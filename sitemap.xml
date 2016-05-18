@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2016-05-18T04:40:00Z</lastmod>
+  <lastmod>2016-05-18T18:56:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2016-05-18T16:20:00Z</lastmod>
+  <lastmod>2016-05-18T22:07:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
@@ -36,5 +36,9 @@
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
   <lastmod>2016-05-18T04:40:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/stories/who-am-i/</loc>
+  <lastmod>2016-05-18T18:56:00Z</lastmod>
  </url>
 </urlset>
