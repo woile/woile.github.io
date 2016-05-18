@@ -4,7 +4,7 @@
 .. tags: init
 .. category:
 .. link:
-.. description:
+.. description: initial post
 .. type: text
 
 I've decided to create this blog to share trip experiences,
