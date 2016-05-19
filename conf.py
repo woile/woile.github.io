@@ -129,6 +129,10 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
+        # ((
+        #     ("/galleries/argentina/", "Argentina"),
+        #  ), "Galerias"),
+        ("/galleries/", "Galerias"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
@@ -136,8 +140,16 @@ NAVIGATION_LINKS = {
     ),
 }
 
+# Title, fontawesome_icon, link
+SOCIAL_NETWORKS = (
+    ('Twitter', 'twitter', 'https://twitter.com/santiwilly'),
+    ('Github', 'github', 'https://github.com/Woile'),
+    ('Linkedin', 'linkedin', 'https://www.linkedin.com/in/santiago-fraire-63b91226')
+)
+
 # Name of the theme to use.
 THEME = "lanyon"
+# THEME = "bootstrap"
 
 # Primary color of your theme. This will be used to customize your theme and
 # auto-generate related colors in POSTS_SECTION_COLORS. Must be a HEX value.
@@ -634,8 +646,8 @@ GITHUB_COMMIT_SOURCE = True
 # Default is:
 GALLERY_FOLDERS = {"galleries": "galleries"}
 # More gallery options:
-THUMBNAIL_SIZE = 180
-# MAX_IMAGE_SIZE = 1280
+THUMBNAIL_SIZE = 200
+MAX_IMAGE_SIZE = 1280
 USE_FILENAME_AS_TITLE = True
 # EXTRA_IMAGE_EXTENSIONS = []
 #
@@ -1065,7 +1077,9 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 # Extra things you want in the pages HEAD tag. This will be added right
 # before </head>
 # (translatable)
-# EXTRA_HEAD_DATA = ""
+EXTRA_HEAD_DATA = """
+<script src="https://use.fontawesome.com/ac3419ca62.js"></script>
+"""
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).
 # (translatable)
@@ -1173,7 +1187,8 @@ UNSLUGIFY_TITLES = True
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
-    "lanyon_subtheme": "theme-base-0b"
+    "lanyon_subtheme": "theme-base-0b",
+    "social_networks": SOCIAL_NETWORKS
 }
 
 # Add functions here and they will be called with template

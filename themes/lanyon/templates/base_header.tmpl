@@ -18,6 +18,18 @@
 <%def name="html_site_title()">
     <h3 id="brand" class="masthead-title">
       <a href="${abs_link(_link("root", None, lang))}" title="${blog_title}" rel="home">${blog_title}</a>
+
+      <div class="pull-right">
+
+      %if social_networks:
+        %for title, fa, link in social_networks:
+            <a rel="noopener noreferrer" target="_blank" href="${link}" title="${title}">
+                <i class="fa fa-${fa} fa-fw" aria-hidden="true"></i>
+            </a>
+        %endfor
+      %endif
+      </div>
+
     </h3>
 </%def>
 
