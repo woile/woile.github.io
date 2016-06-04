@@ -132,7 +132,8 @@ NAVIGATION_LINKS = {
         # ((
         #     ("/galleries/argentina/", "Argentina"),
         #  ), "Galerias"),
-        ("/galleries/", "Galleries"),
+        ("/galleries/spain/", "España"),
+        ("/galleries/portugal/", "Portugal"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
