@@ -7,42 +7,46 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2016-05-19T21:16:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/init/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/argentina/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
-  <loc>https://woile.github.io/listings/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <loc>https://woile.github.io/galleries/portugal/</loc>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/galleries/spain/</loc>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/who-am-i/</loc>
-  <lastmod>2016-05-19T18:18:00Z</lastmod>
+  <lastmod>2016-06-04T18:00:00Z</lastmod>
  </url>
 </urlset>
