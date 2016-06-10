@@ -132,8 +132,8 @@ NAVIGATION_LINKS = {
         # ((
         #     ("/galleries/argentina/", "Argentina"),
         #  ), "Galerias"),
-        ("/galleries/roca_de_la_sierra/", "Roca de la Sierra"),
-        ("/galleries/seville/", "Sevilla"),
+        ("/galleries/spain/roca_de_la_sierra/", "Roca de la Sierra"),
+        ("/galleries/spain/seville/", "Sevilla"),
         ("/galleries/portugal/cascais/", "Cascais"),
         ("/galleries/portugal/castelo_de_campo_maior/", "Castelo de Campo Maior"),
         ("/galleries/portugal/porto/", "Porto"),
