@@ -7,54 +7,62 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
   <loc>https://woile.github.io/categories/init.xml</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-06-10T09:41:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/argentina/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/portugal/cascais/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/portugal/castelo_de_campo_maior/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/portugal/porto/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/portugal/quinta_de_regaleira/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/portugal/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T08:14:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://woile.github.io/galleries/spain/malaga/rss.xml</loc>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://woile.github.io/galleries/spain/nerja/rss.xml</loc>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/spain/roca_de_la_sierra/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T08:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/spain/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T08:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/spain/seville/rss.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-06-10T09:41:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2016-06-10T09:33:00Z</lastmod>
+  <lastmod>2016-06-11T09:14:00Z</lastmod>
  </sitemap>
 </sitemapindex>
