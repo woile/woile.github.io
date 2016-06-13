@@ -140,6 +140,7 @@ NAVIGATION_LINKS = {
         ("/galleries/spain/seville/", "Sevilla"),
         ("/galleries/spain/malaga/", "Malaga"),
         ("/galleries/spain/nerja/", "Nerja"),
+        ("/galleries/spain/alhambra_granada/", "Alhambra y Generalife"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
