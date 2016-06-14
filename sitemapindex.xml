@@ -62,11 +62,15 @@
   <lastmod>2016-06-13T09:26:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/galleries/spain/valencia/rss.xml</loc>
+  <lastmod>2016-06-14T18:46:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
   <lastmod>2016-06-10T09:41:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2016-06-13T09:26:00Z</lastmod>
+  <lastmod>2016-06-14T18:46:00Z</lastmod>
  </sitemap>
 </sitemapindex>
