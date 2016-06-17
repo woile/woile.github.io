@@ -146,6 +146,7 @@ NAVIGATION_LINKS = {
         ("/galleries/spain/barcelona/camp_nou/", "Camp Nou"),
         ("/galleries/spain/barcelona/cosmocaixa/", "Cosmocaixa"),
         ("/galleries/spain/barcelona/park_guell/", "Park Güell"),
+        ("/galleries/spain/barcelona/ciudad_gotica_rambla/", "Barrio Gótico"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
