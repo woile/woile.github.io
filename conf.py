@@ -149,6 +149,7 @@ NAVIGATION_LINKS = {
         ("/galleries/spain/barcelona/ciudad_gotica_rambla/", "Barrio Gótico"),
         ("/galleries/spain/barcelona/playa_badalona/", "Playa Badalona"),
         ("/galleries/spain/santander/", "Santander"),
+        ("/galleries/spain/santillana/", "Santillana"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
