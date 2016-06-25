@@ -150,6 +150,7 @@ NAVIGATION_LINKS = {
         ("/galleries/spain/barcelona/playa_badalona/", "Playa Badalona"),
         ("/galleries/spain/santander/", "Santander"),
         ("/galleries/spain/santillana/", "Santillana"),
+        ("/galleries/spain/madrid/", "Madrid"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
