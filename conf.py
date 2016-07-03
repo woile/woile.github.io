@@ -152,6 +152,7 @@ NAVIGATION_LINKS = {
         ("/galleries/spain/santillana/", "Santillana"),
         ("/galleries/spain/madrid/", "Madrid"),
         ("/galleries/france/paris/", "Paris"),
+        ("/galleries/belgium/brussels/", "Bruselas"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
