@@ -158,6 +158,7 @@ NAVIGATION_LINKS = {
         ("/galleries/netherlands/amsterdam/", "Amsterdam"),
         ("/galleries/germany/hamburg/", "Hamburgo"),
         ("/galleries/germany/berlin/", "Berlin"),
+        ("/galleries/poland/cracow/", "Cracovia"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
