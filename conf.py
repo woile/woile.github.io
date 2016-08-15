@@ -164,6 +164,7 @@ NAVIGATION_LINKS = {
         ("/galleries/greece/glyfada/", "Glyfada"),
         ("/galleries/italy/marina_del_cantone/", "Marina Del Cantone"),
         ("/galleries/italy/capri/", "Capri"),
+        ("/galleries/italy/rome/", "Roma"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
