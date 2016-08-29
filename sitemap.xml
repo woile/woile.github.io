@@ -7,226 +7,238 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2016-08-15T09:53:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/init/</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/</loc>
-  <lastmod>2016-08-11T20:45:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/argentina/</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/belgium/</loc>
-  <lastmod>2016-07-05T16:25:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/belgium/brugge/</loc>
-  <lastmod>2016-07-05T16:25:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/belgium/brussels/</loc>
-  <lastmod>2016-07-03T20:42:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/czech/</loc>
-  <lastmod>2016-07-28T13:32:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/czech/prague/</loc>
-  <lastmod>2016-07-28T13:32:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/france/</loc>
-  <lastmod>2016-06-27T11:53:00Z</lastmod>
+  <lastmod>2016-08-29T11:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/france/paris/</loc>
-  <lastmod>2016-07-03T20:42:00Z</lastmod>
+  <lastmod>2016-08-29T11:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/</loc>
-  <lastmod>2016-07-28T13:31:00Z</lastmod>
+  <lastmod>2016-08-29T11:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/berlin/</loc>
-  <lastmod>2016-07-17T18:18:00Z</lastmod>
+  <lastmod>2016-08-29T11:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/hamburg/</loc>
-  <lastmod>2016-07-17T18:17:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/munich/</loc>
-  <lastmod>2016-07-28T13:32:00Z</lastmod>
+  <lastmod>2016-08-29T11:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/greece/</loc>
-  <lastmod>2016-08-11T20:45:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/greece/glyfada/</loc>
-  <lastmod>2016-08-12T06:26:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/hungary/</loc>
-  <lastmod>2016-07-28T13:31:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/hungary/budapest/</loc>
-  <lastmod>2016-08-11T20:46:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/</loc>
-  <lastmod>2016-08-15T09:53:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/capri/</loc>
-  <lastmod>2016-08-11T20:46:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/galleries/italy/como/</loc>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/galleries/italy/fermo/</loc>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/marina_del_cantone/</loc>
-  <lastmod>2016-08-12T06:19:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/galleries/italy/milano/</loc>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/rome/</loc>
-  <lastmod>2016-08-15T09:53:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/netherlands/</loc>
-  <lastmod>2016-07-10T10:13:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/netherlands/amsterdam/</loc>
-  <lastmod>2016-07-13T16:16:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/netherlands/rotterdam/</loc>
-  <lastmod>2016-07-10T10:13:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/poland/</loc>
-  <lastmod>2016-07-20T10:32:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/poland/cracow/</loc>
-  <lastmod>2016-07-20T16:11:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/</loc>
-  <lastmod>2016-06-09T08:21:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/cascais/</loc>
-  <lastmod>2016-06-09T08:21:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/castelo_de_campo_maior/</loc>
-  <lastmod>2016-06-09T08:21:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/porto/</loc>
-  <lastmod>2016-06-09T08:21:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/quinta_de_regaleira/</loc>
-  <lastmod>2016-06-09T08:21:00Z</lastmod>
+  <lastmod>2016-08-29T11:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/</loc>
-  <lastmod>2016-06-23T19:45:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/alhambra_granada/</loc>
-  <lastmod>2016-06-13T09:26:00Z</lastmod>
+  <lastmod>2016-08-29T11:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/</loc>
-  <lastmod>2016-06-22T08:41:00Z</lastmod>
+  <lastmod>2016-08-29T11:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/camp_nou/</loc>
-  <lastmod>2016-06-16T19:23:00Z</lastmod>
+  <lastmod>2016-08-29T11:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/ciudad_gotica_rambla/</loc>
-  <lastmod>2016-06-17T11:55:00Z</lastmod>
+  <lastmod>2016-08-29T11:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/cosmocaixa/</loc>
-  <lastmod>2016-06-16T19:23:00Z</lastmod>
+  <lastmod>2016-08-29T11:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/park_guell/</loc>
-  <lastmod>2016-06-16T19:23:00Z</lastmod>
+  <lastmod>2016-08-29T11:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/playa_badalona/</loc>
-  <lastmod>2016-06-22T08:41:00Z</lastmod>
+  <lastmod>2016-08-29T11:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/sagrada_familia/</loc>
-  <lastmod>2016-06-16T19:41:00Z</lastmod>
+  <lastmod>2016-08-29T11:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/madrid/</loc>
-  <lastmod>2016-06-26T11:49:00Z</lastmod>
+  <lastmod>2016-08-29T11:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/malaga/</loc>
-  <lastmod>2016-06-11T09:14:00Z</lastmod>
+  <lastmod>2016-08-29T11:40:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/nerja/</loc>
-  <lastmod>2016-06-11T15:51:00Z</lastmod>
+  <lastmod>2016-08-29T11:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/roca_de_la_sierra/</loc>
-  <lastmod>2016-06-09T08:21:00Z</lastmod>
+  <lastmod>2016-08-29T11:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/santander/</loc>
-  <lastmod>2016-08-12T06:49:00Z</lastmod>
+  <lastmod>2016-08-29T11:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/santillana/</loc>
-  <lastmod>2016-06-23T19:45:00Z</lastmod>
+  <lastmod>2016-08-29T11:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/seville/</loc>
-  <lastmod>2016-06-09T08:21:00Z</lastmod>
+  <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/valencia/</loc>
-  <lastmod>2016-06-14T18:46:00Z</lastmod>
+  <lastmod>2016-08-29T11:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/visited-places/</loc>
-  <lastmod>2016-06-14T20:51:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/who-am-i/</loc>
-  <lastmod>2016-06-04T18:00:00Z</lastmod>
+  <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
 </urlset>
