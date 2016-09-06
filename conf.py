@@ -169,6 +169,7 @@ NAVIGATION_LINKS = {
         ("/galleries/italy/milano/", "Milan"),
         ("/galleries/italy/como/", "Como"),
         ("/galleries/england/cheltenham/", "Cheltenham"),
+        ("/galleries/england/london/", "London"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
