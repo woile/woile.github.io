@@ -170,6 +170,7 @@ NAVIGATION_LINKS = {
         ("/galleries/italy/como/", "Como"),
         ("/galleries/england/cheltenham/", "Cheltenham"),
         ("/galleries/england/london/", "London"),
+        ("/galleries/spain/palma_majorca/", "Palma de Mallorca"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
