@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="https://woile.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="prefetch" href="posts/blog-inauguration/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="prefetch" href="posts/get-skype-working-on-debian-stretch-x64-with-gnome3/" type="text/html">
 </head>
 <body class="theme-base-0b">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -103,7 +103,49 @@
         
 
 <div class="posts">
-    <article class="post h-entry post-text"><header><h1 class="post-title p-name"><a href="posts/blog-inauguration/" class="u-url">Blog inauguration</a></h1>
+    <article class="post h-entry post-text"><header><h1 class="post-title p-name"><a href="posts/get-skype-working-on-debian-stretch-x64-with-gnome3/" class="u-url">Get Skype working on Debian Stretch x64 with GNOME3</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Woile</span></p>
+            <p class="dateline"><a href="posts/get-skype-working-on-debian-stretch-x64-with-gnome3/" rel="bookmark"><time class="post-date published dt-published" datetime="2016-09-19T07:56:03-03:00" title="2016-09-19 07:56">2016-09-19 07:56</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/get-skype-working-on-debian-stretch-x64-with-gnome3/#disqus_thread" data-disqus-identifier="cache/posts/get-skype-working-on-debian-stretch-x64-with-gnome3.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>If you really need to install this software, and you cannot use an alternative like <strong>hangouts</strong>, or <strong>tox</strong>, then this guide is for you.</p>
+<p>I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
+Debian recommends to install the .deb package, but it usually does not work.</p>
+<p>As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.</p>
+<pre class="code bash"><a name="rest_code_a13b2100b881431f820855ebf5242356-1"></a>sudo dpkg --add-architecture i386
+<a name="rest_code_a13b2100b881431f820855ebf5242356-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386
+<a name="rest_code_a13b2100b881431f820855ebf5242356-3"></a>mkdir ~/.apps/
+<a name="rest_code_a13b2100b881431f820855ebf5242356-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
+</pre>
+<p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code> file to your gnome environment.</p>
+<p>The location for this file is either <code>~/.local/share/applications</code>, for the current user, or <code>/usr/share/applications</code> for everyone.</p>
+<p>The content for your <code>skype.desktop</code>, should be something like this:</p>
+<pre class="code bash"><a name="rest_code_7d85aeba8b434300a8146417fb19f53e-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-7"></a><span class="nv">Type</span><span class="o">=</span>Application
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-11"></a>X-KDE-Protocols<span class="o">=</span>skype
+<a name="rest_code_7d85aeba8b434300a8146417fb19f53e-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
+</pre>
+<p>PS: Remember to change the user for the one you are using.</p>
+<p>Good luck!</p>
+</div>
+    </div>
+    </article><article class="post h-entry post-text"><header><h1 class="post-title p-name"><a href="posts/blog-inauguration/" class="u-url">Blog inauguration</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">Woile</span></p>
             <p class="dateline"><a href="posts/blog-inauguration/" rel="bookmark"><time class="post-date published dt-published" datetime="2016-05-18T01:01:40-03:00" title="2016-05-18 01:01">2016-05-18 01:01</time></a></p>

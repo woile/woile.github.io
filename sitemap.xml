@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2016-09-13T17:56:00Z</lastmod>
+  <lastmod>2016-09-19T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
@@ -248,6 +248,10 @@
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
   <lastmod>2016-08-29T11:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</loc>
+  <lastmod>2016-09-19T11:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/visited-places/</loc>
