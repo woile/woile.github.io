@@ -6,6 +6,10 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
+  <loc>https://woile.github.io/categories/cat_skype-debian.xml</loc>
+  <lastmod>2016-09-19T14:18:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/init.xml</loc>
   <lastmod>2016-08-29T11:44:00Z</lastmod>
  </sitemap>
@@ -231,10 +235,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2016-09-19T11:01:00Z</lastmod>
+  <lastmod>2016-09-19T14:18:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2016-09-19T11:01:00Z</lastmod>
+  <lastmod>2016-09-19T14:18:00Z</lastmod>
  </sitemap>
 </sitemapindex>
