@@ -18,7 +18,7 @@ As you probably know, skype is a 32bit software, so we'll need to enable that in
 .. code-block:: bash
 
     sudo dpkg --add-architecture i386
-    sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386
+    sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
     mkdir ~/.apps/
     wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 | tar jx -C ~/.apps/
 
