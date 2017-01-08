@@ -74,6 +74,12 @@ They usually spam their other payed tours, but the important thing is that you g
 Another important source of information are the `USE-IT maps <https://www.use-it.travel/home/>`_. which are made by locals (or that's what they say). They explain some traditions of the city, where to go, and where not to go. You can download them or check where to get them, and the best part is that... it's FREE.
 
 
+.. raw:: html
+
+    <img src="/galleries/greece/glyfada/GOPR3079.JPG">
+
+
+
 Transportation sources
 ----------------------
 
@@ -103,4 +109,12 @@ Renting beds in hostels
 Going for free to someone's place. We did it once in Milan and we had a great experience.
 
 
+Bottom line
+-----------
 
+I encourage you to don't miss the opportunity to travel and meet new friends, you won't regret at all.
+
+
+Happy new year!
+
+Santi
