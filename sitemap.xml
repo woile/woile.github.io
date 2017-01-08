@@ -7,31 +7,59 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2016-08-29T11:44:00Z</lastmod>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
   <lastmod>2016-08-29T11:38:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/2017/</loc>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2016-12-08T23:14:00Z</lastmod>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2016-09-19T14:18:00Z</lastmod>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_skype-debian/</loc>
   <lastmod>2016-09-19T14:18:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/cat_travel/</loc>
+  <lastmod>2017-01-08T19:57:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/europe/</loc>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/eurotrip/</loc>
+  <lastmod>2017-01-08T19:57:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/friends/</loc>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/gopro/</loc>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/categories/init/</loc>
   <lastmod>2016-08-29T11:44:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/trip/</loc>
+  <lastmod>2017-01-08T20:26:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/galleries/</loc>
-  <lastmod>2016-12-08T23:14:00Z</lastmod>
+  <lastmod>2017-01-02T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/argentina/</loc>
@@ -187,7 +215,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/</loc>
-  <lastmod>2016-09-13T17:56:00Z</lastmod>
+  <lastmod>2017-01-02T19:02:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/alhambra_granada/</loc>
@@ -260,6 +288,10 @@
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
   <lastmod>2016-08-29T11:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/eurotrip-2016/</loc>
+  <lastmod>2017-01-08T19:57:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</loc>
