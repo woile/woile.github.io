@@ -187,6 +187,8 @@ SOCIAL_NETWORKS = (
 )
 
 # Name of the theme to use.
+# THEME = "hyde"
+# THEME = "zen"
 THEME = "lanyon"
 # THEME = "bootstrap"
 
@@ -1227,7 +1229,8 @@ UNSLUGIFY_TITLES = True
 # It can be anything, data, functions, modules, etc.
 GLOBAL_CONTEXT = {
     "lanyon_subtheme": "theme-base-0b",
-    "social_networks": SOCIAL_NETWORKS
+    "social_networks": SOCIAL_NETWORKS,
+    "hyde_subtheme": "theme-base-08"
 }
 
 # Add functions here and they will be called with template

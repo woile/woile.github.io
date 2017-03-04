@@ -1,8 +1,8 @@
 .. title: Get Skype working on Debian Stretch x64 with GNOME3
 .. slug: get-skype-working-on-debian-stretch-x64-with-gnome3
 .. date: 2016-09-19 07:56:03 UTC-03:00
-.. tags:
-.. category: skype, debian
+.. tags: skype, debian, linux
+.. category: software
 .. link:
 .. description: Skype working in Debian Stretch
 .. type: text
