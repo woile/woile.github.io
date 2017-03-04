@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="https://woile.github.io/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="prefetch" href="posts/eurotrip-2016/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="prefetch" href="posts/django-polymorphic-integration-with-django-filters/" type="text/html">
 </head>
 <body class="theme-base-0b">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -100,7 +100,134 @@
         
 
 <div class="posts">
-    <article class="post h-entry post-text"><header><h1 class="post-title p-name"><a href="posts/eurotrip-2016/" class="u-url">Eurotrip 2016</a></h1>
+    <article class="post h-entry post-text"><header><h1 class="post-title p-name"><a href="posts/django-polymorphic-integration-with-django-filters/" class="u-url">How to filter Polymorphic Models with Django Filters</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Woile</span></p>
+            <p class="dateline"><a href="posts/django-polymorphic-integration-with-django-filters/" rel="bookmark"><time class="post-date published dt-published" datetime="2017-03-02T20:58:22-03:00" title="2017-03-02 20:58">2017-03-02 20:58</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/django-polymorphic-integration-with-django-filters/#disqus_thread" data-disqus-identifier="cache/posts/django-polymorphic-integration-with-django-filters.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>As the title says, I needed a way to filter my polymorphic models using my already defined
+<code>rest_framework.FilterSet</code>.</p>
+<p>First, let's talk about <code>django-polymorphic</code> and <code>django-filters</code>, what are these libraries for.</p>
+<div class="section" id="django-polymorphic">
+<h2>Django-polymorphic <a class="footnote-reference" href="posts/django-polymorphic-integration-with-django-filters/#id3" id="id1">[1]</a>
+</h2>
+<pre class="literal-block">
+Simplifies using inherited models in Django projects. When a query is made at the base
+model, the inherited model classes are returned.
+</pre>
+<p>One of the most important things to understand of polymorphic is, that when you ask for the queryset of the parent, every element is represented with its children classes. Let's see this.</p>
+<p>I'll use the models examples provided by the <a class="reference external" href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
+<pre class="code python"><a name="rest_code_68a1360021ff4c87869778b0ef760b22-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-2"></a>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-7"></a>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-10"></a>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_68a1360021ff4c87869778b0ef760b22-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre>
+<pre class="code python"><a name="rest_code_5c43473daf6347ff996b9c9ffb519cda-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
+<a name="rest_code_5c43473daf6347ff996b9c9ffb519cda-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
+<a name="rest_code_5c43473daf6347ff996b9c9ffb519cda-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
+</pre>
+<pre class="code python"><a name="rest_code_5843ab4febd04f69b50b0bb9ea197698-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<a name="rest_code_5843ab4febd04f69b50b0bb9ea197698-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_5843ab4febd04f69b50b0bb9ea197698-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_5843ab4febd04f69b50b0bb9ea197698-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
+</pre>
+<p>As you can see, this can be really helpful when using Django Rest Framework (DRF) and model inheritance.
+It allows to use just one model, in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into account
+that your serializer will have to handle the representation of each of the models.</p>
+</div>
+<div class="section" id="django-filter">
+<h2>Django-filter <a class="footnote-reference" href="posts/django-polymorphic-integration-with-django-filters/#id4" id="id2">[2]</a>
+</h2>
+<pre class="literal-block">
+Is a generic, reusable application to alleviate writing some of the more mundane bits of view code. Specifically, it allows users to filter down a queryset based on a model’s fields.
+</pre>
+<p>Fundamentally, when using django filters you'll want to create a class specifying the model's
+fields by which a queryset can be filtered.</p>
+<p>Let's modified a bit the example of the <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
+<pre class="code python"><a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-2"></a>
+<a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
+<a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-5"></a>
+<a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_3e0e0083f8ea4db0953a9e1edfd0f4f8-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
+</pre>
+<p>And the view should look something like:</p>
+<pre class="code python"><a name="rest_code_77c6ec32cd284eb689bb89ddc0baa87e-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a name="rest_code_77c6ec32cd284eb689bb89ddc0baa87e-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<a name="rest_code_77c6ec32cd284eb689bb89ddc0baa87e-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+</pre>
+<p>Obviously, this will help reduce the amount of code written, and will be way easier to mantain.
+The good thing about this library, and what matters to me the most, is that it has a great <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with DRF</a> by providing a DRF-specific FilterSet and a filter backend.</p>
+</div>
+<div class="section" id="filtering-by-a-polymorphic-model">
+<h2>Filtering by a polymorphic model</h2>
+<p>As we stated at the beginning what I want to do is filter by a <strong>polymorphic model</strong>, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the <code>rest_framework.FilterSet</code> and using a customized filter with <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a> in our FilterSet.</p>
+<pre class="code python"><a name="rest_code_ffbb7b43ae634d978ba08d3659722980-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-2"></a>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-3"></a><span class="n">PROJECT_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-4"></a>    <span class="s1">'project'</span><span class="p">:</span> <span class="n">Project</span><span class="p">,</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-5"></a>    <span class="s1">'art_project'</span><span class="p">:</span> <span class="n">ArtProject</span><span class="p">,</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-6"></a>    <span class="s1">'research_project'</span><span class="p">:</span> <span class="n">ResearchProject</span><span class="p">,</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-7"></a><span class="p">)</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-8"></a>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-9"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-10"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-11"></a>                                                       <span class="n">choices</span><span class="o">=</span><span class="n">PROJECT_CHOICES</span><span class="p">)</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-12"></a>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-13"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-14"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-15"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-16"></a>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-17"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-18"></a>        <span class="n">project_klasses</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PROJECT_CHOICES</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+<a name="rest_code_ffbb7b43ae634d978ba08d3659722980-19"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">project_klasses</span><span class="p">)</span>
+</pre>
+<p>Now, if our querystring includes a key <code>project_type</code>, it will check if the values match any of
+the choices and it will return the queryset filtered by the specified choices.
+And that's it, we have successfully filtered polymorphic models. Now we just need to add <code>ProjectFilter `tffo the :code:`filter_class</code> in the <code>viewsets.ModelViewSet</code></p>
+<p>Cheers!</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup>
+<col class="label">
+<col>
+</colgroup>
+<tbody valign="top"><tr>
+<td class="label"><a class="fn-backref" href="posts/django-polymorphic-integration-with-django-filters/#id1">[1]</a></td>
+<td><a class="reference external" href="https://github.com/django-polymorphic/django-polymorphic">https://github.com/django-polymorphic/django-polymorphic</a></td>
+</tr></tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id4" rules="none">
+<colgroup>
+<col class="label">
+<col>
+</colgroup>
+<tbody valign="top"><tr>
+<td class="label"><a class="fn-backref" href="posts/django-polymorphic-integration-with-django-filters/#id2">[2]</a></td>
+<td><a class="reference external" href="https://github.com/carltongibson/django-filter">https://github.com/carltongibson/django-filter</a></td>
+</tr></tbody>
+</table>
+</div>
+</div>
+    </div>
+    </article><article class="post h-entry post-text"><header><h1 class="post-title p-name"><a href="posts/eurotrip-2016/" class="u-url">Eurotrip 2016</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">Woile</span></p>
             <p class="dateline"><a href="posts/eurotrip-2016/" rel="bookmark"><time class="post-date published dt-published" datetime="2017-01-08T12:30:53-03:00" title="2017-01-08 12:30">2017-01-08 12:30</time></a></p>
@@ -190,26 +317,26 @@ Going for free to someone's place. We did it once in Milan and we had a great ex
 <p>I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.</p>
 <p>As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.</p>
-<pre class="code bash"><a name="rest_code_88617c747f6a43f2be615d1a56016d99-1"></a>sudo dpkg --add-architecture i386
-<a name="rest_code_88617c747f6a43f2be615d1a56016d99-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-<a name="rest_code_88617c747f6a43f2be615d1a56016d99-3"></a>mkdir ~/.apps/
-<a name="rest_code_88617c747f6a43f2be615d1a56016d99-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
+<pre class="code bash"><a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-1"></a>sudo dpkg --add-architecture i386
+<a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
+<a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-3"></a>mkdir ~/.apps/
+<a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
 </pre>
 <p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code> file to your gnome environment.</p>
 <p>The location for this file is either <code>~/.local/share/applications</code>, for the current user, or <code>/usr/share/applications</code> for everyone.</p>
 <p>The content for your <code>skype.desktop</code>, should be something like this:</p>
-<pre class="code bash"><a name="rest_code_75986b21226c4b78a521128a7de83f82-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-7"></a><span class="nv">Type</span><span class="o">=</span>Application
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-11"></a>X-KDE-Protocols<span class="o">=</span>skype
-<a name="rest_code_75986b21226c4b78a521128a7de83f82-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
+<pre class="code bash"><a name="rest_code_9567f22f80d54650bc150f2cd37911ce-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-7"></a><span class="nv">Type</span><span class="o">=</span>Application
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-11"></a>X-KDE-Protocols<span class="o">=</span>skype
+<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
 </pre>
 <p>PS: Remember to change the user for the one you are using.</p>
 <p>Good luck!</p>

@@ -19,19 +19,51 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2017-01-08T20:26:00Z</lastmod>
+  <lastmod>2017-03-03T02:08:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2017-01-08T20:26:00Z</lastmod>
+  <lastmod>2017-03-04T19:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/api/</loc>
+  <lastmod>2017-03-03T02:19:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_python-django/</loc>
+  <lastmod>2017-03-03T02:19:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_python/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_skype-debian/</loc>
   <lastmod>2016-09-19T14:18:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/cat_software/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/categories/cat_travel/</loc>
   <lastmod>2017-01-08T19:57:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/debian/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/django-rest-framework/</loc>
+  <lastmod>2017-03-03T02:19:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/django/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/drf/</loc>
+  <lastmod>2017-03-03T02:19:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/europe/</loc>
@@ -40,6 +72,10 @@
  <url>
   <loc>https://woile.github.io/categories/eurotrip/</loc>
   <lastmod>2017-01-08T19:57:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/filters/</loc>
+  <lastmod>2017-03-04T19:01:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/friends/</loc>
@@ -52,6 +88,22 @@
  <url>
   <loc>https://woile.github.io/categories/init/</loc>
   <lastmod>2016-08-29T11:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/linux/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/polymorphic/</loc>
+  <lastmod>2017-03-04T19:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/python/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/skype/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/trip/</loc>
@@ -288,6 +340,10 @@
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
   <lastmod>2016-08-29T11:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/</loc>
+  <lastmod>2017-03-03T01:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/eurotrip-2016/</loc>
