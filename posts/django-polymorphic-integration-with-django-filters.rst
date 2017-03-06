@@ -8,7 +8,7 @@
 .. type: text
 
 As the title says, I needed a way to filter my polymorphic models using my already defined
-:code:`rest_framework.FilterSet`.
+:code:`rest_framework.FilterSet`, and as I didn't find much resources about it I'm sharing my experience here.
 
 First, let's talk about :code:`django-polymorphic` and :code:`django-filters`, what are these libraries for.
 
