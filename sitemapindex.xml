@@ -7,19 +7,11 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
   <loc>https://woile.github.io/categories/api.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_python-django.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://woile.github.io/categories/cat_python.xml</loc>
-  <lastmod>2017-03-03T02:14:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://woile.github.io/categories/cat_skype-debian.xml</loc>
-  <lastmod>2016-12-11T03:34:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_software.xml</loc>
@@ -35,15 +27,15 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/django-rest-framework.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/django.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/drf.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/europe.xml</loc>
@@ -55,7 +47,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/filters.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/friends.xml</loc>
@@ -75,11 +67,11 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/polymorphic.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/python.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/skype.xml</loc>
@@ -319,10 +311,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2017-03-04T19:01:00Z</lastmod>
+  <lastmod>2017-03-06T17:10:00Z</lastmod>
  </sitemap>
 </sitemapindex>

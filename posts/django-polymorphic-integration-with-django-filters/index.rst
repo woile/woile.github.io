@@ -99,7 +99,7 @@ The good thing about this library, and what matters to me the most, is that it h
 Filtering by a polymorphic model
 --------------------------------
 
-As we stated at the beginning what I want to do is filter by a **polymorphic model**, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the :code:`rest_framework.FilterSet` and using a customized filter with `Filter.method <https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method>`_ in our FilterSet.
+As we stated at the beginning what I wanted to do is filter by a **polymorphic model**, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the :code:`rest_framework.FilterSet` and using a customized filter with `Filter.method <https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method>`_ in our FilterSet.
 
 .. code-block:: python
 
@@ -125,7 +125,7 @@ As we stated at the beginning what I want to do is filter by a **polymorphic mod
 
 Now, if our querystring includes a key :code:`project_type`, it will check if the values match any of
 the choices and it will return the queryset filtered by the specified choices.
-And that's it, we have successfully filtered polymorphic models. Now we just need to add :code:`ProjectFilter `tffo the :code:`filter_class` in the :code:`viewsets.ModelViewSet`
+And that's it, we have successfully filtered polymorphic models. Now we just need to add :code:`ProjectFilter`to the :code:`filter_class` in the :code:`viewsets.ModelViewSet`.
 
 Cheers!
 
