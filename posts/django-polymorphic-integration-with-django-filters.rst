@@ -105,27 +105,30 @@ As we stated at the beginning what I wanted to do is filter by a **polymorphic m
 
     import django_filters
 
-    PROJECT_CHOICES = (
-        'project': Project,
-        'art_project': ArtProject,
-        'research_project': ResearchProject,
-    )
+
+    def get_subclasses_as_choice(klass):
+        choices = {subclass.__name__.lower(): subclass
+                   for subclass in klass.__subclasses__()}
+        return choices
+
 
     class ProjectFilter(django_filters.rest_framework.FilterSet):
-        project_type = django_filters.MultipleChoiceFilter(method='project_type_filter',
-                                                           choices=PROJECT_CHOICES)
+        project_type = django_filters.MultipleChoiceFilter(
+            method='project_type_filter', choices=get_subclasses_as_choice(Project))
 
         class Meta:
             model = Project
             fields = ['topic', 'start_date', 'end_date']
 
         def project_type_filter(self, queryset, name, value):
-            project_klasses = [p[1] for p in PROJECT_CHOICES if p[0] in value]
-            return queryset.instance_of(*project_klasses)
+            project_choices = get_subclasses_as_choice(Project)
+            selected_projects = [value for key, value in project_choices.items()
+                                 if key in value]
+            return queryset.instance_of(*selected_projects)
 
 Now, if our querystring includes a key :code:`project_type`, it will check if the values match any of
 the choices and it will return the queryset filtered by the specified choices.
-And that's it, we have successfully filtered polymorphic models. Now we just need to add :code:`ProjectFilter`to the :code:`filter_class` in the :code:`viewsets.ModelViewSet`.
+And that's it, we have successfully filtered polymorphic models. Now we just need to add :code:`ProjectFilter` to the :code:`filter_class` in the :code:`viewsets.ModelViewSet`.
 
 Cheers!
 
