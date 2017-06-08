@@ -10,6 +10,10 @@
   <lastmod>2017-03-08T00:45:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/categories/cat_programming.xml</loc>
+  <lastmod>2017-06-08T19:47:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/cat_python-django.xml</loc>
   <lastmod>2017-03-08T00:45:00Z</lastmod>
  </sitemap>
@@ -62,6 +66,10 @@
   <lastmod>2017-03-03T01:58:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/categories/linters.xml</loc>
+  <lastmod>2017-06-08T19:47:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/linux.xml</loc>
   <lastmod>2017-03-03T01:58:00Z</lastmod>
  </sitemap>
@@ -70,12 +78,20 @@
   <lastmod>2017-03-08T00:45:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/categories/programming.xml</loc>
+  <lastmod>2017-06-08T19:47:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/python.xml</loc>
-  <lastmod>2017-03-08T00:45:00Z</lastmod>
+  <lastmod>2017-06-08T19:47:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/skype.xml</loc>
   <lastmod>2017-03-03T01:58:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://woile.github.io/categories/sublime.xml</loc>
+  <lastmod>2017-06-08T19:47:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/trip.xml</loc>
@@ -311,10 +327,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2017-03-08T00:45:00Z</lastmod>
+  <lastmod>2017-06-08T19:47:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2017-05-24T19:37:00Z</lastmod>
+  <lastmod>2017-06-08T19:47:00Z</lastmod>
  </sitemap>
 </sitemapindex>
