@@ -172,6 +172,8 @@ NAVIGATION_LINKS = {
         ("/galleries/england/london/", "London"),
         ("/galleries/spain/palma_majorca/", "Palma de Mallorca"),
         ("/galleries/denmark/copenhaguen/", "Copenhaguen"),
+        ("/galleries/brasil/sao_paulo/", "Sao Paulo"),
+        ("/galleries/brasil/rio_de_janeiro/", "Rio de Janeiro"),
         ("/archive.html", "Archive"),
         ("/categories/", "Tags"),
         ("/rss.xml", "RSS feed"),
