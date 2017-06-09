@@ -127,10 +127,9 @@
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
     <div>
-<h2>Guide to Sublime like a normal person</h2>
 <p>First of all, verify that you have installed the latest version of <a href="https://www.sublimetext.com/3">Sublime Text 3</a>.</p>
 <h3>General settings</h3>
-<p>Add the following settings in <code>Preferences &gt; Settings - User</code></p>
+<p>Add the following settings in <code>Preferences &gt; Settings &gt; User Tab</code></p>
 <pre class="code literal-block"><span></span>"trim_trailing_white_space_on_save": true,
 "auto_complete": false,
 "translate_tabs_to_spaces": true,
@@ -138,25 +137,31 @@
 </pre>
 
 
-<p>The first one will delete the trailing spaces as required in many languages.
-The second one is intended to improve performance of sublime. If the project is huge sublime will get slow with this feature on, but if you press tab it will try to autocomplete anyways.
-The third forces to always use spaces when tabbing, as most of the programmers do.
-The forth helps avoid problems when using features like multiline select.</p>
+<p>The first one will delete the trailing spaces. This is useful to select text properly and sometimes is required by many languages.</p>
+<p>The second one is intended to improve performance of sublime. If the project is huge sublime will get slow with this feature on, but if you press tab while you are writing, sublime will try to autocomplete.</p>
+<p>The third forces to always use spaces when tabbing, as most of programmers do.</p>
+<p>The forth helps avoid problems when using features like multiline select.</p>
 <h3>Installing packages</h3>
-<p>Install the <a href="https://packagecontrol.io/installation">package control</a>.</p>
-<p>To use it go to <code>Tools &gt; Command Palette</code> or by default the shortcut keys are:
-    Linux: <code>ctrl+shit+P</code>
-    Os X: <code>cmd+shift+p</code></p>
-<p>Finally, the steps to install a new package are:
-1. Select the option: <code>Package Control: install package</code>.
-2. Wait until the packages are loaded.
-3. Write the name of the package you want to install.</p>
+<p>Install the <a href="https://packagecontrol.io/installation">package control</a> as explained there.</p>
+<p>To use it go to <code>Tools &gt; Command Palette</code> or by default the shortcut keys are:</p>
+<pre class="code literal-block"><span></span>Linux: `ctrl+shit+P`
+Os X: `cmd+shift+p`
+</pre>
+
+
+<p>Finally, the steps to install a new package are:</p>
+<ol>
+<li>Select the option: <code>Package Control: install package</code>.</li>
+<li>Wait until the packages are loaded.</li>
+<li>Write the name of the package you want to install.</li>
+</ol>
 <h3>Linters</h3>
 <p>A lint tool performs static analysis of source code and flags patterns that might be errors or otherwise cause problems for the developer.
 In other words, it will tell you where you are writing incorrect code.
 Usually, a linter is a software that receives the files to analyze as paramters, and the will give you an output indicating in which lines somethings is weird.</p>
 <h3>Sublime Linter</h3>
-<p>In my opinion, this is one of the most important <strong>package</strong> we should install, it will provide us with an interface to the linters, and the errors will be displayed in the editor in an elegant manner.</p>
+<p>In my opinion, this is the <strong>most important package</strong> we should install, it provides an interface to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
+This means that Sublime Linter will talk with the linter you have installed in your system, and will display in the editor the errors reported by the linter.</p>
 <p>As the site reads:</p>
 <blockquote>
 <p>SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter has been designed to provide maximum flexibility and usability for users and maximum simplicity for linter authors.</p>
@@ -164,8 +169,8 @@ Usually, a linter is a software that receives the files to analyze as paramters,
 <p>The concept behind it is very simple:
     1. Install globally in your system a linter for the language of your choice (pep8, eslint, csslint, rubocop, etc).
     2. Install the corresponding sublime linter through the <strong>package control</strong>.</p>
-<h4>Useful linters for sublime linter</h4>
-<p>Choose the one that suits you more, and install it through the package manager.</p>
+<h4>Useful linters</h4>
+<p>Choose the one that suits you more, and install it through the package manager of the corresponding language. Eg: pip for python, gem for ruby, etc.</p>
 <table>
 <thead><tr>
 <th>Language</th>
@@ -193,6 +198,13 @@ Usually, a linter is a software that receives the files to analyze as paramters,
 <td>checks Python source files for errors</td>
 </tr>
 <tr>
+<td>python</td>
+<td align="center">flake8</td>
+<td align="center">SublimeLinter-flake8</td>
+<td>
+<strong>[recommended]</strong> includes lint checks provided by the PyFlakes project, PEP-0008 inspired style checks provided by the PyCodeStyle project, and McCabe complexity checking provided by the McCabe project</td>
+</tr>
+<tr>
 <td>javascript</td>
 <td align="center">jshint</td>
 <td align="center">SublimeLinter-jshint</td>
@@ -202,7 +214,8 @@ Usually, a linter is a software that receives the files to analyze as paramters,
 <td>javascript</td>
 <td align="center">eslint</td>
 <td align="center">SublimeLinter-eslint</td>
-<td>tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exception</td>
+<td>
+<strong>[recommended]</strong> tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exception</td>
 </tr>
 <tr>
 <td>css</td>
@@ -230,10 +243,11 @@ Usually, a linter is a software that receives the files to analyze as paramters,
 </tr>
 </tbody>
 </table>
+<p>Note: I work with python and javascript so I've marked those which I consider good for those languages.</p>
 <h4>Tips to configure sublime linter</h4>
 <ul>
 <li>If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.</li>
-<li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. Put in your sublime linter settigns:</li>
+<li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settigns:</li>
 </ul>
 <pre class="code literal-block"><span></span>"syntax_map": {
     "python (django)": "python",
@@ -258,8 +272,8 @@ Usually, a linter is a software that receives the files to analyze as paramters,
 <p><code>select_lines</code></p>
 <p><code>find_under_expand</code> to filter with case, open the search panel and enable the "Case Sensitive" option.</p>
 <h3>RECOMMENDED THEME</h3>
-<p>This theme include those amazing icons
-<a href="https://github.com/Miw0/SoDaReloaded-Theme">SoDaReloaded-Theme</a>
+<p>This awesome theme also includes those cool icons which appear in the image.</p>
+<p><a href="https://github.com/Miw0/SoDaReloaded-Theme">SoDaReloaded-Theme</a>
 <img alt="" src="https://raw.githubusercontent.com/Miw0/sodareloaded-theme/master/dark/example.png"></p>
 </div>
     </div>
