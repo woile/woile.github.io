@@ -482,30 +482,42 @@ Going for free to someone's place. We did it once in Milan and we had a great ex
 </div>
     </header><div class="e-content entry-content">
     <div>
-<p>If you really need to install this software, and you cannot use an alternative like <strong>hangouts</strong>, or <strong>tox</strong>, then this guide is for you.</p>
+<blockquote>
+<p>Note</p>
+<p>This info is no longer relevant. Right now Skype has been rewritten using <a class="reference external" href="https://electron.atom.io/">electron</a> and installing it in a debian based system is no longer a problem.
+Right now it doesn't support screensharing and some other features a normal person would expect.</p>
+</blockquote>
+<p>Some alternatives I recommend:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://appear.in/">appear.in</a></li>
+<li><a class="reference external" href="https://tox.chat/">tox</a></li>
+<li><a class="reference external" href="https://hangouts.google.com/">hangouts</a></li>
+<li><a class="reference external" href="https://discordapp.com/">discord</a></li>
+</ul>
+<p>If you really need to install this software, and you cannot use the alternatives, then this guide is for you.</p>
 <p>I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.</p>
 <p>As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.</p>
-<pre class="code bash"><a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-1"></a>sudo dpkg --add-architecture i386
-<a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-<a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-3"></a>mkdir ~/.apps/
-<a name="rest_code_4cecb2e1cb9846f0b7235d3f32e649a0-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
+<pre class="code bash"><a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-1"></a>sudo dpkg --add-architecture i386
+<a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
+<a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-3"></a>mkdir ~/.apps/
+<a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
 </pre>
 <p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code> file to your gnome environment.</p>
 <p>The location for this file is either <code>~/.local/share/applications</code>, for the current user, or <code>/usr/share/applications</code> for everyone.</p>
 <p>The content for your <code>skype.desktop</code>, should be something like this:</p>
-<pre class="code bash"><a name="rest_code_9567f22f80d54650bc150f2cd37911ce-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-7"></a><span class="nv">Type</span><span class="o">=</span>Application
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-11"></a>X-KDE-Protocols<span class="o">=</span>skype
-<a name="rest_code_9567f22f80d54650bc150f2cd37911ce-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
+<pre class="code bash"><a name="rest_code_1bb742da052b49e38e95fe091015a262-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-7"></a><span class="nv">Type</span><span class="o">=</span>Application
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-11"></a>X-KDE-Protocols<span class="o">=</span>skype
+<a name="rest_code_1bb742da052b49e38e95fe091015a262-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
 </pre>
 <p>PS: Remember to change the user for the one you are using.</p>
 <p>Good luck!</p>
