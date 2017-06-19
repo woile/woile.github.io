@@ -9,6 +9,15 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../../../rss.xml">
 <link rel="canonical" href="https://woile.github.io/galleries/spain/barcelona/cosmocaixa/">
 <!--[if lt IE 9]><script src="../../../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<style type="text/css">
+    .image-block {
+        display: inline-block;
+    }
+    .flowr_row {
+        width: 100%;
+    }
+    </style>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 </head>
 <body class="theme-base-0b">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -107,33 +116,39 @@
                 <li><a href="../">barcelona</a></li>
                 <li>cosmocaixa</li>
 </ul></nav><h1>cosmocaixa</h1>
-    <ul class="thumbnails">
+
+<div id="gallery_container"></div>
+<noscript>
+<ul class="thumbnails">
 <li>
 <a href="GOPR1857.JPG" class="thumbnail image-reference" title="Gopr1857">
-                <img src="GOPR1857.thumbnail.JPG" alt="Gopr1857"></a>
-            </li>
+            <img src="GOPR1857.thumbnail.JPG" alt="Gopr1857"></a>
+        </li>
 <li>
 <a href="GOPR1858.JPG" class="thumbnail image-reference" title="Gopr1858">
-                <img src="GOPR1858.thumbnail.JPG" alt="Gopr1858"></a>
-            </li>
+            <img src="GOPR1858.thumbnail.JPG" alt="Gopr1858"></a>
+        </li>
 <li>
 <a href="GOPR1855.JPG" class="thumbnail image-reference" title="Gopr1855">
-                <img src="GOPR1855.thumbnail.JPG" alt="Gopr1855"></a>
-            </li>
+            <img src="GOPR1855.thumbnail.JPG" alt="Gopr1855"></a>
+        </li>
 <li>
 <a href="GOPR1870.JPG" class="thumbnail image-reference" title="Gopr1870">
-                <img src="GOPR1870.thumbnail.JPG" alt="Gopr1870"></a>
-            </li>
+            <img src="GOPR1870.thumbnail.JPG" alt="Gopr1870"></a>
+        </li>
 <li>
 <a href="GOPR1871.JPG" class="thumbnail image-reference" title="Gopr1871">
-                <img src="GOPR1871.thumbnail.JPG" alt="Gopr1871"></a>
-            </li>
+            <img src="GOPR1871.thumbnail.JPG" alt="Gopr1871"></a>
+        </li>
 <li>
 <a href="GOPR1852.JPG" class="thumbnail image-reference" title="Gopr1852">
-                <img src="GOPR1852.thumbnail.JPG" alt="Gopr1852"></a>
-    </li>
+            <img src="GOPR1852.thumbnail.JPG" alt="Gopr1852"></a>
+</li>
 </ul>
-<footer id="footer"><p>Contents © 2017         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+</noscript>
+
+        
+        <footer id="footer"><p>Contents © 2017         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
@@ -149,6 +164,45 @@
   ga('create', 'UA-77945905-1', 'auto');
   ga('send', 'pageview');
 
+</script><script src="../../../../assets/js/flowr.js"></script><script>
+jsonContent = [{"size": {"h": 150, "w": 200}, "title": "Gopr1857", "url": "GOPR1857.JPG", "url_thumb": "GOPR1857.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1858", "url": "GOPR1858.JPG", "url_thumb": "GOPR1858.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1855", "url": "GOPR1855.JPG", "url_thumb": "GOPR1855.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1870", "url": "GOPR1870.JPG", "url_thumb": "GOPR1870.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1871", "url": "GOPR1871.JPG", "url_thumb": "GOPR1871.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1852", "url": "GOPR1852.JPG", "url_thumb": "GOPR1852.thumbnail.JPG"}];
+flowr(document.querySelectorAll("#gallery_container")[0], {
+        data : jsonContent,
+        height : 200*.6,
+        padding: 5,
+        rows: -1,
+        render : function(params) {
+            // Just return a div, string or a dom object, anything works fine
+            var img = document.createElement("img");
+            img.setAttribute('src', params.itemData.url_thumb);
+            img.setAttribute('width', params.width);
+            img.setAttribute('height', params.height);
+            img.setAttribute('alt', params.itemData.title);
+            img.style.maxWidth = '100%';
+            link = document.createElement("a");
+            link.setAttribute('href', params.itemData.url);
+            link.setAttribute('class', 'image-reference');
+            div = document.createElement("div");
+            div.setAttribute('class', 'image-block');
+            div.setAttribute('title', params.itemData.title);
+            div.setAttribute('data-toggle', "tooltip")
+            link.append(img);
+            div.append(link);
+            //div.hover(div.tooltip());
+            return div;
+        },
+        itemWidth : function(data) { return data.size.w; },
+        itemHeight : function(data) { return data.size.h; },
+        complete : function(params) {
+            if( jsonContent.length > params.renderedItems ) {
+                nextRenderList = jsonContent.slice( params.renderedItems );
+            }
+        }
+    });
+    baguetteBox.run('#gallery_container', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
 </script>
 </body>
 </html>

@@ -9,6 +9,15 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="canonical" href="https://woile.github.io/galleries/argentina/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<style type="text/css">
+    .image-block {
+        display: inline-block;
+    }
+    .flowr_row {
+        width: 100%;
+    }
+    </style>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 </head>
 <body class="theme-base-0b">
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -105,21 +114,27 @@
 <li><a href="../">galleries</a></li>
                 <li>argentina</li>
 </ul></nav><h1>argentina</h1>
-    <ul class="thumbnails">
+
+<div id="gallery_container"></div>
+<noscript>
+<ul class="thumbnails">
 <li>
 <a href="G0071324.JPG" class="thumbnail image-reference" title="G0071324">
-                <img src="G0071324.thumbnail.JPG" alt="G0071324"></a>
-            </li>
+            <img src="G0071324.thumbnail.JPG" alt="G0071324"></a>
+        </li>
 <li>
 <a href="G0121373.JPG" class="thumbnail image-reference" title="G0121373">
-                <img src="G0121373.thumbnail.JPG" alt="G0121373"></a>
-            </li>
+            <img src="G0121373.thumbnail.JPG" alt="G0121373"></a>
+        </li>
 <li>
 <a href="G0061305.JPG" class="thumbnail image-reference" title="G0061305">
-                <img src="G0061305.thumbnail.JPG" alt="G0061305"></a>
-    </li>
+            <img src="G0061305.thumbnail.JPG" alt="G0061305"></a>
+</li>
 </ul>
-<footer id="footer"><p>Contents © 2017         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+</noscript>
+
+        
+        <footer id="footer"><p>Contents © 2017         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
@@ -135,6 +150,45 @@
   ga('create', 'UA-77945905-1', 'auto');
   ga('send', 'pageview');
 
+</script><script src="../../assets/js/flowr.js"></script><script>
+jsonContent = [{"size": {"h": 150, "w": 200}, "title": "G0071324", "url": "G0071324.JPG", "url_thumb": "G0071324.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "G0121373", "url": "G0121373.JPG", "url_thumb": "G0121373.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "G0061305", "url": "G0061305.JPG", "url_thumb": "G0061305.thumbnail.JPG"}];
+flowr(document.querySelectorAll("#gallery_container")[0], {
+        data : jsonContent,
+        height : 200*.6,
+        padding: 5,
+        rows: -1,
+        render : function(params) {
+            // Just return a div, string or a dom object, anything works fine
+            var img = document.createElement("img");
+            img.setAttribute('src', params.itemData.url_thumb);
+            img.setAttribute('width', params.width);
+            img.setAttribute('height', params.height);
+            img.setAttribute('alt', params.itemData.title);
+            img.style.maxWidth = '100%';
+            link = document.createElement("a");
+            link.setAttribute('href', params.itemData.url);
+            link.setAttribute('class', 'image-reference');
+            div = document.createElement("div");
+            div.setAttribute('class', 'image-block');
+            div.setAttribute('title', params.itemData.title);
+            div.setAttribute('data-toggle', "tooltip")
+            link.append(img);
+            div.append(link);
+            //div.hover(div.tooltip());
+            return div;
+        },
+        itemWidth : function(data) { return data.size.w; },
+        itemHeight : function(data) { return data.size.h; },
+        complete : function(params) {
+            if( jsonContent.length > params.renderedItems ) {
+                nextRenderList = jsonContent.slice( params.renderedItems );
+            }
+        }
+    });
+    baguetteBox.run('#gallery_container', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
 </script>
 </body>
 </html>

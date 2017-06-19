@@ -26,7 +26,7 @@ The first one will delete the trailing spaces. This is useful to select text pro
 
 The second one is intended to improve performance of sublime. If the project is huge sublime will get slow with this feature on, but if you press tab while you are writing, sublime will try to autocomplete.
 
-The third forces to always use spaces when tabbing, as most of programmers do.
+The third forces to always use spaces when tabbing, as most programmers do.
 
 The forth helps avoid problems when using features like multiline select.
 
@@ -51,8 +51,8 @@ Finally, the steps to install a new package are:
 
 ## Linters
 
-A lint tool performs static analysis of source code and flags patterns that might be errors or otherwise cause problems for the developer.
-In other words, it will tell you where you are writing incorrect code.
+A lint tool performs static analysis of source code and flags patterns that might have errors or otherwise cause problems for the developer.
+In other words, it tells you where you are writing incorrect code.
 Usually, a linter is a software that receives the files to analyze as paramters, and the will give you an output indicating in which lines somethings is weird.
 
 
@@ -113,23 +113,25 @@ Note: I work with python and javascript so I've marked those which I consider go
 
 `Emmet` Write HTML faster, introduces many sweet snippets.
 
-`Djaneiro` Add django support with many many snippets.
-
 
 ## MUST KNOW SHORTCUTS
 
-Using this shortcuts will make your life much easier. I will include some gifs eventually, but trust me, search them in your key bindin settings, and observe the keys.
+Using this shortcuts will make your life much easier.
 
-`toggle_comment`
+Search them in your key bindin settings, and observe the keys.
 
-`select_lines`
+`toggle_comment` usually `Ctrl + /`
+![](/images/guide-to-sublime-like-a-normal-person/toggle_comment.gif)
+
+`select_lines` usualy by pressing `Ctrl` and click
+![](/images/guide-to-sublime-like-a-normal-person/select_lines.gif)
 
 `find_under_expand` to filter with case, open the search panel and enable the "Case Sensitive" option.
 
 
 ## RECOMMENDED THEME
 
-This awesome theme also includes those cool icons which appear in the image.
+This awesome theme also includes those cool icons for every extension, like in the image below.
 
 [SoDaReloaded-Theme](https://github.com/Miw0/SoDaReloaded-Theme)
 ![](https://raw.githubusercontent.com/Miw0/sodareloaded-theme/master/dark/example.png)
