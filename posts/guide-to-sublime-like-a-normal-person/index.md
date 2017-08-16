@@ -22,13 +22,15 @@ Add the following settings in `Preferences > Settings > User Tab`
 "word_wrap": "false",
 ```
 
-The first one will delete the trailing spaces. This is useful to select text properly and sometimes is required by many languages.
+`trim_trailing_white_space_on_save` deletes the trailing spaces. This is useful to select text properly and sometimes is required by many languages.
 
-The second one is intended to improve performance of sublime. If the project is huge sublime will get slow with this feature on, but if you press tab while you are writing, sublime will try to autocomplete.
+`auto_complete` improves sublime's performance. If the project is huge sublime will get slow while
+this feature is on by default, having to look up for everything you write. Autocomplete still will be triggered if you press `tab` while writing.
 
-The third forces to always use spaces when tabbing, as most programmers do.
+`translate_tabs_to_spaces` forces to always use spaces when tabbing. This is a personal choice, you can
+use either `tabs` or `spaces`, but be consistent with the one you or your team use.
 
-The forth helps avoid problems when using features like multiline select.
+`word_wrap` if set to false, helps avoiding problems when using features like multiline select.
 
 
 ## Installing packages
@@ -58,8 +60,8 @@ Usually, a linter is a software that receives the files to analyze as paramters,
 
 ## Sublime Linter
 
-In my opinion, this is the **most important package** we should install, it provides an interface to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
-This means that Sublime Linter will talk with the linter you have installed in your system, and will display in the editor the errors reported by the linter.
+In my opinion, this is the **most important package** everyone should install, it provides an interface to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
+This means that Sublime Linter will talk with the linter you have installed in your system globally, and will display in the editor the errors reported by the linter.
 
 As the site reads:
 > SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter has been designed to provide maximum flexibility and usability for users and maximum simplicity for linter authors.
@@ -128,10 +130,13 @@ Search them in your key bindin settings, and observe the keys.
 
 `find_under_expand` to filter with case, open the search panel and enable the "Case Sensitive" option.
 
+No image for this sorry.
+
 
 ## RECOMMENDED THEME
 
-This awesome theme also includes those cool icons for every extension, like in the image below.
-
 [SoDaReloaded-Theme](https://github.com/Miw0/SoDaReloaded-Theme)
+
+This awesome theme also includes cool icons for every extension, like in the image below.
+
 ![](https://raw.githubusercontent.com/Miw0/sodareloaded-theme/master/dark/example.png)
