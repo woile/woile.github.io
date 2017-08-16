@@ -126,9 +126,11 @@
 </pre>
 
 
-<p><code>trim_trailing_white_space_on_save</code> deletes the trailing spaces. This is useful to select text properly and sometimes is required by many languages.</p>
+<p><code>trim_trailing_white_space_on_save</code> deletes the trailing spaces. This is useful to select text
+properly and sometimes is required by many languages.</p>
 <p><code>auto_complete</code> improves sublime's performance. If the project is huge sublime will get slow while
-this feature is on by default, having to look up for everything you write. Autocomplete still will be triggered if you press <code>tab</code> while writing.</p>
+this feature is on by default, having to look up for everything you write. Autocomplete still will be
+ triggered if you press <code>tab</code> while writing.</p>
 <p><code>translate_tabs_to_spaces</code> forces to always use spaces when tabbing. This is a personal choice, you can
 use either <code>tabs</code> or <code>spaces</code>, but be consistent with the one you or your team use.</p>
 <p><code>word_wrap</code> if set to false, helps avoiding problems when using features like multiline select.</p>
@@ -146,16 +148,24 @@ Os X: `cmd+shift+p`
 <li>Wait until the packages are loaded.</li>
 <li>Write the name of the package you want to install.</li>
 </ol>
-<h3>Linters</h3>
-<p>A lint tool performs static analysis of source code and flags patterns that might have errors or otherwise cause problems for the developer.
-In other words, it tells you where you are writing incorrect code.
-Usually, a linter is a software that receives the files to analyze as paramters, and the will give you an output indicating in which lines somethings is weird.</p>
+<h3>A talk about linters first</h3>
+<p>A <strong>lint tool</strong> performs static analysis of source code and flags patterns that might have errors or
+otherwise cause problems for the developer.
+In other words, it tells you where you are writing incorrect/badly-formatted code.
+A linter is a software, that receives the files to analyze as paramters, and it will
+return an output indicating in which lines somethings is weird.</p>
 <h3>Sublime Linter</h3>
-<p>In my opinion, this is the <strong>most important package</strong> everyone should install, it provides an interface to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
-This means that Sublime Linter will talk with the linter you have installed in your system globally, and will display in the editor the errors reported by the linter.</p>
+<p>In my opinion, this is the <strong>most important package</strong> everyone should install, that's why I introduced
+linters first. Sublime Linter provides an interface
+to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
+This means that Sublime Linter will talk with the linter you have installed in your system globally, and will
+ display in the editor the errors reported by the linter.</p>
 <p>As the site reads:</p>
 <blockquote>
-<p>SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter has been designed to provide maximum flexibility and usability for users and maximum simplicity for linter authors.</p>
+<p>SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language
+ you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter
+ has been designed to provide maximum flexibility and usability for users and maximum simplicity
+ for linter authors.</p>
 </blockquote>
 <p>The concept behind it is very simple:
     1. Install globally in your system a linter for the language of your choice (pep8, eslint, csslint, rubocop, etc).
@@ -235,6 +245,16 @@ This means that Sublime Linter will talk with the linter you have installed in y
 </tbody>
 </table>
 <p>Note: I work with python and javascript so I've marked those which I consider good for those languages.</p>
+<p>Let's say we want to lint python files with <code>flake8</code>. The procedure would go like this:</p>
+<ol>
+<li>Check <code>SublimeLinter</code> is installed first.</li>
+<li>Install flake8 globally, in a debian based machine: <code>sudo pip install flake8</code>
+</li>
+<li>Install the related sublime linter plugin. In this case <a href="https://github.com/SublimeLinter/SublimeLinter-flake8">SublimeLinter-flake8</a>
+</li>
+<li>That's it, try restarting sublime and everything should be up an running.</li>
+</ol>
+<p><img alt="" src="posts/guide-to-sublime-like-a-normal-person/images/guide-to-sublime-like-a-normal-person/slinter_diagram.jpg"></p>
 <h4>Tips to configure sublime linter</h4>
 <ul>
 <li>If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.</li>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Willy's blog (Posts about sublime)</title><link>https://woile.github.io/</link><description></description><atom:link type="application/rss+xml" rel="self" href="https://woile.github.io/categories/sublime.xml"></atom:link><language>en</language><lastBuildDate>Wed, 16 Aug 2017 10:58:13 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Guide to Sublime like a normal person</title><link>https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;First of all, verify that you have installed the latest version of &lt;a href="https://www.sublimetext.com/3"&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Willy's blog (Posts about sublime)</title><link>https://woile.github.io/</link><description></description><atom:link rel="self" href="https://woile.github.io/categories/sublime.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Wed, 16 Aug 2017 11:22:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Guide to Sublime like a normal person</title><link>https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;First of all, verify that you have installed the latest version of &lt;a href="https://www.sublimetext.com/3"&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;General settings&lt;/h3&gt;
 &lt;p&gt;Add the following settings in &lt;code&gt;Preferences &amp;gt; Settings &amp;gt; User Tab&lt;/code&gt;&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;"trim_trailing_white_space_on_save": true,
@@ -9,9 +9,11 @@
 &lt;/pre&gt;
 
 
-&lt;p&gt;&lt;code&gt;trim_trailing_white_space_on_save&lt;/code&gt; deletes the trailing spaces. This is useful to select text properly and sometimes is required by many languages.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;trim_trailing_white_space_on_save&lt;/code&gt; deletes the trailing spaces. This is useful to select text
+properly and sometimes is required by many languages.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;auto_complete&lt;/code&gt; improves sublime's performance. If the project is huge sublime will get slow while
-this feature is on by default, having to look up for everything you write. Autocomplete still will be triggered if you press &lt;code&gt;tab&lt;/code&gt; while writing.&lt;/p&gt;
+this feature is on by default, having to look up for everything you write. Autocomplete still will be
+ triggered if you press &lt;code&gt;tab&lt;/code&gt; while writing.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;translate_tabs_to_spaces&lt;/code&gt; forces to always use spaces when tabbing. This is a personal choice, you can
 use either &lt;code&gt;tabs&lt;/code&gt; or &lt;code&gt;spaces&lt;/code&gt;, but be consistent with the one you or your team use.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;word_wrap&lt;/code&gt; if set to false, helps avoiding problems when using features like multiline select.&lt;/p&gt;
@@ -29,16 +31,24 @@ Os X: `cmd+shift+p`
 &lt;li&gt;Wait until the packages are loaded.&lt;/li&gt;
 &lt;li&gt;Write the name of the package you want to install.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3&gt;Linters&lt;/h3&gt;
-&lt;p&gt;A lint tool performs static analysis of source code and flags patterns that might have errors or otherwise cause problems for the developer.
-In other words, it tells you where you are writing incorrect code.
-Usually, a linter is a software that receives the files to analyze as paramters, and the will give you an output indicating in which lines somethings is weird.&lt;/p&gt;
+&lt;h3&gt;A talk about linters first&lt;/h3&gt;
+&lt;p&gt;A &lt;strong&gt;lint tool&lt;/strong&gt; performs static analysis of source code and flags patterns that might have errors or
+otherwise cause problems for the developer.
+In other words, it tells you where you are writing incorrect/badly-formatted code.
+A linter is a software, that receives the files to analyze as paramters, and it will
+return an output indicating in which lines somethings is weird.&lt;/p&gt;
 &lt;h3&gt;Sublime Linter&lt;/h3&gt;
-&lt;p&gt;In my opinion, this is the &lt;strong&gt;most important package&lt;/strong&gt; everyone should install, it provides an interface to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
-This means that Sublime Linter will talk with the linter you have installed in your system globally, and will display in the editor the errors reported by the linter.&lt;/p&gt;
+&lt;p&gt;In my opinion, this is the &lt;strong&gt;most important package&lt;/strong&gt; everyone should install, that's why I introduced
+linters first. Sublime Linter provides an interface
+to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
+This means that Sublime Linter will talk with the linter you have installed in your system globally, and will
+ display in the editor the errors reported by the linter.&lt;/p&gt;
 &lt;p&gt;As the site reads:&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter has been designed to provide maximum flexibility and usability for users and maximum simplicity for linter authors.&lt;/p&gt;
+&lt;p&gt;SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language
+ you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter
+ has been designed to provide maximum flexibility and usability for users and maximum simplicity
+ for linter authors.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The concept behind it is very simple:
     1. Install globally in your system a linter for the language of your choice (pep8, eslint, csslint, rubocop, etc).
@@ -118,6 +128,14 @@ This means that Sublime Linter will talk with the linter you have installed in y
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Note: I work with python and javascript so I've marked those which I consider good for those languages.&lt;/p&gt;
+&lt;p&gt;Let's say we want to lint python files with &lt;code&gt;flake8&lt;/code&gt;. The procedure would go like this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Check &lt;code&gt;SublimeLinter&lt;/code&gt; is installed first.&lt;/li&gt;
+&lt;li&gt;Install flake8 globally, in a debian based machine: &lt;code&gt;sudo pip install flake8&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install the related sublime linter plugin. In this case &lt;a href="https://github.com/SublimeLinter/SublimeLinter-flake8"&gt;SublimeLinter-flake8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;That's it, try restarting sublime and everything should be up an running.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="" src="https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/images/guide-to-sublime-like-a-normal-person/slinter_diagram.jpg"&gt;&lt;/p&gt;
 &lt;h4&gt;Tips to configure sublime linter&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.&lt;/li&gt;

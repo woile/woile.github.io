@@ -22,10 +22,12 @@ Add the following settings in `Preferences > Settings > User Tab`
 "word_wrap": "false",
 ```
 
-`trim_trailing_white_space_on_save` deletes the trailing spaces. This is useful to select text properly and sometimes is required by many languages.
+`trim_trailing_white_space_on_save` deletes the trailing spaces. This is useful to select text
+properly and sometimes is required by many languages.
 
 `auto_complete` improves sublime's performance. If the project is huge sublime will get slow while
-this feature is on by default, having to look up for everything you write. Autocomplete still will be triggered if you press `tab` while writing.
+this feature is on by default, having to look up for everything you write. Autocomplete still will be
+ triggered if you press `tab` while writing.
 
 `translate_tabs_to_spaces` forces to always use spaces when tabbing. This is a personal choice, you can
 use either `tabs` or `spaces`, but be consistent with the one you or your team use.
@@ -51,20 +53,28 @@ Finally, the steps to install a new package are:
 3. Write the name of the package you want to install.
 
 
-## Linters
+## A talk about linters first
 
-A lint tool performs static analysis of source code and flags patterns that might have errors or otherwise cause problems for the developer.
-In other words, it tells you where you are writing incorrect code.
-Usually, a linter is a software that receives the files to analyze as paramters, and the will give you an output indicating in which lines somethings is weird.
+A **lint tool** performs static analysis of source code and flags patterns that might have errors or
+otherwise cause problems for the developer.
+In other words, it tells you where you are writing incorrect/badly-formatted code.
+A linter is a software, that receives the files to analyze as paramters, and it will
+return an output indicating in which lines somethings is weird.
 
 
 ## Sublime Linter
 
-In my opinion, this is the **most important package** everyone should install, it provides an interface to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
-This means that Sublime Linter will talk with the linter you have installed in your system globally, and will display in the editor the errors reported by the linter.
+In my opinion, this is the **most important package** everyone should install, that's why I introduced
+linters first. Sublime Linter provides an interface
+to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
+This means that Sublime Linter will talk with the linter you have installed in your system globally, and will
+ display in the editor the errors reported by the linter.
 
 As the site reads:
-> SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter has been designed to provide maximum flexibility and usability for users and maximum simplicity for linter authors.
+> SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language
+ you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter
+ has been designed to provide maximum flexibility and usability for users and maximum simplicity
+ for linter authors.
 
 The concept behind it is very simple:
     1. Install globally in your system a linter for the language of your choice (pep8, eslint, csslint, rubocop, etc).
@@ -90,6 +100,14 @@ Choose the one that suits you more, and install it through the package manager o
 
 Note: I work with python and javascript so I've marked those which I consider good for those languages.
 
+Let's say we want to lint python files with `flake8`. The procedure would go like this:
+
+1. Check `SublimeLinter` is installed first.
+2. Install flake8 globally, in a debian based machine: `sudo pip install flake8`
+3. Install the related sublime linter plugin. In this case [SublimeLinter-flake8](https://github.com/SublimeLinter/SublimeLinter-flake8)
+4. That's it, try restarting sublime and everything should be up an running.
+
+![](./images/guide-to-sublime-like-a-normal-person/slinter_diagram.jpg)
 
 ### Tips to configure sublime linter
 
