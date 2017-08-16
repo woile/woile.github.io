@@ -107,7 +107,7 @@ Let's say we want to lint python files with `flake8`. The procedure would go lik
 3. Install the related sublime linter plugin. In this case [SublimeLinter-flake8](https://github.com/SublimeLinter/SublimeLinter-flake8)
 4. That's it, try restarting sublime and everything should be up an running.
 
-![](./images/guide-to-sublime-like-a-normal-person/slinter_diagram.jpg)
+![](/images/guide-to-sublime-like-a-normal-person/slinter_diagram.jpg)
 
 ### Tips to configure sublime linter
 
