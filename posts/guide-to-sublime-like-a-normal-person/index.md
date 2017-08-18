@@ -91,6 +91,7 @@ Choose the one that suits you more, and install it through the package manager o
 | python| pep257 | SublimeLinter-pep257 | static analysis tool for checking compliance with Python docstring conventions |
 | python | pyflakes | SublimeLinter-pyflakes | checks Python source files for errors |
 | python | flake8 | SublimeLinter-flake8 | **[recommended]** includes lint checks provided by the PyFlakes project, PEP-0008 inspired style checks provided by the PyCodeStyle project, and McCabe complexity checking provided by the McCabe project |
+| python | mypy | SublimeLinter-contrib-mypy | **[recommended]** includes static type checker (python 3) |
 | javascript | jshint | SublimeLinter-jshint | JSHint is a program that flags suspicious usage in programs written in JavaScript |
 | javascript | eslint | SublimeLinter-eslint | **[recommended]** tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exception |
 | css | csslint | SublimeLinter-csslint | open source CSS code quality tool |
@@ -121,6 +122,16 @@ Let's say we want to lint python files with `flake8`. The procedure would go lik
 ```
 * To change the mark style, open the package control and type **Choose Mark Style**, I like the Squiggly underline.
 * You can ignore rules, in the settings of the linter inside the sublime linter settings.
+* If you are using `mypy` and you want to ignore import hints, add to `sublimelinter > user settings > linters` the following:
+```
+"mypy": {
+    "@disable": false,
+    "args": [
+        "--ignore-missing-imports"
+    ],
+    "excludes": []
+}
+```
 
 
 ## Another useful Packages
