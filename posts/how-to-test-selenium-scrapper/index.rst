@@ -167,8 +167,16 @@ If you find hard to test some scrapper function, try dividing it into smaller fu
 them individually.
 
 If a scrapper function does not include any condition, it's okay to :code:`return True` at the end,
-and assert that boolean. If something fails in the scrapper, we'll get noticied with an exception
-and the test will fail.
+and assert that boolean. If something goes wrong in the scrapper, we'll get noticied with an exception
+and the test will throw an error. Also, if you wanted to `receive a fail <https://stackoverflow.com/a/4319870/2047185>`_
+instead of an error, which is more pythonic, you should do something like this in your test:
+
+.. code-block:: python
+
+    try:
+        users_from_github()
+    except ExceptionType:
+        self.fail("users_from_github() raised ExceptionType unexpectedly!")
 
 Try isolating the scrapper as much as possible from the rest of your project, whenever you need
 to use selenium, avoid including bussiness logic in it as well, this difficults testing and makes
