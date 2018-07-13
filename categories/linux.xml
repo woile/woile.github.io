@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about linux)</title><link>https://woile.github.io/</link><description></description><atom:link type="application/rss+xml" href="https://woile.github.io/categories/linux.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 19 Jun 2017 15:45:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Get Skype working on Debian Stretch x64 with GNOME3</title><link>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about linux)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/linux.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 21:42:34 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Get Skype working on Debian Stretch x64 with GNOME3</title><link>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note&lt;/p&gt;
 &lt;p&gt;This info is no longer relevant. Right now Skype has been rewritten using &lt;a class="reference external" href="https://electron.atom.io/"&gt;electron&lt;/a&gt; and installing it in a debian based system is no longer a problem.
 Right now it doesn't support screensharing and some other features a normal person would expect.&lt;/p&gt;
@@ -15,24 +15,24 @@ Right now it doesn't support screensharing and some other features a normal pers
 &lt;p&gt;I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.&lt;/p&gt;
 &lt;p&gt;As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.&lt;/p&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-1"&gt;&lt;/a&gt;sudo dpkg --add-architecture i386
-&lt;a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-2"&gt;&lt;/a&gt;sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-&lt;a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-3"&gt;&lt;/a&gt;mkdir ~/.apps/
-&lt;a name="rest_code_507a67e1a73d4a4b90c088396d8d66a9-4"&gt;&lt;/a&gt;wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 &lt;span class="p"&gt;|&lt;/span&gt; tar jx -C ~/.apps/
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_6e4177797e544de6b87244279fa46b33-1"&gt;&lt;/a&gt;sudo dpkg --add-architecture i386
+&lt;a name="rest_code_6e4177797e544de6b87244279fa46b33-2"&gt;&lt;/a&gt;sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
+&lt;a name="rest_code_6e4177797e544de6b87244279fa46b33-3"&gt;&lt;/a&gt;mkdir ~/.apps/
+&lt;a name="rest_code_6e4177797e544de6b87244279fa46b33-4"&gt;&lt;/a&gt;wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 &lt;span class="p"&gt;|&lt;/span&gt; tar jx -C ~/.apps/
 &lt;/pre&gt;&lt;p&gt;Instead of launching the &lt;code&gt;./skype&lt;/code&gt; script, you can add a &lt;code&gt;skype.desktop&lt;/code&gt; file to your gnome environment.&lt;/p&gt;
 &lt;p&gt;The location for this file is either &lt;code&gt;~/.local/share/applications&lt;/code&gt;, for the current user, or &lt;code&gt;/usr/share/applications&lt;/code&gt; for everyone.&lt;/p&gt;
 &lt;p&gt;The content for your &lt;code&gt;skype.desktop&lt;/code&gt;, should be something like this:&lt;/p&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-1"&gt;&lt;/a&gt;&lt;span class="o"&gt;[&lt;/span&gt;Desktop Entry&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-2"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Skype
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-3"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Skype Internet Telephony
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-4"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/**santiago**/.apps/skype-4.3.0.37/skype
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-5"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-6"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Terminal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-7"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Application
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-8"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;UTF-8
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-9"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Network&lt;span class="p"&gt;;&lt;/span&gt;Application&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-10"&gt;&lt;/a&gt;&lt;span class="nv"&gt;MimeType&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;x-scheme-handler/skype&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-11"&gt;&lt;/a&gt;X-KDE-Protocols&lt;span class="o"&gt;=&lt;/span&gt;skype
-&lt;a name="rest_code_1bb742da052b49e38e95fe091015a262-12"&gt;&lt;/a&gt;X-GNOME-Bugzilla-Product&lt;span class="o"&gt;=&lt;/span&gt;skype
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-1"&gt;&lt;/a&gt;&lt;span class="o"&gt;[&lt;/span&gt;Desktop Entry&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-2"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Skype
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-3"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Skype Internet Telephony
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-4"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/**santiago**/.apps/skype-4.3.0.37/skype
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-5"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-6"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Terminal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-7"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Application
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-8"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;UTF-8
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-9"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Network&lt;span class="p"&gt;;&lt;/span&gt;Application&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-10"&gt;&lt;/a&gt;&lt;span class="nv"&gt;MimeType&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;x-scheme-handler/skype&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-11"&gt;&lt;/a&gt;X-KDE-Protocols&lt;span class="o"&gt;=&lt;/span&gt;skype
+&lt;a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-12"&gt;&lt;/a&gt;X-GNOME-Bugzilla-Product&lt;span class="o"&gt;=&lt;/span&gt;skype
 &lt;/pre&gt;&lt;p&gt;PS: Remember to change the user for the one you are using.&lt;/p&gt;
 &lt;p&gt;Good luck!&lt;/p&gt;&lt;/div&gt;</description><category>debian</category><category>linux</category><category>skype</category><guid>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</guid><pubDate>Mon, 19 Sep 2016 10:56:03 GMT</pubDate></item></channel></rss>
