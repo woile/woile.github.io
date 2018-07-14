@@ -2,10 +2,10 @@
 .. title: Decrypt filesystem
 .. slug: decrypt-filesystem
 .. date: 2018-07-13 18:14:43 UTC-03:00
-.. tags:
-.. category:
-.. link:
-.. description:
+.. tags: linux, ubuntu, encrypt
+.. category: linux, ubuntu, encrypt
+.. link: https://woile.github.io/posts/decrypt-filesystem/
+.. description: how to decrypt your ubuntu linux machine from command line
 .. type: text
 -->
 

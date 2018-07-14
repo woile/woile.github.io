@@ -10,6 +10,10 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/categories/cat_linux-ubuntu-encrypt.xml</loc>
+  <lastmod>2018-07-14T07:42:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/cat_programming.xml</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </sitemap>
@@ -42,6 +46,10 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/categories/encrypt.xml</loc>
+  <lastmod>2018-07-14T07:42:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/europe.xml</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </sitemap>
@@ -71,7 +79,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/linux.xml</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2018-07-14T07:42:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/polymorphic.xml</loc>
@@ -96,6 +104,10 @@
  <sitemap>
   <loc>https://woile.github.io/categories/trip.xml</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://woile.github.io/categories/ubuntu.xml</loc>
+  <lastmod>2018-07-14T07:42:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/argentina/rss.xml</loc>
@@ -339,10 +351,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2018-07-14T07:42:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2018-07-14T07:42:00Z</lastmod>
  </sitemap>
 </sitemapindex>
