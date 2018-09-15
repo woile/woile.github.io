@@ -91,6 +91,7 @@ If you haven't seen how a **pyproject.toml** looks, it's something like this:
     flake8 = "^3.5"
     mypy = "^0.620.0"
 
+Pretty simple, right?
 
 Writing the interface
 ---------------------
@@ -98,7 +99,7 @@ Writing the interface
 We are gonna write the **cli** in the :code:`___main__.py` file, so we can treat the folder :code:`git` as a module.
 Look at the file structure if in doubt.
 
-In order to use it as a module, we need to provide, to the python interpreter, the :code:`-m` flag.
+In order to use it as a module, we need to provide the :code:`-m` flag, to the python interpreter.
 Our resulting command would look something like this:
 
 :code:`python -m git <top_level_arguments> <subcommand> <sub_arguments>`.
