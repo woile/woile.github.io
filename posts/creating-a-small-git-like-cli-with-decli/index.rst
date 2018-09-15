@@ -11,7 +11,7 @@ So for a long time I've been using different cli tools, mostly :code:`argparse` 
 
 Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.
 
-Because of this, I created :code:`decli`, which is a declarative command line utility. Super simple.
+Because of this, I created `decli <https://github.com/Woile/decli>`_, which is a declarative command line utility. Super simple.
 Which is basically a wrapper around argparse.
 Just write a dict and you are ready to go.
 

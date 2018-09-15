@@ -23,7 +23,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_python-programming.xml</loc>
-  <lastmod>2018-09-15T13:08:00Z</lastmod>
+  <lastmod>2018-09-15T13:11:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_software.xml</loc>
@@ -71,11 +71,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/git-python-decli-cli-tutorial.xml</loc>
-  <lastmod>2018-09-15T13:08:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://woile.github.io/categories/git-python-decli-cli.xml</loc>
-  <lastmod>2018-09-15T13:08:00Z</lastmod>
+  <lastmod>2018-09-15T13:11:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/gopro.xml</loc>
@@ -363,10 +359,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2018-09-15T13:08:00Z</lastmod>
+  <lastmod>2018-09-15T13:11:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2018-09-15T13:08:00Z</lastmod>
+  <lastmod>2018-09-15T13:11:00Z</lastmod>
  </sitemap>
 </sitemapindex>
