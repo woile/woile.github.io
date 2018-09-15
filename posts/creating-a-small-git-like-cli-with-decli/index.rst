@@ -207,8 +207,8 @@ Also, each one will use a class that we are gonna implement later. So no output 
 
 Some extras:
 
-- We are gonna print the help if nothing is provided
-- We are gonna call a :code:`run` method from the class that we are gonna define next
+- We are gonna print the help if nothing is provided.
+- We are gonna call a :code:`run` method from the classes that we are gonna define later.
 
 
 .. code-block:: python
@@ -289,14 +289,15 @@ So this is how :code:`___main__.py` should look like.
 Writing the commands
 --------------------
 
-So before, we left our application unfinished and not working, because it was missing the classes imported from the :code:`commands` folder.
+Before, we left our application unfinished and not working, because it was missing the classes imported from the :code:`commands` folder.
 If you haven't created the folder and the files yet, go and do it. Remember also to create the :code:`___init__.py` files.
 
 It's interesting to observe how each class is unpacking the arguments that needs.
 
-Also, each class is a normal python class, there's nothing needed, really **easy to test**.
+Also, each class is a normal python class, there's nothing needed, really **easy to test**, right?
 
 A better implementation could be made, of course, having a parent class defining the interface and handling global arguments, would be interesting.
+But I'll leave that for you.
 
 Add
 ~~~
@@ -348,6 +349,8 @@ For :code:`commands/push.py`
 
 Init
 ~~~~
+
+We are gonna add this, in order to import directly from :code:`commands`, instead of one by one.
 
 For :code:`commands/__init__.py`
 
@@ -405,7 +408,7 @@ Calling commit commnand with a sub-argument
     $ python -m git commit --amend
     Commiting... debug: False, amend: True
 
-Calling push commnand with global and a sub arguments
+Calling push commnand with global and sub arguments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
@@ -419,16 +422,16 @@ Help for one of the commands
 
 ::
 
-    $ python -m git add --help
-    usage: git add [-h] [--update]
+    $ python -m git commit --help
+    usage: git commit [-h] [--amend]
 
     optional arguments:
     -h, --help  show this help message and exit
-    --update
+    --amend     Replace the tip of the current branch by creating a new commit.
 
 
 And that's it, we have succesfully created a nice and mantainable cli.
 
-Also if you already have a project and you want to provide an interface, now you know how.
+Keep in mind that if you already have a project, and you want to provide an interface, now you know how.
 
 Hope it was a useful reading.
