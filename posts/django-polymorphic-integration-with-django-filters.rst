@@ -2,7 +2,7 @@
 .. slug: django-polymorphic-integration-with-django-filters
 .. date: 2017-03-02 20:58:22 UTC-03:00
 .. tags: python, django, drf, django-rest-framework, api, polymorphic, filters
-.. category: python, django
+.. category: python
 .. link:
 .. description: Integration of two python/django libraries
 .. type: text

@@ -1,8 +1,8 @@
 .. title: How to test Selenium scrapper with Python
 .. slug: how-to-test-selenium-scrapper
 .. date: 2017-09-12 11:38:40 UTC-03:00
-.. tags:
-.. category:
+.. tags: selenium python testing
+.. category: python
 .. link:
 .. description:
 .. type: text
