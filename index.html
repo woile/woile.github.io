@@ -196,15 +196,15 @@ python -m git --debug commit --amend
 <p>For the interface, using <strong>decli</strong>, we need to create a dict. Let's dive into it.</p>
 <div class="section" id="main-component">
 <h3>Main component</h3>
-<pre class="code python"><a name="rest_code_a5fc28900408472f82d09982e6e1be3a-1"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-2"></a>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-3"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-4"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-5"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-6"></a><span class="p">}</span>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-7"></a>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-8"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<a name="rest_code_a5fc28900408472f82d09982e6e1be3a-9"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<pre class="code python"><a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-1"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-2"></a>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-3"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-4"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-5"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-6"></a><span class="p">}</span>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-7"></a>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-8"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a name="rest_code_b8ce8c98dda74ddf9b0bfcfa2adc332c-9"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 </pre>
 <p>This part is the entrypoint of our cli.</p>
 <p>The <code>prog</code> key is the name of the app, it will be used in the help information, same as <code>description</code>.
@@ -224,26 +224,26 @@ optional arguments:
 <p>Let's add some global arguments, we want to have a <code>debug</code> and a <code>version</code>.
 We are also going to add some code to handle the version flag.
 And for now, if nothing is provided we'll print the args.</p>
-<pre class="code python"><a name="rest_code_556a810f9d374d05a2a818aa6a465283-1"></a><span class="kn">import</span> <span class="nn">sys</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-3"></a>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-4"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-5"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-6"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-7"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-8"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-10"></a>    <span class="p">],</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-11"></a><span class="p">}</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-12"></a>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-13"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-14"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-15"></a>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-16"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-17"></a>    <span class="k">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-18"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-19"></a>
-<a name="rest_code_556a810f9d374d05a2a818aa6a465283-20"></a><span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-1"></a><span class="kn">import</span> <span class="nn">sys</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-3"></a>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-4"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-5"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-6"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-7"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-8"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-10"></a>    <span class="p">],</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-11"></a><span class="p">}</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-12"></a>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-13"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-14"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-15"></a>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-16"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-17"></a>    <span class="k">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-18"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-19"></a>
+<a name="rest_code_ca2747a0e84c4c3caeda323f8e49174f-20"></a><span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre>
 <p>Let's take a look at the help, also to what happens when calling with the <code>version</code> flag, and when nothing is provided.</p>
 <pre class="literal-block">
@@ -276,75 +276,75 @@ Each one will have a unique argument. Each one will use a class that we are gonn
 <li>We are gonna print the help if nothing is provided</li>
 <li>We are gonna call a <code>run</code> method from the class that we are gonna define next</li>
 </ul>
-<pre class="code python"><a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-1"></a><span class="kn">import</span> <span class="nn">sys</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-3"></a><span class="kn">from</span> <span class="nn">.commands</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Commit</span><span class="p">,</span> <span class="n">Push</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-4"></a>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-5"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-6"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-7"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-8"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-10"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-11"></a>    <span class="p">],</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-12"></a>    <span class="s2">"subcommands"</span><span class="p">:</span> <span class="p">{</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-13"></a>        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"main"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-14"></a>        <span class="s2">"commands"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-15"></a>            <span class="p">{</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-16"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"add"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-17"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Add file contents to the index"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-18"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Add</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-19"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--update"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">}],</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-20"></a>            <span class="p">},</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-21"></a>            <span class="p">{</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-22"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-23"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Record changes to the repository"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-24"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Commit</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-25"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-26"></a>                    <span class="p">{</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-27"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--amend"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-28"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-29"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-30"></a>                            <span class="s2">"Replace the tip of the current "</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-31"></a>                            <span class="s2">"branch by creating a new commit."</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-32"></a>                        <span class="p">),</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-33"></a>                    <span class="p">}</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-34"></a>                <span class="p">],</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-35"></a>            <span class="p">},</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-36"></a>            <span class="p">{</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-37"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"push"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-38"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Update remote refs along with associated objects"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-39"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Push</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-40"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-41"></a>                    <span class="p">{</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-42"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--tags"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-43"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-44"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-45"></a>                            <span class="s2">"All refs under refs/tags are pushed, in"</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-46"></a>                            <span class="s2">" addition to refspecs explicitly listed "</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-47"></a>                            <span class="s2">"on the command line."</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-48"></a>                        <span class="p">),</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-49"></a>                    <span class="p">}</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-50"></a>                <span class="p">],</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-51"></a>            <span class="p">},</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-52"></a>        <span class="p">],</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-53"></a>    <span class="p">},</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-54"></a><span class="p">}</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-55"></a>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-56"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-57"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-58"></a>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-59"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-60"></a>    <span class="k">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-61"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-62"></a>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-63"></a><span class="c1"># print help if no arguments are provided</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-64"></a><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-65"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-66"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-67"></a>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-68"></a><span class="n">cmd</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-<a name="rest_code_9d2a1028b11d463f9c34f46549c549a2-69"></a><span class="n">cmd</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<pre class="code python"><a name="rest_code_83c3334b8b224849b30a7814373573d9-1"></a><span class="kn">import</span> <span class="nn">sys</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-3"></a><span class="kn">from</span> <span class="nn">.commands</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Commit</span><span class="p">,</span> <span class="n">Push</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-4"></a>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-5"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-6"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-7"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-8"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-10"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-11"></a>    <span class="p">],</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-12"></a>    <span class="s2">"subcommands"</span><span class="p">:</span> <span class="p">{</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-13"></a>        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"main"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-14"></a>        <span class="s2">"commands"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-15"></a>            <span class="p">{</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-16"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"add"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-17"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Add file contents to the index"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-18"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Add</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-19"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--update"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">}],</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-20"></a>            <span class="p">},</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-21"></a>            <span class="p">{</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-22"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-23"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Record changes to the repository"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-24"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Commit</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-25"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-26"></a>                    <span class="p">{</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-27"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--amend"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-28"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-29"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-30"></a>                            <span class="s2">"Replace the tip of the current "</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-31"></a>                            <span class="s2">"branch by creating a new commit."</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-32"></a>                        <span class="p">),</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-33"></a>                    <span class="p">}</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-34"></a>                <span class="p">],</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-35"></a>            <span class="p">},</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-36"></a>            <span class="p">{</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-37"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"push"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-38"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Update remote refs along with associated objects"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-39"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Push</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-40"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-41"></a>                    <span class="p">{</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-42"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--tags"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-43"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-44"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-45"></a>                            <span class="s2">"All refs under refs/tags are pushed, in"</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-46"></a>                            <span class="s2">" addition to refspecs explicitly listed "</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-47"></a>                            <span class="s2">"on the command line."</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-48"></a>                        <span class="p">),</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-49"></a>                    <span class="p">}</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-50"></a>                <span class="p">],</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-51"></a>            <span class="p">},</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-52"></a>        <span class="p">],</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-53"></a>    <span class="p">},</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-54"></a><span class="p">}</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-55"></a>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-56"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-57"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-58"></a>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-59"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-60"></a>    <span class="k">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-61"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-62"></a>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-63"></a><span class="c1"># print help if no arguments are provided</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-64"></a><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-65"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-66"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-67"></a>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-68"></a><span class="n">cmd</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+<a name="rest_code_83c3334b8b224849b30a7814373573d9-69"></a><span class="n">cmd</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre>
 <p>So this is how <code>__main__.py</code> should look like.</p>
 </div>
@@ -359,54 +359,54 @@ If you haven't created the folder and the files yet, go and do it. Remember also
 <div class="section" id="add">
 <h3>Add</h3>
 <p>For <code>commands/app.py</code></p>
-<pre class="code python"><a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-1"></a><span class="k">class</span> <span class="nc">Add</span><span class="p">:</span>
-<a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-2"></a>
-<a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
-<a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">update</span>
-<a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-6"></a>
-<a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_c7f841b222ff495cbf2cee27fc5b6318-8"></a>        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'running add... update: {self.update}, debug: {self.debug}'</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_f57d5779575a44f5b735b5498d15746b-1"></a><span class="k">class</span> <span class="nc">Add</span><span class="p">:</span>
+<a name="rest_code_f57d5779575a44f5b735b5498d15746b-2"></a>
+<a name="rest_code_f57d5779575a44f5b735b5498d15746b-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a name="rest_code_f57d5779575a44f5b735b5498d15746b-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+<a name="rest_code_f57d5779575a44f5b735b5498d15746b-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">update</span>
+<a name="rest_code_f57d5779575a44f5b735b5498d15746b-6"></a>
+<a name="rest_code_f57d5779575a44f5b735b5498d15746b-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_f57d5779575a44f5b735b5498d15746b-8"></a>        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'running add... update: {self.update}, debug: {self.debug}'</span><span class="p">)</span>
 </pre>
 </div>
 <div class="section" id="commit">
 <h3>Commit</h3>
 <p>For <code>commands/commit.py</code></p>
-<pre class="code python"><a name="rest_code_8f41dc1b6aea418cbba474935069863e-1"></a><span class="k">class</span> <span class="nc">Commit</span><span class="p">:</span>
-<a name="rest_code_8f41dc1b6aea418cbba474935069863e-2"></a>
-<a name="rest_code_8f41dc1b6aea418cbba474935069863e-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">amend</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a name="rest_code_8f41dc1b6aea418cbba474935069863e-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
-<a name="rest_code_8f41dc1b6aea418cbba474935069863e-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">amend</span> <span class="o">=</span> <span class="n">amend</span>
-<a name="rest_code_8f41dc1b6aea418cbba474935069863e-6"></a>
-<a name="rest_code_8f41dc1b6aea418cbba474935069863e-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_8f41dc1b6aea418cbba474935069863e-8"></a>        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Commiting... debug: {self.debug}, amend: {self.amend}'</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-1"></a><span class="k">class</span> <span class="nc">Commit</span><span class="p">:</span>
+<a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-2"></a>
+<a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">amend</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+<a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">amend</span> <span class="o">=</span> <span class="n">amend</span>
+<a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-6"></a>
+<a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_01fd550c79fb4b62a7e8172cd0271d99-8"></a>        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Commiting... debug: {self.debug}, amend: {self.amend}'</span><span class="p">)</span>
 </pre>
 </div>
 <div class="section" id="push">
 <h3>Push</h3>
 <p>For <code>commands/push.py</code></p>
-<pre class="code python"><a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-1"></a><span class="k">class</span> <span class="nc">Push</span><span class="p">:</span>
-<a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-2"></a>
-<a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
-<a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span>
-<a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-6"></a>
-<a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_07d966ef5e63457ab6fbce34d6943f3a-8"></a>        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Pushing... debug: {self.debug}, tags: {self.tags}'</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_46018f5d1f414d5d84ff52534f008838-1"></a><span class="k">class</span> <span class="nc">Push</span><span class="p">:</span>
+<a name="rest_code_46018f5d1f414d5d84ff52534f008838-2"></a>
+<a name="rest_code_46018f5d1f414d5d84ff52534f008838-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a name="rest_code_46018f5d1f414d5d84ff52534f008838-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+<a name="rest_code_46018f5d1f414d5d84ff52534f008838-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span>
+<a name="rest_code_46018f5d1f414d5d84ff52534f008838-6"></a>
+<a name="rest_code_46018f5d1f414d5d84ff52534f008838-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_46018f5d1f414d5d84ff52534f008838-8"></a>        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">'Pushing... debug: {self.debug}, tags: {self.tags}'</span><span class="p">)</span>
 </pre>
 </div>
 <div class="section" id="init">
 <h3>Init</h3>
 <p>For <code>commands/__init__.py</code></p>
-<pre class="code python"><a name="rest_code_b7bf594799a0467599081e762f31b0bf-1"></a><span class="kn">from</span> <span class="nn">.add</span> <span class="kn">import</span> <span class="n">Add</span>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-2"></a><span class="kn">from</span> <span class="nn">.commit</span> <span class="kn">import</span> <span class="n">Commit</span>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-3"></a><span class="kn">from</span> <span class="nn">.push</span> <span class="kn">import</span> <span class="n">Push</span>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-4"></a>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-5"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-6"></a>    <span class="s1">'Add'</span><span class="p">,</span>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-7"></a>    <span class="s1">'Commit'</span><span class="p">,</span>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-8"></a>    <span class="s1">'Push'</span>
-<a name="rest_code_b7bf594799a0467599081e762f31b0bf-9"></a><span class="p">)</span>
+<pre class="code python"><a name="rest_code_29c9333e2e3045409d87a5db13eb2665-1"></a><span class="kn">from</span> <span class="nn">.add</span> <span class="kn">import</span> <span class="n">Add</span>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-2"></a><span class="kn">from</span> <span class="nn">.commit</span> <span class="kn">import</span> <span class="n">Commit</span>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-3"></a><span class="kn">from</span> <span class="nn">.push</span> <span class="kn">import</span> <span class="n">Push</span>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-4"></a>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-5"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-6"></a>    <span class="s1">'Add'</span><span class="p">,</span>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-7"></a>    <span class="s1">'Commit'</span><span class="p">,</span>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-8"></a>    <span class="s1">'Push'</span>
+<a name="rest_code_29c9333e2e3045409d87a5db13eb2665-9"></a><span class="p">)</span>
 </pre>
 </div>
 </div>
@@ -568,115 +568,115 @@ or writing the scrapper in pure Javascript, but I felt comfortable using Seleniu
 while testing. Yes, it's a bit tedious, but it delivers.</p>
 <p>When should you save?</p>
 <p>Whenever you need to. This is a good example:</p>
-<pre class="code python"><a name="rest_code_8315397b64224701b75b96ea0a2121fc-1"></a><span class="n">url</span> <span class="o">=</span> <span class="s1">'https://betterexplained.com/articles/why-do-we-multiply-combinations/'</span>
-<a name="rest_code_8315397b64224701b75b96ea0a2121fc-2"></a><span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
-<a name="rest_code_8315397b64224701b75b96ea0a2121fc-3"></a><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a name="rest_code_8315397b64224701b75b96ea0a2121fc-4"></a><span class="n">save_current_state</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">,</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-1"></a><span class="n">url</span> <span class="o">=</span> <span class="s1">'https://betterexplained.com/articles/why-do-we-multiply-combinations/'</span>
+<a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-2"></a><span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-3"></a><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-4"></a><span class="n">save_current_state</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">,</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
 </pre>
 <p>Can I see the code of <code>save_current_state</code>? Here you go:</p>
-<pre class="code python"><a name="rest_code_355501d8025c4825b2a5fd744089bb9f-1"></a><span class="kn">import</span> <span class="nn">os</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-2"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-3"></a>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-4"></a><span class="n">SAVE_SOURCE</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># disable in production</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-5"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-6"></a>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-7"></a>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-8"></a><span class="k">def</span> <span class="nf">save_current_state</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-9"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">SAVE_SOURCE</span><span class="p">:</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-10"></a>        <span class="k">return</span> <span class="bp">None</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-11"></a>    <span class="k">if</span> <span class="n">location</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-12"></a>        <span class="n">location</span> <span class="o">=</span> <span class="n">TEST_LOCATION</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-13"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-14"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'source must be a string'</span><span class="p">)</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-15"></a>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-16"></a>    <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'/'</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'.html'</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-17"></a>    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-18"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-19"></a>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-20"></a>
-<a name="rest_code_355501d8025c4825b2a5fd744089bb9f-21"></a>    <span class="k">return</span> <span class="n">filepath</span>
+<pre class="code python"><a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-2"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-3"></a>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-4"></a><span class="n">SAVE_SOURCE</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># disable in production</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-5"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-6"></a>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-7"></a>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-8"></a><span class="k">def</span> <span class="nf">save_current_state</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-9"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">SAVE_SOURCE</span><span class="p">:</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-10"></a>        <span class="k">return</span> <span class="bp">None</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-11"></a>    <span class="k">if</span> <span class="n">location</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-12"></a>        <span class="n">location</span> <span class="o">=</span> <span class="n">TEST_LOCATION</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-13"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-14"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'source must be a string'</span><span class="p">)</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-15"></a>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-16"></a>    <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'/'</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'.html'</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-17"></a>    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-18"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-19"></a>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-20"></a>
+<a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-21"></a>    <span class="k">return</span> <span class="n">filepath</span>
 </pre>
 <p>Notice how the url is used as the file name (safely parsed). This helps a lot to match urls.
 But of course, a case where something custom is required may happen, so you can tune the server to
 fit any case.</p>
 <p>And the python server? A minor modification from <a class="reference external" href="https://realpython.com/blog/python/testing-third-party-apis-with-mock-servers/">here</a></p>
-<pre class="code python"><a name="rest_code_6af9b1808790478098182d97bf5f9caf-1"></a><span class="kn">import</span> <span class="nn">os</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-2"></a><span class="kn">import</span> <span class="nn">socket</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-3"></a><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-4"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-5"></a><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-6"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-7"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-8"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-9"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-10"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-11"></a><span class="k">class</span> <span class="nc">MockServerRequestHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-12"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-13"></a>    <span class="k">def</span> <span class="nf">_set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Set-Cookie'</span><span class="p">,</span> <span class="s1">'exampleid=c295IGVsIHVzdWFyaW8gZW5pdG8K'</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">)</span>  <span class="c1"># change at will</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-18"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-19"></a>    <span class="nd">@property</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-20"></a>    <span class="k">def</span> <span class="nf">_filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-21"></a>        <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">),</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-22"></a>        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_LOCATION</span><span class="p">,</span> <span class="s1">'{0}.html'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-23"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-24"></a>    <span class="k">def</span> <span class="nf">_read_from_file_or_404</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-25"></a>        <span class="k">try</span><span class="p">:</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-26"></a>            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filepath</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-27"></a>        <span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-28"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">&lt;html&gt;&lt;body&gt;404 Not Found!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-30"></a>        <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-31"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-32"></a>            <span class="c1"># needs an extra new line</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-33"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-34"></a>            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-35"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-36"></a>    <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-37"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-39"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-40"></a>    <span class="k">def</span> <span class="nf">do_POST</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-42"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-43"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-44"></a>    <span class="k">def</span> <span class="nf">log_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-45"></a>        <span class="sd">"""Do not write log messages to std. Disable to see the requests."""</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-46"></a>        <span class="k">return</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-47"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-48"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-49"></a><span class="k">def</span> <span class="nf">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-50"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-51"></a>    <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-52"></a>    <span class="n">address</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-53"></a>    <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-54"></a>    <span class="k">return</span> <span class="n">port</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-55"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-56"></a>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-57"></a><span class="k">def</span> <span class="nf">start_mock_server</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-58"></a>    <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-59"></a>        <span class="n">port</span> <span class="o">=</span> <span class="n">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-60"></a>    <span class="n">mock_server</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">MockServerRequestHandler</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-61"></a>    <span class="n">mock_server_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">mock_server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-62"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-63"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<a name="rest_code_6af9b1808790478098182d97bf5f9caf-64"></a>    <span class="k">return</span> <span class="s1">'{hostname}:{port}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-2"></a><span class="kn">import</span> <span class="nn">socket</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-3"></a><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-4"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-5"></a><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-6"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-7"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-8"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-9"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-10"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-11"></a><span class="k">class</span> <span class="nc">MockServerRequestHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-12"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-13"></a>    <span class="k">def</span> <span class="nf">_set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Set-Cookie'</span><span class="p">,</span> <span class="s1">'exampleid=c295IGVsIHVzdWFyaW8gZW5pdG8K'</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">)</span>  <span class="c1"># change at will</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-18"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-19"></a>    <span class="nd">@property</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-20"></a>    <span class="k">def</span> <span class="nf">_filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-21"></a>        <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">),</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-22"></a>        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_LOCATION</span><span class="p">,</span> <span class="s1">'{0}.html'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-23"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-24"></a>    <span class="k">def</span> <span class="nf">_read_from_file_or_404</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-25"></a>        <span class="k">try</span><span class="p">:</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-26"></a>            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filepath</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-27"></a>        <span class="k">except</span> <span class="n">FileNotFoundError</span><span class="p">:</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-28"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">&lt;html&gt;&lt;body&gt;404 Not Found!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-30"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-31"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-32"></a>            <span class="c1"># needs an extra new line</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-33"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-34"></a>            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-35"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-36"></a>    <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-37"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-39"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-40"></a>    <span class="k">def</span> <span class="nf">do_POST</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-42"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-43"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-44"></a>    <span class="k">def</span> <span class="nf">log_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-45"></a>        <span class="sd">"""Do not write log messages to std. Disable to see the requests."""</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-46"></a>        <span class="k">return</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-47"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-48"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-49"></a><span class="k">def</span> <span class="nf">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-50"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-51"></a>    <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-52"></a>    <span class="n">address</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-53"></a>    <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-54"></a>    <span class="k">return</span> <span class="n">port</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-55"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-56"></a>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-57"></a><span class="k">def</span> <span class="nf">start_mock_server</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-58"></a>    <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-59"></a>        <span class="n">port</span> <span class="o">=</span> <span class="n">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-60"></a>    <span class="n">mock_server</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">MockServerRequestHandler</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-61"></a>    <span class="n">mock_server_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">mock_server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-62"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-63"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-64"></a>    <span class="k">return</span> <span class="s1">'{hostname}:{port}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
 </pre>
 <p>And finally the base test from which you will inherit, whenever you need to test the scrapper.</p>
-<pre class="code python"><a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-1"></a><span class="kn">import</span> <span class="nn">unittest</span>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-2"></a><span class="kn">from</span> <span class="nn">my_project</span> <span class="kn">import</span> <span class="n">const</span>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-3"></a><span class="kn">from</span> <span class="nn">tests</span> <span class="kn">import</span> <span class="n">start_mock_server</span>  <span class="c1"># or where you saved it</span>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-4"></a>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-5"></a>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-6"></a><span class="k">class</span> <span class="nc">BaseScrapperTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-7"></a>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-8"></a>    <span class="nd">@classmethod</span>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-9"></a>    <span class="k">def</span> <span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-10"></a>        <span class="n">url</span> <span class="o">=</span> <span class="n">start_mock_server</span><span class="p">()</span>
-<a name="rest_code_e7f68a5252ec4ae5ad5361097db6fcd4-11"></a>        <span class="n">const</span><span class="o">.</span><span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">url</span>
+<pre class="code python"><a name="rest_code_f707887c1737413292ff69ca18ce8b98-1"></a><span class="kn">import</span> <span class="nn">unittest</span>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-2"></a><span class="kn">from</span> <span class="nn">my_project</span> <span class="kn">import</span> <span class="n">const</span>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-3"></a><span class="kn">from</span> <span class="nn">tests</span> <span class="kn">import</span> <span class="n">start_mock_server</span>  <span class="c1"># or where you saved it</span>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-4"></a>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-5"></a>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-6"></a><span class="k">class</span> <span class="nc">BaseScrapperTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-7"></a>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-8"></a>    <span class="nd">@classmethod</span>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-9"></a>    <span class="k">def</span> <span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-10"></a>        <span class="n">url</span> <span class="o">=</span> <span class="n">start_mock_server</span><span class="p">()</span>
+<a name="rest_code_f707887c1737413292ff69ca18ce8b98-11"></a>        <span class="n">const</span><span class="o">.</span><span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">url</span>
 </pre>
 <p>Take a look at that last line, your project must have a central point where the <strong>HOSTNAME</strong> is set.
 Before testing, you need to tell to your application to hit your localserver.</p>
@@ -689,10 +689,10 @@ them individually.</p>
 and assert that boolean. If something goes wrong in the scrapper, we'll get noticied with an exception
 and the test will throw an error. Also, if you wanted to <a class="reference external" href="https://stackoverflow.com/a/4319870/2047185">receive a fail</a>
 instead of an error, which is more pythonic, you should do something like this in your test:</p>
-<pre class="code python"><a name="rest_code_34f4397d77e3406180d514359c3daee9-1"></a><span class="k">try</span><span class="p">:</span>
-<a name="rest_code_34f4397d77e3406180d514359c3daee9-2"></a>    <span class="n">users_from_github</span><span class="p">()</span>
-<a name="rest_code_34f4397d77e3406180d514359c3daee9-3"></a><span class="k">except</span> <span class="n">ExceptionType</span><span class="p">:</span>
-<a name="rest_code_34f4397d77e3406180d514359c3daee9-4"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"users_from_github() raised ExceptionType unexpectedly!"</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-1"></a><span class="k">try</span><span class="p">:</span>
+<a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-2"></a>    <span class="n">users_from_github</span><span class="p">()</span>
+<a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-3"></a><span class="k">except</span> <span class="n">ExceptionType</span><span class="p">:</span>
+<a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-4"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"users_from_github() raised ExceptionType unexpectedly!"</span><span class="p">)</span>
 </pre>
 <p>Try isolating the scrapper as much as possible from the rest of your project, whenever you need
 to use selenium, avoid including bussiness logic in it as well, this difficults testing and makes
@@ -932,27 +932,27 @@ model, the inherited model classes are returned.
 </pre>
 <p>One of the most important things to understand of polymorphic is, that when you ask for the queryset of the parent, every element is represented with its children classes. Let's see this.</p>
 <p>I'll use the models examples provided by the <a class="reference external" href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
-<pre class="code python"><a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-2"></a>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-7"></a>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-10"></a>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_a2c3718e00a44f408bf7e8d1aad90946-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_af07f8b614c4472ba8f442392c8f8469-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-2"></a>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-7"></a>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-10"></a>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_40bbe758d56240a1a5e16ac33845b59a-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
-<a name="rest_code_40bbe758d56240a1a5e16ac33845b59a-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
-<a name="rest_code_40bbe758d56240a1a5e16ac33845b59a-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_182cdf4829534b9f98eee59f2745d777-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
+<a name="rest_code_182cdf4829534b9f98eee59f2745d777-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
+<a name="rest_code_182cdf4829534b9f98eee59f2745d777-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_2148667148ee41aa87df43aaf49094c6-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-<a name="rest_code_2148667148ee41aa87df43aaf49094c6-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_2148667148ee41aa87df43aaf49094c6-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_2148667148ee41aa87df43aaf49094c6-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
+<pre class="code python"><a name="rest_code_e1249f421c564d2187dc599fe81befd1-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<a name="rest_code_e1249f421c564d2187dc599fe81befd1-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_e1249f421c564d2187dc599fe81befd1-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_e1249f421c564d2187dc599fe81befd1-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
 </pre>
 <p>As you can see, this can be really helpful when using Django Rest Framework (DRF) and model inheritance.
 It allows to use just one model, in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into account
@@ -967,19 +967,19 @@ Is a generic, reusable application to alleviate writing some of the more mundane
 <p>Fundamentally, when using django filters you'll want to create a class specifying the model's
 fields by which a queryset can be filtered.</p>
 <p>Let's modified a bit the example of the <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
-<pre class="code python"><a name="rest_code_25d26c962d2a488a85914e28ceb53575-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_25d26c962d2a488a85914e28ceb53575-2"></a>
-<a name="rest_code_25d26c962d2a488a85914e28ceb53575-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_25d26c962d2a488a85914e28ceb53575-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
-<a name="rest_code_25d26c962d2a488a85914e28ceb53575-5"></a>
-<a name="rest_code_25d26c962d2a488a85914e28ceb53575-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_25d26c962d2a488a85914e28ceb53575-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_25d26c962d2a488a85914e28ceb53575-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
+<pre class="code python"><a name="rest_code_44b14603d8b44030999d0ccc35836034-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_44b14603d8b44030999d0ccc35836034-2"></a>
+<a name="rest_code_44b14603d8b44030999d0ccc35836034-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_44b14603d8b44030999d0ccc35836034-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
+<a name="rest_code_44b14603d8b44030999d0ccc35836034-5"></a>
+<a name="rest_code_44b14603d8b44030999d0ccc35836034-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_44b14603d8b44030999d0ccc35836034-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_44b14603d8b44030999d0ccc35836034-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
 </pre>
 <p>And the view should look something like:</p>
-<pre class="code python"><a name="rest_code_d194d60ae7d140fab32b6a2d414f9ff8-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<a name="rest_code_d194d60ae7d140fab32b6a2d414f9ff8-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-<a name="rest_code_d194d60ae7d140fab32b6a2d414f9ff8-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+<pre class="code python"><a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
 </pre>
 <p>Obviously, this will help reduce the amount of code written, and will be way easier to mantain.
 The good thing about this library, and what matters to me the most, is that it has a great <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with DRF</a> by providing a DRF-specific FilterSet and a filter backend.</p>
@@ -987,28 +987,28 @@ The good thing about this library, and what matters to me the most, is that it h
 <div class="section" id="filtering-by-a-polymorphic-model">
 <h2>Filtering by a polymorphic model</h2>
 <p>As we stated at the beginning what I wanted to do is filter by a <strong>polymorphic model</strong>, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the <code>rest_framework.FilterSet</code> and using a customized filter with <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a> in our FilterSet.</p>
-<pre class="code python"><a name="rest_code_c361ce2d6710487cb64e64305c230fda-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-2"></a>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-3"></a>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-7"></a>    <span class="k">return</span> <span class="n">choices</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-8"></a>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-9"></a>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-13"></a>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-17"></a>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
-<a name="rest_code_c361ce2d6710487cb64e64305c230fda-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_9b257a2964254627a639011b7439d5ff-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-2"></a>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-3"></a>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-7"></a>    <span class="k">return</span> <span class="n">choices</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-8"></a>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-9"></a>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-13"></a>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-17"></a>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+<a name="rest_code_9b257a2964254627a639011b7439d5ff-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
 </pre>
 <p>Now, if our querystring includes a key <code>project_type</code>, it will check if the values match any of
 the choices and it will return the queryset filtered by the specified choices.
@@ -1139,26 +1139,26 @@ Right now it doesn't support screensharing and some other features a normal pers
 <p>I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.</p>
 <p>As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.</p>
-<pre class="code bash"><a name="rest_code_6e4177797e544de6b87244279fa46b33-1"></a>sudo dpkg --add-architecture i386
-<a name="rest_code_6e4177797e544de6b87244279fa46b33-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-<a name="rest_code_6e4177797e544de6b87244279fa46b33-3"></a>mkdir ~/.apps/
-<a name="rest_code_6e4177797e544de6b87244279fa46b33-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
+<pre class="code bash"><a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-1"></a>sudo dpkg --add-architecture i386
+<a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
+<a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-3"></a>mkdir ~/.apps/
+<a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
 </pre>
 <p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code> file to your gnome environment.</p>
 <p>The location for this file is either <code>~/.local/share/applications</code>, for the current user, or <code>/usr/share/applications</code> for everyone.</p>
 <p>The content for your <code>skype.desktop</code>, should be something like this:</p>
-<pre class="code bash"><a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-7"></a><span class="nv">Type</span><span class="o">=</span>Application
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-11"></a>X-KDE-Protocols<span class="o">=</span>skype
-<a name="rest_code_a0c2bca01b314d82af5fbd25a5b7e66b-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
+<pre class="code bash"><a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-7"></a><span class="nv">Type</span><span class="o">=</span>Application
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-11"></a>X-KDE-Protocols<span class="o">=</span>skype
+<a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
 </pre>
 <p>PS: Remember to change the user for the one you are using.</p>
 <p>Good luck!</p>
