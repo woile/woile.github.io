@@ -11,7 +11,7 @@ So for a long time I've been using different cli tools, mostly :code:`argparse` 
 
 Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.
 
-Because of this, I created `decli <https://github.com/Woile/decli>`_, which is a declarative command line utility. Super simple.
+Because of this, I created `decli <https://github.com/Woile/decli>`__, which is a declarative command line utility. Super simple.
 Which is basically a wrapper around argparse.
 Just write a dict and you are ready to go.
 
@@ -47,7 +47,7 @@ Our file structure will result in something like this:
 
 If you are gonna write code along with the tutorial, you can create those files already. You can skip the **pyproject.toml**.
 
-The code for this tutorial is `hosted in github <https://github.com/Woile/decli-git-demo>`.
+The code for this tutorial is `hosted in github <https://github.com/Woile/decli-git-demo>`_.
 
 Installation
 ------------
@@ -95,7 +95,7 @@ If you haven't seen how a **pyproject.toml** looks, it's something like this:
 Writing the interface
 ---------------------
 
-We are gonna write the **cli** in the :code:`__main__.py` file, so we can treat the folder :code:`git` as a module.
+We are gonna write the **cli** in the :code:`___main__.py` file, so we can treat the folder :code:`git` as a module.
 Look at the file structure if in doubt.
 
 In order to use it as a module, we need to provide, to the python interpreter, the :code:`-m` flag.
@@ -281,14 +281,14 @@ Some extras:
     cmd = args.func(**args.__dict__)
     cmd.run()
 
-So this is how :code:`__main__.py` should look like.
+So this is how :code:`___main__.py` should look like.
 
 
 Writing the commands
 --------------------
 
 So before, we left our application unfinished and not working, because it was missing the classes imported from the :code:`commands` folder.
-If you haven't created the folder and the files yet, go and do it. Remember also to create the :code:`__init__.py` files.
+If you haven't created the folder and the files yet, go and do it. Remember also to create the :code:`___init__.py` files.
 
 It's interesting to observe how each class is unpacking the arguments that needs.
 
