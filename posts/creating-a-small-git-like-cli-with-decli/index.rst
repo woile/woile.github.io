@@ -145,7 +145,7 @@ Let's see how this works:
 Arguments
 ~~~~~~~~~
 
-Let's add some global arguments, we want to have a :code:`debug` and a :code:`version`.
+Let's add some global arguments, we want to have :code:`debug` and :code:`version` available.
 We are also going to add some code to handle the version flag.
 And for now, if nothing is provided we'll print the args.
 
