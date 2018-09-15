@@ -1,7 +1,7 @@
-.. title: Writing my dreamt cli using decli package
+.. title: Tutorial: writing my dreamt cli using decli package
 .. slug: creating-a-small-git-like-cli-with-decli
 .. date: 2018-09-14 14:33:02 UTC-03:00
-.. tags: git python decli cli
+.. tags: git python decli cli tutorial
 .. category: python programming
 .. link:
 .. description:
