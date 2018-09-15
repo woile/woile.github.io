@@ -392,7 +392,7 @@ Providing nothing
         commit           Record changes to the repository
         push             Update remote refs along with associated objects
 
-Calling add commnand
+Calling add command
 ~~~~~~~~~~~~~~~~~~~~
 
 ::
@@ -400,7 +400,7 @@ Calling add commnand
     $ python -m git add
     running add... update: False, debug: False
 
-Calling commit commnand with a sub-argument
+Calling commit command with a sub-argument
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
@@ -408,7 +408,7 @@ Calling commit commnand with a sub-argument
     $ python -m git commit --amend
     Commiting... debug: False, amend: True
 
-Calling push commnand with global and sub arguments
+Calling push command with global and sub arguments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
