@@ -203,7 +203,7 @@ Subcommands
 
 Last thing we are missing are the subcommands, we said we were gonna cover :code:`add`, :code:`commit`, and :code:`push`.
 Each one will have a unique sub-argument (just as an example).
-Also, each one will use a class that we are gonna implement later. So no output for now.
+Also, each one will use a class that we are gonna implement later. So no output example for now.
 
 Some extras:
 
