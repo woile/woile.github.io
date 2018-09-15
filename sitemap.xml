@@ -23,11 +23,11 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2018-09-15T13:06:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2018-07-14T07:42:00Z</lastmod>
+  <lastmod>2018-09-15T13:06:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
@@ -44,6 +44,10 @@
  <url>
   <loc>https://woile.github.io/categories/cat_python-django/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_python-programming/</loc>
+  <lastmod>2018-09-15T13:06:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_software/</loc>
@@ -88,6 +92,10 @@
  <url>
   <loc>https://woile.github.io/categories/friends/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/git-python-decli-cli/</loc>
+  <lastmod>2018-09-15T13:06:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/gopro/</loc>
@@ -376,6 +384,10 @@
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</loc>
+  <lastmod>2018-09-15T13:06:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/decrypt-filesystem/</loc>
