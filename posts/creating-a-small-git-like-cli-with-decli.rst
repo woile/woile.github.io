@@ -7,7 +7,8 @@
 .. description: tutorial to write a command line interface with python decli
 .. type: text
 
-So for a long time I've been using different cli tools, mostly :code:`argparse` because this way I had zero dependencies, less worries.
+So for a long time I've been using different cli tools, mostly :code:`argparse` because this way I had zero dependencies,
+less worries, this is pure personal preference.
 
 Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.
 
