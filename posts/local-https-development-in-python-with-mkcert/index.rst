@@ -90,7 +90,7 @@ In your terminal run
     pip install uvicorn starlette
 
 
-Now create a file `star_app.py`
+Now create a file :code:`star_app.py`
 
 .. code-block:: python
 
@@ -147,6 +147,8 @@ Update your :code:`settings.py`
         ...
     )
 
+And in your terminal run
+
 .. code-block:: console
 
     python manage.py runsslserver --certificate cert.pem --key key.pem
@@ -177,7 +179,7 @@ Install `flask <http://flask.pocoo.org/>`_
     pip install flask
 
 
-Create a file `flask_app.py`
+Create a file :code:`flask_app.py`
 
 .. code-block:: python
 
