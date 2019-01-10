@@ -169,7 +169,7 @@ I guess it would be something like
 Flask
 ~~~~~
 
-Install `flask
+Install `flask <http://flask.pocoo.org/>`_
 
 .. code-block:: console
 
@@ -204,7 +204,7 @@ Run in your terminal
 UWSGI
 ~~~~~
 
-Install uwsgi
+Install `uwsgi <https://uwsgi-docs.readthedocs.io>`_.
 
 .. code-block:: console
 
