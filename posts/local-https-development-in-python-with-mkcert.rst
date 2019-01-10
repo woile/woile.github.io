@@ -80,8 +80,9 @@ I've tested this with this open `PR <https://github.com/encode/uvicorn/pull/213>
 I've used `starlette <https://github.com/encode/starlette>`_
 because it's simpler than writing a uvicorn App, but it's not required.
 
-I guess this should also work for `FastAPI <https://github.com/tiangolo/fastapi>`_,
-`Bocadillo <https://github.com/bocadilloproject/bocadillo>`_ and `Responder <https://github.com/kennethreitz/responder>`_.
+I guess this should be fairly similar for `FastAPI <https://github.com/tiangolo/fastapi>`_,
+`Bocadillo <https://github.com/bocadilloproject/bocadillo>`_ and `Responder <https://github.com/kennethreitz/responder>`_
+once the PR gets merged into uvicorn.
 
 In your terminal run
 
