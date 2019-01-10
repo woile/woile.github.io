@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
@@ -22,12 +22,16 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/2019/</loc>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2018-09-15T13:06:00Z</lastmod>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2018-09-15T13:13:00Z</lastmod>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
@@ -36,6 +40,10 @@
  <url>
   <loc>https://woile.github.io/categories/cat_linux/</loc>
   <lastmod>2018-09-15T13:13:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_networking/</loc>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_programming/</loc>
@@ -116,6 +124,10 @@
  <url>
   <loc>https://woile.github.io/categories/python/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/rfc-summary-websockets/</loc>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/selenium-python-testing/</loc>
@@ -408,6 +420,14 @@
  <url>
   <loc>https://woile.github.io/posts/how-to-test-selenium-scrapper/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</loc>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/websockets-rfc-summary/</loc>
+  <lastmod>2019-01-10T17:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/visited-places/</loc>
