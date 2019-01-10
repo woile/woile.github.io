@@ -74,8 +74,8 @@ Uvicorn + Starlette
 ~~~~~~~~~~~~~~~~~~~~
 
 Note: `uvicorn <https://github.com/encode/uvicorn>`_ SSL Support has not been merged yet.
-
 I've tested this with this open `PR <https://github.com/encode/uvicorn/pull/213>`_.
+
 I've used `starlette <https://github.com/encode/starlette>`_
 because it's simpler than writing a uvicorn App, but it's not required.
 
