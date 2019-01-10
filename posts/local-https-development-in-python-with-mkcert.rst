@@ -8,7 +8,7 @@
 .. type: text
 
 .. contents::
-    :class: h2
+    :local:
     :depth: 2
 
 About mkcert
