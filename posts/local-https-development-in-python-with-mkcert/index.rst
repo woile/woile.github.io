@@ -191,7 +191,6 @@ Create a file `flask_app.py`
         return "<h1 style='color:blue'>Hello There!</h1>"
 
     if __name__ == "__main__":
-        # application.run(host='0.0.0.0', ssl_context=('cert.pem', 'key.pem'))
         application.run(ssl_context=('cert.pem', 'key.pem'))
 
 
@@ -235,15 +234,15 @@ Security concerns
 **DO NOT** use this certificates in production. This is **only** for development. Use `Let's Encrypt <https://letsencrypt.org/>`_ instead.
 
 You don't need to commit the generated certificates.
-Looks like each machine will have to install and create it's own certificates.
+Looks like each machine will have to install mkcert, create and work with its own certificates.
 
 This will only work on your local machine, where the server is running, if you want to access from a mobile device
-read `the docs <https://github.com/FiloSottile/mkcert#mobile-devices>`_
+read `the docs <https://github.com/FiloSottile/mkcert#mobile-devices>`_.
 
 Conclusion
 ----------
 
-Many times, I've had the need to test something with HTTPS,
+Many times, I've had the need to test something with HTTPS, but it took me a lot of time to do it.
 I think :code:`mkcert` is a really easy to use tool which achieves this smoothly.
 
 Do you have any other (security) concerns? Feedback is appreciated.
