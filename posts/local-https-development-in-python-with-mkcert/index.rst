@@ -30,7 +30,7 @@ Configuring mkcert
 ------------------
 
 Install the `dependencies for your os <https://github.com/FiloSottile/mkcert/#installation>`_.
-We are gonna work with a Linux Debian based systems here, so:
+In my case I'm using a Linux Debian based os.
 
 .. code-block:: console
 
@@ -80,7 +80,7 @@ I've used `starlette <https://github.com/encode/starlette>`_
 because it's simpler than writing a uvicorn App, but it's not required.
 
 I guess this should also work for `FastAPI <https://github.com/tiangolo/fastapi>`_,
-`Bocadillo <https://github.com/bocadilloproject/bocadillo>`_ and `Responder <https://github.com/kennethreitz/responder>`_
+`Bocadillo <https://github.com/bocadilloproject/bocadillo>`_ and `Responder <https://github.com/kennethreitz/responder>`_.
 
 In your terminal run
 
