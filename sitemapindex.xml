@@ -10,6 +10,10 @@
   <lastmod>2018-09-15T13:13:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/categories/cat_docker.xml</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/cat_linux.xml</loc>
   <lastmod>2018-09-15T13:13:00Z</lastmod>
  </sitemap>
@@ -23,7 +27,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_python.xml</loc>
-  <lastmod>2018-09-15T13:36:00Z</lastmod>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_travel.xml</loc>
@@ -82,6 +86,10 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://woile.github.io/categories/linux-python-containers-alpine-slim-debian.xml</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://woile.github.io/categories/linux.xml</loc>
   <lastmod>2018-09-15T13:13:00Z</lastmod>
  </sitemap>
@@ -120,6 +128,10 @@
  <sitemap>
   <loc>https://woile.github.io/categories/ubuntu.xml</loc>
   <lastmod>2018-09-15T13:13:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://woile.github.io/categories/web-frameworks-development-security-https.xml</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/argentina/rss.xml</loc>
@@ -363,10 +375,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </sitemap>
 </sitemapindex>

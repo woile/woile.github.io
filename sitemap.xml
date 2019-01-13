@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
@@ -27,15 +27,19 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_docker/</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_linux/</loc>
@@ -110,6 +114,10 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/linux-python-containers-alpine-slim-debian/</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/categories/linux/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
@@ -148,6 +156,10 @@
  <url>
   <loc>https://woile.github.io/categories/ubuntu/</loc>
   <lastmod>2018-07-14T07:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/web-frameworks-development-security-https/</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/</loc>
@@ -390,6 +402,10 @@
   <lastmod>2018-07-13T21:38:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/index-1.html</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
@@ -424,6 +440,10 @@
  <url>
   <loc>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</loc>
   <lastmod>2019-01-10T17:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</loc>
+  <lastmod>2019-01-13T15:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/websockets-rfc-summary/</loc>

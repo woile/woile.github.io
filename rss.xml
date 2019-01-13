@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Personal blog about software development, travel and sports</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 10 Jan 2019 18:19:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Personal blog about software development, travel and sports</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 13 Jan 2019 15:59:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
+I've used the base version, the slim and the alpine.&lt;/p&gt;
+&lt;p&gt;Initially I moved from the base python3.6 to the python3.6-slim and everything
+went great. The main win was that no change was required in the Dockerfile,
+it was smaller and more secure (less dependencies, more security, right?)&lt;/p&gt;
+&lt;p&gt;After a while, I decided to move from slim to alpine, because of the size benefit.
+While doing the migration I found these drawbacks:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Renaming dependencies&lt;/strong&gt;. I had to convert from &lt;code&gt;apt&lt;/code&gt; to &lt;code&gt;apk&lt;/code&gt; for every dependency.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Working with edge&lt;/strong&gt;. There's always a problem with the edge repository.
+Sometimes it's down. Sometimes the packages are broken.
+You have to dig a lot in order to have a proper configuration.
+Like using &lt;code&gt;--no-cache&lt;/code&gt; flag in apk. Or setting up the edge repo, then having to upgrade &lt;code&gt;apk-tools&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This kind of problems break our pipeline when there's no new commit. And I don't want this.
+That's why I've decided to move back to &lt;code&gt;slim&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Don't get me wrong, alpine is great, small and secure, and if you don't have many edge dependencies,
+I guess it'll work flawlessly, and I would totally use it.
+But our image unfortunately has dependencies like postgis, and proj4, which fail a lot in alpine.&lt;/p&gt;
+&lt;p&gt;But my story is not over with alpine, I'll try it again in the future.
+I know with time it will get better and better.&lt;/p&gt;&lt;/div&gt;</description><category>linux python containers alpine slim debian</category><guid>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</guid><pubDate>Sun, 13 Jan 2019 15:34:43 GMT</pubDate></item><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id4"&gt;About mkcert&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id5"&gt;Configuring mkcert&lt;/a&gt;&lt;/li&gt;
@@ -28,15 +46,15 @@ and websockets in some cases where SSL is already enabled.&lt;/p&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id5"&gt;Configuring mkcert&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Install the &lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/#installation"&gt;dependencies for your os&lt;/a&gt;.
 In my case I'm using a Linux Debian based os.&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_9c9622ce3ae94b53be94b38a9fee65e4-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;sudo apt install libnss3-tools&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_184cdcbfefe64d0dab7a67281fc65c3b-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;sudo apt install libnss3-tools&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Download the binary for your distribution from
 &lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/releases"&gt;mkcert release page&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Rename the file to &lt;code&gt;mkcert&lt;/code&gt; and give execution permissions&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_accf258324b64ce4845a07b3a1ddf980-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;chmod +x mkcert&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_567f52fecf5d496ab4429c0b2bdf8222-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;chmod +x mkcert&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Install the certificate authorities (CA) using&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_75d115dc95064698904928175a5e8345-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -install&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_65e58dd413044b148f9bd052c8d5e0f3-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -install&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Create certificates for the domains you'd like to use&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_ec1c8454721d4794ac2843d50b0c60b2-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -cert-file cert.pem -key-file key.pem 0.0.0.0 localhost 127.0.0.1 ::1&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_8845c7c82a9f4e6d98a48e97ead506b8-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -cert-file cert.pem -key-file key.pem 0.0.0.0 localhost 127.0.0.1 ::1&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;This will create a &lt;code&gt;cert.pem&lt;/code&gt; and a &lt;code&gt;key.pem&lt;/code&gt; files in your current directory.
 We are gonna use this 2 files along the post.&lt;/p&gt;
 &lt;/div&gt;
@@ -56,86 +74,86 @@ because it's simpler than writing a uvicorn App, but it's not required.&lt;/p&gt
 &lt;a class="reference external" href="https://github.com/bocadilloproject/bocadillo"&gt;Bocadillo&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/kennethreitz/responder"&gt;Responder&lt;/a&gt;
 once the PR gets merged into uvicorn.&lt;/p&gt;
 &lt;p&gt;In your terminal run&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_c86ee0a648f24fa1bae97aa51d62c0b7-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uvicorn starlette&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_657629062c4e47ac9fb8cb2dec1121dc-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uvicorn starlette&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Now create a file &lt;code&gt;star_app.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# star_app.py&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.applications&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.responses&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-4"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;uvicorn&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-5"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ssl&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-6"&gt;&lt;/a&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-8"&gt;&lt;/a&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-9"&gt;&lt;/a&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-10"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-11"&gt;&lt;/a&gt;&lt;span class="n"&gt;async&lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-12"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;"hello"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"world"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-13"&gt;&lt;/a&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-14"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-15"&gt;&lt;/a&gt;    &lt;span class="n"&gt;uvicorn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-16"&gt;&lt;/a&gt;        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-17"&gt;&lt;/a&gt;        &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"0.0.0.0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-18"&gt;&lt;/a&gt;        &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8433&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-19"&gt;&lt;/a&gt;        &lt;span class="n"&gt;ssl_version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROTOCOL_SSLv23&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-20"&gt;&lt;/a&gt;        &lt;span class="n"&gt;cert_reqs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CERT_OPTIONAL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-21"&gt;&lt;/a&gt;        &lt;span class="n"&gt;keyfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./key.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;        &lt;span class="c1"&gt;# Note that the generated certificates&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-22"&gt;&lt;/a&gt;        &lt;span class="n"&gt;certfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./cert.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="c1"&gt;# are used here&lt;/span&gt;
-&lt;a name="rest_code_026203cbdfa240228e5175b591f58615-23"&gt;&lt;/a&gt;    &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# star_app.py&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.applications&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.responses&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-4"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;uvicorn&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-5"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ssl&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-6"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-8"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-9"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-10"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-11"&gt;&lt;/a&gt;&lt;span class="n"&gt;async&lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-12"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;"hello"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"world"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-13"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-14"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-15"&gt;&lt;/a&gt;    &lt;span class="n"&gt;uvicorn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-16"&gt;&lt;/a&gt;        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-17"&gt;&lt;/a&gt;        &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"0.0.0.0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-18"&gt;&lt;/a&gt;        &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8433&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-19"&gt;&lt;/a&gt;        &lt;span class="n"&gt;ssl_version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROTOCOL_SSLv23&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-20"&gt;&lt;/a&gt;        &lt;span class="n"&gt;cert_reqs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CERT_OPTIONAL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-21"&gt;&lt;/a&gt;        &lt;span class="n"&gt;keyfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./key.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;        &lt;span class="c1"&gt;# Note that the generated certificates&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-22"&gt;&lt;/a&gt;        &lt;span class="n"&gt;certfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./cert.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="c1"&gt;# are used here&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-23"&gt;&lt;/a&gt;    &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;And then just run&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_4820e05fac614fd7973adeda12847c7a-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python star_app.py&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_4a9a89c0868442978237b374d4040265-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python star_app.py&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Go to &lt;code&gt;https://0.0.0.0:8443&lt;/code&gt; in your browser&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="django-ssl-server"&gt;
 &lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id8"&gt;Django SSL Server&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/teddziuba/django-sslserver"&gt;django-sslserver&lt;/a&gt; is a small library which adds the ability to
 run a secure debug server with the certificates we just created.&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_454ca2d201d745988a2bfbc3ab698a92-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install django-sslserver&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_0fc2993e100e4b4cb3afecf1d8687010-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install django-sslserver&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Update your &lt;code&gt;settings.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_32fceaaa1ba5433c95970fd5bdc7b103-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
-&lt;a name="rest_code_32fceaaa1ba5433c95970fd5bdc7b103-2"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'sslserver'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_32fceaaa1ba5433c95970fd5bdc7b103-3"&gt;&lt;/a&gt;    &lt;span class="o"&gt;...&lt;/span&gt;
-&lt;a name="rest_code_32fceaaa1ba5433c95970fd5bdc7b103-4"&gt;&lt;/a&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-2"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'sslserver'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-3"&gt;&lt;/a&gt;    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-4"&gt;&lt;/a&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;And in your terminal run&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_94a277c229714e06aa683f77e01ccd7a-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runsslserver --certificate cert.pem --key key.pem&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_15db1248dc444e9a926a34512265a5af-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runsslserver --certificate cert.pem --key key.pem&lt;/span&gt;
 &lt;/pre&gt;&lt;div class="section" id="django-extensions"&gt;
 &lt;h4&gt;Django extensions&lt;/h4&gt;
 &lt;p&gt;There's another alternative which I haven't tested, but it has a lot of extra functionality,
 which I don't need, so I've skipped it.&lt;/p&gt;
 &lt;p&gt;Feel free to try &lt;a class="reference external" href="https://django-extensions.readthedocs.io/en/latest/runserver_plus.html"&gt;django-extensions&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I guess it would be something like&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_27ef0dba526a47dea0a4db1f6946aa52-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runserver_plus --cert-file cert.pem --key-file cert.pem&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_2547084f48614c3da8b1a5b9bc2a6030-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runserver_plus --cert-file cert.pem --key-file cert.pem&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="flask"&gt;
 &lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id9"&gt;Flask&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Install &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;flask&lt;/a&gt;&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_3fcd75ceb8c644768ecf2cc78243ce60-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install flask&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_0250511a08284277830917a3a957e447-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install flask&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Create a file &lt;code&gt;flask_app.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# flask_app.py&lt;/span&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-3"&gt;&lt;/a&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-5"&gt;&lt;/a&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-6"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@application.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-7"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-8"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;h1 style='color:blue'&amp;gt;Hello There!&amp;lt;/h1&amp;gt;"&lt;/span&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-9"&gt;&lt;/a&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-10"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_73d145e7d1694c72b9e75b23ff86f762-11"&gt;&lt;/a&gt;    &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ssl_context&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cert.pem'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'key.pem'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# flask_app.py&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-3"&gt;&lt;/a&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-5"&gt;&lt;/a&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-6"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@application.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-7"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-8"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;h1 style='color:blue'&amp;gt;Hello There!&amp;lt;/h1&amp;gt;"&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-9"&gt;&lt;/a&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-10"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-11"&gt;&lt;/a&gt;    &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ssl_context&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cert.pem'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'key.pem'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Run in your terminal&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_a1cb921639f54fd9b09d0e35b82975ab-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python flask_app.py&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_6fbc28593e80465cbdfb6c83925fcc1b-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python flask_app.py&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="section" id="uwsgi"&gt;
 &lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id10"&gt;UWSGI&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Install &lt;a class="reference external" href="https://uwsgi-docs.readthedocs.io"&gt;uwsgi&lt;/a&gt;.&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_bb643a900b2a4cc09a7e1dac8ea8f3f4-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uwsgi&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_6128e15deb5b4cb99423131cb2400809-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uwsgi&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Create a file called &lt;code&gt;wsgi.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_b9f48ed4f4ec46b494db3d33d2b255af-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# wsgi.py&lt;/span&gt;
-&lt;a name="rest_code_b9f48ed4f4ec46b494db3d33d2b255af-2"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_b9f48ed4f4ec46b494db3d33d2b255af-3"&gt;&lt;/a&gt;    &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'200 OK'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;'Content-Type'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'text/html'&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
-&lt;a name="rest_code_b9f48ed4f4ec46b494db3d33d2b255af-4"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"Hello World"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# wsgi.py&lt;/span&gt;
+&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-2"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-3"&gt;&lt;/a&gt;    &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'200 OK'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;'Content-Type'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'text/html'&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-4"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"Hello World"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Run in your terminal&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_8ac1e50079674244a0714261133d1c65-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem&lt;/span&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_faa6b01811ad4595a7c2f68bad478220-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Go to &lt;code&gt;https://0.0.0.0:8443&lt;/code&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -154,7 +172,7 @@ I think &lt;code&gt;mkcert&lt;/code&gt; is a really easy to use tool which achie
 &lt;p&gt;Do you have any other (security) concerns? Feedback is appreciated.&lt;/p&gt;
 &lt;p&gt;If you have drop-in examples for other frameworks or tools I'll update the post.&lt;/p&gt;
 &lt;p&gt;Thanks for reading and happy coding!&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Websockets RFC summary</title><link>https://woile.github.io/posts/websockets-rfc-summary/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="section" id="id1"&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Websockets RFC summary</title><link>https://woile.github.io/posts/websockets-rfc-summary/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="section" id="id1"&gt;
 &lt;h2&gt;&lt;a class="reference external" href="https://tools.ietf.org/html/rfc6455.html"&gt;RFC&lt;/a&gt;&lt;/h2&gt;
 &lt;/div&gt;
 &lt;div class="section" id="introduction"&gt;
@@ -1174,5 +1192,4 @@ Debian recommends to install the .deb package, but it usually does not work.&lt;
 &lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-11"&gt;&lt;/a&gt;X-KDE-Protocols&lt;span class="o"&gt;=&lt;/span&gt;skype
 &lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-12"&gt;&lt;/a&gt;X-GNOME-Bugzilla-Product&lt;span class="o"&gt;=&lt;/span&gt;skype
 &lt;/pre&gt;&lt;p&gt;PS: Remember to change the user for the one you are using.&lt;/p&gt;
-&lt;p&gt;Good luck!&lt;/p&gt;&lt;/div&gt;</description><category>debian</category><category>linux</category><category>skype</category><guid>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</guid><pubDate>Mon, 19 Sep 2016 10:56:03 GMT</pubDate></item><item><title>Blog inauguration</title><link>https://woile.github.io/posts/blog-inauguration/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;I've decided to create this blog to share trip experiences,
-software development, stuff interesting to me, and whatever I want.&lt;/p&gt;</description><category>init</category><guid>https://woile.github.io/posts/blog-inauguration/</guid><pubDate>Wed, 18 May 2016 04:01:40 GMT</pubDate></item></channel></rss>
+&lt;p&gt;Good luck!&lt;/p&gt;&lt;/div&gt;</description><category>debian</category><category>linux</category><category>skype</category><guid>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</guid><pubDate>Mon, 19 Sep 2016 10:56:03 GMT</pubDate></item></channel></rss>

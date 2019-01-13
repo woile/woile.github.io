@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about web frameworks development security https)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/web-frameworks-development-security-https.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 13 Jan 2019 15:59:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id4"&gt;About mkcert&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id5"&gt;Configuring mkcert&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id6"&gt;Python frameworks&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id7"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id8"&gt;Django SSL Server&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#flask" id="id9"&gt;Flask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id10"&gt;UWSGI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id11"&gt;Security concerns&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id12"&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="about-mkcert"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id4"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/"&gt;mkcert&lt;/a&gt; allows you to have a local
+certificate authority (CA).
+This means that you can run your development web server using HTTPS.
+You'll see the green lock in your browser.&lt;/p&gt;
+&lt;img src="https://woile.github.io/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
+HTTPS by default in the browser, like web bluetooth, service workers, web authentication
+and websockets in some cases where SSL is already enabled.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="configuring-mkcert"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id5"&gt;Configuring mkcert&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Install the &lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/#installation"&gt;dependencies for your os&lt;/a&gt;.
+In my case I'm using a Linux Debian based os.&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_184cdcbfefe64d0dab7a67281fc65c3b-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;sudo apt install libnss3-tools&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Download the binary for your distribution from
+&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/releases"&gt;mkcert release page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Rename the file to &lt;code&gt;mkcert&lt;/code&gt; and give execution permissions&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_567f52fecf5d496ab4429c0b2bdf8222-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;chmod +x mkcert&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Install the certificate authorities (CA) using&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_65e58dd413044b148f9bd052c8d5e0f3-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -install&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Create certificates for the domains you'd like to use&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_8845c7c82a9f4e6d98a48e97ead506b8-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -cert-file cert.pem -key-file key.pem 0.0.0.0 localhost 127.0.0.1 ::1&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;This will create a &lt;code&gt;cert.pem&lt;/code&gt; and a &lt;code&gt;key.pem&lt;/code&gt; files in your current directory.
+We are gonna use this 2 files along the post.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="python-frameworks"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id6"&gt;Python frameworks&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Now that we have created the certficates for those domains, we just need to
+know how to tell our app to use them.&lt;/p&gt;
+&lt;p&gt;I'll assume you have a virtualenv already created.&lt;/p&gt;
+&lt;p&gt;Let's see how to do this in some different python frameworks and tools.&lt;/p&gt;
+&lt;div class="section" id="uvicorn-starlette"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id7"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Note: &lt;a class="reference external" href="https://github.com/encode/uvicorn"&gt;uvicorn&lt;/a&gt; SSL Support has not been merged yet.
+I've tested this with this open &lt;a class="reference external" href="https://github.com/encode/uvicorn/pull/213"&gt;PR&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I've used &lt;a class="reference external" href="https://github.com/encode/starlette"&gt;starlette&lt;/a&gt;
+because it's simpler than writing a uvicorn App, but it's not required.&lt;/p&gt;
+&lt;p&gt;I guess this should be fairly similar for &lt;a class="reference external" href="https://github.com/tiangolo/fastapi"&gt;FastAPI&lt;/a&gt;,
+&lt;a class="reference external" href="https://github.com/bocadilloproject/bocadillo"&gt;Bocadillo&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/kennethreitz/responder"&gt;Responder&lt;/a&gt;
+once the PR gets merged into uvicorn.&lt;/p&gt;
+&lt;p&gt;In your terminal run&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_657629062c4e47ac9fb8cb2dec1121dc-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uvicorn starlette&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Now create a file &lt;code&gt;star_app.py&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# star_app.py&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.applications&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.responses&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-4"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;uvicorn&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-5"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ssl&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-6"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-8"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-9"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-10"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-11"&gt;&lt;/a&gt;&lt;span class="n"&gt;async&lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-12"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;"hello"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"world"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-13"&gt;&lt;/a&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-14"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-15"&gt;&lt;/a&gt;    &lt;span class="n"&gt;uvicorn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-16"&gt;&lt;/a&gt;        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-17"&gt;&lt;/a&gt;        &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"0.0.0.0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-18"&gt;&lt;/a&gt;        &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8433&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-19"&gt;&lt;/a&gt;        &lt;span class="n"&gt;ssl_version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROTOCOL_SSLv23&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-20"&gt;&lt;/a&gt;        &lt;span class="n"&gt;cert_reqs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CERT_OPTIONAL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-21"&gt;&lt;/a&gt;        &lt;span class="n"&gt;keyfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./key.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;        &lt;span class="c1"&gt;# Note that the generated certificates&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-22"&gt;&lt;/a&gt;        &lt;span class="n"&gt;certfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./cert.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="c1"&gt;# are used here&lt;/span&gt;
+&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-23"&gt;&lt;/a&gt;    &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;And then just run&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_4a9a89c0868442978237b374d4040265-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python star_app.py&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Go to &lt;code&gt;https://0.0.0.0:8443&lt;/code&gt; in your browser&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="django-ssl-server"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id8"&gt;Django SSL Server&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/teddziuba/django-sslserver"&gt;django-sslserver&lt;/a&gt; is a small library which adds the ability to
+run a secure debug server with the certificates we just created.&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_0fc2993e100e4b4cb3afecf1d8687010-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install django-sslserver&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Update your &lt;code&gt;settings.py&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-2"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'sslserver'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-3"&gt;&lt;/a&gt;    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-4"&gt;&lt;/a&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;And in your terminal run&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_15db1248dc444e9a926a34512265a5af-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runsslserver --certificate cert.pem --key key.pem&lt;/span&gt;
+&lt;/pre&gt;&lt;div class="section" id="django-extensions"&gt;
+&lt;h4&gt;Django extensions&lt;/h4&gt;
+&lt;p&gt;There's another alternative which I haven't tested, but it has a lot of extra functionality,
+which I don't need, so I've skipped it.&lt;/p&gt;
+&lt;p&gt;Feel free to try &lt;a class="reference external" href="https://django-extensions.readthedocs.io/en/latest/runserver_plus.html"&gt;django-extensions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I guess it would be something like&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_2547084f48614c3da8b1a5b9bc2a6030-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runserver_plus --cert-file cert.pem --key-file cert.pem&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="flask"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id9"&gt;Flask&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Install &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;flask&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_0250511a08284277830917a3a957e447-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install flask&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Create a file &lt;code&gt;flask_app.py&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# flask_app.py&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-3"&gt;&lt;/a&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-5"&gt;&lt;/a&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-6"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@application.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-7"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-8"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;h1 style='color:blue'&amp;gt;Hello There!&amp;lt;/h1&amp;gt;"&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-9"&gt;&lt;/a&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-10"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-11"&gt;&lt;/a&gt;    &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ssl_context&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cert.pem'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'key.pem'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Run in your terminal&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_6fbc28593e80465cbdfb6c83925fcc1b-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python flask_app.py&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="uwsgi"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id10"&gt;UWSGI&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Install &lt;a class="reference external" href="https://uwsgi-docs.readthedocs.io"&gt;uwsgi&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_6128e15deb5b4cb99423131cb2400809-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uwsgi&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Create a file called &lt;code&gt;wsgi.py&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# wsgi.py&lt;/span&gt;
+&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-2"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-3"&gt;&lt;/a&gt;    &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'200 OK'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;'Content-Type'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'text/html'&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-4"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"Hello World"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Run in your terminal&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_faa6b01811ad4595a7c2f68bad478220-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Go to &lt;code&gt;https://0.0.0.0:8443&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="security-concerns"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id11"&gt;Security concerns&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;DO NOT&lt;/strong&gt; use this certificates in production. This is &lt;strong&gt;only&lt;/strong&gt; for development. Use &lt;a class="reference external" href="https://letsencrypt.org/"&gt;Let's Encrypt&lt;/a&gt; instead.&lt;/p&gt;
+&lt;p&gt;You don't need to commit the generated certificates.
+Looks like each machine will have to install mkcert, create and work with its own certificates.&lt;/p&gt;
+&lt;p&gt;This will only work on your local machine, where the server is running, if you want to access from a mobile device
+read &lt;a class="reference external" href="https://github.com/FiloSottile/mkcert#mobile-devices"&gt;the docs&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusion"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id12"&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Many times, I've had the need to test something with HTTPS, but it took me a lot of time to do it.
+I think &lt;code&gt;mkcert&lt;/code&gt; is a really easy to use tool which achieves this smoothly.&lt;/p&gt;
+&lt;p&gt;Do you have any other (security) concerns? Feedback is appreciated.&lt;/p&gt;
+&lt;p&gt;If you have drop-in examples for other frameworks or tools I'll update the post.&lt;/p&gt;
+&lt;p&gt;Thanks for reading and happy coding!&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item></channel></rss>
