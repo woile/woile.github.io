@@ -32,4 +32,4 @@ I guess it'll work flawlessly, and I would totally use it.
 But our image unfortunately has dependencies like postgis, and proj4, which fail a lot in alpine.
 
 But my story is not over with alpine, I'll try it again in the future.
-I know with time it will get better and better.
+I know with time it will get better and better, and I'll understand it more and more.
