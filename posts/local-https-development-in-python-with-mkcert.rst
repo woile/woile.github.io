@@ -1,10 +1,10 @@
 .. title: Local HTTPS development in Python with Mkcert
 .. slug: local-https-development-in-python-with-mkcert
 .. date: 2019-01-10 14:30:24 UTC-03:00
-.. tags:
-.. category:
+.. tags: web frameworks development security https
+.. category: python
 .. link:
-.. description:
+.. description: setting https in our local development servers with python and mkcert
 .. type: text
 
 .. contents::
