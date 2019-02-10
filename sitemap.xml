@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2019-01-13T15:59:00Z</lastmod>
+  <lastmod>2019-02-10T22:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
@@ -31,7 +31,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2019-02-10T20:40:00Z</lastmod>
+  <lastmod>2019-02-10T22:38:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
@@ -44,14 +44,6 @@
  <url>
   <loc>https://woile.github.io/categories/cat_linux/</loc>
   <lastmod>2018-09-15T13:13:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/categories/cat_networking/</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/categories/cat_posts/</loc>
-  <lastmod>2019-02-10T20:39:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_programming/</loc>
@@ -136,10 +128,6 @@
  <url>
   <loc>https://woile.github.io/categories/python/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/categories/rfc-summary-websockets/</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/selenium-python-testing/</loc>
@@ -404,10 +392,6 @@
  <url>
   <loc>https://woile.github.io/galleries/spain/valencia/</loc>
   <lastmod>2018-07-13T21:38:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/index-1.html</loc>
-  <lastmod>2019-02-10T20:11:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>

@@ -15,15 +15,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_linux.xml</loc>
-  <lastmod>2019-02-10T20:40:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://woile.github.io/categories/cat_networking.xml</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://woile.github.io/categories/cat_posts.xml</loc>
-  <lastmod>2019-02-10T20:40:00Z</lastmod>
+  <lastmod>2019-02-10T22:34:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_programming.xml</loc>
@@ -31,7 +23,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_python.xml</loc>
-  <lastmod>2019-02-10T20:40:00Z</lastmod>
+  <lastmod>2019-02-10T22:33:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_travel.xml</loc>
@@ -39,7 +31,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/debian.xml</loc>
-  <lastmod>2019-02-10T20:39:00Z</lastmod>
+  <lastmod>2019-02-10T22:34:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/django-rest-framework.xml</loc>
@@ -75,7 +67,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/git-python-decli-cli-tutorial-programming.xml</loc>
-  <lastmod>2019-02-10T20:39:00Z</lastmod>
+  <lastmod>2019-02-10T22:32:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/gopro.xml</loc>
@@ -95,7 +87,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/linux.xml</loc>
-  <lastmod>2019-02-10T20:39:00Z</lastmod>
+  <lastmod>2019-02-10T22:34:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/polymorphic.xml</loc>
@@ -110,16 +102,12 @@
   <lastmod>2019-02-10T20:39:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://woile.github.io/categories/rfc-summary-websockets.xml</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
- </sitemap>
- <sitemap>
   <loc>https://woile.github.io/categories/selenium-python-testing.xml</loc>
-  <lastmod>2019-02-10T20:39:00Z</lastmod>
+  <lastmod>2019-02-10T22:33:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/skype.xml</loc>
-  <lastmod>2019-02-10T20:39:00Z</lastmod>
+  <lastmod>2019-02-10T22:34:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/sublime.xml</loc>
@@ -135,7 +123,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/web-frameworks-development-security-https.xml</loc>
-  <lastmod>2019-02-10T20:40:00Z</lastmod>
+  <lastmod>2019-02-10T22:30:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/galleries/argentina/rss.xml</loc>
@@ -379,10 +367,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2019-02-10T20:40:00Z</lastmod>
+  <lastmod>2019-02-10T22:34:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2019-02-10T22:26:00Z</lastmod>
+  <lastmod>2019-02-10T22:38:00Z</lastmod>
  </sitemap>
 </sitemapindex>
