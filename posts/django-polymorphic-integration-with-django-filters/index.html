@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<html prefix="" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Integration of two python/django libraries">
 <meta name="viewport" content="width=device-width">
 <title>How to filter Polymorphic Models with Django Filters | Willy's blog</title>
-<link href="../../assets/css/all.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="canonical" href="https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/">
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><meta name="author" content="Woile">
@@ -26,66 +32,272 @@
 <meta property="article:tag" content="polymorphic">
 <meta property="article:tag" content="python">
 </head>
-<body class="theme-base-0b">
-    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
-    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
-            styles, `#sidebar-checkbox` for behavior. -->
-    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
-        <div class="sidebar-item">
-            <p>My Personal blog.</p>
-        </div>
-        
-    <nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="(('/galleries/spain/roca_de_la_sierra/',%20'Roca%20de%20la%20Sierra'),%20('/galleries/portugal/castelo_de_campo_maior/',%20'Castelo%20de%20Campo%20Maior'),%20('/galleries/portugal/porto/',%20'Porto'),%20('/galleries/portugal/cascais/',%20'Cascais'),%20('/galleries/portugal/quinta_de_regaleira/',%20'Quinta%20de%20Regaleira'),%20('/galleries/spain/seville/',%20'Sevilla'),%20('/galleries/spain/malaga/',%20'Malaga'),%20('/galleries/spain/nerja/',%20'Nerja'),%20('/galleries/spain/alhambra_granada/',%20'Alhambra%20y%20Generalife'),%20('/galleries/spain/valencia/',%20'Valencia'),%20('/galleries/spain/barcelona/sagrada_familia/',%20'Sagrada%20Familia'),%20('/galleries/spain/barcelona/camp_nou/',%20'Camp%20Nou'),%20('/galleries/spain/barcelona/cosmocaixa/',%20'Cosmocaixa'),%20('/galleries/spain/barcelona/park_guell/',%20'Park%20G%C3%BCell'),%20('/galleries/spain/barcelona/ciudad_gotica_rambla/',%20'Barrio%20G%C3%B3tico'),%20('/galleries/spain/barcelona/playa_badalona/',%20'Playa%20Badalona'),%20('/galleries/spain/santander/',%20'Santander'),%20('/galleries/spain/santillana/',%20'Santillana'),%20('/galleries/spain/madrid/',%20'Madrid'),%20('/galleries/france/paris/',%20'Paris'),%20('/galleries/belgium/brussels/',%20'Bruselas'),%20('/galleries/belgium/brugge/',%20'Brujas'),%20('/galleries/netherlands/rotterdam/',%20'Rotterdam'),%20('/galleries/netherlands/amsterdam/',%20'Amsterdam'),%20('/galleries/germany/hamburg/',%20'Hamburgo'),%20('/galleries/germany/berlin/',%20'Berlin'),%20('/galleries/poland/cracow/',%20'Cracovia'),%20('/galleries/czech/prague/',%20'Praga'),%20('/galleries/hungary/budapest/',%20'Budapest'),%20('/galleries/greece/glyfada/',%20'Glyfada'),%20('/galleries/italy/marina_del_cantone/',%20'Marina%20Del%20Cantone'),%20('/galleries/italy/capri/',%20'Capri'),%20('/galleries/italy/rome/',%20'Roma'),%20('/galleries/italy/fermo/',%20'Fermo'),%20('/galleries/italy/milano/',%20'Milan'),%20('/galleries/italy/como/',%20'Como'),%20('/galleries/england/cheltenham/',%20'Cheltenham'),%20('/galleries/england/london/',%20'London'),%20('/galleries/spain/palma_majorca/',%20'Palma%20de%20Mallorca'),%20('/galleries/denmark/copenhaguen/',%20'Copenhaguen'),%20('/galleries/brasil/sao_paulo/',%20'Sao%20Paulo'),%20('/galleries/brasil/rio_de_janeiro/',%20'Rio%20de%20Janeiro'),%20('/archive.html',%20'Archive'),%20('/categories/',%20'Tags'),%20('/rss.xml',%20'RSS%20feed'),%20('/stories/visited-places/',%20'Map'),%20('/stories/who-am-i/',%20'About%20me'))">Gallery</a>
+<body class="nav-closed">
+
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+                <a href="../../">Home</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/visited-places/">Around the world</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../categories/">Tags</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../rss.xml">RSS feed</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../archive.html">Archive</a>
+            </li>
+            
+
+            <li class="nav-opened" role="presentation">
+                <a href="javascript:void(0)" class="nested-url" data-children="nested-gallery">
+                Gallery
+                </a>
+            </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/roca_de_la_sierra/" class="child">
+                    Roca de la Sierra
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/castelo_de_campo_maior/" class="child">
+                    Castelo de Campo Maior
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/porto/" class="child">
+                    Porto
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/cascais/" class="child">
+                    Cascais
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/quinta_de_regaleira/" class="child">
+                    Quinta de Regaleira
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/seville/" class="child">
+                    Sevilla
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/malaga/" class="child">
+                    Malaga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/nerja/" class="child">
+                    Nerja
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/alhambra_granada/" class="child">
+                    Alhambra y Generalife
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/valencia/" class="child">
+                    Valencia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/sagrada_familia/" class="child">
+                    Sagrada Familia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/camp_nou/" class="child">
+                    Camp Nou
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/cosmocaixa/" class="child">
+                    Cosmocaixa
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/park_guell/" class="child">
+                    Park Güell
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/ciudad_gotica_rambla/" class="child">
+                    Barrio Gótico
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/playa_badalona/" class="child">
+                    Playa Badalona
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santander/" class="child">
+                    Santander
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santillana/" class="child">
+                    Santillana
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/madrid/" class="child">
+                    Madrid
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/france/paris/" class="child">
+                    Paris
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brussels/" class="child">
+                    Bruselas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brugge/" class="child">
+                    Brujas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/rotterdam/" class="child">
+                    Rotterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/amsterdam/" class="child">
+                    Amsterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/hamburg/" class="child">
+                    Hamburgo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/berlin/" class="child">
+                    Berlin
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/poland/cracow/" class="child">
+                    Cracovia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/czech/prague/" class="child">
+                    Praga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/hungary/budapest/" class="child">
+                    Budapest
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/greece/glyfada/" class="child">
+                    Glyfada
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/marina_del_cantone/" class="child">
+                    Marina Del Cantone
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/capri/" class="child">
+                    Capri
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/rome/" class="child">
+                    Roma
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/fermo/" class="child">
+                    Fermo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/milano/" class="child">
+                    Milan
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/como/" class="child">
+                    Como
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/cheltenham/" class="child">
+                    Cheltenham
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/london/" class="child">
+                    London
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/palma_majorca/" class="child">
+                    Palma de Mallorca
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/denmark/copenhaguen/" class="child">
+                    Copenhaguen
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/sao_paulo/" class="child">
+                    Sao Paulo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/rio_de_janeiro/" class="child">
+                    Rio de Janeiro
+                    </a>
+                </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/who-am-i/">About me</a>
+            </li>
     
     
-    </nav>
+    </ul>
 </div>
+<span class="nav-cover"></span>
 
-    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-         content to avoid any CSS collisions with our real content. -->
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          
-    <h3 id="brand" class="masthead-title">
-      <a href="https://woile.github.io/" title="Willy's blog" rel="home">Willy's blog</a>
-
-      <div class="pull-right">
-
-            <a rel="noopener noreferrer" target="_blank" href="https://twitter.com/santiwilly" title="Twitter">
-                <i class="fa fa-twitter fa-fw" aria-hidden="true"></i>
-            </a>
-            <a rel="noopener noreferrer" target="_blank" href="https://github.com/Woile" title="Github">
-                <i class="fa fa-github fa-fw" aria-hidden="true"></i>
-            </a>
-            <a rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/santiago-fraire-63b91226" title="Linkedin">
-                <i class="fa fa-linkedin fa-fw" aria-hidden="true"></i>
-            </a>
-      </div>
-
-    </h3>
-
-        </div>
-      </div>
-
-      <div class="container content" id="content">
-        
-<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="post-title p-name entry-title" itemprop="headline name"><a href="." class="u-url">How to filter Polymorphic Models with Django Filters</a></h1>
-
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">Woile</span></p>
-            <p class="dateline"><a href="." rel="bookmark"><time class="post-date published dt-published" datetime="2017-03-02T20:58:22-03:00" itemprop="datePublished" title="2017-03-02 20:58">2017-03-02 20:58</time></a></p>
-                <p class="commentline">
-        
-    <a href="#disqus_thread" data-disqus-identifier="cache/posts/django-polymorphic-integration-with-django-filters.html">Comments</a>
-
-
-                <meta name="description" itemprop="description" content="Integration of two python/django libraries"></p>
-</div>
-        
-
-    </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://woile.github.io/"><img src="https://s.gravatar.com/avatar/7ff595c207c9b935811a691d2f3d2551?s=150" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">How to filter Polymorphic Models with Django Filters</h1>
+        <section class="post-meta"> by
+            Woile
+            on
+                <a href="../../categories/api/">#api</a>,
+                <a href="../../categories/django/">#django</a>,
+                <a href="../../categories/django-rest-framework/">#django-rest-framework</a>,
+                <a href="../../categories/drf/">#drf</a>,
+                <a href="../../categories/filters/">#filters</a>,
+                <a href="../../categories/polymorphic/">#polymorphic</a>,
+                <a href="../../categories/python/">#python</a>,
+            <time class="post-date" datetime="2017-03-02T20:58:22-03:00">
+                2017-03-02 20:58
+            </time></section></header><section class="post-content"><div>
 <p>As the title says, I needed a way to filter my polymorphic models using my already defined
 <code>rest_framework.FilterSet</code>, and as I didn't find much resources about it I'm sharing my experience here.</p>
 <p>First, let's talk about <code>django-polymorphic</code> and <code>django-filters</code>, what are these libraries for.</p>
@@ -98,27 +310,27 @@ model, the inherited model classes are returned.
 </pre>
 <p>One of the most important things to understand of polymorphic is, that when you ask for the queryset of the parent, every element is represented with its children classes. Let's see this.</p>
 <p>I'll use the models examples provided by the <a class="reference external" href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
-<pre class="code python"><a name="rest_code_af07f8b614c4472ba8f442392c8f8469-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-2"></a>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-7"></a>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-10"></a>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_af07f8b614c4472ba8f442392c8f8469-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-2"></a>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-7"></a>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-10"></a>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_182cdf4829534b9f98eee59f2745d777-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
-<a name="rest_code_182cdf4829534b9f98eee59f2745d777-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
-<a name="rest_code_182cdf4829534b9f98eee59f2745d777-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
+<a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
+<a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_e1249f421c564d2187dc599fe81befd1-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-<a name="rest_code_e1249f421c564d2187dc599fe81befd1-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_e1249f421c564d2187dc599fe81befd1-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_e1249f421c564d2187dc599fe81befd1-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
+<pre class="code python"><a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
 </pre>
 <p>As you can see, this can be really helpful when using Django Rest Framework (DRF) and model inheritance.
 It allows to use just one model, in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into account
@@ -133,19 +345,19 @@ Is a generic, reusable application to alleviate writing some of the more mundane
 <p>Fundamentally, when using django filters you'll want to create a class specifying the model's
 fields by which a queryset can be filtered.</p>
 <p>Let's modified a bit the example of the <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
-<pre class="code python"><a name="rest_code_44b14603d8b44030999d0ccc35836034-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_44b14603d8b44030999d0ccc35836034-2"></a>
-<a name="rest_code_44b14603d8b44030999d0ccc35836034-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_44b14603d8b44030999d0ccc35836034-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
-<a name="rest_code_44b14603d8b44030999d0ccc35836034-5"></a>
-<a name="rest_code_44b14603d8b44030999d0ccc35836034-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_44b14603d8b44030999d0ccc35836034-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_44b14603d8b44030999d0ccc35836034-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
+<pre class="code python"><a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-2"></a>
+<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
+<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-5"></a>
+<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
 </pre>
 <p>And the view should look something like:</p>
-<pre class="code python"><a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-<a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+<pre class="code python"><a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
 </pre>
 <p>Obviously, this will help reduce the amount of code written, and will be way easier to mantain.
 The good thing about this library, and what matters to me the most, is that it has a great <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with DRF</a> by providing a DRF-specific FilterSet and a filter backend.</p>
@@ -153,28 +365,28 @@ The good thing about this library, and what matters to me the most, is that it h
 <div class="section" id="filtering-by-a-polymorphic-model">
 <h2>Filtering by a polymorphic model</h2>
 <p>As we stated at the beginning what I wanted to do is filter by a <strong>polymorphic model</strong>, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the <code>rest_framework.FilterSet</code> and using a customized filter with <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a> in our FilterSet.</p>
-<pre class="code python"><a name="rest_code_9b257a2964254627a639011b7439d5ff-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-2"></a>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-3"></a>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-7"></a>    <span class="k">return</span> <span class="n">choices</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-8"></a>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-9"></a>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-13"></a>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-17"></a>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
-<a name="rest_code_9b257a2964254627a639011b7439d5ff-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-2"></a>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-3"></a>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-7"></a>    <span class="k">return</span> <span class="n">choices</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-8"></a>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-9"></a>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-13"></a>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-17"></a>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
 </pre>
 <p>Now, if our querystring includes a key <code>project_type</code>, it will check if the values match any of
 the choices and it will return the queryset filtered by the specified choices.
@@ -202,24 +414,7 @@ And that's it, we have successfully filtered polymorphic models. Now we just nee
 </table>
 </div>
 </div>
-    </div>
-    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
-<li><a class="tag p-category" href="../../categories/api/" rel="tag">api</a></li>
-            <li><a class="tag p-category" href="../../categories/django/" rel="tag">django</a></li>
-            <li><a class="tag p-category" href="../../categories/django-rest-framework/" rel="tag">django-rest-framework</a></li>
-            <li><a class="tag p-category" href="../../categories/drf/" rel="tag">drf</a></li>
-            <li><a class="tag p-category" href="../../categories/filters/" rel="tag">filters</a></li>
-            <li><a class="tag p-category" href="../../categories/polymorphic/" rel="tag">polymorphic</a></li>
-            <li><a class="tag p-category" href="../../categories/python/" rel="tag">python</a></li>
-        </ul>
-<ul class="pager hidden-print">
-<li class="previous">
-                <a href="../eurotrip-2016/" rel="prev" title="Eurotrip 2016">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="../guide-to-sublime-like-a-normal-person/" rel="next" title="Guide to Sublime like a normal person">Next post</a>
-            </li>
-        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
         
         
         <div id="disqus_thread"></div>
@@ -241,14 +436,10 @@ And that's it, we have successfully filtered polymorphic models. Now we just nee
     <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-        </section></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
-            
-        </footer>
+        </section></footer></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
-    </div>
-    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-    
-<script>
+
+    <script type="text/javascript" src="../../assets/js/jquery.js"></script><script type="text/javascript" src="../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../assets/js/index.js"></script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

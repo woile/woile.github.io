@@ -29,6 +29,8 @@ Solution
 Save the static content while running the scrapper, then, serve it with a very small http server
 while testing. Yes, it's a bit tedious, but it delivers.
 
+.. TEASER_END
+
 When should you save?
 
 Whenever you need to. This is a good example:

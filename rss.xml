@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Personal blog about software development, travel and sports</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 13 Jan 2019 16:17:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Personal blog about software development, travel and sports</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sun, 10 Feb 2019 22:34:15 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
 I've used the base version, the slim and the alpine.&lt;/p&gt;
 &lt;p&gt;Initially I moved from the base python3.6 to the python3.6-slim and everything
 went great. The main win was that no change was required in the Dockerfile,
@@ -41,239 +41,7 @@ You'll see the green lock in your browser.&lt;/p&gt;
 &lt;img src="https://woile.github.io/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
 HTTPS by default in the browser, like web bluetooth, service workers, web authentication
 and websockets in some cases where SSL is already enabled.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="configuring-mkcert"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id5"&gt;Configuring mkcert&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Install the &lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/#installation"&gt;dependencies for your os&lt;/a&gt;.
-In my case I'm using a Linux Debian based os.&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_184cdcbfefe64d0dab7a67281fc65c3b-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;sudo apt install libnss3-tools&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Download the binary for your distribution from
-&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/releases"&gt;mkcert release page&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Rename the file to &lt;code&gt;mkcert&lt;/code&gt; and give execution permissions&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_567f52fecf5d496ab4429c0b2bdf8222-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;chmod +x mkcert&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Install the certificate authorities (CA) using&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_65e58dd413044b148f9bd052c8d5e0f3-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -install&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Create certificates for the domains you'd like to use&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_8845c7c82a9f4e6d98a48e97ead506b8-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;./mkcert -cert-file cert.pem -key-file key.pem 0.0.0.0 localhost 127.0.0.1 ::1&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;This will create a &lt;code&gt;cert.pem&lt;/code&gt; and a &lt;code&gt;key.pem&lt;/code&gt; files in your current directory.
-We are gonna use this 2 files along the post.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="python-frameworks"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id6"&gt;Python frameworks&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Now that we have created the certficates for those domains, we just need to
-know how to tell our app to use them.&lt;/p&gt;
-&lt;p&gt;I'll assume you have a virtualenv already created.&lt;/p&gt;
-&lt;p&gt;Let's see how to do this in some different python frameworks and tools.&lt;/p&gt;
-&lt;div class="section" id="uvicorn-starlette"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id7"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Note: &lt;a class="reference external" href="https://github.com/encode/uvicorn"&gt;uvicorn&lt;/a&gt; SSL Support has not been merged yet.
-I've tested this with this open &lt;a class="reference external" href="https://github.com/encode/uvicorn/pull/213"&gt;PR&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;I've used &lt;a class="reference external" href="https://github.com/encode/starlette"&gt;starlette&lt;/a&gt;
-because it's simpler than writing a uvicorn App, but it's not required.&lt;/p&gt;
-&lt;p&gt;I guess this should be fairly similar for &lt;a class="reference external" href="https://github.com/tiangolo/fastapi"&gt;FastAPI&lt;/a&gt;,
-&lt;a class="reference external" href="https://github.com/bocadilloproject/bocadillo"&gt;Bocadillo&lt;/a&gt; and &lt;a class="reference external" href="https://github.com/kennethreitz/responder"&gt;Responder&lt;/a&gt;
-once the PR gets merged into uvicorn.&lt;/p&gt;
-&lt;p&gt;In your terminal run&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_657629062c4e47ac9fb8cb2dec1121dc-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uvicorn starlette&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Now create a file &lt;code&gt;star_app.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# star_app.py&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.applications&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;starlette.responses&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-4"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;uvicorn&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-5"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ssl&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-6"&gt;&lt;/a&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Starlette&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-8"&gt;&lt;/a&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-9"&gt;&lt;/a&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-10"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-11"&gt;&lt;/a&gt;&lt;span class="n"&gt;async&lt;/span&gt; &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-12"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;JSONResponse&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;"hello"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"world"&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-13"&gt;&lt;/a&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-14"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-15"&gt;&lt;/a&gt;    &lt;span class="n"&gt;uvicorn&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-16"&gt;&lt;/a&gt;        &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-17"&gt;&lt;/a&gt;        &lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"0.0.0.0"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-18"&gt;&lt;/a&gt;        &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8433&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-19"&gt;&lt;/a&gt;        &lt;span class="n"&gt;ssl_version&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROTOCOL_SSLv23&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-20"&gt;&lt;/a&gt;        &lt;span class="n"&gt;cert_reqs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ssl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CERT_OPTIONAL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-21"&gt;&lt;/a&gt;        &lt;span class="n"&gt;keyfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./key.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;        &lt;span class="c1"&gt;# Note that the generated certificates&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-22"&gt;&lt;/a&gt;        &lt;span class="n"&gt;certfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"./cert.pem"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;      &lt;span class="c1"&gt;# are used here&lt;/span&gt;
-&lt;a name="rest_code_550a74c64fd144808fbe8c6aed0b42cc-23"&gt;&lt;/a&gt;    &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;And then just run&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_4a9a89c0868442978237b374d4040265-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python star_app.py&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Go to &lt;code&gt;https://0.0.0.0:8443&lt;/code&gt; in your browser&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="django-ssl-server"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id8"&gt;Django SSL Server&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://github.com/teddziuba/django-sslserver"&gt;django-sslserver&lt;/a&gt; is a small library which adds the ability to
-run a secure debug server with the certificates we just created.&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_0fc2993e100e4b4cb3afecf1d8687010-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install django-sslserver&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Update your &lt;code&gt;settings.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt;
-&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-2"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'sslserver'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-3"&gt;&lt;/a&gt;    &lt;span class="o"&gt;...&lt;/span&gt;
-&lt;a name="rest_code_b8f6c63ca72a4513a2e13a3a93e981df-4"&gt;&lt;/a&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;And in your terminal run&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_15db1248dc444e9a926a34512265a5af-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runsslserver --certificate cert.pem --key key.pem&lt;/span&gt;
-&lt;/pre&gt;&lt;div class="section" id="django-extensions"&gt;
-&lt;h4&gt;Django extensions&lt;/h4&gt;
-&lt;p&gt;There's another alternative which I haven't tested, but it has a lot of extra functionality,
-which I don't need, so I've skipped it.&lt;/p&gt;
-&lt;p&gt;Feel free to try &lt;a class="reference external" href="https://django-extensions.readthedocs.io/en/latest/runserver_plus.html"&gt;django-extensions&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;I guess it would be something like&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_2547084f48614c3da8b1a5b9bc2a6030-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python manage.py runserver_plus --cert-file cert.pem --key-file cert.pem&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="flask"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id9"&gt;Flask&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Install &lt;a class="reference external" href="http://flask.pocoo.org/"&gt;flask&lt;/a&gt;&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_0250511a08284277830917a3a957e447-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install flask&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Create a file &lt;code&gt;flask_app.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# flask_app.py&lt;/span&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-3"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;application&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-5"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-6"&gt;&lt;/a&gt;&lt;span class="nd"&gt;@application.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-7"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-8"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;h1 style='color:blue'&amp;gt;Hello There!&amp;lt;/h1&amp;gt;"&lt;/span&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-9"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-10"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1402b353e5fd4ef3b34c18aff21f1c4d-11"&gt;&lt;/a&gt;    &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ssl_context&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'cert.pem'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'key.pem'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Run in your terminal&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_6fbc28593e80465cbdfb6c83925fcc1b-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;python flask_app.py&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="uwsgi"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id10"&gt;UWSGI&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Install &lt;a class="reference external" href="https://uwsgi-docs.readthedocs.io"&gt;uwsgi&lt;/a&gt;.&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_6128e15deb5b4cb99423131cb2400809-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;pip install uwsgi&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Create a file called &lt;code&gt;wsgi.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# wsgi.py&lt;/span&gt;
-&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-2"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-3"&gt;&lt;/a&gt;    &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'200 OK'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;'Content-Type'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'text/html'&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
-&lt;a name="rest_code_81c7f5dd16e84deeb75a16d27c781a43-4"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;"Hello World"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Run in your terminal&lt;/p&gt;
-&lt;pre class="code console"&gt;&lt;a name="rest_code_faa6b01811ad4595a7c2f68bad478220-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Go to &lt;code&gt;https://0.0.0.0:8443&lt;/code&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="security-concerns"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id11"&gt;Security concerns&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;DO NOT&lt;/strong&gt; use this certificates in production. This is &lt;strong&gt;only&lt;/strong&gt; for development. Use &lt;a class="reference external" href="https://letsencrypt.org/"&gt;Let's Encrypt&lt;/a&gt; instead.&lt;/p&gt;
-&lt;p&gt;You don't need to commit the generated certificates.
-Looks like each machine will have to install mkcert, create and work with its own certificates.&lt;/p&gt;
-&lt;p&gt;This will only work on your local machine, where the server is running, if you want to access from a mobile device
-read &lt;a class="reference external" href="https://github.com/FiloSottile/mkcert#mobile-devices"&gt;the docs&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="conclusion"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id12"&gt;Conclusion&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Many times, I've had the need to test something with HTTPS, but it took me a lot of time to do it.
-I think &lt;code&gt;mkcert&lt;/code&gt; is a really easy to use tool which achieves this smoothly.&lt;/p&gt;
-&lt;p&gt;Do you have any other (security) concerns? Feedback is appreciated.&lt;/p&gt;
-&lt;p&gt;If you have drop-in examples for other frameworks or tools I'll update the post.&lt;/p&gt;
-&lt;p&gt;Thanks for reading and happy coding!&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Websockets RFC summary</title><link>https://woile.github.io/posts/websockets-rfc-summary/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="section" id="id1"&gt;
-&lt;h2&gt;&lt;a class="reference external" href="https://tools.ietf.org/html/rfc6455.html"&gt;RFC&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div class="section" id="introduction"&gt;
-&lt;h2&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;For bi-directional communication (e.g., instant messaging and gaming applications): abuse of &lt;strong&gt;HTTP poll&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="section" id="problems"&gt;
-&lt;h3&gt;Problems&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;mutiple TCP connections. One for sending information and a new one for each incoming message.&lt;/li&gt;
-&lt;li&gt;each client-to-server message having an HTTP header.&lt;/li&gt;
-&lt;li&gt;the client-side script is forced to maintain a mapping from the outgoing connections to the incoming connection to track replies&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="solution"&gt;
-&lt;h3&gt;Solution&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;WebSocket Protocol&lt;/strong&gt; uses a single TCP connection for traffic in both directions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="features"&gt;
-&lt;h3&gt;Features&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;works over HTTP ports 80 and 443&lt;/li&gt;
-&lt;li&gt;support for HTTP proxies and intermediaries&lt;/li&gt;
-&lt;li&gt;design does not limit WebSocket to HTTP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="overview"&gt;
-&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;Protocol has 2 parts: &lt;strong&gt;handshake&lt;/strong&gt; &amp;amp; &lt;strong&gt;data transfer&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="section" id="handshake"&gt;
-&lt;h3&gt;Handshake&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;client&lt;/strong&gt; handshake example&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-GET /chat HTTP/1.1
-Host: server.example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
-Origin: http://example.com
-Sec-WebSocket-Protocol: chat, superchat
-Sec-WebSocket-Version: 13
-&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;server&lt;/strong&gt; handshake example&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-HTTP/1.1 101 Switching Protocols
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
-Sec-WebSocket-Protocol: chat
-&lt;/pre&gt;
-&lt;p&gt;An unordered set of header fields comes after the leading line in both cases.
-Additional header fields may also be present, such as cookies.&lt;/p&gt;
-&lt;p&gt;After a successful handshake, clients and servers transfer data back and forth in
-conceptual units referred as &lt;strong&gt;"messages"&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="section" id="opening-handshake"&gt;
-&lt;h4&gt;Opening Handshake&lt;/h4&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;compatible with HTTP-based server-side&lt;/li&gt;
-&lt;li&gt;handshake from server includes header with the status code &lt;strong&gt;101&lt;/strong&gt;, otherwise handshake has not completed and that the semantics of HTTP still apply&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="design-philosophy"&gt;
-&lt;h3&gt;Design philosophy&lt;/h3&gt;
-&lt;p&gt;The WebSocket Protocol is designed on the principle that there should
-be minimal framing (the only framing that exists is to make the
-protocol frame-based instead of stream-based and to support a
-distinction between Unicode text and binary frames).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="relationship-to-tcp-and-http"&gt;
-&lt;h3&gt;Relationship to TCP and HTTP&lt;/h3&gt;
-&lt;p&gt;The WebSocket Protocol is an independent TCP-based protocol.  Its
-only relationship to HTTP is that its handshake is interpreted by
-HTTP servers as an Upgrade request.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="websocket-uris"&gt;
-&lt;h2&gt;WebSocket URIs&lt;/h2&gt;
-&lt;p&gt;two URI schemes (insecure &amp;amp; secure)&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-ws-URI = "ws:" "//" host [ ":" port ] path [ "?" query ]
-wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]
-&lt;/pre&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;port component is OPTIONAL&lt;/li&gt;
-&lt;li&gt;default for "ws" is port 80,&lt;/li&gt;
-&lt;li&gt;default for "wss" is port 443.&lt;/li&gt;
-&lt;li&gt;fragment identifiers (#) are meaningless in the context of WebSocket URIs and MUST NOT be used on these URIs, escape them using %23 if needed.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="data-framing"&gt;
-&lt;h2&gt;Data Framing&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;client &lt;strong&gt;MUST&lt;/strong&gt; mask all frames that it sends to the server&lt;/li&gt;
-&lt;li&gt;server &lt;strong&gt;MUST&lt;/strong&gt; close the connection upon receiving a frame that is not masked.&lt;/li&gt;
-&lt;li&gt;server &lt;strong&gt;MAY&lt;/strong&gt; use the status code 1002 to close connection&lt;/li&gt;
-&lt;li&gt;server &lt;strong&gt;MUST NOT&lt;/strong&gt; mask any frames that it sends to the client.&lt;/li&gt;
-&lt;li&gt;client &lt;strong&gt;MUST&lt;/strong&gt; close a connection if it detects a masked frame.&lt;/li&gt;
-&lt;li&gt;client &lt;strong&gt;MAY&lt;/strong&gt; use the status code 1002 to close connection&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>rfc summary websockets</category><guid>https://woile.github.io/posts/websockets-rfc-summary/</guid><pubDate>Fri, 28 Sep 2018 17:16:24 GMT</pubDate></item><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
 less worries, this is pure personal preference.&lt;/p&gt;
 &lt;p&gt;Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.&lt;/p&gt;
 &lt;p&gt;Because of this, I created &lt;a class="reference external" href="https://github.com/Woile/decli"&gt;decli&lt;/a&gt;, which is a declarative command line utility. Super simple.
@@ -304,326 +72,7 @@ git-demo
 &lt;/pre&gt;
 &lt;p&gt;If you are gonna write code along with the tutorial, you can create those files already. You can skip the &lt;strong&gt;pyproject.toml&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;The code for this tutorial is &lt;a class="reference external" href="https://github.com/Woile/decli-git-demo"&gt;hosted in github&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="section" id="installation"&gt;
-&lt;h2&gt;Installation&lt;/h2&gt;
-&lt;div class="admonition warning"&gt;
-&lt;p class="first admonition-title"&gt;Warning&lt;/p&gt;
-&lt;p class="last"&gt;Python3! Everything here is python3!&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;I like the new package manager &lt;code&gt;poetry&lt;/code&gt; which uses the new &lt;strong&gt;pyproject.toml&lt;/strong&gt; file. So let's install:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-poetry add decli
-&lt;/pre&gt;
-&lt;p&gt;Otherwise if you want to use pip:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-python -m venv venv
-source venv/bin/activate
-pip install -U decli
-&lt;/pre&gt;
-&lt;div class="section" id="the-pyproject-toml-file"&gt;
-&lt;h3&gt;The pyproject.toml file&lt;/h3&gt;
-&lt;p&gt;If you haven't seen how a &lt;strong&gt;pyproject.toml&lt;/strong&gt; looks, it's something like this:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-[tool.poetry]
-name = "decli-git-demo"
-version = "0.1.0"
-description = "A git like demo"
-
-[tool.poetry.dependencies]
-python = "*"
-decli = "^0.5.0"
-
-[tool.poetry.dev-dependencies]
-pytest = "^3.0"
-flake8 = "^3.5"
-mypy = "^0.620.0"
-&lt;/pre&gt;
-&lt;p&gt;Pretty simple, right?&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="writing-the-interface"&gt;
-&lt;h2&gt;Writing the interface&lt;/h2&gt;
-&lt;p&gt;We are gonna write the &lt;strong&gt;cli&lt;/strong&gt; in the &lt;code&gt;___main__.py&lt;/code&gt; file, so we can treat the folder &lt;code&gt;git&lt;/code&gt; as a module.
-Look at the file structure if in doubt.&lt;/p&gt;
-&lt;p&gt;In order to use it as a module, we need to provide the &lt;code&gt;-m&lt;/code&gt; flag, to the python interpreter.
-Our resulting command would look something like this:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;python -m git &amp;lt;top_level_arguments&amp;gt; &amp;lt;subcommand&amp;gt; &amp;lt;sub_arguments&amp;gt;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-python -m git --debug commit --amend
-&lt;/pre&gt;
-&lt;p&gt;For the interface, using &lt;strong&gt;decli&lt;/strong&gt;, we need to create a dict. Let's dive into it.&lt;/p&gt;
-&lt;div class="section" id="main-component"&gt;
-&lt;h3&gt;Main component&lt;/h3&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;decli&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;cli&lt;/span&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-4"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"prog"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"git"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-5"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"description"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"These are common Git commands used in various situations"&lt;/span&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-6"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-7"&gt;&lt;/a&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-8"&gt;&lt;/a&gt;&lt;span class="n"&gt;parser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_c65c316bb18c4b0e979bbffafeaf42b0-9"&gt;&lt;/a&gt;&lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_args&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;This part is the entrypoint of our cli.&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;prog&lt;/code&gt; key is the name of the app, it will be used in the help information, same as &lt;code&gt;description&lt;/code&gt;.
-Let's see how this works:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git --help
-usage: git [-h]
-
-These are common Git commands used in various situations
-
-optional arguments:
--h, --help  show this help message and exit
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class="section" id="arguments"&gt;
-&lt;h3&gt;Arguments&lt;/h3&gt;
-&lt;p&gt;Let's add some global arguments, we want to have &lt;code&gt;debug&lt;/code&gt; and &lt;code&gt;version&lt;/code&gt; available.
-We are also going to add some code to handle the version flag.
-And for now, if nothing is provided we'll print the args.&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;decli&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;cli&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-3"&gt;&lt;/a&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-5"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"prog"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"git"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-6"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"description"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"These are common Git commands used in various situations"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-7"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"arguments"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-8"&gt;&lt;/a&gt;        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"-v"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"--version"&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"store_true"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-9"&gt;&lt;/a&gt;        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"--debug"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"store_true"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-10"&gt;&lt;/a&gt;    &lt;span class="p"&gt;],&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-11"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-12"&gt;&lt;/a&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-13"&gt;&lt;/a&gt;&lt;span class="n"&gt;parser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-14"&gt;&lt;/a&gt;&lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_args&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-15"&gt;&lt;/a&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-16"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-17"&gt;&lt;/a&gt;    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"0.1.0"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-18"&gt;&lt;/a&gt;    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-19"&gt;&lt;/a&gt;
-&lt;a name="rest_code_cfc9c7aab7ae4510b22e5f61b1e51678-20"&gt;&lt;/a&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Let's take a look at the help, also to what happens when calling with the &lt;code&gt;version&lt;/code&gt; flag, and when nothing is provided.&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git --help
-usage: git [-h] [-v] [--debug]
-
-These are common Git commands used in various situations
-
-optional arguments:
--h, --help     show this help message and exit
--v, --version
---debug
-&lt;/pre&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git --version
-0.1.0
-&lt;/pre&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git
-Namespace(debug=False, version=False)
-&lt;/pre&gt;
-&lt;p&gt;Awesome, this is looking promising.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="subcommands"&gt;
-&lt;h3&gt;Subcommands&lt;/h3&gt;
-&lt;p&gt;Last thing we are missing are the subcommands, we said we were gonna cover &lt;code&gt;add&lt;/code&gt;, &lt;code&gt;commit&lt;/code&gt;, and &lt;code&gt;push&lt;/code&gt;.
-Each one will have a unique sub-argument (just as an example).
-Also, each one will use a class that we are gonna implement later. So no output example for now.&lt;/p&gt;
-&lt;p&gt;Some extras:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;We are gonna print the help if nothing is provided.&lt;/li&gt;
-&lt;li&gt;We are gonna call a &lt;code&gt;run&lt;/code&gt; method from the classes that we are gonna define later.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;decli&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;cli&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.commands&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Add&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Commit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Push&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-4"&gt;&lt;/a&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-5"&gt;&lt;/a&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-6"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"prog"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"git"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-7"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"description"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"These are common Git commands used in various situations"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-8"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"arguments"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-9"&gt;&lt;/a&gt;        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"-v"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"--version"&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"store_true"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-10"&gt;&lt;/a&gt;        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"--debug"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"store_true"&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-11"&gt;&lt;/a&gt;    &lt;span class="p"&gt;],&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-12"&gt;&lt;/a&gt;    &lt;span class="s2"&gt;"subcommands"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-13"&gt;&lt;/a&gt;        &lt;span class="s2"&gt;"title"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"main"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-14"&gt;&lt;/a&gt;        &lt;span class="s2"&gt;"commands"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-15"&gt;&lt;/a&gt;            &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-16"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"add"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-17"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"help"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"Add file contents to the index"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-18"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"func"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Add&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-19"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"arguments"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"--update"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"store_true"&lt;/span&gt;&lt;span class="p"&gt;}],&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-20"&gt;&lt;/a&gt;            &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-21"&gt;&lt;/a&gt;            &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-22"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"commit"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-23"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"help"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"Record changes to the repository"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-24"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"func"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Commit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-25"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"arguments"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-26"&gt;&lt;/a&gt;                    &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-27"&gt;&lt;/a&gt;                        &lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"--amend"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-28"&gt;&lt;/a&gt;                        &lt;span class="s2"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"store_true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-29"&gt;&lt;/a&gt;                        &lt;span class="s2"&gt;"help"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-30"&gt;&lt;/a&gt;                            &lt;span class="s2"&gt;"Replace the tip of the current "&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-31"&gt;&lt;/a&gt;                            &lt;span class="s2"&gt;"branch by creating a new commit."&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-32"&gt;&lt;/a&gt;                        &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-33"&gt;&lt;/a&gt;                    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-34"&gt;&lt;/a&gt;                &lt;span class="p"&gt;],&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-35"&gt;&lt;/a&gt;            &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-36"&gt;&lt;/a&gt;            &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-37"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"push"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-38"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"help"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"Update remote refs along with associated objects"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-39"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"func"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Push&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-40"&gt;&lt;/a&gt;                &lt;span class="s2"&gt;"arguments"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-41"&gt;&lt;/a&gt;                    &lt;span class="p"&gt;{&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-42"&gt;&lt;/a&gt;                        &lt;span class="s2"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"--tags"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-43"&gt;&lt;/a&gt;                        &lt;span class="s2"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"store_true"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-44"&gt;&lt;/a&gt;                        &lt;span class="s2"&gt;"help"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-45"&gt;&lt;/a&gt;                            &lt;span class="s2"&gt;"All refs under refs/tags are pushed, in"&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-46"&gt;&lt;/a&gt;                            &lt;span class="s2"&gt;" addition to refspecs explicitly listed "&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-47"&gt;&lt;/a&gt;                            &lt;span class="s2"&gt;"on the command line."&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-48"&gt;&lt;/a&gt;                        &lt;span class="p"&gt;),&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-49"&gt;&lt;/a&gt;                    &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-50"&gt;&lt;/a&gt;                &lt;span class="p"&gt;],&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-51"&gt;&lt;/a&gt;            &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-52"&gt;&lt;/a&gt;        &lt;span class="p"&gt;],&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-53"&gt;&lt;/a&gt;    &lt;span class="p"&gt;},&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-54"&gt;&lt;/a&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-55"&gt;&lt;/a&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-56"&gt;&lt;/a&gt;&lt;span class="n"&gt;parser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-57"&gt;&lt;/a&gt;&lt;span class="n"&gt;args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_args&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-58"&gt;&lt;/a&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-59"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-60"&gt;&lt;/a&gt;    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"0.1.0"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-61"&gt;&lt;/a&gt;    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-62"&gt;&lt;/a&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-63"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# print help if no arguments are provided&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-64"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-65"&gt;&lt;/a&gt;    &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;print_help&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-66"&gt;&lt;/a&gt;    &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-67"&gt;&lt;/a&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-68"&gt;&lt;/a&gt;&lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__dict__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_4799e44fb0184c74adc97a87d97c0812-69"&gt;&lt;/a&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;So this is how &lt;code&gt;___main__.py&lt;/code&gt; should look like.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="writing-the-commands"&gt;
-&lt;h2&gt;Writing the commands&lt;/h2&gt;
-&lt;p&gt;Before, we left our application unfinished and not working, because it was missing the classes imported from the &lt;code&gt;commands&lt;/code&gt; folder.
-If you haven't created the folder and the files yet, go and do it. Remember also to create the &lt;code&gt;___init__.py&lt;/code&gt; files.&lt;/p&gt;
-&lt;p&gt;It's interesting to observe how each class is unpacking the arguments that needs.&lt;/p&gt;
-&lt;p&gt;Also, each class is a normal python class, there's nothing needed, really &lt;strong&gt;easy to test&lt;/strong&gt;, right?&lt;/p&gt;
-&lt;p&gt;A better implementation could be made, of course, having a parent class defining the interface and handling global arguments, would be interesting.
-But I'll leave that for you.&lt;/p&gt;
-&lt;div class="section" id="add"&gt;
-&lt;h3&gt;Add&lt;/h3&gt;
-&lt;p&gt;For &lt;code&gt;commands/app.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Add&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-3"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-4"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;debug&lt;/span&gt;
-&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-5"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;update&lt;/span&gt;
-&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-6"&gt;&lt;/a&gt;
-&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-7"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_af615cfe66014157ad76ec79d036a123-8"&gt;&lt;/a&gt;        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;'running add... update: {self.update}, debug: {self.debug}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="commit"&gt;
-&lt;h3&gt;Commit&lt;/h3&gt;
-&lt;p&gt;For &lt;code&gt;commands/commit.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Commit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-3"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;amend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-4"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;debug&lt;/span&gt;
-&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-5"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amend&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;amend&lt;/span&gt;
-&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-6"&gt;&lt;/a&gt;
-&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-7"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_8b13cfecfd8b4c00b4c48d697e5513d8-8"&gt;&lt;/a&gt;        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;'Commiting... debug: {self.debug}, amend: {self.amend}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="push"&gt;
-&lt;h3&gt;Push&lt;/h3&gt;
-&lt;p&gt;For &lt;code&gt;commands/push.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-3"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-4"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;debug&lt;/span&gt;
-&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-5"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tags&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt;
-&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-6"&gt;&lt;/a&gt;
-&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-7"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_c785378b2f0d4059a1a1d3b2811823b9-8"&gt;&lt;/a&gt;        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s1"&gt;'Pushing... debug: {self.debug}, tags: {self.tags}'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="section" id="init"&gt;
-&lt;h3&gt;Init&lt;/h3&gt;
-&lt;p&gt;We are gonna add this, in order to import directly from &lt;code&gt;commands&lt;/code&gt;, instead of one by one.&lt;/p&gt;
-&lt;p&gt;For &lt;code&gt;commands/__init__.py&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.add&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Add&lt;/span&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.commit&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Commit&lt;/span&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.push&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Push&lt;/span&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-4"&gt;&lt;/a&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-5"&gt;&lt;/a&gt;&lt;span class="n"&gt;__all__&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-6"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'Add'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-7"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'Commit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-8"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'Push'&lt;/span&gt;
-&lt;a name="rest_code_778846183e0d4d46b5d5d1b3944a7c18-9"&gt;&lt;/a&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="now-what"&gt;
-&lt;h2&gt;Now what?&lt;/h2&gt;
-&lt;p&gt;That's it, our application is completed, let's see some output results.&lt;/p&gt;
-&lt;div class="section" id="providing-nothing"&gt;
-&lt;h3&gt;Providing nothing&lt;/h3&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git
-usage: git [-h] [-v] [--debug] {add,commit,push} ...
-
-These are common Git commands used in various situations
-
-optional arguments:
--h, --help         show this help message and exit
--v, --version
---debug
-
-main:
-{add,commit,push}
-    add              Add file contents to the index
-    commit           Record changes to the repository
-    push             Update remote refs along with associated objects
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class="section" id="calling-add-command"&gt;
-&lt;h3&gt;Calling add command&lt;/h3&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git add
-running add... update: False, debug: False
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class="section" id="calling-commit-command-with-a-sub-argument"&gt;
-&lt;h3&gt;Calling commit command with a sub-argument&lt;/h3&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git commit --amend
-Commiting... debug: False, amend: True
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class="section" id="calling-push-command-with-global-and-sub-arguments"&gt;
-&lt;h3&gt;Calling push command with global and sub arguments&lt;/h3&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git --debug push --tags
-Pushing... debug: True, tags: True
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div class="section" id="help-for-one-of-the-commands"&gt;
-&lt;h3&gt;Help for one of the commands&lt;/h3&gt;
-&lt;pre class="literal-block"&gt;
-$ python -m git commit --help
-usage: git commit [-h] [--amend]
-
-optional arguments:
--h, --help  show this help message and exit
---amend     Replace the tip of the current branch by creating a new commit.
-&lt;/pre&gt;
-&lt;p&gt;And that's it, we have succesfully created a nice and mantainable cli.&lt;/p&gt;
-&lt;p&gt;Keep in mind that if you already have a project, and you want to provide an interface, now you know how.&lt;/p&gt;
-&lt;p&gt;Hope it was a useful reading.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>git python decli cli tutorial programming</category><guid>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</guid><pubDate>Fri, 14 Sep 2018 17:33:02 GMT</pubDate></item><item><title>Decrypt filesystem</title><link>https://woile.github.io/posts/decrypt-filesystem/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h2&gt;Decrypt ubuntu filesystem&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/"&gt;Read more…&lt;/a&gt; (5 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>git python decli cli tutorial programming</category><guid>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</guid><pubDate>Fri, 14 Sep 2018 17:33:02 GMT</pubDate></item><item><title>Decrypt filesystem</title><link>https://woile.github.io/posts/decrypt-filesystem/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h2&gt;Decrypt ubuntu filesystem&lt;/h2&gt;
 &lt;p&gt;If you have encrypted your drive with one of the latest ubuntu version, this is how to decrypt using the command line.&lt;/p&gt;
 &lt;p&gt;A few weeks ago I had a problem with my ubuntu (as usual) and I had no clue how to decrypt my file, which it's encrypted by my company's policy.&lt;/p&gt;
 &lt;p&gt;Optional: run a &lt;strong&gt;live ubuntu&lt;/strong&gt; if your system is not working properly&lt;/p&gt;
@@ -689,134 +138,7 @@ or writing the scrapper in pure Javascript, but I felt comfortable using Seleniu
 &lt;h2&gt;Solution&lt;/h2&gt;
 &lt;p&gt;Save the static content while running the scrapper, then, serve it with a very small http server
 while testing. Yes, it's a bit tedious, but it delivers.&lt;/p&gt;
-&lt;p&gt;When should you save?&lt;/p&gt;
-&lt;p&gt;Whenever you need to. This is a good example:&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'https://betterexplained.com/articles/why-do-we-multiply-combinations/'&lt;/span&gt;
-&lt;a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;driver&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;webdriver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Chrome&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;driver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_86c453193c1f401984ea8d2c05bbfc95-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;save_current_state&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;driver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;driver&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;page_source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Can I see the code of &lt;code&gt;save_current_state&lt;/code&gt;? Here you go:&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;urllib.parse&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-3"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;SAVE_SOURCE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;  &lt;span class="c1"&gt;# disable in production&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-5"&gt;&lt;/a&gt;&lt;span class="n"&gt;TEST_LOCATION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'tests/static'&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-6"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-7"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-8"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;save_current_state&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-9"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;SAVE_SOURCE&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-10"&gt;&lt;/a&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-11"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-12"&gt;&lt;/a&gt;        &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TEST_LOCATION&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-13"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-14"&gt;&lt;/a&gt;        &lt;span class="k"&gt;raise&lt;/span&gt; &lt;span class="ne"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'source must be a string'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-15"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-16"&gt;&lt;/a&gt;    &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;safe&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'.html'&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-17"&gt;&lt;/a&gt;    &lt;span class="n"&gt;filepath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;location&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-18"&gt;&lt;/a&gt;    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filepath&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'w'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-19"&gt;&lt;/a&gt;        &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-20"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b1ee5191763424b88c2eaa6fea3f05c-21"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;filepath&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Notice how the url is used as the file name (safely parsed). This helps a lot to match urls.
-But of course, a case where something custom is required may happen, so you can tune the server to
-fit any case.&lt;/p&gt;
-&lt;p&gt;And the python server? A minor modification from &lt;a class="reference external" href="https://realpython.com/blog/python/testing-third-party-apis-with-mock-servers/"&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;socket&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;threading&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Thread&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-4"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;urllib.parse&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-5"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;http.server&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;BaseHTTPRequestHandler&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HTTPServer&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-6"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-7"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-8"&gt;&lt;/a&gt;&lt;span class="n"&gt;TEST_LOCATION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'tests/static'&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-9"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-10"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-11"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MockServerRequestHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BaseHTTPRequestHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-12"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-13"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_set_headers&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-14"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-15"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Set-Cookie'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'exampleid=c295IGVsIHVzdWFyaW8gZW5pdG8K'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-16"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Content-type'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'text/html'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# change at will&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-17"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end_headers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-18"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-19"&gt;&lt;/a&gt;    &lt;span class="nd"&gt;@property&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-20"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_filepath&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-21"&gt;&lt;/a&gt;        &lt;span class="n"&gt;filename&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'/'&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;safe&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-22"&gt;&lt;/a&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;TEST_LOCATION&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'{0}.html'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-23"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-24"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_read_from_file_or_404&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-25"&gt;&lt;/a&gt;        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-26"&gt;&lt;/a&gt;            &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_filepath&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'rb'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-27"&gt;&lt;/a&gt;        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;FileNotFoundError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-28"&gt;&lt;/a&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;404&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-29"&gt;&lt;/a&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;404 Not Found!&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-30"&gt;&lt;/a&gt;        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-31"&gt;&lt;/a&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-32"&gt;&lt;/a&gt;            &lt;span class="c1"&gt;# needs an extra new line&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-33"&gt;&lt;/a&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wfile&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-34"&gt;&lt;/a&gt;            &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-35"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-36"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;do_GET&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-37"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_set_headers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-38"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_read_from_file_or_404&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-39"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-40"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;do_POST&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-41"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_set_headers&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-42"&gt;&lt;/a&gt;        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_read_from_file_or_404&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-43"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-44"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;log_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-45"&gt;&lt;/a&gt;        &lt;span class="sd"&gt;"""Do not write log messages to std. Disable to see the requests."""&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-46"&gt;&lt;/a&gt;        &lt;span class="k"&gt;return&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-47"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-48"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-49"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_free_port&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-50"&gt;&lt;/a&gt;    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AF_INET&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SOCK_STREAM&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-51"&gt;&lt;/a&gt;    &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-52"&gt;&lt;/a&gt;    &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getsockname&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-53"&gt;&lt;/a&gt;    &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-54"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-55"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-56"&gt;&lt;/a&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-57"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;start_mock_server&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'localhost'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-58"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-59"&gt;&lt;/a&gt;        &lt;span class="n"&gt;port&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_free_port&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-60"&gt;&lt;/a&gt;    &lt;span class="n"&gt;mock_server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HTTPServer&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;MockServerRequestHandler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-61"&gt;&lt;/a&gt;    &lt;span class="n"&gt;mock_server_thread&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Thread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mock_server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serve_forever&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-62"&gt;&lt;/a&gt;    &lt;span class="n"&gt;mock_server_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setDaemon&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-63"&gt;&lt;/a&gt;    &lt;span class="n"&gt;mock_server_thread&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_1b4acbcda9154d83abffa393d8e2a138-64"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;'{hostname}:{port}'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;And finally the base test from which you will inherit, whenever you need to test the scrapper.&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;unittest&lt;/span&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;my_project&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;const&lt;/span&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;tests&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;start_mock_server&lt;/span&gt;  &lt;span class="c1"&gt;# or where you saved it&lt;/span&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-4"&gt;&lt;/a&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-5"&gt;&lt;/a&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-6"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;BaseScrapperTest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;unittest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TestCase&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-7"&gt;&lt;/a&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-8"&gt;&lt;/a&gt;    &lt;span class="nd"&gt;@classmethod&lt;/span&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-9"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;setUpClass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-10"&gt;&lt;/a&gt;        &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;start_mock_server&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_f707887c1737413292ff69ca18ce8b98-11"&gt;&lt;/a&gt;        &lt;span class="n"&gt;const&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HOSTNAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Take a look at that last line, your project must have a central point where the &lt;strong&gt;HOSTNAME&lt;/strong&gt; is set.
-Before testing, you need to tell to your application to hit your localserver.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="final-notes"&gt;
-&lt;h2&gt;Final notes&lt;/h2&gt;
-&lt;p&gt;If you find hard to test some scrapper function, try dividing it into smaller functions, and testing
-them individually.&lt;/p&gt;
-&lt;p&gt;If a scrapper function does not include any condition, it's okay to &lt;code&gt;return True&lt;/code&gt; at the end,
-and assert that boolean. If something goes wrong in the scrapper, we'll get noticied with an exception
-and the test will throw an error. Also, if you wanted to &lt;a class="reference external" href="https://stackoverflow.com/a/4319870/2047185"&gt;receive a fail&lt;/a&gt;
-instead of an error, which is more pythonic, you should do something like this in your test:&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-2"&gt;&lt;/a&gt;    &lt;span class="n"&gt;users_from_github&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;ExceptionType&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_69f5249ec9554c15a00ce94f93c7ae9e-4"&gt;&lt;/a&gt;    &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"users_from_github() raised ExceptionType unexpectedly!"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;p&gt;Try isolating the scrapper as much as possible from the rest of your project, whenever you need
-to use selenium, avoid including bussiness logic in it as well, this difficults testing and makes
-the code quite confusing.&lt;/p&gt;
-&lt;p&gt;Regards!&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>selenium python testing</category><guid>https://woile.github.io/posts/how-to-test-selenium-scrapper/</guid><pubDate>Tue, 12 Sep 2017 14:38:40 GMT</pubDate></item><item><title>Guide to Sublime like a normal person</title><link>https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;First of all, verify that you have installed the latest version of &lt;a href="https://www.sublimetext.com/3"&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/how-to-test-selenium-scrapper/"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>selenium python testing</category><guid>https://woile.github.io/posts/how-to-test-selenium-scrapper/</guid><pubDate>Tue, 12 Sep 2017 14:38:40 GMT</pubDate></item><item><title>Guide to Sublime like a normal person</title><link>https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;First of all, verify that you have installed the latest version of &lt;a href="https://www.sublimetext.com/3"&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;General settings&lt;/h3&gt;
 &lt;p&gt;Add the following settings in &lt;code&gt;Preferences &amp;gt; Settings &amp;gt; User Tab&lt;/code&gt;&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;"trim_trailing_white_space_on_save": true,
@@ -1014,25 +336,25 @@ model, the inherited model classes are returned.
 &lt;/pre&gt;
 &lt;p&gt;One of the most important things to understand of polymorphic is, that when you ask for the queryset of the parent, every element is represented with its children classes. Let's see this.&lt;/p&gt;
 &lt;p&gt;I'll use the models examples provided by the &lt;a class="reference external" href="https://django-polymorphic.readthedocs.io/en/stable/"&gt;docs&lt;/a&gt;.&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;polymorphic.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PolymorphicModel&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PolymorphicModel&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-4"&gt;&lt;/a&gt;    &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-5"&gt;&lt;/a&gt;    &lt;span class="n"&gt;start_date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DateField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-6"&gt;&lt;/a&gt;    &lt;span class="n"&gt;finish_date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DateField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-7"&gt;&lt;/a&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-8"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ArtProject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-9"&gt;&lt;/a&gt;    &lt;span class="n"&gt;artist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-10"&gt;&lt;/a&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-11"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ResearchProject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_af07f8b614c4472ba8f442392c8f8469-12"&gt;&lt;/a&gt;    &lt;span class="n"&gt;supervisor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;pre class="code python"&gt;&lt;a name="rest_code_182cdf4829534b9f98eee59f2745d777-1"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;topic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Department Party"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_182cdf4829534b9f98eee59f2745d777-2"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ArtProject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;topic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Painting with Tim"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;artist&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"T. Turner"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_182cdf4829534b9f98eee59f2745d777-3"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ResearchProject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;topic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Swallow Aerodynamics"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;supervisor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Dr. Winter"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;pre class="code python"&gt;&lt;a name="rest_code_e1249f421c564d2187dc599fe81befd1-1"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_e1249f421c564d2187dc599fe81befd1-2"&gt;&lt;/a&gt;&lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;         &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="s2"&gt;"Department Party"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_e1249f421c564d2187dc599fe81befd1-3"&gt;&lt;/a&gt;  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;ArtProject&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;      &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="s2"&gt;"Painting with Tim"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;artist&lt;/span&gt; &lt;span class="s2"&gt;"T. Turner"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;a name="rest_code_e1249f421c564d2187dc599fe81befd1-4"&gt;&lt;/a&gt;  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;ResearchProject&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="s2"&gt;"Swallow Aerodynamics"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;supervisor&lt;/span&gt; &lt;span class="s2"&gt;"Dr. Winter"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;polymorphic.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PolymorphicModel&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-2"&gt;&lt;/a&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;PolymorphicModel&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-4"&gt;&lt;/a&gt;    &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-5"&gt;&lt;/a&gt;    &lt;span class="n"&gt;start_date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DateField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-6"&gt;&lt;/a&gt;    &lt;span class="n"&gt;finish_date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DateField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;null&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;blank&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-7"&gt;&lt;/a&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-8"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ArtProject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-9"&gt;&lt;/a&gt;    &lt;span class="n"&gt;artist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-10"&gt;&lt;/a&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-11"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ResearchProject&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-12"&gt;&lt;/a&gt;    &lt;span class="n"&gt;supervisor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code python"&gt;&lt;a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-1"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;topic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Department Party"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-2"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ArtProject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;topic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Painting with Tim"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;artist&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"T. Turner"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-3"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;ResearchProject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;topic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Swallow Aerodynamics"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;supervisor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"Dr. Winter"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code python"&gt;&lt;a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-1"&gt;&lt;/a&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-2"&gt;&lt;/a&gt;&lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;         &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="s2"&gt;"Department Party"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-3"&gt;&lt;/a&gt;  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;ArtProject&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;      &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="s2"&gt;"Painting with Tim"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;artist&lt;/span&gt; &lt;span class="s2"&gt;"T. Turner"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-4"&gt;&lt;/a&gt;  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;ResearchProject&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="s2"&gt;"Swallow Aerodynamics"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;supervisor&lt;/span&gt; &lt;span class="s2"&gt;"Dr. Winter"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;As you can see, this can be really helpful when using Django Rest Framework (DRF) and model inheritance.
 It allows to use just one model, in this case &lt;code&gt;Project&lt;/code&gt;, in a &lt;code&gt;ModelViewSet&lt;/code&gt; and you will receive all the instances for &lt;code&gt;Project&lt;/code&gt;, &lt;code&gt;ArtProject&lt;/code&gt; and &lt;code&gt;ResearchProject&lt;/code&gt;. Take into account
 that your serializer will have to handle the representation of each of the models.&lt;/p&gt;
@@ -1045,46 +367,46 @@ Is a generic, reusable application to alleviate writing some of the more mundane
 &lt;p&gt;Fundamentally, when using django filters you'll want to create a class specifying the model's
 fields by which a queryset can be filtered.&lt;/p&gt;
 &lt;p&gt;Let's modified a bit the example of the &lt;a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html"&gt;docs&lt;/a&gt;:&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;django_filters&lt;/span&gt;
-&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ProjectFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FilterSet&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-4"&gt;&lt;/a&gt;    &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lookup_expr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'iexact'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-5"&gt;&lt;/a&gt;
-&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-6"&gt;&lt;/a&gt;    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-7"&gt;&lt;/a&gt;        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;
-&lt;a name="rest_code_44b14603d8b44030999d0ccc35836034-8"&gt;&lt;/a&gt;        &lt;span class="n"&gt;fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'start_date'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'finish_date'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;django_filters&lt;/span&gt;
+&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-2"&gt;&lt;/a&gt;
+&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-3"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ProjectFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FilterSet&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-4"&gt;&lt;/a&gt;    &lt;span class="n"&gt;topic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lookup_expr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'iexact'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-5"&gt;&lt;/a&gt;
+&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-6"&gt;&lt;/a&gt;    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-7"&gt;&lt;/a&gt;        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;
+&lt;a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-8"&gt;&lt;/a&gt;        &lt;span class="n"&gt;fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'start_date'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'finish_date'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;And the view should look something like:&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;project_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-2"&gt;&lt;/a&gt;    &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ProjectFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GET&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
-&lt;a name="rest_code_9abe8e1b11eb45b7bd63529606f97bb7-3"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'my_app/template.html'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'filter'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-1"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;project_list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-2"&gt;&lt;/a&gt;    &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ProjectFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;GET&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-3"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'my_app/template.html'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'filter'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Obviously, this will help reduce the amount of code written, and will be way easier to mantain.
 The good thing about this library, and what matters to me the most, is that it has a great &lt;a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html"&gt;integration with DRF&lt;/a&gt; by providing a DRF-specific FilterSet and a filter backend.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="filtering-by-a-polymorphic-model"&gt;
 &lt;h2&gt;Filtering by a polymorphic model&lt;/h2&gt;
 &lt;p&gt;As we stated at the beginning what I wanted to do is filter by a &lt;strong&gt;polymorphic model&lt;/strong&gt;, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the &lt;code&gt;rest_framework.FilterSet&lt;/code&gt; and using a customized filter with &lt;a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method"&gt;Filter.method&lt;/a&gt; in our FilterSet.&lt;/p&gt;
-&lt;pre class="code python"&gt;&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;django_filters&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-2"&gt;&lt;/a&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-3"&gt;&lt;/a&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-4"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_subclasses_as_choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;klass&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-5"&gt;&lt;/a&gt;    &lt;span class="n"&gt;choices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;subclass&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt; &lt;span class="n"&gt;subclass&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-6"&gt;&lt;/a&gt;               &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;subclass&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;klass&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__subclasses__&lt;/span&gt;&lt;span class="p"&gt;()}&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-7"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;choices&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-8"&gt;&lt;/a&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-9"&gt;&lt;/a&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-10"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ProjectFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rest_framework&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FilterSet&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-11"&gt;&lt;/a&gt;    &lt;span class="n"&gt;project_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MultipleChoiceFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-12"&gt;&lt;/a&gt;        &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'project_type_filter'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;choices&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;get_subclasses_as_choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-13"&gt;&lt;/a&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-14"&gt;&lt;/a&gt;    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-15"&gt;&lt;/a&gt;        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-16"&gt;&lt;/a&gt;        &lt;span class="n"&gt;fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'topic'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'start_date'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'end_date'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-17"&gt;&lt;/a&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-18"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;project_type_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-19"&gt;&lt;/a&gt;        &lt;span class="n"&gt;project_choices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_subclasses_as_choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-20"&gt;&lt;/a&gt;        &lt;span class="n"&gt;selected_projects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;project_choices&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-21"&gt;&lt;/a&gt;                             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;a name="rest_code_9b257a2964254627a639011b7439d5ff-22"&gt;&lt;/a&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instance_of&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;selected_projects&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;django_filters&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-2"&gt;&lt;/a&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-3"&gt;&lt;/a&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-4"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_subclasses_as_choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;klass&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-5"&gt;&lt;/a&gt;    &lt;span class="n"&gt;choices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;subclass&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt; &lt;span class="n"&gt;subclass&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-6"&gt;&lt;/a&gt;               &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;subclass&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;klass&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__subclasses__&lt;/span&gt;&lt;span class="p"&gt;()}&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-7"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;choices&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-8"&gt;&lt;/a&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-9"&gt;&lt;/a&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-10"&gt;&lt;/a&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ProjectFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rest_framework&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FilterSet&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-11"&gt;&lt;/a&gt;    &lt;span class="n"&gt;project_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;django_filters&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MultipleChoiceFilter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-12"&gt;&lt;/a&gt;        &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'project_type_filter'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;choices&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;get_subclasses_as_choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-13"&gt;&lt;/a&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-14"&gt;&lt;/a&gt;    &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Meta&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-15"&gt;&lt;/a&gt;        &lt;span class="n"&gt;model&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Project&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-16"&gt;&lt;/a&gt;        &lt;span class="n"&gt;fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'topic'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'start_date'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'end_date'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-17"&gt;&lt;/a&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-18"&gt;&lt;/a&gt;    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;project_type_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-19"&gt;&lt;/a&gt;        &lt;span class="n"&gt;project_choices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_subclasses_as_choice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Project&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-20"&gt;&lt;/a&gt;        &lt;span class="n"&gt;selected_projects&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;project_choices&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-21"&gt;&lt;/a&gt;                             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-22"&gt;&lt;/a&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;queryset&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instance_of&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;selected_projects&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;p&gt;Now, if our querystring includes a key &lt;code&gt;project_type&lt;/code&gt;, it will check if the values match any of
 the choices and it will return the queryset filtered by the specified choices.
 And that's it, we have successfully filtered polymorphic models. Now we just need to add &lt;code&gt;ProjectFilter&lt;/code&gt; to the &lt;code&gt;filter_class&lt;/code&gt; in the &lt;code&gt;viewsets.ModelViewSet&lt;/code&gt;.&lt;/p&gt;
@@ -1102,7 +424,7 @@ And that's it, we have successfully filtered polymorphic models. Now we just nee
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>api</category><category>django</category><category>django-rest-framework</category><category>drf</category><category>filters</category><category>polymorphic</category><category>python</category><guid>https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/</guid><pubDate>Thu, 02 Mar 2017 23:58:22 GMT</pubDate></item><item><title>Eurotrip 2016</title><link>https://woile.github.io/posts/eurotrip-2016/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="youtube-video align-center"&gt;
-&lt;iframe width="640" height="360" src="https://www.youtube.com/embed/I3UGBamgnQU?rel=0&amp;amp;hd=1&amp;amp;wmode=transparent"&gt;&lt;/iframe&gt;
+&lt;iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/I3UGBamgnQU?rel=0&amp;amp;wmode=transparent" frameborder="0" allow="encrypted-media" allowfullscreen&gt;&lt;/iframe&gt;
 &lt;/div&gt;&lt;p&gt;Hi guys, from may to november 2016, I've been traveling around Europe with some friends. I wanted to share some insight about our trip.&lt;/p&gt;
 &lt;p&gt;First, I would like to start with some numbers:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;720 litres&lt;/strong&gt; of beer were drunk (around 2 lt per day per person during 3 months on average)&lt;/p&gt;
@@ -1169,27 +491,5 @@ Right now it doesn't support screensharing and some other features a normal pers
 &lt;li&gt;&lt;a class="reference external" href="https://discordapp.com/"&gt;discord&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;If you really need to install this software, and you cannot use the alternatives, then this guide is for you.&lt;/p&gt;
-&lt;p&gt;I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
-Debian recommends to install the .deb package, but it usually does not work.&lt;/p&gt;
-&lt;p&gt;As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.&lt;/p&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-1"&gt;&lt;/a&gt;sudo dpkg --add-architecture i386
-&lt;a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-2"&gt;&lt;/a&gt;sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-&lt;a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-3"&gt;&lt;/a&gt;mkdir ~/.apps/
-&lt;a name="rest_code_96cf8728d5974b6b9a96a1eb8cd0adfc-4"&gt;&lt;/a&gt;wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 &lt;span class="p"&gt;|&lt;/span&gt; tar jx -C ~/.apps/
-&lt;/pre&gt;&lt;p&gt;Instead of launching the &lt;code&gt;./skype&lt;/code&gt; script, you can add a &lt;code&gt;skype.desktop&lt;/code&gt; file to your gnome environment.&lt;/p&gt;
-&lt;p&gt;The location for this file is either &lt;code&gt;~/.local/share/applications&lt;/code&gt;, for the current user, or &lt;code&gt;/usr/share/applications&lt;/code&gt; for everyone.&lt;/p&gt;
-&lt;p&gt;The content for your &lt;code&gt;skype.desktop&lt;/code&gt;, should be something like this:&lt;/p&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-1"&gt;&lt;/a&gt;&lt;span class="o"&gt;[&lt;/span&gt;Desktop Entry&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-2"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Skype
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-3"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Comment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Skype Internet Telephony
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-4"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Exec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/**santiago**/.apps/skype-4.3.0.37/skype
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-5"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Icon&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-6"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Terminal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-7"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Application
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-8"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;UTF-8
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-9"&gt;&lt;/a&gt;&lt;span class="nv"&gt;Categories&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Network&lt;span class="p"&gt;;&lt;/span&gt;Application&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-10"&gt;&lt;/a&gt;&lt;span class="nv"&gt;MimeType&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;x-scheme-handler/skype&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-11"&gt;&lt;/a&gt;X-KDE-Protocols&lt;span class="o"&gt;=&lt;/span&gt;skype
-&lt;a name="rest_code_69b9c2cfed98409c8706cf8f89b2f320-12"&gt;&lt;/a&gt;X-GNOME-Bugzilla-Product&lt;span class="o"&gt;=&lt;/span&gt;skype
-&lt;/pre&gt;&lt;p&gt;PS: Remember to change the user for the one you are using.&lt;/p&gt;
-&lt;p&gt;Good luck!&lt;/p&gt;&lt;/div&gt;</description><category>debian</category><category>linux</category><category>skype</category><guid>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</guid><pubDate>Mon, 19 Sep 2016 10:56:03 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>debian</category><category>linux</category><category>skype</category><guid>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</guid><pubDate>Mon, 19 Sep 2016 10:56:03 GMT</pubDate></item><item><title>Blog inauguration</title><link>https://woile.github.io/posts/blog-inauguration/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;I've decided to create this blog to share trip experiences,
+software development, stuff interesting to me, and whatever I want.&lt;/p&gt;</description><category>init</category><guid>https://woile.github.io/posts/blog-inauguration/</guid><pubDate>Wed, 18 May 2016 04:01:40 GMT</pubDate></item></channel></rss>
