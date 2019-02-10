@@ -9,5 +9,14 @@
 
 .. thumbnail:: /images/G0121373.JPG
 
-I'm a twenty-something developer, who's not married to any technology but in love with python.
-I try to travel as much as I can, do sports and eat healthy :)
+I'm a Software Engineer, I like delivering quality software.
+
+Into open source technologies.
+
+Experienced in python and javascript. Currently learning go.
+
+Interested in distributed system.
+
+I enjoy travelling, doing sports, and having interesting conversations with people.
+
+Also into books and cooking.

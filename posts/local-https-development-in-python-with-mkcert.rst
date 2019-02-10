@@ -27,6 +27,8 @@ You might not need it most of the time, but more and more features require
 HTTPS by default in the browser, like web bluetooth, service workers, web authentication
 and websockets in some cases where SSL is already enabled.
 
+.. TEASER_END
+
 Configuring mkcert
 ------------------
 

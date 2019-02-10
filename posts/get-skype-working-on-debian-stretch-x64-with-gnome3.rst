@@ -23,6 +23,8 @@ Some alternatives I recommend:
 
 If you really need to install this software, and you cannot use the alternatives, then this guide is for you.
 
+.. TEASER_END
+
 I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.
 

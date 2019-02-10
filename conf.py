@@ -132,6 +132,12 @@ NAVIGATION_LINKS = {
         # ((
         #     ("/galleries/argentina/", "Argentina"),
         #  ), "Galerias"),
+        ("/", "Home"),
+        ("/stories/visited-places/", "Around the world"),
+        ("/categories/", "Tags"),
+        ("/rss.xml", "RSS feed"),
+        ("/archive.html", "Archive"),
+
         (
             (
                 ("/galleries/spain/roca_de_la_sierra/", "Roca de la Sierra"),
@@ -176,13 +182,10 @@ NAVIGATION_LINKS = {
                 ("/galleries/denmark/copenhaguen/", "Copenhaguen"),
                 ("/galleries/brasil/sao_paulo/", "Sao Paulo"),
                 ("/galleries/brasil/rio_de_janeiro/", "Rio de Janeiro"),
-                ("/archive.html", "Archive"),
-                ("/categories/", "Tags"),
-                ("/rss.xml", "RSS feed"),
-                ("/stories/visited-places/", "Map"),
-                ("/stories/who-am-i/", "About me"),
+
             ), "Gallery"
         ),
+        ("/stories/who-am-i/", "About me"),
     ),
 }
 
@@ -196,8 +199,10 @@ SOCIAL_NETWORKS = (
 # Name of the theme to use.
 # THEME = "hyde"
 # THEME = "zen"
-THEME = "lanyon"
+# THEME = "lanyon"
 # THEME = "bootstrap"
+THEME = "canterville"
+LOGO_URL = 'https://s.gravatar.com/avatar/7ff595c207c9b935811a691d2f3d2551?s=150'
 
 # Primary color of your theme. This will be used to customize your theme and
 # auto-generate related colors in POSTS_SECTION_COLORS. Must be a HEX value.
@@ -347,13 +352,6 @@ COMPILERS = {
 # Warning: this option will change its default value to False in v8!
 WRITE_TAG_CLOUD = True
 
-# Generate pages for each section. The site must have at least two sections
-# for this option to take effect. It wouldn't build for just one section.
-POSTS_SECTIONS = True
-
-# Setting this to False generates a list page instead of an index. Indexes
-# are the default and will apply GENERATE_ATOM if set.
-# POSTS_SECTIONS_ARE_INDEXES = True
 
 # Each post and section page will have an associated color that can be used
 # to style them with a recognizable color detail across your site. A color
@@ -698,7 +696,7 @@ GALLERY_FOLDERS = {"galleries": "galleries"}
 THUMBNAIL_SIZE = 200
 MAX_IMAGE_SIZE = 1280
 USE_FILENAME_AS_TITLE = True
-# EXTRA_IMAGE_EXTENSIONS = []
+EXTRA_IMAGE_EXTENSIONS = ["webp"]
 #
 # If set to False, it will sort by filename instead. Defaults to True
 GALLERY_SORT_BY_DATE = True
@@ -716,6 +714,7 @@ GALLERY_SORT_BY_DATE = True
 
 IMAGE_FOLDERS = {'images': 'images'}
 IMAGE_THUMBNAIL_SIZE = 400
+# IMAGE_THUMBNAIL_FORMAT = '{name}.thumbnail{ext}'
 
 # #############################################################################
 # HTML fragments and diverse things that are used by the templates
@@ -815,7 +814,7 @@ IMAGE_THUMBNAIL_SIZE = 400
 # )
 
 # Show teasers (instead of full posts) in indexes? Defaults to False.
-# INDEX_TEASERS = False
+INDEX_TEASERS = True
 
 # HTML fragments with the Read more... links.
 # The following tags exist and are replaced for you:
@@ -1163,7 +1162,7 @@ BODY_END = """
 
 # If you hate "Filenames with Capital Letters and Spaces.md", you should
 # set this to true.
-UNSLUGIFY_TITLES = True
+FILE_METADATA_UNSLUGIFY_TITLES = True
 
 # Additional metadata that is added to a post when creating a new_post
 # ADDITIONAL_METADATA = {}
@@ -1238,7 +1237,12 @@ UNSLUGIFY_TITLES = True
 GLOBAL_CONTEXT = {
     "lanyon_subtheme": "theme-base-0b",
     "social_networks": SOCIAL_NETWORKS,
-    "hyde_subtheme": "theme-base-08"
+    "hyde_subtheme": "theme-base-08",
+    'TWITTER_URL': 'https://twitter.com/santiwilly',
+    'GITHUB_URL': 'https://github.com/Woile',
+    'LINKEDIN_URL': 'https://www.linkedin.com/in/santiago-fraire-63b91226',
+    'BANNER_URL': '/images/back.webp',
+    # 'BANNER_URL': '/assets/img/silk-road.jpg'
 }
 
 # Add functions here and they will be called with template

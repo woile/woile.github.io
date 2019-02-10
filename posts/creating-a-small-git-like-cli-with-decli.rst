@@ -50,6 +50,8 @@ If you are gonna write code along with the tutorial, you can create those files 
 
 The code for this tutorial is `hosted in github <https://github.com/Woile/decli-git-demo>`_.
 
+.. TEASER_END
+
 Installation
 ------------
 
