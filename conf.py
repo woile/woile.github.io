@@ -26,7 +26,7 @@ SITE_URL = "https://woile.github.io/"
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://woile.github.io/"
 BLOG_EMAIL = "santiwilly@gmail.com"
-BLOG_DESCRIPTION = "Personal blog about software development, travel and sports"  # (translatable)
+BLOG_DESCRIPTION = "Software Engineer, Python dev"  # (translatable)
 
 # Nikola is multilingual!
 #
