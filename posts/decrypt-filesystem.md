@@ -21,6 +21,8 @@ Optional: run a **live ubuntu** if your system is not working properly
 
 Open a terminal and type `sudo ecryptfs-unwrap-passphrase`. Most of the time this should do it.
 
+<!-- TEASER_END -->
+
 ## Second option
 
 Let's start opening a terminal and typing:
