@@ -9,7 +9,10 @@
 .. type: text
 -->
 
-First of all, verify that you have installed the latest version of [Sublime Text 3](https://www.sublimetext.com/3).
+First of all, verify that you have installed the
+latest version of [Sublime Text 3](https://www.sublimetext.com/3).
+
+<!-- TEASER_END -->
 
 ## General settings
 
@@ -34,7 +37,6 @@ use either `tabs` or `spaces`, but be consistent with the one you or your team u
 
 `word_wrap` if set to false, helps avoiding problems when using features like multiline select.
 
-<!-- TEASER_END -->
 
 ## Installing packages
 
