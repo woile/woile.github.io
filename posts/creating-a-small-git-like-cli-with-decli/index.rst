@@ -23,6 +23,8 @@ But we are gonna structure the code, the way I always wanted to hehe.
 
 The commands will be decoupled from the *command line interface* (cli from now on).
 
+.. TEASER_END
+
 These are the git commands we are gonna cover:
 
 ::
@@ -49,8 +51,6 @@ Our file structure will result in something like this:
 If you are gonna write code along with the tutorial, you can create those files already. You can skip the **pyproject.toml**.
 
 The code for this tutorial is `hosted in github <https://github.com/Woile/decli-git-demo>`_.
-
-.. TEASER_END
 
 Installation
 ------------

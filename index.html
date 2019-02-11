@@ -388,27 +388,6 @@ Just write a dict and you are ready to go.</p>
 Let's create a few commands which will just print a message.</p>
 <p>But we are gonna structure the code, the way I always wanted to hehe.</p>
 <p>The commands will be decoupled from the <em>command line interface</em> (cli from now on).</p>
-<p>These are the git commands we are gonna cover:</p>
-<pre class="literal-block">
-add
-commit
-push
-</pre>
-<p>Our file structure will result in something like this:</p>
-<pre class="literal-block">
-git-demo
-├── git
-│   ├── commands
-│   │   ├── __init__.py
-│   │   ├── add.py
-│   │   ├── commit.py
-│   │   └── push.py
-│   ├── __init__.py
-│   └── __main__.py
-└── pyproject.toml
-</pre>
-<p>If you are gonna write code along with the tutorial, you can create those files already. You can skip the <strong>pyproject.toml</strong>.</p>
-<p>The code for this tutorial is <a class="reference external" href="https://github.com/Woile/decli-git-demo">hosted in github</a>.</p>
 <p class="more"><a href="posts/creating-a-small-git-like-cli-with-decli/">Read more…</a></p>
 </div>
     </section><footer class="post-meta">
@@ -427,52 +406,7 @@ git-demo
 <p>Optional: run a <strong>live ubuntu</strong> if your system is not working properly</p>
 <h3>First option</h3>
 <p>Open a terminal and type <code>sudo ecryptfs-unwrap-passphrase</code>. Most of the time this should do it.</p>
-<h3>Second option</h3>
-<p>Let's start opening a terminal and typing:</p>
-<p><code>lsblk</code></p>
-<p>Look for your encrypted partition, it might look something similar to:</p>
-<pre class="code literal-block"><span></span>nvme0n1        <span class="m">259</span>:0    <span class="m">0</span> <span class="m">953</span>.9G  <span class="m">0</span> disk
-├─nvme0n1p1    <span class="m">259</span>:1    <span class="m">0</span>   512M  <span class="m">0</span> part
-├─nvme0n1p2    <span class="m">259</span>:2    <span class="m">0</span>   488M  <span class="m">0</span> part
-└─nvme0n1p3    <span class="m">259</span>:3    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> part
-</pre>
-
-
-<p>Then to decrypt:</p>
-<pre class="code literal-block"><span></span>cryptsetup luksOpen &lt;path_to_encrypted&gt; &lt;name_for_unencrypted_partition&gt;
-<span class="c1"># This will prompt a password</span>
-</pre>
-
-
-<p>For example:</p>
-<pre class="code literal-block"><span></span>cryptsetup luksOpen /dev/mapper/nvme0n1p3 woile
-</pre>
-
-
-<p>Once decrypted type again:</p>
-<p><code>lsblk</code></p>
-<p>And you'll see your partition unencrypted, something like this:</p>
-<pre class="code literal-block"><span></span>nvme0n1        <span class="m">259</span>:0    <span class="m">0</span> <span class="m">953</span>.9G  <span class="m">0</span> disk
-├─nvme0n1p1    <span class="m">259</span>:1    <span class="m">0</span>   512M  <span class="m">0</span> part
-├─nvme0n1p2    <span class="m">259</span>:2    <span class="m">0</span>   488M  <span class="m">0</span> part
-└─nvme0n1p3    <span class="m">259</span>:3    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> part
-  └─woile <span class="m">253</span>:0    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> crypt
-</pre>
-
-
-<p>Now it's time to mount the new partition</p>
-<ol>
-<li>create a directory</li>
-<li>mount unencrypted partition</li>
-</ol>
-<pre class="code literal-block"><span></span>mkdir /media/tmp_mount_location  <span class="c1"># (1)</span>
-mount /dev/mapper/woile /media/tmp_mount_location  <span class="c1"># (2)</span>
-</pre>
-
-
-<p>That's it, if you go to /media/tmp_mount_location, your files should be there.</p>
-<p>This is mostly a mental note for me.</p>
-<p>Cheers!</p>
+<p class="more"><a href="posts/decrypt-filesystem/">Read more…</a></p>
 </div>
     </section><footer class="post-meta">
                 Woile

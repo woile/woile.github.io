@@ -42,10 +42,8 @@ Install the [package control](https://packagecontrol.io/installation) as explain
 
 To use it go to `Tools > Command Palette` or by default the shortcut keys are:
 
-```
 Linux: `ctrl+shit+P`
 Os X: `cmd+shift+p`
-```
 
 Finally, the steps to install a new package are:
 

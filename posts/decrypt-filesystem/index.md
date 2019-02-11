@@ -7,7 +7,6 @@
 .. link: https://woile.github.io/posts/decrypt-filesystem/
 .. description: how to decrypt your ubuntu linux machine from command line
 .. type: text
-.. status: draft
 -->
 
 # Decrypt ubuntu filesystem
@@ -21,6 +20,8 @@ Optional: run a **live ubuntu** if your system is not working properly
 ## First option
 
 Open a terminal and type `sudo ecryptfs-unwrap-passphrase`. Most of the time this should do it.
+
+<!-- TEASER_END -->
 
 ## Second option
 
