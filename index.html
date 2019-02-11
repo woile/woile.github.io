@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="" lang="en">
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Software Engineer, Python dev">
@@ -15,6 +15,7 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="https://woile.github.io/">
+<link rel="next" href="index-1.html" type="text/html">
 <!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="prefetch" href="posts/moving-from-docker-alpine-to-slim/" type="text/html">
 </head>
 <body class="nav-closed">
@@ -325,22 +326,23 @@ I know with time it will get better and better, and I'll understand it more and 
     </header><section class="post-excerpt"><div>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id4">About mkcert</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id5">Configuring mkcert</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5">About mkcert</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6">Configuring mkcert</a></li>
 <li>
-<a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id6">Python frameworks</a><ul>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id7">Uvicorn + Starlette</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id8">Django SSL Server</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#flask" id="id9">Flask</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id10">UWSGI</a></li>
+<a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7">Python frameworks</a><ul>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8">Uvicorn + Starlette</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9">Django SSL Server</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#flask" id="id10">Flask</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11">Gunicorn</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12">UWSGI</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id11">Security concerns</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#conclusion" id="id12">Conclusion</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13">Security concerns</a></li>
+<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14">Conclusion</a></li>
 </ul>
 </div>
 <div class="section" id="about-mkcert">
-<h2><a class="toc-backref" href="posts/local-https-development-in-python-with-mkcert/#id4">About mkcert</a></h2>
+<h2><a class="toc-backref" href="posts/local-https-development-in-python-with-mkcert/#id5">About mkcert</a></h2>
 <p><a class="reference external" href="https://github.com/FiloSottile/mkcert/">mkcert</a> allows you to have a local
 certificate authority (CA).
 This means that you can run your development web server using HTTPS.
@@ -359,6 +361,119 @@ and websockets in some cases where SSL is already enabled.</p>
 
         <time class="post-date" datetime="2019-01-10T14:30:24-03:00">
             2019-01-10 14:30
+        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/websockets-rfc-summary/">Websockets RFC summary</a></h2>
+    </header><section class="post-excerpt"><div>
+<div class="section" id="id1">
+<h2><a class="reference external" href="https://tools.ietf.org/html/rfc6455.html">RFC</a></h2>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction</h2>
+<p>For bi-directional communication (e.g., instant messaging and gaming applications): abuse of <strong>HTTP poll</strong>.</p>
+<div class="section" id="problems">
+<h3>Problems</h3>
+<ul class="simple">
+<li>mutiple TCP connections. One for sending information and a new one for each incoming message.</li>
+<li>each client-to-server message having an HTTP header.</li>
+<li>the client-side script is forced to maintain a mapping from the outgoing connections to the incoming connection to track replies</li>
+</ul>
+</div>
+<div class="section" id="solution">
+<h3>Solution</h3>
+<p><strong>WebSocket Protocol</strong> uses a single TCP connection for traffic in both directions.</p>
+</div>
+<div class="section" id="features">
+<h3>Features</h3>
+<ul class="simple">
+<li>works over HTTP ports 80 and 443</li>
+<li>support for HTTP proxies and intermediaries</li>
+<li>design does not limit WebSocket to HTTP</li>
+</ul>
+</div>
+</div>
+<div class="section" id="overview">
+<h2>Overview</h2>
+<p>Protocol has 2 parts: <strong>handshake</strong> &amp; <strong>data transfer</strong></p>
+<div class="section" id="handshake">
+<h3>Handshake</h3>
+<p><strong>client</strong> handshake example</p>
+<pre class="literal-block">
+GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Origin: http://example.com
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13
+</pre>
+<p><strong>server</strong> handshake example</p>
+<pre class="literal-block">
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
+Sec-WebSocket-Protocol: chat
+</pre>
+<p>An unordered set of header fields comes after the leading line in both cases.
+Additional header fields may also be present, such as cookies.</p>
+<p>After a successful handshake, clients and servers transfer data back and forth in
+conceptual units referred as <strong>"messages"</strong>.</p>
+<div class="section" id="opening-handshake">
+<h4>Opening Handshake</h4>
+<ul class="simple">
+<li>compatible with HTTP-based server-side</li>
+<li>handshake from server includes header with the status code <strong>101</strong>, otherwise handshake has not completed and that the semantics of HTTP still apply</li>
+</ul>
+</div>
+</div>
+<div class="section" id="design-philosophy">
+<h3>Design philosophy</h3>
+<p>The WebSocket Protocol is designed on the principle that there should
+be minimal framing (the only framing that exists is to make the
+protocol frame-based instead of stream-based and to support a
+distinction between Unicode text and binary frames).</p>
+</div>
+<div class="section" id="relationship-to-tcp-and-http">
+<h3>Relationship to TCP and HTTP</h3>
+<p>The WebSocket Protocol is an independent TCP-based protocol.  Its
+only relationship to HTTP is that its handshake is interpreted by
+HTTP servers as an Upgrade request.</p>
+</div>
+</div>
+<div class="section" id="websocket-uris">
+<h2>WebSocket URIs</h2>
+<p>two URI schemes (insecure &amp; secure)</p>
+<pre class="literal-block">
+ws-URI = "ws:" "//" host [ ":" port ] path [ "?" query ]
+wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]
+</pre>
+<ul class="simple">
+<li>port component is OPTIONAL</li>
+<li>default for "ws" is port 80,</li>
+<li>default for "wss" is port 443.</li>
+<li>fragment identifiers (#) are meaningless in the context of WebSocket URIs and MUST NOT be used on these URIs, escape them using %23 if needed.</li>
+</ul>
+</div>
+<div class="section" id="data-framing">
+<h2>Data Framing</h2>
+<ul class="simple">
+<li>client <strong>MUST</strong> mask all frames that it sends to the server</li>
+<li>server <strong>MUST</strong> close the connection upon receiving a frame that is not masked.</li>
+<li>server <strong>MAY</strong> use the status code 1002 to close connection</li>
+<li>server <strong>MUST NOT</strong> mask any frames that it sends to the client.</li>
+<li>client <strong>MUST</strong> close a connection if it detects a masked frame.</li>
+<li>client <strong>MAY</strong> use the status code 1002 to close connection</li>
+</ul>
+</div>
+</div>
+    </section><footer class="post-meta">
+                Woile
+
+        on
+                <a href="categories/rfc-summary-websockets/">#rfc summary websockets</a>,
+
+        <time class="post-date" datetime="2018-09-28T14:16:24-03:00">
+            2018-09-28 14:16
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/creating-a-small-git-like-cli-with-decli/">Tutorial: writing my dreamt cli using decli</a></h2>
     </header><section class="post-excerpt"><div>
 <p>So for a long time I've been using different cli tools, mostly <code>argparse</code> because this way I had zero dependencies,
@@ -714,27 +829,27 @@ model, the inherited model classes are returned.
 </pre>
 <p>One of the most important things to understand of polymorphic is, that when you ask for the queryset of the parent, every element is represented with its children classes. Let's see this.</p>
 <p>I'll use the models examples provided by the <a class="reference external" href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
-<pre class="code python"><a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-2"></a>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-7"></a>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-10"></a>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_b1c5b618cc164b2087e1376eabc3c95b-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_52766aec376244f1b75a85f18b8870b5-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-2"></a>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-7"></a>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-10"></a>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_52766aec376244f1b75a85f18b8870b5-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
-<a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
-<a name="rest_code_4f617566ab764e7ea60ff7fe84ba3e61-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_facff373636b4df3b83397ee6bd0587b-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
+<a name="rest_code_facff373636b4df3b83397ee6bd0587b-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
+<a name="rest_code_facff373636b4df3b83397ee6bd0587b-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-<a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_d51a35b77d6a4bfcb545dd91d4958c6a-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
+<pre class="code python"><a name="rest_code_963cc5f92bfd428699ac70e831a4dbe3-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<a name="rest_code_963cc5f92bfd428699ac70e831a4dbe3-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_963cc5f92bfd428699ac70e831a4dbe3-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_963cc5f92bfd428699ac70e831a4dbe3-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
 </pre>
 <p>As you can see, this can be really helpful when using Django Rest Framework (DRF) and model inheritance.
 It allows to use just one model, in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into account
@@ -749,19 +864,19 @@ Is a generic, reusable application to alleviate writing some of the more mundane
 <p>Fundamentally, when using django filters you'll want to create a class specifying the model's
 fields by which a queryset can be filtered.</p>
 <p>Let's modified a bit the example of the <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
-<pre class="code python"><a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-2"></a>
-<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
-<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-5"></a>
-<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_a7b23f6a018c49dda22238bc3aa41dd5-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
+<pre class="code python"><a name="rest_code_80ce78892568439182678bdcdfdee630-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_80ce78892568439182678bdcdfdee630-2"></a>
+<a name="rest_code_80ce78892568439182678bdcdfdee630-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_80ce78892568439182678bdcdfdee630-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
+<a name="rest_code_80ce78892568439182678bdcdfdee630-5"></a>
+<a name="rest_code_80ce78892568439182678bdcdfdee630-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_80ce78892568439182678bdcdfdee630-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_80ce78892568439182678bdcdfdee630-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
 </pre>
 <p>And the view should look something like:</p>
-<pre class="code python"><a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-<a name="rest_code_e7cd530b2c16460cb2421a5cf8467ec4-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+<pre class="code python"><a name="rest_code_c27d144499a146ff815af5b009d45aab-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a name="rest_code_c27d144499a146ff815af5b009d45aab-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<a name="rest_code_c27d144499a146ff815af5b009d45aab-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
 </pre>
 <p>Obviously, this will help reduce the amount of code written, and will be way easier to mantain.
 The good thing about this library, and what matters to me the most, is that it has a great <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with DRF</a> by providing a DRF-specific FilterSet and a filter backend.</p>
@@ -769,28 +884,28 @@ The good thing about this library, and what matters to me the most, is that it h
 <div class="section" id="filtering-by-a-polymorphic-model">
 <h2>Filtering by a polymorphic model</h2>
 <p>As we stated at the beginning what I wanted to do is filter by a <strong>polymorphic model</strong>, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the <code>rest_framework.FilterSet</code> and using a customized filter with <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a> in our FilterSet.</p>
-<pre class="code python"><a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-2"></a>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-3"></a>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-7"></a>    <span class="k">return</span> <span class="n">choices</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-8"></a>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-9"></a>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-13"></a>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-17"></a>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
-<a name="rest_code_96e1d7a074494c039f78cb13aa2abaf9-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_79b515379cc8470d864ec61bce160544-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-2"></a>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-3"></a>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-7"></a>    <span class="k">return</span> <span class="n">choices</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-8"></a>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-9"></a>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-13"></a>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-17"></a>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+<a name="rest_code_79b515379cc8470d864ec61bce160544-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
 </pre>
 <p>Now, if our querystring includes a key <code>project_type</code>, it will check if the values match any of
 the choices and it will return the queryset filtered by the specified choices.
@@ -835,7 +950,7 @@ And that's it, we have successfully filtered polymorphic models. Now we just nee
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/eurotrip-2016/">Eurotrip 2016</a></h2>
     </header><section class="post-excerpt"><div>
 <div class="youtube-video align-center">
-<iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/I3UGBamgnQU?rel=0&amp;wmode=transparent" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/I3UGBamgnQU?rel=0&amp;hd=1&amp;wmode=transparent"></iframe>
 </div>
 <p>Hi guys, from may to november 2016, I've been traveling around Europe with some friends. I wanted to share some insight about our trip.</p>
 <p>First, I would like to start with some numbers:</p>
@@ -932,24 +1047,14 @@ Right now it doesn't support screensharing and some other features a normal pers
 
         <time class="post-date" datetime="2016-09-19T07:56:03-03:00">
             2016-09-19 07:56
-        </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/blog-inauguration/">Blog inauguration</a></h2>
-    </header><section class="post-excerpt"><p>I've decided to create this blog to share trip experiences,
-software development, stuff interesting to me, and whatever I want.</p>
-    </section><footer class="post-meta">
-                Woile
-
-        on
-                <a href="categories/init/">#init</a>,
-
-        <time class="post-date" datetime="2016-05-18T01:01:40-03:00">
-            2016-05-18 01:01
         </time></footer></article>
 </div>
 
-
-
-        
-       <script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+        <nav class="postindexpager"><ul class="pager">
+<li class="next">
+                <a href="index-1.html" rel="next">Older posts</a>
+            </li>
+        </ul></nav><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
     <script type="text/javascript" src="assets/js/jquery.js"></script><script type="text/javascript" src="assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="assets/js/index.js"></script><script>

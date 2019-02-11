@@ -76,15 +76,13 @@ Let's see how to do this in some different python frameworks and tools.
 Uvicorn + Starlette
 ~~~~~~~~~~~~~~~~~~~~
 
-Note: `uvicorn <https://github.com/encode/uvicorn>`_ SSL Support has not been merged yet.
-I've tested this with this open `PR <https://github.com/encode/uvicorn/pull/213>`_.
+**Update**: uvicorn now has `SSL support <https://github.com/encode/uvicorn/pull/294>`_.
 
 I've used `starlette <https://github.com/encode/starlette>`_
 because it's simpler than writing a uvicorn App, but it's not required.
 
 I guess this should be fairly similar for `FastAPI <https://github.com/tiangolo/fastapi>`_,
-`Bocadillo <https://github.com/bocadilloproject/bocadillo>`_ and `Responder <https://github.com/kennethreitz/responder>`_
-once the PR gets merged into uvicorn.
+`Bocadillo <https://github.com/bocadilloproject/bocadillo>`_ and `Responder <https://github.com/kennethreitz/responder>`_.
 
 In your terminal run
 
@@ -117,8 +115,8 @@ Now create a file :code:`star_app.py`
             port=8433,
             ssl_version=ssl.PROTOCOL_SSLv23,
             cert_reqs=ssl.CERT_OPTIONAL,
-            keyfile="./key.pem",        # Note that the generated certificates
-            certfile="./cert.pem",      # are used here
+            ssl_keyfile="./key.pem",        # Note that the generated certificates
+            ssl_certfile="./cert.pem",      # are used here
         )
 
 And then just run
@@ -205,6 +203,20 @@ Run in your terminal
 
     python flask_app.py
 
+Gunicorn
+~~~~~~~~~
+
+Install `gunicorn <https://gunicorn.org/>`_.
+
+.. code-block:: console
+
+    pip install gunicorn
+
+Let's continue with the previous flask example
+
+.. code-block:: console
+
+    gunicorn flask_app:application --keyfile=./key.pem --certfile=./cert.pem
 
 UWSGI
 ~~~~~
@@ -255,3 +267,6 @@ Do you have any other (security) concerns? Feedback is appreciated.
 If you have drop-in examples for other frameworks or tools I'll update the post.
 
 Thanks for reading and happy coding!
+
+
+Edit: gunicorn example + uvicorn now supports ssl.
