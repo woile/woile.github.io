@@ -12,7 +12,7 @@ As the title says, I needed a way to filter my polymorphic models using my alrea
 
 First, let's talk about :code:`django-polymorphic` and :code:`django-filters`, what are these libraries for.
 
-
+.. TEASER_END
 
 Django-polymorphic [#]_
 -----------------------
