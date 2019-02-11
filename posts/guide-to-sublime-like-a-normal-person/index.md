@@ -34,6 +34,7 @@ use either `tabs` or `spaces`, but be consistent with the one you or your team u
 
 `word_wrap` if set to false, helps avoiding problems when using features like multiline select.
 
+<!-- TEASER_END -->
 
 ## Installing packages
 

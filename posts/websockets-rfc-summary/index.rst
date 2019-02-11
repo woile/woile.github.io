@@ -9,13 +9,15 @@
 .. status: draft
 
 
-`RFC <https://tools.ietf.org/html/rfc6455.html>`_
-==================================================
 
 Introduction
 ============
 
+`RFC Link <https://tools.ietf.org/html/rfc6455.html>`_
+
 For bi-directional communication (e.g., instant messaging and gaming applications): abuse of **HTTP poll**.
+
+.. TEASER_END
 
 Problems
 --------
@@ -23,6 +25,8 @@ Problems
 - mutiple TCP connections. One for sending information and a new one for each incoming message.
 - each client-to-server message having an HTTP header.
 - the client-side script is forced to maintain a mapping from the outgoing connections to the incoming connection to track replies
+
+
 
 Solution
 --------

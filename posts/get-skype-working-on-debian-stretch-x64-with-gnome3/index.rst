@@ -6,6 +6,7 @@
 .. link:
 .. description: Skype working in Debian Stretch
 .. type: text
+.. status: draft
 
 
     Note

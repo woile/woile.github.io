@@ -7,6 +7,7 @@
 .. link: https://woile.github.io/posts/decrypt-filesystem/
 .. description: how to decrypt your ubuntu linux machine from command line
 .. type: text
+.. status: draft
 -->
 
 # Decrypt ubuntu filesystem

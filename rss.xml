@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 11 Feb 2019 08:45:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 11 Feb 2019 21:09:39 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
 I've used the base version, the slim and the alpine.&lt;/p&gt;
 &lt;p&gt;Initially I moved from the base python3.6 to the python3.6-slim and everything
 went great. The main win was that no change was required in the Dockerfile,
@@ -42,108 +42,11 @@ You'll see the green lock in your browser.&lt;/p&gt;
 &lt;img src="https://woile.github.io/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
 HTTPS by default in the browser, like web bluetooth, service workers, web authentication
 and websockets in some cases where SSL is already enabled.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Websockets RFC summary</title><link>https://woile.github.io/posts/websockets-rfc-summary/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="section" id="id1"&gt;
-&lt;h2&gt;&lt;a class="reference external" href="https://tools.ietf.org/html/rfc6455.html"&gt;RFC&lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div class="section" id="introduction"&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Websockets RFC summary</title><link>https://woile.github.io/posts/websockets-rfc-summary/</link><dc:creator>Woile</dc:creator><description>&lt;div class="section" id="introduction"&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://tools.ietf.org/html/rfc6455.html"&gt;RFC Link&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;For bi-directional communication (e.g., instant messaging and gaming applications): abuse of &lt;strong&gt;HTTP poll&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="section" id="problems"&gt;
-&lt;h3&gt;Problems&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;mutiple TCP connections. One for sending information and a new one for each incoming message.&lt;/li&gt;
-&lt;li&gt;each client-to-server message having an HTTP header.&lt;/li&gt;
-&lt;li&gt;the client-side script is forced to maintain a mapping from the outgoing connections to the incoming connection to track replies&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="solution"&gt;
-&lt;h3&gt;Solution&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;WebSocket Protocol&lt;/strong&gt; uses a single TCP connection for traffic in both directions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="features"&gt;
-&lt;h3&gt;Features&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;works over HTTP ports 80 and 443&lt;/li&gt;
-&lt;li&gt;support for HTTP proxies and intermediaries&lt;/li&gt;
-&lt;li&gt;design does not limit WebSocket to HTTP&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="overview"&gt;
-&lt;h2&gt;Overview&lt;/h2&gt;
-&lt;p&gt;Protocol has 2 parts: &lt;strong&gt;handshake&lt;/strong&gt; &amp;amp; &lt;strong&gt;data transfer&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="section" id="handshake"&gt;
-&lt;h3&gt;Handshake&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;client&lt;/strong&gt; handshake example&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-GET /chat HTTP/1.1
-Host: server.example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
-Origin: http://example.com
-Sec-WebSocket-Protocol: chat, superchat
-Sec-WebSocket-Version: 13
-&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;server&lt;/strong&gt; handshake example&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-HTTP/1.1 101 Switching Protocols
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
-Sec-WebSocket-Protocol: chat
-&lt;/pre&gt;
-&lt;p&gt;An unordered set of header fields comes after the leading line in both cases.
-Additional header fields may also be present, such as cookies.&lt;/p&gt;
-&lt;p&gt;After a successful handshake, clients and servers transfer data back and forth in
-conceptual units referred as &lt;strong&gt;"messages"&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class="section" id="opening-handshake"&gt;
-&lt;h4&gt;Opening Handshake&lt;/h4&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;compatible with HTTP-based server-side&lt;/li&gt;
-&lt;li&gt;handshake from server includes header with the status code &lt;strong&gt;101&lt;/strong&gt;, otherwise handshake has not completed and that the semantics of HTTP still apply&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="design-philosophy"&gt;
-&lt;h3&gt;Design philosophy&lt;/h3&gt;
-&lt;p&gt;The WebSocket Protocol is designed on the principle that there should
-be minimal framing (the only framing that exists is to make the
-protocol frame-based instead of stream-based and to support a
-distinction between Unicode text and binary frames).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="relationship-to-tcp-and-http"&gt;
-&lt;h3&gt;Relationship to TCP and HTTP&lt;/h3&gt;
-&lt;p&gt;The WebSocket Protocol is an independent TCP-based protocol.  Its
-only relationship to HTTP is that its handshake is interpreted by
-HTTP servers as an Upgrade request.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="websocket-uris"&gt;
-&lt;h2&gt;WebSocket URIs&lt;/h2&gt;
-&lt;p&gt;two URI schemes (insecure &amp;amp; secure)&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-ws-URI = "ws:" "//" host [ ":" port ] path [ "?" query ]
-wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]
-&lt;/pre&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;port component is OPTIONAL&lt;/li&gt;
-&lt;li&gt;default for "ws" is port 80,&lt;/li&gt;
-&lt;li&gt;default for "wss" is port 443.&lt;/li&gt;
-&lt;li&gt;fragment identifiers (#) are meaningless in the context of WebSocket URIs and MUST NOT be used on these URIs, escape them using %23 if needed.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="data-framing"&gt;
-&lt;h2&gt;Data Framing&lt;/h2&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;client &lt;strong&gt;MUST&lt;/strong&gt; mask all frames that it sends to the server&lt;/li&gt;
-&lt;li&gt;server &lt;strong&gt;MUST&lt;/strong&gt; close the connection upon receiving a frame that is not masked.&lt;/li&gt;
-&lt;li&gt;server &lt;strong&gt;MAY&lt;/strong&gt; use the status code 1002 to close connection&lt;/li&gt;
-&lt;li&gt;server &lt;strong&gt;MUST NOT&lt;/strong&gt; mask any frames that it sends to the client.&lt;/li&gt;
-&lt;li&gt;client &lt;strong&gt;MUST&lt;/strong&gt; close a connection if it detects a masked frame.&lt;/li&gt;
-&lt;li&gt;client &lt;strong&gt;MAY&lt;/strong&gt; use the status code 1002 to close connection&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>rfc summary websockets</category><guid>https://woile.github.io/posts/websockets-rfc-summary/</guid><pubDate>Fri, 28 Sep 2018 17:16:24 GMT</pubDate></item><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/websockets-rfc-summary/"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>rfc summary websockets</category><guid>https://woile.github.io/posts/websockets-rfc-summary/</guid><pubDate>Fri, 28 Sep 2018 17:16:24 GMT</pubDate></item><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
 less worries, this is pure personal preference.&lt;/p&gt;
 &lt;p&gt;Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.&lt;/p&gt;
 &lt;p&gt;Because of this, I created &lt;a class="reference external" href="https://github.com/Woile/decli"&gt;decli&lt;/a&gt;, which is a declarative command line utility. Super simple.
@@ -258,176 +161,7 @@ this feature is on by default, having to look up for everything you write. Autoc
 &lt;p&gt;&lt;code&gt;translate_tabs_to_spaces&lt;/code&gt; forces to always use spaces when tabbing. This is a personal choice, you can
 use either &lt;code&gt;tabs&lt;/code&gt; or &lt;code&gt;spaces&lt;/code&gt;, but be consistent with the one you or your team use.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;word_wrap&lt;/code&gt; if set to false, helps avoiding problems when using features like multiline select.&lt;/p&gt;
-&lt;h3&gt;Installing packages&lt;/h3&gt;
-&lt;p&gt;Install the &lt;a href="https://packagecontrol.io/installation"&gt;package control&lt;/a&gt; as explained there.&lt;/p&gt;
-&lt;p&gt;To use it go to &lt;code&gt;Tools &amp;gt; Command Palette&lt;/code&gt; or by default the shortcut keys are:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;Linux: `ctrl+shit+P`
-Os X: `cmd+shift+p`
-&lt;/pre&gt;
-
-
-&lt;p&gt;Finally, the steps to install a new package are:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Select the option: &lt;code&gt;Package Control: install package&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Wait until the packages are loaded.&lt;/li&gt;
-&lt;li&gt;Write the name of the package you want to install.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;A talk about linters first&lt;/h3&gt;
-&lt;p&gt;A &lt;strong&gt;lint tool&lt;/strong&gt; performs static analysis of source code and flags patterns that might have errors or
-otherwise cause problems for the developer.
-In other words, it tells you where you are writing incorrect/badly-formatted code.
-A linter is a software, that receives the files to analyze as paramters, and it will
-return an output indicating in which lines somethings is weird.&lt;/p&gt;
-&lt;h3&gt;Sublime Linter&lt;/h3&gt;
-&lt;p&gt;In my opinion, this is the &lt;strong&gt;most important package&lt;/strong&gt; everyone should install, that's why I introduced
-linters first. Sublime Linter provides an interface
-to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
-This means that Sublime Linter will talk with the linter you have installed in your system globally, and will
- display in the editor the errors reported by the linter.&lt;/p&gt;
-&lt;p&gt;As the site reads:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language
- you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter
- has been designed to provide maximum flexibility and usability for users and maximum simplicity
- for linter authors.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;The concept behind it is very simple:
-    1. Install globally in your system a linter for the language of your choice (pep8, eslint, csslint, rubocop, etc).
-    2. Install the corresponding sublime linter through the &lt;strong&gt;package control&lt;/strong&gt;.&lt;/p&gt;
-&lt;h4&gt;Useful linters&lt;/h4&gt;
-&lt;p&gt;Choose the one that suits you more, and install it through the package manager of the corresponding language. Eg: pip for python, gem for ruby, etc.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Language&lt;/th&gt;
-&lt;th align="center"&gt;Linter&lt;/th&gt;
-&lt;th align="center"&gt;Sublime package name&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;python&lt;/td&gt;
-&lt;td align="center"&gt;pep8&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-pep8&lt;/td&gt;
-&lt;td&gt;tool to check your Python code against some of the style conventions in PEP 8&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;python&lt;/td&gt;
-&lt;td align="center"&gt;pep257&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-pep257&lt;/td&gt;
-&lt;td&gt;static analysis tool for checking compliance with Python docstring conventions&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;python&lt;/td&gt;
-&lt;td align="center"&gt;pyflakes&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-pyflakes&lt;/td&gt;
-&lt;td&gt;checks Python source files for errors&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;python&lt;/td&gt;
-&lt;td align="center"&gt;flake8&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-flake8&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;[recommended]&lt;/strong&gt; includes lint checks provided by the PyFlakes project, PEP-0008 inspired style checks provided by the PyCodeStyle project, and McCabe complexity checking provided by the McCabe project&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;python&lt;/td&gt;
-&lt;td align="center"&gt;mypy&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-contrib-mypy&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;[recommended]&lt;/strong&gt; includes static type checker (python 3)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;javascript&lt;/td&gt;
-&lt;td align="center"&gt;jshint&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-jshint&lt;/td&gt;
-&lt;td&gt;JSHint is a program that flags suspicious usage in programs written in JavaScript&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;javascript&lt;/td&gt;
-&lt;td align="center"&gt;eslint&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-eslint&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;[recommended]&lt;/strong&gt; tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exception&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;css&lt;/td&gt;
-&lt;td align="center"&gt;csslint&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-csslint&lt;/td&gt;
-&lt;td&gt;open source CSS code quality tool&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;sass&lt;/td&gt;
-&lt;td align="center"&gt;sass-lint&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-contrib-sass-lint&lt;/td&gt;
-&lt;td&gt;A Node-only Sass linter for both sass and scss syntax!&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ruby&lt;/td&gt;
-&lt;td align="center"&gt;rubocop&lt;/td&gt;
-&lt;td align="center"&gt;SublimeLinter-rubocop&lt;/td&gt;
-&lt;td&gt;A Ruby static code analyzer, based on the community Ruby style guide.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;golang&lt;/td&gt;
-&lt;td align="center"&gt;golint&lt;/td&gt;
-&lt;td align="center"&gt;Sublime​Linter-contrib-golint&lt;/td&gt;
-&lt;td&gt;Golint is a linter for Go source code.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Note: I work with python and javascript so I've marked those which I consider good for those languages.&lt;/p&gt;
-&lt;p&gt;Let's say we want to lint python files with &lt;code&gt;flake8&lt;/code&gt;. The procedure would go like this:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Check &lt;code&gt;SublimeLinter&lt;/code&gt; is installed first.&lt;/li&gt;
-&lt;li&gt;Install flake8 globally, in a debian based machine: &lt;code&gt;sudo pip install flake8&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Install the related sublime linter plugin. In this case &lt;a href="https://github.com/SublimeLinter/SublimeLinter-flake8"&gt;SublimeLinter-flake8&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;That's it, try restarting sublime and everything should be up an running.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;img alt="" src="https://woile.github.io/images/guide-to-sublime-like-a-normal-person/slinter_diagram.jpg"&gt;&lt;/p&gt;
-&lt;h4&gt;Tips to configure sublime linter&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.&lt;/li&gt;
-&lt;li&gt;After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settigns:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;"syntax_map": {
-    "python (django)": "python",
-    "python django": "python"
-}
-&lt;/pre&gt;
-
-
-&lt;ul&gt;
-&lt;li&gt;To change the mark style, open the package control and type &lt;strong&gt;Choose Mark Style&lt;/strong&gt;, I like the Squiggly underline.&lt;/li&gt;
-&lt;li&gt;You can ignore rules, in the settings of the linter inside the sublime linter settings.&lt;/li&gt;
-&lt;li&gt;If you are using &lt;code&gt;mypy&lt;/code&gt; and you want to ignore import hints, add to &lt;code&gt;sublimelinter &amp;gt; user settings &amp;gt; linters&lt;/code&gt; the following:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;"mypy": {
-    "@disable": false,
-    "args": [
-        "--ignore-missing-imports"
-    ],
-    "excludes": []
-}
-&lt;/pre&gt;
-
-
-&lt;h3&gt;Another useful Packages&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;DockBlockr&lt;/code&gt; Helps commenting (go to the web for more information)&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Colorhighlighter&lt;/code&gt; Highlights hexa colors, useful for CSS&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;SidebarEnhancements&lt;/code&gt; Allows options as move, copy, remove, etc in the side bar&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Emmet&lt;/code&gt; Write HTML faster, introduces many sweet snippets.&lt;/p&gt;
-&lt;h3&gt;MUST KNOW SHORTCUTS&lt;/h3&gt;
-&lt;p&gt;Using this shortcuts will make your life much easier.&lt;/p&gt;
-&lt;p&gt;Search them in your key bindin settings, and observe the keys.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;toggle_comment&lt;/code&gt; usually &lt;code&gt;Ctrl + /&lt;/code&gt;
-&lt;img alt="" src="https://woile.github.io/images/guide-to-sublime-like-a-normal-person/toggle_comment.gif"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;select_lines&lt;/code&gt; usualy by pressing &lt;code&gt;Ctrl&lt;/code&gt; and click
-&lt;img alt="" src="https://woile.github.io/images/guide-to-sublime-like-a-normal-person/select_lines.gif"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;find_under_expand&lt;/code&gt; to filter with case, open the search panel and enable the "Case Sensitive" option.&lt;/p&gt;
-&lt;p&gt;No image for this sorry.&lt;/p&gt;
-&lt;h3&gt;RECOMMENDED THEME&lt;/h3&gt;
-&lt;p&gt;&lt;a href="https://github.com/Miw0/SoDaReloaded-Theme"&gt;SoDaReloaded-Theme&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This awesome theme also includes cool icons for every extension, like in the image below.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://raw.githubusercontent.com/Miw0/sodareloaded-theme/master/dark/example.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>linters</category><category>programming</category><category>python</category><category>sublime</category><guid>https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/</guid><pubDate>Thu, 08 Jun 2017 19:46:15 GMT</pubDate></item><item><title>How to filter Polymorphic Models with Django Filters</title><link>https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;As the title says, I needed a way to filter my polymorphic models using my already defined
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/"&gt;Read more…&lt;/a&gt; (5 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>linters</category><category>programming</category><category>python</category><category>sublime</category><guid>https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/</guid><pubDate>Thu, 08 Jun 2017 19:46:15 GMT</pubDate></item><item><title>How to filter Polymorphic Models with Django Filters</title><link>https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;As the title says, I needed a way to filter my polymorphic models using my already defined
 &lt;code&gt;rest_framework.FilterSet&lt;/code&gt;, and as I didn't find much resources about it I'm sharing my experience here.&lt;/p&gt;
 &lt;p&gt;First, let's talk about &lt;code&gt;django-polymorphic&lt;/code&gt; and &lt;code&gt;django-filters&lt;/code&gt;, what are these libraries for.&lt;/p&gt;
 &lt;div class="section" id="django-polymorphic"&gt;
@@ -525,9 +259,7 @@ And that's it, we have successfully filtered polymorphic models. Now we just nee
 &lt;tr&gt;&lt;td class="label"&gt;&lt;a class="fn-backref" href="https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/#id2"&gt;[2]&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;a class="reference external" href="https://github.com/carltongibson/django-filter"&gt;https://github.com/carltongibson/django-filter&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>api</category><category>django</category><category>django-rest-framework</category><category>drf</category><category>filters</category><category>polymorphic</category><category>python</category><guid>https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/</guid><pubDate>Thu, 02 Mar 2017 23:58:22 GMT</pubDate></item><item><title>Eurotrip 2016</title><link>https://woile.github.io/posts/eurotrip-2016/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="youtube-video align-center"&gt;
-&lt;iframe width="640" height="360" src="https://www.youtube.com/embed/I3UGBamgnQU?rel=0&amp;amp;hd=1&amp;amp;wmode=transparent"&gt;&lt;/iframe&gt;
-&lt;/div&gt;&lt;p&gt;Hi guys, from may to november 2016, I've been traveling around Europe with some friends. I wanted to share some insight about our trip.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>api</category><category>django</category><category>django-rest-framework</category><category>drf</category><category>filters</category><category>polymorphic</category><category>python</category><guid>https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/</guid><pubDate>Thu, 02 Mar 2017 23:58:22 GMT</pubDate></item><item><title>Eurotrip 2016</title><link>https://woile.github.io/posts/eurotrip-2016/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Hi guys, from may to november 2016, I've been traveling around Europe with some friends. I wanted to share some insight about our trip.&lt;/p&gt;
 &lt;p&gt;First, I would like to start with some numbers:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;720 litres&lt;/strong&gt; of beer were drunk (around 2 lt per day per person during 3 months on average)&lt;/p&gt;
 &lt;p&gt;41 cities, &lt;strong&gt;13 countries&lt;/strong&gt; visited.&lt;/p&gt;
@@ -537,50 +269,7 @@ And that's it, we have successfully filtered polymorphic models. Now we just nee
 &lt;p&gt;Cheapest country: &lt;strong&gt;Hungary&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Most expensive: &lt;strong&gt;London&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Best activity: &lt;strong&gt;Surf&lt;/strong&gt; (Don't miss it if you have the opportunity)&lt;/p&gt;
-&lt;iframe src="https://www.google.com/maps/d/embed?mid=1vkZK3ktJAtiDy2LnK_-Yzxq928E" width="640" height="480"&gt;&lt;/iframe&gt;&lt;div class="section" id="friends"&gt;
-&lt;h2&gt;Friends&lt;/h2&gt;
-&lt;p&gt;We met a lot of people, never had a problem with anyone, all of them were wonderful, except maybe a racist drunk swedish in Denmark, that was weird, but he didn't do anything to us, just complaining about random stuff.&lt;/p&gt;
-&lt;p&gt;If I had to make a recommendation, I'd say go to hostels in Spain and Portugal, because there you'll find the most relaxed environment and people willing to join you in an adventure. And please give an opportunity to couchsurfing, we didn't use it much, till the end, and we had a great experience, really warm people.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="money"&gt;
-&lt;h2&gt;Money&lt;/h2&gt;
-&lt;p&gt;If you are wondering how much we spent, we used an easy rule. We calculated an average of USD 50 per day. Yes, that includes transportation (planes, buses, trains, etc), food and shelter.&lt;/p&gt;
-&lt;p&gt;How does this work? Well it's easy. First of all, housing is usually around USD 20, probably you'll find some places around USD 10 and sometimes USD 40, but, and let me focus on this word, the AVERAGE was USD 20.&lt;/p&gt;
-&lt;p&gt;Second, food. Let's be generous, and set USD 10 for food, which is a lot if you cook your own meals.&lt;/p&gt;
-&lt;p&gt;So, let's use 15 USD for transportation, but we are not going to be moving everyday, so you can sum it.
-Doing some math, we were abroad for 90 days, with 15 USD for transportation every day, it's USD 1350 available to move, without taking into account the continental flights, it's around USD 52 per transport.&lt;/p&gt;
-&lt;p&gt;What do we do with the USD 5 left? Well it's USD 450 to spend in museums and going out, use it wisely.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="exploring-cities"&gt;
-&lt;h2&gt;Exploring cities&lt;/h2&gt;
-&lt;p&gt;Okay, we didn't had much money to pay expensive tours, so we usually went to the free tours. They are in every city, and you pay what you want, after the tour, and if you don't like it, just leave.&lt;/p&gt;
-&lt;p&gt;They usually spam their other payed tours, but the important thing is that you get to know some worthy places to visit, like the Hofbräuhaus München. And you learn some history of the place.&lt;/p&gt;
-&lt;p&gt;Another important source of information are the &lt;a class="reference external" href="https://www.use-it.travel/home/"&gt;USE-IT maps&lt;/a&gt;. which are made by locals (or that's what they say). They explain some traditions of the city, where to go, and where not to go. You can download them or check where to get them, and the best part is that... it's FREE.&lt;/p&gt;
-&lt;img src="https://woile.github.io/galleries/greece/glyfada/GOPR3079.JPG"&gt;&lt;/div&gt;
-&lt;div class="section" id="transportation-sources"&gt;
-&lt;h2&gt;Transportation sources&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://www.blablacar.es/"&gt;Blablacar&lt;/a&gt;.
-It's for car pooling, someone is going somewhere, and, having some free seats, they are offered in this platform.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://woile.github.io/posts/eurotrip-2016/www.goeuro.com"&gt;Goeuro&lt;/a&gt;.
-Includes many transportation systems, train, bus, plane, car pooling. We used mostly for buses.&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://woile.github.io/posts/eurotrip-2016/www.google.com/flights/"&gt;Google Flights&lt;/a&gt;.
-It's the best search engine for flights, allowing to track specific flights or dates.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="acommodation-sources"&gt;
-&lt;h2&gt;Acommodation sources&lt;/h2&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://www.airbnb.com.ar/"&gt;AirBnb&lt;/a&gt;.
-Renting appartments&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://www.hostelworld.com/"&gt;HostelWorld&lt;/a&gt;.
-Renting beds in hostels&lt;/p&gt;
-&lt;p&gt;&lt;a class="reference external" href="https://www.couchsurfing.com/"&gt;Couchsurfing&lt;/a&gt;.
-Going for free to someone's place. We did it once in Milan and we had a great experience.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="bottom-line"&gt;
-&lt;h2&gt;Bottom line&lt;/h2&gt;
-&lt;p&gt;I encourage you to don't miss the opportunity to travel and meet new friends, you won't regret at all.&lt;/p&gt;
-&lt;p&gt;Happy new year!&lt;/p&gt;
-&lt;p&gt;Santi&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>europe</category><category>eurotrip</category><category>friends</category><category>gopro</category><category>trip</category><guid>https://woile.github.io/posts/eurotrip-2016/</guid><pubDate>Sun, 08 Jan 2017 15:30:53 GMT</pubDate></item><item><title>Get Skype working on Debian Stretch x64 with GNOME3</title><link>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/eurotrip-2016/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>europe</category><category>eurotrip</category><category>friends</category><category>gopro</category><category>trip</category><guid>https://woile.github.io/posts/eurotrip-2016/</guid><pubDate>Sun, 08 Jan 2017 15:30:53 GMT</pubDate></item><item><title>Get Skype working on Debian Stretch x64 with GNOME3</title><link>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
 &lt;p&gt;Note&lt;/p&gt;
 &lt;p&gt;This info is no longer relevant. Right now Skype has been rewritten using &lt;a class="reference external" href="https://electron.atom.io/"&gt;electron&lt;/a&gt; and installing it in a debian based system is no longer a problem.
 Right now it doesn't support screensharing and some other features a normal person would expect.&lt;/p&gt;
