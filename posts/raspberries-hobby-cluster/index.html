@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="set up a kubernetes cluster with raspberry pi">
+<meta name="viewport" content="width=device-width">
+<title>Raspberry Pi hobby cluster | Willy's blog</title>
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://woile.github.io/posts/raspberries-hobby-cluster/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><meta name="author" content="Woile">
+<link rel="prev" href="../moving-from-docker-alpine-to-slim/" title="Moving from docker alpine to slim" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Raspberry Pi hobby cluster">
+<meta property="og:url" content="https://woile.github.io/posts/raspberries-hobby-cluster/">
+<meta property="og:description" content="set up a kubernetes cluster with raspberry pi">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-02-22T04:46:17-03:00">
+<meta property="article:tag" content="cluster">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="raspberry">
+</head>
+<body class="nav-closed">
+
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+                <a href="../../">Home</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/visited-places/">Around the world</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../categories/">Tags</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../rss.xml">RSS feed</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../archive.html">Archive</a>
+            </li>
+            
+
+            <li class="nav-opened" role="presentation">
+                <a href="javascript:void(0)" class="nested-url" data-children="nested-gallery">
+                Gallery
+                </a>
+            </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/roca_de_la_sierra/" class="child">
+                    Roca de la Sierra
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/castelo_de_campo_maior/" class="child">
+                    Castelo de Campo Maior
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/porto/" class="child">
+                    Porto
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/cascais/" class="child">
+                    Cascais
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/quinta_de_regaleira/" class="child">
+                    Quinta de Regaleira
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/seville/" class="child">
+                    Sevilla
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/malaga/" class="child">
+                    Malaga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/nerja/" class="child">
+                    Nerja
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/alhambra_granada/" class="child">
+                    Alhambra y Generalife
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/valencia/" class="child">
+                    Valencia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/sagrada_familia/" class="child">
+                    Sagrada Familia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/camp_nou/" class="child">
+                    Camp Nou
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/cosmocaixa/" class="child">
+                    Cosmocaixa
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/park_guell/" class="child">
+                    Park Güell
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/ciudad_gotica_rambla/" class="child">
+                    Barrio Gótico
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/playa_badalona/" class="child">
+                    Playa Badalona
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santander/" class="child">
+                    Santander
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santillana/" class="child">
+                    Santillana
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/madrid/" class="child">
+                    Madrid
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/france/paris/" class="child">
+                    Paris
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brussels/" class="child">
+                    Bruselas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brugge/" class="child">
+                    Brujas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/rotterdam/" class="child">
+                    Rotterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/amsterdam/" class="child">
+                    Amsterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/hamburg/" class="child">
+                    Hamburgo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/berlin/" class="child">
+                    Berlin
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/poland/cracow/" class="child">
+                    Cracovia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/czech/prague/" class="child">
+                    Praga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/hungary/budapest/" class="child">
+                    Budapest
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/greece/glyfada/" class="child">
+                    Glyfada
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/marina_del_cantone/" class="child">
+                    Marina Del Cantone
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/capri/" class="child">
+                    Capri
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/rome/" class="child">
+                    Roma
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/fermo/" class="child">
+                    Fermo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/milano/" class="child">
+                    Milan
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/como/" class="child">
+                    Como
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/cheltenham/" class="child">
+                    Cheltenham
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/london/" class="child">
+                    London
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/palma_majorca/" class="child">
+                    Palma de Mallorca
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/denmark/copenhaguen/" class="child">
+                    Copenhaguen
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/sao_paulo/" class="child">
+                    Sao Paulo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/rio_de_janeiro/" class="child">
+                    Rio de Janeiro
+                    </a>
+                </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/who-am-i/">About me</a>
+            </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
+
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://woile.github.io/"><img src="https://s.gravatar.com/avatar/7ff595c207c9b935811a691d2f3d2551?s=150" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Raspberry Pi hobby cluster</h1>
+        <section class="post-meta"> by
+            Woile
+            on
+                <a href="../../categories/cluster/">#cluster</a>,
+                <a href="../../categories/docker/">#docker</a>,
+                <a href="../../categories/kubernetes/">#kubernetes</a>,
+                <a href="../../categories/raspberry/">#raspberry</a>,
+            <time class="post-date" datetime="2019-02-22T04:46:17-03:00">
+                2019-02-22 04:46
+            </time></section></header><section class="post-content"><div>
+<p>In this tutorial we are gonna try to setup a cluster in our home
+server built with raspberries.</p>
+<p>In another post I'll describe how to configure a Kubernetes cluster in our raspberries.</p>
+<p>Kubernetes is a container orchestration tool, it can do all of this:</p>
+<ul class="simple">
+<li>Automatic bin packing</li>
+<li>Self-healing</li>
+<li>Horizontal scaling</li>
+<li>Service discovery and Load balancing</li>
+<li>Automated rollouts and rollbacks</li>
+<li>Secrets and configuration management</li>
+<li>Storage orchestration</li>
+<li>Long running jobs</li>
+<li>Batch execution</li>
+</ul>
+<!-- TEASER_END --><div class="section" id="hardware">
+<h2>Hardware</h2>
+<ul class="simple">
+<li>4x <a class="reference external" href="https://www.amazon.de/gp/product/B07BDR5PDW/ref=oh_aui_detailpage_o04_s01?ie=UTF8&amp;psc=1">Raspberry Pi 3 B+</a>
+</li>
+<li>4x <a class="reference external" href="https://www.amazon.de/gp/product/B01AWK81VM/ref=oh_aui_detailpage_o04_s03?ie=UTF8&amp;psc=1">RJ45 Cat6 ethernet cable</a>
+</li>
+<li>4x <a class="reference external" href="https://www.amazon.de/gp/product/B06XFSZGCC/ref=oh_aui_detailpage_o04_s02?ie=UTF8&amp;psc=1">32GB Micro SDHC</a>
+</li>
+<li>4x <a class="reference external" href="https://www.amazon.de/gp/product/B016BEVNK4/ref=oh_aui_detailpage_o02_s00?ie=UTF8&amp;psc=1">Micro USB cable</a>
+</li>
+<li>1x <a class="reference external" href="https://www.amazon.de/gp/product/B000FNFSPY/ref=oh_aui_detailpage_o04_s03?ie=UTF8&amp;psc=1">Switch TP-LINK TL-SF1005D 5-Port 10/100Mbps Unmanaged Desktop</a>
+</li>
+<li>1x <a class="reference external" href="https://www.amazon.de/gp/product/B00VUGOSWY/ref=oh_aui_detailpage_o04_s04?ie=UTF8&amp;psc=1">Anker Port Wall Chargers</a>
+</li>
+<li>1x <a class="reference external" href="https://www.amazon.de/DELOCK-Kabel-USB-Power-Hohlstecker/dp/B001XM49Y2/ref=sr_1_7?s=computers&amp;ie=UTF8&amp;qid=1540141485&amp;sr=1-7&amp;keywords=usb+to+barrel">USB to barrel</a> (optional)</li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+<ul class="simple">
+<li>unix system (linux or mac)</li>
+<li>flash v2.2.0 <a class="reference external" href="https://github.com/hypriot/flash/tree/2.2.0#installation">installation</a>
+</li>
+<li>hypriot OS v1.9.0 <a class="reference external" href="https://github.com/hypriot/image-builder-rpi/releases/download/v1.9.0/hypriotos-rpi-v1.9.0.img.zip">download</a>
+</li>
+</ul>
+</div>
+<div class="section" id="ssh-keys">
+<h2>SSH keys</h2>
+<p>We need a SSH key in order to connect to the cluster without having to type
+the password every time we access.</p>
+<p>In case you don't have any, run this command and follow the steps.</p>
+<pre class="code bash"><a name="rest_code_918cf1928c794447bf6109c697281e7b-1"></a>ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">"your_email@example.com"</span>
+</pre>
+<p>Add the key to your ssh agent, assuming our keys generated are <code>id_rsa</code>
+and <code>id_rsa.pub</code>.</p>
+<pre class="code bash"><a name="rest_code_813b29d8f8f643e6a1e9ea05555ff0b1-1"></a>ssh-add ~/.ssh/id_rsa
+</pre>
+<p>You can find a more in depth explanation in this <a class="reference external" href="https://confluence.atlassian.com/bitbucketserver/creating-ssh-keys-776639788.html">tutorial</a></p>
+</div>
+<div class="section" id="creating-cloud-init-config">
+<h2>Creating cloud-init-config</h2>
+<p>The <tt class="docutils literal">flash</tt> command line utility, uses a cloud-init-conf in order to configure the
+debian system that it's going to be installed. We are gonna use hypriot debian,
+which is optimized for containers.</p>
+<p>Let's generate the conf using a template I've created, remember to update
+the environment variables with your values.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<thead valign="bottom"><tr>
+<th class="head">Variable</th>
+<th class="head">Description</th>
+</tr></thead>
+<tbody valign="top">
+<tr>
+<td><tt class="docutils literal">USERNAME</tt></td>
+<td>Username to login into the os</td>
+</tr>
+<tr>
+<td><tt class="docutils literal">SSH_PUBLIC_KEY</tt></td>
+<td>A public key to log in without
+typing the password.</td>
+</tr>
+<tr>
+<td><tt class="docutils literal">WIFI_SSID_NAME</tt></td>
+<td>The name of your wifi</td>
+</tr>
+<tr>
+<td><tt class="docutils literal">WIFI_PASSWORD</tt></td>
+<td>Use
+<tt class="docutils literal">wpa_passphrase SSID PASSWORD</tt>
+for preshared key</td>
+</tr>
+</tbody>
+</table>
+<pre class="code bash"><a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-1"></a><span class="nb">export</span> <span class="nv">USERNAME</span><span class="o">=</span>willy
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-2"></a><span class="nb">export</span> <span class="nv">WIFI_SSID_NAME</span><span class="o">=</span><span class="s2">"Bla bla"</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-3"></a><span class="nb">export</span> <span class="nv">WIFI_PASSWORD</span><span class="o">=</span><span class="s2">"longandsecurepassword"</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-4"></a><span class="nb">export</span> <span class="nv">WIFI_COUNTRY</span><span class="o">=</span>NL
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-5"></a><span class="nb">export</span> <span class="nv">TIMEZONE</span><span class="o">=</span><span class="k">$(</span>curl -s https://ipapi.co/timezone<span class="k">)</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-6"></a><span class="nb">export</span> <span class="nv">SSH_PUBLIC_KEY</span><span class="o">=</span><span class="k">$(</span>cat ~/.ssh/id_rsa.pub<span class="k">)</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-7"></a>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-8"></a>curl -s https://gist.githubusercontent.com/Woile/51eca58047b6bd51c60eeae80d60ec14/raw/db05664b5e90a28472f139bc8757562c2ed13026/cloud-init-config-template.yaml <span class="p">|</span> <span class="se">\</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-9"></a>sed -e <span class="s2">"s/\${USERNAME}/</span><span class="nv">$USERNAME</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-10"></a>-e <span class="s2">"s/\${WIFI_SSID_NAME}/</span><span class="nv">$WIFI_SSID_NAME</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-11"></a>-e <span class="s2">"s/\${WIFI_PASSWORD}/</span><span class="nv">$WIFI_PASSWORD</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-12"></a>-e <span class="s2">"s/\${WIFI_COUNTRY}/</span><span class="nv">$WIFI_COUNTRY</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-13"></a>-e <span class="s2">"s|\${TIMEZONE}|</span><span class="nv">$TIMEZONE</span><span class="s2">|"</span> <span class="se">\</span>
+<a name="rest_code_4f853781f85e4a819fbdf7ffa742ff28-14"></a>-e <span class="s2">"s|\${SSH_PUBLIC_KEY}|</span><span class="nv">$SSH_PUBLIC_KEY</span><span class="s2">|"</span> &gt; cloud-init-config.yaml
+</pre>
+</div>
+<div class="section" id="flashing-sd-cards">
+<h2>Flashing SD cards</h2>
+<p>Insert the SD card and find it with <tt class="docutils literal">df</tt>.</p>
+<p>Flash the <tt class="docutils literal"><span class="pre">cloud-init-conf.yaml</span></tt> in all of your SD cards.
+It's important to change the hostname per raspberry. Pay attention to param
+<tt class="docutils literal"><span class="pre">--hostname</span></tt>.</p>
+<p>For my 4 raspberries I am going to use these hostnames:</p>
+<pre class="code bash"><a name="rest_code_20b8f4a169c5404885e350f7053ded5e-1"></a>willy-1
+<a name="rest_code_20b8f4a169c5404885e350f7053ded5e-2"></a>willy-2
+<a name="rest_code_20b8f4a169c5404885e350f7053ded5e-3"></a>willy-3
+<a name="rest_code_20b8f4a169c5404885e350f7053ded5e-4"></a>willy-4
+</pre>
+<p><tt class="docutils literal">flash <span class="pre">-f</span> <span class="pre">--hostname</span> <span class="pre">willy-1</span> <span class="pre">--device</span> &lt;device_found_using_df&gt; <span class="pre">-u</span> <span class="pre">cloud-init-config.yaml</span> <span class="pre">hypriotos-rpi-v1.9.0.img</span> pv</tt></p>
+<p>Example:</p>
+<p><tt class="docutils literal">flash <span class="pre">-f</span> <span class="pre">--hostname</span> <span class="pre">willy-1</span> <span class="pre">--device</span> /dev/mmcblk0 <span class="pre">-u</span> <span class="pre">cloud-init-config.yaml</span> <span class="pre">hypriotos-rpi-v1.9.0.img</span> pv</tt></p>
+<p>Plug the SD card on each raspberry and connect them to the wall.</p>
+</div>
+<div class="section" id="setting-up-the-nodes">
+<h2>Setting up the nodes</h2>
+<p>To find the IPs of your raspberries run:</p>
+<pre class="code bash"><a name="rest_code_b3271dcc1afc43aab74e46a4d38bfd3e-1"></a><span class="c1"># For Debian based OS</span>
+<a name="rest_code_b3271dcc1afc43aab74e46a4d38bfd3e-2"></a>sudo apt-get install arp-scan
+<a name="rest_code_b3271dcc1afc43aab74e46a4d38bfd3e-3"></a><span class="c1"># For Mac</span>
+<a name="rest_code_b3271dcc1afc43aab74e46a4d38bfd3e-4"></a>brew install arp-scan
+</pre>
+<pre class="code bash"><a name="rest_code_e529e500d77348b386d0ffab72fbb38a-1"></a>ip a  <span class="c1"># here found the interface, like wlp2s0</span>
+<a name="rest_code_e529e500d77348b386d0ffab72fbb38a-2"></a>sudo arp-scan --interface<span class="o">=</span>&lt;your_interface&gt; --localnet
+</pre>
+<p>Connect to each one of them using <tt class="docutils literal">ssh <span class="pre">&lt;username&gt;@&lt;hostname&gt;</span></tt>, because
+we previosuly added the ssh key, we should not need to type a passsword.</p>
+<p>Execute on each node the next steps.</p>
+<div class="section" id="reset-password">
+<h3>Reset password</h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This is an important step!</p>
+</div>
+<p>Update your user’s password with <tt class="docutils literal">passwd</tt>. Remember that by default is <tt class="docutils literal">hypriot</tt>.</p>
+</div>
+<div class="section" id="configure-firewall">
+<h3>Configure Firewall</h3>
+<p>For simplicity and in case you want to have a multi master cluster, we
+are gonna allow ports for master kubernetes and for kubernetes workers.</p>
+<p>Run this as root typing <tt class="docutils literal">sudo su</tt></p>
+<pre class="code bash"><a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-1"></a>ufw --force reset  <span class="c1"># ok</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-2"></a>ufw allow ssh
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-3"></a>ufw allow <span class="m">6443</span> <span class="c1"># Kubernetes API (master)</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-4"></a>ufw allow <span class="m">80</span>  <span class="c1"># HTTP</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-5"></a>ufw allow <span class="m">443</span>  <span class="c1"># HTTPS</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-6"></a>ufw allow <span class="m">8443</span>  <span class="c1"># kubectl proxy</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-7"></a>ufw allow <span class="m">10250</span>  <span class="c1"># Kubelet API (master and worker)</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-8"></a>ufw allow <span class="m">10251</span>  <span class="c1"># kube-scheduler (master)</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-9"></a>ufw allow <span class="m">10252</span>  <span class="c1"># kube-controller-manager (master)</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-10"></a>ufw allow <span class="m">2379</span>:2380/tcp  <span class="c1"># etcd server client API (master)</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-11"></a>ufw allow <span class="m">30000</span>:32767/tcp  <span class="c1"># NodePort Services** (worker)</span>
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-12"></a>ufw default deny incoming
+<a name="rest_code_5c30432a4b914bcabb97546ab3623c9d-13"></a>yes <span class="p">|</span> ufw <span class="nb">enable</span>
+</pre>
+<p><a class="reference external" href="https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports">Ports used by kubernetes</a></p>
+</div>
+</div>
+<div class="section" id="configuring-master-node">
+<h2>Configuring master node</h2>
+<p>Choose one of the raspberries as the master, I use <tt class="docutils literal"><span class="pre">willy-1</span></tt> as
+master.</p>
+<div class="section" id="set-static-ip">
+<h3>Set static IP</h3>
+<p>Edit <tt class="docutils literal">/etc/network/interfaces.d/eth0</tt> and set it to</p>
+<pre class="code ini"><a name="rest_code_922d8ad78a1e41a78663b2b00ab18f58-1"></a><span class="na">allow-hotplug eth0</span>
+<a name="rest_code_922d8ad78a1e41a78663b2b00ab18f58-2"></a><span class="na">iface eth0 inet static</span>
+<a name="rest_code_922d8ad78a1e41a78663b2b00ab18f58-3"></a><span class="na">address 10.0.0.1</span>
+<a name="rest_code_922d8ad78a1e41a78663b2b00ab18f58-4"></a><span class="na">netmask 255.255.255.0</span>
+<a name="rest_code_922d8ad78a1e41a78663b2b00ab18f58-5"></a><span class="na">broadcast 10.0.0.255</span>
+<a name="rest_code_922d8ad78a1e41a78663b2b00ab18f58-6"></a><span class="na">gateway 10.0.0.1</span>
+</pre>
+<p>Reboot to claim the IP <tt class="docutils literal">10.0.0.1</tt> in your internal cluster’s network
+(the switch network)</p>
+</div>
+<div class="section" id="allocate-addresses-to-the-worker-nodes-using-dhcp">
+<h3>Allocate addresses to the worker nodes using DHCP</h3>
+<p>The cloud-init template already includes <tt class="docutils literal"><span class="pre">isc-dhcp-server</span></tt></p>
+<p>Edit <tt class="docutils literal"><span class="pre">/etc/default/isc-dhcp-server</span></tt>, comment out <tt class="docutils literal"># <span class="pre">INTERFACESv6=""</span></tt>
+and set <tt class="docutils literal"><span class="pre">INTERFACESv4="eth0"</span></tt></p>
+<p>Or run this</p>
+<pre class="code bash"><a name="rest_code_ad055c96323846c3be389ee1437f9a25-1"></a>sudo sed -e <span class="s1">'/INTERFACESv6=/ s/^#*/#/'</span> -e <span class="s1">'s/INTERFACESv4=""/INTERFACESv4="eth0"/g'</span> -i /etc/default/isc-dhcp-server
+</pre>
+<p>Backup and edit <tt class="docutils literal">/etc/dhcp/dhcpd.conf</tt>. Set it like this:</p>
+<pre class="code ini"><a name="rest_code_5355921c06974ca4b59642c65f75461e-1"></a><span class="na">option domain-name "willy.home"; # Set a domain name, can be anything</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-2"></a><span class="na">option domain-name-servers 8.8.8.8, 8.8.4.4; # Use Google DNS by default, you can substitute ISP-supplied values here</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-3"></a><span class="na">subnet 10.0.0.0 netmask 255.255.255.0 { # We'll use 10.0.0.X for our subnet</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-4"></a>    <span class="na">range 10.0.0.1 10.0.0.50;</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-5"></a>    <span class="na">option subnet-mask 255.255.255.0;</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-6"></a>    <span class="na">option broadcast-address 10.0.0.255;</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-7"></a>    <span class="na">option routers 10.0.0.1;</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-8"></a><span class="na">}</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-9"></a><span class="na">default-lease-time 600;</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-10"></a><span class="na">max-lease-time 7200;</span>
+<a name="rest_code_5355921c06974ca4b59642c65f75461e-11"></a><span class="na">authoritative;</span>
+</pre>
+<p>Restart service <tt class="docutils literal">sudo systemctl restart dhcpcd.service</tt></p>
+<p>Now our master will start assigning addresses to the other nodes.</p>
+<p>In case it’s not assigning IPs, try unplugging from the switch and
+restarting all the other nodes but the master. You can check the IPs by
+doing <tt class="docutils literal">ip a</tt> or <tt class="docutils literal">hostname <span class="pre">-I</span></tt>, remember that this is the range
+<tt class="docutils literal">range 10.0.0.1 10.0.0.50</tt></p>
+<p>Our cluster is set up now.</p>
+</div>
+</div>
+<div class="section" id="credits">
+<h2>Credits</h2>
+<p>This tutorial is based on <a class="reference external" href="http://shop.oreilly.com/product/0636920043874.do">Kubernetes: Up and Running</a>, <a class="reference external" href="https://blog.hypriot.com/post/setup-kubernetes-raspberry-pi-cluster/">Hypriot |
+Setup Kubernetes on a Raspberry Pi Cluster easily the official way!</a> and
+<a class="reference external" href="https://imti.co/hobby-cluster/#swap">Production Hobby Cluster</a>.</p>
+</div>
+</div>
+    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="woile",
+            disqus_url="https://woile.github.io/posts/raspberries-hobby-cluster/",
+        disqus_title="Raspberry Pi hobby cluster",
+        disqus_identifier="cache/posts/raspberries-hobby-cluster.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></footer></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</div>
+
+    <script type="text/javascript" src="../../assets/js/jquery.js"></script><script type="text/javascript" src="../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../assets/js/index.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77945905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

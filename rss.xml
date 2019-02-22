@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 11 Feb 2019 21:31:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Fri, 22 Feb 2019 23:55:11 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Raspberry Pi hobby cluster</title><link>https://woile.github.io/posts/raspberries-hobby-cluster/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;In this tutorial we are gonna try to setup a cluster in our home
+server built with raspberries.&lt;/p&gt;
+&lt;p&gt;In another post I'll describe how to configure a Kubernetes cluster in our raspberries.&lt;/p&gt;
+&lt;p&gt;Kubernetes is a container orchestration tool, it can do all of this:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Automatic bin packing&lt;/li&gt;
+&lt;li&gt;Self-healing&lt;/li&gt;
+&lt;li&gt;Horizontal scaling&lt;/li&gt;
+&lt;li&gt;Service discovery and Load balancing&lt;/li&gt;
+&lt;li&gt;Automated rollouts and rollbacks&lt;/li&gt;
+&lt;li&gt;Secrets and configuration management&lt;/li&gt;
+&lt;li&gt;Storage orchestration&lt;/li&gt;
+&lt;li&gt;Long running jobs&lt;/li&gt;
+&lt;li&gt;Batch execution&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/raspberries-hobby-cluster/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cluster</category><category>docker</category><category>kubernetes</category><category>raspberry</category><guid>https://woile.github.io/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
 I've used the base version, the slim and the alpine.&lt;/p&gt;
 &lt;p&gt;Initially I moved from the base python3.6 to the python3.6-slim and everything
 went great. The main win was that no change was required in the Dockerfile,
@@ -92,17 +107,4 @@ latest version of &lt;a href="https://www.sublimetext.com/3"&gt;Sublime Text 3&l
 &lt;p&gt;Cheapest country: &lt;strong&gt;Hungary&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Most expensive: &lt;strong&gt;London&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Best activity: &lt;strong&gt;Surf&lt;/strong&gt; (Don't miss it if you have the opportunity)&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.github.io/posts/eurotrip-2016/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>europe</category><category>eurotrip</category><category>friends</category><category>gopro</category><category>trip</category><guid>https://woile.github.io/posts/eurotrip-2016/</guid><pubDate>Sun, 08 Jan 2017 15:30:53 GMT</pubDate></item><item><title>Get Skype working on Debian Stretch x64 with GNOME3</title><link>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
-&lt;p&gt;Note&lt;/p&gt;
-&lt;p&gt;This info is no longer relevant. Right now Skype has been rewritten using &lt;a class="reference external" href="https://electron.atom.io/"&gt;electron&lt;/a&gt; and installing it in a debian based system is no longer a problem.
-Right now it doesn't support screensharing and some other features a normal person would expect.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Some alternatives I recommend:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://appear.in/"&gt;appear.in&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://tox.chat/"&gt;tox&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://hangouts.google.com/"&gt;hangouts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="https://discordapp.com/"&gt;discord&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;If you really need to install this software, and you cannot use the alternatives, then this guide is for you.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>debian</category><category>linux</category><category>skype</category><guid>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</guid><pubDate>Mon, 19 Sep 2016 10:56:03 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/eurotrip-2016/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>europe</category><category>eurotrip</category><category>friends</category><category>gopro</category><category>trip</category><guid>https://woile.github.io/posts/eurotrip-2016/</guid><pubDate>Sun, 08 Jan 2017 15:30:53 GMT</pubDate></item></channel></rss>
