@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about security)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/cat_security.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Mon, 18 Mar 2019 22:45:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The eternal passwords dilemma</title><link>https://woile.github.io/posts/sharing-team-secrets/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Tired of storing your passwords in unreliable but convenient places?&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Tired of sharing password across unreliable platforms? slack, git, etc&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Tired of having your team passwords in no specific place?&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;If you have answer to any of this questions with a yes, then you might find&lt;/div&gt;
+&lt;div class="line"&gt;this post quite useful. If your answer was no, read it anyway, you are&lt;/div&gt;
+&lt;div class="line"&gt;already here.&lt;/div&gt;
+&lt;/div&gt;
+&lt;img src="https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif"&gt;&lt;p&gt;&lt;a href="https://woile.github.io/posts/sharing-team-secrets/"&gt;Read more…&lt;/a&gt; (6 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>encryption</category><category>gpg</category><category>password manager</category><category>security</category><guid>https://woile.github.io/posts/sharing-team-secrets/</guid><pubDate>Mon, 18 Mar 2019 16:34:36 GMT</pubDate></item></channel></rss>

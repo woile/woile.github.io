@@ -27,11 +27,11 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2019-02-22T07:49:00Z</lastmod>
+  <lastmod>2019-03-18T19:13:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2019-02-22T15:33:00Z</lastmod>
+  <lastmod>2019-03-18T19:17:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
@@ -60,6 +60,10 @@
  <url>
   <loc>https://woile.github.io/categories/cat_python/</loc>
   <lastmod>2018-09-15T13:13:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_security/</loc>
+  <lastmod>2019-03-18T18:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_travel/</loc>
@@ -94,6 +98,14 @@
   <lastmod>2018-07-14T07:42:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/encryption/</loc>
+  <lastmod>2019-03-18T19:17:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/encrypy/</loc>
+  <lastmod>2019-03-18T18:59:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/categories/europe/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
@@ -118,6 +130,10 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/gpg/</loc>
+  <lastmod>2019-03-18T18:59:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/categories/init/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
@@ -138,6 +154,10 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/password-manager/</loc>
+  <lastmod>2019-03-18T18:59:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/categories/polymorphic/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
@@ -156,6 +176,10 @@
  <url>
   <loc>https://woile.github.io/categories/rfc-summary-websockets/</loc>
   <lastmod>2019-02-11T08:45:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/security/</loc>
+  <lastmod>2019-03-18T18:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/selenium-python-testing/</loc>
@@ -423,7 +447,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/index-1.html</loc>
-  <lastmod>2019-02-22T07:49:00Z</lastmod>
+  <lastmod>2019-03-18T19:13:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
@@ -468,6 +492,14 @@
  <url>
   <loc>https://woile.github.io/posts/raspberries-hobby-cluster/</loc>
   <lastmod>2019-02-22T07:49:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/raspberry-pi-kubernetes-cluster/</loc>
+  <lastmod>2019-02-23T00:05:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/sharing-team-secrets/</loc>
+  <lastmod>2019-03-18T18:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/websockets-rfc-summary/</loc>

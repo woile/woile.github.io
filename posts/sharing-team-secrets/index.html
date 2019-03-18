@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Share secrets between team members, manage your personal password, multi device, gpg, happiness.">
+<meta name="viewport" content="width=device-width">
+<title>The eternal passwords dilemma | Willy's blog</title>
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://woile.github.io/posts/sharing-team-secrets/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><meta name="author" content="Woile">
+<link rel="prev" href="../raspberries-hobby-cluster/" title="Raspberry Pi hobby cluster" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="The eternal passwords dilemma">
+<meta property="og:url" content="https://woile.github.io/posts/sharing-team-secrets/">
+<meta property="og:description" content="Share secrets between team members, manage your personal password, multi device, gpg, happiness.">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-03-18T13:34:36-03:00">
+<meta property="article:tag" content="encryption">
+<meta property="article:tag" content="gpg">
+<meta property="article:tag" content="password manager">
+<meta property="article:tag" content="security">
+</head>
+<body class="nav-closed">
+
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+                <a href="../../">Home</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/visited-places/">Around the world</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../categories/">Tags</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../rss.xml">RSS feed</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../archive.html">Archive</a>
+            </li>
+            
+
+            <li class="nav-opened" role="presentation">
+                <a href="javascript:void(0)" class="nested-url" data-children="nested-gallery">
+                Gallery
+                </a>
+            </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/roca_de_la_sierra/" class="child">
+                    Roca de la Sierra
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/castelo_de_campo_maior/" class="child">
+                    Castelo de Campo Maior
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/porto/" class="child">
+                    Porto
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/cascais/" class="child">
+                    Cascais
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/quinta_de_regaleira/" class="child">
+                    Quinta de Regaleira
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/seville/" class="child">
+                    Sevilla
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/malaga/" class="child">
+                    Malaga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/nerja/" class="child">
+                    Nerja
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/alhambra_granada/" class="child">
+                    Alhambra y Generalife
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/valencia/" class="child">
+                    Valencia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/sagrada_familia/" class="child">
+                    Sagrada Familia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/camp_nou/" class="child">
+                    Camp Nou
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/cosmocaixa/" class="child">
+                    Cosmocaixa
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/park_guell/" class="child">
+                    Park Güell
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/ciudad_gotica_rambla/" class="child">
+                    Barrio Gótico
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/playa_badalona/" class="child">
+                    Playa Badalona
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santander/" class="child">
+                    Santander
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santillana/" class="child">
+                    Santillana
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/madrid/" class="child">
+                    Madrid
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/france/paris/" class="child">
+                    Paris
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brussels/" class="child">
+                    Bruselas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brugge/" class="child">
+                    Brujas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/rotterdam/" class="child">
+                    Rotterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/amsterdam/" class="child">
+                    Amsterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/hamburg/" class="child">
+                    Hamburgo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/berlin/" class="child">
+                    Berlin
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/poland/cracow/" class="child">
+                    Cracovia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/czech/prague/" class="child">
+                    Praga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/hungary/budapest/" class="child">
+                    Budapest
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/greece/glyfada/" class="child">
+                    Glyfada
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/marina_del_cantone/" class="child">
+                    Marina Del Cantone
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/capri/" class="child">
+                    Capri
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/rome/" class="child">
+                    Roma
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/fermo/" class="child">
+                    Fermo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/milano/" class="child">
+                    Milan
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/como/" class="child">
+                    Como
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/cheltenham/" class="child">
+                    Cheltenham
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/london/" class="child">
+                    London
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/palma_majorca/" class="child">
+                    Palma de Mallorca
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/denmark/copenhaguen/" class="child">
+                    Copenhaguen
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/sao_paulo/" class="child">
+                    Sao Paulo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/rio_de_janeiro/" class="child">
+                    Rio de Janeiro
+                    </a>
+                </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/who-am-i/">About me</a>
+            </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
+
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://woile.github.io/"><img src="https://s.gravatar.com/avatar/7ff595c207c9b935811a691d2f3d2551?s=150" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">The eternal passwords dilemma</h1>
+        <section class="post-meta"> by
+            Woile
+            on
+                <a href="../../categories/encryption/">#encryption</a>,
+                <a href="../../categories/gpg/">#gpg</a>,
+                <a href="../../categories/password-manager/">#password manager</a>,
+                <a href="../../categories/security/">#security</a>,
+            <time class="post-date" datetime="2019-03-18T13:34:36-03:00">
+                2019-03-18 13:34
+            </time></section></header><section class="post-content"><div>
+<div class="line-block">
+<div class="line">Tired of storing your passwords in unreliable but convenient places?</div>
+</div>
+<div class="line-block">
+<div class="line">Tired of sharing password across unreliable platforms? slack, git, etc</div>
+</div>
+<div class="line-block">
+<div class="line">Tired of having your team passwords in no specific place?</div>
+</div>
+<div class="line-block">
+<div class="line">If you have answer to any of this questions with a yes, then you might find</div>
+<div class="line">this post quite useful. If your answer was no, read it anyway, you are</div>
+<div class="line">already here.</div>
+</div>
+<img src="https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif"><!-- TEASER_END --><div class="section" id="background">
+<h2>Background</h2>
+<p>For quite some time, I've been trying to solve this problem I had in my mind.
+I was looking for a way to store my passwords in a secure way.
+But also, I wanted these features:</p>
+<ul class="simple">
+<li>Storing passwords in the cloud</li>
+<li>Easy to synchronize between devices</li>
+<li>Easy to share between teammates (groups)</li>
+</ul>
+<p>The solution I found was <a class="reference external" href="https://www.gopass.pw/">gopass</a>.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works</h2>
+<p>Basically <a class="reference external" href="https://www.gopass.pw/">gopass</a> is like <a class="reference external" href="https://passwordstore.org">pass</a> (the unix password manager) with an extra
+pair of batteries.</p>
+<p>Among others, the features it has, relevant to me, are:</p>
+<ol class="arabic simple">
+<li>Uses <strong>gpg</strong> for secrets encryption.</li>
+<li>Uses <strong>git</strong> for secrets synchronization.</li>
+<li>Multiple password's <strong>stores</strong> (personal, company, etc).</li>
+<li>Each store can point to a different repository.</li>
+<li>Support for <strong>multiple people</strong> per store, called recipients in the jargon.</li>
+</ol>
+<img src="https://media.giphy.com/media/MWKPjY6uapZENHlzXT/giphy.gif"><p>Even though it lacks a bit in documentation, the commands just do what's
+expected of them. So don't be afraid to play with it.</p>
+<p>Regarding gpg, it makes me glad to start wrapping my mind around it, and gopass
+using it, well, makes my day :)</p>
+<p>The only drawback I found is the lack of official windows support. I don't
+know if it works or not in windows.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<p>You can check the website's <a class="reference external" href="https://www.gopass.pw/#install">installation</a> or you can go to a more in depth
+explanation in gopass <a class="reference external" href="https://github.com/gopasspw/gopass/blob/master/docs/setup.md">repo</a>.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage</h2>
+<p>First of all, we are gonna need a gpg key.
+To create one, gopass it's not needed.
+Instaed, we are gonna use gpg cli that should be in your system if you have
+installed gopass.</p>
+<p><strong>How does gpg work?</strong></p>
+<p>In the context of gopass, we are gonna use the public and private keys provided
+by gpg.</p>
+<p>Imagine you have an infinite amount of boxes (public key), that once they are
+closed, they can only be open with a key that only you have (private key).</p>
+<p>From this analogy, we can conclude 2 things:</p>
+<p>1. You <strong>can distribute your public keys</strong> and let anyone encrypt
+information with it.
+Let's say I give boxes to friends, they put something inside and close it.
+That's it, only I will be able to open it. And of course, I can also encrypt
+my stuff, in case some is sniffing around.</p>
+<p>2. <strong>Private keys are really important</strong>, keep them safe, don't lose them,
+and make a backup. You can use an encrypted pendrive, a paper note in a
+safe place, or a <a class="reference external" href="https://www.yubico.com/">yubikey</a>. Would be nice if companies give yubikeys to their
+employees, right?</p>
+<p><strong>Creating a key</strong></p>
+<p>Simple as following the prompt that appears after typing the command.
+If you don't know what to fill, use the default values.</p>
+<pre class="code bash"><a name="rest_code_cd01f39f5dfa4859bf7c489699341879-1"></a>gpg --full-generate-key
+</pre>
+<p>And check the generatd key</p>
+<pre class="code bash"><a name="rest_code_80a8e1118e6846eca8fd3f6c0bc46487-1"></a>gpg -k
+</pre>
+<div class="section" id="initializing-gopass">
+<h3>Initializing gopass</h3>
+<p>Easy as typing</p>
+<pre class="code bash"><a name="rest_code_fb5f266ab3c142bdaa4acf600a9bb2ed-1"></a>gopass init
+</pre>
+<p>This will set up some stuff and will create the default store.</p>
+<p>I recommend adding the autocomplete to your terminal</p>
+<pre class="code bash"><a name="rest_code_9f8b006540654423874e17254adb1fb2-1"></a><span class="nb">echo</span> <span class="s2">"source &lt;(gopass completion bash)"</span> &gt;&gt; ~/.bashrc
+</pre>
+</div>
+<div class="section" id="using-gopass">
+<h3>Using gopass</h3>
+<p>Gopass works in a "unix" like way.
+You'll have a tree (folders) where the leaves are encrypted files.</p>
+<pre class="code text"><a name="rest_code_306318a96cc143bb88e838f0adcb96d0-1"></a>gopass
+<a name="rest_code_306318a96cc143bb88e838f0adcb96d0-2"></a>    ├── my-company
+<a name="rest_code_306318a96cc143bb88e838f0adcb96d0-3"></a>    │   └── pepe@my-company.com
+<a name="rest_code_306318a96cc143bb88e838f0adcb96d0-4"></a>    └── personal
+<a name="rest_code_306318a96cc143bb88e838f0adcb96d0-5"></a>        └── pepe@personal.com
+</pre>
+<p>Let's begin by <strong>inserting</strong> a secret.</p>
+<pre class="code bash"><a name="rest_code_1e4a316ccc4a4a80a3d1dba7213eb2cd-1"></a>gopass insert personal/twitter/santiwilly
+</pre>
+<p>It will show a prompt and you'll have to fill the password twice.
+The structure I follow is this (most of them optional)
+<tt class="docutils literal"><span class="pre">{store}/{org}/{env}/{username</span> or email}</tt>.</p>
+<p>Now let's <strong>list</strong> our secret, by simply doing</p>
+<pre class="code bash"><a name="rest_code_b008d958e5fd47b1bd52130a6790b878-1"></a>gopass ls
+</pre>
+<p>We should now see, something like this.</p>
+<pre class="code text"><a name="rest_code_b9892d1feb3b472da507799942c07df0-1"></a>gopass
+<a name="rest_code_b9892d1feb3b472da507799942c07df0-2"></a>    ├── my-company
+<a name="rest_code_b9892d1feb3b472da507799942c07df0-3"></a>    │   └── pepe@my-company.com
+<a name="rest_code_b9892d1feb3b472da507799942c07df0-4"></a>    └── personal
+<a name="rest_code_b9892d1feb3b472da507799942c07df0-5"></a>        ├── pepe@personal.com
+<a name="rest_code_b9892d1feb3b472da507799942c07df0-6"></a>        └── twitter
+<a name="rest_code_b9892d1feb3b472da507799942c07df0-7"></a>            └── santiwilly
+</pre>
+<p>Perfect!</p>
+<p>Let's continue. I'm just gonna throw you the commands, they don't have any
+complexity.</p>
+<p><strong>Show password</strong></p>
+<pre class="code bash"><a name="rest_code_345ecf9d6a96468db47feb31d2333758-1"></a>gopass personal/twitter/santiwilly
+</pre>
+<p><strong>Copy password to clipboard</strong></p>
+<pre class="code bash"><a name="rest_code_9494da56ba44449ab283681398801768-1"></a>gopass -c personal/twitter/santiwilly
+</pre>
+<p><strong>Generate random pass</strong></p>
+<pre class="code bash"><a name="rest_code_f869ce01d825408587ef483054646559-1"></a>gopass generate my-company/anothername@rmail.com
+</pre>
+<p><strong>Search secrets</strong></p>
+<pre class="code bash"><a name="rest_code_08dfea76bf0c4639aa47cedf67378115-1"></a>gopass search @gmail.com
+</pre>
+</div>
+<div class="section" id="using-stores">
+<h3>Using stores</h3>
+<p>Here's were my journey got a bit complicated, as I mentioned the docs are
+not necessary bad, but you can get lost, maybe the website could be organized
+a bit better. So I ended up creating multiple docker containers and started
+playing around.</p>
+<p>Stores (AKA <strong>mounts</strong>) let you group your passwords.
+Example: <code>personal</code>, <code>company</code>.
+Each one can live in a different repository, and you could potentially,
+share <code>company</code> with your peers.</p>
+<p><strong>Initialize new store</strong></p>
+<p>Creates a new store located at <tt class="docutils literal"><span class="pre">~/.password-store-my-company</span></tt>.</p>
+<pre class="code bash"><a name="rest_code_e5ac3ceff8c542d6b61fde20ad0e8793-1"></a>gopass init --store my-company
+</pre>
+<p><strong>Add git remote to store</strong></p>
+<pre class="code bash"><a name="rest_code_1126d1e17aeb4115be0d0f48d4a610dc-1"></a>gopass git remote add --store my-company origin git@gh.com/Woile/keys.git
+</pre>
+<p><strong>Clone existing store</strong></p>
+<p>Let's say you move to another computer, now it's where gopass starts to shine.
+Whether you use the same private key (imported in different computers) or you
+choose to have a key per machine, to clone a repo, you just need
+access to it.</p>
+<pre class="code bash"><a name="rest_code_fe3b9986bc574f84a155bc749d0ec563-1"></a>gopass clone git@gh.com/Woile/keys.git my-company --sync gitcli
+</pre>
+<p>It's important to specify <tt class="docutils literal">gitcli</tt> as the <tt class="docutils literal">sync</tt> method. Otherwise gopass
+won't know how to synchronize the secret (it will use <tt class="docutils literal">noop</tt> by default).
+Gopass provides other sync methods but I haven't checked them.</p>
+<p>Solutions that provide a free private repo are:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://www.gitlab.com">gitlab</a></li>
+<li><a class="reference external" href="https://github.com">github</a></li>
+<li><a class="reference external" href="https://bitbucket.org/product">bitbucket</a></li>
+</ul>
+<p><strong>Removing existing store</strong></p>
+<p>To avoid having issues with gopass, first we need to unmount the store.</p>
+<pre class="code bash"><a name="rest_code_8f6ca9bbb1c0447095286c487a7eb137-1"></a>gopass mounts umount my-company
+</pre>
+<p>Now that we've done this, it's safe to remove the folder.</p>
+<pre class="code bash"><a name="rest_code_ef8f690f5dcb4dfdb1ce8e167c2c08f5-1"></a>rm -rf ~/.password-store-my-company
+</pre>
+</div>
+<div class="section" id="synchronization">
+<h3>Synchronization</h3>
+<p>In gopass, sync usually means <tt class="docutils literal">git pull</tt> and <tt class="docutils literal">git push</tt>, maybe also commit
+but I'm not sure. Usually the commits are done on <tt class="docutils literal">gopass insert</tt>.</p>
+<p><strong>Synchronize with git remotes</strong></p>
+<pre class="code bash"><a name="rest_code_34ee876328a84456ae50d709f94b93e3-1"></a>gopass sync
+</pre>
+<p><strong>Synchronzing a single store</strong></p>
+<pre class="code bash"><a name="rest_code_1442f4722f964491852264a08ea62472-1"></a>gopass sync --store my-company
+</pre>
+</div>
+<div class="section" id="team-sharing">
+<h3>Team sharing</h3>
+<p>We are finally on the last and most fantastic part,
+sharing secrets with people.</p>
+<p>Suppose we have a colleague with an email <tt class="docutils literal">logan@pm.me</tt>. This person has
+already generated a gpg key, for that email, in they machine.</p>
+<p>Logan then, must <strong>export the public key</strong> and send it to us.</p>
+<pre class="code bash"><a name="rest_code_44d6831edbb34c17a40d57778c1081ca-1"></a>gpg -a --export logan@pm.me &gt; logan.pub.asc
+</pre>
+<p>It's okay, public keys can be shared in untrusted environments. If you are
+still not convinced, try <a class="reference external" href="https://send.firefox.com">send</a> from firefox. Keep in mind that people share
+their public keys in keyservers, like <a class="reference external" href="https://pgp.surfnet.nl/">opengpgkeyserver</a>.</p>
+<p><strong>Adding public key into gopass</strong></p>
+<p>We have the public key, now it's time to <strong>import</strong> it into our
+local gpg keyring.</p>
+<pre class="code bash"><a name="rest_code_f7c09bb56064433c97e3919cb5673f11-1"></a>gpg --import &lt; logan.pub.asc
+</pre>
+<p>And lastly, we need to <strong>add the new key to a gopass store</strong>.</p>
+<pre class="code bash"><a name="rest_code_fc85c8378c8c454aa7f11174dd62379b-1"></a>gopass recipients add logan@pm.me
+</pre>
+<p>You'll see a prompt with all of your stores. Choose the one you want, and it
+will re-encrypt your secrets with the new public key (plus the existing ones).</p>
+<p>And that's it, we are done. You can of course remove recipients, but I'll let
+you do the search, tip: <tt class="docutils literal">gopass recipients <span class="pre">--help</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion</h2>
+<p>I have created a gopass <a class="reference external" href="https://woile.github.io/gopass-cheat-sheet/">cheat sheet</a> with these commands and
+a <a class="reference external" href="https://woile.github.io/gopass-presentation/">presentation</a> to convince your colleagues.</p>
+<img src="https://media.giphy.com/media/3ohhwo81vLfGfDsDrG/giphy.gif"><p>Gopass is an awesome tool to include in your toolbelt.
+Unfortunately, it is not that easy for non-developers, but still possible.</p>
+<p>Some extra tools I use to enhance my gopass experience are:</p>
+<p><a class="reference external" href="https://github.com/zeapo/Android-Password-Store">Android password store</a></p>
+<p>I suggest installing it using F-droid, you'll need OpenKey-chain to create
+a new gpg key, and you already know how to add multiple recipients to
+your stores.</p>
+<p><a class="reference external" href="https://github.com/gopasspw/gopassbridge">Gopass bridge</a></p>
+<p>Browser extension for Firefox or Chrome that let's you access your stores.</p>
+<p><a class="reference external" href="https://github.com/codecentric/gopass-ui">Gopass UI</a></p>
+<p>Electron based UI wrapper for your gopass on the command line.
+It makes your life easier by providing a rich graphical user
+interface to search and manage your secrets.</p>
+<p>Any feedback is welcome, as I'm no security expert and I'd be glad to have a
+better and more secure workflow.</p>
+<p>Thank you for reading.</p>
+<p>Note: I've added some random memes to ease the reading.</p>
+</div>
+</div>
+    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="woile",
+            disqus_url="https://woile.github.io/posts/sharing-team-secrets/",
+        disqus_title="The eternal passwords dilemma",
+        disqus_identifier="cache/posts/sharing-team-secrets.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></footer></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</div>
+
+    <script type="text/javascript" src="../../assets/js/jquery.js"></script><script type="text/javascript" src="../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../assets/js/index.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77945905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
