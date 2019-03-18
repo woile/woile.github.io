@@ -35,7 +35,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_security.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:55:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/cat_travel.xml</loc>
@@ -71,11 +71,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/encryption.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://woile.github.io/categories/encrypy.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:55:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/europe.xml</loc>
@@ -103,7 +99,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/gpg.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:55:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/init.xml</loc>
@@ -127,7 +123,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/password-manager.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:55:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/polymorphic.xml</loc>
@@ -151,7 +147,7 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/security.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:55:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/categories/selenium-python-testing.xml</loc>
@@ -419,10 +415,10 @@
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/rss.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:55:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://woile.github.io/sitemap.xml</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:55:00Z</lastmod>
  </sitemap>
 </sitemapindex>

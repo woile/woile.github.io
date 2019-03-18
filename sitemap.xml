@@ -31,7 +31,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-03-18T22:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
@@ -100,10 +100,6 @@
  <url>
   <loc>https://woile.github.io/categories/encryption/</loc>
   <lastmod>2019-03-18T19:17:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/categories/encrypy/</loc>
-  <lastmod>2019-03-18T18:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/europe/</loc>
@@ -492,10 +488,6 @@
  <url>
   <loc>https://woile.github.io/posts/raspberries-hobby-cluster/</loc>
   <lastmod>2019-02-22T07:49:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/posts/raspberry-pi-kubernetes-cluster/</loc>
-  <lastmod>2019-02-23T00:05:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/sharing-team-secrets/</loc>
