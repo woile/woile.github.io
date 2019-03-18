@@ -27,7 +27,8 @@ Background
 ----------
 
 For quite some time, I've been trying to solve this problem I had in my mind.
-I was looking for a way to store my passwords in a secure way.
+I was looking for a way to store my passwords (I'll refer to them as
+secrets also) in a secure way.
 But also, I wanted these features:
 
 - Storing passwords in the cloud
