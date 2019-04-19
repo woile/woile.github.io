@@ -222,22 +222,22 @@ h4, h5, h6 {
 }
 
 h1 {
-    font-size: 5rem;
+    font-size: 3.3rem;
     letter-spacing: -2px;
     text-indent: -3px;
 }
 
 h2 {
-    font-size: 3.6rem;
+    font-size: 3rem;
     letter-spacing: -1px;
 }
 
 h3 {
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 h4 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
 }
 
 h5 {
@@ -930,7 +930,7 @@ body.nav-opened .menu-button .word {
 .post{
     position: relative;
     width: 80%;
-    max-width: 710px;
+    max-width: 850px;
     margin: 4rem auto;
     padding-bottom: 4rem;
     border-bottom: #EBF2F6 1px solid;
@@ -974,7 +974,7 @@ article {
 }
 
 body:not(.post-template) .post-title {
-    font-size: 3.6rem;
+    font-size: 3.3rem;
 }
 
 .post-title a {

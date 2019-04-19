@@ -292,25 +292,8 @@
     </header><main id="content" class="content" role="main"><div class="postindex">
 
 
-<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/sharing-team-secrets/">The eternal passwords dilemma</a></h2>
-    </header><section class="post-excerpt"><div>
-<div class="line-block">
-<div class="line">Tired of storing your passwords in unreliable but convenient places?</div>
-</div>
-<div class="line-block">
-<div class="line">Tired of sharing password across unreliable platforms? slack, git, etc</div>
-</div>
-<div class="line-block">
-<div class="line">Tired of having your team passwords in no specific place?</div>
-</div>
-<div class="line-block">
-<div class="line">If you have answer to any of this questions with a yes, then you might find</div>
-<div class="line">this post quite useful. If your answer was no, read it anyway, you are</div>
-<div class="line">already here.</div>
-</div>
-<img src="https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif"><p class="more"><a href="posts/sharing-team-secrets/">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
+<article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/sharing-team-secrets/">Sharing passwords using gopass, git and gpg</a></h2>
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -322,25 +305,7 @@
         <time class="post-date" datetime="2019-03-18T13:34:36-03:00">
             2019-03-18 13:34
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/raspberries-hobby-cluster/">Raspberry Pi hobby cluster</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>In this tutorial we are gonna try to setup a cluster in our home
-server built with raspberries.</p>
-<p>In another post I'll describe how to configure a Kubernetes cluster in our raspberries.</p>
-<p>Kubernetes is a container orchestration tool, it can do all of this:</p>
-<ul class="simple">
-<li>Automatic bin packing</li>
-<li>Self-healing</li>
-<li>Horizontal scaling</li>
-<li>Service discovery and Load balancing</li>
-<li>Automated rollouts and rollbacks</li>
-<li>Secrets and configuration management</li>
-<li>Storage orchestration</li>
-<li>Long running jobs</li>
-<li>Batch execution</li>
-</ul>
-<p class="more"><a href="posts/raspberries-hobby-cluster/">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -352,28 +317,7 @@ server built with raspberries.</p>
         <time class="post-date" datetime="2019-02-22T04:46:17-03:00">
             2019-02-22 04:46
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/moving-from-docker-alpine-to-slim/">Moving from docker alpine to slim</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>I've been running a docker python3.x image for a long time.
-I've used the base version, the slim and the alpine.</p>
-<p>Initially I moved from the base python3.6 to the python3.6-slim and everything
-went great. The main win was that no change was required in the Dockerfile,
-it was smaller and more secure (less dependencies, more security, right?)</p>
-<p>After a while, I decided to move from slim to alpine, because of the size benefit.
-While doing the migration I found these drawbacks:</p>
-<p><strong>Renaming dependencies</strong>. I had to convert from <code>apt</code> to <code>apk</code> for every dependency.</p>
-<p><strong>Working with edge</strong>. There's always a problem with the edge repository.
-Sometimes it's down. Sometimes the packages are broken.
-You have to dig a lot in order to have a proper configuration.
-Like using <code>--no-cache</code> flag in apk. Or setting up the edge repo, then having to upgrade <code>apk-tools</code></p>
-<p>This kind of problems break our pipeline when there's no new commit. And I don't want this.
-That's why I've decided to move back to <code>slim</code>.</p>
-<p>Don't get me wrong, alpine is great, small and secure, and if you don't have many edge dependencies,
-I guess it'll work flawlessly, and I would totally use it.
-But our image unfortunately has dependencies like postgis, and proj4, which fail a lot in alpine.</p>
-<p>But my story is not over with alpine, I'll try it again in the future.
-I know with time it will get better and better, and I'll understand it more and more.</p>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -382,37 +326,7 @@ I know with time it will get better and better, and I'll understand it more and 
         <time class="post-date" datetime="2019-01-13T12:34:43-03:00">
             2019-01-13 12:34
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/local-https-development-in-python-with-mkcert/">Local HTTPS development in Python with Mkcert</a></h2>
-    </header><section class="post-excerpt"><div>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5">About mkcert</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6">Configuring mkcert</a></li>
-<li>
-<a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7">Python frameworks</a><ul>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8">Uvicorn + Starlette</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9">Django SSL Server</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#flask" id="id10">Flask</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11">Gunicorn</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12">UWSGI</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13">Security concerns</a></li>
-<li><a class="reference internal" href="posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14">Conclusion</a></li>
-</ul>
-</div>
-<div class="section" id="about-mkcert">
-<h2><a class="toc-backref" href="posts/local-https-development-in-python-with-mkcert/#id5">About mkcert</a></h2>
-<p><a class="reference external" href="https://github.com/FiloSottile/mkcert/">mkcert</a> allows you to have a local
-certificate authority (CA).
-This means that you can run your development web server using HTTPS.
-You'll see the green lock in your browser.</p>
-<img src="images/local-https-development-in-python-with-mkcert/https.png"><p>You might not need it most of the time, but more and more features require
-HTTPS by default in the browser, like web bluetooth, service workers, web authentication
-and websockets in some cases where SSL is already enabled.</p>
-<p class="more"><a href="posts/local-https-development-in-python-with-mkcert/">Read more…</a></p>
-</div>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -421,13 +335,7 @@ and websockets in some cases where SSL is already enabled.</p>
         <time class="post-date" datetime="2019-01-10T14:30:24-03:00">
             2019-01-10 14:30
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/websockets-rfc-summary/">Websockets RFC summary</a></h2>
-    </header><section class="post-excerpt"><div class="section" id="introduction">
-<h2>Introduction</h2>
-<p><a class="reference external" href="https://tools.ietf.org/html/rfc6455.html">RFC Link</a></p>
-<p>For bi-directional communication (e.g., instant messaging and gaming applications): abuse of <strong>HTTP poll</strong>.</p>
-<p class="more"><a href="posts/websockets-rfc-summary/">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -436,20 +344,7 @@ and websockets in some cases where SSL is already enabled.</p>
         <time class="post-date" datetime="2018-09-28T14:16:24-03:00">
             2018-09-28 14:16
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/creating-a-small-git-like-cli-with-decli/">Tutorial: writing my dreamt cli using decli</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>So for a long time I've been using different cli tools, mostly <code>argparse</code> because this way I had zero dependencies,
-less worries, this is pure personal preference.</p>
-<p>Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.</p>
-<p>Because of this, I created <a class="reference external" href="https://github.com/Woile/decli">decli</a>, which is a declarative command line utility. Super simple.
-Which is basically a wrapper around argparse.
-Just write a dict and you are ready to go.</p>
-<p>In this tutorial we are gonna try to simulate a <em>git command line tool</em>.
-Let's create a few commands which will just print a message.</p>
-<p>But we are gonna structure the code, the way I always wanted to hehe.</p>
-<p>The commands will be decoupled from the <em>command line interface</em> (cli from now on).</p>
-<p class="more"><a href="posts/creating-a-small-git-like-cli-with-decli/">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -458,16 +353,7 @@ Let's create a few commands which will just print a message.</p>
         <time class="post-date" datetime="2018-09-14T14:33:02-03:00">
             2018-09-14 14:33
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/decrypt-filesystem/">Decrypt filesystem</a></h2>
-    </header><section class="post-excerpt"><div>
-<h2>Decrypt ubuntu filesystem</h2>
-<p>If you have encrypted your drive with one of the latest ubuntu version, this is how to decrypt using the command line.</p>
-<p>A few weeks ago I had a problem with my ubuntu (as usual) and I had no clue how to decrypt my file, which it's encrypted by my company's policy.</p>
-<p>Optional: run a <strong>live ubuntu</strong> if your system is not working properly</p>
-<h3>First option</h3>
-<p>Open a terminal and type <code>sudo ecryptfs-unwrap-passphrase</code>. Most of the time this should do it.</p>
-<p class="more"><a href="posts/decrypt-filesystem/">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -478,26 +364,7 @@ Let's create a few commands which will just print a message.</p>
         <time class="post-date" datetime="2018-07-13T18:14:43-03:00">
             2018-07-13 18:14
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/how-to-test-selenium-scrapper/">How to test Selenium scrapper with Python</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>This week I've been writing tests for <a class="reference external" href="https://github.com/discov-r/pyinstamation">a project</a> which is
-using Selenium as a scrapper.</p>
-<p>As you may know, Selenium is a testing framework, it's intended to be used while writing tests,
-not as a web crawler/scrapper.</p>
-<p>But you can. Why? Because it runs a browser, and the browser is the real sh*t, so the Javascript
-gets executed, and we are happy. There are other solutions like <a class="reference external" href="https://github.com/makinacorpus/spynner">Spynner</a>
-or writing the scrapper in pure Javascript, but I felt comfortable using Selenium this way.</p>
-<div class="section" id="the-problem">
-<h2>The problem</h2>
-<p>How do we <strong>test</strong> this scrapper? I want it to have tests, damn!</p>
-</div>
-<div class="section" id="solution">
-<h2>Solution</h2>
-<p>Save the static content while running the scrapper, then, serve it with a very small http server
-while testing. Yes, it's a bit tedious, but it delivers.</p>
-<p class="more"><a href="posts/how-to-test-selenium-scrapper/">Read more…</a></p>
-</div>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -506,12 +373,7 @@ while testing. Yes, it's a bit tedious, but it delivers.</p>
         <time class="post-date" datetime="2017-09-12T11:38:40-03:00">
             2017-09-12 11:38
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/guide-to-sublime-like-a-normal-person/">Guide to Sublime like a normal person</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>First of all, verify that you have installed the
-latest version of <a href="https://www.sublimetext.com/3">Sublime Text 3</a>.</p>
-<p class="more"><a href="posts/guide-to-sublime-like-a-normal-person/">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on
@@ -523,13 +385,7 @@ latest version of <a href="https://www.sublimetext.com/3">Sublime Text 3</a>.</p
         <time class="post-date" datetime="2017-06-08T16:46:15-03:00">
             2017-06-08 16:46
         </time></footer></article><article class="post post"><header class="post-header"><h2 class="post-title"><a href="posts/django-polymorphic-integration-with-django-filters/">How to filter Polymorphic Models with Django Filters</a></h2>
-    </header><section class="post-excerpt"><div>
-<p>As the title says, I needed a way to filter my polymorphic models using my already defined
-<code>rest_framework.FilterSet</code>, and as I didn't find much resources about it I'm sharing my experience here.</p>
-<p>First, let's talk about <code>django-polymorphic</code> and <code>django-filters</code>, what are these libraries for.</p>
-<p class="more"><a href="posts/django-polymorphic-integration-with-django-filters/">Read more…</a></p>
-</div>
-    </section><footer class="post-meta">
+    </header><footer class="post-meta">
                 Woile
 
         on

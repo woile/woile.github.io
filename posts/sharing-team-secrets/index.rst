@@ -1,4 +1,4 @@
-.. title: The eternal passwords dilemma
+.. title: Sharing passwords using gopass, git and gpg
 .. slug: sharing-team-secrets
 .. date: 2019-03-18 13:34:36 UTC-03:00
 .. tags: security, password manager, encryption, gpg
@@ -9,7 +9,7 @@
 
 | Tired of storing your passwords in unreliable but convenient places?
 
-| Tired of sharing password across unreliable platforms? slack, git, etc
+| Tired of sharing password across unreliable platforms? slack, notes, etc
 
 | Tired of having your team passwords in no specific place?
 

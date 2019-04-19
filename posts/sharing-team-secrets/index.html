@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="description" content="Share secrets between team members, manage your personal password, multi device, gpg, happiness.">
 <meta name="viewport" content="width=device-width">
-<title>The eternal passwords dilemma | Willy's blog</title>
+<title>Sharing passwords using gopass, git and gpg | Willy's blog</title>
 <link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
 <link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
 <link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
 <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><meta name="author" content="Woile">
 <link rel="prev" href="../raspberries-hobby-cluster/" title="Raspberry Pi hobby cluster" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
-<meta property="og:title" content="The eternal passwords dilemma">
+<meta property="og:title" content="Sharing passwords using gopass, git and gpg">
 <meta property="og:url" content="https://woile.github.io/posts/sharing-team-secrets/">
 <meta property="og:description" content="Share secrets between team members, manage your personal password, multi device, gpg, happiness.">
 <meta property="og:type" content="article">
@@ -280,7 +280,7 @@
 <div class="site-wrapper">
     <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://woile.github.io/"><img src="https://s.gravatar.com/avatar/7ff595c207c9b935811a691d2f3d2551?s=150" alt="Blog Logo"></a>
             <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
-        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">The eternal passwords dilemma</h1>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Sharing passwords using gopass, git and gpg</h1>
         <section class="post-meta"> by
             Woile
             on
@@ -295,7 +295,7 @@
 <div class="line">Tired of storing your passwords in unreliable but convenient places?</div>
 </div>
 <div class="line-block">
-<div class="line">Tired of sharing password across unreliable platforms? slack, git, etc</div>
+<div class="line">Tired of sharing password across unreliable platforms? slack, notes, etc</div>
 </div>
 <div class="line-block">
 <div class="line">Tired of having your team passwords in no specific place?</div>
@@ -366,63 +366,63 @@ employees, right?</p>
 <p><strong>Creating a key</strong></p>
 <p>Simple as following the prompt that appears after typing the command.
 If you don't know what to fill, use the default values.</p>
-<pre class="code bash"><a name="rest_code_fc06e59615ec4d90933187684acb3047-1"></a>gpg --full-generate-key
+<pre class="code bash"><a name="rest_code_d4821a4243c9424f8eb9f9527dddb877-1"></a>gpg --full-generate-key
 </pre>
 <p>And check the generatd key</p>
-<pre class="code bash"><a name="rest_code_0848405abd1b4c84ac4d6d63d617901b-1"></a>gpg -k
+<pre class="code bash"><a name="rest_code_4637411322fa4cfc9d1dbc6522244cda-1"></a>gpg -k
 </pre>
 <div class="section" id="initializing-gopass">
 <h3>Initializing gopass</h3>
 <p>Easy as typing</p>
-<pre class="code bash"><a name="rest_code_32534512761749728d9f01afb225454c-1"></a>gopass init
+<pre class="code bash"><a name="rest_code_6f623060b5704ba691a745e38c066e47-1"></a>gopass init
 </pre>
 <p>This will set up some stuff and will create the default store.</p>
 <p>I recommend adding the autocomplete to your terminal</p>
-<pre class="code bash"><a name="rest_code_3a7540a4c54246febc1e7e1e75ec0a0c-1"></a><span class="nb">echo</span> <span class="s2">"source &lt;(gopass completion bash)"</span> &gt;&gt; ~/.bashrc
+<pre class="code bash"><a name="rest_code_077d8ceb110b444ba3a3ad113067b420-1"></a><span class="nb">echo</span> <span class="s2">"source &lt;(gopass completion bash)"</span> &gt;&gt; ~/.bashrc
 </pre>
 </div>
 <div class="section" id="using-gopass">
 <h3>Using gopass</h3>
 <p>Gopass works in a "unix" like way.
 You'll have a tree (folders) where the leaves are encrypted files.</p>
-<pre class="code text"><a name="rest_code_450efaa9f62f466b9ca7caafdbf2a8aa-1"></a>gopass
-<a name="rest_code_450efaa9f62f466b9ca7caafdbf2a8aa-2"></a>    ├── my-company
-<a name="rest_code_450efaa9f62f466b9ca7caafdbf2a8aa-3"></a>    │   └── pepe@my-company.com
-<a name="rest_code_450efaa9f62f466b9ca7caafdbf2a8aa-4"></a>    └── personal
-<a name="rest_code_450efaa9f62f466b9ca7caafdbf2a8aa-5"></a>        └── pepe@personal.com
+<pre class="code text"><a name="rest_code_ee4f1fc9e3de41a5a52dff99062115d0-1"></a>gopass
+<a name="rest_code_ee4f1fc9e3de41a5a52dff99062115d0-2"></a>    ├── my-company
+<a name="rest_code_ee4f1fc9e3de41a5a52dff99062115d0-3"></a>    │   └── pepe@my-company.com
+<a name="rest_code_ee4f1fc9e3de41a5a52dff99062115d0-4"></a>    └── personal
+<a name="rest_code_ee4f1fc9e3de41a5a52dff99062115d0-5"></a>        └── pepe@personal.com
 </pre>
 <p>Let's begin by <strong>inserting</strong> a secret.</p>
-<pre class="code bash"><a name="rest_code_947a068b995a4c2594b770552a710479-1"></a>gopass insert personal/twitter/santiwilly
+<pre class="code bash"><a name="rest_code_26c2d1bd1f8b4390af6aeb400c99c5f3-1"></a>gopass insert personal/twitter/santiwilly
 </pre>
 <p>It will show a prompt and you'll have to fill the password twice.
 The structure I follow is this (most of them optional)
 <tt class="docutils literal"><span class="pre">{store}/{org}/{env}/{username</span> or email}</tt>.</p>
 <p>Now let's <strong>list</strong> our secret, by simply doing</p>
-<pre class="code bash"><a name="rest_code_6d0fef8301534077b1f68b38507e210c-1"></a>gopass ls
+<pre class="code bash"><a name="rest_code_3b567e5d3fd9459786d5a354ccfb627f-1"></a>gopass ls
 </pre>
 <p>We should now see, something like this.</p>
-<pre class="code text"><a name="rest_code_fb9d4da848554023b10d1efde47f1ab7-1"></a>gopass
-<a name="rest_code_fb9d4da848554023b10d1efde47f1ab7-2"></a>    ├── my-company
-<a name="rest_code_fb9d4da848554023b10d1efde47f1ab7-3"></a>    │   └── pepe@my-company.com
-<a name="rest_code_fb9d4da848554023b10d1efde47f1ab7-4"></a>    └── personal
-<a name="rest_code_fb9d4da848554023b10d1efde47f1ab7-5"></a>        ├── pepe@personal.com
-<a name="rest_code_fb9d4da848554023b10d1efde47f1ab7-6"></a>        └── twitter
-<a name="rest_code_fb9d4da848554023b10d1efde47f1ab7-7"></a>            └── santiwilly
+<pre class="code text"><a name="rest_code_afa9261c17c2447cb8a2727ee96e9a9e-1"></a>gopass
+<a name="rest_code_afa9261c17c2447cb8a2727ee96e9a9e-2"></a>    ├── my-company
+<a name="rest_code_afa9261c17c2447cb8a2727ee96e9a9e-3"></a>    │   └── pepe@my-company.com
+<a name="rest_code_afa9261c17c2447cb8a2727ee96e9a9e-4"></a>    └── personal
+<a name="rest_code_afa9261c17c2447cb8a2727ee96e9a9e-5"></a>        ├── pepe@personal.com
+<a name="rest_code_afa9261c17c2447cb8a2727ee96e9a9e-6"></a>        └── twitter
+<a name="rest_code_afa9261c17c2447cb8a2727ee96e9a9e-7"></a>            └── santiwilly
 </pre>
 <p>Perfect!</p>
 <p>Let's continue. I'm just gonna throw you the commands, they don't have any
 complexity.</p>
 <p><strong>Show password</strong></p>
-<pre class="code bash"><a name="rest_code_210ba81b87f64537bf9a70023294ce77-1"></a>gopass personal/twitter/santiwilly
+<pre class="code bash"><a name="rest_code_166390cf2d734d41873f3dfb5b36d9d1-1"></a>gopass personal/twitter/santiwilly
 </pre>
 <p><strong>Copy password to clipboard</strong></p>
-<pre class="code bash"><a name="rest_code_47e2f6690777456096b9fc2e8d44b14f-1"></a>gopass -c personal/twitter/santiwilly
+<pre class="code bash"><a name="rest_code_ee1e98cff5ac41f19709157dbc8c42c0-1"></a>gopass -c personal/twitter/santiwilly
 </pre>
 <p><strong>Generate random pass</strong></p>
-<pre class="code bash"><a name="rest_code_261bb0703bf44d00aca8f6b35f52a674-1"></a>gopass generate my-company/anothername@rmail.com
+<pre class="code bash"><a name="rest_code_0c4b7c4ff365454099a1d56e945989fc-1"></a>gopass generate my-company/anothername@rmail.com
 </pre>
 <p><strong>Search secrets</strong></p>
-<pre class="code bash"><a name="rest_code_42431fa855234aa2a485833d486bae76-1"></a>gopass search @gmail.com
+<pre class="code bash"><a name="rest_code_3b136eb3140b4115a349d73940337686-1"></a>gopass search @gmail.com
 </pre>
 </div>
 <div class="section" id="using-stores">
@@ -437,17 +437,17 @@ Each one can live in a different repository, and you could potentially,
 share <code>company</code> with your peers.</p>
 <p><strong>Initialize new store</strong></p>
 <p>Creates a new store located at <tt class="docutils literal"><span class="pre">~/.password-store-my-company</span></tt>.</p>
-<pre class="code bash"><a name="rest_code_bcaf5853685c4f3abfa40328a1220746-1"></a>gopass init --store my-company
+<pre class="code bash"><a name="rest_code_5013fc53f7db41e0b30d2319972d2fc5-1"></a>gopass init --store my-company
 </pre>
 <p><strong>Add git remote to store</strong></p>
-<pre class="code bash"><a name="rest_code_c2eeae4d90c5490aa2ccf83fe982df16-1"></a>gopass git remote add --store my-company origin git@gh.com/Woile/keys.git
+<pre class="code bash"><a name="rest_code_1db6590c02fb4c5c95dfd87ebaf6e184-1"></a>gopass git remote add --store my-company origin git@gh.com/Woile/keys.git
 </pre>
 <p><strong>Clone existing store</strong></p>
 <p>Let's say you move to another computer, now it's where gopass starts to shine.
 Whether you use the same private key (imported in different computers) or you
 choose to have a key per machine, to clone a repo, you just need
 access to it.</p>
-<pre class="code bash"><a name="rest_code_5ab010203d88426ba2d14b99646c7abd-1"></a>gopass clone git@gh.com/Woile/keys.git my-company --sync gitcli
+<pre class="code bash"><a name="rest_code_8a886697b08548e39e40f3418017bb5c-1"></a>gopass clone git@gh.com/Woile/keys.git my-company --sync gitcli
 </pre>
 <p>It's important to specify <tt class="docutils literal">gitcli</tt> as the <tt class="docutils literal">sync</tt> method. Otherwise gopass
 won't know how to synchronize the secret (it will use <tt class="docutils literal">noop</tt> by default).
@@ -460,10 +460,10 @@ Gopass provides other sync methods but I haven't checked them.</p>
 </ul>
 <p><strong>Removing existing store</strong></p>
 <p>To avoid having issues with gopass, first we need to unmount the store.</p>
-<pre class="code bash"><a name="rest_code_b6f7d372fe5947d2b7baa9ad1320da56-1"></a>gopass mounts umount my-company
+<pre class="code bash"><a name="rest_code_5d5e03d218624ec98d8175a060da7372-1"></a>gopass mounts umount my-company
 </pre>
 <p>Now that we've done this, it's safe to remove the folder.</p>
-<pre class="code bash"><a name="rest_code_1e589de5bfb048f0aeaedc6adfe3a4d0-1"></a>rm -rf ~/.password-store-my-company
+<pre class="code bash"><a name="rest_code_2515f0efd1314e04ad0c20ab616b5bd8-1"></a>rm -rf ~/.password-store-my-company
 </pre>
 </div>
 <div class="section" id="synchronization">
@@ -471,10 +471,10 @@ Gopass provides other sync methods but I haven't checked them.</p>
 <p>In gopass, sync usually means <tt class="docutils literal">git pull</tt> and <tt class="docutils literal">git push</tt>, maybe also commit
 but I'm not sure. Usually the commits are done on <tt class="docutils literal">gopass insert</tt>.</p>
 <p><strong>Synchronize with git remotes</strong></p>
-<pre class="code bash"><a name="rest_code_edda075d5cb5477bba7c9b09eb3b89ad-1"></a>gopass sync
+<pre class="code bash"><a name="rest_code_c7c15f73734e4591bc5c722df6f15840-1"></a>gopass sync
 </pre>
 <p><strong>Synchronzing a single store</strong></p>
-<pre class="code bash"><a name="rest_code_33db007d6cba451a80e77a75dcb02791-1"></a>gopass sync --store my-company
+<pre class="code bash"><a name="rest_code_363e7cfb0db7400095a18395d72f27db-1"></a>gopass sync --store my-company
 </pre>
 </div>
 <div class="section" id="team-sharing">
@@ -484,7 +484,7 @@ sharing secrets with people.</p>
 <p>Suppose we have a colleague with an email <tt class="docutils literal">logan@pm.me</tt>. This person has
 already generated a gpg key, for that email, in they machine.</p>
 <p>Logan then, must <strong>export the public key</strong> and send it to us.</p>
-<pre class="code bash"><a name="rest_code_70daefa8d9124a7a9ab8b571287c2c4c-1"></a>gpg -a --export logan@pm.me &gt; logan.pub.asc
+<pre class="code bash"><a name="rest_code_c6a35f6658a74167aaad7439fed59417-1"></a>gpg -a --export logan@pm.me &gt; logan.pub.asc
 </pre>
 <p>It's okay, public keys can be shared in untrusted environments. If you are
 still not convinced, try <a class="reference external" href="https://send.firefox.com">send</a> from firefox. Keep in mind that people share
@@ -492,10 +492,10 @@ their public keys in keyservers, like <a class="reference external" href="https:
 <p><strong>Adding public key into gopass</strong></p>
 <p>We have the public key, now it's time to <strong>import</strong> it into our
 local gpg keyring.</p>
-<pre class="code bash"><a name="rest_code_71cfe1c5447648f1946a9e5c6fcf0714-1"></a>gpg --import &lt; logan.pub.asc
+<pre class="code bash"><a name="rest_code_aacc97c045fd41a4a631e65dedae6f6f-1"></a>gpg --import &lt; logan.pub.asc
 </pre>
 <p>And lastly, we need to <strong>add the new key to a gopass store</strong>.</p>
-<pre class="code bash"><a name="rest_code_d98d6eb702694726be600c0a79c59909-1"></a>gopass recipients add logan@pm.me
+<pre class="code bash"><a name="rest_code_ecf0ecc39c6e4c9c842021329040866b-1"></a>gopass recipients add logan@pm.me
 </pre>
 <p>You'll see a prompt with all of your stores. Choose the one you want, and it
 will re-encrypt your secrets with the new public key (plus the existing ones).</p>
@@ -533,7 +533,7 @@ better and more secure workflow.</p>
         <script>
         var disqus_shortname ="woile",
             disqus_url="https://woile.github.io/posts/sharing-team-secrets/",
-        disqus_title="The eternal passwords dilemma",
+        disqus_title="Sharing passwords using gopass, git and gpg",
         disqus_identifier="cache/posts/sharing-team-secrets.html",
         disqus_config = function () {
             this.language = "en";
