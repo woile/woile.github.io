@@ -29,14 +29,7 @@
     <header class="post-header">
         <h2 class="post-title"><a href="${post.permalink()}">${post.title()|h}</a></h2>
     </header>
-    %if index_teasers:
-    <section class="post-excerpt">
-    ${post.text(teaser_only=True)}
-    %else:
-    <section class="post-excerpt">
-    ${post.text(teaser_only=False)}
-    %endif
-    </section>
+
     <footer class="post-meta">
             % if author_pages_generated:
                 <a href="${_link('author', post.author())}">${post.author()|h}</a>

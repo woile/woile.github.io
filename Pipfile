@@ -8,6 +8,8 @@ Nikola = {extras = ["extras"]}
 
 [dev-packages]
 "flake8" = "*"
+mypy = "*"
+bandit = "*"
 
 [requires]
 python_version = "3.6"
