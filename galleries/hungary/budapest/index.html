@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<html prefix="" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
@@ -16,13 +16,13 @@
 <link rel="canonical" href="https://woile.github.io/galleries/hungary/budapest/">
 <!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <style type="text/css">
+    #gallery_container {
+        position: relative;
+    }
     .image-block {
-        display: inline-block;
+        position: absolute;
     }
-    .flowr_row {
-        width: 100%;
-    }
-    </style>
+</style>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 </head>
 <body class="nav-closed">
@@ -376,45 +376,11 @@
     </main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
-    <script type="text/javascript" src="../../../assets/js/jquery.js"></script><script type="text/javascript" src="../../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../../assets/js/index.js"></script><script src="../../../assets/js/flowr.js"></script><script>
-jsonContent = [{"size": {"h": 150, "w": 200}, "title": "Gopr3021", "url": "GOPR3021.JPG", "url_thumb": "GOPR3021.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3068", "url": "GOPR3068.JPG", "url_thumb": "GOPR3068.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3075", "url": "GOPR3075.JPG", "url_thumb": "GOPR3075.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3058", "url": "GOPR3058.JPG", "url_thumb": "GOPR3058.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3052", "url": "GOPR3052.JPG", "url_thumb": "GOPR3052.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3064", "url": "GOPR3064.JPG", "url_thumb": "GOPR3064.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3033", "url": "GOPR3033.JPG", "url_thumb": "GOPR3033.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3035", "url": "GOPR3035.JPG", "url_thumb": "GOPR3035.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3047", "url": "GOPR3047.JPG", "url_thumb": "GOPR3047.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3023", "url": "GOPR3023.JPG", "url_thumb": "GOPR3023.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3073", "url": "GOPR3073.JPG", "url_thumb": "GOPR3073.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3038", "url": "GOPR3038.JPG", "url_thumb": "GOPR3038.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3037", "url": "GOPR3037.JPG", "url_thumb": "GOPR3037.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3055", "url": "GOPR3055.JPG", "url_thumb": "GOPR3055.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3059", "url": "GOPR3059.JPG", "url_thumb": "GOPR3059.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3063", "url": "GOPR3063.JPG", "url_thumb": "GOPR3063.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3013", "url": "GOPR3013.JPG", "url_thumb": "GOPR3013.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3053", "url": "GOPR3053.JPG", "url_thumb": "GOPR3053.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3022", "url": "GOPR3022.JPG", "url_thumb": "GOPR3022.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3061", "url": "GOPR3061.JPG", "url_thumb": "GOPR3061.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr3025", "url": "GOPR3025.JPG", "url_thumb": "GOPR3025.thumbnail.JPG"}];
-flowr(document.querySelectorAll("#gallery_container")[0], {
-        data : jsonContent,
-        height : 200*.6,
-        padding: 5,
-        rows: -1,
-        render : function(params) {
-            // Just return a div, string or a dom object, anything works fine
-            var img = document.createElement("img");
-            img.setAttribute('src', params.itemData.url_thumb);
-            img.setAttribute('width', params.width);
-            img.setAttribute('height', params.height);
-            img.setAttribute('alt', params.itemData.title);
-            img.style.maxWidth = '100%';
-            link = document.createElement("a");
-            link.setAttribute('href', params.itemData.url);
-            link.setAttribute('class', 'image-reference');
-            div = document.createElement("div");
-            div.setAttribute('class', 'image-block');
-            div.setAttribute('title', params.itemData.title);
-            div.setAttribute('data-toggle', "tooltip")
-            link.append(img);
-            div.append(link);
-            //div.hover(div.tooltip());
-            return div;
-        },
-        itemWidth : function(data) { return data.size.w; },
-        itemHeight : function(data) { return data.size.h; },
-        complete : function(params) {
-            if( jsonContent.length > params.renderedItems ) {
-                nextRenderList = jsonContent.slice( params.renderedItems );
-            }
-        }
-    });
-    baguetteBox.run('#gallery_container', {
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
+    <script type="text/javascript" src="../../../assets/js/jquery.js"></script><script type="text/javascript" src="../../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../../assets/js/index.js"></script><script src="../../../assets/js/justified-layout.min.js"></script><script src="../../../assets/js/gallery.min.js"></script><script>
+var jsonContent = [{"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3021", "url": "GOPR3021.JPG", "url_thumb": "GOPR3021.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3068", "url": "GOPR3068.JPG", "url_thumb": "GOPR3068.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3075", "url": "GOPR3075.JPG", "url_thumb": "GOPR3075.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3058", "url": "GOPR3058.JPG", "url_thumb": "GOPR3058.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3052", "url": "GOPR3052.JPG", "url_thumb": "GOPR3052.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3064", "url": "GOPR3064.JPG", "url_thumb": "GOPR3064.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3033", "url": "GOPR3033.JPG", "url_thumb": "GOPR3033.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3035", "url": "GOPR3035.JPG", "url_thumb": "GOPR3035.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3047", "url": "GOPR3047.JPG", "url_thumb": "GOPR3047.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3023", "url": "GOPR3023.JPG", "url_thumb": "GOPR3023.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3073", "url": "GOPR3073.JPG", "url_thumb": "GOPR3073.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3038", "url": "GOPR3038.JPG", "url_thumb": "GOPR3038.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3037", "url": "GOPR3037.JPG", "url_thumb": "GOPR3037.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3055", "url": "GOPR3055.JPG", "url_thumb": "GOPR3055.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3059", "url": "GOPR3059.JPG", "url_thumb": "GOPR3059.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3063", "url": "GOPR3063.JPG", "url_thumb": "GOPR3063.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3013", "url": "GOPR3013.JPG", "url_thumb": "GOPR3013.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3053", "url": "GOPR3053.JPG", "url_thumb": "GOPR3053.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3022", "url": "GOPR3022.JPG", "url_thumb": "GOPR3022.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3061", "url": "GOPR3061.JPG", "url_thumb": "GOPR3061.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr3025", "url": "GOPR3025.JPG", "url_thumb": "GOPR3025.thumbnail.JPG", "width": 200}];
+var thumbnailSize = 200;
+renderGallery(jsonContent, thumbnailSize);
+window.addEventListener('resize', renderGallery);
 </script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

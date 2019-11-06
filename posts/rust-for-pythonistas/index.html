@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html prefix="" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Rust for pythonistas | Willy's blog</title>
+<link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/screen.css">
+<link rel="stylesheet" type="text/css" href="../../assets/css/nav.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400%7CInconsolata">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://woile.github.io/posts/rust-for-pythonistas/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><meta name="author" content="Woile">
+<link rel="prev" href="../sharing-team-secrets/" title="Sharing passwords using gopass, git and gpg" type="text/html">
+<link rel="next" href="../pycon-france-2019-experience/" title="PyCon France 2019 experience" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Rust for pythonistas">
+<meta property="og:url" content="https://woile.github.io/posts/rust-for-pythonistas/">
+<meta property="og:description" content='RUST FOR PYTHONISTAS
+Data structures with typing
+
+
+
+Python
+Rust
+Docs
+
+
+
+
+num: int = 1
+let num: i32 = 1; // used as default integer
+integers
+
+
+word: str = "avocado"
+let word: String = String::from("avo'>
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-05-28T05:54:33-03:00">
+</head>
+<body class="nav-closed">
+
+<div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+<li class="nav-opened" role="presentation">
+                <a href="../../">Home</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/visited-places/">Around the world</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../categories/">Tags</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../rss.xml">RSS feed</a>
+            </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../archive.html">Archive</a>
+            </li>
+            
+
+            <li class="nav-opened" role="presentation">
+                <a href="javascript:void(0)" class="nested-url" data-children="nested-gallery">
+                Gallery
+                </a>
+            </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/roca_de_la_sierra/" class="child">
+                    Roca de la Sierra
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/castelo_de_campo_maior/" class="child">
+                    Castelo de Campo Maior
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/porto/" class="child">
+                    Porto
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/cascais/" class="child">
+                    Cascais
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/portugal/quinta_de_regaleira/" class="child">
+                    Quinta de Regaleira
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/seville/" class="child">
+                    Sevilla
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/malaga/" class="child">
+                    Malaga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/nerja/" class="child">
+                    Nerja
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/alhambra_granada/" class="child">
+                    Alhambra y Generalife
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/valencia/" class="child">
+                    Valencia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/sagrada_familia/" class="child">
+                    Sagrada Familia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/camp_nou/" class="child">
+                    Camp Nou
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/cosmocaixa/" class="child">
+                    Cosmocaixa
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/park_guell/" class="child">
+                    Park Güell
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/ciudad_gotica_rambla/" class="child">
+                    Barrio Gótico
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/barcelona/playa_badalona/" class="child">
+                    Playa Badalona
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santander/" class="child">
+                    Santander
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/santillana/" class="child">
+                    Santillana
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/madrid/" class="child">
+                    Madrid
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/france/paris/" class="child">
+                    Paris
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brussels/" class="child">
+                    Bruselas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/belgium/brugge/" class="child">
+                    Brujas
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/rotterdam/" class="child">
+                    Rotterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/netherlands/amsterdam/" class="child">
+                    Amsterdam
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/hamburg/" class="child">
+                    Hamburgo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/germany/berlin/" class="child">
+                    Berlin
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/poland/cracow/" class="child">
+                    Cracovia
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/czech/prague/" class="child">
+                    Praga
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/hungary/budapest/" class="child">
+                    Budapest
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/greece/glyfada/" class="child">
+                    Glyfada
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/marina_del_cantone/" class="child">
+                    Marina Del Cantone
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/capri/" class="child">
+                    Capri
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/rome/" class="child">
+                    Roma
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/fermo/" class="child">
+                    Fermo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/milano/" class="child">
+                    Milan
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/italy/como/" class="child">
+                    Como
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/cheltenham/" class="child">
+                    Cheltenham
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/england/london/" class="child">
+                    London
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/spain/palma_majorca/" class="child">
+                    Palma de Mallorca
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/denmark/copenhaguen/" class="child">
+                    Copenhaguen
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/sao_paulo/" class="child">
+                    Sao Paulo
+                    </a>
+                </li>
+                <li class="nav-opened nested-gallery hidden" role="presentation">
+                    <a href="../../galleries/brasil/rio_de_janeiro/" class="child">
+                    Rio de Janeiro
+                    </a>
+                </li>
+            <li class="nav-opened" role="presentation">
+                <a href="../../stories/who-am-i/">About me</a>
+            </li>
+    
+    
+    </ul>
+</div>
+<span class="nav-cover"></span>
+
+<div class="site-wrapper">
+    <header class="main-header post-head no-cover"><nav class="main-nav overlay clearfix"><a class="blog-logo" href="https://woile.github.io/"><img src="https://s.gravatar.com/avatar/7ff595c207c9b935811a691d2f3d2551?s=150" alt="Blog Logo"></a>
+            <a class="menu-button" href="#"><span class="burger">☰</span><span class="word">Menu</span></a>
+        </nav></header><main id="content" class="content" role="main"><article class="post post"><header class="post-header"><h1 class="post-title">Rust for pythonistas</h1>
+        <section class="post-meta"> by
+            Woile
+            on
+            <time class="post-date" datetime="2019-05-28T05:54:33-03:00">
+                2019-05-28 05:54
+            </time></section></header><section class="post-content"><div>
+<h2>RUST FOR PYTHONISTAS</h2>
+<h3>Data structures with typing</h3>
+<table>
+<thead><tr>
+<th>Python</th>
+<th>Rust</th>
+<th>Docs</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>num: int = 1</code></td>
+<td><code>let num: i32 = 1; // used as default integer</code></td>
+<td><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types">integers</a></td>
+</tr>
+<tr>
+<td><code>word: str = "avocado"</code></td>
+<td><code>let word: String = String::from("avocado");</code></td>
+<td><a href="https://doc.rust-lang.org/book/ch08-02-strings.html">strings</a></td>
+</tr>
+<tr>
+<td><code>point: Tuple = (1, 2)</code></td>
+<td><code>let point: (i32, i32) = (1, 2)</code></td>
+<td><a href="https://doc.rust-lang.org/book/ch03-02-data-types.html#the-tuple-type">tuples</a></td>
+</tr>
+</tbody>
+</table>
+<h3>builins</h3>
+<table>
+<thead><tr>
+<th>Python</th>
+<th>Rust</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>print("holis")</code></td>
+<td><code>println!("holis")</code></td>
+</tr>
+<tr>
+<td><code>map</code></td>
+<td><code>a_vector.into_iter().map()</code></td>
+</tr>
+<tr>
+<td><code>filter</code></td>
+<td><code>a_vector.into_iter().filter()</code></td>
+</tr>
+<tr>
+<td>
+<code>functools.reduce</code>*</td>
+<td><code>a_vector.into_iter().fold()</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>not a builtin but still useful</li>
+</ul>
+<h3>Use one variable</h3>
+<p>Because of immutability and <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html">borrowing</a>, try not to spread variables arround.
+This basically means, do not spread the content of a variable into multiple variables.
+This is not a problem with native data structures, but it's easy to forget about it.</p>
+<p>In rust something like this will fail:</p>
+<pre class="code literal-block"><span></span><span class="kd">let</span><span class="w"> </span><span class="n">mama</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">"pipo"</span><span class="p">);</span><span class="w"></span>
+<span class="kd">let</span><span class="w"> </span><span class="n">moma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mama</span><span class="p">;</span><span class="w"></span>
+<span class="n">println</span><span class="o">!</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span><span class="w"> </span><span class="n">mama</span><span class="p">,</span><span class="w"> </span><span class="n">moma</span><span class="p">);</span><span class="w"></span>
+</pre>
+
+
+<p>Why? Security and robustness.</p>
+<h4>Immutability</h4>
+<p>What does this mean?</p>
+</div>
+    </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="woile",
+            disqus_url="https://woile.github.io/posts/rust-for-pythonistas/",
+        disqus_title="Rust for pythonistas",
+        disqus_identifier="cache/posts/rust-for-pythonistas.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></footer></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
+</div>
+
+    <script type="text/javascript" src="../../assets/js/jquery.js"></script><script type="text/javascript" src="../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../assets/js/index.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77945905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

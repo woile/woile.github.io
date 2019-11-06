@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<html prefix="" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
@@ -16,13 +16,13 @@
 <link rel="canonical" href="https://woile.github.io/galleries/spain/barcelona/ciudad_gotica_rambla/">
 <!--[if lt IE 9]><script src="../../../../assets/js/html5.js"></script><![endif]--><script src="https://use.fontawesome.com/ac3419ca62.js"></script><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <style type="text/css">
+    #gallery_container {
+        position: relative;
+    }
     .image-block {
-        display: inline-block;
+        position: absolute;
     }
-    .flowr_row {
-        width: 100%;
-    }
-    </style>
+</style>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 </head>
 <body class="nav-closed">
@@ -389,45 +389,11 @@
     </main><footer class="site-footer clearfix"><section class="poweredby">Contents © 2019         <a href="mailto:santiwilly@gmail.com">Woile</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </section></footer>
 </div>
 
-    <script type="text/javascript" src="../../../../assets/js/jquery.js"></script><script type="text/javascript" src="../../../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../../../assets/js/index.js"></script><script src="../../../../assets/js/flowr.js"></script><script>
-jsonContent = [{"size": {"h": 150, "w": 200}, "title": "Gopr1982", "url": "GOPR1982.JPG", "url_thumb": "GOPR1982.thumbnail.JPG"}, {"size": {"h": 200, "w": 150}, "title": "Gopr1980", "url": "GOPR1980.JPG", "url_thumb": "GOPR1980.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1958", "url": "GOPR1958.JPG", "url_thumb": "GOPR1958.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1956", "url": "GOPR1956.JPG", "url_thumb": "GOPR1956.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1976", "url": "GOPR1976.JPG", "url_thumb": "GOPR1976.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1963", "url": "GOPR1963.JPG", "url_thumb": "GOPR1963.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1953", "url": "GOPR1953.JPG", "url_thumb": "GOPR1953.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1974", "url": "GOPR1974.JPG", "url_thumb": "GOPR1974.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1946", "url": "GOPR1946.JPG", "url_thumb": "GOPR1946.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1979", "url": "GOPR1979.JPG", "url_thumb": "GOPR1979.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1952", "url": "GOPR1952.JPG", "url_thumb": "GOPR1952.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1972", "url": "GOPR1972.JPG", "url_thumb": "GOPR1972.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1970", "url": "GOPR1970.JPG", "url_thumb": "GOPR1970.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1981", "url": "GOPR1981.JPG", "url_thumb": "GOPR1981.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1942", "url": "GOPR1942.JPG", "url_thumb": "GOPR1942.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1950", "url": "GOPR1950.JPG", "url_thumb": "GOPR1950.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1959", "url": "GOPR1959.JPG", "url_thumb": "GOPR1959.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1961", "url": "GOPR1961.JPG", "url_thumb": "GOPR1961.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1945", "url": "GOPR1945.JPG", "url_thumb": "GOPR1945.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1967", "url": "GOPR1967.JPG", "url_thumb": "GOPR1967.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1962", "url": "GOPR1962.JPG", "url_thumb": "GOPR1962.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1971", "url": "GOPR1971.JPG", "url_thumb": "GOPR1971.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1973", "url": "GOPR1973.JPG", "url_thumb": "GOPR1973.thumbnail.JPG"}, {"size": {"h": 150, "w": 200}, "title": "Gopr1957", "url": "GOPR1957.JPG", "url_thumb": "GOPR1957.thumbnail.JPG"}];
-flowr(document.querySelectorAll("#gallery_container")[0], {
-        data : jsonContent,
-        height : 200*.6,
-        padding: 5,
-        rows: -1,
-        render : function(params) {
-            // Just return a div, string or a dom object, anything works fine
-            var img = document.createElement("img");
-            img.setAttribute('src', params.itemData.url_thumb);
-            img.setAttribute('width', params.width);
-            img.setAttribute('height', params.height);
-            img.setAttribute('alt', params.itemData.title);
-            img.style.maxWidth = '100%';
-            link = document.createElement("a");
-            link.setAttribute('href', params.itemData.url);
-            link.setAttribute('class', 'image-reference');
-            div = document.createElement("div");
-            div.setAttribute('class', 'image-block');
-            div.setAttribute('title', params.itemData.title);
-            div.setAttribute('data-toggle', "tooltip")
-            link.append(img);
-            div.append(link);
-            //div.hover(div.tooltip());
-            return div;
-        },
-        itemWidth : function(data) { return data.size.w; },
-        itemHeight : function(data) { return data.size.h; },
-        complete : function(params) {
-            if( jsonContent.length > params.renderedItems ) {
-                nextRenderList = jsonContent.slice( params.renderedItems );
-            }
-        }
-    });
-    baguetteBox.run('#gallery_container', {
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
+    <script type="text/javascript" src="../../../../assets/js/jquery.js"></script><script type="text/javascript" src="../../../../assets/js/jquery.fitvids.js"></script><script type="text/javascript" src="../../../../assets/js/index.js"></script><script src="../../../../assets/js/justified-layout.min.js"></script><script src="../../../../assets/js/gallery.min.js"></script><script>
+var jsonContent = [{"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1982", "url": "GOPR1982.JPG", "url_thumb": "GOPR1982.thumbnail.JPG", "width": 200}, {"height": 200, "size": {"h": 200, "w": 150}, "title": "Gopr1980", "url": "GOPR1980.JPG", "url_thumb": "GOPR1980.thumbnail.JPG", "width": 150}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1958", "url": "GOPR1958.JPG", "url_thumb": "GOPR1958.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1956", "url": "GOPR1956.JPG", "url_thumb": "GOPR1956.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1976", "url": "GOPR1976.JPG", "url_thumb": "GOPR1976.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1963", "url": "GOPR1963.JPG", "url_thumb": "GOPR1963.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1953", "url": "GOPR1953.JPG", "url_thumb": "GOPR1953.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1974", "url": "GOPR1974.JPG", "url_thumb": "GOPR1974.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1946", "url": "GOPR1946.JPG", "url_thumb": "GOPR1946.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1979", "url": "GOPR1979.JPG", "url_thumb": "GOPR1979.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1952", "url": "GOPR1952.JPG", "url_thumb": "GOPR1952.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1972", "url": "GOPR1972.JPG", "url_thumb": "GOPR1972.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1970", "url": "GOPR1970.JPG", "url_thumb": "GOPR1970.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1981", "url": "GOPR1981.JPG", "url_thumb": "GOPR1981.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1942", "url": "GOPR1942.JPG", "url_thumb": "GOPR1942.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1950", "url": "GOPR1950.JPG", "url_thumb": "GOPR1950.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1959", "url": "GOPR1959.JPG", "url_thumb": "GOPR1959.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1961", "url": "GOPR1961.JPG", "url_thumb": "GOPR1961.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1945", "url": "GOPR1945.JPG", "url_thumb": "GOPR1945.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1967", "url": "GOPR1967.JPG", "url_thumb": "GOPR1967.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1962", "url": "GOPR1962.JPG", "url_thumb": "GOPR1962.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1971", "url": "GOPR1971.JPG", "url_thumb": "GOPR1971.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1973", "url": "GOPR1973.JPG", "url_thumb": "GOPR1973.thumbnail.JPG", "width": 200}, {"height": 150, "size": {"h": 150, "w": 200}, "title": "Gopr1957", "url": "GOPR1957.JPG", "url_thumb": "GOPR1957.thumbnail.JPG", "width": 200}];
+var thumbnailSize = 200;
+renderGallery(jsonContent, thumbnailSize);
+window.addEventListener('resize', renderGallery);
 </script><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

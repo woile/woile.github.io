@@ -27,11 +27,11 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2019-03-18T19:13:00Z</lastmod>
+  <lastmod>2019-11-06T11:23:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2019-03-18T22:48:00Z</lastmod>
+  <lastmod>2019-11-06T11:28:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
@@ -48,10 +48,6 @@
  <url>
   <loc>https://woile.github.io/categories/cat_linux/</loc>
   <lastmod>2018-09-15T13:13:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/categories/cat_networking/</loc>
-  <lastmod>2019-02-11T08:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_programming/</loc>
@@ -72,6 +68,10 @@
  <url>
   <loc>https://woile.github.io/categories/cluster/</loc>
   <lastmod>2019-02-22T15:33:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/conference/</loc>
+  <lastmod>2019-11-06T11:23:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/debian/</loc>
@@ -162,16 +162,16 @@
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/categories/pycon/</loc>
+  <lastmod>2019-11-06T11:23:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/categories/python/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/raspberry/</loc>
   <lastmod>2019-02-22T15:33:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/categories/rfc-summary-websockets/</loc>
-  <lastmod>2019-02-11T08:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/security/</loc>
@@ -443,7 +443,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/index-1.html</loc>
-  <lastmod>2019-04-19T07:43:00Z</lastmod>
+  <lastmod>2019-11-06T11:23:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
@@ -486,16 +486,20 @@
   <lastmod>2019-01-13T15:59:00Z</lastmod>
  </url>
  <url>
+  <loc>https://woile.github.io/posts/pycon-france-2019-experience/</loc>
+  <lastmod>2019-11-06T11:24:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://woile.github.io/posts/raspberries-hobby-cluster/</loc>
   <lastmod>2019-02-22T07:49:00Z</lastmod>
  </url>
  <url>
-  <loc>https://woile.github.io/posts/sharing-team-secrets/</loc>
-  <lastmod>2019-03-18T18:59:00Z</lastmod>
+  <loc>https://woile.github.io/posts/rust-for-pythonistas/</loc>
+  <lastmod>2019-11-06T11:23:00Z</lastmod>
  </url>
  <url>
-  <loc>https://woile.github.io/posts/websockets-rfc-summary/</loc>
-  <lastmod>2019-02-11T08:45:00Z</lastmod>
+  <loc>https://woile.github.io/posts/sharing-team-secrets/</loc>
+  <lastmod>2019-03-18T18:59:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/visited-places/</loc>

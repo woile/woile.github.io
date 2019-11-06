@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<html prefix="" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Installing and configuring Sublime Text 3">
@@ -298,10 +298,10 @@ latest version of <a href="https://www.sublimetext.com/3">Sublime Text 3</a>.</p
 
 <h3>General settings</h3>
 <p>Add the following settings in <code>Preferences &gt; Settings &gt; User Tab</code></p>
-<pre class="code literal-block"><span></span>"trim_trailing_white_space_on_save": true,
-"auto_complete": false,
-"translate_tabs_to_spaces": true,
-"word_wrap": "false",
+<pre class="code literal-block"><span></span><span class="ss">"trim_trailing_white_space_on_save"</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+<span class="ss">"auto_complete"</span><span class="p">:</span> <span class="k">false</span><span class="p">,</span>
+<span class="ss">"translate_tabs_to_spaces"</span><span class="p">:</span> <span class="k">true</span><span class="p">,</span>
+<span class="ss">"word_wrap"</span><span class="p">:</span> <span class="ss">"false"</span><span class="p">,</span>
 </pre>
 
 
@@ -443,10 +443,10 @@ This means that Sublime Linter will talk with the linter you have installed in y
 <li>If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.</li>
 <li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settigns:</li>
 </ul>
-<pre class="code literal-block"><span></span>"syntax_map": {
-    "python (django)": "python",
-    "python django": "python"
-}
+<pre class="code literal-block"><span></span><span class="ss">"syntax_map"</span><span class="p">:</span> <span class="err">{</span>
+    <span class="ss">"python (django)"</span><span class="p">:</span> <span class="ss">"python"</span><span class="p">,</span>
+    <span class="ss">"python django"</span><span class="p">:</span> <span class="ss">"python"</span>
+<span class="err">}</span>
 </pre>
 
 
@@ -455,13 +455,13 @@ This means that Sublime Linter will talk with the linter you have installed in y
 <li>You can ignore rules, in the settings of the linter inside the sublime linter settings.</li>
 <li>If you are using <code>mypy</code> and you want to ignore import hints, add to <code>sublimelinter &gt; user settings &gt; linters</code> the following:</li>
 </ul>
-<pre class="code literal-block"><span></span>"mypy": {
-    "@disable": false,
-    "args": [
-        "--ignore-missing-imports"
-    ],
-    "excludes": []
-}
+<pre class="code literal-block"><span></span><span class="ss">"mypy"</span><span class="err">:</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="ss">"@disable"</span><span class="err">:</span><span class="w"> </span><span class="k">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="ss">"args"</span><span class="err">:</span><span class="w"> </span><span class="o">[</span><span class="n"></span>
+<span class="n">        "--ignore-missing-imports"</span>
+<span class="n">    </span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="ss">"excludes"</span><span class="err">:</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 </pre>
 
 
