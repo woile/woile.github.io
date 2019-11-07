@@ -39,7 +39,7 @@ live.
 
 I met a bunch of new people and had some interesting talks.
 
-There were some talks I couldn't assist because of the language barrier
+There were some talks I couldn't attend because of the language barrier
 (I don't speak French). But there's no one to blame for this.
 
 The talk I enjoyed the most was the keynote about **"The Role of 21st Century Technology in Protests"**.

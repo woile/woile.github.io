@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about python)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 07 Nov 2019 09:57:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>PyCon France 2019 experience</title><link>https://woile.github.io/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.github.io/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about python)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 07 Nov 2019 12:23:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>PyCon France 2019 experience</title><link>https://woile.github.io/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.github.io/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;This year (2019) I had the opportunity to participate as a speaker at &lt;a href="https://www.pycon.fr/2019/"&gt;PyCon France&lt;/a&gt;,
 and it was a great experience.
 The event was held in &lt;strong&gt;Bordeaux, France&lt;/strong&gt;, a super cozy city, famous for its wines.&lt;/p&gt;
@@ -20,7 +20,7 @@ I chose the following:&lt;/p&gt;
 &lt;p&gt;They also had an &lt;strong&gt;automatic captioning tool&lt;/strong&gt;, which generated the transcription
 live.&lt;/p&gt;
 &lt;p&gt;I met a bunch of new people and had some interesting talks.&lt;/p&gt;
-&lt;p&gt;There were some talks I couldn't assist because of the language barrier
+&lt;p&gt;There were some talks I couldn't attend because of the language barrier
 (I don't speak French). But there's no one to blame for this.&lt;/p&gt;
 &lt;p&gt;The talk I enjoyed the most was the keynote about &lt;strong&gt;"The Role of 21st Century Technology in Protests"&lt;/strong&gt;.
 It gave me a lot to think about.
