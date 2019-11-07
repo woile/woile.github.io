@@ -52,7 +52,7 @@ When left in autocratic hands, it can quickly deviate and be used to harm people
 **no matter how good intentions are at the beginning**.
 
 Technology, in the way's being used in some countries, is scary.
-Even scarier is that people are not aware of the dangers.
+What is even scarier is that people are not aware of the dangers.
 
 The only lesson I take from this is that **education** is key.
 The more education a person receives, the more resilient, and shielded they become
