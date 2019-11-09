@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sat, 09 Nov 2019 12:48:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Multiple configurations in kubernetes</title><link>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen that you start working with 2 or more different clusters in
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Sat, 09 Nov 2019 12:51:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Multiple configurations in kubernetes</title><link>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen that you start working with 2 or more different clusters in
 kubernetes. At this point, you'll want to have multiple config files, instead of
 replacing &lt;code&gt;~/.kube/config&lt;/code&gt;, which is fine the first few times.&lt;/p&gt;
 &lt;p&gt;In order to do this we only need to set &lt;code&gt;KUBECONFIG&lt;/code&gt; env variable with the path to the kubeconfigs.&lt;/p&gt;
-&lt;p&gt;In kubernetes documentation is mentioned the creation of a &lt;code&gt;config-exercise&lt;/code&gt; folder,
-where the config files should live. So let's create it.&lt;/p&gt;
+&lt;p&gt;It is mentioned, in the kubernetes documentation, the creation of a &lt;code&gt;config-exercise&lt;/code&gt; folder,
+where the kubernetes config files should live. So let's create it.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;mkdir -p ~/.kube/config-exercise
 &lt;/pre&gt;
 
 
 &lt;p&gt;The next thing is to add the env variable to our &lt;code&gt;.bashrc&lt;/code&gt;, &lt;code&gt;.zshrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file,
 with the location of our configurations. The paths should be separated by a &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/config-exercise/gke-config:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/config-exercise/rbpi-config:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/config-exercise/eks-config
+&lt;pre class="code literal-block"&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/config-exercise/gke-config:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/config-exercise/eks-config
 &lt;/pre&gt;
 
 
@@ -33,6 +33,7 @@ with the location of our configurations. The paths should be separated by a &lt;
     &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$kubeconfigs&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 
+&lt;span class="c1"&gt;# Execute the function&lt;/span&gt;
 set_kubeconfig
 &lt;/pre&gt;
 
