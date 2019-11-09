@@ -27,11 +27,11 @@
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2019-11-06T11:23:00Z</lastmod>
+  <lastmod>2019-11-09T12:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2019-11-06T11:28:00Z</lastmod>
+  <lastmod>2019-11-09T12:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
@@ -44,6 +44,10 @@
  <url>
   <loc>https://woile.github.io/categories/cat_docker/</loc>
   <lastmod>2019-01-13T15:59:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_kubernetes/</loc>
+  <lastmod>2019-11-09T12:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_linux/</loc>
@@ -72,6 +76,10 @@
  <url>
   <loc>https://woile.github.io/categories/conference/</loc>
   <lastmod>2019-11-06T11:23:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/configuration/</loc>
+  <lastmod>2019-11-09T12:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/debian/</loc>
@@ -132,6 +140,10 @@
  <url>
   <loc>https://woile.github.io/categories/init/</loc>
   <lastmod>2018-07-13T21:42:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/kubectl/</loc>
+  <lastmod>2019-11-09T12:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/kubernetes/</loc>
@@ -443,7 +455,7 @@
  </url>
  <url>
   <loc>https://woile.github.io/index-1.html</loc>
-  <lastmod>2019-11-06T11:23:00Z</lastmod>
+  <lastmod>2019-11-09T12:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
@@ -484,6 +496,10 @@
  <url>
   <loc>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</loc>
   <lastmod>2019-01-13T15:59:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</loc>
+  <lastmod>2019-11-09T12:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/pycon-france-2019-experience/</loc>
