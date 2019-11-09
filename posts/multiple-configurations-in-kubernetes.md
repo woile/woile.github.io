@@ -15,8 +15,8 @@ replacing `~/.kube/config`, which is fine the first few times.
 
 In order to do this we only need to set `KUBECONFIG` env variable with the path to the kubeconfigs.
 
-In kubernetes documentation is mentioned the creation of a `config-exercise` folder,
-where the config files should live. So let's create it.
+It is mentioned, in the kubernetes documentation, the creation of a `config-exercise` folder,
+where the kubernetes config files should live. So let's create it.
 
 ```bash
 mkdir -p ~/.kube/config-exercise
@@ -26,7 +26,7 @@ The next thing is to add the env variable to our `.bashrc`, `.zshrc` or `.profil
 with the location of our configurations. The paths should be separated by a `:`.
 
 ```bash
-export KUBECONFIG=$HOME/.kube/config-exercise/gke-config:$HOME/.kube/config-exercise/rbpi-config:$HOME/.kube/config-exercise/eks-config
+export KUBECONFIG=$HOME/.kube/config-exercise/gke-config:$HOME/.kube/config-exercise/eks-config
 ```
 
 Now reloading our terminal with `. ~/.bashrc`, or opening a new one should pick up the changes.
@@ -52,6 +52,7 @@ set_kubeconfig() {
     export KUBECONFIG=$kubeconfigs
 }
 
+# Execute the function
 set_kubeconfig
 ```
 
