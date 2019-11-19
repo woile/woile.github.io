@@ -332,6 +332,30 @@ set_kubeconfig
 <p>This script will get all the <strong>files</strong> inside <code>~/.kube/configs</code>,
 which do not include <code>skip</code> in their name, and will set the <code>KUBECONFIG</code>
 variable to the found files.</p>
+<h4>Switching context and namespace</h4>
+<p>Now that our configs are detected automatically, we still have to change manually between
+contexts and namespaces. I'll leave here the shortcuts</p>
+<p>Remember that a context is a mix of [cluster, namespace, user].</p>
+<h5>Current configuration</h5>
+<pre class="code literal-block"><span></span>kubectl config view --minify  <span class="c1"># without minify we'll see all the configs</span>
+</pre>
+
+
+<h5>List contexts</h5>
+<pre class="code literal-block"><span></span>kubectl config get-contexts
+</pre>
+
+
+<h5>Swtich context</h5>
+<pre class="code literal-block"><span></span>kubectl config use-context &lt;context_name&gt;
+</pre>
+
+
+<h5>Switch namespace</h5>
+<pre class="code literal-block"><span></span>kubectl config set-context --current --namespace<span class="o">=</span>&lt;new_namespace&gt;
+</pre>
+
+
 <p>Thanks for reading!</p>
 </div>
     </section><footer class="post-footer"><section class="comments hidden-print"><h2>Comments</h2>
