@@ -90,4 +90,6 @@ kubectl config use-context <context_name>
 kubectl config set-context --current --namespace=<new_namespace>
 ```
 
+Find me on twitter: [@santiwilly](https://twitter.com/santiwilly)
+
 Thanks for reading!
