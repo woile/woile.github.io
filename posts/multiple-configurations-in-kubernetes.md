@@ -59,4 +59,35 @@ This script will get all the **files** inside `~/.kube/configs`,
 which do not include `skip` in their name, and will set the `KUBECONFIG`
 variable to the found files.
 
+### Switching context and namespace
+
+Now that our configs are detected automatically, we still have to change manually between
+contexts and namespaces. I'll leave here the shortcuts
+
+Remember that a context is a mix of [cluster, namespace, user].
+
+#### Current configuration
+
+```bash
+kubectl config view --minify  # without minify we'll see all the configs
+```
+
+#### List contexts
+
+```bash
+kubectl config get-contexts
+```
+
+#### Swtich context
+
+```bash
+kubectl config use-context <context_name>
+```
+
+#### Switch namespace
+
+```bash
+kubectl config set-context --current --namespace=<new_namespace>
+```
+
 Thanks for reading!
