@@ -62,8 +62,8 @@ And I also don't enjoy flying.
 
 This year I've released 2 apps:
 
-- rentee.app (may not work now due to certificates)
-- veck.app
+- [rentee.app][rentee] (may not work now due to certificates)
+- [veck.app][veck]
 
 The first one took around 2 years to be built and the second around 2 weeks.
 Of course the later was built after the lessons learned.
@@ -114,3 +114,5 @@ Things I plan to do:
 Thanks for reading and follow me on twitter [santiwilly][santiwilly] if you want to know more about my future.
 
 [santiwilly]: https://twitter.com/santiwilly
+[rentee]: https://rentee.app
+[veck]: https://veck.app
