@@ -7,522 +7,514 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.github.io/</loc>
-  <lastmod>2019-02-11T08:45:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2016/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2017/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2018/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/2019/</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/archive.html</loc>
-  <lastmod>2019-11-09T12:48:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/</loc>
-  <lastmod>2019-11-09T12:48:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/api/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_containers/</loc>
-  <lastmod>2019-02-22T15:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_docker/</loc>
-  <lastmod>2019-01-13T15:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_kubernetes/</loc>
-  <lastmod>2019-11-09T12:48:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_linux/</loc>
-  <lastmod>2018-09-15T13:13:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_programming/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_python/</loc>
-  <lastmod>2018-09-15T13:13:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_security/</loc>
-  <lastmod>2019-03-18T18:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/cat_self/</loc>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cat_travel/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/cluster/</loc>
-  <lastmod>2019-02-22T15:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/conference/</loc>
-  <lastmod>2019-11-06T11:23:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/configuration/</loc>
-  <lastmod>2019-11-09T12:48:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/debian/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/django-rest-framework/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/django/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/docker/</loc>
-  <lastmod>2019-02-22T15:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/drf/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/encrypt/</loc>
-  <lastmod>2018-07-14T07:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/encryption/</loc>
-  <lastmod>2019-03-18T19:17:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/europe/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/eurotrip/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/filters/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/friends/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/git-python-decli-cli-tutorial-programming/</loc>
-  <lastmod>2018-09-15T13:13:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/gopro/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/gpg/</loc>
-  <lastmod>2019-03-18T18:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/init/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/kubectl/</loc>
-  <lastmod>2019-11-09T12:48:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/kubernetes/</loc>
-  <lastmod>2019-02-22T15:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/linters/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/linux-python-containers-alpine-slim-debian/</loc>
-  <lastmod>2019-01-13T15:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/linux/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/password-manager/</loc>
-  <lastmod>2019-03-18T18:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/polymorphic/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/programming/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/pycon/</loc>
-  <lastmod>2019-11-06T11:23:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/python/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/raspberry/</loc>
-  <lastmod>2019-02-22T15:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/security/</loc>
-  <lastmod>2019-03-18T18:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/selenium-python-testing/</loc>
-  <lastmod>2018-09-15T13:13:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/categories/self/</loc>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/skype/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/sublime/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/trip/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/ubuntu/</loc>
-  <lastmod>2018-07-14T07:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/categories/web-frameworks-development-security-https/</loc>
-  <lastmod>2019-01-13T15:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/argentina/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/belgium/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/belgium/brugge/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/belgium/brussels/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/brasil/</loc>
-  <lastmod>2018-07-13T21:37:00Z</lastmod>
+  <lastmod>2019-12-31T16:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/brasil/rio_de_janeiro/</loc>
-  <lastmod>2018-07-13T21:38:00Z</lastmod>
+  <lastmod>2019-12-31T16:46:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/brasil/sao_paulo/</loc>
-  <lastmod>2018-07-13T21:37:00Z</lastmod>
+  <lastmod>2019-12-31T16:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/czech/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/czech/prague/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/denmark/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/denmark/copenhaguen/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/england/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/england/cheltenham/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/england/london/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/france/</loc>
-  <lastmod>2018-07-13T21:35:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/france/paris/</loc>
-  <lastmod>2018-07-13T21:36:00Z</lastmod>
+  <lastmod>2019-12-31T16:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/</loc>
-  <lastmod>2018-07-13T21:36:00Z</lastmod>
+  <lastmod>2019-12-31T16:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/berlin/</loc>
-  <lastmod>2018-07-13T21:37:00Z</lastmod>
+  <lastmod>2019-12-31T16:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/hamburg/</loc>
-  <lastmod>2018-07-13T21:37:00Z</lastmod>
+  <lastmod>2019-12-31T16:45:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/germany/munich/</loc>
-  <lastmod>2018-07-13T21:37:00Z</lastmod>
+  <lastmod>2019-12-31T16:45:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/galleries/glyfada/</loc>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/greece/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/greece/glyfada/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/hungary/</loc>
-  <lastmod>2018-07-13T21:35:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/hungary/budapest/</loc>
-  <lastmod>2018-07-13T21:35:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/capri/</loc>
-  <lastmod>2018-07-13T21:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/como/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/fermo/</loc>
-  <lastmod>2018-07-13T21:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/marina_del_cantone/</loc>
-  <lastmod>2018-07-13T21:33:00Z</lastmod>
+  <lastmod>2019-12-31T16:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/milano/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/italy/rome/</loc>
-  <lastmod>2018-07-13T21:33:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/galleries/netherlands/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/galleries/netherlands/amsterdam/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/galleries/netherlands/rotterdam/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:42:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/poland/</loc>
-  <lastmod>2018-07-13T21:34:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/poland/cracow/</loc>
-  <lastmod>2018-07-13T21:35:00Z</lastmod>
+  <lastmod>2019-12-31T16:43:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/cascais/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/castelo_de_campo_maior/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/porto/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/portugal/quinta_de_regaleira/</loc>
-  <lastmod>2018-07-13T21:32:00Z</lastmod>
+  <lastmod>2019-12-31T16:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/</loc>
-  <lastmod>2018-07-13T21:38:00Z</lastmod>
+  <lastmod>2019-12-31T16:46:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/alhambra_granada/</loc>
-  <lastmod>2018-07-13T21:40:00Z</lastmod>
+  <lastmod>2019-12-31T16:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/</loc>
-  <lastmod>2018-07-13T21:40:00Z</lastmod>
+  <lastmod>2019-12-31T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/camp_nou/</loc>
-  <lastmod>2018-07-13T21:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/galleries/spain/barcelona/ciudad_gotica_rambla/</loc>
-  <lastmod>2018-07-13T21:41:00Z</lastmod>
+  <lastmod>2019-12-31T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/cosmocaixa/</loc>
-  <lastmod>2018-07-13T21:41:00Z</lastmod>
+  <lastmod>2019-12-31T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/park_guell/</loc>
-  <lastmod>2018-07-13T21:41:00Z</lastmod>
+  <lastmod>2019-12-31T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/playa_badalona/</loc>
-  <lastmod>2018-07-13T21:41:00Z</lastmod>
+  <lastmod>2019-12-31T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/barcelona/sagrada_familia/</loc>
-  <lastmod>2018-07-13T21:40:00Z</lastmod>
+  <lastmod>2019-12-31T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/madrid/</loc>
-  <lastmod>2018-07-13T21:38:00Z</lastmod>
+  <lastmod>2019-12-31T16:46:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/malaga/</loc>
-  <lastmod>2018-07-13T21:40:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/galleries/spain/nerja/</loc>
-  <lastmod>2018-07-13T21:41:00Z</lastmod>
+  <lastmod>2019-12-31T16:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/palma_majorca/</loc>
-  <lastmod>2018-07-13T21:39:00Z</lastmod>
+  <lastmod>2019-12-31T16:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/roca_de_la_sierra/</loc>
-  <lastmod>2018-07-13T21:40:00Z</lastmod>
+  <lastmod>2019-12-31T16:48:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/santander/</loc>
-  <lastmod>2018-07-13T21:39:00Z</lastmod>
+  <lastmod>2019-12-31T16:46:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/santillana/</loc>
-  <lastmod>2018-07-13T21:39:00Z</lastmod>
- </url>
- <url>
-  <loc>https://woile.github.io/galleries/spain/seville/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:47:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/galleries/spain/valencia/</loc>
-  <lastmod>2018-07-13T21:38:00Z</lastmod>
+  <lastmod>2019-12-31T16:46:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/index-1.html</loc>
-  <lastmod>2019-11-09T12:48:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.github.io/posts/2019-yearly-retrospective/</loc>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/blog-inauguration/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/creating-a-small-git-like-cli-with-decli/</loc>
-  <lastmod>2018-09-15T13:06:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/decrypt-filesystem/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/eurotrip-2016/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/guide-to-sublime-like-a-normal-person/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/how-to-test-selenium-scrapper/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</loc>
-  <lastmod>2019-01-10T17:52:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</loc>
-  <lastmod>2019-01-13T15:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</loc>
-  <lastmod>2019-11-09T12:48:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/pycon-france-2019-experience/</loc>
-  <lastmod>2019-11-06T11:24:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/raspberries-hobby-cluster/</loc>
-  <lastmod>2019-02-22T07:49:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/rust-for-pythonistas/</loc>
-  <lastmod>2019-11-06T11:23:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/posts/sharing-team-secrets/</loc>
-  <lastmod>2019-03-18T18:59:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/visited-places/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.github.io/stories/who-am-i/</loc>
-  <lastmod>2018-07-13T21:42:00Z</lastmod>
+  <lastmod>2019-12-31T16:52:00Z</lastmod>
  </url>
 </urlset>

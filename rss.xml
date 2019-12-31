@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Tue, 19 Nov 2019 12:27:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Multiple configurations in kubernetes</title><link>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Tue, 31 Dec 2019 17:05:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>2019 yearly retrospective</title><link>https://woile.github.io/posts/2019-yearly-retrospective/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So far it's been great, I just wanted to write a recap for my future self.&lt;/p&gt;
+&lt;h3&gt;Life&lt;/h3&gt;
+&lt;p&gt;This year will be almost 3 years since I've been in Amsterdam. I love living here.
+The more I think about it the more I'm sure of it: &lt;strong&gt;Amsterdam (or the whole Netherlands) is a bubble&lt;/strong&gt;,
+even in Europe.
+Most people move around in their bikes, everything just works, everyone enjoys living here,
+there's a huge balance between nature and city.
+It's a cosmopolitan city, full of diversity, alive, but it looks like a small town.&lt;/p&gt;
+&lt;p&gt;Of course it's not perfect and it has its issues, but nothing can be perfect.&lt;/p&gt;
+&lt;h3&gt;Friends&lt;/h3&gt;
+&lt;p&gt;This year I've made a lot of friends, most of them Argentinians,
+it's always nice to experience life with friends. I'm thankful for it.&lt;/p&gt;
+&lt;p&gt;I'm lucky enough to have many friends in many different places, with different ideas,
+desires, experiences. They enrich my mind.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: keep making friends, most people are interesting&lt;/p&gt;
+&lt;h3&gt;Books&lt;/h3&gt;
+&lt;p&gt;This year I read 10 out of 12 books I wanted to read.
+Pretty good, but next year I'll read more.
+I feel that in this era of information overload, books are a way to get "curated" information.&lt;/p&gt;
+&lt;h3&gt;Travel&lt;/h3&gt;
+&lt;p&gt;Thanks to randomness and myself, I have the chance to travel quite often.
+This year I've been to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alicante, Spain on my first climbing trip&lt;/li&gt;
+&lt;li&gt;Tignes, France on my first ski trip&lt;/li&gt;
+&lt;li&gt;Sharm El Sheikh, Egypt to dive&lt;/li&gt;
+&lt;li&gt;Istanbul, Turkey and its other cities for tourism&lt;/li&gt;
+&lt;li&gt;London, UK to visit my sister&lt;/li&gt;
+&lt;li&gt;Basel, Switzerland attending to the Europython conference&lt;/li&gt;
+&lt;li&gt;Bordeaux, France to give a talk at PyCon France&lt;/li&gt;
+&lt;li&gt;Gent, Belgium for a festival&lt;/li&gt;
+&lt;li&gt;Giethoorn, The Netherlands with my mom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I've reduced the amount of flights I take, in order to reduce my environment impact.
+And I also don't enjoy flying.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: traveling expands my mind&lt;/p&gt;
+&lt;h3&gt;Hobby&lt;/h3&gt;
+&lt;p&gt;This year I've released 2 apps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;rentee.app (may not work now due to certificates)&lt;/li&gt;
+&lt;li&gt;veck.app&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first one took around 2 years to be built and the second around 2 weeks.
+Of course the later was built after the lessons learned.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: release early&lt;/p&gt;
+&lt;p&gt;As of today I think that validating against your users is the best way to build services or products,
+&lt;strong&gt;build a core&lt;/strong&gt; and go out to the public. Make a short list of what must be done, and launch.&lt;/p&gt;
+&lt;p&gt;I still have to learn how to communicate and reach wider audiences, but it's going well so far.&lt;/p&gt;
+&lt;p&gt;I'm thankful for having a bunch of enthusistic friends to work with them in our
+ideas and projects.&lt;/p&gt;
+&lt;h3&gt;Languages&lt;/h3&gt;
+&lt;p&gt;I've been trying to improve my Dutch for some time now,
+this last time I'm barely starting to feel a bit comfortable with it,
+my Duolingo streak is 363 days so far, and I don't plan on stopping.&lt;/p&gt;
+&lt;p&gt;Regarding programming languages, this year I've talk in some conferences and meetups,
+contributed to many open source projects and now I'm also trying to help people who wants to learn
+(if you want to, you can always write me for advice).&lt;/p&gt;
+&lt;p&gt;Special mention to the &lt;strong&gt;Python programming language&lt;/strong&gt;, which thanks to it,
+I can do a lot of things in my life :)&lt;/p&gt;
+&lt;p&gt;Next year I'll try to focus more on languages like rust, which attract me a lot.&lt;/p&gt;
+&lt;h3&gt;Work&lt;/h3&gt;
+&lt;p&gt;My current job so far is great, and I'm thankful for it.
+I work from monday to thursday and on fridays, they let me work on my self.
+The schedule is flexible and no one in my team is counting hours,
+they count the work done instead.
+I won't go into detail because it's stuff I build for the company.&lt;/p&gt;
+&lt;h3&gt;Future&lt;/h3&gt;
+&lt;p&gt;Things I plan to do:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have a podcast about history&lt;/li&gt;
+&lt;li&gt;Build (paid) services that help people&lt;/li&gt;
+&lt;li&gt;Build useful apps for fun&lt;/li&gt;
+&lt;li&gt;Learn another programming language&lt;/li&gt;
+&lt;li&gt;Read more books&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks for reading and follow me on twitter &lt;a href="https://twitter.com/santiwilly"&gt;santiwilly&lt;/a&gt; if you want to know more about my future.&lt;/p&gt;&lt;/div&gt;</description><category>self</category><guid>https://woile.github.io/posts/2019-yearly-retrospective/</guid><pubDate>Tue, 31 Dec 2019 16:40:35 GMT</pubDate></item><item><title>Multiple configurations in kubernetes</title><link>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
 kubernetes. At this point, you'll want to have multiple config files, instead of
 replacing &lt;code&gt;~/.kube/config&lt;/code&gt;, which is fine the first few times.&lt;/p&gt;
 &lt;p&gt;In order to do this we only need to set &lt;code&gt;KUBECONFIG&lt;/code&gt; env variable with the path to the kubeconfigs.&lt;/p&gt;
@@ -201,15 +276,15 @@ server built with raspberries.&lt;/p&gt;
 &lt;p&gt;In another post I'll describe how to configure a Kubernetes cluster in our raspberries.&lt;/p&gt;
 &lt;p&gt;Kubernetes is a container orchestration tool, it can do all of this:&lt;/p&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;Automatic bin packing&lt;/li&gt;
-&lt;li&gt;Self-healing&lt;/li&gt;
-&lt;li&gt;Horizontal scaling&lt;/li&gt;
-&lt;li&gt;Service discovery and Load balancing&lt;/li&gt;
-&lt;li&gt;Automated rollouts and rollbacks&lt;/li&gt;
-&lt;li&gt;Secrets and configuration management&lt;/li&gt;
-&lt;li&gt;Storage orchestration&lt;/li&gt;
-&lt;li&gt;Long running jobs&lt;/li&gt;
-&lt;li&gt;Batch execution&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Automatic bin packing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Self-healing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Horizontal scaling&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Service discovery and Load balancing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Automated rollouts and rollbacks&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Secrets and configuration management&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Storage orchestration&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Long running jobs&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Batch execution&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://woile.github.io/posts/raspberries-hobby-cluster/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cluster</category><category>docker</category><category>kubernetes</category><category>raspberry</category><guid>https://woile.github.io/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
 I've used the base version, the slim and the alpine.&lt;/p&gt;
@@ -231,18 +306,19 @@ But our image unfortunately has dependencies like postgis, and proj4, which fail
 &lt;p&gt;But my story is not over with alpine, I'll try it again in the future.
 I know with time it will get better and better, and I'll understand it more and more.&lt;/p&gt;&lt;/div&gt;</description><category>linux python containers alpine slim debian</category><guid>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</guid><pubDate>Sun, 13 Jan 2019 15:34:43 GMT</pubDate></item><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5"&gt;About mkcert&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6"&gt;Configuring mkcert&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7"&gt;Python frameworks&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9"&gt;Django SSL Server&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#flask" id="id10"&gt;Flask&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11"&gt;Gunicorn&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12"&gt;UWSGI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5"&gt;About mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6"&gt;Configuring mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7"&gt;Python frameworks&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9"&gt;Django SSL Server&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#flask" id="id10"&gt;Flask&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11"&gt;Gunicorn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12"&gt;UWSGI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13"&gt;Security concerns&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13"&gt;Security concerns&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="about-mkcert"&gt;
@@ -270,19 +346,4 @@ Let's create a few commands which will just print a message.&lt;/p&gt;
 &lt;p&gt;Optional: run a &lt;strong&gt;live ubuntu&lt;/strong&gt; if your system is not working properly&lt;/p&gt;
 &lt;h3&gt;First option&lt;/h3&gt;
 &lt;p&gt;Open a terminal and type &lt;code&gt;sudo ecryptfs-unwrap-passphrase&lt;/code&gt;. Most of the time this should do it.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.github.io/posts/decrypt-filesystem/"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>encrypt</category><category>linux</category><category>ubuntu</category><guid>https://woile.github.io/posts/decrypt-filesystem/</guid><pubDate>Fri, 13 Jul 2018 21:14:43 GMT</pubDate></item><item><title>How to test Selenium scrapper with Python</title><link>https://woile.github.io/posts/how-to-test-selenium-scrapper/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;This week I've been writing tests for &lt;a class="reference external" href="https://github.com/discov-r/pyinstamation"&gt;a project&lt;/a&gt; which is
-using Selenium as a scrapper.&lt;/p&gt;
-&lt;p&gt;As you may know, Selenium is a testing framework, it's intended to be used while writing tests,
-not as a web crawler/scrapper.&lt;/p&gt;
-&lt;p&gt;But you can. Why? Because it runs a browser, and the browser is the real sh*t, so the Javascript
-gets executed, and we are happy. There are other solutions like &lt;a class="reference external" href="https://github.com/makinacorpus/spynner"&gt;Spynner&lt;/a&gt;
-or writing the scrapper in pure Javascript, but I felt comfortable using Selenium this way.&lt;/p&gt;
-&lt;div class="section" id="the-problem"&gt;
-&lt;h2&gt;The problem&lt;/h2&gt;
-&lt;p&gt;How do we &lt;strong&gt;test&lt;/strong&gt; this scrapper? I want it to have tests, damn!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="solution"&gt;
-&lt;h2&gt;Solution&lt;/h2&gt;
-&lt;p&gt;Save the static content while running the scrapper, then, serve it with a very small http server
-while testing. Yes, it's a bit tedious, but it delivers.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.github.io/posts/how-to-test-selenium-scrapper/"&gt;Read more…&lt;/a&gt; (2 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>selenium python testing</category><guid>https://woile.github.io/posts/how-to-test-selenium-scrapper/</guid><pubDate>Tue, 12 Sep 2017 14:38:40 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/decrypt-filesystem/"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>encrypt</category><category>linux</category><category>ubuntu</category><guid>https://woile.github.io/posts/decrypt-filesystem/</guid><pubDate>Fri, 13 Jul 2018 21:14:43 GMT</pubDate></item></channel></rss>

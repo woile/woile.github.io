@@ -8,6 +8,13 @@
 .. type: text
 
 
+.. youtube:: I3UGBamgnQU
+   :align: center
+   :width: 640
+   :height: 360
+
+
+
 Hi guys, from may to november 2016, I've been traveling around Europe with some friends. I wanted to share some insight about our trip.
 
 First, I would like to start with some numbers:
@@ -28,12 +35,6 @@ Most expensive: **London**
 
 Best activity: **Surf** (Don't miss it if you have the opportunity)
 
-.. TEASER_END
-
-.. youtube:: I3UGBamgnQU
-   :align: center
-   :width: 640
-   :height: 360
 
 .. raw:: html
 

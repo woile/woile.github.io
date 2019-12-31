@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about self)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/cat_self.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Tue, 31 Dec 2019 17:05:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>2019 yearly retrospective</title><link>https://woile.github.io/posts/2019-yearly-retrospective/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So far it's been great, I just wanted to write a recap for my future self.&lt;/p&gt;
+&lt;h3&gt;Life&lt;/h3&gt;
+&lt;p&gt;This year will be almost 3 years since I've been in Amsterdam. I love living here.
+The more I think about it the more I'm sure of it: &lt;strong&gt;Amsterdam (or the whole Netherlands) is a bubble&lt;/strong&gt;,
+even in Europe.
+Most people move around in their bikes, everything just works, everyone enjoys living here,
+there's a huge balance between nature and city.
+It's a cosmopolitan city, full of diversity, alive, but it looks like a small town.&lt;/p&gt;
+&lt;p&gt;Of course it's not perfect and it has its issues, but nothing can be perfect.&lt;/p&gt;
+&lt;h3&gt;Friends&lt;/h3&gt;
+&lt;p&gt;This year I've made a lot of friends, most of them Argentinians,
+it's always nice to experience life with friends. I'm thankful for it.&lt;/p&gt;
+&lt;p&gt;I'm lucky enough to have many friends in many different places, with different ideas,
+desires, experiences. They enrich my mind.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: keep making friends, most people are interesting&lt;/p&gt;
+&lt;h3&gt;Books&lt;/h3&gt;
+&lt;p&gt;This year I read 10 out of 12 books I wanted to read.
+Pretty good, but next year I'll read more.
+I feel that in this era of information overload, books are a way to get "curated" information.&lt;/p&gt;
+&lt;h3&gt;Travel&lt;/h3&gt;
+&lt;p&gt;Thanks to randomness and myself, I have the chance to travel quite often.
+This year I've been to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alicante, Spain on my first climbing trip&lt;/li&gt;
+&lt;li&gt;Tignes, France on my first ski trip&lt;/li&gt;
+&lt;li&gt;Sharm El Sheikh, Egypt to dive&lt;/li&gt;
+&lt;li&gt;Istanbul, Turkey and its other cities for tourism&lt;/li&gt;
+&lt;li&gt;London, UK to visit my sister&lt;/li&gt;
+&lt;li&gt;Basel, Switzerland attending to the Europython conference&lt;/li&gt;
+&lt;li&gt;Bordeaux, France to give a talk at PyCon France&lt;/li&gt;
+&lt;li&gt;Gent, Belgium for a festival&lt;/li&gt;
+&lt;li&gt;Giethoorn, The Netherlands with my mom&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I've reduced the amount of flights I take, in order to reduce my environment impact.
+And I also don't enjoy flying.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: traveling expands my mind&lt;/p&gt;
+&lt;h3&gt;Hobby&lt;/h3&gt;
+&lt;p&gt;This year I've released 2 apps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;rentee.app (may not work now due to certificates)&lt;/li&gt;
+&lt;li&gt;veck.app&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first one took around 2 years to be built and the second around 2 weeks.
+Of course the later was built after the lessons learned.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: release early&lt;/p&gt;
+&lt;p&gt;As of today I think that validating against your users is the best way to build services or products,
+&lt;strong&gt;build a core&lt;/strong&gt; and go out to the public. Make a short list of what must be done, and launch.&lt;/p&gt;
+&lt;p&gt;I still have to learn how to communicate and reach wider audiences, but it's going well so far.&lt;/p&gt;
+&lt;p&gt;I'm thankful for having a bunch of enthusistic friends to work with them in our
+ideas and projects.&lt;/p&gt;
+&lt;h3&gt;Languages&lt;/h3&gt;
+&lt;p&gt;I've been trying to improve my Dutch for some time now,
+this last time I'm barely starting to feel a bit comfortable with it,
+my Duolingo streak is 363 days so far, and I don't plan on stopping.&lt;/p&gt;
+&lt;p&gt;Regarding programming languages, this year I've talk in some conferences and meetups,
+contributed to many open source projects and now I'm also trying to help people who wants to learn
+(if you want to, you can always write me for advice).&lt;/p&gt;
+&lt;p&gt;Special mention to the &lt;strong&gt;Python programming language&lt;/strong&gt;, which thanks to it,
+I can do a lot of things in my life :)&lt;/p&gt;
+&lt;p&gt;Next year I'll try to focus more on languages like rust, which attract me a lot.&lt;/p&gt;
+&lt;h3&gt;Work&lt;/h3&gt;
+&lt;p&gt;My current job so far is great, and I'm thankful for it.
+I work from monday to thursday and on fridays, they let me work on my self.
+The schedule is flexible and no one in my team is counting hours,
+they count the work done instead.
+I won't go into detail because it's stuff I build for the company.&lt;/p&gt;
+&lt;h3&gt;Future&lt;/h3&gt;
+&lt;p&gt;Things I plan to do:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have a podcast about history&lt;/li&gt;
+&lt;li&gt;Build (paid) services that help people&lt;/li&gt;
+&lt;li&gt;Build useful apps for fun&lt;/li&gt;
+&lt;li&gt;Learn another programming language&lt;/li&gt;
+&lt;li&gt;Read more books&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks for reading and follow me on twitter &lt;a href="https://twitter.com/santiwilly"&gt;santiwilly&lt;/a&gt; if you want to know more about my future.&lt;/p&gt;&lt;/div&gt;</description><category>self</category><guid>https://woile.github.io/posts/2019-yearly-retrospective/</guid><pubDate>Tue, 31 Dec 2019 16:40:35 GMT</pubDate></item></channel></rss>
