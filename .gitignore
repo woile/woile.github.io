@@ -1,9 +1,11 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+__/
 drafts/
 *.py[cod]
 *$py.class
-.doit.db
+.doit.db*
+.doit.db.db
+nikolaserve.pid
 cache
 output
 
@@ -43,7 +45,7 @@ htmlcov/
 .tox/
 .coverage
 .coverage.*
-.cache
+
 nosetests.xml
 coverage.xml
 *,cover
@@ -68,3 +70,6 @@ target/
 # virtualenv
 venv
 .venv
+
+*.bak
+
