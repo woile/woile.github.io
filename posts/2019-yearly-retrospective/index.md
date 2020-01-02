@@ -9,7 +9,7 @@
 .. type: text
 -->
 
-So far it's been great, I just wanted to write a recap for my future self.
+So far it's been great. I just wanted to write a recap for my future self.
 
 ## Life
 
@@ -24,13 +24,13 @@ Of course it's not perfect and it has its issues, but nothing can be perfect.
 
 ## Friends
 
-This year I've made a lot of friends, most of them Argentinians,
-it's always nice to experience life with friends. I'm thankful for it.
+This year I've made a lot of friends, most of them Argentinians.
+It's always nice to experience life with friends. I'm thankful for it.
 
 I'm lucky enough to have many friends in many different places, with different ideas,
 desires, experiences. They enrich my mind.
 
-**Lesson**: keep making friends, most people are interesting
+**Lesson**: keep making friends; most people are interesting
 
 ## Books
 
@@ -43,15 +43,15 @@ I feel that in this era of information overload, books are a way to get "curated
 Thanks to randomness and myself, I have the chance to travel quite often.
 This year I've been to:
 
-- Alicante, Spain on my first climbing trip
-- Tignes, France on my first ski trip
-- Sharm El Sheikh, Egypt to dive
-- Istanbul, Turkey and its other cities for tourism
-- London, UK to visit my sister
-- Basel, Switzerland attending to the Europython conference
-- Bordeaux, France to give a talk at PyCon France
-- Gent, Belgium for a festival
-- Giethoorn, The Netherlands with my mom
+- Alicante, Spain on my first climbing trip.
+- Tignes, France on my first ski trip.
+- Sharm El Sheikh, Egypt to dive.
+- Istanbul, Turkey and its other cities for tourism.
+- London, UK to visit my sister.
+- Basel, Switzerland attending to attend the Europython conference.
+- Bordeaux, France to give a talk at PyCon France.
+- Gent, Belgium for a festival.
+- Giethoorn, The Netherlands with my mom.
 
 I've reduced the amount of flights I take, in order to reduce my environment impact.
 And I also don't enjoy flying.
@@ -66,12 +66,12 @@ This year I've released 2 apps:
 - [veck.app][veck]
 
 The first one took around 2 years to be built and the second around 2 weeks.
-Of course the later was built after the lessons learned.
+Of course, the later was built after the lessons learned.
 
 **Lesson**: release early
 
 As of today I think that validating against your users is the best way to build services or products,
-**build a core** and go out to the public. Make a short list of what must be done, and launch.
+**build a core** and go public. Make a short list of what must be done, and launch.
 
 I still have to learn how to communicate and reach wider audiences, but it's going well so far.
 
@@ -80,24 +80,24 @@ ideas and projects.
 
 ## Languages
 
-I've been trying to improve my Dutch for some time now,
-this last time I'm barely starting to feel a bit comfortable with it,
-my Duolingo streak is 363 days so far, and I don't plan on stopping.
+I've been trying to improve my Dutch for some time now.
+This last time I've barely started to feel a bit comfortable with it.
+My Duolingo streak is 363 days so far, and I don't plan on stopping.
 
-Regarding programming languages, this year I've talk in some conferences and meetups,
-contributed to many open source projects and now I'm also trying to help people who wants to learn
+Regarding programming languages, this year I've talked in some conferences and meetups,
+contributed to many open source projects and now I'm also trying to help people who want to learn
 (if you want to, you can always write me for advice).
 
-Special mention to the **Python programming language**, which thanks to it,
+Special mention to the **Python programming language**, thanks to whom,
 I can do a lot of things in my life :)
 
-Next year I'll try to focus more on languages like rust, which attract me a lot.
+Next year, I'll try to focus more on languages like rust, which attract me a lot.
 
 ## Work
 
 My current job so far is great, and I'm thankful for it.
-I work from monday to thursday and on fridays, they let me work on my self.
-The schedule is flexible and no one in my team is counting hours,
+I work from Monday to Thursday and on Fridays, they let me work on myself.
+The schedule is flexible and no one in my team is counting hours;
 they count the work done instead.
 I won't go into detail because it's stuff I build for the company.
 
@@ -105,13 +105,13 @@ I won't go into detail because it's stuff I build for the company.
 
 Things I plan to do:
 
-- Have a podcast about history
-- Build (paid) services that help people
-- Build useful apps for fun
-- Learn another programming language
-- Read more books
+- Have a podcast about history.
+- Build (paid) services that help people.
+- Build useful apps for fun.
+- Learn another programming language.
+- Read more books.
 
-Thanks for reading and follow me on twitter [santiwilly][santiwilly] if you want to know more about my future.
+Thanks for reading and follow me on Twitter [santiwilly][santiwilly] if you want to know more about my future.
 
 [santiwilly]: https://twitter.com/santiwilly
 [rentee]: https://rentee.app
