@@ -1,0 +1,19 @@
+{#  -*- coding: utf-8 -*- #}
+{% import 'math_helper.tmpl' as math with context %}
+{% macro html_pager() %}
+    {% if prevlink or nextlink %}
+        <nav class="postindexpager pagination">
+        {% if prevlink %}
+            <a class="hover:pagination__link" href="{{ prevlink }}" rel="prev">{{ messages("Newer posts") }}</a>
+        {% endif %}
+        {% if nextlink %}
+            <a class="hover:pagination__link" href="{{ nextlink }}" rel="next">{{ messages("Older posts") }}</a>
+        {% endif %}
+        </nav>
+    {% endif %}
+{% endmacro %}
+
+{#  This function is deprecated; use math_helper directly. #}
+{% macro mathjax_script(posts) %}
+    {{ math.math_scripts_ifposts(posts) }}
+{% endmacro %}
