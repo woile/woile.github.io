@@ -23,7 +23,9 @@ You can find me in these social networks:
 
 ##### [👔 linkedin][linkedin]
 
+##### [DEV][dev]
 
 [linkedin]: https://www.linkedin.com/in/santiago-fraire-63b91226
 [github]: https://github.com/Woile
 [twitter]: https://twitter.com/santiwilly
+[dev]: https://dev.to/woile
