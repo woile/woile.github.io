@@ -177,7 +177,7 @@ not packaged inside the image. This gives the container a lot of flexibility and
 same principle applies to Helm. There's an interesting [discussion in the helm repo][helm_discussion]
 about this.
 
-Ideally, your custom values shouldn't leave inside the chart. They should be passed to the chart. 
+Ideally, your custom values shouldn't live inside the chart. They should be passed to the chart.
 
 Let's see a setup example for the `auth-service`.
 
@@ -201,8 +201,8 @@ I'd like to hear opinions about it. How'd you do it?
 
 ## Release
 
-> A Release is an instance of a chart running in a Kubernetes cluster. One chart can often be installed many times into the same cluster. And each time it is installed, a **new release is created**. 
-Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have its own release, which will in turn have its own release name [\[3\]][three-big-concepts].
+> A Release is an instance of a chart running in a Kubernetes cluster. One chart can often be installed many times into the same cluster. And each time it is installed, a **new release is created**.
+> Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have its own release, which will in turn have its own release name [\[3\]][three-big-concepts].
 
 ### New release
 
