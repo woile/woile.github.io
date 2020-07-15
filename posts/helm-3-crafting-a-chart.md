@@ -266,13 +266,13 @@ helm upgrade -f values.prod.yaml auth-service-prod ./auth-service
 
 ### Rollback release
 
-```
+```bash
 helm rollback <release_name> <revision>
 ```
 
 #### Example
 
-```
+```bash
 helm rollback auth-service-prod 1
 ```
 
