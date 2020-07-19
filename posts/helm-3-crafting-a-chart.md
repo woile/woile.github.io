@@ -109,6 +109,8 @@ during the CI execution, and push back to the repo.
 [github issue][tag_or_appVersion]
 - If you use `appVersion` you can use `helm history <release_name>` to get info on the versions
 per revision.
+- You can re-use the same chart to deploy multiple django/rails applications, [seems like a
+common practice][reusing-chart]
 
 ### Chart customization
 
@@ -338,3 +340,4 @@ I think this is an improving point; I haven't understood it by reading the docum
 [helmfile]: https://github.com/roboll/helmfile
 [tag_or_appVersion]: https://github.com/helm/helm/issues/8194
 [santiwilly]: https://twitter.com/santiwilly
+[reusing-chart]: https://github.com/helm/helm/issues/8194#issuecomment-658715462
