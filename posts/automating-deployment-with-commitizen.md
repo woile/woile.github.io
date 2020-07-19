@@ -1,6 +1,7 @@
 <!--
 .. title: Automating deployment with commitizen
 .. slug: automating-deployment-with-commitizen
+.. status: draft
 .. date: 2020-07-15 15:27:20 UTC
 .. tags: python, ci
 .. category: devops
