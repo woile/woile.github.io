@@ -64,8 +64,10 @@ helm create <package_name>
 
 #### Example
 
+Along the post we'll use `auth-service` as our project example name.
+
 ```bash
-mkdir auth-service # We will use auth-service as our project example name
+mkdir auth-service
 cd auth-service/
 mkdir charts
 cd charts/
