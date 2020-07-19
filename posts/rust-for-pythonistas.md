@@ -1,6 +1,7 @@
 <!--
 .. title: Rust for pythonistas
 .. slug: rust-for-pythonistas
+.. status: draft
 .. date: 2019-05-28 05:54:33 UTC-03:00
 .. tags:
 .. category:
