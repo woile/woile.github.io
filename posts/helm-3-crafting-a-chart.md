@@ -201,7 +201,7 @@ auth-service/
 The installation command would look like
 
 ```bash
-helm install --values charts-values/production/auth-service.yaml ./auth-service
+helm install --values charts-values/production/auth-service.yaml auth-service-prod ./auth-service
 ```
 
 I'm not 100% happy with the above setup, mainly with the naming.
