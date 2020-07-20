@@ -172,7 +172,7 @@ per enviroment (`production`, `staging`).
 If you are going to modify small aspects of your app, using `--set` should be enough.
 
 A common practice, is to place the production and staging files inside the chart folder,
-but in my opinion this is a kind of anti-pattern.
+but in my opinion this should be avoided when possible.
 
 A Helm chart is a package: **Helm is a package manager**.
 Like apt, pip or npm.
@@ -181,7 +181,7 @@ not packaged inside the image. This gives the container a lot of flexibility and
 same principle applies to Helm. There's an interesting [discussion in the helm repo][helm_discussion]
 about this.
 
-Ideally, your custom values shouldn't live inside the chart. They should be passed to the chart.
+Ideally, your custom values should live outside the chart, and they should be given to the chart.
 
 Let's see a setup example for the `auth-service`.
 
@@ -196,6 +196,12 @@ auth-service/
 │   └── staging/
 │       └── auth-service.yaml
 └── src/
+```
+
+The installation command would look like
+
+```bash
+helm install --values charts-values/production/auth-service.yaml ./auth-service
 ```
 
 I'm not 100% happy with the above setup, mainly with the naming.
@@ -255,7 +261,6 @@ helm status auth-service-prod
 
 > An upgrade takes an existing release and upgrades it according to the information you provide. Because Kubernetes charts can be large and complex, Helm tries to perform the **least invasive upgrade**. It will only update things that have changed **since the last release**. [[6]][helm-upgrade]
 
-
 ### Uprgrade release
 
 ```bash
@@ -265,7 +270,7 @@ helm upgrade -f <custom_values.yaml> <release_name> <package_name>
 #### Example
 
 ```bash
-helm upgrade -f values.prod.yaml auth-service-prod ./auth-service
+helm upgrade -f charts-values/production/auth-service.yaml auth-service-prod ./auth-service
 ```
 
 ### Rollback release
