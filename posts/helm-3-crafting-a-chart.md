@@ -327,10 +327,12 @@ helm upgrade --install auth-service-prod --values charts-values/production/auth-
 I think this is an improving point; I haven't understood it by reading the documentation yet.
 
 
-> Hey, hello!
+> Hey, hello 👋
+>
 > If you are interested in what I write, follow me on [twitter][santiwilly]
 >
 
+[santiwilly]: https://twitter.com/santiwilly
 [three-big-concepts]: https://helm.sh/docs/intro/using_helm/#three-big-concepts
 [appVersion]: https://stackoverflow.com/a/60054111/2047185
 [commitizen]: https://github.com/commitizen-tools/commitizen
@@ -344,5 +346,4 @@ I think this is an improving point; I haven't understood it by reading the docum
 [helm_discussion]: https://github.com/helm/helm/issues/6715
 [helmfile]: https://github.com/roboll/helmfile
 [tag_or_appVersion]: https://github.com/helm/helm/issues/8194
-[santiwilly]: https://twitter.com/santiwilly
 [reusing-chart]: https://github.com/helm/helm/issues/8194#issuecomment-658715462

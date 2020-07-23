@@ -127,7 +127,7 @@ Done!
 - Write parseable commits
 - Easy to map commit messages to semver
 
-## Command
+### Command
 
 ```bash
 cz bump --changelog
@@ -138,9 +138,10 @@ cz bump --changelog
 Try commitizen and check the [repo][cz]!
 
 We aim for simplicity, trying to make this process as simple as possible, but
-the tool is quite flexible.
+the tool is quite flexible, explore it, and see if it fits for your use cases.
 
 > Hey, hello 👋
+>
 > If you are interested in what I write, follow me on [twitter][santiwilly]
 >
 
