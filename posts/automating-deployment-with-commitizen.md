@@ -69,7 +69,7 @@ the correct [semver][semver].
 - Talk imperative and follow this rule: `If applied, this commit will <commit message>` [0][commit-guide]
 - Keep the subject short
 
-## Commitizen
+## Introducing commitizen
 
 [Commitizen][cz] is a tool to do exactly that.
 
