@@ -55,7 +55,9 @@ Commits examples:
 
 > MAJOR: Change public interface for class User
 
+
 > MINOR: Add new type of user (employee)
+
 
 > PATCH: Fix full name not being displayed properly
 
