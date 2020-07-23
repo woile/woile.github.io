@@ -61,8 +61,6 @@ Commits examples:
 
 > PATCH: Fix full name not being displayed properly
 
-Nowadays a very popular commit rule used is .
-
 And that's it! The next step is to use a tool to collect the commits, and generate
 the correct [semver][semver].
 
