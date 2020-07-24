@@ -18,11 +18,11 @@ Quite simple, right?
 
 We can map that to `MAJOR.MINOR.PATCH` where
 
-MAJOR ➡️ BREAKING CHANGES ⚠️
+`MAJOR` ➡️ BREAKING CHANGES ⚠️
 
-MINOR ➡️ New stuff 🎉
+`MINOR` ➡️ New stuff 🎉
 
-PATCH ➡️ Security 🔒 and bug fixes 🐛
+`PATCH` ➡️ Security 🔒 and bug fixes 🐛
 
 That's the highlight.
 
