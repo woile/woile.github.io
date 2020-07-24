@@ -36,7 +36,7 @@ new features, or they **must** update.
 
 The release process can be fully automated, but it has a price.
 
-## Price
+## The Price
 
 - Write parseable commits
 - Easy to map commit messages to [SemVer][semver]
@@ -122,7 +122,7 @@ Done!
 - [semver][semver]
 - [conventional commits][cm]
 
-### Price
+### The Price
 
 - Write parseable commits
 - Easy to map commit messages to semver
