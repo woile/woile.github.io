@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Moving from docker alpine to slim | Willy's blog</title>
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
+<link rel="canonical" href="https://woile.github.io/posts/moving-from-docker-alpine-to-slim/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
+<link rel="prev" href="../local-https-development-in-python-with-mkcert/" title="Local HTTPS development in Python with Mkcert" type="text/html">
+<link rel="next" href="../raspberries-hobby-cluster/" title="Raspberry Pi hobby cluster" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Moving from docker alpine to slim">
+<meta property="og:url" content="https://woile.github.io/posts/moving-from-docker-alpine-to-slim/">
+<meta property="og:description" content="I've been running a docker python3.x image for a long time.
+I've used the base version, the slim and the alpine.
+Initially I moved from the base python3.6 to the python3.6-slim and everything
+went gre">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-01-13T12:34:43-03:00">
+<meta property="article:tag" content="linux python containers alpine slim debian">
+</head>
+<body>
+    <input id="dark-mode" type="checkbox"><div class="theme">
+        <div class="layout">
+                <header class="cover"><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+            <span id="blog-title">Willy's blog</span>
+        </a></h3>
+
+    <label class="dark-mode-label" for="dark-mode"></label>
+    
+
+
+    </header><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+        <nav class="menu"><ul>
+<li><a href="../../">Home</a></li>
+                <li><a href="../../blog/">Blog</a></li>
+                <li><a href="../../archive.html">Archives</a></li>
+                <li><a href="../../categories/index.html">Tags</a></li>
+                <li><a href="../../rss.xml">RSS feed</a></li>
+
+    
+    
+    
+    </ul></nav><main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Moving from docker alpine to slim</a></h2>
+
+        <div class="metadata">
+            <span class="byline author vcard p-author h-card">
+            <span class="byline-name fn p-name" itemprop="author">
+                    Woile
+            </span>
+            </span>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/linux-python-containers-alpine-slim-debian/" rel="tag">#linux python containers alpine slim debian</a>
+            <span class="dateline">
+            <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+            <time class="published dt-published" datetime="2019-01-13T12:34:43-03:00" itemprop="datePublished" title="2019-01-13 12:34">2019-01-13 12:34</time></a>
+            </span>
+                <span class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/moving-from-docker-alpine-to-slim.html">Comments</a>
+
+
+                    | <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.rst">Source</a></span>
+
+        </span>
+</div>
+        
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p>I've been running a docker python3.x image for a long time.
+I've used the base version, the slim and the alpine.</p>
+<p>Initially I moved from the base python3.6 to the python3.6-slim and everything
+went great. The main win was that no change was required in the Dockerfile,
+it was smaller and more secure (less dependencies, more security, right?)</p>
+<p>After a while, I decided to move from slim to alpine, because of the size benefit.
+While doing the migration I found these drawbacks:</p>
+<p><strong>Renaming dependencies</strong>. I had to convert from <code>apt</code> to <code>apk</code> for every dependency.</p>
+<p><strong>Working with edge</strong>. There's always a problem with the edge repository.
+Sometimes it's down. Sometimes the packages are broken.
+You have to dig a lot in order to have a proper configuration.
+Like using <code>--no-cache</code> flag in apk. Or setting up the edge repo, then having to upgrade <code>apk-tools</code></p>
+<p>This kind of problems break our pipeline when there's no new commit. And I don't want this.
+That's why I've decided to move back to <code>slim</code>.</p>
+<p>Don't get me wrong, alpine is great, small and secure, and if you don't have many edge dependencies,
+I guess it'll work flawlessly, and I would totally use it.
+But our image unfortunately has dependencies like postgis, and proj4, which fail a lot in alpine.</p>
+<p>But my story is not over with alpine, I'll try it again in the future.
+I know with time it will get better and better, and I'll understand it more and more.</p>
+</div>
+    </section><aside class="postpromonav"><nav><div itemprop="keywords" class="tags article__meta">
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/linux-python-containers-alpine-slim-debian/" rel="tag">#linux python containers alpine slim debian</a>
+        </div>
+
+            <div class="pager hidden-print pagination">
+            <span class="previous">
+                <a class="hover:pagination__link" href="../local-https-development-in-python-with-mkcert/" rel="prev" title="Local HTTPS development in Python with Mkcert">Previous post</a>
+            </span>
+            <span class="next">
+                <a class="hover:pagination__link" href="../raspberries-hobby-cluster/" rel="next" title="Raspberry Pi hobby cluster">Next post</a>
+            </span>
+        </div>
+
+    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+                        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="woile",
+            disqus_url="https://woile.github.io/posts/moving-from-docker-alpine-to-slim/",
+        disqus_title="Moving from docker alpine to slim",
+        disqus_identifier="cache/posts/moving-from-docker-alpine-to-slim.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
+</div>
+    </div>
+                <script src="../../assets/js/index.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77945905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

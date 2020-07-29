@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about debian)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/debian.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 08 Jul 2020 09:08:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Get Skype working on Debian Stretch x64 with GNOME3</title><link>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;blockquote&gt;
+&lt;p&gt;Note&lt;/p&gt;
+&lt;p&gt;This info is no longer relevant. Right now Skype has been rewritten using &lt;a class="reference external" href="https://electron.atom.io/"&gt;electron&lt;/a&gt; and installing it in a debian based system is no longer a problem.
+Right now it doesn't support screensharing and some other features a normal person would expect.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Some alternatives I recommend:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://appear.in/"&gt;appear.in&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://tox.chat/"&gt;tox&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://hangouts.google.com/"&gt;hangouts&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://discordapp.com/"&gt;discord&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you really need to install this software, and you cannot use the alternatives, then this guide is for you.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>debian</category><category>linux</category><category>skype</category><guid>https://woile.github.io/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</guid><pubDate>Mon, 19 Sep 2016 10:56:03 GMT</pubDate></item></channel></rss>

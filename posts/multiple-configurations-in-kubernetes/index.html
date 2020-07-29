@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="How to manage multiple configuration files">
+<meta name="viewport" content="width=device-width">
+<title>Multiple configurations in kubernetes | Willy's blog</title>
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
+<link rel="canonical" href="https://woile.github.io/posts/multiple-configurations-in-kubernetes/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
+<link rel="prev" href="../pycon-france-2019-experience/" title="PyCon France 2019 experience" type="text/html">
+<link rel="next" href="../2019-yearly-retrospective/" title="2019 yearly retrospective" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Multiple configurations in kubernetes">
+<meta property="og:url" content="https://woile.github.io/posts/multiple-configurations-in-kubernetes/">
+<meta property="og:description" content="How to manage multiple configuration files">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2019-11-08T15:15:28-03:00">
+<meta property="article:tag" content="configuration">
+<meta property="article:tag" content="kubectl">
+<meta property="article:tag" content="kubernetes">
+<meta property="article:tag" content="linux">
+</head>
+<body>
+    <input id="dark-mode" type="checkbox"><div class="theme">
+        <div class="layout">
+                <header class="cover"><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+            <span id="blog-title">Willy's blog</span>
+        </a></h3>
+
+    <label class="dark-mode-label" for="dark-mode"></label>
+    
+
+
+    </header><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+        <nav class="menu"><ul>
+<li><a href="../../">Home</a></li>
+                <li><a href="../../blog/">Blog</a></li>
+                <li><a href="../../archive.html">Archives</a></li>
+                <li><a href="../../categories/index.html">Tags</a></li>
+                <li><a href="../../rss.xml">RSS feed</a></li>
+
+    
+    
+    
+    </ul></nav><main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Multiple configurations in kubernetes</a></h2>
+
+        <div class="metadata">
+            <span class="byline author vcard p-author h-card">
+            <span class="byline-name fn p-name" itemprop="author">
+                    Woile
+            </span>
+            </span>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/configuration/" rel="tag">#configuration</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/kubectl/" rel="tag">#kubectl</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/kubernetes/" rel="tag">#kubernetes</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/linux/" rel="tag">#linux</a>
+            <span class="dateline">
+            <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+            <time class="published dt-published" datetime="2019-11-08T15:15:28-03:00" itemprop="datePublished" title="2019-11-08 15:15">2019-11-08 15:15</time></a>
+            </span>
+                <span class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/multiple-configurations-in-kubernetes.html">Comments</a>
+
+
+                    | <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Source</a></span>
+
+        </span>
+</div>
+        
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p>It may happen to you, that you start working with 2 or more different clusters in
+kubernetes. At this point, you'll want to have multiple config files, instead of
+replacing <code>~/.kube/config</code>, which is fine the first few times.</p>
+<p>In order to do this we only need to set <code>KUBECONFIG</code> env variable with the path to the kubeconfigs.</p>
+<p>Create a <code>configs</code> folder, where the kubernetes config files will live.</p>
+<pre class="code literal-block">mkdir -p ~/.kube/configs
+</pre>
+
+<p>The next thing is to add the env variable to our <code>.bashrc</code>, <code>.zshrc</code> or <code>.profile</code> file,
+with the location of our configurations. The paths should be separated by a <code>:</code>.</p>
+<pre class="code literal-block"><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span><span class="nv">$HOME</span>/.kube/configs/gke-config:<span class="nv">$HOME</span>/.kube/configs/eks-config
+</pre>
+
+<p>Reloading our terminal with <code>. ~/.bashrc</code>, or opening a new one should pick up the changes.</p>
+<h4>Automating the config detection</h4>
+<p>Why not automate this? So everytime we add a new kubeconfig, it's detected automatically.</p>
+<p>Here's my attempt, place this snippet in your <code>.bashrc</code> or any other terminal file.</p>
+<pre class="code literal-block">set_kubeconfig<span class="o">()</span> <span class="o">{</span>
+    <span class="k">for</span> entry in <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.kube/configs"</span>/*
+    <span class="k">do</span>
+        <span class="c1"># Get files which do not include "skip"</span>
+        <span class="k">if</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$entry</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[[</span> <span class="nv">$entry</span> !<span class="o">=</span> *<span class="s2">"skip"</span>* <span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+            <span class="nv">kubeconfigs</span><span class="o">=</span><span class="s2">"</span><span class="nv">$kubeconfigs</span><span class="s2">:</span><span class="nv">$entry</span><span class="s2">"</span>
+        <span class="k">fi</span>
+    <span class="k">done</span>
+
+    <span class="c1"># Clean first colons</span>
+    <span class="nv">kubeconfigs</span><span class="o">=</span><span class="si">${</span><span class="nv">kubeconfigs</span><span class="p">#</span><span class="s2">":"</span><span class="si">}</span>
+    <span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span><span class="nv">$kubeconfigs</span>
+<span class="o">}</span>
+
+<span class="c1"># Execute the function</span>
+set_kubeconfig
+</pre>
+
+<p>This script will get all the <strong>files</strong> inside <code>~/.kube/configs</code>,
+which do not include <code>skip</code> in their name, and will set the <code>KUBECONFIG</code>
+variable to the found files.</p>
+<h4>Switching context and namespace</h4>
+<p>Now that our configs are detected automatically, we still have to change manually between
+contexts and namespaces. I'll leave here the shortcuts</p>
+<p>Remember that a context is a mix of [cluster, namespace, user].</p>
+<h5>Current configuration</h5>
+<pre class="code literal-block">kubectl config view --minify  <span class="c1"># without minify we'll see all the configs</span>
+</pre>
+
+<h5>List contexts</h5>
+<pre class="code literal-block">kubectl config get-contexts
+</pre>
+
+<h5>Swtich context</h5>
+<pre class="code literal-block">kubectl config use-context &lt;context_name&gt;
+</pre>
+
+<h5>Switch namespace</h5>
+<pre class="code literal-block">kubectl config set-context --current --namespace<span class="o">=</span>&lt;new_namespace&gt;
+</pre>
+
+<p>Find me on twitter: <a href="https://twitter.com/santiwilly">@santiwilly</a></p>
+<p>Thanks for reading!</p>
+</div>
+    </section><aside class="postpromonav"><nav><div itemprop="keywords" class="tags article__meta">
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/configuration/" rel="tag">#configuration</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/kubectl/" rel="tag">#kubectl</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/kubernetes/" rel="tag">#kubernetes</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/linux/" rel="tag">#linux</a>
+        </div>
+
+            <div class="pager hidden-print pagination">
+            <span class="previous">
+                <a class="hover:pagination__link" href="../pycon-france-2019-experience/" rel="prev" title="PyCon France 2019 experience">Previous post</a>
+            </span>
+            <span class="next">
+                <a class="hover:pagination__link" href="../2019-yearly-retrospective/" rel="next" title="2019 yearly retrospective">Next post</a>
+            </span>
+        </div>
+
+    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+                        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="woile",
+            disqus_url="https://woile.github.io/posts/multiple-configurations-in-kubernetes/",
+        disqus_title="Multiple configurations in kubernetes",
+        disqus_identifier="cache/posts/multiple-configurations-in-kubernetes.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
+</div>
+    </div>
+                <script src="../../assets/js/index.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77945905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

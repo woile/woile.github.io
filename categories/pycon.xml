@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about pycon)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/pycon.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 08 Jul 2020 09:08:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>PyCon France 2019 experience</title><link>https://woile.github.io/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.github.io/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;This year (2019) I had the opportunity to participate as a speaker at &lt;a href="https://www.pycon.fr/2019/"&gt;PyCon France&lt;/a&gt;,
+and it was a great experience.
+The event was held in &lt;strong&gt;Bordeaux, France&lt;/strong&gt;, a super cozy city, famous for its wines.&lt;/p&gt;
+&lt;p&gt;I realize now that every country claims they have the best wine, including mine.
+I have to say, though, that I loved Bordeaux wines, and I bought 4 to bring back home.&lt;/p&gt;
+&lt;h3&gt;Highlights of PyFrance&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="marcos in bordeaux" src="https://woile.github.io/images/pycon-fr-2019/marcos.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Everyone was kind to me and I felt really comfortable at the conference.
+It somehow reminded me of the Argentinian PyCon, maybe because it's free for everyone.&lt;/p&gt;
+&lt;p&gt;I really liked the &lt;strong&gt;"badge"&lt;/strong&gt; approach. On arrival, you could pick some "flags".
+I chose the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"I speak english"&lt;/li&gt;
+&lt;li&gt;"Speaker"&lt;/li&gt;
+&lt;li&gt;"First time"&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some cool others: "Do not talk to me", "No pics please", "Volunteer".&lt;/p&gt;
+&lt;p&gt;They also had an &lt;strong&gt;automatic captioning tool&lt;/strong&gt;, which generated the transcription
+live.&lt;/p&gt;
+&lt;p&gt;I met a bunch of new people and had some interesting talks.&lt;/p&gt;
+&lt;p&gt;There were some talks I couldn't attend because of the language barrier
+(I don't speak French). But there's no one to blame for this.&lt;/p&gt;
+&lt;p&gt;The talk I enjoyed the most was the keynote about &lt;strong&gt;"The Role of 21st Century Technology in Protests"&lt;/strong&gt;.
+It gave me a lot to think about.
+First, I'm amazed by the creativity and cleverness of the Hong Kong people and
+their constant push to prevent incidents.
+Please look up all the stuff they did to counter police efforts to capture people.
+And second, about the role technology has in society.
+When left in autocratic hands, it can quickly deviate and be used to harm people,
+&lt;strong&gt;no matter how good intentions are at the beginning&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Technology, in the way's being used in some countries, is scary.
+What is even scarier is that people are not aware of the dangers.&lt;/p&gt;
+&lt;p&gt;The only lesson I take from this is that &lt;strong&gt;education&lt;/strong&gt; is key.
+The more education a person receives, the more resilient, and shielded they become
+against foreign evil "human" agents, like vaccines.
+And I mean education, not indoctrination, though in practice it may be harder
+to draw the line.&lt;/p&gt;
+&lt;h3&gt;My Presentation&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="me talking at pycon fr 2019" src="https://woile.github.io/images/pycon-fr-2019/santi.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;I prepared the talk for over 3 weeks: &lt;a href="https://woile.github.io/pytest-presentation/"&gt;Pytest yes, let's go&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Every talk I give takes me a lot of time and effort.
+I find it really hard to come up with the slides quickly.
+Luckily I got positive feedback over my talk, so I left the conference quite proud.&lt;/p&gt;
+&lt;p&gt;For my next pycon (whichever I end up attending), I think I know the topic I'll discuss about: &lt;strong&gt;Documentation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>conference</category><category>pycon</category><category>python</category><guid>https://woile.github.io/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item></channel></rss>

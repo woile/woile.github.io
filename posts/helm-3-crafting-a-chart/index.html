@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="create and releasing a Helm chart">
+<meta name="viewport" content="width=device-width">
+<title>Helm 3 - Crafting a Chart | Willy's blog</title>
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
+<link rel="canonical" href="https://woile.github.io/posts/helm-3-crafting-a-chart/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
+<link rel="prev" href="../pyenv/" title="Pyenv" type="text/html">
+<link rel="next" href="../automating-semver-releases-with-commitizen/" title="Automating semver releases with commitizen" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Helm 3 - Crafting a Chart">
+<meta property="og:url" content="https://woile.github.io/posts/helm-3-crafting-a-chart/">
+<meta property="og:description" content="create and releasing a Helm chart">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-07-15T13:20:41Z">
+<meta property="article:tag" content="helm">
+<meta property="article:tag" content="kubernetes">
+</head>
+<body>
+    <input id="dark-mode" type="checkbox"><div class="theme">
+        <div class="layout">
+                <header class="cover"><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+            <span id="blog-title">Willy's blog</span>
+        </a></h3>
+
+    <label class="dark-mode-label" for="dark-mode"></label>
+    
+
+
+    </header><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+        <nav class="menu"><ul>
+<li><a href="../../">Home</a></li>
+                <li><a href="../../blog/">Blog</a></li>
+                <li><a href="../../archive.html">Archives</a></li>
+                <li><a href="../../categories/index.html">Tags</a></li>
+                <li><a href="../../rss.xml">RSS feed</a></li>
+
+    
+    
+    
+    </ul></nav><main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Helm 3 - Crafting a Chart</a></h2>
+
+        <div class="metadata">
+            <span class="byline author vcard p-author h-card">
+            <span class="byline-name fn p-name" itemprop="author">
+                    Woile
+            </span>
+            </span>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/helm/" rel="tag">#helm</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/kubernetes/" rel="tag">#kubernetes</a>
+            <span class="dateline">
+            <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+            <time class="published dt-published" datetime="2020-07-15T13:20:41Z" itemprop="datePublished" title="2020-07-15 13:20">2020-07-15 13:20</time></a>
+            </span>
+                <span class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/helm-3-crafting-a-chart.html">Comments</a>
+
+
+                    | <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Source</a></span>
+
+        </span>
+</div>
+        
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p>This post focuses on <strong>creating and releasing a chart</strong>, not consuming from a Helm Chart Repository.</p>
+<p>Helm is an <strong>advanced</strong> tool used by kubernetes people, some "lingo" (jargon) is used here.
+Please leave a comment if you want more information.</p>
+<p>Helm allows to <strong>"package"</strong> kubernetes applications, it simplifies the distribution
+and installation. While doing so, it checks dependencies versions and some other validations.</p>
+<hr>
+<p><a href="https://helm.sh/docs/intro/">Official Helm 3 Documentation</a></p>
+<hr>
+<h3>Version used</h3>
+<pre class="code literal-block">$ helm version --short
+v3.2.4+g0ad800e
+</pre>
+
+<h3>Helm Chart</h3>
+<blockquote>
+<p>A Chart is a Helm package. It contains all of the resource definitions necessary to run an application,
+tool, or service inside of a Kubernetes cluster. Think of it as the Kubernetes equivalent of a
+Homebrew formula, an apt dpkg, or a Yum RPM file <a href="https://helm.sh/docs/intro/using_helm/#three-big-concepts">[0]</a>.</p>
+</blockquote>
+<p>For OOP people:</p>
+<ul>
+<li>Chart ~= class</li>
+<li>Release ~= instance</li>
+</ul>
+<p>This is important to remember, we are going to be building a <strong>package</strong>.</p>
+<h3>Development of a Chart</h3>
+<h4>Creating a new Chart</h4>
+<p>My recommendation is to create a <code>charts/</code> folder in the root of your project(s).</p>
+<p>This way each of your projects could become a "chart repository", similar to how hub.helm.sh consumes respositories from different sources in a descentralized way.</p>
+<p>You could do the same for your projects. Each git project becomes a descentralized chart repository,
+or you can publish to a centralized chart repository like artifactory or your own github repo.</p>
+<p>In any case, calling it <code>charts/</code> is informative and flexible enough to choose any option.</p>
+<p>Inside <code>charts/</code>, we are going to use <code>helm</code> to create the first boilerplate of our app.</p>
+<pre class="code literal-block">helm create &lt;package_name&gt;
+</pre>
+
+<h5>Example</h5>
+<p>Along the post we'll use <code>auth-service</code> as our project example name.</p>
+<pre class="code literal-block">mkdir auth-service
+<span class="nb">cd</span> auth-service/
+mkdir charts
+<span class="nb">cd</span> charts/
+</pre>
+
+<pre class="code literal-block">helm create auth-service
+</pre>
+
+<h5>Structure</h5>
+<pre class="code literal-block">auth-service/
+└── charts/
+    └── auth-service/
+        ├── charts/
+        ├── Chart.yaml
+        ├── templates/
+        │   ├── deployment.yaml
+        │   ├── _helpers.tpl
+        │   ├── hpa.yaml
+        │   ├── ingress.yaml
+        │   ├── NOTES.txt
+        │   ├── serviceaccount.yaml
+        │   ├── service.yaml
+        │   └── tests/
+        │       └── test-connection.yaml
+        └── values.yaml
+</pre>
+
+<h5>Notes</h5>
+<ul>
+<li>
+<code>appVersion</code> inside <code>Chart.yaml</code> references the <strong>application version</strong> <a href="https://stackoverflow.com/a/60054111/2047185">[1]</a>
+</li>
+<li>
+<code>image.tag</code> inside <code>values.yaml</code> references the <strong>docker image version/tag</strong>.</li>
+<li>if <code>image.tag</code> is skipped, <code>appVersion</code> is used instead.</li>
+<li>
+<strong>recommendation</strong>: use a tool to automatically bump the version, like <a href="https://github.com/commitizen-tools/commitizen">commitizen</a>,
+during the CI execution, and push back to the repo.</li>
+<li>Whether to use <code>image.tag</code> or <code>appVersion</code> is still under debate, you can read more in the
+<a href="https://github.com/helm/helm/issues/8194">github issue</a>
+</li>
+<li>If you use <code>appVersion</code> you can use <code>helm history &lt;release_name&gt;</code> to get info on the versions
+per revision.</li>
+<li>You can re-use the same chart to deploy multiple django/rails applications, <a href="https://github.com/helm/helm/issues/8194#issuecomment-658715462">seems like a
+common practice</a>
+</li>
+</ul>
+<h4>Chart customization</h4>
+<p>I recommend to start with the default helm chart and from there, start
+adding any extra stuff that you need.</p>
+<h4>Templating</h4>
+<p>If you have used other template systems like <code>jinja</code>, or Django's template engine,
+Helm's system is not that different: you can apply functions using a pipeline <code>|</code>.</p>
+<pre class="code literal-block"><span class="nt">food</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.favorite.food | upper | quote</span> <span class="p p-Indicator">}}</span>
+</pre>
+
+<p>Avoid adding complex template tags; the purpose of <code>yaml</code> is to be <strong>readable</strong>.
+By using templates, we make things more complex, and less readable, <strong>touch only when necessary</strong>.</p>
+<p><code>templates/_helpers.tpl</code> contains custom functions for your templates, like generating the release name based on values.</p>
+<p>To find problems with you charts, run:</p>
+<pre class="code literal-block">helm lint &lt;package_name&gt;
+</pre>
+
+<h4>Values</h4>
+<p>Place the "configuration" that you want to expose to the users of the chart in
+the <code>values.yaml</code>, even if it's you who's gonna end up using it.
+There's no need to parametrize everything, and try to use sensible defaults.</p>
+<p>A good rule is to expose only the things you are going to use and make new
+parameters only when you have to.</p>
+<p>Let developers specify unconventional aspects of the application.</p>
+<p>You can also define a <code>values.schema.json</code> which will be used by helm to validate
+the parameters given to Helm <a href="https://helm.sh/docs/topics/charts/#schema-files">[2]</a>.</p>
+<h4>Using custom values</h4>
+<p><code>values.yaml</code> is used as default and any extra values provided through <code>--set</code> or <code>--values</code>
+will be merged into the default <code>values.yaml</code> inside the chart.</p>
+<p>There are 2 approaches to deal with custom values that I know.</p>
+<h5>Centralized values</h5>
+<p>The first one is to have a centralized place with all the configuration. At the
+moment, I know <a href="https://github.com/roboll/helmfile">helmfile</a> is being used for this.
+You'd specify every configuration per environment per chart in a <code>helmfile.yaml</code>.</p>
+<h5>Per repository</h5>
+<p>This is the most popular approach. Each "project" is responsible to set the values
+per enviroment (<code>production</code>, <code>staging</code>).</p>
+<p>If you are going to modify small aspects of your app, using <code>--set</code> should be enough.</p>
+<p>A common practice, is to place the production and staging files inside the chart folder,
+but in my opinion this should be avoided when possible.</p>
+<p>A Helm chart is a package: <strong>Helm is a package manager</strong>.
+Like apt, pip or npm.
+When we use tools like Docker, for example, we provide env variables from outside, they are
+not packaged inside the image. This gives the container a lot of flexibility and the
+same principle applies to Helm. There's an interesting <a href="https://github.com/helm/helm/issues/6715">discussion in the helm repo</a>
+about this.</p>
+<p>Ideally, your custom values should live outside the chart, and they should be given to the chart.</p>
+<p>Let's see a setup example for the <code>auth-service</code>.</p>
+<pre class="code literal-block">auth-service/
+├── charts/
+│   └── auth-service/
+├── charts-values/
+│   ├── production/
+│   │   ├── redis.yaml
+│   │   └── auth-service.yaml
+│   └── staging/
+│       └── auth-service.yaml
+└── src/
+</pre>
+
+<p>The installation command would look like</p>
+<pre class="code literal-block">helm install --values charts-values/production/auth-service.yaml auth-service-prod ./auth-service
+</pre>
+
+<p>I'm not 100% happy with the above setup, mainly with the naming.
+But it allows having multiple values per chart per environment.
+We could easily add values for a redis pulled from the official Helm hub.
+I'd like to hear opinions about it. How'd you do it?</p>
+<h3>Release</h3>
+<blockquote>
+<p>A Release is an instance of a chart running in a Kubernetes cluster. One chart can often be installed many times into the same cluster. And each time it is installed, a <strong>new release is created</strong>.
+Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have its own release, which will in turn have its own release name <a href="https://helm.sh/docs/intro/using_helm/#three-big-concepts">[3]</a>.</p>
+</blockquote>
+<h4>New release</h4>
+<pre class="code literal-block">helm install &lt;release_name&gt; &lt;package_name&gt;
+</pre>
+
+<p>Deploy a new release to the cluster.</p>
+<p>We can also run a dry-run to check what's going to happen:</p>
+<pre class="code literal-block">helm install &lt;release_name&gt; &lt;package_name&gt; --dry-run
+</pre>
+
+<h5>Example</h5>
+<pre class="code literal-block">helm install auth-service-prod ./auth-service
+</pre>
+
+<h5>Notes</h5>
+<ul>
+<li>
+<code>package_name</code> can be a folder, a <code>.tgz</code> or a url.</li>
+<li>
+<code>release_name</code>: the name of this particular release. If the name is different another "instance" will be deployed. So for redis instances it may be worth using different <code>release_name</code>s, but for your JavaScript app it may not.</li>
+<li>The output of <code>templates/NOTES.txt</code> is shown in the prompt when making a new release, useful for CI logs.</li>
+<li>If you don't want to provide a <code>&lt;release_name&gt;</code>, use <code>--generate-name</code> and it will assign a random <code>&lt;release_name&gt;</code>.</li>
+<li>Helm stores release config per namespace, so if you want to release 2 redis instances in the same namespace, they should have different <code>&lt;release_name&gt;</code>s <a href="https://github.com/helm/community/blob/master/helm-v3/003-state.md#namespacing-changes">[4]</a>.</li>
+<li>Helm does not wait until all of the resources are running before it exits <a href="https://helm.sh/docs/intro/using_helm/#helm-install-installing-a-package">[5]</a>.</li>
+<li>
+<strong>personal</strong>: use different <code>release_name</code>s per environment (<code>production</code>, <code>staging</code>). Even though it may not be necessary, giving that extra information in the name is useful and cheap.</li>
+<li>Use <code>helm get values &lt;release_name&gt;</code> to get the values used for the release, useful to check if our custom values were applied properly.</li>
+</ul>
+<h4>Check release status</h4>
+<p>After it is installed, we want to know if everything went well.</p>
+<pre class="code literal-block">helm status &lt;release_name&gt;
+</pre>
+
+<h5>Example</h5>
+<pre class="code literal-block">helm status auth-service-prod
+</pre>
+
+<blockquote>
+<p>An upgrade takes an existing release and upgrades it according to the information you provide. Because Kubernetes charts can be large and complex, Helm tries to perform the <strong>least invasive upgrade</strong>. It will only update things that have changed <strong>since the last release</strong>. <a href="https://helm.sh/docs/intro/using_helm/#helm-upgrade-and-helm-rollback-upgrading-a-release-and-recovering-on-failure">[6]</a></p>
+</blockquote>
+<h4>Uprgrade release</h4>
+<pre class="code literal-block">helm upgrade -f &lt;custom_values.yaml&gt; &lt;release_name&gt; &lt;package_name&gt;
+</pre>
+
+<h5>Example</h5>
+<pre class="code literal-block">helm upgrade -f charts-values/production/auth-service.yaml auth-service-prod ./auth-service
+</pre>
+
+<h4>Rollback release</h4>
+<pre class="code literal-block">helm rollback &lt;release_name&gt; &lt;revision&gt;
+</pre>
+
+<h5>Example</h5>
+<pre class="code literal-block">helm rollback auth-service-prod <span class="m">1</span>
+</pre>
+
+<h5>Notes</h5>
+<ul>
+<li>Any release version increment will produce a <code>revision</code> number. It goes from 1..N.</li>
+<li>Use <code>helm history &lt;release_name&gt;</code> to see the revisions of your <code>release_name</code>.</li>
+</ul>
+<h4>Uninstall release</h4>
+<pre class="code literal-block">helm uninstall &lt;release_name&gt;
+</pre>
+
+<p>I won't go deep into this, but just know it exists, and you can remove an existing release.</p>
+<h4>Automating release cycle</h4>
+<p>A recommended best practice to avoid running <code>helm install</code> and <code>helm upgrade</code> <a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#install-or-upgrade-a-release-with-one-command">[7]</a> is to use:</p>
+<pre class="code literal-block">helm upgrade --install &lt;release_name&gt; --values &lt;custom_values.yaml&gt; &lt;package_name&gt;
+</pre>
+
+<p>This can be a benefit in an automated CI/CD pipeline. We let Helm perform the check to know if it's a first time,
+or a release upgrade.</p>
+<h5>Example</h5>
+<pre class="code literal-block">helm upgrade --install auth-service-prod --values charts-values/production/auth-service.yaml ./auth-service
+</pre>
+
+<h5>Notes</h5>
+<ul>
+<li>Use <code>--atomic</code> to get automatic rollback on failures.<a href="https://lzone.de/blog/Helm-Best-Practices">[8]</a>
+</li>
+</ul>
+<h4>Complex Charts with Many Dependencies</h4>
+<blockquote>
+<p>The current best practice for composing a complex application from discrete parts is to create a top-level umbrella chart that exposes the global configurations, and then use the charts/ subdirectory to embed each of the components.<a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#complex-charts-with-many-dependencies">5</a></p>
+</blockquote>
+<p>I think this is an improving point; I haven't understood it by reading the documentation yet.</p>
+<blockquote>
+<p>Hey, hello 👋</p>
+<p>If you are interested in what I write, follow me on <a href="https://twitter.com/santiwilly">twitter</a>
+</p>
+</blockquote>
+</div>
+    </section><aside class="postpromonav"><nav><div itemprop="keywords" class="tags article__meta">
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/helm/" rel="tag">#helm</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/kubernetes/" rel="tag">#kubernetes</a>
+        </div>
+
+            <div class="pager hidden-print pagination">
+            <span class="previous">
+                <a class="hover:pagination__link" href="../pyenv/" rel="prev" title="Pyenv">Previous post</a>
+            </span>
+            <span class="next">
+                <a class="hover:pagination__link" href="../automating-semver-releases-with-commitizen/" rel="next" title="Automating semver releases with commitizen">Next post</a>
+            </span>
+        </div>
+
+    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+                        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="woile",
+            disqus_url="https://woile.github.io/posts/helm-3-crafting-a-chart/",
+        disqus_title="Helm 3 - Crafting a Chart",
+        disqus_identifier="cache/posts/helm-3-crafting-a-chart.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
+</div>
+    </div>
+                <script src="../../assets/js/index.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77945905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

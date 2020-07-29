@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about docker)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/docker.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 08 Jul 2020 09:08:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Raspberry Pi hobby cluster</title><link>https://woile.github.io/posts/raspberries-hobby-cluster/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;In this tutorial we are gonna try to setup a cluster in our home
+server built with raspberries.&lt;/p&gt;
+&lt;p&gt;In another post I'll describe how to configure a Kubernetes cluster in our raspberries.&lt;/p&gt;
+&lt;p&gt;Kubernetes is a container orchestration tool, it can do all of this:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;Automatic bin packing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Self-healing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Horizontal scaling&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Service discovery and Load balancing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Automated rollouts and rollbacks&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Secrets and configuration management&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Storage orchestration&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Long running jobs&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Batch execution&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/raspberries-hobby-cluster/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cluster</category><category>docker</category><category>kubernetes</category><category>raspberry</category><guid>https://woile.github.io/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item></channel></rss>

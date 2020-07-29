@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Integration of two python/django libraries">
+<meta name="viewport" content="width=device-width">
+<title>How to filter Polymorphic Models with Django Filters | Willy's blog</title>
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
+<link rel="canonical" href="https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
+<link rel="prev" href="../eurotrip-2016/" title="Eurotrip 2016" type="text/html">
+<link rel="next" href="../guide-to-sublime-like-a-normal-person/" title="Guide to Sublime like a normal person" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="How to filter Polymorphic Models with Django Filters">
+<meta property="og:url" content="https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/">
+<meta property="og:description" content="Integration of two python/django libraries">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-03-02T20:58:22-03:00">
+<meta property="article:tag" content="api">
+<meta property="article:tag" content="django">
+<meta property="article:tag" content="django-rest-framework">
+<meta property="article:tag" content="drf">
+<meta property="article:tag" content="filters">
+<meta property="article:tag" content="polymorphic">
+<meta property="article:tag" content="python">
+</head>
+<body>
+    <input id="dark-mode" type="checkbox"><div class="theme">
+        <div class="layout">
+                <header class="cover"><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+            <span id="blog-title">Willy's blog</span>
+        </a></h3>
+
+    <label class="dark-mode-label" for="dark-mode"></label>
+    
+
+
+    </header><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+        <nav class="menu"><ul>
+<li><a href="../../">Home</a></li>
+                <li><a href="../../blog/">Blog</a></li>
+                <li><a href="../../archive.html">Archives</a></li>
+                <li><a href="../../categories/index.html">Tags</a></li>
+                <li><a href="../../rss.xml">RSS feed</a></li>
+
+    
+    
+    
+    </ul></nav><main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">How to filter Polymorphic Models with Django Filters</a></h2>
+
+        <div class="metadata">
+            <span class="byline author vcard p-author h-card">
+            <span class="byline-name fn p-name" itemprop="author">
+                    Woile
+            </span>
+            </span>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/api/" rel="tag">#api</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/django/" rel="tag">#django</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/django-rest-framework/" rel="tag">#django-rest-framework</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/drf/" rel="tag">#drf</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/filters/" rel="tag">#filters</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/polymorphic/" rel="tag">#polymorphic</a>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/python/" rel="tag">#python</a>
+            <span class="dateline">
+            <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+            <time class="published dt-published" datetime="2017-03-02T20:58:22-03:00" itemprop="datePublished" title="2017-03-02 20:58">2017-03-02 20:58</time></a>
+            </span>
+                <span class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/django-polymorphic-integration-with-django-filters.html">Comments</a>
+
+
+                    | <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.rst">Source</a></span>
+
+        </span>
+</div>
+        
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p>As the title says, I needed a way to filter my polymorphic models using my already defined
+<code>rest_framework.FilterSet</code>, and as I didn't find much resources about it I'm sharing my experience here.</p>
+<p>First, let's talk about <code>django-polymorphic</code> and <code>django-filters</code>, what are these libraries for.</p>
+<!-- TEASER_END -->
+<div class="section" id="django-polymorphic">
+<h2>Django-polymorphic <a class="footnote-reference brackets" href="#id3" id="id1">1</a>
+</h2>
+<pre class="literal-block">Simplifies using inherited models in Django projects. When a query is made at the base
+model, the inherited model classes are returned.</pre>
+<p>One of the most important things to understand of polymorphic is, that when you ask for the queryset of the parent, every element is represented with its children classes. Let's see this.</p>
+<p>I'll use the models examples provided by the <a class="reference external" href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
+<pre class="code python"><a name="rest_code_c4e0d38198514417ba6feab643563a5c-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-2"></a>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-7"></a>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-10"></a>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_c4e0d38198514417ba6feab643563a5c-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre>
+<pre class="code python"><a name="rest_code_9e89cd18c3a54e24a6b1752311729099-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
+<a name="rest_code_9e89cd18c3a54e24a6b1752311729099-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
+<a name="rest_code_9e89cd18c3a54e24a6b1752311729099-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
+</pre>
+<pre class="code python"><a name="rest_code_ff82b8f88b2844bfa0c0da5737cb408e-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<a name="rest_code_ff82b8f88b2844bfa0c0da5737cb408e-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_ff82b8f88b2844bfa0c0da5737cb408e-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_ff82b8f88b2844bfa0c0da5737cb408e-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
+</pre>
+<p>As you can see, this can be really helpful when using Django Rest Framework (DRF) and model inheritance.
+It allows to use just one model, in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into account
+that your serializer will have to handle the representation of each of the models.</p>
+</div>
+<div class="section" id="django-filter">
+<h2>Django-filter <a class="footnote-reference brackets" href="#id4" id="id2">2</a>
+</h2>
+<pre class="literal-block">Is a generic, reusable application to alleviate writing some of the more mundane bits of view code. Specifically, it allows users to filter down a queryset based on a model’s fields.</pre>
+<p>Fundamentally, when using django filters you'll want to create a class specifying the model's
+fields by which a queryset can be filtered.</p>
+<p>Let's modified a bit the example of the <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
+<pre class="code python"><a name="rest_code_058a940663034893a1d863db728f0111-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_058a940663034893a1d863db728f0111-2"></a>
+<a name="rest_code_058a940663034893a1d863db728f0111-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_058a940663034893a1d863db728f0111-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
+<a name="rest_code_058a940663034893a1d863db728f0111-5"></a>
+<a name="rest_code_058a940663034893a1d863db728f0111-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_058a940663034893a1d863db728f0111-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_058a940663034893a1d863db728f0111-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
+</pre>
+<p>And the view should look something like:</p>
+<pre class="code python"><a name="rest_code_3bafc9813ec048ecb2b2e3491cac6239-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a name="rest_code_3bafc9813ec048ecb2b2e3491cac6239-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<a name="rest_code_3bafc9813ec048ecb2b2e3491cac6239-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+</pre>
+<p>Obviously, this will help reduce the amount of code written, and will be way easier to mantain.
+The good thing about this library, and what matters to me the most, is that it has a great <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with DRF</a> by providing a DRF-specific FilterSet and a filter backend.</p>
+</div>
+<div class="section" id="filtering-by-a-polymorphic-model">
+<h2>Filtering by a polymorphic model</h2>
+<p>As we stated at the beginning what I wanted to do is filter by a <strong>polymorphic model</strong>, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the <code>rest_framework.FilterSet</code> and using a customized filter with <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a> in our FilterSet.</p>
+<pre class="code python"><a name="rest_code_158d3aa316db4665af013ce8a20e564f-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-2"></a>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-3"></a>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-7"></a>    <span class="k">return</span> <span class="n">choices</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-8"></a>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-9"></a>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-13"></a>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-17"></a>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+<a name="rest_code_158d3aa316db4665af013ce8a20e564f-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
+</pre>
+<p>Now, if our querystring includes a key <code>project_type</code>, it will check if the values match any of
+the choices and it will return the queryset filtered by the specified choices.
+And that's it, we have successfully filtered polymorphic models. Now we just need to add <code>ProjectFilter</code> to the <code>filter_class</code> in the <code>viewsets.ModelViewSet</code>.</p>
+<p>Cheers!</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://github.com/django-polymorphic/django-polymorphic">https://github.com/django-polymorphic/django-polymorphic</a></p>
+</dd>
+<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd>
+<p><a class="reference external" href="https://github.com/carltongibson/django-filter">https://github.com/carltongibson/django-filter</a></p>
+</dd>
+</dl>
+</div>
+</div>
+    </section><aside class="postpromonav"><nav><div itemprop="keywords" class="tags article__meta">
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/api/" rel="tag">#api</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/django/" rel="tag">#django</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/django-rest-framework/" rel="tag">#django-rest-framework</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/drf/" rel="tag">#drf</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/filters/" rel="tag">#filters</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/polymorphic/" rel="tag">#polymorphic</a>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/python/" rel="tag">#python</a>
+        </div>
+
+            <div class="pager hidden-print pagination">
+            <span class="previous">
+                <a class="hover:pagination__link" href="../eurotrip-2016/" rel="prev" title="Eurotrip 2016">Previous post</a>
+            </span>
+            <span class="next">
+                <a class="hover:pagination__link" href="../guide-to-sublime-like-a-normal-person/" rel="next" title="Guide to Sublime like a normal person">Next post</a>
+            </span>
+        </div>
+
+    </nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+                        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="woile",
+            disqus_url="https://woile.github.io/posts/django-polymorphic-integration-with-django-filters/",
+        disqus_title="How to filter Polymorphic Models with Django Filters",
+        disqus_identifier="cache/posts/django-polymorphic-integration-with-django-filters.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
+</div>
+    </div>
+                <script src="../../assets/js/index.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77945905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.github.io/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.github.io/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 24 Jul 2020 08:27:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automating semver releases with commitizen</title><link>https://woile.github.io/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
+Languages like rust have &lt;a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-cratesio"&gt;fully embraced it&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A SemVer version looks like this: &lt;code&gt;1.2.0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Quite simple, right?&lt;/p&gt;
+&lt;p&gt;We can map that to &lt;code&gt;MAJOR.MINOR.PATCH&lt;/code&gt; where&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MAJOR&lt;/code&gt; ➡️ BREAKING CHANGES ⚠️&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MINOR&lt;/code&gt; ➡️ New stuff 🎉&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PATCH&lt;/code&gt; ➡️ Security 🔒 and bug fixes 🐛&lt;/p&gt;
+&lt;p&gt;That's the highlight.&lt;/p&gt;
+&lt;h3&gt;Making a new release&lt;/h3&gt;
+&lt;p&gt;Usually, when making a new semantic version (semver), you have to review your
+commits, check if there's any braking changes, then check if there are new features,
+otherwise, it's just a patch. This process can be tedious, but semver gives
+developers a lot of information about a release, like if they can update safely,
+new features, or they &lt;strong&gt;must&lt;/strong&gt; update.&lt;/p&gt;
+&lt;p&gt;The release process can be fully automated, but it has a price.&lt;/p&gt;
+&lt;h3&gt;The Price&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Write parseable commits&lt;/li&gt;
+&lt;li&gt;Easy to map commit messages to &lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Automating release&lt;/h3&gt;
+&lt;p&gt;By writing commits this way, we have to think, in that moment, what kind of change
+we are introducing. And that information get's encoded in the message.&lt;/p&gt;
+&lt;p&gt;Let's see a simple rule for parseable, easy to map messages:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Include MAJOR:, MINOR:, PATCH: at the beginning of each commit. If not present
+the commit will be skipped, and it won't be released.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Commits examples:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;MAJOR: Change public interface for class User&lt;/p&gt;
+&lt;p&gt;MINOR: Add new type of user (employee)&lt;/p&gt;
+&lt;p&gt;PATCH: Fix full name not being displayed properly&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And that's it! The next step is to use a tool to collect the commits, and generate
+the correct &lt;a href="https://semver.org/"&gt;semver&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Commit tips&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Talk imperative and follow this rule: &lt;code&gt;If applied, this commit will &amp;lt;commit message&amp;gt;&lt;/code&gt; &lt;a href="https://chris.beams.io/posts/git-commit/"&gt;0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Keep the subject short&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Introducing commitizen&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/commitizen-tools/commitizen"&gt;Commitizen&lt;/a&gt; is a tool to do exactly that.&lt;/p&gt;
+&lt;p&gt;I created it in order to automate that process. Based on existing tools from
+the JS ecosystem but which I found hard to use.&lt;/p&gt;
+&lt;p&gt;By default it parses the widely popular commit rules: &lt;a href="https://www.conventionalcommits.org/en/v1.0.0/"&gt;conventional commits&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But you can &lt;a href="https://commitizen-tools.github.io/commitizen/customization/#2-customize-through-customizing-a-class"&gt;easily extend commitizen&lt;/a&gt; to create the example given before.&lt;/p&gt;
+&lt;p&gt;Not only it will create the version, but it can also generate the changelog.&lt;/p&gt;
+&lt;p&gt;It's really easy to use, first create a &lt;code&gt;.cz.toml&lt;/code&gt; file in your project's root.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[tool.commitizen]&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"2.5.1"&lt;/span&gt;
+&lt;span class="n"&gt;version_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;["setup.py", "Dockerfile", "scripts/publish"]&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;And that's it, by running a single command we get the version and the changelog.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;cz bump --changelog
+&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;veresion_files&lt;/code&gt; will also bump the version in the specified files.&lt;/p&gt;
+&lt;h3&gt;CI/CD&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="diagram of semantic release" src="https://woile.github.io/images/automating-deployment-with-commitizen/semantic_release.png"&gt;&lt;/p&gt;
+&lt;p&gt;In this diagram, you'd execute commitizen in the green job, during the version bump.&lt;/p&gt;
+&lt;p&gt;We push back the new commit including the changelog, the updated version in the
+corresponding files and the tag.&lt;/p&gt;
+&lt;p&gt;Pushing the tag triggers another job, which will take care of the release, which can be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;deploying to kubernetes&lt;/li&gt;
+&lt;li&gt;publishing to pypi/npm/cargo&lt;/li&gt;
+&lt;li&gt;deploying to a cloud service, like AWS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Done!&lt;/p&gt;
+&lt;h3&gt;Recap&lt;/h3&gt;
+&lt;h4&gt;Standards&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://semver.org/"&gt;semver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.conventionalcommits.org/en/v1.0.0/"&gt;conventional commits&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;The Price&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Write parseable commits&lt;/li&gt;
+&lt;li&gt;Easy to map commit messages to semver&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Command&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;cz bump --changelog
+&lt;/pre&gt;
+
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Try commitizen and check the &lt;a href="https://github.com/commitizen-tools/commitizen"&gt;repo&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;We aim for simplicity, trying to make this process as simple as possible, but
+the tool is quite flexible, explore it, and see if it fits for your use cases.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hey, hello 👋&lt;/p&gt;
+&lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><category>ci</category><category>python</category><guid>https://woile.github.io/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item><item><title>Helm 3 - Crafting a Chart</title><link>https://woile.github.io/posts/helm-3-crafting-a-chart/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;This post focuses on &lt;strong&gt;creating and releasing a chart&lt;/strong&gt;, not consuming from a Helm Chart Repository.&lt;/p&gt;
+&lt;p&gt;Helm is an &lt;strong&gt;advanced&lt;/strong&gt; tool used by kubernetes people, some "lingo" (jargon) is used here.
+Please leave a comment if you want more information.&lt;/p&gt;
+&lt;p&gt;Helm allows to &lt;strong&gt;"package"&lt;/strong&gt; kubernetes applications, it simplifies the distribution
+and installation. While doing so, it checks dependencies versions and some other validations.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a href="https://helm.sh/docs/intro/"&gt;Official Helm 3 Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;Version used&lt;/h3&gt;
+&lt;pre class="code literal-block"&gt;$ helm version --short
+v3.2.4+g0ad800e
+&lt;/pre&gt;
+
+&lt;h3&gt;Helm Chart&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A Chart is a Helm package. It contains all of the resource definitions necessary to run an application,
+tool, or service inside of a Kubernetes cluster. Think of it as the Kubernetes equivalent of a
+Homebrew formula, an apt dpkg, or a Yum RPM file &lt;a href="https://helm.sh/docs/intro/using_helm/#three-big-concepts"&gt;[0]&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For OOP people:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Chart ~= class&lt;/li&gt;
+&lt;li&gt;Release ~= instance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is important to remember, we are going to be building a &lt;strong&gt;package&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;Development of a Chart&lt;/h3&gt;
+&lt;h4&gt;Creating a new Chart&lt;/h4&gt;
+&lt;p&gt;My recommendation is to create a &lt;code&gt;charts/&lt;/code&gt; folder in the root of your project(s).&lt;/p&gt;
+&lt;p&gt;This way each of your projects could become a "chart repository", similar to how hub.helm.sh consumes respositories from different sources in a descentralized way.&lt;/p&gt;
+&lt;p&gt;You could do the same for your projects. Each git project becomes a descentralized chart repository,
+or you can publish to a centralized chart repository like artifactory or your own github repo.&lt;/p&gt;
+&lt;p&gt;In any case, calling it &lt;code&gt;charts/&lt;/code&gt; is informative and flexible enough to choose any option.&lt;/p&gt;
+&lt;p&gt;Inside &lt;code&gt;charts/&lt;/code&gt;, we are going to use &lt;code&gt;helm&lt;/code&gt; to create the first boilerplate of our app.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;helm create &amp;lt;package_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;h5&gt;Example&lt;/h5&gt;
+&lt;p&gt;Along the post we'll use &lt;code&gt;auth-service&lt;/code&gt; as our project example name.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;mkdir auth-service
+&lt;span class="nb"&gt;cd&lt;/span&gt; auth-service/
+mkdir charts
+&lt;span class="nb"&gt;cd&lt;/span&gt; charts/
+&lt;/pre&gt;
+
+&lt;pre class="code literal-block"&gt;helm create auth-service
+&lt;/pre&gt;
+
+&lt;h5&gt;Structure&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;auth-service/
+└── charts/
+    └── auth-service/
+        ├── charts/
+        ├── Chart.yaml
+        ├── templates/
+        │   ├── deployment.yaml
+        │   ├── _helpers.tpl
+        │   ├── hpa.yaml
+        │   ├── ingress.yaml
+        │   ├── NOTES.txt
+        │   ├── serviceaccount.yaml
+        │   ├── service.yaml
+        │   └── tests/
+        │       └── test-connection.yaml
+        └── values.yaml
+&lt;/pre&gt;
+
+&lt;h5&gt;Notes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;appVersion&lt;/code&gt; inside &lt;code&gt;Chart.yaml&lt;/code&gt; references the &lt;strong&gt;application version&lt;/strong&gt; &lt;a href="https://stackoverflow.com/a/60054111/2047185"&gt;[1]&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;image.tag&lt;/code&gt; inside &lt;code&gt;values.yaml&lt;/code&gt; references the &lt;strong&gt;docker image version/tag&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;if &lt;code&gt;image.tag&lt;/code&gt; is skipped, &lt;code&gt;appVersion&lt;/code&gt; is used instead.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;recommendation&lt;/strong&gt;: use a tool to automatically bump the version, like &lt;a href="https://github.com/commitizen-tools/commitizen"&gt;commitizen&lt;/a&gt;,
+during the CI execution, and push back to the repo.&lt;/li&gt;
+&lt;li&gt;Whether to use &lt;code&gt;image.tag&lt;/code&gt; or &lt;code&gt;appVersion&lt;/code&gt; is still under debate, you can read more in the
+&lt;a href="https://github.com/helm/helm/issues/8194"&gt;github issue&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;If you use &lt;code&gt;appVersion&lt;/code&gt; you can use &lt;code&gt;helm history &amp;lt;release_name&amp;gt;&lt;/code&gt; to get info on the versions
+per revision.&lt;/li&gt;
+&lt;li&gt;You can re-use the same chart to deploy multiple django/rails applications, &lt;a href="https://github.com/helm/helm/issues/8194#issuecomment-658715462"&gt;seems like a
+common practice&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Chart customization&lt;/h4&gt;
+&lt;p&gt;I recommend to start with the default helm chart and from there, start
+adding any extra stuff that you need.&lt;/p&gt;
+&lt;h4&gt;Templating&lt;/h4&gt;
+&lt;p&gt;If you have used other template systems like &lt;code&gt;jinja&lt;/code&gt;, or Django's template engine,
+Helm's system is not that different: you can apply functions using a pipeline &lt;code&gt;|&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;food&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;.Values.favorite.food | upper | quote&lt;/span&gt; &lt;span class="p p-Indicator"&gt;}}&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Avoid adding complex template tags; the purpose of &lt;code&gt;yaml&lt;/code&gt; is to be &lt;strong&gt;readable&lt;/strong&gt;.
+By using templates, we make things more complex, and less readable, &lt;strong&gt;touch only when necessary&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;templates/_helpers.tpl&lt;/code&gt; contains custom functions for your templates, like generating the release name based on values.&lt;/p&gt;
+&lt;p&gt;To find problems with you charts, run:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;helm lint &amp;lt;package_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;h4&gt;Values&lt;/h4&gt;
+&lt;p&gt;Place the "configuration" that you want to expose to the users of the chart in
+the &lt;code&gt;values.yaml&lt;/code&gt;, even if it's you who's gonna end up using it.
+There's no need to parametrize everything, and try to use sensible defaults.&lt;/p&gt;
+&lt;p&gt;A good rule is to expose only the things you are going to use and make new
+parameters only when you have to.&lt;/p&gt;
+&lt;p&gt;Let developers specify unconventional aspects of the application.&lt;/p&gt;
+&lt;p&gt;You can also define a &lt;code&gt;values.schema.json&lt;/code&gt; which will be used by helm to validate
+the parameters given to Helm &lt;a href="https://helm.sh/docs/topics/charts/#schema-files"&gt;[2]&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Using custom values&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;values.yaml&lt;/code&gt; is used as default and any extra values provided through &lt;code&gt;--set&lt;/code&gt; or &lt;code&gt;--values&lt;/code&gt;
+will be merged into the default &lt;code&gt;values.yaml&lt;/code&gt; inside the chart.&lt;/p&gt;
+&lt;p&gt;There are 2 approaches to deal with custom values that I know.&lt;/p&gt;
+&lt;h5&gt;Centralized values&lt;/h5&gt;
+&lt;p&gt;The first one is to have a centralized place with all the configuration. At the
+moment, I know &lt;a href="https://github.com/roboll/helmfile"&gt;helmfile&lt;/a&gt; is being used for this.
+You'd specify every configuration per environment per chart in a &lt;code&gt;helmfile.yaml&lt;/code&gt;.&lt;/p&gt;
+&lt;h5&gt;Per repository&lt;/h5&gt;
+&lt;p&gt;This is the most popular approach. Each "project" is responsible to set the values
+per enviroment (&lt;code&gt;production&lt;/code&gt;, &lt;code&gt;staging&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;If you are going to modify small aspects of your app, using &lt;code&gt;--set&lt;/code&gt; should be enough.&lt;/p&gt;
+&lt;p&gt;A common practice, is to place the production and staging files inside the chart folder,
+but in my opinion this should be avoided when possible.&lt;/p&gt;
+&lt;p&gt;A Helm chart is a package: &lt;strong&gt;Helm is a package manager&lt;/strong&gt;.
+Like apt, pip or npm.
+When we use tools like Docker, for example, we provide env variables from outside, they are
+not packaged inside the image. This gives the container a lot of flexibility and the
+same principle applies to Helm. There's an interesting &lt;a href="https://github.com/helm/helm/issues/6715"&gt;discussion in the helm repo&lt;/a&gt;
+about this.&lt;/p&gt;
+&lt;p&gt;Ideally, your custom values should live outside the chart, and they should be given to the chart.&lt;/p&gt;
+&lt;p&gt;Let's see a setup example for the &lt;code&gt;auth-service&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;auth-service/
+├── charts/
+│   └── auth-service/
+├── charts-values/
+│   ├── production/
+│   │   ├── redis.yaml
+│   │   └── auth-service.yaml
+│   └── staging/
+│       └── auth-service.yaml
+└── src/
+&lt;/pre&gt;
+
+&lt;p&gt;The installation command would look like&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;helm install --values charts-values/production/auth-service.yaml auth-service-prod ./auth-service
+&lt;/pre&gt;
+
+&lt;p&gt;I'm not 100% happy with the above setup, mainly with the naming.
+But it allows having multiple values per chart per environment.
+We could easily add values for a redis pulled from the official Helm hub.
+I'd like to hear opinions about it. How'd you do it?&lt;/p&gt;
+&lt;h3&gt;Release&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A Release is an instance of a chart running in a Kubernetes cluster. One chart can often be installed many times into the same cluster. And each time it is installed, a &lt;strong&gt;new release is created&lt;/strong&gt;.
+Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have its own release, which will in turn have its own release name &lt;a href="https://helm.sh/docs/intro/using_helm/#three-big-concepts"&gt;[3]&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;New release&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;helm install &amp;lt;release_name&amp;gt; &amp;lt;package_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Deploy a new release to the cluster.&lt;/p&gt;
+&lt;p&gt;We can also run a dry-run to check what's going to happen:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;helm install &amp;lt;release_name&amp;gt; &amp;lt;package_name&amp;gt; --dry-run
+&lt;/pre&gt;
+
+&lt;h5&gt;Example&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;helm install auth-service-prod ./auth-service
+&lt;/pre&gt;
+
+&lt;h5&gt;Notes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;package_name&lt;/code&gt; can be a folder, a &lt;code&gt;.tgz&lt;/code&gt; or a url.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;release_name&lt;/code&gt;: the name of this particular release. If the name is different another "instance" will be deployed. So for redis instances it may be worth using different &lt;code&gt;release_name&lt;/code&gt;s, but for your JavaScript app it may not.&lt;/li&gt;
+&lt;li&gt;The output of &lt;code&gt;templates/NOTES.txt&lt;/code&gt; is shown in the prompt when making a new release, useful for CI logs.&lt;/li&gt;
+&lt;li&gt;If you don't want to provide a &lt;code&gt;&amp;lt;release_name&amp;gt;&lt;/code&gt;, use &lt;code&gt;--generate-name&lt;/code&gt; and it will assign a random &lt;code&gt;&amp;lt;release_name&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Helm stores release config per namespace, so if you want to release 2 redis instances in the same namespace, they should have different &lt;code&gt;&amp;lt;release_name&amp;gt;&lt;/code&gt;s &lt;a href="https://github.com/helm/community/blob/master/helm-v3/003-state.md#namespacing-changes"&gt;[4]&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Helm does not wait until all of the resources are running before it exits &lt;a href="https://helm.sh/docs/intro/using_helm/#helm-install-installing-a-package"&gt;[5]&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;personal&lt;/strong&gt;: use different &lt;code&gt;release_name&lt;/code&gt;s per environment (&lt;code&gt;production&lt;/code&gt;, &lt;code&gt;staging&lt;/code&gt;). Even though it may not be necessary, giving that extra information in the name is useful and cheap.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;helm get values &amp;lt;release_name&amp;gt;&lt;/code&gt; to get the values used for the release, useful to check if our custom values were applied properly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Check release status&lt;/h4&gt;
+&lt;p&gt;After it is installed, we want to know if everything went well.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;helm status &amp;lt;release_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;h5&gt;Example&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;helm status auth-service-prod
+&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;An upgrade takes an existing release and upgrades it according to the information you provide. Because Kubernetes charts can be large and complex, Helm tries to perform the &lt;strong&gt;least invasive upgrade&lt;/strong&gt;. It will only update things that have changed &lt;strong&gt;since the last release&lt;/strong&gt;. &lt;a href="https://helm.sh/docs/intro/using_helm/#helm-upgrade-and-helm-rollback-upgrading-a-release-and-recovering-on-failure"&gt;[6]&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;Uprgrade release&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;helm upgrade -f &amp;lt;custom_values.yaml&amp;gt; &amp;lt;release_name&amp;gt; &amp;lt;package_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;h5&gt;Example&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;helm upgrade -f charts-values/production/auth-service.yaml auth-service-prod ./auth-service
+&lt;/pre&gt;
+
+&lt;h4&gt;Rollback release&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;helm rollback &amp;lt;release_name&amp;gt; &amp;lt;revision&amp;gt;
+&lt;/pre&gt;
+
+&lt;h5&gt;Example&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;helm rollback auth-service-prod &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;h5&gt;Notes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Any release version increment will produce a &lt;code&gt;revision&lt;/code&gt; number. It goes from 1..N.&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;helm history &amp;lt;release_name&amp;gt;&lt;/code&gt; to see the revisions of your &lt;code&gt;release_name&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Uninstall release&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;helm uninstall &amp;lt;release_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;I won't go deep into this, but just know it exists, and you can remove an existing release.&lt;/p&gt;
+&lt;h4&gt;Automating release cycle&lt;/h4&gt;
+&lt;p&gt;A recommended best practice to avoid running &lt;code&gt;helm install&lt;/code&gt; and &lt;code&gt;helm upgrade&lt;/code&gt; &lt;a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#install-or-upgrade-a-release-with-one-command"&gt;[7]&lt;/a&gt; is to use:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;helm upgrade --install &amp;lt;release_name&amp;gt; --values &amp;lt;custom_values.yaml&amp;gt; &amp;lt;package_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;This can be a benefit in an automated CI/CD pipeline. We let Helm perform the check to know if it's a first time,
+or a release upgrade.&lt;/p&gt;
+&lt;h5&gt;Example&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;helm upgrade --install auth-service-prod --values charts-values/production/auth-service.yaml ./auth-service
+&lt;/pre&gt;
+
+&lt;h5&gt;Notes&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Use &lt;code&gt;--atomic&lt;/code&gt; to get automatic rollback on failures.&lt;a href="https://lzone.de/blog/Helm-Best-Practices"&gt;[8]&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Complex Charts with Many Dependencies&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The current best practice for composing a complex application from discrete parts is to create a top-level umbrella chart that exposes the global configurations, and then use the charts/ subdirectory to embed each of the components.&lt;a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#complex-charts-with-many-dependencies"&gt;5&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I think this is an improving point; I haven't understood it by reading the documentation yet.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hey, hello 👋&lt;/p&gt;
+&lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><category>helm</category><category>kubernetes</category><guid>https://woile.github.io/posts/helm-3-crafting-a-chart/</guid><pubDate>Wed, 15 Jul 2020 13:20:41 GMT</pubDate></item><item><title>Pyenv</title><link>https://woile.github.io/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
+Works in the user space, avoiding the system's python, therefore is less error prone.
+You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
+Doesn't require python.&lt;/p&gt;
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Use &lt;a href="https://github.com/pyenv/pyenv-installer"&gt;pyenv-installer&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;curl https://pyenv.run &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;$SHELL&lt;/span&gt;  &lt;span class="c1"&gt;# Restart shell or open new terminal&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;h3&gt;Usage&lt;/h3&gt;
+&lt;h4&gt;Install different python versions&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.6.10
+pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.7.6
+&lt;/pre&gt;
+
+&lt;h4&gt;Set global python&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;pyenv global &lt;span class="m"&gt;3&lt;/span&gt;.7.6
+&lt;/pre&gt;
+
+&lt;p&gt;Observe&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;python --version
+&lt;span class="nb"&gt;type&lt;/span&gt; -a python
+&lt;/pre&gt;
+
+&lt;h4&gt;Set local python&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/my-project
+pyenv &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.6.10
+&lt;/pre&gt;
+
+&lt;p&gt;Observe&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;cat .python-version
+python --version
+&lt;span class="nb"&gt;type&lt;/span&gt; -a python
+&lt;/pre&gt;
+
+&lt;h4&gt;Other languages&lt;/h4&gt;
+&lt;p&gt;There's a set of similar tools for other languages, following the
+same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &lt;code&gt;nodenv&lt;/code&gt; for example.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ruby:&lt;/strong&gt; &lt;a href="https://github.com/rbenv/rbenv"&gt;rbenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;javascript:&lt;/strong&gt; &lt;a href="https://github.com/nodenv/nodenv"&gt;nodenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;go:&lt;/strong&gt; &lt;a href="https://github.com/syndbg/goenv"&gt;go&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;php:&lt;/strong&gt; &lt;a href="https://github.com/phpenv/phpenv"&gt;phpenv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;More resources&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://realpython.com/intro-to-pyenv/"&gt;In depth tutorial by real python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;Official docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hey, hello 👋&lt;/p&gt;
+&lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><category>python</category><category>python-versions</category><category>tutorial</category><guid>https://woile.github.io/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item><item><title>2019 yearly retrospective</title><link>https://woile.github.io/posts/2019-yearly-retrospective/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So far it's been great. I just wanted to write a recap for my future self.&lt;/p&gt;
+&lt;h3&gt;Life&lt;/h3&gt;
+&lt;p&gt;This year will be almost 3 years since I've been in Amsterdam. I love living here.
+The more I think about it the more I'm sure of it: &lt;strong&gt;Amsterdam (or the whole Netherlands) is a bubble&lt;/strong&gt;,
+even in Europe.
+Most people move around in their bikes, everything just works, everyone enjoys living here,
+there's a huge balance between nature and city.
+It's a cosmopolitan city, full of diversity, alive, but it looks like a small town.&lt;/p&gt;
+&lt;p&gt;Of course it's not perfect and it has its issues, but nothing can be perfect.&lt;/p&gt;
+&lt;h3&gt;Friends&lt;/h3&gt;
+&lt;p&gt;This year I've made a lot of friends, most of them Argentinians.
+It's always nice to experience life with friends. I'm thankful for it.&lt;/p&gt;
+&lt;p&gt;I'm lucky enough to have many friends in many different places, with different ideas,
+desires, experiences. They enrich my mind.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: keep making friends; most people are interesting&lt;/p&gt;
+&lt;h3&gt;Books&lt;/h3&gt;
+&lt;p&gt;This year I read 10 out of 12 books I wanted to read.
+Pretty good, but next year I'll read more.
+I feel that in this era of information overload, books are a way to get "curated" information.&lt;/p&gt;
+&lt;h3&gt;Travel&lt;/h3&gt;
+&lt;p&gt;Thanks to randomness and myself, I have the chance to travel quite often.
+This year I've been to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alicante, Spain on my first climbing trip.&lt;/li&gt;
+&lt;li&gt;Tignes, France on my first ski trip.&lt;/li&gt;
+&lt;li&gt;Sharm El Sheikh, Egypt to dive.&lt;/li&gt;
+&lt;li&gt;Istanbul, Turkey and its other cities for tourism.&lt;/li&gt;
+&lt;li&gt;London, UK to visit my sister.&lt;/li&gt;
+&lt;li&gt;Basel, Switzerland attending to attend the Europython conference.&lt;/li&gt;
+&lt;li&gt;Bordeaux, France to give a talk at PyCon France.&lt;/li&gt;
+&lt;li&gt;Gent, Belgium for a festival.&lt;/li&gt;
+&lt;li&gt;Giethoorn, The Netherlands with my mom.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I've reduced the amount of flights I take, in order to reduce my environment impact.
+And I also don't enjoy flying.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: traveling expands my mind&lt;/p&gt;
+&lt;h3&gt;Hobby&lt;/h3&gt;
+&lt;p&gt;This year I've released 2 apps:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://rentee.app"&gt;rentee.app&lt;/a&gt; (may not work now due to certificates)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://veck.app"&gt;veck.app&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The first one took around 2 years to be built and the second around 2 weeks.
+Of course, the later was built after the lessons learned.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lesson&lt;/strong&gt;: release early&lt;/p&gt;
+&lt;p&gt;As of today I think that validating against your users is the best way to build services or products,
+&lt;strong&gt;build a core&lt;/strong&gt; and go public. Make a short list of what must be done, and launch.&lt;/p&gt;
+&lt;p&gt;I still have to learn how to communicate and reach wider audiences, but it's going well so far.&lt;/p&gt;
+&lt;p&gt;I'm thankful for having a bunch of enthusistic friends to work with them in our
+ideas and projects.&lt;/p&gt;
+&lt;h3&gt;Languages&lt;/h3&gt;
+&lt;p&gt;I've been trying to improve my Dutch for some time now.
+This last time I've barely started to feel a bit comfortable with it.
+My Duolingo streak is 363 days so far, and I don't plan on stopping.&lt;/p&gt;
+&lt;p&gt;Regarding programming languages, this year I've talked in some conferences and meetups,
+contributed to many open source projects and now I'm also trying to help people who want to learn
+(if you want to, you can always write me for advice).&lt;/p&gt;
+&lt;p&gt;Special mention to the &lt;strong&gt;Python programming language&lt;/strong&gt;, thanks to whom,
+I can do a lot of things in my life :)&lt;/p&gt;
+&lt;p&gt;Next year, I'll try to focus more on languages like rust, which attract me a lot.&lt;/p&gt;
+&lt;h3&gt;Work&lt;/h3&gt;
+&lt;p&gt;My current job so far is great, and I'm thankful for it.
+I work from Monday to Thursday and on Fridays, they let me work on myself.
+The schedule is flexible and no one in my team is counting hours;
+they count the work done instead.
+I won't go into detail because it's stuff I build for the company.&lt;/p&gt;
+&lt;h3&gt;Future&lt;/h3&gt;
+&lt;p&gt;Things I plan to do:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Have a podcast about history.&lt;/li&gt;
+&lt;li&gt;Build (paid) services that help people.&lt;/li&gt;
+&lt;li&gt;Build useful apps for fun.&lt;/li&gt;
+&lt;li&gt;Learn another programming language.&lt;/li&gt;
+&lt;li&gt;Read more books.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks for reading and follow me on Twitter &lt;a href="https://twitter.com/santiwilly"&gt;santiwilly&lt;/a&gt; if you want to know more about my future.&lt;/p&gt;&lt;/div&gt;</description><category>self</category><guid>https://woile.github.io/posts/2019-yearly-retrospective/</guid><pubDate>Tue, 31 Dec 2019 16:40:35 GMT</pubDate></item><item><title>Multiple configurations in kubernetes</title><link>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
+kubernetes. At this point, you'll want to have multiple config files, instead of
+replacing &lt;code&gt;~/.kube/config&lt;/code&gt;, which is fine the first few times.&lt;/p&gt;
+&lt;p&gt;In order to do this we only need to set &lt;code&gt;KUBECONFIG&lt;/code&gt; env variable with the path to the kubeconfigs.&lt;/p&gt;
+&lt;p&gt;Create a &lt;code&gt;configs&lt;/code&gt; folder, where the kubernetes config files will live.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;mkdir -p ~/.kube/configs
+&lt;/pre&gt;
+
+&lt;p&gt;The next thing is to add the env variable to our &lt;code&gt;.bashrc&lt;/code&gt;, &lt;code&gt;.zshrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file,
+with the location of our configurations. The paths should be separated by a &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/configs/gke-config:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/configs/eks-config
+&lt;/pre&gt;
+
+&lt;p&gt;Reloading our terminal with &lt;code&gt;. ~/.bashrc&lt;/code&gt;, or opening a new one should pick up the changes.&lt;/p&gt;
+&lt;h4&gt;Automating the config detection&lt;/h4&gt;
+&lt;p&gt;Why not automate this? So everytime we add a new kubeconfig, it's detected automatically.&lt;/p&gt;
+&lt;p&gt;Here's my attempt, place this snippet in your &lt;code&gt;.bashrc&lt;/code&gt; or any other terminal file.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;set_kubeconfig&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; entry in &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/.kube/configs"&lt;/span&gt;/*
+    &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="c1"&gt;# Get files which do not include "skip"&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$entry&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;[[&lt;/span&gt; &lt;span class="nv"&gt;$entry&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; *&lt;span class="s2"&gt;"skip"&lt;/span&gt;* &lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nv"&gt;kubeconfigs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$kubeconfigs&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$entry&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Clean first colons&lt;/span&gt;
+    &lt;span class="nv"&gt;kubeconfigs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;kubeconfigs&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="s2"&gt;":"&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+    &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$kubeconfigs&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Execute the function&lt;/span&gt;
+set_kubeconfig
+&lt;/pre&gt;
+
+&lt;p&gt;This script will get all the &lt;strong&gt;files&lt;/strong&gt; inside &lt;code&gt;~/.kube/configs&lt;/code&gt;,
+which do not include &lt;code&gt;skip&lt;/code&gt; in their name, and will set the &lt;code&gt;KUBECONFIG&lt;/code&gt;
+variable to the found files.&lt;/p&gt;
+&lt;h4&gt;Switching context and namespace&lt;/h4&gt;
+&lt;p&gt;Now that our configs are detected automatically, we still have to change manually between
+contexts and namespaces. I'll leave here the shortcuts&lt;/p&gt;
+&lt;p&gt;Remember that a context is a mix of [cluster, namespace, user].&lt;/p&gt;
+&lt;h5&gt;Current configuration&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;kubectl config view --minify  &lt;span class="c1"&gt;# without minify we'll see all the configs&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;h5&gt;List contexts&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;kubectl config get-contexts
+&lt;/pre&gt;
+
+&lt;h5&gt;Swtich context&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;kubectl config use-context &amp;lt;context_name&amp;gt;
+&lt;/pre&gt;
+
+&lt;h5&gt;Switch namespace&lt;/h5&gt;
+&lt;pre class="code literal-block"&gt;kubectl config set-context --current --namespace&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;new_namespace&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;&lt;/div&gt;</description><category>configuration</category><category>kubectl</category><category>kubernetes</category><category>linux</category><guid>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</guid><pubDate>Fri, 08 Nov 2019 18:15:28 GMT</pubDate></item><item><title>PyCon France 2019 experience</title><link>https://woile.github.io/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.github.io/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;This year (2019) I had the opportunity to participate as a speaker at &lt;a href="https://www.pycon.fr/2019/"&gt;PyCon France&lt;/a&gt;,
+and it was a great experience.
+The event was held in &lt;strong&gt;Bordeaux, France&lt;/strong&gt;, a super cozy city, famous for its wines.&lt;/p&gt;
+&lt;p&gt;I realize now that every country claims they have the best wine, including mine.
+I have to say, though, that I loved Bordeaux wines, and I bought 4 to bring back home.&lt;/p&gt;
+&lt;h3&gt;Highlights of PyFrance&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="marcos in bordeaux" src="https://woile.github.io/images/pycon-fr-2019/marcos.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Everyone was kind to me and I felt really comfortable at the conference.
+It somehow reminded me of the Argentinian PyCon, maybe because it's free for everyone.&lt;/p&gt;
+&lt;p&gt;I really liked the &lt;strong&gt;"badge"&lt;/strong&gt; approach. On arrival, you could pick some "flags".
+I chose the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"I speak english"&lt;/li&gt;
+&lt;li&gt;"Speaker"&lt;/li&gt;
+&lt;li&gt;"First time"&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some cool others: "Do not talk to me", "No pics please", "Volunteer".&lt;/p&gt;
+&lt;p&gt;They also had an &lt;strong&gt;automatic captioning tool&lt;/strong&gt;, which generated the transcription
+live.&lt;/p&gt;
+&lt;p&gt;I met a bunch of new people and had some interesting talks.&lt;/p&gt;
+&lt;p&gt;There were some talks I couldn't attend because of the language barrier
+(I don't speak French). But there's no one to blame for this.&lt;/p&gt;
+&lt;p&gt;The talk I enjoyed the most was the keynote about &lt;strong&gt;"The Role of 21st Century Technology in Protests"&lt;/strong&gt;.
+It gave me a lot to think about.
+First, I'm amazed by the creativity and cleverness of the Hong Kong people and
+their constant push to prevent incidents.
+Please look up all the stuff they did to counter police efforts to capture people.
+And second, about the role technology has in society.
+When left in autocratic hands, it can quickly deviate and be used to harm people,
+&lt;strong&gt;no matter how good intentions are at the beginning&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Technology, in the way's being used in some countries, is scary.
+What is even scarier is that people are not aware of the dangers.&lt;/p&gt;
+&lt;p&gt;The only lesson I take from this is that &lt;strong&gt;education&lt;/strong&gt; is key.
+The more education a person receives, the more resilient, and shielded they become
+against foreign evil "human" agents, like vaccines.
+And I mean education, not indoctrination, though in practice it may be harder
+to draw the line.&lt;/p&gt;
+&lt;h3&gt;My Presentation&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="me talking at pycon fr 2019" src="https://woile.github.io/images/pycon-fr-2019/santi.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;I prepared the talk for over 3 weeks: &lt;a href="https://woile.github.io/pytest-presentation/"&gt;Pytest yes, let's go&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Every talk I give takes me a lot of time and effort.
+I find it really hard to come up with the slides quickly.
+Luckily I got positive feedback over my talk, so I left the conference quite proud.&lt;/p&gt;
+&lt;p&gt;For my next pycon (whichever I end up attending), I think I know the topic I'll discuss about: &lt;strong&gt;Documentation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>conference</category><category>pycon</category><category>python</category><guid>https://woile.github.io/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Sharing passwords using gopass, git and gpg</title><link>https://woile.github.io/posts/sharing-team-secrets/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Tired of storing your passwords in unreliable but convenient places?&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Tired of sharing password across unreliable platforms? slack, notes, etc&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;Tired of having your team passwords in no specific place?&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="line-block"&gt;
+&lt;div class="line"&gt;If you have answer to any of this questions with a yes, then you might find&lt;/div&gt;
+&lt;div class="line"&gt;this post quite useful. If your answer was no, read it anyway, you are&lt;/div&gt;
+&lt;div class="line"&gt;already here.&lt;/div&gt;
+&lt;/div&gt;
+&lt;img src="https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif"&gt;&lt;p&gt;&lt;a href="https://woile.github.io/posts/sharing-team-secrets/"&gt;Read more…&lt;/a&gt; (6 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>encryption</category><category>gpg</category><category>password manager</category><category>security</category><guid>https://woile.github.io/posts/sharing-team-secrets/</guid><pubDate>Mon, 18 Mar 2019 16:34:36 GMT</pubDate></item><item><title>Raspberry Pi hobby cluster</title><link>https://woile.github.io/posts/raspberries-hobby-cluster/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;In this tutorial we are gonna try to setup a cluster in our home
+server built with raspberries.&lt;/p&gt;
+&lt;p&gt;In another post I'll describe how to configure a Kubernetes cluster in our raspberries.&lt;/p&gt;
+&lt;p&gt;Kubernetes is a container orchestration tool, it can do all of this:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;Automatic bin packing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Self-healing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Horizontal scaling&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Service discovery and Load balancing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Automated rollouts and rollbacks&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Secrets and configuration management&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Storage orchestration&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Long running jobs&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Batch execution&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/raspberries-hobby-cluster/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cluster</category><category>docker</category><category>kubernetes</category><category>raspberry</category><guid>https://woile.github.io/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item><item><title>Moving from docker alpine to slim</title><link>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
+I've used the base version, the slim and the alpine.&lt;/p&gt;
+&lt;p&gt;Initially I moved from the base python3.6 to the python3.6-slim and everything
+went great. The main win was that no change was required in the Dockerfile,
+it was smaller and more secure (less dependencies, more security, right?)&lt;/p&gt;
+&lt;p&gt;After a while, I decided to move from slim to alpine, because of the size benefit.
+While doing the migration I found these drawbacks:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Renaming dependencies&lt;/strong&gt;. I had to convert from &lt;code&gt;apt&lt;/code&gt; to &lt;code&gt;apk&lt;/code&gt; for every dependency.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Working with edge&lt;/strong&gt;. There's always a problem with the edge repository.
+Sometimes it's down. Sometimes the packages are broken.
+You have to dig a lot in order to have a proper configuration.
+Like using &lt;code&gt;--no-cache&lt;/code&gt; flag in apk. Or setting up the edge repo, then having to upgrade &lt;code&gt;apk-tools&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This kind of problems break our pipeline when there's no new commit. And I don't want this.
+That's why I've decided to move back to &lt;code&gt;slim&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Don't get me wrong, alpine is great, small and secure, and if you don't have many edge dependencies,
+I guess it'll work flawlessly, and I would totally use it.
+But our image unfortunately has dependencies like postgis, and proj4, which fail a lot in alpine.&lt;/p&gt;
+&lt;p&gt;But my story is not over with alpine, I'll try it again in the future.
+I know with time it will get better and better, and I'll understand it more and more.&lt;/p&gt;&lt;/div&gt;</description><category>linux python containers alpine slim debian</category><guid>https://woile.github.io/posts/moving-from-docker-alpine-to-slim/</guid><pubDate>Sun, 13 Jan 2019 15:34:43 GMT</pubDate></item><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5"&gt;About mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6"&gt;Configuring mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7"&gt;Python frameworks&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9"&gt;Django SSL Server&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#flask" id="id10"&gt;Flask&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11"&gt;Gunicorn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12"&gt;UWSGI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13"&gt;Security concerns&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="about-mkcert"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id5"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/"&gt;mkcert&lt;/a&gt; allows you to have a local
+certificate authority (CA).
+This means that you can run your development web server using HTTPS.
+You'll see the green lock in your browser.&lt;/p&gt;
+&lt;img src="https://woile.github.io/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
+HTTPS by default in the browser, like web bluetooth, service workers, web authentication
+and websockets in some cases where SSL is already enabled.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item></channel></rss>
