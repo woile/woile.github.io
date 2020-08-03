@@ -20,10 +20,10 @@ efectivamente, para no tener que pensar en eso en el futuro.
 > ATENCIÓN
 >
 > No me dedico a esto, y tampoco me gusta, así que no te puedo dar ninguna garantía
-> de nada. Tómalo como una introducción al tema.
+> de nada. Tomalo como una introducción al tema.
 
 Cualquier duda, aporte o correción son bienvenidos, hay una sección de comentarios al
-final o puedes contactarme en [twitter][santiwilly].
+final o podés contactarme en [twitter][santiwilly].
 
 ## Introduccion
 
@@ -38,39 +38,38 @@ Esto **no se trata de hacerse rico al instante**, sino retirarse temprano, es de
 en menos tiempo de lo que se llega a una pensión.
 
 Tampoco se trata de tener una tonelada de plata, sino que tus bienes produzcan más o menos
-lo suficiente para cubrir lo que gastas ahora.
+los gastos que generás ahora.
 
-Por tirar un numero, yo diría que se tarda en promedio, 20 años, esto es mucho menos que
-la pension. Esto varia dependiendo tu situación.
+Por tirar un número, yo diría que se tarda en promedio, 20 años; esto es mucho menos que
+la pensión. Esto varia dependiendo de tu situación.
 
-Mas alla de eso, es un gran complemento a lo que será tu pensión y es **mejor que
+Mas allá de eso, es un gran complemento a lo que será tu pensión y es **mejor que
 tener tu dinero parado**.
 
-Puedes leer más en el [faq de /r/financialindependance][faq_fi].
+Podés leer más en el [faq de /r/financialindependance][faq_fi].
 
 Asegurate de **no tener deudas** y tener un colchoncito de dinero, por lo menos
 para **poder vivir por 6 meses**, antes de empezar.
 
 ## Inversiones
 
-Yo me voy a enfocar en **donde invertir**.
+Yo me voy a enfocar en **dónde invertir**.
 
 En general, los argentinos en los Países Bajos tienen un salario que les permite
-ahorrar. Pero dada nuestra historia, (o por lo menos yo) no sabemos que se puede
+ahorrar. Pero dada nuestra historia, (o por lo menos yo) no sabemos qué se puede
 hacer con los ahorros, además de tenerlos en la cuenta.
 
 Entonces... dónde hay que invertir? En el stock market. Sí, **acciones**.
 
 El stock market tiene el margen de retorno más alto (~7.5% cuenta la leyenda),
-mejor que real estate, y otros [[0]][simple_path], y el riesgo lo controlamos
-invirtiendo de la forma controlada, y a largo plazo que se explica en este post.
-El canadiense Ben Felix explica, por ejemplo, el costo asociado a comprar un hogar en [este video][buying_vs_renting].
+mejor que real estate, y otros [[0]][simple_path], y a su vez es el de menor
+riesgo. El canadiense Ben Felix explica el costo asociado a comprar un hogar en [este video][buying_vs_renting].
 
 ![Stock market](/images/fire-para-argentinos-en-los-paises-bajos/stock.jpg)
 
 Pero no vamos a invertir de la manera que uno piensa en acciones, teniendo que mirar todos los días la pantallita del celular, **eso no por favor!** Ya veremos más adelante.
 
-### Cuanto necesito para retirarme
+### Cuánto necesito para retirarme
 
 El cálculo es **25 veces tus gastos anuales** [[1]][trinity_study]
 
@@ -81,39 +80,39 @@ Ejemplos:
 
 Ese **4%** aparece en muchos lugares mencionado.
 
-Pueden leer "[The Shockingly Simple Math Behind Early Retirement][shocking]" para mas info.
+Pueden leer "[The Shockingly Simple Math Behind Early Retirement][shocking]" para más info.
 
-### Donde invierto
+### Dónde invierto
 
 Basicamente invertiremos en ETFs o index funds, que son más o menos lo mismo, a largo
 plazo no importa mucho la diferencia.
 
 Los **index funds** son un conjunto de acciones de muchas empresas.
 
-Por los 70, un tal [John C. Bogle][boggle] dijo que había que armar un index que
+Por los '70s, un tal [John C. Bogle][boggle] dijo que había que armar un index que
 imitara la performance del mercado en general a largo plazo.
 Si el mercado en un período genera 10% de interés, eso es lo que queremos.
 Dijo que el **mercado siempre está creciendo**.
 Fundó entonces [The Vanguard Group][vanguard], en la que
-los dueños son los mismos clientes, es decir, si tienes acciones del index sos en parte dueño.
+los dueños son los mismos clientes, es decir, si tenés acciones del index sos en parte dueño.
 
 Bogle estaba en contra de la especulación, que es cortoplacista y se enfoca en
 el precio de las acciones. En cambio, a largo plazo obtenemos una ganancia en base
 al negocio en sí mismo, y la gente que lo saca adelante.
 
-Como imitó al mercado? Seleccionando un conjunto de muchas empresas.
-Blog entonces, lanzó su primer index fund atado al [S&P500][sp500], que son las mejores 500 empresas
+Cómo imitó al mercado? Seleccionando un conjunto de muchas empresas.
+Blog entonces lanzó su primer index fund atado al [S&P500][sp500], que son las mejores 500 empresas
 americanas.
 
 El resto es historia.
 
-Hoy en día hay muchísimos tipos de fondos, a mi me gustan los **[ESG][esg]** que son **fondos
+Hoy en día hay muchísimos tipos de fondos. A mi me gustan los **[ESG][esg]** que son **fondos
 sustentables**. Es interesante que el mismo dinero que nos va a dar de comer puede tener
 un impacto (positivo o negativo) en el mundo.
 
 ### Cómo invertir
 
-Estando en los Países Bajos, es muy fácil, puede ser a través de la app del banco,
+Estando en los Países Bajos es muy fácil, puede ser a través de la app del banco,
 o usando [Trading 212][t212] (T212). DeGiro no la recomiendo, porque me pedía un número
 fiscal que no tengo y no pude activar mi cuenta.
 
@@ -124,7 +123,7 @@ está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en 
 Dependiendo la plataforma que elijas, vas a tener un abanico de ofertas diferentes,
 y sus costos varían. Pero el tema de costos es despreciable, así que no importa mucho.
 
-A continuación, dejo una lista que la podes usar así como esta, dependiendo tu
+A continuación, dejo una lista que la podes usar así como está, dependiendo de tu
 plataforma:
 
 | Plataforma                   | Index Fund                                                                                                         |
@@ -134,32 +133,32 @@ plataforma:
 | ABN Amro Zelf Beleggen Basis | 88% MSCI World Custom **ESG** Index (NL0011225305) + 12% MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
 | Rabobank Zelf Beleggen       | 88% MSCI World Custom **ESG** Index (NL0011225305) + 12% MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
 
-La plataforma que elijas, la buscas en google, y te va a llevar a donde hacer click
+La plataforma que elijas, la buscás en Google, y te va a llevar a dónde hacer click
 para configurar o crear una cuenta.
 
 Habrás notado que para los bancos es el mismo fund the [Northern Trust][nt] (NT), esto
-es así, porque están registrados en los Países Bajos, y no se que mambo hay que
+es así, porque están registrados en los Países Bajos, y no se qué mambo hay que
 terminamos pagando menos impuestos. Además son **ESG** y eso es genial.
 
 T212 no tiene disponibles los fondos de NT, pero los de Vanguard son los más recomendados
-en la mayor parte del mundo y son buenos. No se si tienen **ESG**.
+en la mayor parte del mundo y son buenos. No sé si tienen **ESG**.
 
-El porcentaje que aparece, es cuánto hay que invertir en cada uno.
+El porcentaje que aparece es cuánto hay que invertir en cada uno.
 Si vas a poner €100, entonces €88 van para World Custom y €12 para EMergin Market.
 
-Todos los meses separa una parte de tu salario, y volves a comprar en el mismo fund.
+Todos los meses separá una parte de tu salario, y volvés a comprar en el mismo fund.
 
-Para ver costos, cuánto obtendremos de retorno, y más información, un holandes hizo la web [indexfondsenvergelijken.nl][ifnl] que es genial.
+Para ver costos, cuánto obtendremos de retorno, y más información, un holandés hizo la web [indexfondsenvergelijken.nl][ifnl], que es genial.
 
 ## Impuestos
 
 Vas a tener que pagar impuestos por todos tus bienes en Holanda, de eso olvidate
 y mejor no luchar en contra.
 
-Tus _assets_ los vas a tener que reportar. Estes usando el banco o una plataforma,
+Tus _assets_ los vas a tener que reportar. Estés usando el banco o una plataforma,
 todos los años, en diciembre, te van a mandar un reporte con el valor de tus inversiones hasta ese momento.
 Ese valor es el que vas a tener que ingresar en la declaración jurada de ese año, en la parte de _wealth tax (box 3)_.
-Capaz te dan algún beneficio por comprar los NT por ejemplo, pero todavía no se bien como funciona,
+Capaz te dan algún beneficio por comprar los NT por ejemplo, pero todavía no sé bien cómo funciona,
 por el momento, solo se que hay algún tipo de beneficio.
 
 Los primeros €30k si sos soltero o €60k para parejas, son libres de impuesto. Te
@@ -177,34 +176,34 @@ Esta es la tablita del 2019
 
 ## Obtener el dinero de las inversiones
 
-Los fondos de inversion, bonos, stock, y otros, suelen producir [dividendos][dividend],
+Los fondos de inversión, bonos, stock, y otros, suelen producir [dividendos][dividend],
 que es la distribución de ganancias hacia los shareholders.
 
-Como vos vas a ser uno, te va a llegar esa plata, en general te la depositan en
+Como vos vas a ser uno, te va a llegar esa plata; en general te la depositan en
 la plataforma que uses.
 
-La idea es que una vez que llegas a tu objetivo, vivas de los dividendos, pero a
-veces tambien vas a tener q vender una partecita.
+La idea es que una vez que llegás a tu objetivo, vivas de los dividendos, pero a
+veces también vas a tener que vender una partecita.
 
-Digamos que tenes que sacar 4% de tu portfolio por año. Si los dividendos te dan
+Digamos que tenés que sacar 4% de tu portfolio por año. Si los dividendos te dan
 2.5%, vas a tener q vender un 1.5%. Pero no importa, porque ese 1.5% lo
-recuperarias ese mismo año en teoría.
+recuperarías ese mismo año en teoría.
 
-Northern Trust fund por ejemplo, está obligado a pagarte los dividendos una vez
+Northern Trust fund, por ejemplo, está obligado a pagarte los dividendos una vez
 por año, durante los primeros 8 meses del año.
 
 ## No vivo en Holanda
 
 Si estas en USA lee el libro [Simple path to Wealth][simple_path] que te va a guiar.
 
-Si estas en otro país de Europa puedes pedir consejo en [r/EuropeFIRE][ef].
+Si estas en otro país de Europa podés pedir consejo en [r/EuropeFIRE][ef].
 
 Pero el principo es el mismo.
 
 ## Resúmen
 
-- Abrite una cuenta de inversiones en tu banco o app favorita
-- Inverti en Index Funds (Northern Trust o Vanguard)
+- Abrite una cuenta de inversiones en tu banco o app favorita.
+- Inverti en Index Funds (Northern Trust o Vanguard).
 - Hacelo un hábito y olvidate del tema, no importa si el mercado cae, **NO VENDAS**.
 
 ## Recursos
@@ -217,7 +216,7 @@ Pero el principo es el mismo.
 
 > Hey, hola 👋
 >
-> Si te interesa lo que escribo puedes seguirme en [twitter][santiwilly].
+> Si te interesa lo que escribo podés seguirme en [twitter][santiwilly].
 >
 
 [trinity_study]: https://en.wikipedia.org/wiki/Trinity_study
