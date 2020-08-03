@@ -122,6 +122,9 @@ En T212 te van a pedir una proof of address, que puede ser la boleta del agua,
 pero en teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
 está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en esas apps.
 
+> Si te vas a abrir una cuenta en T212, usa [mi link de referencia][reference] que
+> nos dan €100 para invertir a cada uno.
+
 Dependiendo la plataforma que elijas, vas a tener un abanico de ofertas diferentes,
 y sus costos varían. Pero el tema de costos es despreciable, así que no importa mucho.
 
@@ -194,7 +197,7 @@ recuperarías ese mismo año en teoría.
 Northern Trust fund, por ejemplo, está obligado a pagarte los dividendos una vez
 por año, durante los primeros 8 meses del año.
 
-## No vivo en Holanda
+## No vivís en Holanda
 
 Si estas en USA lee el libro [Simple path to Wealth][simple_path] que te va a guiar.
 
@@ -238,3 +241,4 @@ Pero el principo es el mismo.
 [dividend]: https://en.wikipedia.org/wiki/Dividend
 [ef]: https://www.reddit.com/r/EuropeFIRE/
 [df]: https://www.reddit.com/r/DutchFIRE
+[reference]: www.trading212.com/invite/GINwpabB
