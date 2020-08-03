@@ -28,7 +28,7 @@ final o podés contactarme en [twitter][santiwilly].
 ## Introduccion
 
 "Financial Independence, Retire Early" es un movimiento cuyo objetivo es acumular
-bienes, hasta poder vivir de los ingresos pasivos (passive income) que estos generan.
+bienes, hasta poder vivir de los ingresos pasivos (_passive income_) que estos generan.
 La idea es maximizar los ahorros, reducir los gastos y encontrar distintas formas de
 aumentar los ingresos.
 
@@ -86,10 +86,10 @@ Pueden leer "[The Shockingly Simple Math Behind Early Retirement][shocking]" par
 
 ### Dónde invierto
 
-Basicamente invertiremos en ETFs o index funds, que son más o menos lo mismo, a largo
+Basicamente invertiremos en ETFs o _index funds_, que son más o menos lo mismo, a largo
 plazo no importa mucho la diferencia.
 
-Los **index funds** son un conjunto de acciones de muchas empresas.
+Los _index funds_ son un conjunto de acciones de muchas empresas.
 
 Por los '70s, un tal [John C. Bogle][boggle] dijo que había que armar un index que
 imitara la performance del mercado en general a largo plazo.
@@ -208,7 +208,7 @@ Pero el principo es el mismo.
 ## Resúmen
 
 - Abrite una cuenta de inversiones en tu banco o app favorita.
-- Inverti en Index Funds (Northern Trust o Vanguard).
+- Inverti en _Index Funds_ (Northern Trust o Vanguard).
 - Hacelo un hábito y olvidate del tema, no importa si el mercado cae, **NO VENDAS**.
 
 ## Recursos
