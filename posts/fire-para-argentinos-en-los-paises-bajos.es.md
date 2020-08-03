@@ -175,9 +175,9 @@ Esta es la tablita del 2019
 
 | Braket          | Impuesto | Ejemplo               |
 | --------------- | -------- | --------------------- |
-| €0-€71,650      | 0.58%    | €50.000 -> €290       |
-| €71,651-989,736 | 1.34%    | €300.000 -> €4.020    |
-| > €989,737      | 1.68%    | €1.100.000 -> €18.480 |
+| €0-€71.650      | 0.58%    | €50.000 -> €290       |
+| €71.651-989.736 | 1.34%    | €300.000 -> €4.020    |
+| > €989.737      | 1.68%    | €1.100.000 -> €18.480 |
 
 ## Obtener el dinero de las inversiones
 
@@ -210,6 +210,11 @@ Pero el principo es el mismo.
 - Abrite una cuenta de inversiones en tu banco o app favorita.
 - Inverti en _Index Funds_ (Northern Trust o Vanguard).
 - Hacelo un hábito y olvidate del tema, no importa si el mercado cae, **NO VENDAS**.
+
+## Research pendiente
+
+- 30% ruling no necesita declarar ahorros e inversiones?
+- Invertir en stocks "green" aumenta nuestro máximo a €50k?
 
 ## Recursos
 
