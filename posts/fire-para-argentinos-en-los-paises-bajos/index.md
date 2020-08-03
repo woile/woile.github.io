@@ -118,7 +118,7 @@ Estando en los Países Bajos es muy fácil, puede ser a través de la app del ba
 o usando [Trading 212][t212] (T212). DeGiro no la recomiendo, porque me pedía un número
 fiscal que no tengo y no pude activar mi cuenta.
 
-En T212 te van a pedir una proof of address, que puede ser la boleta del agua,
+En T212 te van a pedir una _proof of address_, que puede ser la boleta del agua,
 pero en teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
 está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en esas apps.
 
