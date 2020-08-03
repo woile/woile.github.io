@@ -36,8 +36,10 @@
             <span id="blog-title">Willy's blog</span>
         </a></h3>
 
+    <div>
     <label class="dark-mode-label" for="dark-mode"></label>
     
+    </div>
 
 
     </header><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
@@ -83,12 +85,11 @@ latest version of <a href="https://www.sublimetext.com/3">Sublime Text 3</a>.</p
 
 <h3>General settings</h3>
 <p>Add the following settings in <code>Preferences &gt; Settings &gt; User Tab</code></p>
-<pre class="code literal-block"><span></span><code><span class="err">"trim_trailing_white_space_on_save": true,</span>
-<span class="err">"auto_complete": false,</span>
-<span class="err">"translate_tabs_to_spaces": true,</span>
-<span class="err">"word_wrap": "false",</span>
-</code></pre>
-
+<pre class="code literal-block">"trim_trailing_white_space_on_save": true,
+"auto_complete": false,
+"translate_tabs_to_spaces": true,
+"word_wrap": "false",
+</pre>
 
 <p><code>trim_trailing_white_space_on_save</code> deletes the trailing spaces. This is useful to select text
 properly and sometimes is required by many languages.</p>
@@ -226,30 +227,26 @@ This means that Sublime Linter will talk with the linter you have installed in y
 <h4>Tips to configure sublime linter</h4>
 <ul>
 <li>If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.</li>
-<li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settigns:</li>
-</ul>
-<pre class="code literal-block"><span></span><code><span class="err">"syntax_map": {</span>
-<span class="err">    "python (django)": "python",</span>
-<span class="err">    "python django": "python"</span>
-<span class="err">}</span>
-</code></pre>
-
-
-<ul>
+<li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settigns:
+<pre class="code literal-block">"syntax_map": {
+    "python (django)": "python",
+    "python django": "python"
+}
+</pre>
+</li>
 <li>To change the mark style, open the package control and type <strong>Choose Mark Style</strong>, I like the Squiggly underline.</li>
 <li>You can ignore rules, in the settings of the linter inside the sublime linter settings.</li>
-<li>If you are using <code>mypy</code> and you want to ignore import hints, add to <code>sublimelinter &gt; user settings &gt; linters</code> the following:</li>
+<li>If you are using <code>mypy</code> and you want to ignore import hints, add to <code>sublimelinter &gt; user settings &gt; linters</code> the following:
+<pre class="code literal-block">"mypy": {
+    "@disable": false,
+    "args": [
+        "--ignore-missing-imports"
+    ],
+    "excludes": []
+}
+</pre>
+</li>
 </ul>
-<pre class="code literal-block"><span></span><code><span class="err">"mypy": {</span>
-<span class="err">    "@disable": false,</span>
-<span class="err">    "args": [</span>
-<span class="err">        "--ignore-missing-imports"</span>
-<span class="err">    ],</span>
-<span class="err">    "excludes": []</span>
-<span class="err">}</span>
-</code></pre>
-
-
 <h3>Another useful Packages</h3>
 <p><code>DockBlockr</code> Helps commenting (go to the web for more information)</p>
 <p><code>Colorhighlighter</code> Highlights hexa colors, useful for CSS</p>

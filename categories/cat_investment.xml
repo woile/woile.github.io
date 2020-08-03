@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about investment)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/cat_investment.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 03 Aug 2020 20:30:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.github.io/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Hola!&lt;/p&gt;
+&lt;p&gt;Mi idea con este post es compartir un poco la información que he recolectado y tirarte
+la información necesaria para arrancar sin tener que pensar mucho.&lt;/p&gt;
+&lt;p&gt;El tema inversiones es algo que &lt;strong&gt;no me atrae&lt;/strong&gt;, así que estoy tratando de resolverlo
+efectivamente, para no tener que pensar en eso en el futuro.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ATENCIÓN&lt;/p&gt;
+&lt;p&gt;No me dedico a esto, y tampoco me gusta, así que no te puedo dar ninguna garantía
+de nada. Tómalo como una introducción al tema.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Cualquier duda, aporte o correción son bienvenidos, hay una sección de comentarios al
+final o puedes contactarme en &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Introduccion&lt;/h3&gt;
+&lt;p&gt;"Financial Independence, Retire Early" es un movimiento cuyo objetivo es acumular
+bienes, hasta poder vivir de los ingresos pasivos (passive income) que estos generan.
+La idea es maximizar los ahorros, reducir las expensas y encontrar distintas formas de
+aumentar los ingresos.&lt;/p&gt;
+&lt;p&gt;Se teoriza que cuanto más ahorres de tu salario, más rápido te vas a poder retirar.&lt;/p&gt;
+&lt;p&gt;Esto &lt;strong&gt;no se trata de hacerse rico al instante&lt;/strong&gt;, sino retirarse temprano, es decir,
+en menos tiempo de lo que se llega a una pensión.&lt;/p&gt;
+&lt;p&gt;Tampoco se trata de tener una tonelada de plata, sino que tus bienes produzcan más o menos
+las expensas que gastas ahora.&lt;/p&gt;
+&lt;p&gt;Por tirar un numero, yo diría que se tarda en promedio, 20 años, esto es mucho menos que
+la pension. Esto varia dependiendo tu situación.&lt;/p&gt;
+&lt;p&gt;Mas alla de eso, es un gran complemento a lo que será tu pensión y es &lt;strong&gt;mejor que
+tener tu dinero parado&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Puedes leer más en el &lt;a href="https://www.reddit.com/r/financialindependence/wiki/faq"&gt;faq de /r/financialindependance&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Asegurate de &lt;strong&gt;no tener deudas&lt;/strong&gt; y tener un colchoncito de dinero, por lo menos
+para &lt;strong&gt;poder vivir por 6 meses&lt;/strong&gt;, antes de empezar.&lt;/p&gt;
+&lt;h3&gt;Inversiones&lt;/h3&gt;
+&lt;p&gt;Yo me voy a enfocar en &lt;strong&gt;donde invertir&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;En general, los argentinos en los Países Bajos tienen un salario que les permite
+ahorrar. Pero dada nuestra historia, (o por lo menos yo) no sabemos que se puede
+hacer con los ahorros, además de tenerlos en la cuenta.&lt;/p&gt;
+&lt;p&gt;Entonces... dónde hay que invertir? En el stock market. Sí, &lt;strong&gt;acciones&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;El stock market tiene el margen de retorno más alto (~7.5% cuenta la leyenda),
+mejor que real estate, y otros &lt;a href="https://www.goodreads.com/book/show/30646587-the-simple-path-to-wealth"&gt;[0]&lt;/a&gt;, y a su vez es el de menor
+riesgo. El canadiense Ben Felix explica el costo asociado a comprar un hogar en &lt;a href="https://youtu.be/Uwl3-jBNEd4"&gt;este video&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Stock market" src="https://woile.github.io/images/fire-para-argentinos-en-los-paises-bajos/stock.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Pero no vamos a invertir de la manera que uno piensa en acciones, teniendo que mirar todos los días la pantallita del celular, &lt;strong&gt;eso no por favor!&lt;/strong&gt; Ya veremos más adelante.&lt;/p&gt;
+&lt;h4&gt;Cuanto necesito para retirarme&lt;/h4&gt;
+&lt;p&gt;El cálculo es &lt;strong&gt;25 veces tus gastos anuales&lt;/strong&gt; &lt;a href="https://en.wikipedia.org/wiki/Trinity_study"&gt;[1]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Ejemplos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Utilizo €40k anuales para vivir. Entonces €40k * 25 = €1M&lt;/li&gt;
+&lt;li&gt;Tengo €1M en ahorros. Entonces puedo gastar €40k anuales (4%).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ese &lt;strong&gt;4%&lt;/strong&gt; aparece en muchos lugares mencionado.&lt;/p&gt;
+&lt;p&gt;Pueden leer "&lt;a href="https://www.mrmoneymustache.com/2012/01/13/the-shockingly-simple-math-behind-early-retirement/"&gt;The Shockingly Simple Math Behind Early Retirement&lt;/a&gt;" para mas info.&lt;/p&gt;
+&lt;h4&gt;Donde invierto&lt;/h4&gt;
+&lt;p&gt;Basicamente invertiremos en ETFs o index funds, que son más o menos lo mismo, a largo
+plazo no importa mucho la diferencia.&lt;/p&gt;
+&lt;p&gt;Los &lt;strong&gt;index funds&lt;/strong&gt; son un conjunto de acciones de muchas empresas.&lt;/p&gt;
+&lt;p&gt;Por los 70, un tal &lt;a href="https://en.wikipedia.org/wiki/John_C._Bogle"&gt;John C. Bogle&lt;/a&gt; dijo que había que armar un index que
+imitara la performance del mercado en general a largo plazo.
+Si el mercado en un período genera 10% de interés, eso es lo que queremos.
+Dijo que el &lt;strong&gt;mercado siempre está creciendo&lt;/strong&gt;.
+Fundó entonces &lt;a href="https://investor.vanguard.com/corporate-portal/"&gt;The Vanguard Group&lt;/a&gt;, en la que
+los dueños son los mismos clientes, es decir, si tienes acciones del index sos en parte dueño.&lt;/p&gt;
+&lt;p&gt;Bogle estaba en contra de la especulación, que es cortoplacista y se enfoca en
+el precio de las acciones. En cambio, a largo plazo obtenemos una ganancia en base
+al negocio en sí mismo, y la gente que lo saca adelante.&lt;/p&gt;
+&lt;p&gt;Como imitó al mercado? Seleccionando un conjunto de muchas empresas.
+Blog entonces, lanzó su primer index fund atado al &lt;a href="https://en.wikipedia.org/wiki/S%26P_500_Index"&gt;S&amp;amp;P500&lt;/a&gt;, que son las mejores 500 empresas
+americanas.&lt;/p&gt;
+&lt;p&gt;El resto es historia.&lt;/p&gt;
+&lt;p&gt;Hoy en día hay muchísimos tipos de fondos, a mi me gustan los &lt;strong&gt;&lt;a href="https://en.wikipedia.org/wiki/Environmental,_social_and_corporate_governance"&gt;ESG&lt;/a&gt;&lt;/strong&gt; que son &lt;strong&gt;fondos
+sustentables&lt;/strong&gt;. Es interesante que el mismo dinero que nos va a dar de comer puede tener
+un impacto (positivo o negativo) en el mundo.&lt;/p&gt;
+&lt;h4&gt;Cómo invertir&lt;/h4&gt;
+&lt;p&gt;Estando en los Países Bajos, es muy fácil, puede ser a través de la app del banco,
+o usando &lt;a href="https://www.trading212.com/nl"&gt;Trading 212&lt;/a&gt; (T212). DeGiro no la recomiendo, porque me pedía un número
+fiscal que no tengo y no pude activar mi cuenta.&lt;/p&gt;
+&lt;p&gt;En T212 te van a pedir una proof of address, que puede ser la boleta del agua,
+pero en teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
+está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en esas apps.&lt;/p&gt;
+&lt;p&gt;Dependiendo la plataforma que elijas, vas a tener un abanico de ofertas diferentes,
+y sus costos varían. Pero el tema de costos es despreciable, así que no importa mucho.&lt;/p&gt;
+&lt;p&gt;A continuación, dejo una lista que la podes usar así como esta, dependiendo tu
+plataforma:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Plataforma&lt;/th&gt;
+&lt;th&gt;Index Fund&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;T212&lt;/td&gt;
+&lt;td&gt;100% VWRL FTSE All-World Index (IE00B3RBWM25)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ING Zelf op de beurs&lt;/td&gt;
+&lt;td&gt;88% MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ABN Amro Zelf Beleggen Basis&lt;/td&gt;
+&lt;td&gt;88% MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Rabobank Zelf Beleggen&lt;/td&gt;
+&lt;td&gt;88% MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;La plataforma que elijas, la buscas en google, y te va a llevar a donde hacer click
+para configurar o crear una cuenta.&lt;/p&gt;
+&lt;p&gt;Habrás notado que para los bancos es el mismo fund the &lt;a href="https://www.northerntrust.com/netherlands/home"&gt;Northern Trust&lt;/a&gt; (NT), esto
+es así, porque están registrados en los Países Bajos, y no se que mambo hay que
+terminamos pagando menos impuestos. Además son &lt;strong&gt;ESG&lt;/strong&gt; y eso es genial.&lt;/p&gt;
+&lt;p&gt;T212 no tiene disponibles los fondos de NT, pero los de Vanguard son los más recomendados
+en la mayor parte del mundo y son buenos. No se si tienen &lt;strong&gt;ESG&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;El porcentaje que aparece, es cuánto hay que invertir en cada uno.
+Si vas a poner €100, entonces €88 van para World Custom y €12 para EMergin Market.&lt;/p&gt;
+&lt;p&gt;Todos los meses separa una parte de tu salario, y volves a comprar en el mismo fund.&lt;/p&gt;
+&lt;p&gt;Para ver costos, cuánto obtendremos de retorno, y más información, un holandes hizo la web &lt;a href="https://www.indexfondsenvergelijken.nl/"&gt;indexfondsenvergelijken.nl&lt;/a&gt; que es genial.&lt;/p&gt;
+&lt;h3&gt;Impuestos&lt;/h3&gt;
+&lt;p&gt;Vas a tener que pagar impuestos por todos tus bienes en Holanda, de eso olvidate
+y mejor no luchar en contra.&lt;/p&gt;
+&lt;p&gt;Tus &lt;em&gt;assets&lt;/em&gt; los vas a tener que reportar. Estes usando el banco o una plataforma,
+todos los años, en diciembre, te van a mandar un reporte con el valor de tus inversiones hasta ese momento.
+Ese valor es el que vas a tener que ingresar en la declaración jurada de ese año, en la parte de &lt;em&gt;wealth tax (box 3)&lt;/em&gt;.
+Capaz te dan algún beneficio por comprar los NT por ejemplo, pero todavía no se bien como funciona,
+por el momento, solo se que hay algún tipo de beneficio.&lt;/p&gt;
+&lt;p&gt;Los primeros €30k si sos soltero o €60k para parejas, son libres de impuesto. Te
+van a cobrar impuestos solamente sobre el monto que supere ese limite.&lt;/p&gt;
+&lt;p&gt;Si vos tenes €75k, te van a cobrar impuestos sobre €15k solamente.&lt;/p&gt;
+&lt;p&gt;Esta es la tablita del 2019&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Braket&lt;/th&gt;
+&lt;th&gt;Impuesto&lt;/th&gt;
+&lt;th&gt;Ejemplo&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;€0-€71,650&lt;/td&gt;
+&lt;td&gt;0.58%&lt;/td&gt;
+&lt;td&gt;€50.000 -&amp;gt; €290&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;€71,651-989,736&lt;/td&gt;
+&lt;td&gt;1.34%&lt;/td&gt;
+&lt;td&gt;€300.000 -&amp;gt; €4.020&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&amp;gt; €989,737&lt;/td&gt;
+&lt;td&gt;1.68%&lt;/td&gt;
+&lt;td&gt;€1.100.000 -&amp;gt; €18.480&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Obtener el dinero de las inversiones&lt;/h3&gt;
+&lt;p&gt;Los fondos de inversion, bonos, stock, y otros, suelen producir &lt;a href="https://en.wikipedia.org/wiki/Dividend"&gt;dividendos&lt;/a&gt;,
+que es la distribución de ganancias hacia los shareholders.&lt;/p&gt;
+&lt;p&gt;Como vos vas a ser uno, te va a llegar esa plata, en general te la depositan en
+la plataforma que uses.&lt;/p&gt;
+&lt;p&gt;La idea es que una vez que llegas a tu objetivo, vivas de los dividendos, pero a
+veces tambien vas a tener q vender una partecita.&lt;/p&gt;
+&lt;p&gt;Digamos que tenes que sacar 4% de tu portfolio por año. Si los dividendos te dan
+2.5%, vas a tener q vender un 1.5%. Pero no importa, porque ese 1.5% lo
+recuperarias ese mismo año en teoría.&lt;/p&gt;
+&lt;p&gt;Northern Trust fund por ejemplo, está obligado a pagarte los dividendos una vez
+por año, durante los primeros 8 meses del año.&lt;/p&gt;
+&lt;h3&gt;No vivo en Holanda&lt;/h3&gt;
+&lt;p&gt;Si estas en USA lee el libro &lt;a href="https://www.goodreads.com/book/show/30646587-the-simple-path-to-wealth"&gt;Simple path to Wealth&lt;/a&gt; que te va a guiar.&lt;/p&gt;
+&lt;p&gt;Si estas en otro país de Europa puedes pedir consejo en &lt;a href="https://www.reddit.com/r/EuropeFIRE/"&gt;r/EuropeFIRE&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Pero el principo es el mismo.&lt;/p&gt;
+&lt;h3&gt;Resúmen&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Abrite una cuenta de inversiones en tu banco o app favorita&lt;/li&gt;
+&lt;li&gt;Inverti en Index Funds (Northern Trust o Vanguard)&lt;/li&gt;
+&lt;li&gt;Hacelo un hábito y olvidate del tema, no importa si el mercado cae, &lt;strong&gt;NO VENDAS&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Recursos&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.reddit.com/r/DutchFIRE/comments/flc6d1/all_world_index_portfolios_en_broker_kosten_2020/"&gt;Analisis de los Index Fund y costos 2020 (holandes)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.reddit.com/r/EuropeFIRE/"&gt;r/EuropeFIRE&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.reddit.com/r/DutchFIRE"&gt;r/DutchFIRE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span&gt;Photo by &lt;a href="https://unsplash.com/@nick604?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Nick Chong&lt;/a&gt; on &lt;a href="https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Unsplash&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hey, hola 👋&lt;/p&gt;
+&lt;p&gt;Si te interesa lo que escribo puedes seguirme en &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><category>argentinos</category><category>dinero</category><category>fire</category><category>holanda</category><category>inversion</category><guid>https://woile.github.io/posts/fire-para-argentinos-en-los-paises-bajos/</guid><pubDate>Mon, 03 Aug 2020 16:08:26 GMT</pubDate></item></channel></rss>
