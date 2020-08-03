@@ -154,63 +154,63 @@ employees, right?</p>
 <p><strong>Creating a key</strong></p>
 <p>Simple as following the prompt that appears after typing the command.
 If you don't know what to fill, use the default values.</p>
-<pre class="code bash"><a name="rest_code_7b8b22a869f64d4d8be1daee3745c1be-1"></a>gpg --full-generate-key
+<pre class="code bash"><a name="rest_code_a8fe71ad11624064a5afd4782550553c-1"></a>gpg --full-generate-key
 </pre>
 <p>And check the generatd key</p>
-<pre class="code bash"><a name="rest_code_22be7a4eb44e4bc9978b507ed40dd193-1"></a>gpg -k
+<pre class="code bash"><a name="rest_code_68f74ef22c67476aa2125d789bf62f95-1"></a>gpg -k
 </pre>
 <div class="section" id="initializing-gopass">
 <h3>Initializing gopass</h3>
 <p>Easy as typing</p>
-<pre class="code bash"><a name="rest_code_03df41dafa1b45aab9e361136a9a04f3-1"></a>gopass init
+<pre class="code bash"><a name="rest_code_b5c6ce334782445b835761badad5c628-1"></a>gopass init
 </pre>
 <p>This will set up some stuff and will create the default store.</p>
 <p>I recommend adding the autocomplete to your terminal</p>
-<pre class="code bash"><a name="rest_code_0b04b8ed405a43c48ab5dce73c287c4d-1"></a><span class="nb">echo</span> <span class="s2">"source &lt;(gopass completion bash)"</span> &gt;&gt; ~/.bashrc
+<pre class="code bash"><a name="rest_code_9cd2d0933ec24be380c0396f39e40c2c-1"></a><span class="nb">echo</span> <span class="s2">"source &lt;(gopass completion bash)"</span> &gt;&gt; ~/.bashrc
 </pre>
 </div>
 <div class="section" id="using-gopass">
 <h3>Using gopass</h3>
 <p>Gopass works in a "unix" like way.
 You'll have a tree (folders) where the leaves are encrypted files.</p>
-<pre class="code text"><a name="rest_code_7b481a93cebb4d0f8e20dce418e12d16-1"></a>gopass
-<a name="rest_code_7b481a93cebb4d0f8e20dce418e12d16-2"></a>    ├── my-company
-<a name="rest_code_7b481a93cebb4d0f8e20dce418e12d16-3"></a>    │   └── pepe@my-company.com
-<a name="rest_code_7b481a93cebb4d0f8e20dce418e12d16-4"></a>    └── personal
-<a name="rest_code_7b481a93cebb4d0f8e20dce418e12d16-5"></a>        └── pepe@personal.com
+<pre class="code text"><a name="rest_code_78f07bb9368c4241b4bbe049f417136d-1"></a>gopass
+<a name="rest_code_78f07bb9368c4241b4bbe049f417136d-2"></a>    ├── my-company
+<a name="rest_code_78f07bb9368c4241b4bbe049f417136d-3"></a>    │   └── pepe@my-company.com
+<a name="rest_code_78f07bb9368c4241b4bbe049f417136d-4"></a>    └── personal
+<a name="rest_code_78f07bb9368c4241b4bbe049f417136d-5"></a>        └── pepe@personal.com
 </pre>
 <p>Let's begin by <strong>inserting</strong> a secret.</p>
-<pre class="code bash"><a name="rest_code_725f17af64004bb493a3898e51754bce-1"></a>gopass insert personal/twitter/santiwilly
+<pre class="code bash"><a name="rest_code_6cf946c83aa44ef79c063a6c09cc67a0-1"></a>gopass insert personal/twitter/santiwilly
 </pre>
 <p>It will show a prompt and you'll have to fill the password twice.
 The structure I follow is this (most of them optional)
 <code class="docutils literal"><span class="pre">{store}/{org}/{env}/{username</span> or email}</code>.</p>
 <p>Now let's <strong>list</strong> our secret, by simply doing</p>
-<pre class="code bash"><a name="rest_code_05fd27dda9de4734a5069b9c993fcf35-1"></a>gopass ls
+<pre class="code bash"><a name="rest_code_600ac414247c48cf92da28928c8d3008-1"></a>gopass ls
 </pre>
 <p>We should now see, something like this.</p>
-<pre class="code text"><a name="rest_code_2fd725a8e3a241af8dcbb01fe4de2b8f-1"></a>gopass
-<a name="rest_code_2fd725a8e3a241af8dcbb01fe4de2b8f-2"></a>    ├── my-company
-<a name="rest_code_2fd725a8e3a241af8dcbb01fe4de2b8f-3"></a>    │   └── pepe@my-company.com
-<a name="rest_code_2fd725a8e3a241af8dcbb01fe4de2b8f-4"></a>    └── personal
-<a name="rest_code_2fd725a8e3a241af8dcbb01fe4de2b8f-5"></a>        ├── pepe@personal.com
-<a name="rest_code_2fd725a8e3a241af8dcbb01fe4de2b8f-6"></a>        └── twitter
-<a name="rest_code_2fd725a8e3a241af8dcbb01fe4de2b8f-7"></a>            └── santiwilly
+<pre class="code text"><a name="rest_code_bc2ec0aa9967489da08c54fc9ce2c0d6-1"></a>gopass
+<a name="rest_code_bc2ec0aa9967489da08c54fc9ce2c0d6-2"></a>    ├── my-company
+<a name="rest_code_bc2ec0aa9967489da08c54fc9ce2c0d6-3"></a>    │   └── pepe@my-company.com
+<a name="rest_code_bc2ec0aa9967489da08c54fc9ce2c0d6-4"></a>    └── personal
+<a name="rest_code_bc2ec0aa9967489da08c54fc9ce2c0d6-5"></a>        ├── pepe@personal.com
+<a name="rest_code_bc2ec0aa9967489da08c54fc9ce2c0d6-6"></a>        └── twitter
+<a name="rest_code_bc2ec0aa9967489da08c54fc9ce2c0d6-7"></a>            └── santiwilly
 </pre>
 <p>Perfect!</p>
 <p>Let's continue. I'm just gonna throw you the commands, they don't have any
 complexity.</p>
 <p><strong>Show password</strong></p>
-<pre class="code bash"><a name="rest_code_2e80cadba8d642dfbb265a4b96034835-1"></a>gopass personal/twitter/santiwilly
+<pre class="code bash"><a name="rest_code_96cd4905b21e4b0c84d5dde48b5851ce-1"></a>gopass personal/twitter/santiwilly
 </pre>
 <p><strong>Copy password to clipboard</strong></p>
-<pre class="code bash"><a name="rest_code_406841ad255e47c995d3f66c68e83080-1"></a>gopass -c personal/twitter/santiwilly
+<pre class="code bash"><a name="rest_code_e5bd85040a0648109b4ed4eee8a63ead-1"></a>gopass -c personal/twitter/santiwilly
 </pre>
 <p><strong>Generate random pass</strong></p>
-<pre class="code bash"><a name="rest_code_224f6164ef814751b19d9e33856158e2-1"></a>gopass generate my-company/anothername@rmail.com
+<pre class="code bash"><a name="rest_code_217e0f28f1824178b46e14b0b4164ab3-1"></a>gopass generate my-company/anothername@rmail.com
 </pre>
 <p><strong>Search secrets</strong></p>
-<pre class="code bash"><a name="rest_code_fff2a3fe019647ca91685dced99998ce-1"></a>gopass search @gmail.com
+<pre class="code bash"><a name="rest_code_edabacfb6c294b9da1e92f6f5fc8d3a5-1"></a>gopass search @gmail.com
 </pre>
 </div>
 <div class="section" id="using-stores">
@@ -225,17 +225,17 @@ Each one can live in a different repository, and you could potentially,
 share <code>company</code> with your peers.</p>
 <p><strong>Initialize new store</strong></p>
 <p>Creates a new store located at <code class="docutils literal"><span class="pre">~/.password-store-my-company</span></code>.</p>
-<pre class="code bash"><a name="rest_code_cec1f7f06c644707b59fe67bd4e90bdf-1"></a>gopass init --store my-company
+<pre class="code bash"><a name="rest_code_759b8e7003e9458d979fc74c37e20459-1"></a>gopass init --store my-company
 </pre>
 <p><strong>Add git remote to store</strong></p>
-<pre class="code bash"><a name="rest_code_6696e503b49148adbf25ea456238b9eb-1"></a>gopass git remote add --store my-company origin git@gh.com/Woile/keys.git
+<pre class="code bash"><a name="rest_code_5919f6bf90fc4e169a5d3251c5e775f9-1"></a>gopass git remote add --store my-company origin git@gh.com/Woile/keys.git
 </pre>
 <p><strong>Clone existing store</strong></p>
 <p>Let's say you move to another computer, now it's where gopass starts to shine.
 Whether you use the same private key (imported in different computers) or you
 choose to have a key per machine, to clone a repo, you just need
 access to it.</p>
-<pre class="code bash"><a name="rest_code_42b2bcbf1d00438ba7560db64808ebfc-1"></a>gopass clone git@gh.com/Woile/keys.git my-company --sync gitcli
+<pre class="code bash"><a name="rest_code_88c7d3dbf2074eb0a1b64c4fc9ff8dff-1"></a>gopass clone git@gh.com/Woile/keys.git my-company --sync gitcli
 </pre>
 <p>It's important to specify <code class="docutils literal">gitcli</code> as the <code class="docutils literal">sync</code> method. Otherwise gopass
 won't know how to synchronize the secret (it will use <code class="docutils literal">noop</code> by default).
@@ -248,10 +248,10 @@ Gopass provides other sync methods but I haven't checked them.</p>
 </ul>
 <p><strong>Removing existing store</strong></p>
 <p>To avoid having issues with gopass, first we need to unmount the store.</p>
-<pre class="code bash"><a name="rest_code_9d2389ab24b54a5d888599fdd189f0fc-1"></a>gopass mounts umount my-company
+<pre class="code bash"><a name="rest_code_9b47891745cf4882b6fafd3029cfe433-1"></a>gopass mounts umount my-company
 </pre>
 <p>Now that we've done this, it's safe to remove the folder.</p>
-<pre class="code bash"><a name="rest_code_a1d5c746d3ef4a5da5a462cf17c5d96e-1"></a>rm -rf ~/.password-store-my-company
+<pre class="code bash"><a name="rest_code_68650dba8515443ab591651c4be5b50f-1"></a>rm -rf ~/.password-store-my-company
 </pre>
 </div>
 <div class="section" id="synchronization">
@@ -259,10 +259,10 @@ Gopass provides other sync methods but I haven't checked them.</p>
 <p>In gopass, sync usually means <code class="docutils literal">git pull</code> and <code class="docutils literal">git push</code>, maybe also commit
 but I'm not sure. Usually the commits are done on <code class="docutils literal">gopass insert</code>.</p>
 <p><strong>Synchronize with git remotes</strong></p>
-<pre class="code bash"><a name="rest_code_9ad231960b034a82bce518a05ffc161f-1"></a>gopass sync
+<pre class="code bash"><a name="rest_code_d1f9e8e6074a4b9d8888ba0d97842868-1"></a>gopass sync
 </pre>
 <p><strong>Synchronzing a single store</strong></p>
-<pre class="code bash"><a name="rest_code_30377e3078bd420d9cb9c5903da3bc13-1"></a>gopass sync --store my-company
+<pre class="code bash"><a name="rest_code_81baa210743e4085b119ac2845567c21-1"></a>gopass sync --store my-company
 </pre>
 </div>
 <div class="section" id="team-sharing">
@@ -272,7 +272,7 @@ sharing secrets with people.</p>
 <p>Suppose we have a colleague with an email <code class="docutils literal">logan@pm.me</code>. This person has
 already generated a gpg key, for that email, in they machine.</p>
 <p>Logan then, must <strong>export the public key</strong> and send it to us.</p>
-<pre class="code bash"><a name="rest_code_1f74c00c8b9a44d19b0521e66feda5c4-1"></a>gpg -a --export logan@pm.me &gt; logan.pub.asc
+<pre class="code bash"><a name="rest_code_66e6d321e4df41cd96f3abed3aede781-1"></a>gpg -a --export logan@pm.me &gt; logan.pub.asc
 </pre>
 <p>It's okay, public keys can be shared in untrusted environments. If you are
 still not convinced, try <a class="reference external" href="https://send.firefox.com">send</a> from firefox. Keep in mind that people share
@@ -280,10 +280,10 @@ their public keys in keyservers, like <a class="reference external" href="https:
 <p><strong>Adding public key into gopass</strong></p>
 <p>We have the public key, now it's time to <strong>import</strong> it into our
 local gpg keyring.</p>
-<pre class="code bash"><a name="rest_code_049bc20058364cbdb070c87f1a3a82b5-1"></a>gpg --import &lt; logan.pub.asc
+<pre class="code bash"><a name="rest_code_11f6fc89938c4401af54d98b69fc0ce2-1"></a>gpg --import &lt; logan.pub.asc
 </pre>
 <p>And lastly, we need to <strong>add the new key to a gopass store</strong>.</p>
-<pre class="code bash"><a name="rest_code_62efcf96ef3040edba24a19419147715-1"></a>gopass recipients add logan@pm.me
+<pre class="code bash"><a name="rest_code_a3ef764757234e519dddefe7cadb9f64-1"></a>gopass recipients add logan@pm.me
 </pre>
 <p>You'll see a prompt with all of your stores. Choose the one you want, and it
 will re-encrypt your secrets with the new public key (plus the existing ones).</p>

@@ -122,7 +122,7 @@ En T212 te van a pedir una proof of address, que puede ser la boleta del agua,
 pero en teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
 está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en esas apps.
 
-> Si te vas a abrir una cuenta en T212, usa [mi link de referencia][reference] que
+> Si te vas a abrir una cuenta en T212, usa [mi link de referencia][t212] que
 > nos dan €100 para invertir a cada uno.
 
 Dependiendo la plataforma que elijas, vas a tener un abanico de ofertas diferentes,
@@ -232,7 +232,6 @@ Pero el principo es el mismo.
 [vanguard]: https://investor.vanguard.com/corporate-portal/
 [sp500]: https://en.wikipedia.org/wiki/S%26P_500_Index
 [esg]: https://en.wikipedia.org/wiki/Environmental,_social_and_corporate_governance
-[t212]: https://www.trading212.com/nl
 [ifnl]: https://www.indexfondsenvergelijken.nl/
 [nt]: https://www.northerntrust.com/netherlands/home
 [analysis_dutch]: https://www.reddit.com/r/DutchFIRE/comments/flc6d1/all_world_index_portfolios_en_broker_kosten_2020/
@@ -241,4 +240,4 @@ Pero el principo es el mismo.
 [dividend]: https://en.wikipedia.org/wiki/Dividend
 [ef]: https://www.reddit.com/r/EuropeFIRE/
 [df]: https://www.reddit.com/r/DutchFIRE
-[reference]: www.trading212.com/invite/GINwpabB
+[t212]: www.trading212.com/invite/GINwpabB
