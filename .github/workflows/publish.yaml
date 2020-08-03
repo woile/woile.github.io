@@ -1,0 +1,18 @@
+name: Publish blog
+
+on:
+  push:
+    branches:
+      - src
+
+jobs:
+  publish:
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+    - name: Build and Deploy Nikola
+      uses: getnikola/nikola-action@v3
+      with:
+        dry_run: false
