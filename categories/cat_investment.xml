@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about investment)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/cat_investment.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 03 Aug 2020 21:44:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.github.io/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Hola!&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about investment)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/cat_investment.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 03 Aug 2020 21:48:45 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.github.io/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Hola!&lt;/p&gt;
 &lt;p&gt;Mi idea con este post es compartir un poco la información que he recolectado y tirarte
 la información necesaria para arrancar sin tener que pensar mucho.&lt;/p&gt;
 &lt;p&gt;El tema inversiones es algo que &lt;strong&gt;no me atrae&lt;/strong&gt;, así que estoy tratando de resolverlo
@@ -13,7 +13,7 @@ de nada. Tomalo como una introducción al tema.&lt;/p&gt;
 final o podés contactarme en &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Introduccion&lt;/h3&gt;
 &lt;p&gt;"Financial Independence, Retire Early" es un movimiento cuyo objetivo es acumular
-bienes, hasta poder vivir de los ingresos pasivos (passive income) que estos generan.
+bienes, hasta poder vivir de los ingresos pasivos (&lt;em&gt;passive income&lt;/em&gt;) que estos generan.
 La idea es maximizar los ahorros, reducir los gastos y encontrar distintas formas de
 aumentar los ingresos.&lt;/p&gt;
 &lt;p&gt;Se teoriza que cuanto más ahorres de tu salario, más rápido te vas a poder retirar.&lt;/p&gt;
@@ -51,9 +51,9 @@ expande este tema.&lt;/p&gt;
 &lt;p&gt;Ese &lt;strong&gt;4%&lt;/strong&gt; aparece en muchos lugares mencionado.&lt;/p&gt;
 &lt;p&gt;Pueden leer "&lt;a href="https://www.mrmoneymustache.com/2012/01/13/the-shockingly-simple-math-behind-early-retirement/"&gt;The Shockingly Simple Math Behind Early Retirement&lt;/a&gt;" para más info.&lt;/p&gt;
 &lt;h4&gt;Dónde invierto&lt;/h4&gt;
-&lt;p&gt;Basicamente invertiremos en ETFs o index funds, que son más o menos lo mismo, a largo
+&lt;p&gt;Basicamente invertiremos en ETFs o &lt;em&gt;index funds&lt;/em&gt;, que son más o menos lo mismo, a largo
 plazo no importa mucho la diferencia.&lt;/p&gt;
-&lt;p&gt;Los &lt;strong&gt;index funds&lt;/strong&gt; son un conjunto de acciones de muchas empresas.&lt;/p&gt;
+&lt;p&gt;Los &lt;em&gt;index funds&lt;/em&gt; son un conjunto de acciones de muchas empresas.&lt;/p&gt;
 &lt;p&gt;Por los '70s, un tal &lt;a href="https://en.wikipedia.org/wiki/John_C._Bogle"&gt;John C. Bogle&lt;/a&gt; dijo que había que armar un index que
 imitara la performance del mercado en general a largo plazo.
 Si el mercado en un período genera 10% de interés, eso es lo que queremos.
@@ -179,7 +179,7 @@ por año, durante los primeros 8 meses del año.&lt;/p&gt;
 &lt;h3&gt;Resúmen&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Abrite una cuenta de inversiones en tu banco o app favorita.&lt;/li&gt;
-&lt;li&gt;Inverti en Index Funds (Northern Trust o Vanguard).&lt;/li&gt;
+&lt;li&gt;Inverti en &lt;em&gt;Index Funds&lt;/em&gt; (Northern Trust o Vanguard).&lt;/li&gt;
 &lt;li&gt;Hacelo un hábito y olvidate del tema, no importa si el mercado cae, &lt;strong&gt;NO VENDAS&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Recursos&lt;/h3&gt;
