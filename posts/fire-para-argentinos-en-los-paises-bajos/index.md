@@ -41,7 +41,7 @@ Tampoco se trata de tener una tonelada de plata, sino que tus bienes produzcan m
 los gastos que generás ahora.
 
 Por tirar un número, yo diría que se tarda en promedio, 20 años; esto es mucho menos que
-la pensión. Esto varia dependiendo de tu situación.
+la pensión. Esto varía dependiendo de tu situación.
 
 Mas allá de eso, es un gran complemento a lo que será tu pensión y es **mejor que
 tener tu dinero parado**.
@@ -215,6 +215,7 @@ Pero el principo es el mismo.
 
 - 30% ruling no necesita declarar ahorros e inversiones?
 - Invertir en stocks "green" aumenta nuestro máximo a €50k?
+- Cómo se hace el rebalance anual?
 
 ## Recursos
 
