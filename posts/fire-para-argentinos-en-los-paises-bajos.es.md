@@ -29,7 +29,7 @@ final o puedes contactarme en [twitter][santiwilly].
 
 "Financial Independence, Retire Early" es un movimiento cuyo objetivo es acumular
 bienes, hasta poder vivir de los ingresos pasivos (passive income) que estos generan.
-La idea es maximizar los ahorros, reducir las expensas y encontrar distintas formas de
+La idea es maximizar los ahorros, reducir los gastos y encontrar distintas formas de
 aumentar los ingresos.
 
 Se teoriza que cuanto más ahorres de tu salario, más rápido te vas a poder retirar.
@@ -38,7 +38,7 @@ Esto **no se trata de hacerse rico al instante**, sino retirarse temprano, es de
 en menos tiempo de lo que se llega a una pensión.
 
 Tampoco se trata de tener una tonelada de plata, sino que tus bienes produzcan más o menos
-las expensas que gastas ahora.
+lo suficiente para cubrir lo que gastas ahora.
 
 Por tirar un numero, yo diría que se tarda en promedio, 20 años, esto es mucho menos que
 la pension. Esto varia dependiendo tu situación.
@@ -62,8 +62,9 @@ hacer con los ahorros, además de tenerlos en la cuenta.
 Entonces... dónde hay que invertir? En el stock market. Sí, **acciones**.
 
 El stock market tiene el margen de retorno más alto (~7.5% cuenta la leyenda),
-mejor que real estate, y otros [[0]][simple_path], y a su vez es el de menor
-riesgo. El canadiense Ben Felix explica el costo asociado a comprar un hogar en [este video][buying_vs_renting].
+mejor que real estate, y otros [[0]][simple_path], y el riesgo lo controlamos
+invirtiendo de la forma controlada, y a largo plazo que se explica en este post.
+El canadiense Ben Felix explica, por ejemplo, el costo asociado a comprar un hogar en [este video][buying_vs_renting].
 
 ![Stock market](/images/fire-para-argentinos-en-los-paises-bajos/stock.jpg)
 
