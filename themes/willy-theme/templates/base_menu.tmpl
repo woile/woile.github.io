@@ -4,8 +4,10 @@
 {% macro html_header() %}
     <header class="cover">
     {{ html_site_title() }}
+    <div>
     <label class="dark-mode-label" for="dark-mode"></label>
     {{ html_translation_header() }}
+    </div>
 
     {% if search_form %}
         <div class="searchform" role="search">
@@ -41,7 +43,8 @@
         {% if show_blog_title %}
             <span id="blog-title">{{ blog_title|e }}</span>
         {% endif %}
-        </a></h1>
+        </a>
+        </h1>
     {% else %}
         <h3 id="brand" ><a href="{{ _link("root", None, lang) }}" title="{{ blog_title|e }}" rel="home">
         {% if show_blog_title %}
@@ -87,9 +90,8 @@
 
 {% macro html_translation_header() %}
     {% if translations|length > 1 %}
-        <div id="toptranslations">
-            <h2>{{ messages("Languages:") }}</h2>
+        <span id="toptranslations">
             {{ base.html_translations() }}
-        </div>
+        </span>
     {% endif %}
 {% endmacro %}

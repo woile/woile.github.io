@@ -124,7 +124,7 @@ lang="{{ lang }}">
 {% endmacro %}
 
 {% macro html_translations() %}
-    <ul class="translations">
+    <ul class="translations" style="display: inline-block;">
     {% for langname in translations|sort %}
         {% if langname != lang %}
             <li><a href="{{ _link("root", None, langname) }}" rel="alternate" hreflang="{{ langname }}">{{ messages("LANGUAGE", langname) }}</a></li>
