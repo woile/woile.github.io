@@ -64,7 +64,8 @@ Entonces... dónde hay que invertir? En el stock market. Sí, **acciones**.
 El stock market tiene el margen de retorno más alto (~7.5% cuenta la leyenda),
 mejor que real estate, y otros [[0]][simple_path], y el riesgo lo controlamos
 invirtiendo de la forma controlada, y a largo plazo que se explica en este post.
-El canadiense Ben Felix explica, por ejemplo, el costo asociado a comprar un hogar en [este video][buying_vs_renting].
+El canadiense Ben Felix explica, por ejemplo, el costo asociado a comprar un hogar en [este video][buying_vs_renting]. Y en el libro [Simple path to wealth][simple_path] se
+expande este tema.
 
 ![Stock market](/images/fire-para-argentinos-en-los-paises-bajos/stock.jpg)
 
