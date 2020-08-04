@@ -134,9 +134,9 @@ plataforma:
 | Plataforma                   | Index Fund                                                                                                         |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | T212                         | 100% VWRL FTSE All-World Index (IE00B3RBWM25)                                                                      |
-| ING Zelf op de beurs         | 88% MSCI World Custom **ESG** Index (NL0011225305) + 12% MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
-| ABN Amro Zelf Beleggen Basis | 88% MSCI World Custom **ESG** Index (NL0011225305) + 12% MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
-| Rabobank Zelf Beleggen       | 88% MSCI World Custom **ESG** Index (NL0011225305) + 12% MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
+| ING Zelf op de beurs         | 88% NT World MSCI World Custom **ESG** Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
+| ABN Amro Zelf Beleggen Basis | 88% NT World MSCI World Custom **ESG** Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
+| Rabobank Zelf Beleggen       | 88% NT World MSCI World Custom **ESG** Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
 
 La plataforma que elijas, la buscás en Google, y te va a llevar a dónde hacer click
 para configurar o crear una cuenta.
@@ -144,6 +144,8 @@ para configurar o crear una cuenta.
 Habrás notado que para los bancos es el mismo fund the [Northern Trust][nt] (NT), esto
 es así, porque están registrados en los Países Bajos, y no se qué mambo hay que
 terminamos pagando menos impuestos. Además son **ESG** y eso es genial.
+NT tiene un fund nuevo, basado en low carbon emissions, pero todavía no aparece
+en esa lista.
 
 T212 no tiene disponibles los fondos de NT, pero los de Vanguard son los más recomendados
 en la mayor parte del mundo y son buenos. No sé si tienen **ESG**.
@@ -246,4 +248,4 @@ Pero el principo es el mismo.
 [dividend]: https://en.wikipedia.org/wiki/Dividend
 [ef]: https://www.reddit.com/r/EuropeFIRE/
 [df]: https://www.reddit.com/r/DutchFIRE
-[t212]: www.trading212.com/invite/GINwpabB
+[t212]: https://www.trading212.com/invite/GINwpabB
