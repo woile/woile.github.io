@@ -215,7 +215,7 @@ Pero el principo es el mismo.
 
 ## Research pendiente
 
-- 30% ruling no necesita declarar ahorros e inversiones?
+- 30% ruling no necesita declarar ahorros e inversiones? [Pareciera que no][ruling_tax]
 - Invertir en stocks "green" aumenta nuestro máximo a €50k?
 - Cómo se hace el rebalance anual?
 
@@ -249,3 +249,4 @@ Pero el principo es el mismo.
 [ef]: https://www.reddit.com/r/EuropeFIRE/
 [df]: https://www.reddit.com/r/DutchFIRE
 [t212]: https://www.trading212.com/invite/GINwpabB
+[ruling_tax]: https://www.xpat.nl/expat-netherlands/legal-financial-netherlands/dutch-taxes/#main:~:text=Box%203%3A%20Taxable%20Income%20from%20Savings%20and%20Investments
