@@ -69,7 +69,7 @@ same convention here, so if you know `pyenv`, you know `nodenv` for example.
 
 - **ruby:** [rbenv][rvenv]
 - **javascript:** [nodenv][nodenv]
-- **go:** [go][go]
+- **go:** [goenv][goenv]
 - **php:** [phpenv][phpenv]
 
 ### More resources
@@ -87,6 +87,6 @@ same convention here, so if you know `pyenv`, you know `nodenv` for example.
 [rvenv]: https://github.com/rbenv/rbenv
 [nodenv]: https://github.com/nodenv/nodenv
 [pyenv-installer]: https://github.com/pyenv/pyenv-installer
-[go]: https://github.com/syndbg/goenv
+[goenv]: https://github.com/syndbg/goenv
 [phpenv]: https://github.com/phpenv/phpenv
 [realpython]: https://realpython.com/intro-to-pyenv/
