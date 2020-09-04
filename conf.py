@@ -139,11 +139,11 @@ TRANSLATIONS_PATTERN = '{path}.{lang}.{ext}'
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/", "Home"),
-        ("/blog/", "Blog"),
-        ("/archive.html", "Archives"),
-        ("/categories/index.html", "Tags"),
-        ("/rss.xml", "RSS feed"),
+        ("/", "🏠 Home"),
+        ("/blog/", "📰 Blog"),
+        ("/archive.html", "🗄️ Archives"),
+        ("/categories/index.html", "🏷️ Tags"),
+        ("/rss.xml", "🛰️ RSS feed"),
     ),
 }
 
