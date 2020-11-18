@@ -47,6 +47,24 @@ println!("{} {}", mama, moma);
 
 Why? Security and robustness.
 
+## Strings
+
+`str` is not what we would normally refer to as a `str` in python, it is a string slice,
+and something like `"hello human"` is a string literal.
+In rust, string slices are immutable,
+It does not map well to python's `str`.
+Instead the type `String` is the one that has useful functions.
+
+```rust
+let name = "jon" // literal string
+let name = name.to_string() // String type
+// we could also do:
+let name = String::from(name)
+```
+
+Now that our string has been cast to the type `String` we can start doing some operations on it.
+
+
 ### Immutability
 
 What does this mean?
