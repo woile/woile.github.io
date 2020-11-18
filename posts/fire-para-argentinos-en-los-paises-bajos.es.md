@@ -123,7 +123,7 @@ pero en teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, es
 está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en esas apps.
 
 > Si te vas a abrir una cuenta en T212, usa [mi link de referencia][t212] que
-> nos dan €100 para invertir a cada uno.
+> nos dan una acción de hasta €100 a cada uno.
 
 Dependiendo la plataforma que elijas, vas a tener un abanico de ofertas diferentes,
 y sus costos varían. Pero el tema de costos es despreciable, así que no importa mucho.
