@@ -14,13 +14,13 @@
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
-<link rel="canonical" href="https://woile.github.io/posts/automating-semver-releases-with-commitizen/">
+<link rel="canonical" href="https://woile.dev/posts/automating-semver-releases-with-commitizen/">
 <!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
 <link rel="prev" href="../helm-3-crafting-a-chart/" title="Helm 3 - Crafting a Chart" type="text/html">
 <link rel="next" href="../fire-para-argentinos-en-los-paises-bajos/" title="FIRE para Argentinos en los Países Bajos" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Automating semver releases with commitizen">
-<meta property="og:url" content="https://woile.github.io/posts/automating-semver-releases-with-commitizen/">
+<meta property="og:url" content="https://woile.dev/posts/automating-semver-releases-with-commitizen/">
 <meta property="og:description" content="How to make a deployment almost hassle free">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2020-07-15T15:27:20Z">
@@ -132,11 +132,9 @@ the JS ecosystem but which I found hard to use.</p>
 <span class="n">version</span> <span class="o">=</span> <span class="s">"2.5.1"</span>
 <span class="n">version_files</span> <span class="o">=</span> <span class="k">["setup.py", "Dockerfile", "scripts/publish"]</span>
 </pre>
-
 <p>And that's it, by running a single command we get the version and the changelog.</p>
 <pre class="code literal-block">cz bump --changelog
 </pre>
-
 <p>The <code>veresion_files</code> will also bump the version in the specified files.</p>
 <h3>CI/CD</h3>
 <p><img alt="diagram of semantic release" src="../../images/automating-deployment-with-commitizen/semantic_release.png"></p>
@@ -164,7 +162,6 @@ corresponding files and the tag.</p>
 <h4>Command</h4>
 <pre class="code literal-block">cz bump --changelog
 </pre>
-
 <h3>Conclusion</h3>
 <p>Try commitizen and check the <a href="https://github.com/commitizen-tools/commitizen">repo</a>!</p>
 <p>We aim for simplicity, trying to make this process as simple as possible, but
@@ -194,7 +191,7 @@ the tool is quite flexible, explore it, and see if it fits for your use cases.</
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="woile",
-            disqus_url="https://woile.github.io/posts/automating-semver-releases-with-commitizen/",
+            disqus_url="https://woile.dev/posts/automating-semver-releases-with-commitizen/",
         disqus_title="Automating semver releases with commitizen",
         disqus_identifier="cache/posts/automating-deployment-with-commitizen.html",
         disqus_config = function () {

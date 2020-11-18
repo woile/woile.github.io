@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about ci)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/ci.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 Sep 2020 07:37:41 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automating semver releases with commitizen</title><link>https://woile.github.io/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about ci)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/ci.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 18 Nov 2020 13:50:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
 Languages like rust have &lt;a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-cratesio"&gt;fully embraced it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;A SemVer version looks like this: &lt;code&gt;1.2.0&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Quite simple, right?&lt;/p&gt;
@@ -53,14 +53,12 @@ the JS ecosystem but which I found hard to use.&lt;/p&gt;
 &lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"2.5.1"&lt;/span&gt;
 &lt;span class="n"&gt;version_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;["setup.py", "Dockerfile", "scripts/publish"]&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;p&gt;And that's it, by running a single command we get the version and the changelog.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;cz bump --changelog
 &lt;/pre&gt;
-
 &lt;p&gt;The &lt;code&gt;veresion_files&lt;/code&gt; will also bump the version in the specified files.&lt;/p&gt;
 &lt;h3&gt;CI/CD&lt;/h3&gt;
-&lt;p&gt;&lt;img alt="diagram of semantic release" src="https://woile.github.io/images/automating-deployment-with-commitizen/semantic_release.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="diagram of semantic release" src="https://woile.dev/images/automating-deployment-with-commitizen/semantic_release.png"&gt;&lt;/p&gt;
 &lt;p&gt;In this diagram, you'd execute commitizen in the green job, during the version bump.&lt;/p&gt;
 &lt;p&gt;We push back the new commit including the changelog, the updated version in the
 corresponding files and the tag.&lt;/p&gt;
@@ -85,7 +83,6 @@ corresponding files and the tag.&lt;/p&gt;
 &lt;h4&gt;Command&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;cz bump --changelog
 &lt;/pre&gt;
-
 &lt;h3&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;Try commitizen and check the &lt;a href="https://github.com/commitizen-tools/commitizen"&gt;repo&lt;/a&gt;!&lt;/p&gt;
 &lt;p&gt;We aim for simplicity, trying to make this process as simple as possible, but
@@ -94,4 +91,4 @@ the tool is quite flexible, explore it, and see if it fits for your use cases.&l
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><category>ci</category><category>python</category><guid>https://woile.github.io/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item></channel></rss>
+&lt;/blockquote&gt;&lt;/div&gt;</description><category>ci</category><category>python</category><guid>https://woile.dev/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item></channel></rss>

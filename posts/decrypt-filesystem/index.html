@@ -14,13 +14,13 @@
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
-<link rel="canonical" href="https://woile.github.io/posts/decrypt-filesystem/">
+<link rel="canonical" href="https://woile.dev/posts/decrypt-filesystem/">
 <!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
 <link rel="prev" href="../how-to-test-selenium-scrapper/" title="How to test Selenium scrapper with Python" type="text/html">
 <link rel="next" href="../creating-a-small-git-like-cli-with-decli/" title="Tutorial: writing my dreamt cli using decli" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Decrypt filesystem">
-<meta property="og:url" content="https://woile.github.io/posts/decrypt-filesystem/">
+<meta property="og:url" content="https://woile.dev/posts/decrypt-filesystem/">
 <meta property="og:description" content="how to decrypt your ubuntu linux machine from command line">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2018-07-13T18:14:43-03:00">
@@ -96,16 +96,13 @@
 ├─nvme0n1p2    <span class="m">259</span>:2    <span class="m">0</span>   488M  <span class="m">0</span> part
 └─nvme0n1p3    <span class="m">259</span>:3    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> part
 </pre>
-
 <p>Then to decrypt:</p>
 <pre class="code literal-block">cryptsetup luksOpen &lt;path_to_encrypted&gt; &lt;name_for_unencrypted_partition&gt;
 <span class="c1"># This will prompt a password</span>
 </pre>
-
 <p>For example:</p>
 <pre class="code literal-block">cryptsetup luksOpen /dev/mapper/nvme0n1p3 woile
 </pre>
-
 <p>Once decrypted type again:</p>
 <p><code>lsblk</code></p>
 <p>And you'll see your partition unencrypted, something like this:</p>
@@ -115,7 +112,6 @@
 └─nvme0n1p3    <span class="m">259</span>:3    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> part
   └─woile <span class="m">253</span>:0    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> crypt
 </pre>
-
 <p>Now it's time to mount the new partition</p>
 <ol>
 <li>create a directory</li>
@@ -124,7 +120,6 @@
 <pre class="code literal-block">mkdir /media/tmp_mount_location  <span class="c1"># (1)</span>
 mount /dev/mapper/woile /media/tmp_mount_location  <span class="c1"># (2)</span>
 </pre>
-
 <p>That's it, if you go to /media/tmp_mount_location, your files should be there.</p>
 <p>This is mostly a mental note for me.</p>
 <p>Cheers!</p>
@@ -151,7 +146,7 @@ mount /dev/mapper/woile /media/tmp_mount_location  <span class="c1"># (2)</span>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="woile",
-            disqus_url="https://woile.github.io/posts/decrypt-filesystem/",
+            disqus_url="https://woile.dev/posts/decrypt-filesystem/",
         disqus_title="Decrypt filesystem",
         disqus_identifier="cache/posts/decrypt-filesystem.html",
         disqus_config = function () {

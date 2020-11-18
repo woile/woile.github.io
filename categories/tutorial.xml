@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about tutorial)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/tutorial.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 Sep 2020 07:37:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.github.io/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about tutorial)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/tutorial.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 18 Nov 2020 13:50:39 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.dev/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
 Works in the user space, avoiding the system's python, therefore is less error prone.
 You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
@@ -9,33 +9,27 @@ Doesn't require python.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;curl https://pyenv.run &lt;span class="p"&gt;|&lt;/span&gt; bash
 &lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;$SHELL&lt;/span&gt;  &lt;span class="c1"&gt;# Restart shell or open new terminal&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;h3&gt;Usage&lt;/h3&gt;
 &lt;h4&gt;Install different python versions&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.6.10
 pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.7.6
 &lt;/pre&gt;
-
 &lt;h4&gt;Set global python&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;pyenv global &lt;span class="m"&gt;3&lt;/span&gt;.7.6
 &lt;/pre&gt;
-
 &lt;p&gt;Observe&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;python --version
 &lt;span class="nb"&gt;type&lt;/span&gt; -a python
 &lt;/pre&gt;
-
 &lt;h4&gt;Set local python&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/my-project
 pyenv &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.6.10
 &lt;/pre&gt;
-
 &lt;p&gt;Observe&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;cat .python-version
 python --version
 &lt;span class="nb"&gt;type&lt;/span&gt; -a python
 &lt;/pre&gt;
-
 &lt;h4&gt;Other languages&lt;/h4&gt;
 &lt;p&gt;There's a set of similar tools for other languages, following the
 same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &lt;code&gt;nodenv&lt;/code&gt; for example.&lt;/p&gt;
@@ -54,4 +48,4 @@ same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &l
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><category>python</category><category>python-versions</category><category>tutorial</category><guid>https://woile.github.io/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item></channel></rss>
+&lt;/blockquote&gt;&lt;/div&gt;</description><category>python</category><category>python-versions</category><category>tutorial</category><guid>https://woile.dev/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item></channel></rss>

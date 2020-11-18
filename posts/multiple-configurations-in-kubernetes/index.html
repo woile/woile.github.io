@@ -14,13 +14,13 @@
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
-<link rel="canonical" href="https://woile.github.io/posts/multiple-configurations-in-kubernetes/">
+<link rel="canonical" href="https://woile.dev/posts/multiple-configurations-in-kubernetes/">
 <!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
 <link rel="prev" href="../pycon-france-2019-experience/" title="PyCon France 2019 experience" type="text/html">
 <link rel="next" href="../2019-yearly-retrospective/" title="2019 yearly retrospective" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Multiple configurations in kubernetes">
-<meta property="og:url" content="https://woile.github.io/posts/multiple-configurations-in-kubernetes/">
+<meta property="og:url" content="https://woile.dev/posts/multiple-configurations-in-kubernetes/">
 <meta property="og:description" content="How to manage multiple configuration files">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2019-11-08T15:15:28-03:00">
@@ -87,12 +87,10 @@ replacing <code>~/.kube/config</code>, which is fine the first few times.</p>
 <p>Create a <code>configs</code> folder, where the kubernetes config files will live.</p>
 <pre class="code literal-block">mkdir -p ~/.kube/configs
 </pre>
-
 <p>The next thing is to add the env variable to our <code>.bashrc</code>, <code>.zshrc</code> or <code>.profile</code> file,
 with the location of our configurations. The paths should be separated by a <code>:</code>.</p>
 <pre class="code literal-block"><span class="nb">export</span> <span class="nv">KUBECONFIG</span><span class="o">=</span><span class="nv">$HOME</span>/.kube/configs/gke-config:<span class="nv">$HOME</span>/.kube/configs/eks-config
 </pre>
-
 <p>Reloading our terminal with <code>. ~/.bashrc</code>, or opening a new one should pick up the changes.</p>
 <h4>Automating the config detection</h4>
 <p>Why not automate this? So everytime we add a new kubeconfig, it's detected automatically.</p>
@@ -114,7 +112,6 @@ with the location of our configurations. The paths should be separated by a <cod
 <span class="c1"># Execute the function</span>
 set_kubeconfig
 </pre>
-
 <p>This script will get all the <strong>files</strong> inside <code>~/.kube/configs</code>,
 which do not include <code>skip</code> in their name, and will set the <code>KUBECONFIG</code>
 variable to the found files.</p>
@@ -125,19 +122,15 @@ contexts and namespaces. I'll leave here the shortcuts</p>
 <h5>Current configuration</h5>
 <pre class="code literal-block">kubectl config view --minify  <span class="c1"># without minify we'll see all the configs</span>
 </pre>
-
 <h5>List contexts</h5>
 <pre class="code literal-block">kubectl config get-contexts
 </pre>
-
 <h5>Swtich context</h5>
 <pre class="code literal-block">kubectl config use-context &lt;context_name&gt;
 </pre>
-
 <h5>Switch namespace</h5>
 <pre class="code literal-block">kubectl config set-context --current --namespace<span class="o">=</span>&lt;new_namespace&gt;
 </pre>
-
 <p>Find me on twitter: <a href="https://twitter.com/santiwilly">@santiwilly</a></p>
 <p>Thanks for reading!</p>
 </div>
@@ -166,7 +159,7 @@ contexts and namespaces. I'll leave here the shortcuts</p>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="woile",
-            disqus_url="https://woile.github.io/posts/multiple-configurations-in-kubernetes/",
+            disqus_url="https://woile.dev/posts/multiple-configurations-in-kubernetes/",
         disqus_title="Multiple configurations in kubernetes",
         disqus_identifier="cache/posts/multiple-configurations-in-kubernetes.html",
         disqus_config = function () {

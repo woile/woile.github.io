@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about web frameworks development security https)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/web-frameworks-development-security-https.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 Sep 2020 07:37:41 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about web frameworks development security https)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/web-frameworks-development-security-https.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 18 Nov 2020 13:50:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.dev/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5"&gt;About mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6"&gt;Configuring mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7"&gt;Python frameworks&lt;/a&gt;&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5"&gt;About mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6"&gt;Configuring mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7"&gt;Python frameworks&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9"&gt;Django SSL Server&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#flask" id="id10"&gt;Flask&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11"&gt;Gunicorn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12"&gt;UWSGI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9"&gt;Django SSL Server&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#flask" id="id10"&gt;Flask&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11"&gt;Gunicorn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12"&gt;UWSGI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13"&gt;Security concerns&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13"&gt;Security concerns&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="about-mkcert"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/#id5"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/#id5"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/"&gt;mkcert&lt;/a&gt; allows you to have a local
 certificate authority (CA).
 This means that you can run your development web server using HTTPS.
 You'll see the green lock in your browser.&lt;/p&gt;
-&lt;img src="https://woile.github.io/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
+&lt;img src="https://woile.dev/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
 HTTPS by default in the browser, like web bluetooth, service workers, web authentication
 and websockets in some cases where SSL is already enabled.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.github.io/posts/local-https-development-in-python-with-mkcert/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.github.io/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>web frameworks development security https</category><guid>https://woile.dev/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item></channel></rss>

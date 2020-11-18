@@ -14,13 +14,13 @@
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" hreflang="en" href="../../rss.xml">
-<link rel="canonical" href="https://woile.github.io/posts/helm-3-crafting-a-chart/">
+<link rel="canonical" href="https://woile.dev/posts/helm-3-crafting-a-chart/">
 <!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><meta name="author" content="Woile">
 <link rel="prev" href="../pyenv/" title="Pyenv" type="text/html">
 <link rel="next" href="../automating-semver-releases-with-commitizen/" title="Automating semver releases with commitizen" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Helm 3 - Crafting a Chart">
-<meta property="og:url" content="https://woile.github.io/posts/helm-3-crafting-a-chart/">
+<meta property="og:url" content="https://woile.dev/posts/helm-3-crafting-a-chart/">
 <meta property="og:description" content="create and releasing a Helm chart">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2020-07-15T13:20:41Z">
@@ -88,7 +88,6 @@ and installation. While doing so, it checks dependencies versions and some other
 <pre class="code literal-block">$ helm version --short
 v3.2.4+g0ad800e
 </pre>
-
 <h3>Helm Chart</h3>
 <blockquote>
 <p>A Chart is a Helm package. It contains all of the resource definitions necessary to run an application,
@@ -111,7 +110,6 @@ or you can publish to a centralized chart repository like artifactory or your ow
 <p>Inside <code>charts/</code>, we are going to use <code>helm</code> to create the first boilerplate of our app.</p>
 <pre class="code literal-block">helm create &lt;package_name&gt;
 </pre>
-
 <h5>Example</h5>
 <p>Along the post we'll use <code>auth-service</code> as our project example name.</p>
 <pre class="code literal-block">mkdir auth-service
@@ -119,10 +117,8 @@ or you can publish to a centralized chart repository like artifactory or your ow
 mkdir charts
 <span class="nb">cd</span> charts/
 </pre>
-
 <pre class="code literal-block">helm create auth-service
 </pre>
-
 <h5>Structure</h5>
 <pre class="code literal-block">auth-service/
 └── charts/
@@ -141,7 +137,6 @@ mkdir charts
         │       └── test-connection.yaml
         └── values.yaml
 </pre>
-
 <h5>Notes</h5>
 <ul>
 <li>
@@ -170,14 +165,12 @@ adding any extra stuff that you need.</p>
 Helm's system is not that different: you can apply functions using a pipeline <code>|</code>.</p>
 <pre class="code literal-block"><span class="nt">food</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.favorite.food | upper | quote</span> <span class="p p-Indicator">}}</span>
 </pre>
-
 <p>Avoid adding complex template tags; the purpose of <code>yaml</code> is to be <strong>readable</strong>.
 By using templates, we make things more complex, and less readable, <strong>touch only when necessary</strong>.</p>
 <p><code>templates/_helpers.tpl</code> contains custom functions for your templates, like generating the release name based on values.</p>
 <p>To find problems with you charts, run:</p>
 <pre class="code literal-block">helm lint &lt;package_name&gt;
 </pre>
-
 <h4>Values</h4>
 <p>Place the "configuration" that you want to expose to the users of the chart in
 the <code>values.yaml</code>, even if it's you who's gonna end up using it.
@@ -220,11 +213,9 @@ about this.</p>
 │       └── auth-service.yaml
 └── src/
 </pre>
-
 <p>The installation command would look like</p>
 <pre class="code literal-block">helm install --values charts-values/production/auth-service.yaml auth-service-prod ./auth-service
 </pre>
-
 <p>I'm not 100% happy with the above setup, mainly with the naming.
 But it allows having multiple values per chart per environment.
 We could easily add values for a redis pulled from the official Helm hub.
@@ -237,16 +228,13 @@ Consider a MySQL chart. If you want two databases running in your cluster, you c
 <h4>New release</h4>
 <pre class="code literal-block">helm install &lt;release_name&gt; &lt;package_name&gt;
 </pre>
-
 <p>Deploy a new release to the cluster.</p>
 <p>We can also run a dry-run to check what's going to happen:</p>
 <pre class="code literal-block">helm install &lt;release_name&gt; &lt;package_name&gt; --dry-run
 </pre>
-
 <h5>Example</h5>
 <pre class="code literal-block">helm install auth-service-prod ./auth-service
 </pre>
-
 <h5>Notes</h5>
 <ul>
 <li>
@@ -265,30 +253,24 @@ Consider a MySQL chart. If you want two databases running in your cluster, you c
 <p>After it is installed, we want to know if everything went well.</p>
 <pre class="code literal-block">helm status &lt;release_name&gt;
 </pre>
-
 <h5>Example</h5>
 <pre class="code literal-block">helm status auth-service-prod
 </pre>
-
 <blockquote>
 <p>An upgrade takes an existing release and upgrades it according to the information you provide. Because Kubernetes charts can be large and complex, Helm tries to perform the <strong>least invasive upgrade</strong>. It will only update things that have changed <strong>since the last release</strong>. <a href="https://helm.sh/docs/intro/using_helm/#helm-upgrade-and-helm-rollback-upgrading-a-release-and-recovering-on-failure">[6]</a></p>
 </blockquote>
 <h4>Uprgrade release</h4>
 <pre class="code literal-block">helm upgrade -f &lt;custom_values.yaml&gt; &lt;release_name&gt; &lt;package_name&gt;
 </pre>
-
 <h5>Example</h5>
 <pre class="code literal-block">helm upgrade -f charts-values/production/auth-service.yaml auth-service-prod ./auth-service
 </pre>
-
 <h4>Rollback release</h4>
 <pre class="code literal-block">helm rollback &lt;release_name&gt; &lt;revision&gt;
 </pre>
-
 <h5>Example</h5>
 <pre class="code literal-block">helm rollback auth-service-prod <span class="m">1</span>
 </pre>
-
 <h5>Notes</h5>
 <ul>
 <li>Any release version increment will produce a <code>revision</code> number. It goes from 1..N.</li>
@@ -297,19 +279,16 @@ Consider a MySQL chart. If you want two databases running in your cluster, you c
 <h4>Uninstall release</h4>
 <pre class="code literal-block">helm uninstall &lt;release_name&gt;
 </pre>
-
 <p>I won't go deep into this, but just know it exists, and you can remove an existing release.</p>
 <h4>Automating release cycle</h4>
 <p>A recommended best practice to avoid running <code>helm install</code> and <code>helm upgrade</code> <a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#install-or-upgrade-a-release-with-one-command">[7]</a> is to use:</p>
 <pre class="code literal-block">helm upgrade --install &lt;release_name&gt; --values &lt;custom_values.yaml&gt; &lt;package_name&gt;
 </pre>
-
 <p>This can be a benefit in an automated CI/CD pipeline. We let Helm perform the check to know if it's a first time,
 or a release upgrade.</p>
 <h5>Example</h5>
 <pre class="code literal-block">helm upgrade --install auth-service-prod --values charts-values/production/auth-service.yaml ./auth-service
 </pre>
-
 <h5>Notes</h5>
 <ul>
 <li>Use <code>--atomic</code> to get automatic rollback on failures.<a href="https://lzone.de/blog/Helm-Best-Practices">[8]</a>
@@ -345,7 +324,7 @@ or a release upgrade.</p>
                         <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="woile",
-            disqus_url="https://woile.github.io/posts/helm-3-crafting-a-chart/",
+            disqus_url="https://woile.dev/posts/helm-3-crafting-a-chart/",
         disqus_title="Helm 3 - Crafting a Chart",
         disqus_identifier="cache/posts/helm-3-crafting-a-chart.html",
         disqus_config = function () {

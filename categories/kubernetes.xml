@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about kubernetes)</title><link>https://woile.github.io/</link><description></description><atom:link href="https://woile.github.io/categories/kubernetes.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 04 Sep 2020 07:37:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Helm 3 - Crafting a Chart</title><link>https://woile.github.io/posts/helm-3-crafting-a-chart/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;This post focuses on &lt;strong&gt;creating and releasing a chart&lt;/strong&gt;, not consuming from a Helm Chart Repository.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about kubernetes)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/kubernetes.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2020 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 18 Nov 2020 13:50:39 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Helm 3 - Crafting a Chart</title><link>https://woile.dev/posts/helm-3-crafting-a-chart/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;This post focuses on &lt;strong&gt;creating and releasing a chart&lt;/strong&gt;, not consuming from a Helm Chart Repository.&lt;/p&gt;
 &lt;p&gt;Helm is an &lt;strong&gt;advanced&lt;/strong&gt; tool used by kubernetes people, some "lingo" (jargon) is used here.
 Please leave a comment if you want more information.&lt;/p&gt;
 &lt;p&gt;Helm allows to &lt;strong&gt;"package"&lt;/strong&gt; kubernetes applications, it simplifies the distribution
@@ -11,7 +11,6 @@ and installation. While doing so, it checks dependencies versions and some other
 &lt;pre class="code literal-block"&gt;$ helm version --short
 v3.2.4+g0ad800e
 &lt;/pre&gt;
-
 &lt;h3&gt;Helm Chart&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;A Chart is a Helm package. It contains all of the resource definitions necessary to run an application,
@@ -34,7 +33,6 @@ or you can publish to a centralized chart repository like artifactory or your ow
 &lt;p&gt;Inside &lt;code&gt;charts/&lt;/code&gt;, we are going to use &lt;code&gt;helm&lt;/code&gt; to create the first boilerplate of our app.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;helm create &amp;lt;package_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;h5&gt;Example&lt;/h5&gt;
 &lt;p&gt;Along the post we'll use &lt;code&gt;auth-service&lt;/code&gt; as our project example name.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;mkdir auth-service
@@ -42,10 +40,8 @@ or you can publish to a centralized chart repository like artifactory or your ow
 mkdir charts
 &lt;span class="nb"&gt;cd&lt;/span&gt; charts/
 &lt;/pre&gt;
-
 &lt;pre class="code literal-block"&gt;helm create auth-service
 &lt;/pre&gt;
-
 &lt;h5&gt;Structure&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;auth-service/
 └── charts/
@@ -64,7 +60,6 @@ mkdir charts
         │       └── test-connection.yaml
         └── values.yaml
 &lt;/pre&gt;
-
 &lt;h5&gt;Notes&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;appVersion&lt;/code&gt; inside &lt;code&gt;Chart.yaml&lt;/code&gt; references the &lt;strong&gt;application version&lt;/strong&gt; &lt;a href="https://stackoverflow.com/a/60054111/2047185"&gt;[1]&lt;/a&gt;&lt;/li&gt;
@@ -87,14 +82,12 @@ adding any extra stuff that you need.&lt;/p&gt;
 Helm's system is not that different: you can apply functions using a pipeline &lt;code&gt;|&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;food&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;.Values.favorite.food | upper | quote&lt;/span&gt; &lt;span class="p p-Indicator"&gt;}}&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;p&gt;Avoid adding complex template tags; the purpose of &lt;code&gt;yaml&lt;/code&gt; is to be &lt;strong&gt;readable&lt;/strong&gt;.
 By using templates, we make things more complex, and less readable, &lt;strong&gt;touch only when necessary&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;templates/_helpers.tpl&lt;/code&gt; contains custom functions for your templates, like generating the release name based on values.&lt;/p&gt;
 &lt;p&gt;To find problems with you charts, run:&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;helm lint &amp;lt;package_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;h4&gt;Values&lt;/h4&gt;
 &lt;p&gt;Place the "configuration" that you want to expose to the users of the chart in
 the &lt;code&gt;values.yaml&lt;/code&gt;, even if it's you who's gonna end up using it.
@@ -137,11 +130,9 @@ about this.&lt;/p&gt;
 │       └── auth-service.yaml
 └── src/
 &lt;/pre&gt;
-
 &lt;p&gt;The installation command would look like&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;helm install --values charts-values/production/auth-service.yaml auth-service-prod ./auth-service
 &lt;/pre&gt;
-
 &lt;p&gt;I'm not 100% happy with the above setup, mainly with the naming.
 But it allows having multiple values per chart per environment.
 We could easily add values for a redis pulled from the official Helm hub.
@@ -154,16 +145,13 @@ Consider a MySQL chart. If you want two databases running in your cluster, you c
 &lt;h4&gt;New release&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;helm install &amp;lt;release_name&amp;gt; &amp;lt;package_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;p&gt;Deploy a new release to the cluster.&lt;/p&gt;
 &lt;p&gt;We can also run a dry-run to check what's going to happen:&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;helm install &amp;lt;release_name&amp;gt; &amp;lt;package_name&amp;gt; --dry-run
 &lt;/pre&gt;
-
 &lt;h5&gt;Example&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;helm install auth-service-prod ./auth-service
 &lt;/pre&gt;
-
 &lt;h5&gt;Notes&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;package_name&lt;/code&gt; can be a folder, a &lt;code&gt;.tgz&lt;/code&gt; or a url.&lt;/li&gt;
@@ -179,30 +167,24 @@ Consider a MySQL chart. If you want two databases running in your cluster, you c
 &lt;p&gt;After it is installed, we want to know if everything went well.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;helm status &amp;lt;release_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;h5&gt;Example&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;helm status auth-service-prod
 &lt;/pre&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;An upgrade takes an existing release and upgrades it according to the information you provide. Because Kubernetes charts can be large and complex, Helm tries to perform the &lt;strong&gt;least invasive upgrade&lt;/strong&gt;. It will only update things that have changed &lt;strong&gt;since the last release&lt;/strong&gt;. &lt;a href="https://helm.sh/docs/intro/using_helm/#helm-upgrade-and-helm-rollback-upgrading-a-release-and-recovering-on-failure"&gt;[6]&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4&gt;Uprgrade release&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;helm upgrade -f &amp;lt;custom_values.yaml&amp;gt; &amp;lt;release_name&amp;gt; &amp;lt;package_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;h5&gt;Example&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;helm upgrade -f charts-values/production/auth-service.yaml auth-service-prod ./auth-service
 &lt;/pre&gt;
-
 &lt;h4&gt;Rollback release&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;helm rollback &amp;lt;release_name&amp;gt; &amp;lt;revision&amp;gt;
 &lt;/pre&gt;
-
 &lt;h5&gt;Example&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;helm rollback auth-service-prod &lt;span class="m"&gt;1&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;h5&gt;Notes&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;Any release version increment will produce a &lt;code&gt;revision&lt;/code&gt; number. It goes from 1..N.&lt;/li&gt;
@@ -211,19 +193,16 @@ Consider a MySQL chart. If you want two databases running in your cluster, you c
 &lt;h4&gt;Uninstall release&lt;/h4&gt;
 &lt;pre class="code literal-block"&gt;helm uninstall &amp;lt;release_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;p&gt;I won't go deep into this, but just know it exists, and you can remove an existing release.&lt;/p&gt;
 &lt;h4&gt;Automating release cycle&lt;/h4&gt;
 &lt;p&gt;A recommended best practice to avoid running &lt;code&gt;helm install&lt;/code&gt; and &lt;code&gt;helm upgrade&lt;/code&gt; &lt;a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#install-or-upgrade-a-release-with-one-command"&gt;[7]&lt;/a&gt; is to use:&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;helm upgrade --install &amp;lt;release_name&amp;gt; --values &amp;lt;custom_values.yaml&amp;gt; &amp;lt;package_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;p&gt;This can be a benefit in an automated CI/CD pipeline. We let Helm perform the check to know if it's a first time,
 or a release upgrade.&lt;/p&gt;
 &lt;h5&gt;Example&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;helm upgrade --install auth-service-prod --values charts-values/production/auth-service.yaml ./auth-service
 &lt;/pre&gt;
-
 &lt;h5&gt;Notes&lt;/h5&gt;
 &lt;ul&gt;
 &lt;li&gt;Use &lt;code&gt;--atomic&lt;/code&gt; to get automatic rollback on failures.&lt;a href="https://lzone.de/blog/Helm-Best-Practices"&gt;[8]&lt;/a&gt;&lt;/li&gt;
@@ -237,19 +216,17 @@ or a release upgrade.&lt;/p&gt;
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><category>helm</category><category>kubernetes</category><guid>https://woile.github.io/posts/helm-3-crafting-a-chart/</guid><pubDate>Wed, 15 Jul 2020 13:20:41 GMT</pubDate></item><item><title>Multiple configurations in kubernetes</title><link>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
+&lt;/blockquote&gt;&lt;/div&gt;</description><category>helm</category><category>kubernetes</category><guid>https://woile.dev/posts/helm-3-crafting-a-chart/</guid><pubDate>Wed, 15 Jul 2020 13:20:41 GMT</pubDate></item><item><title>Multiple configurations in kubernetes</title><link>https://woile.dev/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
 kubernetes. At this point, you'll want to have multiple config files, instead of
 replacing &lt;code&gt;~/.kube/config&lt;/code&gt;, which is fine the first few times.&lt;/p&gt;
 &lt;p&gt;In order to do this we only need to set &lt;code&gt;KUBECONFIG&lt;/code&gt; env variable with the path to the kubeconfigs.&lt;/p&gt;
 &lt;p&gt;Create a &lt;code&gt;configs&lt;/code&gt; folder, where the kubernetes config files will live.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;mkdir -p ~/.kube/configs
 &lt;/pre&gt;
-
 &lt;p&gt;The next thing is to add the env variable to our &lt;code&gt;.bashrc&lt;/code&gt;, &lt;code&gt;.zshrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file,
 with the location of our configurations. The paths should be separated by a &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/configs/gke-config:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/configs/eks-config
 &lt;/pre&gt;
-
 &lt;p&gt;Reloading our terminal with &lt;code&gt;. ~/.bashrc&lt;/code&gt;, or opening a new one should pick up the changes.&lt;/p&gt;
 &lt;h4&gt;Automating the config detection&lt;/h4&gt;
 &lt;p&gt;Why not automate this? So everytime we add a new kubeconfig, it's detected automatically.&lt;/p&gt;
@@ -271,7 +248,6 @@ with the location of our configurations. The paths should be separated by a &lt;
 &lt;span class="c1"&gt;# Execute the function&lt;/span&gt;
 set_kubeconfig
 &lt;/pre&gt;
-
 &lt;p&gt;This script will get all the &lt;strong&gt;files&lt;/strong&gt; inside &lt;code&gt;~/.kube/configs&lt;/code&gt;,
 which do not include &lt;code&gt;skip&lt;/code&gt; in their name, and will set the &lt;code&gt;KUBECONFIG&lt;/code&gt;
 variable to the found files.&lt;/p&gt;
@@ -282,21 +258,17 @@ contexts and namespaces. I'll leave here the shortcuts&lt;/p&gt;
 &lt;h5&gt;Current configuration&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;kubectl config view --minify  &lt;span class="c1"&gt;# without minify we'll see all the configs&lt;/span&gt;
 &lt;/pre&gt;
-
 &lt;h5&gt;List contexts&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;kubectl config get-contexts
 &lt;/pre&gt;
-
 &lt;h5&gt;Swtich context&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;kubectl config use-context &amp;lt;context_name&amp;gt;
 &lt;/pre&gt;
-
 &lt;h5&gt;Switch namespace&lt;/h5&gt;
 &lt;pre class="code literal-block"&gt;kubectl config set-context --current --namespace&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;new_namespace&amp;gt;
 &lt;/pre&gt;
-
 &lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Thanks for reading!&lt;/p&gt;&lt;/div&gt;</description><category>configuration</category><category>kubectl</category><category>kubernetes</category><category>linux</category><guid>https://woile.github.io/posts/multiple-configurations-in-kubernetes/</guid><pubDate>Fri, 08 Nov 2019 18:15:28 GMT</pubDate></item><item><title>Raspberry Pi hobby cluster</title><link>https://woile.github.io/posts/raspberries-hobby-cluster/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;In this tutorial we are gonna try to setup a cluster in our home
+&lt;p&gt;Thanks for reading!&lt;/p&gt;&lt;/div&gt;</description><category>configuration</category><category>kubectl</category><category>kubernetes</category><category>linux</category><guid>https://woile.dev/posts/multiple-configurations-in-kubernetes/</guid><pubDate>Fri, 08 Nov 2019 18:15:28 GMT</pubDate></item><item><title>Raspberry Pi hobby cluster</title><link>https://woile.dev/posts/raspberries-hobby-cluster/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;In this tutorial we are gonna try to setup a cluster in our home
 server built with raspberries.&lt;/p&gt;
 &lt;p&gt;In another post I'll describe how to configure a Kubernetes cluster in our raspberries.&lt;/p&gt;
 &lt;p&gt;Kubernetes is a container orchestration tool, it can do all of this:&lt;/p&gt;
@@ -311,4 +283,4 @@ server built with raspberries.&lt;/p&gt;
 &lt;li&gt;&lt;p&gt;Long running jobs&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Batch execution&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://woile.github.io/posts/raspberries-hobby-cluster/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cluster</category><category>docker</category><category>kubernetes</category><category>raspberry</category><guid>https://woile.github.io/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://woile.dev/posts/raspberries-hobby-cluster/"&gt;Read more…&lt;/a&gt; (3 min remaining to read)&lt;/p&gt;&lt;/div&gt;</description><category>cluster</category><category>docker</category><category>kubernetes</category><category>raspberry</category><guid>https://woile.dev/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item></channel></rss>
