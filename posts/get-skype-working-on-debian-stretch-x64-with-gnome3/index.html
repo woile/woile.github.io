@@ -30,31 +30,32 @@
 </head>
 <body>
     <input id="dark-mode" type="checkbox"><div class="theme">
-        <div class="layout">
-                <header class="cover"><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+        
+    <header class="cover"><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+    <nav class="menu"><ul>
+<li><a class="hover:menu__link" href="../../">🏠 Home</a></li>
+                <li><a class="hover:menu__link" href="../../blog/">📰 Blog</a></li>
+                <li><a class="hover:menu__link" href="../../archive.html">🗄️ Archives</a></li>
+                <li><a class="hover:menu__link" href="../../categories/index.html">🏷️ Tags</a></li>
+                <li><a class="hover:menu__link" href="../../rss.xml">🛰️ RSS feed</a></li>
+
+        
+        
+        
+        </ul>
+<label class="dark-mode-label hover:dark-mode-label" for="dark-mode">
+            <?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation: isolate;" viewbox="0 0 416 416" width="30px" height="30px"><defs><clippath id="_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC"><rect width="416" height="416"></rect></clippath></defs><g clip-path="url(#_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC)"><path d=" M 304 88 C 304 57.38 299.49 26.39 288 0 C 364.43 33.27 416 111.32 416 200 C 416 319.29 319.29 416 200 416 C 111.32 416 33.27 364.43 0 288 C 26.39 299.49 57.38 304 88 304 C 207.29 304 304 207.29 304 88 Z "></path></g></svg></label>
+    </nav><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
             <span id="blog-title">Willy's blog</span>
         </a></h3>
 
     <div>
-    <label class="dark-mode-label hover:dark-mode-label" for="dark-mode">
-        <?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation: isolate;" viewbox="0 0 416 416" width="30px" height="30px"><defs><clippath id="_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC"><rect width="416" height="416"></rect></clippath></defs><g clip-path="url(#_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC)"><path d=" M 304 88 C 304 57.38 299.49 26.39 288 0 C 364.43 33.27 416 111.32 416 200 C 416 319.29 319.29 416 200 416 C 111.32 416 33.27 364.43 0 288 C 26.39 299.49 57.38 304 88 304 C 207.29 304 304 207.29 304 88 Z "></path></g></svg></label>
     
     </div>
 
-
-    </header><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
-        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
-        <nav class="menu"><ul>
-<li><a href="../../">🏠 Home</a></li>
-                <li><a href="../../blog/">📰 Blog</a></li>
-                <li><a href="../../archive.html">🗄️ Archives</a></li>
-                <li><a href="../../categories/index.html">🏷️ Tags</a></li>
-                <li><a href="../../rss.xml">🛰️ RSS feed</a></li>
-
-    
-    
-    
-    </ul></nav><main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Get Skype working on Debian Stretch x64 with GNOME3</a></h2>
+    </header><div class="layout">
+            <main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Get Skype working on Debian Stretch x64 with GNOME3</a></h2>
 
         <div class="metadata">
             <span class="byline author vcard p-author h-card">
@@ -95,26 +96,26 @@ Right now it doesn't support screensharing and some other features a normal pers
 <p>I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.</p>
 <p>As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.</p>
-<pre class="code bash"><a name="rest_code_bcbdad6d2c5c485fb0f0705004dabc2e-1"></a>sudo dpkg --add-architecture i386
-<a name="rest_code_bcbdad6d2c5c485fb0f0705004dabc2e-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-<a name="rest_code_bcbdad6d2c5c485fb0f0705004dabc2e-3"></a>mkdir ~/.apps/
-<a name="rest_code_bcbdad6d2c5c485fb0f0705004dabc2e-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
+<pre class="code bash"><a name="rest_code_7436237f26aa40bdafb018ca6f3e3d94-1"></a>sudo dpkg --add-architecture i386
+<a name="rest_code_7436237f26aa40bdafb018ca6f3e3d94-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
+<a name="rest_code_7436237f26aa40bdafb018ca6f3e3d94-3"></a>mkdir ~/.apps/
+<a name="rest_code_7436237f26aa40bdafb018ca6f3e3d94-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
 </pre>
 <p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code> file to your gnome environment.</p>
 <p>The location for this file is either <code>~/.local/share/applications</code>, for the current user, or <code>/usr/share/applications</code> for everyone.</p>
 <p>The content for your <code>skype.desktop</code>, should be something like this:</p>
-<pre class="code bash"><a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-7"></a><span class="nv">Type</span><span class="o">=</span>Application
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-11"></a>X-KDE-Protocols<span class="o">=</span>skype
-<a name="rest_code_2779d4ed90724dbfa88712e4813c83e4-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
+<pre class="code bash"><a name="rest_code_3a36b23925664e189ce44c6219f70406-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-7"></a><span class="nv">Type</span><span class="o">=</span>Application
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-11"></a>X-KDE-Protocols<span class="o">=</span>skype
+<a name="rest_code_3a36b23925664e189ce44c6219f70406-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
 </pre>
 <p>PS: Remember to change the user for the one you are using.</p>
 <p>Good luck!</p>
