@@ -14,8 +14,8 @@
     {#<a href="#content" class="sr-only sr-only-focusable">{{ messages("Skip to main content") }}</a>#}
     <input id="dark-mode" type="checkbox" />
     <div class="theme">
+        {{ menu.html_header() }}
         <div class="layout">
-            {{ menu.html_header() }}
             <main id="content" class="content">
                 {% block content %}{% endblock %}
             </main>
