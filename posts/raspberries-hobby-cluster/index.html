@@ -121,11 +121,11 @@ server built with raspberries.</p>
 <p>We need a SSH key in order to connect to the cluster without having to type
 the password every time we access.</p>
 <p>In case you don't have any, run this command and follow the steps.</p>
-<pre class="code bash"><a name="rest_code_41f12bd946554379a43234394435d549-1"></a>ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">"your_email@example.com"</span>
+<pre class="code bash"><a name="rest_code_72cf3e675939498eb76ab5f4e9062fc3-1"></a>ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">"your_email@example.com"</span>
 </pre>
 <p>Add the key to your ssh agent, assuming our keys generated are <code>id_rsa</code>
 and <code>id_rsa.pub</code>.</p>
-<pre class="code bash"><a name="rest_code_0bc6807911ac4631afaa80c786916cf4-1"></a>ssh-add ~/.ssh/id_rsa
+<pre class="code bash"><a name="rest_code_a2e71480d390420aab23535769028143-1"></a>ssh-add ~/.ssh/id_rsa
 </pre>
 <p>You can find a more in depth explanation in this <a class="reference external" href="https://confluence.atlassian.com/bitbucketserver/creating-ssh-keys-776639788.html">tutorial</a></p>
 </div>
@@ -167,20 +167,20 @@ for preshared key</p></td>
 </tr>
 </tbody>
 </table>
-<pre class="code bash"><a name="rest_code_92899c20041246b8b55766d731a629d4-1"></a><span class="nb">export</span> <span class="nv">USERNAME</span><span class="o">=</span>willy
-<a name="rest_code_92899c20041246b8b55766d731a629d4-2"></a><span class="nb">export</span> <span class="nv">WIFI_SSID_NAME</span><span class="o">=</span><span class="s2">"Bla bla"</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-3"></a><span class="nb">export</span> <span class="nv">WIFI_PASSWORD</span><span class="o">=</span><span class="s2">"longandsecurepassword"</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-4"></a><span class="nb">export</span> <span class="nv">WIFI_COUNTRY</span><span class="o">=</span>NL
-<a name="rest_code_92899c20041246b8b55766d731a629d4-5"></a><span class="nb">export</span> <span class="nv">TIMEZONE</span><span class="o">=</span><span class="k">$(</span>curl -s https://ipapi.co/timezone<span class="k">)</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-6"></a><span class="nb">export</span> <span class="nv">SSH_PUBLIC_KEY</span><span class="o">=</span><span class="k">$(</span>cat ~/.ssh/id_rsa.pub<span class="k">)</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-7"></a>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-8"></a>curl -s https://gist.githubusercontent.com/Woile/51eca58047b6bd51c60eeae80d60ec14/raw/db05664b5e90a28472f139bc8757562c2ed13026/cloud-init-config-template.yaml <span class="p">|</span> <span class="se">\</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-9"></a>sed -e <span class="s2">"s/\${USERNAME}/</span><span class="nv">$USERNAME</span><span class="s2">/"</span> <span class="se">\</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-10"></a>-e <span class="s2">"s/\${WIFI_SSID_NAME}/</span><span class="nv">$WIFI_SSID_NAME</span><span class="s2">/"</span> <span class="se">\</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-11"></a>-e <span class="s2">"s/\${WIFI_PASSWORD}/</span><span class="nv">$WIFI_PASSWORD</span><span class="s2">/"</span> <span class="se">\</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-12"></a>-e <span class="s2">"s/\${WIFI_COUNTRY}/</span><span class="nv">$WIFI_COUNTRY</span><span class="s2">/"</span> <span class="se">\</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-13"></a>-e <span class="s2">"s|\${TIMEZONE}|</span><span class="nv">$TIMEZONE</span><span class="s2">|"</span> <span class="se">\</span>
-<a name="rest_code_92899c20041246b8b55766d731a629d4-14"></a>-e <span class="s2">"s|\${SSH_PUBLIC_KEY}|</span><span class="nv">$SSH_PUBLIC_KEY</span><span class="s2">|"</span> &gt; cloud-init-config.yaml
+<pre class="code bash"><a name="rest_code_6e33de27045b49229a6864f2a9987b05-1"></a><span class="nb">export</span> <span class="nv">USERNAME</span><span class="o">=</span>willy
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-2"></a><span class="nb">export</span> <span class="nv">WIFI_SSID_NAME</span><span class="o">=</span><span class="s2">"Bla bla"</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-3"></a><span class="nb">export</span> <span class="nv">WIFI_PASSWORD</span><span class="o">=</span><span class="s2">"longandsecurepassword"</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-4"></a><span class="nb">export</span> <span class="nv">WIFI_COUNTRY</span><span class="o">=</span>NL
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-5"></a><span class="nb">export</span> <span class="nv">TIMEZONE</span><span class="o">=</span><span class="k">$(</span>curl -s https://ipapi.co/timezone<span class="k">)</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-6"></a><span class="nb">export</span> <span class="nv">SSH_PUBLIC_KEY</span><span class="o">=</span><span class="k">$(</span>cat ~/.ssh/id_rsa.pub<span class="k">)</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-7"></a>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-8"></a>curl -s https://gist.githubusercontent.com/Woile/51eca58047b6bd51c60eeae80d60ec14/raw/db05664b5e90a28472f139bc8757562c2ed13026/cloud-init-config-template.yaml <span class="p">|</span> <span class="se">\</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-9"></a>sed -e <span class="s2">"s/\${USERNAME}/</span><span class="nv">$USERNAME</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-10"></a>-e <span class="s2">"s/\${WIFI_SSID_NAME}/</span><span class="nv">$WIFI_SSID_NAME</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-11"></a>-e <span class="s2">"s/\${WIFI_PASSWORD}/</span><span class="nv">$WIFI_PASSWORD</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-12"></a>-e <span class="s2">"s/\${WIFI_COUNTRY}/</span><span class="nv">$WIFI_COUNTRY</span><span class="s2">/"</span> <span class="se">\</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-13"></a>-e <span class="s2">"s|\${TIMEZONE}|</span><span class="nv">$TIMEZONE</span><span class="s2">|"</span> <span class="se">\</span>
+<a name="rest_code_6e33de27045b49229a6864f2a9987b05-14"></a>-e <span class="s2">"s|\${SSH_PUBLIC_KEY}|</span><span class="nv">$SSH_PUBLIC_KEY</span><span class="s2">|"</span> &gt; cloud-init-config.yaml
 </pre>
 </div>
 <div class="section" id="flashing-sd-cards">
@@ -190,10 +190,10 @@ for preshared key</p></td>
 It's important to change the hostname per raspberry. Pay attention to param
 <code class="docutils literal"><span class="pre">--hostname</span></code>.</p>
 <p>For my 4 raspberries I am going to use these hostnames:</p>
-<pre class="code bash"><a name="rest_code_6b70e64a2220437c8cbd0a44c36ef7bb-1"></a>willy-1
-<a name="rest_code_6b70e64a2220437c8cbd0a44c36ef7bb-2"></a>willy-2
-<a name="rest_code_6b70e64a2220437c8cbd0a44c36ef7bb-3"></a>willy-3
-<a name="rest_code_6b70e64a2220437c8cbd0a44c36ef7bb-4"></a>willy-4
+<pre class="code bash"><a name="rest_code_22ead47205714365860f732a529e84fe-1"></a>willy-1
+<a name="rest_code_22ead47205714365860f732a529e84fe-2"></a>willy-2
+<a name="rest_code_22ead47205714365860f732a529e84fe-3"></a>willy-3
+<a name="rest_code_22ead47205714365860f732a529e84fe-4"></a>willy-4
 </pre>
 <p><code class="docutils literal">flash <span class="pre">-f</span> <span class="pre">--hostname</span> <span class="pre">willy-1</span> <span class="pre">--device</span> &lt;device_found_using_df&gt; <span class="pre">-u</span> <span class="pre">cloud-init-config.yaml</span> <span class="pre">hypriotos-rpi-v1.9.0.img</span> pv</code></p>
 <p>Example:</p>
@@ -203,13 +203,13 @@ It's important to change the hostname per raspberry. Pay attention to param
 <div class="section" id="setting-up-the-nodes">
 <h2>Setting up the nodes</h2>
 <p>To find the IPs of your raspberries run:</p>
-<pre class="code bash"><a name="rest_code_d825b3895399423b92c17e3d1fa08782-1"></a><span class="c1"># For Debian based OS</span>
-<a name="rest_code_d825b3895399423b92c17e3d1fa08782-2"></a>sudo apt-get install arp-scan
-<a name="rest_code_d825b3895399423b92c17e3d1fa08782-3"></a><span class="c1"># For Mac</span>
-<a name="rest_code_d825b3895399423b92c17e3d1fa08782-4"></a>brew install arp-scan
+<pre class="code bash"><a name="rest_code_bd99190bf9904c8facaf387d94c6709f-1"></a><span class="c1"># For Debian based OS</span>
+<a name="rest_code_bd99190bf9904c8facaf387d94c6709f-2"></a>sudo apt-get install arp-scan
+<a name="rest_code_bd99190bf9904c8facaf387d94c6709f-3"></a><span class="c1"># For Mac</span>
+<a name="rest_code_bd99190bf9904c8facaf387d94c6709f-4"></a>brew install arp-scan
 </pre>
-<pre class="code bash"><a name="rest_code_27fe5b32fbd542ceb4632f75258c2f5f-1"></a>ip a  <span class="c1"># here found the interface, like wlp2s0</span>
-<a name="rest_code_27fe5b32fbd542ceb4632f75258c2f5f-2"></a>sudo arp-scan --interface<span class="o">=</span>&lt;your_interface&gt; --localnet
+<pre class="code bash"><a name="rest_code_480b91a96bd84e3b9499131982e7408f-1"></a>ip a  <span class="c1"># here found the interface, like wlp2s0</span>
+<a name="rest_code_480b91a96bd84e3b9499131982e7408f-2"></a>sudo arp-scan --interface<span class="o">=</span>&lt;your_interface&gt; --localnet
 </pre>
 <p>Connect to each one of them using <code class="docutils literal">ssh <span class="pre">&lt;username&gt;@&lt;hostname&gt;</span></code>, because
 we previosuly added the ssh key, we should not need to type a passsword.</p>
@@ -227,19 +227,19 @@ we previosuly added the ssh key, we should not need to type a passsword.</p>
 <p>For simplicity and in case you want to have a multi master cluster, we
 are gonna allow ports for master kubernetes and for kubernetes workers.</p>
 <p>Run this as root typing <code class="docutils literal">sudo su</code></p>
-<pre class="code bash"><a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-1"></a>ufw --force reset  <span class="c1"># ok</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-2"></a>ufw allow ssh
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-3"></a>ufw allow <span class="m">6443</span> <span class="c1"># Kubernetes API (master)</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-4"></a>ufw allow <span class="m">80</span>  <span class="c1"># HTTP</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-5"></a>ufw allow <span class="m">443</span>  <span class="c1"># HTTPS</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-6"></a>ufw allow <span class="m">8443</span>  <span class="c1"># kubectl proxy</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-7"></a>ufw allow <span class="m">10250</span>  <span class="c1"># Kubelet API (master and worker)</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-8"></a>ufw allow <span class="m">10251</span>  <span class="c1"># kube-scheduler (master)</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-9"></a>ufw allow <span class="m">10252</span>  <span class="c1"># kube-controller-manager (master)</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-10"></a>ufw allow <span class="m">2379</span>:2380/tcp  <span class="c1"># etcd server client API (master)</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-11"></a>ufw allow <span class="m">30000</span>:32767/tcp  <span class="c1"># NodePort Services** (worker)</span>
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-12"></a>ufw default deny incoming
-<a name="rest_code_69cdeba464bd4226bb7d3b03c8ad991b-13"></a>yes <span class="p">|</span> ufw <span class="nb">enable</span>
+<pre class="code bash"><a name="rest_code_7125aa70a1264f7f9f39874afa158731-1"></a>ufw --force reset  <span class="c1"># ok</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-2"></a>ufw allow ssh
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-3"></a>ufw allow <span class="m">6443</span> <span class="c1"># Kubernetes API (master)</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-4"></a>ufw allow <span class="m">80</span>  <span class="c1"># HTTP</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-5"></a>ufw allow <span class="m">443</span>  <span class="c1"># HTTPS</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-6"></a>ufw allow <span class="m">8443</span>  <span class="c1"># kubectl proxy</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-7"></a>ufw allow <span class="m">10250</span>  <span class="c1"># Kubelet API (master and worker)</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-8"></a>ufw allow <span class="m">10251</span>  <span class="c1"># kube-scheduler (master)</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-9"></a>ufw allow <span class="m">10252</span>  <span class="c1"># kube-controller-manager (master)</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-10"></a>ufw allow <span class="m">2379</span>:2380/tcp  <span class="c1"># etcd server client API (master)</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-11"></a>ufw allow <span class="m">30000</span>:32767/tcp  <span class="c1"># NodePort Services** (worker)</span>
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-12"></a>ufw default deny incoming
+<a name="rest_code_7125aa70a1264f7f9f39874afa158731-13"></a>yes <span class="p">|</span> ufw <span class="nb">enable</span>
 </pre>
 <p><a class="reference external" href="https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports">Ports used by kubernetes</a></p>
 </div>
@@ -251,12 +251,12 @@ master.</p>
 <div class="section" id="set-static-ip">
 <h3>Set static IP</h3>
 <p>Edit <code class="docutils literal">/etc/network/interfaces.d/eth0</code> and set it to</p>
-<pre class="code ini"><a name="rest_code_d06ed4bc85fa409aa1aad7c7ce3d5653-1"></a><span class="na">allow-hotplug eth0</span>
-<a name="rest_code_d06ed4bc85fa409aa1aad7c7ce3d5653-2"></a><span class="na">iface eth0 inet static</span>
-<a name="rest_code_d06ed4bc85fa409aa1aad7c7ce3d5653-3"></a><span class="na">address 10.0.0.1</span>
-<a name="rest_code_d06ed4bc85fa409aa1aad7c7ce3d5653-4"></a><span class="na">netmask 255.255.255.0</span>
-<a name="rest_code_d06ed4bc85fa409aa1aad7c7ce3d5653-5"></a><span class="na">broadcast 10.0.0.255</span>
-<a name="rest_code_d06ed4bc85fa409aa1aad7c7ce3d5653-6"></a><span class="na">gateway 10.0.0.1</span>
+<pre class="code ini"><a name="rest_code_dceec50071964b5cb05a85eaffe39d7c-1"></a><span class="na">allow-hotplug eth0</span>
+<a name="rest_code_dceec50071964b5cb05a85eaffe39d7c-2"></a><span class="na">iface eth0 inet static</span>
+<a name="rest_code_dceec50071964b5cb05a85eaffe39d7c-3"></a><span class="na">address 10.0.0.1</span>
+<a name="rest_code_dceec50071964b5cb05a85eaffe39d7c-4"></a><span class="na">netmask 255.255.255.0</span>
+<a name="rest_code_dceec50071964b5cb05a85eaffe39d7c-5"></a><span class="na">broadcast 10.0.0.255</span>
+<a name="rest_code_dceec50071964b5cb05a85eaffe39d7c-6"></a><span class="na">gateway 10.0.0.1</span>
 </pre>
 <p>Reboot to claim the IP <code class="docutils literal">10.0.0.1</code> in your internal cluster’s network
 (the switch network)</p>
@@ -267,20 +267,20 @@ master.</p>
 <p>Edit <code class="docutils literal"><span class="pre">/etc/default/isc-dhcp-server</span></code>, comment out <code class="docutils literal"># <span class="pre">INTERFACESv6=""</span></code>
 and set <code class="docutils literal"><span class="pre">INTERFACESv4="eth0"</span></code></p>
 <p>Or run this</p>
-<pre class="code bash"><a name="rest_code_0d98af909abc48288609176306d3ba11-1"></a>sudo sed -e <span class="s1">'/INTERFACESv6=/ s/^#*/#/'</span> -e <span class="s1">'s/INTERFACESv4=""/INTERFACESv4="eth0"/g'</span> -i /etc/default/isc-dhcp-server
+<pre class="code bash"><a name="rest_code_f1ece48051604ac7bd33ecb4d5d48985-1"></a>sudo sed -e <span class="s1">'/INTERFACESv6=/ s/^#*/#/'</span> -e <span class="s1">'s/INTERFACESv4=""/INTERFACESv4="eth0"/g'</span> -i /etc/default/isc-dhcp-server
 </pre>
 <p>Backup and edit <code class="docutils literal">/etc/dhcp/dhcpd.conf</code>. Set it like this:</p>
-<pre class="code ini"><a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-1"></a><span class="na">option domain-name "willy.home"; # Set a domain name, can be anything</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-2"></a><span class="na">option domain-name-servers 8.8.8.8, 8.8.4.4; # Use Google DNS by default, you can substitute ISP-supplied values here</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-3"></a><span class="na">subnet 10.0.0.0 netmask 255.255.255.0 { # We'll use 10.0.0.X for our subnet</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-4"></a>    <span class="na">range 10.0.0.1 10.0.0.50;</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-5"></a>    <span class="na">option subnet-mask 255.255.255.0;</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-6"></a>    <span class="na">option broadcast-address 10.0.0.255;</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-7"></a>    <span class="na">option routers 10.0.0.1;</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-8"></a><span class="na">}</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-9"></a><span class="na">default-lease-time 600;</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-10"></a><span class="na">max-lease-time 7200;</span>
-<a name="rest_code_e104dd899e5445c69a0b18ef20b94ccd-11"></a><span class="na">authoritative;</span>
+<pre class="code ini"><a name="rest_code_57e84f71794041849bafbc4019181ad1-1"></a><span class="na">option domain-name "willy.home"; # Set a domain name, can be anything</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-2"></a><span class="na">option domain-name-servers 8.8.8.8, 8.8.4.4; # Use Google DNS by default, you can substitute ISP-supplied values here</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-3"></a><span class="na">subnet 10.0.0.0 netmask 255.255.255.0 { # We'll use 10.0.0.X for our subnet</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-4"></a>    <span class="na">range 10.0.0.1 10.0.0.50;</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-5"></a>    <span class="na">option subnet-mask 255.255.255.0;</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-6"></a>    <span class="na">option broadcast-address 10.0.0.255;</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-7"></a>    <span class="na">option routers 10.0.0.1;</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-8"></a><span class="na">}</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-9"></a><span class="na">default-lease-time 600;</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-10"></a><span class="na">max-lease-time 7200;</span>
+<a name="rest_code_57e84f71794041849bafbc4019181ad1-11"></a><span class="na">authoritative;</span>
 </pre>
 <p>Restart service <code class="docutils literal">sudo systemctl restart dhcpcd.service</code></p>
 <p>Now our master will start assigning addresses to the other nodes.</p>
