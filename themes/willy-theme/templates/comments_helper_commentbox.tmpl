@@ -1,0 +1,27 @@
+{#  -*- coding: utf-8 -*- #}
+
+{% macro comment_form(url, title, identifier) %}
+    {% if comment_system_id %}
+        <div class="commentbox" id="commentbox"></div>
+
+        <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+        <script>
+
+        commentBox('{{ comment_system_id }}');
+        </script>
+        <noscript>Please enable JavaScript to view the comments</noscript>
+    {% endif %}
+{% endmacro %}
+
+{% macro comment_link(link, identifier) %}
+    {% if comment_system_id %}
+
+    {% endif %}
+{% endmacro %}
+
+
+{% macro comment_link_script() %}
+    {% if comment_system_id %}
+
+    {% endif %}
+{% endmacro %}
