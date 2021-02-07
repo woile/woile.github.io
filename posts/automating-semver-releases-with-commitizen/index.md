@@ -124,7 +124,6 @@ Done!
 ### The Price
 
 - Write parseable commits
-- Easy to map commit messages to semver
 
 ### Command
 
