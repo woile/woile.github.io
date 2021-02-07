@@ -101,12 +101,24 @@ The `veresion_files` will also bump the version in the specified files.
 
 ![diagram of semantic release](/images/automating-deployment-with-commitizen/semantic_release.png)
 
-In this diagram, you'd execute commitizen in the green job, during the version bump.
+In this diagram, you'd execute commitizen during the "merge job" (green in the diagram), where "bump version" is highlighted.
 
-We push back the new commit including the changelog, the updated version in the
-corresponding files and the tag.
+For example, if you are using Github Actions, you'd add this to your job:
 
-Pushing the tag triggers another job, which will take care of the release, which can be:
+```yaml
+on:
+  push:
+    branches:
+      - main
+```
+
+Commitizen then, will generate a new commit, with the updated version in the files and the changelog; and a new tag.
+
+Both are pushed back.
+
+For the new commit, we should not trigger again the CI.
+
+The new tag, instead, should trigger another job, "tag job" (purle in the diagram), which will take care of the release, which can include:
 
 - deploying to kubernetes
 - publishing to pypi/npm/cargo
