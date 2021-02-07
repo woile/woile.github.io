@@ -78,7 +78,7 @@
             <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
             <time class="published dt-published" datetime="2017-03-02T20:58:22-03:00" itemprop="datePublished" title="2017-03-02 20:58">2017-03-02 20:58</time></a>
             </span>
-                <span class="commentline">            <a href="#disqus_thread" data-disqus-identifier="cache/posts/django-polymorphic-integration-with-django-filters.html">Comments</a>
+                <span class="commentline">        
 
 
                     | <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.rst">Source</a></span>
@@ -98,27 +98,27 @@
 model, the inherited model classes are returned.</pre>
 <p>One of the most important things to understand of polymorphic is, that when you ask for the queryset of the parent, every element is represented with its children classes. Let's see this.</p>
 <p>I'll use the models examples provided by the <a class="reference external" href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
-<pre class="code python"><a name="rest_code_a2f185495a9b45d8b515e97381256caf-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-2"></a>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-7"></a>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-10"></a>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
-<a name="rest_code_a2f185495a9b45d8b515e97381256caf-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-1"></a><span class="kn">from</span> <span class="nn">polymorphic.models</span> <span class="kn">import</span> <span class="n">PolymorphicModel</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-2"></a>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-3"></a><span class="k">class</span> <span class="nc">Project</span><span class="p">(</span><span class="n">PolymorphicModel</span><span class="p">):</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-5"></a>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-6"></a>    <span class="n">finish_date</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-7"></a>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-8"></a><span class="k">class</span> <span class="nc">ArtProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-9"></a>    <span class="n">artist</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-10"></a>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-11"></a><span class="k">class</span> <span class="nc">ResearchProject</span><span class="p">(</span><span class="n">Project</span><span class="p">):</span>
+<a name="rest_code_0ffbe89eadc24a6e97b10eae001fe7f6-12"></a>    <span class="n">supervisor</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_16feba38b7fc4b468ca41ee782339990-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
-<a name="rest_code_16feba38b7fc4b468ca41ee782339990-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
-<a name="rest_code_16feba38b7fc4b468ca41ee782339990-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_4e079364011d49c28195832babb2782c-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Department Party"</span><span class="p">)</span>
+<a name="rest_code_4e079364011d49c28195832babb2782c-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ArtProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="s2">"T. Turner"</span><span class="p">)</span>
+<a name="rest_code_4e079364011d49c28195832babb2782c-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">ResearchProject</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span><span class="o">=</span><span class="s2">"Dr. Winter"</span><span class="p">)</span>
 </pre>
-<pre class="code python"><a name="rest_code_9aa4d51911274876a02e9ee2ca7e62ca-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-<a name="rest_code_9aa4d51911274876a02e9ee2ca7e62ca-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_9aa4d51911274876a02e9ee2ca7e62ca-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
-<a name="rest_code_9aa4d51911274876a02e9ee2ca7e62ca-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
+<pre class="code python"><a name="rest_code_199a2755f7fe467eb358f6c2c2202ffc-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<a name="rest_code_199a2755f7fe467eb358f6c2c2202ffc-2"></a><span class="p">[</span> <span class="o">&lt;</span><span class="n">Project</span><span class="p">:</span>         <span class="nb">id</span> <span class="mi">1</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Department Party"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_199a2755f7fe467eb358f6c2c2202ffc-3"></a>  <span class="o">&lt;</span><span class="n">ArtProject</span><span class="p">:</span>      <span class="nb">id</span> <span class="mi">2</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Painting with Tim"</span><span class="p">,</span> <span class="n">artist</span> <span class="s2">"T. Turner"</span><span class="o">&gt;</span><span class="p">,</span>
+<a name="rest_code_199a2755f7fe467eb358f6c2c2202ffc-4"></a>  <span class="o">&lt;</span><span class="n">ResearchProject</span><span class="p">:</span> <span class="nb">id</span> <span class="mi">3</span><span class="p">,</span> <span class="n">topic</span> <span class="s2">"Swallow Aerodynamics"</span><span class="p">,</span> <span class="n">supervisor</span> <span class="s2">"Dr. Winter"</span><span class="o">&gt;</span> <span class="p">]</span>
 </pre>
 <p>As you can see, this can be really helpful when using Django Rest Framework (DRF) and model inheritance.
 It allows to use just one model, in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into account
@@ -131,19 +131,19 @@ that your serializer will have to handle the representation of each of the model
 <p>Fundamentally, when using django filters you'll want to create a class specifying the model's
 fields by which a queryset can be filtered.</p>
 <p>Let's modified a bit the example of the <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
-<pre class="code python"><a name="rest_code_09618963c23847ef9c4b35e517a83bfc-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_09618963c23847ef9c4b35e517a83bfc-2"></a>
-<a name="rest_code_09618963c23847ef9c4b35e517a83bfc-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_09618963c23847ef9c4b35e517a83bfc-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
-<a name="rest_code_09618963c23847ef9c4b35e517a83bfc-5"></a>
-<a name="rest_code_09618963c23847ef9c4b35e517a83bfc-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_09618963c23847ef9c4b35e517a83bfc-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_09618963c23847ef9c4b35e517a83bfc-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
+<pre class="code python"><a name="rest_code_c855fc4ebea845baa82c4f7143604d69-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_c855fc4ebea845baa82c4f7143604d69-2"></a>
+<a name="rest_code_c855fc4ebea845baa82c4f7143604d69-3"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_c855fc4ebea845baa82c4f7143604d69-4"></a>    <span class="n">topic</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">'iexact'</span><span class="p">)</span>
+<a name="rest_code_c855fc4ebea845baa82c4f7143604d69-5"></a>
+<a name="rest_code_c855fc4ebea845baa82c4f7143604d69-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_c855fc4ebea845baa82c4f7143604d69-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_c855fc4ebea845baa82c4f7143604d69-8"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'finish_date'</span><span class="p">]</span>
 </pre>
 <p>And the view should look something like:</p>
-<pre class="code python"><a name="rest_code_b4fae167e7644e1d916baa7da9ff7b8d-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<a name="rest_code_b4fae167e7644e1d916baa7da9ff7b8d-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-<a name="rest_code_b4fae167e7644e1d916baa7da9ff7b8d-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
+<pre class="code python"><a name="rest_code_0b0e242cbdc54d359f16aad25c6a9d89-1"></a><span class="k">def</span> <span class="nf">project_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a name="rest_code_0b0e242cbdc54d359f16aad25c6a9d89-2"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">ProjectFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">Project</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+<a name="rest_code_0b0e242cbdc54d359f16aad25c6a9d89-3"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'my_app/template.html'</span><span class="p">,</span> <span class="p">{</span><span class="s1">'filter'</span><span class="p">:</span> <span class="n">f</span><span class="p">})</span>
 </pre>
 <p>Obviously, this will help reduce the amount of code written, and will be way easier to mantain.
 The good thing about this library, and what matters to me the most, is that it has a great <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with DRF</a> by providing a DRF-specific FilterSet and a filter backend.</p>
@@ -151,28 +151,28 @@ The good thing about this library, and what matters to me the most, is that it h
 <div class="section" id="filtering-by-a-polymorphic-model">
 <h2>Filtering by a polymorphic model</h2>
 <p>As we stated at the beginning what I wanted to do is filter by a <strong>polymorphic model</strong>, because we have different types of projects. This can be easily achieved by reading the docs, no seriously, by essentially using the <code>rest_framework.FilterSet</code> and using a customized filter with <a class="reference external" href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a> in our FilterSet.</p>
-<pre class="code python"><a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-2"></a>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-3"></a>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-7"></a>    <span class="k">return</span> <span class="n">choices</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-8"></a>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-9"></a>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-13"></a>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-17"></a>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
-<a name="rest_code_e5d9f9e8f6fa4497a8828ee4183e009b-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_99f799bef4e24a6986eca7acdc308781-1"></a><span class="kn">import</span> <span class="nn">django_filters</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-2"></a>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-3"></a>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-4"></a><span class="k">def</span> <span class="nf">get_subclasses_as_choice</span><span class="p">(</span><span class="n">klass</span><span class="p">):</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-5"></a>    <span class="n">choices</span> <span class="o">=</span> <span class="p">{</span><span class="n">subclass</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">subclass</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-6"></a>               <span class="k">for</span> <span class="n">subclass</span> <span class="ow">in</span> <span class="n">klass</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()}</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-7"></a>    <span class="k">return</span> <span class="n">choices</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-8"></a>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-9"></a>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-10"></a><span class="k">class</span> <span class="nc">ProjectFilter</span><span class="p">(</span><span class="n">django_filters</span><span class="o">.</span><span class="n">rest_framework</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-11"></a>    <span class="n">project_type</span> <span class="o">=</span> <span class="n">django_filters</span><span class="o">.</span><span class="n">MultipleChoiceFilter</span><span class="p">(</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-12"></a>        <span class="n">method</span><span class="o">=</span><span class="s1">'project_type_filter'</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">))</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-13"></a>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-14"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-15"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Project</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-16"></a>        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'topic'</span><span class="p">,</span> <span class="s1">'start_date'</span><span class="p">,</span> <span class="s1">'end_date'</span><span class="p">]</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-17"></a>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-18"></a>    <span class="k">def</span> <span class="nf">project_type_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-19"></a>        <span class="n">project_choices</span> <span class="o">=</span> <span class="n">get_subclasses_as_choice</span><span class="p">(</span><span class="n">Project</span><span class="p">)</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-20"></a>        <span class="n">selected_projects</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">project_choices</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-21"></a>                             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+<a name="rest_code_99f799bef4e24a6986eca7acdc308781-22"></a>        <span class="k">return</span> <span class="n">queryset</span><span class="o">.</span><span class="n">instance_of</span><span class="p">(</span><span class="o">*</span><span class="n">selected_projects</span><span class="p">)</span>
 </pre>
 <p>Now, if our querystring includes a key <code>project_type</code>, it will check if the values match any of
 the choices and it will return the queryset filtered by the specified choices.
@@ -220,27 +220,15 @@ And that's it, we have successfully filtered polymorphic models. Now we just nee
             <li class="next">
                 <a class="hover:pagination__link" href="../guide-to-sublime-like-a-normal-person/" rel="next" title="Guide to Sublime like a normal person">Next post</a>
             </li>
-        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
-                        <div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="woile",
-            disqus_url="https://woile.dev/posts/django-polymorphic-integration-with-django-filters/",
-        disqus_title="How to filter Polymorphic Models with Django Filters",
-        disqus_identifier="cache/posts/django-polymorphic-integration-with-django-filters.html",
-        disqus_config = function () {
-            this.language = "en";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-</noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+        </ul></nav></aside><section class="comments hidden-print"><div class="commentbox" id="commentbox"></div>
+
+        <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script><script>
+
+        commentBox('5692121306628096-proj');
+        </script><noscript>Please enable JavaScript to view the comments</noscript>
 
 
-        </section></article><script>var disqus_shortname="woile";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></main>
+        </section></article></main>
 </div>
     </div>
                 <script src="../../assets/js/index.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
