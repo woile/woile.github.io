@@ -39,7 +39,6 @@ The release process can be fully automated, but it has a price.
 ## The Price
 
 - Write parseable commits
-- Easy to map commit messages to [SemVer][semver]
 
 ## Automating release
 
