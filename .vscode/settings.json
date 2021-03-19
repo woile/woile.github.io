@@ -6,5 +6,14 @@
     "python.pythonPath": ".venv/bin/python",
     "files.associations": {
         "*.tmpl": "jinja"
-    }
+    },
+    "spellright.language": [
+        "Spanish",
+        "en_GB"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ]
 }
