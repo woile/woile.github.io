@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/cat_python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 19 Mar 2021 16:24:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
+Works in the user space, avoiding the system's python, therefore is less error prone.
+You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
+Doesn't require python.&lt;/p&gt;
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Use &lt;a href="https://github.com/pyenv/pyenv-installer"&gt;pyenv-installer&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;curl https://pyenv.run &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;$SHELL&lt;/span&gt;  &lt;span class="c1"&gt;# Restart shell or open new terminal&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;Usage&lt;/h3&gt;
+&lt;h4&gt;Install different python versions&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.6.10
+pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.7.6
+&lt;/pre&gt;
+&lt;h4&gt;Set global python&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;pyenv global &lt;span class="m"&gt;3&lt;/span&gt;.7.6
+&lt;/pre&gt;
+&lt;p&gt;Observe&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;python --version
+&lt;span class="nb"&gt;type&lt;/span&gt; -a python
+&lt;/pre&gt;
+&lt;h4&gt;Set local python&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/my-project
+pyenv &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.6.10
+&lt;/pre&gt;
+&lt;p&gt;Observe&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;cat .python-version
+python --version
+&lt;span class="nb"&gt;type&lt;/span&gt; -a python
+&lt;/pre&gt;
+&lt;h4&gt;Other languages&lt;/h4&gt;
+&lt;p&gt;There's a set of similar tools for other languages, following the
+same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &lt;code&gt;nodenv&lt;/code&gt; for example.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ruby:&lt;/strong&gt; &lt;a href="https://github.com/rbenv/rbenv"&gt;rbenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;javascript:&lt;/strong&gt; &lt;a href="https://github.com/nodenv/nodenv"&gt;nodenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;go:&lt;/strong&gt; &lt;a href="https://github.com/syndbg/goenv"&gt;goenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;php:&lt;/strong&gt; &lt;a href="https://github.com/phpenv/phpenv"&gt;phpenv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;More resources&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://realpython.com/intro-to-pyenv/"&gt;In depth tutorial by real python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;Official docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hey, hello 👋&lt;/p&gt;
+&lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item><item><title>PyCon France 2019 experience</title><link>https://woile.dev/es/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.dev/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;This year (2019) I had the opportunity to participate as a speaker at &lt;a href="https://www.pycon.fr/2019/"&gt;PyCon France&lt;/a&gt;,
+and it was a great experience.
+The event was held in &lt;strong&gt;Bordeaux, France&lt;/strong&gt;, a super cozy city, famous for its wines.&lt;/p&gt;
+&lt;p&gt;I realize now that every country claims they have the best wine, including mine.
+I have to say, though, that I loved Bordeaux wines, and I bought 4 to bring back home.&lt;/p&gt;
+&lt;h3&gt;Highlights of PyFrance&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="marcos in bordeaux" src="https://woile.dev/images/pycon-fr-2019/marcos.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Everyone was kind to me and I felt really comfortable at the conference.
+It somehow reminded me of the Argentinian PyCon, maybe because it's free for everyone.&lt;/p&gt;
+&lt;p&gt;I really liked the &lt;strong&gt;"badge"&lt;/strong&gt; approach. On arrival, you could pick some "flags".
+I chose the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"I speak english"&lt;/li&gt;
+&lt;li&gt;"Speaker"&lt;/li&gt;
+&lt;li&gt;"First time"&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some cool others: "Do not talk to me", "No pics please", "Volunteer".&lt;/p&gt;
+&lt;p&gt;They also had an &lt;strong&gt;automatic captioning tool&lt;/strong&gt;, which generated the transcription
+live.&lt;/p&gt;
+&lt;p&gt;I met a bunch of new people and had some interesting talks.&lt;/p&gt;
+&lt;p&gt;There were some talks I couldn't attend because of the language barrier
+(I don't speak French). But there's no one to blame for this.&lt;/p&gt;
+&lt;p&gt;The talk I enjoyed the most was the keynote about &lt;strong&gt;"The Role of 21st Century Technology in Protests"&lt;/strong&gt;.
+It gave me a lot to think about.
+First, I'm amazed by the creativity and cleverness of the Hong Kong people and
+their constant push to prevent incidents.
+Please look up all the stuff they did to counter police efforts to capture people.
+And second, about the role technology has in society.
+When left in autocratic hands, it can quickly deviate and be used to harm people,
+&lt;strong&gt;no matter how good intentions are at the beginning&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Technology, in the way's being used in some countries, is scary.
+What is even scarier is that people are not aware of the dangers.&lt;/p&gt;
+&lt;p&gt;The only lesson I take from this is that &lt;strong&gt;education&lt;/strong&gt; is key.
+The more education a person receives, the more resilient, and shielded they become
+against foreign evil "human" agents, like vaccines.
+And I mean education, not indoctrination, though in practice it may be harder
+to draw the line.&lt;/p&gt;
+&lt;h3&gt;My Presentation&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="me talking at pycon fr 2019" src="https://woile.dev/images/pycon-fr-2019/santi.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;I prepared the talk for over 3 weeks: &lt;a href="https://woile.github.io/pytest-presentation/"&gt;Pytest yes, let's go&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Every talk I give takes me a lot of time and effort.
+I find it really hard to come up with the slides quickly.
+Luckily I got positive feedback over my talk, so I left the conference quite proud.&lt;/p&gt;
+&lt;p&gt;For my next pycon (whichever I end up attending), I think I know the topic I'll discuss about: &lt;strong&gt;Documentation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5"&gt;About mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6"&gt;Configuring mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7"&gt;Python frameworks&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9"&gt;Django SSL Server&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#flask" id="id10"&gt;Flask&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11"&gt;Gunicorn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12"&gt;UWSGI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13"&gt;Security concerns&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="about-mkcert"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#id5"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/"&gt;mkcert&lt;/a&gt; allows you to have a local
+certificate authority (CA).
+This means that you can run your development web server using HTTPS.
+You'll see the green lock in your browser.&lt;/p&gt;
+&lt;img src="https://woile.dev/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
+HTTPS by default in the browser, like web bluetooth, service workers, web authentication
+and websockets in some cases where SSL is already enabled.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/"&gt;Leer más…&lt;/a&gt; (quedan 3 minutos de lectura)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
+less worries, this is pure personal preference.&lt;/p&gt;
+&lt;p&gt;Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.&lt;/p&gt;
+&lt;p&gt;Because of this, I created &lt;a class="reference external" href="https://github.com/Woile/decli"&gt;decli&lt;/a&gt;, which is a declarative command line utility. Super simple.
+Which is basically a wrapper around argparse.
+Just write a dict and you are ready to go.&lt;/p&gt;
+&lt;p&gt;In this tutorial we are gonna try to simulate a &lt;em&gt;git command line tool&lt;/em&gt;.
+Let's create a few commands which will just print a message.&lt;/p&gt;
+&lt;p&gt;But we are gonna structure the code, the way I always wanted to hehe.&lt;/p&gt;
+&lt;p&gt;The commands will be decoupled from the &lt;em&gt;command line interface&lt;/em&gt; (cli from now on).&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/"&gt;Leer más…&lt;/a&gt; (quedan 5 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/</guid><pubDate>Fri, 14 Sep 2018 17:33:02 GMT</pubDate></item><item><title>How to test Selenium scrapper with Python</title><link>https://woile.dev/es/posts/how-to-test-selenium-scrapper/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;This week I've been writing tests for &lt;a class="reference external" href="https://github.com/discov-r/pyinstamation"&gt;a project&lt;/a&gt; which is
+using Selenium as a scrapper.&lt;/p&gt;
+&lt;p&gt;As you may know, Selenium is a testing framework, it's intended to be used while writing tests,
+not as a web crawler/scrapper.&lt;/p&gt;
+&lt;p&gt;But you can. Why? Because it runs a browser, and the browser is the real sh*t, so the Javascript
+gets executed, and we are happy. There are other solutions like &lt;a class="reference external" href="https://github.com/makinacorpus/spynner"&gt;Spynner&lt;/a&gt;
+or writing the scrapper in pure Javascript, but I felt comfortable using Selenium this way.&lt;/p&gt;
+&lt;div class="section" id="the-problem"&gt;
+&lt;h2&gt;The problem&lt;/h2&gt;
+&lt;p&gt;How do we &lt;strong&gt;test&lt;/strong&gt; this scrapper? I want it to have tests, damn!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="solution"&gt;
+&lt;h2&gt;Solution&lt;/h2&gt;
+&lt;p&gt;Save the static content while running the scrapper, then, serve it with a very small http server
+while testing. Yes, it's a bit tedious, but it delivers.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/how-to-test-selenium-scrapper/"&gt;Leer más…&lt;/a&gt; (quedan 2 minutos de lectura)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/how-to-test-selenium-scrapper/</guid><pubDate>Tue, 12 Sep 2017 14:38:40 GMT</pubDate></item><item><title>How to filter Polymorphic Models with Django Filters</title><link>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;As the title says, I needed a way to filter my polymorphic models using my already defined
+&lt;code&gt;rest_framework.FilterSet&lt;/code&gt;, and as I didn't find much resources about it I'm sharing my experience here.&lt;/p&gt;
+&lt;p&gt;First, let's talk about &lt;code&gt;django-polymorphic&lt;/code&gt; and &lt;code&gt;django-filters&lt;/code&gt;, what are these libraries for.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/"&gt;Leer más…&lt;/a&gt; (quedan 2 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</guid><pubDate>Thu, 02 Mar 2017 23:58:22 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="a">
+<meta name="viewport" content="width=device-width">
+<title>Websockets RFC summary | Willy's blog</title>
+<link href="../../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/code.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
+<link rel="canonical" href="https://woile.dev/es/posts/websockets-rfc-summary/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
+    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"-3"}))};sessionStorage.setItem("_swa","1");
+</script><meta name="author" content="Woile">
+<meta name="robots" content="noindex">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Websockets RFC summary">
+<meta property="og:url" content="https://woile.dev/es/posts/websockets-rfc-summary/">
+<meta property="og:description" content="a">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2018-09-28T14:16:24-03:00">
+<meta property="article:tag" content="rfc summary websockets">
+<link rel="alternate" hreflang="en" href="../../../posts/websockets-rfc-summary/">
+</head>
+<body>
+    <input id="dark-mode" type="checkbox"><div class="theme">
+        
+    <header class="cover"><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+    <nav class="menu"><ul>
+<li><a class="hover:menu__link" href="../../../">🏠 Inicio</a></li>
+                <li><a class="hover:menu__link" href="blog/">📰 Blog</a></li>
+                <li><a class="hover:menu__link" href="archive.html">🗄️ Archivo</a></li>
+                <li><a class="hover:menu__link" href="categories/index.html">🏷️ Tags</a></li>
+                <li><a class="hover:menu__link" href="rss.xml">🛰️ RSS feed</a></li>
+
+        
+        
+        
+        </ul>
+<ul>
+<li>
+                        <span id="toptranslations">
+                        <a href="../../../" class="hover:menu__link" rel="alternate" hreflang="en">English</a>
+
+        </span>
+
+            </li>
+            <li>
+                <label class="dark-mode-label hover:dark-mode-label" for="dark-mode">
+                    <?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation: isolate;" viewbox="0 0 416 416" width="30px" height="30px"><defs><clippath id="_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC"><rect width="416" height="416"></rect></clippath></defs><g clip-path="url(#_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC)"><path d=" M 304 88 C 304 57.38 299.49 26.39 288 0 C 364.43 33.27 416 111.32 416 200 C 416 319.29 319.29 416 200 416 C 111.32 416 33.27 364.43 0 288 C 26.39 299.49 57.38 304 88 304 C 207.29 304 304 207.29 304 88 Z "></path></g></svg></label>
+            </li>
+        </ul></nav><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+            <span id="blog-title">Willy's blog</span>
+        </a></h3>
+
+    <div>
+
+    </div>
+
+    </header><div class="layout">
+            <main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Websockets RFC summary</a></h2>
+
+        <div class="metadata">
+            <span class="byline author vcard p-author h-card">
+            <span class="byline-name fn p-name" itemprop="author">
+                    Woile
+            </span>
+            </span>
+                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/rfc-summary-websockets/" rel="tag">#rfc summary websockets</a>
+            <span class="dateline">
+            <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+            <time class="published dt-published" datetime="2018-09-28T14:16:24-03:00" itemprop="datePublished" title="2018-09-28 14:16">2018-09-28 14:16</time></a>
+            </span>
+                <span class="commentline">        
+
+
+                    | <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.rst">Código fuente</a></span>
+
+        </span>
+</div>
+        
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<div class="section" id="introduction">
+<h2>Introduction</h2>
+<p><a class="reference external" href="https://tools.ietf.org/html/rfc6455.html">RFC Link</a></p>
+<p>For bi-directional communication (e.g., instant messaging and gaming applications): abuse of <strong>HTTP poll</strong>.</p>
+<!-- TEASER_END -->
+<div class="section" id="problems">
+<h3>Problems</h3>
+<ul class="simple">
+<li><p>mutiple TCP connections. One for sending information and a new one for each incoming message.</p></li>
+<li><p>each client-to-server message having an HTTP header.</p></li>
+<li><p>the client-side script is forced to maintain a mapping from the outgoing connections to the incoming connection to track replies</p></li>
+</ul>
+</div>
+<div class="section" id="solution">
+<h3>Solution</h3>
+<p><strong>WebSocket Protocol</strong> uses a single TCP connection for traffic in both directions.</p>
+</div>
+<div class="section" id="features">
+<h3>Features</h3>
+<ul class="simple">
+<li><p>works over HTTP ports 80 and 443</p></li>
+<li><p>support for HTTP proxies and intermediaries</p></li>
+<li><p>design does not limit WebSocket to HTTP</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="overview">
+<h2>Overview</h2>
+<p>Protocol has 2 parts: <strong>handshake</strong> &amp; <strong>data transfer</strong></p>
+<div class="section" id="handshake">
+<h3>Handshake</h3>
+<p><strong>client</strong> handshake example</p>
+<pre class="literal-block">GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Origin: http://example.com
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13</pre>
+<p><strong>server</strong> handshake example</p>
+<pre class="literal-block">HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
+Sec-WebSocket-Protocol: chat</pre>
+<p>An unordered set of header fields comes after the leading line in both cases.
+Additional header fields may also be present, such as cookies.</p>
+<p>After a successful handshake, clients and servers transfer data back and forth in
+conceptual units referred as <strong>"messages"</strong>.</p>
+<div class="section" id="opening-handshake">
+<h4>Opening Handshake</h4>
+<ul class="simple">
+<li><p>compatible with HTTP-based server-side</p></li>
+<li><p>handshake from server includes header with the status code <strong>101</strong>, otherwise handshake has not completed and that the semantics of HTTP still apply</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="design-philosophy">
+<h3>Design philosophy</h3>
+<p>The WebSocket Protocol is designed on the principle that there should
+be minimal framing (the only framing that exists is to make the
+protocol frame-based instead of stream-based and to support a
+distinction between Unicode text and binary frames).</p>
+</div>
+<div class="section" id="relationship-to-tcp-and-http">
+<h3>Relationship to TCP and HTTP</h3>
+<p>The WebSocket Protocol is an independent TCP-based protocol.  Its
+only relationship to HTTP is that its handshake is interpreted by
+HTTP servers as an Upgrade request.</p>
+</div>
+</div>
+<div class="section" id="websocket-uris">
+<h2>WebSocket URIs</h2>
+<p>two URI schemes (insecure &amp; secure)</p>
+<pre class="literal-block">ws-URI = "ws:" "//" host [ ":" port ] path [ "?" query ]
+wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]</pre>
+<ul class="simple">
+<li><p>port component is OPTIONAL</p></li>
+<li><p>default for "ws" is port 80,</p></li>
+<li><p>default for "wss" is port 443.</p></li>
+<li><p>fragment identifiers (#) are meaningless in the context of WebSocket URIs and MUST NOT be used on these URIs, escape them using %23 if needed.</p></li>
+</ul>
+</div>
+<div class="section" id="data-framing">
+<h2>Data Framing</h2>
+<ul class="simple">
+<li><p>client <strong>MUST</strong> mask all frames that it sends to the server</p></li>
+<li><p>server <strong>MUST</strong> close the connection upon receiving a frame that is not masked.</p></li>
+<li><p>server <strong>MAY</strong> use the status code 1002 to close connection</p></li>
+<li><p>server <strong>MUST NOT</strong> mask any frames that it sends to the client.</p></li>
+<li><p>client <strong>MUST</strong> close a connection if it detects a masked frame.</p></li>
+<li><p>client <strong>MAY</strong> use the status code 1002 to close connection</p></li>
+</ul>
+</div>
+</div>
+    </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
+<li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/rfc-summary-websockets/" rel="tag">#rfc summary websockets</a>
+          </li>
+        </ul></nav></aside><section class="comments hidden-print"><div class="commentbox" id="commentbox"></div>
+
+        <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script><script>
+
+        commentBox('5692121306628096-proj');
+        </script><noscript>Please enable JavaScript to view the comments</noscript>
+
+
+        </section></article></main>
+</div>
+    </div>
+                <script src="../../../assets/js/index.js"></script><script src="../../../assets/js/baguetteBox.min.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>

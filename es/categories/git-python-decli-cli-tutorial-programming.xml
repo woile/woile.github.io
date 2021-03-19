@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre git python decli cli tutorial programming)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/git-python-decli-cli-tutorial-programming.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 19 Mar 2021 16:24:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
+less worries, this is pure personal preference.&lt;/p&gt;
+&lt;p&gt;Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.&lt;/p&gt;
+&lt;p&gt;Because of this, I created &lt;a class="reference external" href="https://github.com/Woile/decli"&gt;decli&lt;/a&gt;, which is a declarative command line utility. Super simple.
+Which is basically a wrapper around argparse.
+Just write a dict and you are ready to go.&lt;/p&gt;
+&lt;p&gt;In this tutorial we are gonna try to simulate a &lt;em&gt;git command line tool&lt;/em&gt;.
+Let's create a few commands which will just print a message.&lt;/p&gt;
+&lt;p&gt;But we are gonna structure the code, the way I always wanted to hehe.&lt;/p&gt;
+&lt;p&gt;The commands will be decoupled from the &lt;em&gt;command line interface&lt;/em&gt; (cli from now on).&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/"&gt;Leer más…&lt;/a&gt; (quedan 5 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/</guid><pubDate>Fri, 14 Sep 2018 17:33:02 GMT</pubDate></item></channel></rss>

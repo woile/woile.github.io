@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre selenium python testing)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/selenium-python-testing.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 19 Mar 2021 16:24:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to test Selenium scrapper with Python</title><link>https://woile.dev/es/posts/how-to-test-selenium-scrapper/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;This week I've been writing tests for &lt;a class="reference external" href="https://github.com/discov-r/pyinstamation"&gt;a project&lt;/a&gt; which is
+using Selenium as a scrapper.&lt;/p&gt;
+&lt;p&gt;As you may know, Selenium is a testing framework, it's intended to be used while writing tests,
+not as a web crawler/scrapper.&lt;/p&gt;
+&lt;p&gt;But you can. Why? Because it runs a browser, and the browser is the real sh*t, so the Javascript
+gets executed, and we are happy. There are other solutions like &lt;a class="reference external" href="https://github.com/makinacorpus/spynner"&gt;Spynner&lt;/a&gt;
+or writing the scrapper in pure Javascript, but I felt comfortable using Selenium this way.&lt;/p&gt;
+&lt;div class="section" id="the-problem"&gt;
+&lt;h2&gt;The problem&lt;/h2&gt;
+&lt;p&gt;How do we &lt;strong&gt;test&lt;/strong&gt; this scrapper? I want it to have tests, damn!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="solution"&gt;
+&lt;h2&gt;Solution&lt;/h2&gt;
+&lt;p&gt;Save the static content while running the scrapper, then, serve it with a very small http server
+while testing. Yes, it's a bit tedious, but it delivers.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/how-to-test-selenium-scrapper/"&gt;Leer más…&lt;/a&gt; (quedan 2 minutos de lectura)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/how-to-test-selenium-scrapper/</guid><pubDate>Tue, 12 Sep 2017 14:38:40 GMT</pubDate></item></channel></rss>

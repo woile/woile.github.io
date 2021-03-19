@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 19 Mar 2021 16:24:04 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
+Languages like rust have &lt;a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-cratesio"&gt;fully embraced it&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A SemVer version looks like this: &lt;code&gt;1.2.0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Quite simple, right?&lt;/p&gt;
+&lt;p&gt;We can map that to &lt;code&gt;MAJOR.MINOR.PATCH&lt;/code&gt; where&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MAJOR&lt;/code&gt; ➡️ BREAKING CHANGES ⚠️&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MINOR&lt;/code&gt; ➡️ New stuff 🎉&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PATCH&lt;/code&gt; ➡️ Security 🔒 and bug fixes 🐛&lt;/p&gt;
+&lt;p&gt;That's the highlight.&lt;/p&gt;
+&lt;h3&gt;Making a new release&lt;/h3&gt;
+&lt;p&gt;Usually, when making a new semantic version (semver), you have to review your
+commits, check if there's any braking changes, then check if there are new features,
+otherwise, it's just a patch. This process can be tedious, but semver gives
+developers a lot of information about a release, like if they can update safely,
+new features, or they &lt;strong&gt;must&lt;/strong&gt; update.&lt;/p&gt;
+&lt;p&gt;The release process can be fully automated, but it has a price.&lt;/p&gt;
+&lt;h3&gt;The Price&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Write parseable commits&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Automating release&lt;/h3&gt;
+&lt;p&gt;By writing commits this way, we have to think, in that moment, what kind of change
+we are introducing. And that information get's encoded in the message.&lt;/p&gt;
+&lt;p&gt;Let's see a simple rule for parseable, easy to map messages:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Include MAJOR:, MINOR:, PATCH: at the beginning of each commit. If not present
+the commit will be skipped, and it won't be released.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Commits examples:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;MAJOR: Change public interface for class User&lt;/p&gt;
+&lt;p&gt;MINOR: Add new type of user (employee)&lt;/p&gt;
+&lt;p&gt;PATCH: Fix full name not being displayed properly&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And that's it! The next step is to use a tool to collect the commits, and generate
+the correct &lt;a href="https://semver.org/"&gt;semver&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Commit tips&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Talk imperative and follow this rule: &lt;code&gt;If applied, this commit will &amp;lt;commit message&amp;gt;&lt;/code&gt; &lt;a href="https://chris.beams.io/posts/git-commit/"&gt;0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Keep the subject short&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Introducing commitizen&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/commitizen-tools/commitizen"&gt;Commitizen&lt;/a&gt; is a tool to do exactly that.&lt;/p&gt;
+&lt;p&gt;I created it in order to automate that process. Based on existing tools from
+the JS ecosystem but which I found hard to use.&lt;/p&gt;
+&lt;p&gt;By default it parses the widely popular commit rules: &lt;a href="https://www.conventionalcommits.org/en/v1.0.0/"&gt;conventional commits&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But you can &lt;a href="https://commitizen-tools.github.io/commitizen/customization/#2-customize-through-customizing-a-class"&gt;easily extend commitizen&lt;/a&gt; to create the example given before.&lt;/p&gt;
+&lt;p&gt;Not only it will create the version, but it can also generate the changelog.&lt;/p&gt;
+&lt;p&gt;It's really easy to use, first create a &lt;code&gt;.cz.toml&lt;/code&gt; file in your project's root.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[tool.commitizen]&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"2.5.1"&lt;/span&gt;
+&lt;span class="n"&gt;version_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;["setup.py", "Dockerfile", "scripts/publish"]&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;And that's it, by running a single command we get the version and the changelog.&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;cz bump --changelog
+&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;veresion_files&lt;/code&gt; will also bump the version in the specified files.&lt;/p&gt;
+&lt;h3&gt;CI/CD&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="diagram of semantic release" src="https://woile.dev/images/automating-deployment-with-commitizen/semantic_release.png"&gt;&lt;/p&gt;
+&lt;p&gt;In this diagram, you'd execute commitizen during the "merge job" (green in the diagram), where "bump version" is highlighted.&lt;/p&gt;
+&lt;p&gt;For example, if you are using Github Actions, you'd add this to your job:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;branches&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;main&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;Commitizen then, will generate a new commit, with the updated version in the files and the changelog; and a new tag.&lt;/p&gt;
+&lt;p&gt;Both are pushed back.&lt;/p&gt;
+&lt;p&gt;For the new commit, we should not trigger again the CI.&lt;/p&gt;
+&lt;p&gt;The new tag, instead, should trigger another job, "tag job" (purle in the diagram), which will take care of the release, which can include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;deploying to kubernetes&lt;/li&gt;
+&lt;li&gt;publishing to pypi/npm/cargo&lt;/li&gt;
+&lt;li&gt;deploying to a cloud service, like AWS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Done!&lt;/p&gt;
+&lt;h3&gt;Recap&lt;/h3&gt;
+&lt;h4&gt;Standards&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://semver.org/"&gt;semver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.conventionalcommits.org/en/v1.0.0/"&gt;conventional commits&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;The Price&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Write parseable commits&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Command&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;cz bump --changelog
+&lt;/pre&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Try commitizen and check the &lt;a href="https://github.com/commitizen-tools/commitizen"&gt;repo&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;We aim for simplicity, trying to make this process as simple as possible, but
+the tool is quite flexible, explore it, and see if it fits for your use cases.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hey, hello 👋&lt;/p&gt;
+&lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
+Works in the user space, avoiding the system's python, therefore is less error prone.
+You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
+Doesn't require python.&lt;/p&gt;
+&lt;h3&gt;Installation&lt;/h3&gt;
+&lt;p&gt;Use &lt;a href="https://github.com/pyenv/pyenv-installer"&gt;pyenv-installer&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;curl https://pyenv.run &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;$SHELL&lt;/span&gt;  &lt;span class="c1"&gt;# Restart shell or open new terminal&lt;/span&gt;
+&lt;/pre&gt;
+&lt;h3&gt;Usage&lt;/h3&gt;
+&lt;h4&gt;Install different python versions&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.6.10
+pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.7.6
+&lt;/pre&gt;
+&lt;h4&gt;Set global python&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;pyenv global &lt;span class="m"&gt;3&lt;/span&gt;.7.6
+&lt;/pre&gt;
+&lt;p&gt;Observe&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;python --version
+&lt;span class="nb"&gt;type&lt;/span&gt; -a python
+&lt;/pre&gt;
+&lt;h4&gt;Set local python&lt;/h4&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/my-project
+pyenv &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.6.10
+&lt;/pre&gt;
+&lt;p&gt;Observe&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;cat .python-version
+python --version
+&lt;span class="nb"&gt;type&lt;/span&gt; -a python
+&lt;/pre&gt;
+&lt;h4&gt;Other languages&lt;/h4&gt;
+&lt;p&gt;There's a set of similar tools for other languages, following the
+same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &lt;code&gt;nodenv&lt;/code&gt; for example.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ruby:&lt;/strong&gt; &lt;a href="https://github.com/rbenv/rbenv"&gt;rbenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;javascript:&lt;/strong&gt; &lt;a href="https://github.com/nodenv/nodenv"&gt;nodenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;go:&lt;/strong&gt; &lt;a href="https://github.com/syndbg/goenv"&gt;goenv&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;php:&lt;/strong&gt; &lt;a href="https://github.com/phpenv/phpenv"&gt;phpenv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;More resources&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://realpython.com/intro-to-pyenv/"&gt;In depth tutorial by real python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;Official docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hey, hello 👋&lt;/p&gt;
+&lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
+&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item><item><title>PyCon France 2019 experience</title><link>https://woile.dev/es/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.dev/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;This year (2019) I had the opportunity to participate as a speaker at &lt;a href="https://www.pycon.fr/2019/"&gt;PyCon France&lt;/a&gt;,
+and it was a great experience.
+The event was held in &lt;strong&gt;Bordeaux, France&lt;/strong&gt;, a super cozy city, famous for its wines.&lt;/p&gt;
+&lt;p&gt;I realize now that every country claims they have the best wine, including mine.
+I have to say, though, that I loved Bordeaux wines, and I bought 4 to bring back home.&lt;/p&gt;
+&lt;h3&gt;Highlights of PyFrance&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="marcos in bordeaux" src="https://woile.dev/images/pycon-fr-2019/marcos.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Everyone was kind to me and I felt really comfortable at the conference.
+It somehow reminded me of the Argentinian PyCon, maybe because it's free for everyone.&lt;/p&gt;
+&lt;p&gt;I really liked the &lt;strong&gt;"badge"&lt;/strong&gt; approach. On arrival, you could pick some "flags".
+I chose the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"I speak english"&lt;/li&gt;
+&lt;li&gt;"Speaker"&lt;/li&gt;
+&lt;li&gt;"First time"&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some cool others: "Do not talk to me", "No pics please", "Volunteer".&lt;/p&gt;
+&lt;p&gt;They also had an &lt;strong&gt;automatic captioning tool&lt;/strong&gt;, which generated the transcription
+live.&lt;/p&gt;
+&lt;p&gt;I met a bunch of new people and had some interesting talks.&lt;/p&gt;
+&lt;p&gt;There were some talks I couldn't attend because of the language barrier
+(I don't speak French). But there's no one to blame for this.&lt;/p&gt;
+&lt;p&gt;The talk I enjoyed the most was the keynote about &lt;strong&gt;"The Role of 21st Century Technology in Protests"&lt;/strong&gt;.
+It gave me a lot to think about.
+First, I'm amazed by the creativity and cleverness of the Hong Kong people and
+their constant push to prevent incidents.
+Please look up all the stuff they did to counter police efforts to capture people.
+And second, about the role technology has in society.
+When left in autocratic hands, it can quickly deviate and be used to harm people,
+&lt;strong&gt;no matter how good intentions are at the beginning&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Technology, in the way's being used in some countries, is scary.
+What is even scarier is that people are not aware of the dangers.&lt;/p&gt;
+&lt;p&gt;The only lesson I take from this is that &lt;strong&gt;education&lt;/strong&gt; is key.
+The more education a person receives, the more resilient, and shielded they become
+against foreign evil "human" agents, like vaccines.
+And I mean education, not indoctrination, though in practice it may be harder
+to draw the line.&lt;/p&gt;
+&lt;h3&gt;My Presentation&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="me talking at pycon fr 2019" src="https://woile.dev/images/pycon-fr-2019/santi.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;I prepared the talk for over 3 weeks: &lt;a href="https://woile.github.io/pytest-presentation/"&gt;Pytest yes, let's go&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Every talk I give takes me a lot of time and effort.
+I find it really hard to come up with the slides quickly.
+Luckily I got positive feedback over my talk, so I left the conference quite proud.&lt;/p&gt;
+&lt;p&gt;For my next pycon (whichever I end up attending), I think I know the topic I'll discuss about: &lt;strong&gt;Documentation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Guide to Sublime like a normal person</title><link>https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;First of all, verify that you have installed the
+latest version of &lt;a href="https://www.sublimetext.com/3"&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/"&gt;Leer más…&lt;/a&gt; (quedan 5 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/</guid><pubDate>Thu, 08 Jun 2017 19:46:15 GMT</pubDate></item><item><title>How to filter Polymorphic Models with Django Filters</title><link>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;As the title says, I needed a way to filter my polymorphic models using my already defined
+&lt;code&gt;rest_framework.FilterSet&lt;/code&gt;, and as I didn't find much resources about it I'm sharing my experience here.&lt;/p&gt;
+&lt;p&gt;First, let's talk about &lt;code&gt;django-polymorphic&lt;/code&gt; and &lt;code&gt;django-filters&lt;/code&gt;, what are these libraries for.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/"&gt;Leer más…&lt;/a&gt; (quedan 2 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</guid><pubDate>Thu, 02 Mar 2017 23:58:22 GMT</pubDate></item></channel></rss>
