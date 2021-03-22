@@ -147,10 +147,10 @@ NAVIGATION_LINKS = {
     ),
     "es": (
         ("/", "🏠 Inicio"),
-        ("blog/", "📰 Blog"),
-        ("archive.html", "🗄️ Archivo"),
-        ("categories/index.html", "🏷️ Tags"),
-        ("rss.xml", "🛰️ RSS feed"),
+        ("/blog/", "📰 Blog"),
+        ("/archive.html", "🗄️ Archivo"),
+        ("/categories/index.html", "🏷️ Tags"),
+        ("/rss.xml", "🛰️ RSS feed"),
     ),
 }
 
