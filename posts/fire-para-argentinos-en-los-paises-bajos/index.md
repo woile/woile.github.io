@@ -22,10 +22,10 @@ efectivamente, para no tener que pensar en eso en el futuro.
 > No me dedico a esto, y tampoco me gusta, así que no te puedo dar ninguna garantía
 > de nada. Tomalo como una introducción al tema.
 
-Cualquier duda, aporte o correción son bienvenidos, hay una sección de comentarios al
-final o podés contactarme en [twitter][santiwilly].
+Cualquier duda, aporte o corrección son bienvenidos, hay una sección de comentarios al
+final o podes contactarme en [twitter][santiwilly].
 
-## Introduccion
+## Introducción
 
 "Financial Independence, Retire Early" es un movimiento cuyo objetivo es acumular
 bienes, hasta poder vivir de los ingresos pasivos (_passive income_) que estos generan.
@@ -46,7 +46,7 @@ la pensión. Esto varía dependiendo de tu situación.
 Mas allá de eso, es un gran complemento a lo que será tu pensión y es **mejor que
 tener tu dinero parado**.
 
-Podés leer más en el [faq de /r/financialindependance][faq_fi].
+Podes leer más en el [faq de /r/financialindependance][faq_fi].
 
 Asegurate de **no tener deudas** y tener un colchoncito de dinero, por lo menos
 para **poder vivir por 6 meses**, antes de empezar.
@@ -86,7 +86,7 @@ Pueden leer "[The Shockingly Simple Math Behind Early Retirement][shocking]" par
 
 ### Dónde invierto
 
-Basicamente invertiremos en ETFs o _index funds_, que son más o menos lo mismo, a largo
+Básicamente invertiremos en ETFs o _index funds_, que son más o menos lo mismo, a largo
 plazo no importa mucho la diferencia.
 
 Los _index funds_ son un conjunto de acciones de muchas empresas.
@@ -143,15 +143,17 @@ para configurar o crear una cuenta.
 
 Habrás notado que para los bancos es el mismo fund the [Northern Trust][nt] (NT), esto
 es así, porque están registrados en los Países Bajos, y no se qué mambo hay que
-terminamos pagando menos impuestos. Además son **ESG** y eso es genial.
-NT tiene un fund nuevo, basado en low carbon emissions, pero todavía no aparece
-en esa lista.
+terminamos pagando menos impuestos. (Actualizado [2021-03-22](#2021-03-22)).
+
+Además son **ESG**, que significa "Environmental, social and corporate governance" y eso es genial.
+~~NT tiene un fund nuevo, basado en low carbon emissions, pero todavía no aparece en esa lista~~,
+este no lo recomiendo más porque tiene un score de sustentabilidad muy bajo.
 
 T212 no tiene disponibles los fondos de NT, pero los de Vanguard son los más recomendados
 en la mayor parte del mundo y son buenos. No sé si tienen **ESG**.
 
 El porcentaje que aparece es cuánto hay que invertir en cada uno.
-Si vas a poner €100, entonces €88 van para World Custom y €12 para EMergin Market.
+Si vas a poner €100, entonces €88 van para World Custom y €12 para Emerging Market.
 
 Todos los meses separá una parte de tu salario, y volvés a comprar en el mismo fund.
 
@@ -166,7 +168,7 @@ Tus _assets_ los vas a tener que reportar. Estés usando el banco o una platafor
 todos los años, en diciembre, te van a mandar un reporte con el valor de tus inversiones hasta ese momento.
 Ese valor es el que vas a tener que ingresar en la declaración jurada de ese año, en la parte de _wealth tax (box 3)_.
 Capaz te dan algún beneficio por comprar los NT por ejemplo, pero todavía no sé bien cómo funciona,
-por el momento, solo se que hay algún tipo de beneficio.
+por el momento, solo se que hay algún tipo de beneficio
 
 Los primeros €30k si sos soltero o €60k para parejas, son libres de impuesto. Te
 van a cobrar impuestos solamente sobre el monto que supere ese limite.
@@ -203,14 +205,14 @@ por año, durante los primeros 8 meses del año.
 
 Si estas en USA lee el libro [Simple path to Wealth][simple_path] que te va a guiar.
 
-Si estas en otro país de Europa podés pedir consejo en [r/EuropeFIRE][ef].
+Si estas en otro país de Europa podes pedir consejo en [r/EuropeFIRE][ef].
 
-Pero el principo es el mismo.
+Pero el principio es el mismo.
 
-## Resúmen
+## Resumen
 
 - Abrite una cuenta de inversiones en tu banco o app favorita.
-- Inverti en _Index Funds_ (Northern Trust o Vanguard).
+- Invertí en _Index Funds_ (Northern Trust o Vanguard).
 - Hacelo un hábito y olvidate del tema, no importa si el mercado cae, **NO VENDAS**.
 
 ## Research pendiente
@@ -219,9 +221,21 @@ Pero el principo es el mismo.
 - Invertir en stocks "green" aumenta nuestro máximo a €50k?
 - Cómo se hace el rebalance anual?
 
+## Actualizaciones
+
+### 2021-03-22 <a name="2021-03-22"></a>
+
+- Un amigo me confirmó que si tenes el 30% ruling no pagas impuestos en el BOX 3 por inversiones o savings, luego de
+hablar con el ABN.
+- Es posible dejar la cuenta abierta del banco si te vas a vivir a otro país, es decir que las inversiones
+las podes seguir manejando por ahí.
+- Beneficio de tener index fund registrado en los Países Bajos:
+
+> The Northern Trust indexfunds are domiciled in the Netherlands and thus avoid dividend leakage which increases their returns about 0,25% per year as compared with a similar indexfund or ETF domiciled in Ireland or Luxembourg (as most in Europe are). Dividend leakage means you'd pay capital gains taxes twice on the same gains. A 0,25% difference isn't the end of the world if you take into account you do pay service fees at ABN AMRO and Rabobank while for a similar ETF at DeGiro you wouldn't pay a service fee.
+
 ## Recursos
 
-- [Analisis de los Index Fund y costos 2020 (holandes)][analysis_dutch]
+- [Análisis de los Index Fund y costos 2020 (holandes)][analysis_dutch]
 - [r/EuropeFIRE][ef]
 - [r/DutchFIRE][df]
 
@@ -229,7 +243,7 @@ Pero el principo es el mismo.
 
 > Hey, hola 👋
 >
-> Si te interesa lo que escribo podés seguirme en [twitter][santiwilly].
+> Si te interesa lo que escribo podes seguirme en [twitter][santiwilly].
 >
 
 [trinity_study]: https://en.wikipedia.org/wiki/Trinity_study
