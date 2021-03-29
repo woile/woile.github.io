@@ -143,7 +143,7 @@ the JS ecosystem but which I found hard to use.</p>
 <p>It's really easy to use, first create a <code>.cz.toml</code> file in your project's root.</p>
 <pre class="code literal-block"><span class="k">[tool.commitizen]</span>
 <span class="n">version</span> <span class="o">=</span> <span class="s">"2.5.1"</span>
-<span class="n">version_files</span> <span class="o">=</span> <span class="k">["setup.py", "Dockerfile", "scripts/publish"]</span>
+<span class="n">version_files</span> <span class="o">=</span> <span class="k">["setup.py", "Dockerfile", "src/__version__.py", "scripts/publish"]</span>
 </pre>
 <p>And that's it, by running a single command we get the version and the changelog.</p>
 <pre class="code literal-block">cz bump --changelog
@@ -161,7 +161,7 @@ the JS ecosystem but which I found hard to use.</p>
 <p>Commitizen then, will generate a new commit, with the updated version in the files and the changelog; and a new tag.</p>
 <p>Both are pushed back.</p>
 <p>For the new commit, we should not trigger again the CI.</p>
-<p>The new tag, instead, should trigger another job, "tag job" (purle in the diagram), which will take care of the release, which can include:</p>
+<p>The new tag, instead, should trigger another job, "tag job" (purple in the diagram), which will take care of the release, which can include:</p>
 <ul>
 <li>deploying to kubernetes</li>
 <li>publishing to pypi/npm/cargo</li>

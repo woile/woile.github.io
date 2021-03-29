@@ -86,7 +86,7 @@ It's really easy to use, first create a `.cz.toml` file in your project's root.
 ```toml
 [tool.commitizen]
 version = "2.5.1"
-version_files = ["setup.py", "Dockerfile", "scripts/publish"]
+version_files = ["setup.py", "Dockerfile", "src/__version__.py", "scripts/publish"]
 ```
 
 And that's it, by running a single command we get the version and the changelog.
@@ -118,7 +118,7 @@ Both are pushed back.
 
 For the new commit, we should not trigger again the CI.
 
-The new tag, instead, should trigger another job, "tag job" (purle in the diagram), which will take care of the release, which can include:
+The new tag, instead, should trigger another job, "tag job" (purple in the diagram), which will take care of the release, which can include:
 
 - deploying to kubernetes
 - publishing to pypi/npm/cargo
