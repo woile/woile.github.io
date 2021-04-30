@@ -147,11 +147,11 @@ NAVIGATION_LINKS = {
         ("/rss.xml", "🛰️ RSS feed"),
     ),
     "es": (
-        ("/", "🏠 Inicio"),
+        ("/es/", "🏠 Inicio"),
         ("/blog/", "📰 Blog"),
         ("/es/mentoring/", "📗 Mentoreo"),
-        ("/archive.html", "🗄️ Archivo"),
-        ("/categories/index.html", "🏷️ Tags"),
+        ("/es/archive.html", "🗄️ Archivo"),
+        ("/es/categories/index.html", "🏷️ Tags"),
         ("/rss.xml", "🛰️ RSS feed"),
     ),
 }
