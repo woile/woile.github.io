@@ -198,8 +198,9 @@ Digamos que tenés que sacar 4% de tu portfolio por año. Si los dividendos te d
 2.5%, vas a tener q vender un 1.5%. Pero no importa, porque ese 1.5% lo
 recuperarías ese mismo año en teoría.
 
-Northern Trust fund, por ejemplo, está obligado a pagarte los dividendos una vez
-por año, durante los primeros 8 meses del año.
+En los Países Bajos, los fondos de inversión, están obligados a pagarte los dividendos
+al menos una vez por año, durante los primeros 8 meses del año.
+Northern Trust fund, por ejemplo, los suele pagar en febrero.
 
 ## No vivís en Holanda
 

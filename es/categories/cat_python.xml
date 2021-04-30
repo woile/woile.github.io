@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/cat_python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 29 Mar 2021 22:33:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/cat_python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 30 Apr 2021 08:51:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
 Works in the user space, avoiding the system's python, therefore is less error prone.
 You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
@@ -111,7 +111,7 @@ Luckily I got positive feedback over my talk, so I left the conference quite pro
 &lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="about-mkcert"&gt;
+&lt;section id="about-mkcert"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#id5"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/"&gt;mkcert&lt;/a&gt; allows you to have a local
 certificate authority (CA).
@@ -120,7 +120,7 @@ You'll see the green lock in your browser.&lt;/p&gt;
 &lt;img src="https://woile.dev/images/local-https-development-in-python-with-mkcert/https.png"&gt;&lt;p&gt;You might not need it most of the time, but more and more features require
 HTTPS by default in the browser, like web bluetooth, service workers, web authentication
 and websockets in some cases where SSL is already enabled.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/"&gt;Leer más…&lt;/a&gt; (quedan 3 minutos de lectura)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/"&gt;Leer más…&lt;/a&gt; (quedan 3 minutos de lectura)&lt;/p&gt;&lt;/section&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/</guid><pubDate>Thu, 10 Jan 2019 17:30:24 GMT</pubDate></item><item><title>Tutorial: writing my dreamt cli using decli</title><link>https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So for a long time I've been using different cli tools, mostly &lt;code&gt;argparse&lt;/code&gt; because this way I had zero dependencies,
 less worries, this is pure personal preference.&lt;/p&gt;
 &lt;p&gt;Other tools such as click or docopt, the way the code must be written, is not something I'm really fond of.&lt;/p&gt;
 &lt;p&gt;Because of this, I created &lt;a class="reference external" href="https://github.com/Woile/decli"&gt;decli&lt;/a&gt;, which is a declarative command line utility. Super simple.
@@ -137,15 +137,15 @@ not as a web crawler/scrapper.&lt;/p&gt;
 &lt;p&gt;But you can. Why? Because it runs a browser, and the browser is the real sh*t, so the Javascript
 gets executed, and we are happy. There are other solutions like &lt;a class="reference external" href="https://github.com/makinacorpus/spynner"&gt;Spynner&lt;/a&gt;
 or writing the scrapper in pure Javascript, but I felt comfortable using Selenium this way.&lt;/p&gt;
-&lt;div class="section" id="the-problem"&gt;
+&lt;section id="the-problem"&gt;
 &lt;h2&gt;The problem&lt;/h2&gt;
 &lt;p&gt;How do we &lt;strong&gt;test&lt;/strong&gt; this scrapper? I want it to have tests, damn!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="solution"&gt;
+&lt;/section&gt;
+&lt;section id="solution"&gt;
 &lt;h2&gt;Solution&lt;/h2&gt;
 &lt;p&gt;Save the static content while running the scrapper, then, serve it with a very small http server
 while testing. Yes, it's a bit tedious, but it delivers.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://woile.dev/es/posts/how-to-test-selenium-scrapper/"&gt;Leer más…&lt;/a&gt; (quedan 2 minutos de lectura)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/how-to-test-selenium-scrapper/</guid><pubDate>Tue, 12 Sep 2017 14:38:40 GMT</pubDate></item><item><title>How to filter Polymorphic Models with Django Filters</title><link>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;As the title says, I needed a way to filter my polymorphic models using my already defined
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/how-to-test-selenium-scrapper/"&gt;Leer más…&lt;/a&gt; (quedan 2 minutos de lectura)&lt;/p&gt;&lt;/section&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/how-to-test-selenium-scrapper/</guid><pubDate>Tue, 12 Sep 2017 14:38:40 GMT</pubDate></item><item><title>How to filter Polymorphic Models with Django Filters</title><link>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;As the title says, I needed a way to filter my polymorphic models using my already defined
 &lt;code&gt;rest_framework.FilterSet&lt;/code&gt;, and as I didn't find much resources about it I'm sharing my experience here.&lt;/p&gt;
 &lt;p&gt;First, let's talk about &lt;code&gt;django-polymorphic&lt;/code&gt; and &lt;code&gt;django-filters&lt;/code&gt;, what are these libraries for.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/"&gt;Leer más…&lt;/a&gt; (quedan 2 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</guid><pubDate>Thu, 02 Mar 2017 23:58:22 GMT</pubDate></item></channel></rss>

@@ -88,37 +88,25 @@
 </div>
         
     </header><section class="e-content entry-content" itemprop="articleBody text"><div>
-<div class="section" id="introduction">
-<h2>Introduction</h2>
+<section id="introduction"><h2>Introduction</h2>
 <p><a class="reference external" href="https://tools.ietf.org/html/rfc6455.html">RFC Link</a></p>
 <p>For bi-directional communication (e.g., instant messaging and gaming applications): abuse of <strong>HTTP poll</strong>.</p>
 <!-- TEASER_END -->
-<div class="section" id="problems">
-<h3>Problems</h3>
+<section id="problems"><h3>Problems</h3>
 <ul class="simple">
 <li><p>mutiple TCP connections. One for sending information and a new one for each incoming message.</p></li>
 <li><p>each client-to-server message having an HTTP header.</p></li>
 <li><p>the client-side script is forced to maintain a mapping from the outgoing connections to the incoming connection to track replies</p></li>
-</ul>
-</div>
-<div class="section" id="solution">
-<h3>Solution</h3>
+</ul></section><section id="solution"><h3>Solution</h3>
 <p><strong>WebSocket Protocol</strong> uses a single TCP connection for traffic in both directions.</p>
-</div>
-<div class="section" id="features">
-<h3>Features</h3>
+</section><section id="features"><h3>Features</h3>
 <ul class="simple">
 <li><p>works over HTTP ports 80 and 443</p></li>
 <li><p>support for HTTP proxies and intermediaries</p></li>
 <li><p>design does not limit WebSocket to HTTP</p></li>
-</ul>
-</div>
-</div>
-<div class="section" id="overview">
-<h2>Overview</h2>
+</ul></section></section><section id="overview"><h2>Overview</h2>
 <p>Protocol has 2 parts: <strong>handshake</strong> &amp; <strong>data transfer</strong></p>
-<div class="section" id="handshake">
-<h3>Handshake</h3>
+<section id="handshake"><h3>Handshake</h3>
 <p><strong>client</strong> handshake example</p>
 <pre class="literal-block">GET /chat HTTP/1.1
 Host: server.example.com
@@ -138,30 +126,20 @@ Sec-WebSocket-Protocol: chat</pre>
 Additional header fields may also be present, such as cookies.</p>
 <p>After a successful handshake, clients and servers transfer data back and forth in
 conceptual units referred as <strong>"messages"</strong>.</p>
-<div class="section" id="opening-handshake">
-<h4>Opening Handshake</h4>
+<section id="opening-handshake"><h4>Opening Handshake</h4>
 <ul class="simple">
 <li><p>compatible with HTTP-based server-side</p></li>
 <li><p>handshake from server includes header with the status code <strong>101</strong>, otherwise handshake has not completed and that the semantics of HTTP still apply</p></li>
-</ul>
-</div>
-</div>
-<div class="section" id="design-philosophy">
-<h3>Design philosophy</h3>
+</ul></section></section><section id="design-philosophy"><h3>Design philosophy</h3>
 <p>The WebSocket Protocol is designed on the principle that there should
 be minimal framing (the only framing that exists is to make the
 protocol frame-based instead of stream-based and to support a
 distinction between Unicode text and binary frames).</p>
-</div>
-<div class="section" id="relationship-to-tcp-and-http">
-<h3>Relationship to TCP and HTTP</h3>
+</section><section id="relationship-to-tcp-and-http"><h3>Relationship to TCP and HTTP</h3>
 <p>The WebSocket Protocol is an independent TCP-based protocol.  Its
 only relationship to HTTP is that its handshake is interpreted by
 HTTP servers as an Upgrade request.</p>
-</div>
-</div>
-<div class="section" id="websocket-uris">
-<h2>WebSocket URIs</h2>
+</section></section><section id="websocket-uris"><h2>WebSocket URIs</h2>
 <p>two URI schemes (insecure &amp; secure)</p>
 <pre class="literal-block">ws-URI = "ws:" "//" host [ ":" port ] path [ "?" query ]
 wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]</pre>
@@ -170,10 +148,7 @@ wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]</pre>
 <li><p>default for "ws" is port 80,</p></li>
 <li><p>default for "wss" is port 443.</p></li>
 <li><p>fragment identifiers (#) are meaningless in the context of WebSocket URIs and MUST NOT be used on these URIs, escape them using %23 if needed.</p></li>
-</ul>
-</div>
-<div class="section" id="data-framing">
-<h2>Data Framing</h2>
+</ul></section><section id="data-framing"><h2>Data Framing</h2>
 <ul class="simple">
 <li><p>client <strong>MUST</strong> mask all frames that it sends to the server</p></li>
 <li><p>server <strong>MUST</strong> close the connection upon receiving a frame that is not masked.</p></li>
@@ -181,8 +156,7 @@ wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]</pre>
 <li><p>server <strong>MUST NOT</strong> mask any frames that it sends to the client.</p></li>
 <li><p>client <strong>MUST</strong> close a connection if it detects a masked frame.</p></li>
 <li><p>client <strong>MAY</strong> use the status code 1002 to close connection</p></li>
-</ul>
-</div>
+</ul></section>
 </div>
     </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
 <li>
