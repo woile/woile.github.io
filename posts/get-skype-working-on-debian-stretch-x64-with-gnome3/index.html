@@ -41,7 +41,7 @@
     <nav class="menu"><ul>
 <li><a class="hover:menu__link" href="../../">🏠 Home</a></li>
                 <li><a class="hover:menu__link" href="../../blog/">📰 Blog</a></li>
-                <li><a class="hover:menu__link" href="../../es/mentoring/">📗 Mentoring</a></li>
+                <li><a class="hover:menu__link" href="../../mentoring/">📗 Mentoring</a></li>
                 <li><a class="hover:menu__link" href="../../archive.html">🗄️ Archives</a></li>
                 <li><a class="hover:menu__link" href="../../categories/index.html">🏷️ Tags</a></li>
                 <li><a class="hover:menu__link" href="../../rss.xml">🛰️ RSS feed</a></li>
@@ -112,26 +112,26 @@ Right now it doesn't support screensharing and some other features a normal pers
 <p>I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.</p>
 <p>As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.</p>
-<pre class="code bash"><a name="rest_code_8995063750a54ab08f689214b847915c-1"></a>sudo dpkg --add-architecture i386
-<a name="rest_code_8995063750a54ab08f689214b847915c-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-<a name="rest_code_8995063750a54ab08f689214b847915c-3"></a>mkdir ~/.apps/
-<a name="rest_code_8995063750a54ab08f689214b847915c-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
+<pre class="code bash"><a name="rest_code_3196d62cda634cbfade00b64788961e3-1"></a>sudo dpkg --add-architecture i386
+<a name="rest_code_3196d62cda634cbfade00b64788961e3-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
+<a name="rest_code_3196d62cda634cbfade00b64788961e3-3"></a>mkdir ~/.apps/
+<a name="rest_code_3196d62cda634cbfade00b64788961e3-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
 </pre>
 <p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code> file to your gnome environment.</p>
 <p>The location for this file is either <code>~/.local/share/applications</code>, for the current user, or <code>/usr/share/applications</code> for everyone.</p>
 <p>The content for your <code>skype.desktop</code>, should be something like this:</p>
-<pre class="code bash"><a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-7"></a><span class="nv">Type</span><span class="o">=</span>Application
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-11"></a>X-KDE-Protocols<span class="o">=</span>skype
-<a name="rest_code_c10b0ecd6a7042aca7f91319bfa744be-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
+<pre class="code bash"><a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-7"></a><span class="nv">Type</span><span class="o">=</span>Application
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-11"></a>X-KDE-Protocols<span class="o">=</span>skype
+<a name="rest_code_8c4a8ece94724ff48311bef0a1d2eee2-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
 </pre>
 <p>PS: Remember to change the user for the one you are using.</p>
 <p>Good luck!</p>
