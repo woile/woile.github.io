@@ -30,6 +30,8 @@ lang="{{ lang }}">
 
     {{ html_stylesheets() }}
     <meta name="theme-color" content="{{ theme_color }}">
+    <meta http-equiv="Content-Security-Policy" content="default-src https:">
+
     {% if meta_generator_tag %}
         <meta name="generator" content="Nikola (getnikola.com)">
     {% endif %}
