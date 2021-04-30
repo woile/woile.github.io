@@ -141,7 +141,7 @@ NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ("/", "🏠 Home"),
         ("/blog/", "📰 Blog"),
-        ("/mentoring/", "📗 Mentoring"),
+        ("/es/mentoring/", "📗 Mentoring"),
         ("/archive.html", "🗄️ Archives"),
         ("/categories/index.html", "🏷️ Tags"),
         ("/rss.xml", "🛰️ RSS feed"),
@@ -149,6 +149,7 @@ NAVIGATION_LINKS = {
     "es": (
         ("/", "🏠 Inicio"),
         ("/blog/", "📰 Blog"),
+        ("/mentoring/", "📗 Mentoreo"),
         ("/archive.html", "🗄️ Archivo"),
         ("/categories/index.html", "🏷️ Tags"),
         ("/rss.xml", "🛰️ RSS feed"),
