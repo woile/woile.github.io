@@ -12,6 +12,7 @@
 <link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
 <link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
+<meta http-equiv="Content-Security-Policy" content="default-src https:">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
@@ -155,15 +156,15 @@ Our resulting command would look something like this:</p>
 <pre class="literal-block">python -m git --debug commit --amend</pre>
 <p>For the interface, using <strong>decli</strong>, we need to create a dict. Let's dive into it.</p>
 <section id="main-component"><h3>Main component</h3>
-<pre class="code python"><a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-1"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-2"></a>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-3"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-4"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-5"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-6"></a><span class="p">}</span>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-7"></a>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-8"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<a name="rest_code_82ea258ecf8941a89bbcb3765a8bf475-9"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<pre class="code python"><a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-1"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-2"></a>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-3"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-4"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-5"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-6"></a><span class="p">}</span>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-7"></a>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-8"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a name="rest_code_62a21587f7e64679a72c8bcf646d6b89-9"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 </pre>
 <p>This part is the entrypoint of our cli.</p>
 <p>The <code>prog</code> key is the name of the app, it will be used in the help information, same as <code>description</code>.
@@ -179,26 +180,26 @@ optional arguments:
 <p>Let's add some global arguments, we want to have <code>debug</code> and <code>version</code> available.
 We are also going to add some code to handle the version flag.
 And for now, if nothing is provided we'll print the args.</p>
-<pre class="code python"><a name="rest_code_9dac2fd85f2c494da36ff99504386981-1"></a><span class="kn">import</span> <span class="nn">sys</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-3"></a>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-4"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-5"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-6"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-7"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-8"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-10"></a>    <span class="p">],</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-11"></a><span class="p">}</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-12"></a>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-13"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-14"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-15"></a>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-16"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-18"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-19"></a>
-<a name="rest_code_9dac2fd85f2c494da36ff99504386981-20"></a><span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-1"></a><span class="kn">import</span> <span class="nn">sys</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-3"></a>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-4"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-5"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-6"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-7"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-8"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-10"></a>    <span class="p">],</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-11"></a><span class="p">}</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-12"></a>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-13"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-14"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-15"></a>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-16"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-18"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-19"></a>
+<a name="rest_code_9c5263bba48b4cfd811d3383b612ab95-20"></a><span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre>
 <p>Let's take a look at the help, also to what happens when calling with the <code>version</code> flag, and when nothing is provided.</p>
 <pre class="literal-block">$ python -m git --help
@@ -224,75 +225,75 @@ Also, each one will use a class that we are gonna implement later. So no output 
 <li><p>We are gonna print the help if nothing is provided.</p></li>
 <li><p>We are gonna call a <code>run</code> method from the classes that we are gonna define later.</p></li>
 </ul>
-<pre class="code python"><a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-1"></a><span class="kn">import</span> <span class="nn">sys</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-3"></a><span class="kn">from</span> <span class="nn">.commands</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Commit</span><span class="p">,</span> <span class="n">Push</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-4"></a>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-5"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-6"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-7"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-8"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-10"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-11"></a>    <span class="p">],</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-12"></a>    <span class="s2">"subcommands"</span><span class="p">:</span> <span class="p">{</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-13"></a>        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"main"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-14"></a>        <span class="s2">"commands"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-15"></a>            <span class="p">{</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-16"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"add"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-17"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Add file contents to the index"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-18"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Add</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-19"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--update"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">}],</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-20"></a>            <span class="p">},</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-21"></a>            <span class="p">{</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-22"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-23"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Record changes to the repository"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-24"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Commit</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-25"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-26"></a>                    <span class="p">{</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-27"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--amend"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-28"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-29"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-30"></a>                            <span class="s2">"Replace the tip of the current "</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-31"></a>                            <span class="s2">"branch by creating a new commit."</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-32"></a>                        <span class="p">),</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-33"></a>                    <span class="p">}</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-34"></a>                <span class="p">],</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-35"></a>            <span class="p">},</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-36"></a>            <span class="p">{</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-37"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"push"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-38"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Update remote refs along with associated objects"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-39"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Push</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-40"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-41"></a>                    <span class="p">{</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-42"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--tags"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-43"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-44"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-45"></a>                            <span class="s2">"All refs under refs/tags are pushed, in"</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-46"></a>                            <span class="s2">" addition to refspecs explicitly listed "</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-47"></a>                            <span class="s2">"on the command line."</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-48"></a>                        <span class="p">),</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-49"></a>                    <span class="p">}</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-50"></a>                <span class="p">],</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-51"></a>            <span class="p">},</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-52"></a>        <span class="p">],</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-53"></a>    <span class="p">},</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-54"></a><span class="p">}</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-55"></a>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-56"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-57"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-58"></a>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-59"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-60"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-61"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-62"></a>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-63"></a><span class="c1"># print help if no arguments are provided</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-64"></a><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-65"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-66"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-67"></a>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-68"></a><span class="n">cmd</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-<a name="rest_code_cf351c56d8e04a2795a6ebbbd218c758-69"></a><span class="n">cmd</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<pre class="code python"><a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-1"></a><span class="kn">import</span> <span class="nn">sys</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-2"></a><span class="kn">from</span> <span class="nn">decli</span> <span class="kn">import</span> <span class="n">cli</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-3"></a><span class="kn">from</span> <span class="nn">.commands</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Commit</span><span class="p">,</span> <span class="n">Push</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-4"></a>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-5"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-6"></a>    <span class="s2">"prog"</span><span class="p">:</span> <span class="s2">"git"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-7"></a>    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"These are common Git commands used in various situations"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-8"></a>    <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-9"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-v"</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-10"></a>        <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--debug"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">},</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-11"></a>    <span class="p">],</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-12"></a>    <span class="s2">"subcommands"</span><span class="p">:</span> <span class="p">{</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-13"></a>        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"main"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-14"></a>        <span class="s2">"commands"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-15"></a>            <span class="p">{</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-16"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"add"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-17"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Add file contents to the index"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-18"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Add</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-19"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--update"</span><span class="p">,</span> <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">}],</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-20"></a>            <span class="p">},</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-21"></a>            <span class="p">{</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-22"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-23"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Record changes to the repository"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-24"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Commit</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-25"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-26"></a>                    <span class="p">{</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-27"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--amend"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-28"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-29"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-30"></a>                            <span class="s2">"Replace the tip of the current "</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-31"></a>                            <span class="s2">"branch by creating a new commit."</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-32"></a>                        <span class="p">),</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-33"></a>                    <span class="p">}</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-34"></a>                <span class="p">],</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-35"></a>            <span class="p">},</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-36"></a>            <span class="p">{</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-37"></a>                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"push"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-38"></a>                <span class="s2">"help"</span><span class="p">:</span> <span class="s2">"Update remote refs along with associated objects"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-39"></a>                <span class="s2">"func"</span><span class="p">:</span> <span class="n">Push</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-40"></a>                <span class="s2">"arguments"</span><span class="p">:</span> <span class="p">[</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-41"></a>                    <span class="p">{</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-42"></a>                        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"--tags"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-43"></a>                        <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"store_true"</span><span class="p">,</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-44"></a>                        <span class="s2">"help"</span><span class="p">:</span> <span class="p">(</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-45"></a>                            <span class="s2">"All refs under refs/tags are pushed, in"</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-46"></a>                            <span class="s2">" addition to refspecs explicitly listed "</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-47"></a>                            <span class="s2">"on the command line."</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-48"></a>                        <span class="p">),</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-49"></a>                    <span class="p">}</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-50"></a>                <span class="p">],</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-51"></a>            <span class="p">},</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-52"></a>        <span class="p">],</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-53"></a>    <span class="p">},</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-54"></a><span class="p">}</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-55"></a>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-56"></a><span class="n">parser</span> <span class="o">=</span> <span class="n">cli</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-57"></a><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-58"></a>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-59"></a><span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-60"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"0.1.0"</span><span class="p">)</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-61"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-62"></a>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-63"></a><span class="c1"># print help if no arguments are provided</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-64"></a><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-65"></a>    <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-66"></a>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-67"></a>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-68"></a><span class="n">cmd</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+<a name="rest_code_dc89dd3b5ca64ac59dd983aabfdb47e1-69"></a><span class="n">cmd</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </pre>
 <p>So this is how <code>___main__.py</code> should look like.</p>
 </section></section><section id="writing-the-commands"><h2>Writing the commands</h2>
@@ -304,46 +305,46 @@ If you haven't created the folder and the files yet, go and do it. Remember also
 But I'll leave that for you.</p>
 <section id="add"><h3>Add</h3>
 <p>For <code>commands/app.py</code></p>
-<pre class="code python"><a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-1"></a><span class="k">class</span> <span class="nc">Add</span><span class="p">:</span>
-<a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-2"></a>
-<a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
-<a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">update</span>
-<a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-6"></a>
-<a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_a7ecaceb7d844150aa001c1b8541e708-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'running add... update: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="si">}</span><span class="s1">, debug: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_1726c14895684d38a25f97d6efa3c555-1"></a><span class="k">class</span> <span class="nc">Add</span><span class="p">:</span>
+<a name="rest_code_1726c14895684d38a25f97d6efa3c555-2"></a>
+<a name="rest_code_1726c14895684d38a25f97d6efa3c555-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a name="rest_code_1726c14895684d38a25f97d6efa3c555-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+<a name="rest_code_1726c14895684d38a25f97d6efa3c555-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">update</span> <span class="o">=</span> <span class="n">update</span>
+<a name="rest_code_1726c14895684d38a25f97d6efa3c555-6"></a>
+<a name="rest_code_1726c14895684d38a25f97d6efa3c555-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_1726c14895684d38a25f97d6efa3c555-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'running add... update: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="si">}</span><span class="s1">, debug: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></section><section id="commit"><h3>Commit</h3>
 <p>For <code>commands/commit.py</code></p>
-<pre class="code python"><a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-1"></a><span class="k">class</span> <span class="nc">Commit</span><span class="p">:</span>
-<a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-2"></a>
-<a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">amend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
-<a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">amend</span> <span class="o">=</span> <span class="n">amend</span>
-<a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-6"></a>
-<a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_2f2a024c12c44f2ebb874059849fe91a-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Commiting... debug: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="si">}</span><span class="s1">, amend: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">amend</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-1"></a><span class="k">class</span> <span class="nc">Commit</span><span class="p">:</span>
+<a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-2"></a>
+<a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">amend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+<a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">amend</span> <span class="o">=</span> <span class="n">amend</span>
+<a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-6"></a>
+<a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_0f0f2ad31d6848dca7612a6b93d02bc4-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Commiting... debug: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="si">}</span><span class="s1">, amend: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">amend</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></section><section id="push"><h3>Push</h3>
 <p>For <code>commands/push.py</code></p>
-<pre class="code python"><a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-1"></a><span class="k">class</span> <span class="nc">Push</span><span class="p">:</span>
-<a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-2"></a>
-<a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
-<a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span>
-<a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-6"></a>
-<a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_485de528c7ee4dd6b7e7fa29174682a3-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Pushing... debug: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="si">}</span><span class="s1">, tags: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-1"></a><span class="k">class</span> <span class="nc">Push</span><span class="p">:</span>
+<a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-2"></a>
+<a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-3"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+<a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span>
+<a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-6"></a>
+<a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-7"></a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_79123d9979f44bd9a4d37c74172b7d0b-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Pushing... debug: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="si">}</span><span class="s1">, tags: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </pre></section><section id="init"><h3>Init</h3>
 <p>We are gonna add this, in order to import directly from <code>commands</code>, instead of one by one.</p>
 <p>For <code>commands/__init__.py</code></p>
-<pre class="code python"><a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-1"></a><span class="kn">from</span> <span class="nn">.add</span> <span class="kn">import</span> <span class="n">Add</span>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-2"></a><span class="kn">from</span> <span class="nn">.commit</span> <span class="kn">import</span> <span class="n">Commit</span>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-3"></a><span class="kn">from</span> <span class="nn">.push</span> <span class="kn">import</span> <span class="n">Push</span>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-4"></a>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-5"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-6"></a>    <span class="s1">'Add'</span><span class="p">,</span>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-7"></a>    <span class="s1">'Commit'</span><span class="p">,</span>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-8"></a>    <span class="s1">'Push'</span>
-<a name="rest_code_a9efbc99792c4b0bbd82984dbbf58e11-9"></a><span class="p">)</span>
+<pre class="code python"><a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-1"></a><span class="kn">from</span> <span class="nn">.add</span> <span class="kn">import</span> <span class="n">Add</span>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-2"></a><span class="kn">from</span> <span class="nn">.commit</span> <span class="kn">import</span> <span class="n">Commit</span>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-3"></a><span class="kn">from</span> <span class="nn">.push</span> <span class="kn">import</span> <span class="n">Push</span>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-4"></a>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-5"></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-6"></a>    <span class="s1">'Add'</span><span class="p">,</span>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-7"></a>    <span class="s1">'Commit'</span><span class="p">,</span>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-8"></a>    <span class="s1">'Push'</span>
+<a name="rest_code_34d6b33fb05d499dbf826fc3a996ed67-9"></a><span class="p">)</span>
 </pre></section></section><section id="now-what"><h2>Now what?</h2>
 <p>That's it, our application is completed, let's see some output results.</p>
 <section id="providing-nothing"><h3>Providing nothing</h3>

@@ -11,6 +11,7 @@
 <link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
 <link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
+<meta http-equiv="Content-Security-Policy" content="default-src https:">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
@@ -107,115 +108,115 @@ while testing. Yes, it's a bit tedious, but it delivers.</p>
 <!-- TEASER_END -->
 <p>When should you save?</p>
 <p>Whenever you need to. This is a good example:</p>
-<pre class="code python"><a name="rest_code_9a8595fd3bdf4d9eaed238ee934c4d65-1"></a><span class="n">url</span> <span class="o">=</span> <span class="s1">'https://betterexplained.com/articles/why-do-we-multiply-combinations/'</span>
-<a name="rest_code_9a8595fd3bdf4d9eaed238ee934c4d65-2"></a><span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
-<a name="rest_code_9a8595fd3bdf4d9eaed238ee934c4d65-3"></a><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<a name="rest_code_9a8595fd3bdf4d9eaed238ee934c4d65-4"></a><span class="n">save_current_state</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">,</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_4beb1d343a4c43b095e66fd1bd304016-1"></a><span class="n">url</span> <span class="o">=</span> <span class="s1">'https://betterexplained.com/articles/why-do-we-multiply-combinations/'</span>
+<a name="rest_code_4beb1d343a4c43b095e66fd1bd304016-2"></a><span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">()</span>
+<a name="rest_code_4beb1d343a4c43b095e66fd1bd304016-3"></a><span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<a name="rest_code_4beb1d343a4c43b095e66fd1bd304016-4"></a><span class="n">save_current_state</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">current_url</span><span class="p">,</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span><span class="p">)</span>
 </pre>
 <p>Can I see the code of <code>save_current_state</code>? Here you go:</p>
-<pre class="code python"><a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-1"></a><span class="kn">import</span> <span class="nn">os</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-2"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-3"></a>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-4"></a><span class="n">SAVE_SOURCE</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># disable in production</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-5"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-6"></a>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-7"></a>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-8"></a><span class="k">def</span> <span class="nf">save_current_state</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-9"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">SAVE_SOURCE</span><span class="p">:</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-10"></a>        <span class="k">return</span> <span class="kc">None</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-11"></a>    <span class="k">if</span> <span class="n">location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-12"></a>        <span class="n">location</span> <span class="o">=</span> <span class="n">TEST_LOCATION</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-13"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-14"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'source must be a string'</span><span class="p">)</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-15"></a>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-16"></a>    <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'/'</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'.html'</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-17"></a>    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-18"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-19"></a>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-20"></a>
-<a name="rest_code_1d6a2f64df4c43b8976a53d06702b579-21"></a>    <span class="k">return</span> <span class="n">filepath</span>
+<pre class="code python"><a name="rest_code_4ab268db7dcb4af399f81821288de8dd-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-2"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-3"></a>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-4"></a><span class="n">SAVE_SOURCE</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># disable in production</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-5"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-6"></a>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-7"></a>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-8"></a><span class="k">def</span> <span class="nf">save_current_state</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-9"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">SAVE_SOURCE</span><span class="p">:</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-10"></a>        <span class="k">return</span> <span class="kc">None</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-11"></a>    <span class="k">if</span> <span class="n">location</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-12"></a>        <span class="n">location</span> <span class="o">=</span> <span class="n">TEST_LOCATION</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-13"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-14"></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'source must be a string'</span><span class="p">)</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-15"></a>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-16"></a>    <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">'/'</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'.html'</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-17"></a>    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-18"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-19"></a>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-20"></a>
+<a name="rest_code_4ab268db7dcb4af399f81821288de8dd-21"></a>    <span class="k">return</span> <span class="n">filepath</span>
 </pre>
 <p>Notice how the url is used as the file name (safely parsed). This helps a lot to match urls.
 But of course, a case where something custom is required may happen, so you can tune the server to
 fit any case.</p>
 <p>And the python server? A minor modification from <a class="reference external" href="https://realpython.com/blog/python/testing-third-party-apis-with-mock-servers/">here</a></p>
-<pre class="code python"><a name="rest_code_ae9997a5b97648a1b690ae01df837bef-1"></a><span class="kn">import</span> <span class="nn">os</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-2"></a><span class="kn">import</span> <span class="nn">socket</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-3"></a><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-4"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-5"></a><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-6"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-7"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-8"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-9"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-10"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-11"></a><span class="k">class</span> <span class="nc">MockServerRequestHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-12"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-13"></a>    <span class="k">def</span> <span class="nf">_set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Set-Cookie'</span><span class="p">,</span> <span class="s1">'exampleid=c295IGVsIHVzdWFyaW8gZW5pdG8K'</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">)</span>  <span class="c1"># change at will</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-18"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-19"></a>    <span class="nd">@property</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-20"></a>    <span class="k">def</span> <span class="nf">_filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-21"></a>        <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">),</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-22"></a>        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_LOCATION</span><span class="p">,</span> <span class="s1">'</span><span class="si">{0}</span><span class="s1">.html'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-23"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-24"></a>    <span class="k">def</span> <span class="nf">_read_from_file_or_404</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-25"></a>        <span class="k">try</span><span class="p">:</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-26"></a>            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filepath</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-27"></a>        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-28"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">&lt;html&gt;&lt;body&gt;404 Not Found!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-30"></a>        <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-31"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-32"></a>            <span class="c1"># needs an extra new line</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-33"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-34"></a>            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-35"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-36"></a>    <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-37"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-39"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-40"></a>    <span class="k">def</span> <span class="nf">do_POST</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-42"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-43"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-44"></a>    <span class="k">def</span> <span class="nf">log_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-45"></a>        <span class="sd">"""Do not write log messages to std. Disable to see the requests."""</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-46"></a>        <span class="k">return</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-47"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-48"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-49"></a><span class="k">def</span> <span class="nf">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-50"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-51"></a>    <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-52"></a>    <span class="n">address</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-53"></a>    <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-54"></a>    <span class="k">return</span> <span class="n">port</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-55"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-56"></a>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-57"></a><span class="k">def</span> <span class="nf">start_mock_server</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-58"></a>    <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-59"></a>        <span class="n">port</span> <span class="o">=</span> <span class="n">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-60"></a>    <span class="n">mock_server</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">MockServerRequestHandler</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-61"></a>    <span class="n">mock_server_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">mock_server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-62"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-63"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<a name="rest_code_ae9997a5b97648a1b690ae01df837bef-64"></a>    <span class="k">return</span> <span class="s1">'</span><span class="si">{hostname}</span><span class="s1">:</span><span class="si">{port}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_4cfc9f057204443388dcadc44284a253-1"></a><span class="kn">import</span> <span class="nn">os</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-2"></a><span class="kn">import</span> <span class="nn">socket</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-3"></a><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-4"></a><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-5"></a><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-6"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-7"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-8"></a><span class="n">TEST_LOCATION</span> <span class="o">=</span> <span class="s1">'tests/static'</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-9"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-10"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-11"></a><span class="k">class</span> <span class="nc">MockServerRequestHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-12"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-13"></a>    <span class="k">def</span> <span class="nf">_set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Set-Cookie'</span><span class="p">,</span> <span class="s1">'exampleid=c295IGVsIHVzdWFyaW8gZW5pdG8K'</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s1">'Content-type'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">)</span>  <span class="c1"># change at will</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-18"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-19"></a>    <span class="nd">@property</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-20"></a>    <span class="k">def</span> <span class="nf">_filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-21"></a>        <span class="n">filename</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'/'</span><span class="p">),</span> <span class="n">safe</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-22"></a>        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TEST_LOCATION</span><span class="p">,</span> <span class="s1">'</span><span class="si">{0}</span><span class="s1">.html'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-23"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-24"></a>    <span class="k">def</span> <span class="nf">_read_from_file_or_404</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-25"></a>        <span class="k">try</span><span class="p">:</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-26"></a>            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filepath</span><span class="p">,</span> <span class="s1">'rb'</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-27"></a>        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-28"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">404</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">&lt;html&gt;&lt;body&gt;404 Not Found!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-30"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-31"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-32"></a>            <span class="c1"># needs an extra new line</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-33"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-34"></a>            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-35"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-36"></a>    <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-37"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-39"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-40"></a>    <span class="k">def</span> <span class="nf">do_POST</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_set_headers</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-42"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_file_or_404</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-43"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-44"></a>    <span class="k">def</span> <span class="nf">log_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">format</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-45"></a>        <span class="sd">"""Do not write log messages to std. Disable to see the requests."""</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-46"></a>        <span class="k">return</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-47"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-48"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-49"></a><span class="k">def</span> <span class="nf">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-50"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-51"></a>    <span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-52"></a>    <span class="n">address</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-53"></a>    <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-54"></a>    <span class="k">return</span> <span class="n">port</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-55"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-56"></a>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-57"></a><span class="k">def</span> <span class="nf">start_mock_server</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-58"></a>    <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-59"></a>        <span class="n">port</span> <span class="o">=</span> <span class="n">get_free_port</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-60"></a>    <span class="n">mock_server</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">MockServerRequestHandler</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-61"></a>    <span class="n">mock_server_thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">mock_server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-62"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">setDaemon</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-63"></a>    <span class="n">mock_server_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a name="rest_code_4cfc9f057204443388dcadc44284a253-64"></a>    <span class="k">return</span> <span class="s1">'</span><span class="si">{hostname}</span><span class="s1">:</span><span class="si">{port}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="o">=</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
 </pre>
 <p>And finally the base test from which you will inherit, whenever you need to test the scrapper.</p>
-<pre class="code python"><a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-1"></a><span class="kn">import</span> <span class="nn">unittest</span>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-2"></a><span class="kn">from</span> <span class="nn">my_project</span> <span class="kn">import</span> <span class="n">const</span>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-3"></a><span class="kn">from</span> <span class="nn">tests</span> <span class="kn">import</span> <span class="n">start_mock_server</span>  <span class="c1"># or where you saved it</span>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-4"></a>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-5"></a>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-6"></a><span class="k">class</span> <span class="nc">BaseScrapperTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-7"></a>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-8"></a>    <span class="nd">@classmethod</span>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-9"></a>    <span class="k">def</span> <span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-10"></a>        <span class="n">url</span> <span class="o">=</span> <span class="n">start_mock_server</span><span class="p">()</span>
-<a name="rest_code_77ef44c705d24ef885c1a3d6c705ca51-11"></a>        <span class="n">const</span><span class="o">.</span><span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">url</span>
+<pre class="code python"><a name="rest_code_707be969822e4e5c9f132f4ab267b25b-1"></a><span class="kn">import</span> <span class="nn">unittest</span>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-2"></a><span class="kn">from</span> <span class="nn">my_project</span> <span class="kn">import</span> <span class="n">const</span>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-3"></a><span class="kn">from</span> <span class="nn">tests</span> <span class="kn">import</span> <span class="n">start_mock_server</span>  <span class="c1"># or where you saved it</span>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-4"></a>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-5"></a>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-6"></a><span class="k">class</span> <span class="nc">BaseScrapperTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-7"></a>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-8"></a>    <span class="nd">@classmethod</span>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-9"></a>    <span class="k">def</span> <span class="nf">setUpClass</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-10"></a>        <span class="n">url</span> <span class="o">=</span> <span class="n">start_mock_server</span><span class="p">()</span>
+<a name="rest_code_707be969822e4e5c9f132f4ab267b25b-11"></a>        <span class="n">const</span><span class="o">.</span><span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">url</span>
 </pre>
 <p>Take a look at that last line, your project must have a central point where the <strong>HOSTNAME</strong> is set.
 Before testing, you need to tell to your application to hit your localserver.</p>
@@ -226,10 +227,10 @@ them individually.</p>
 and assert that boolean. If something goes wrong in the scrapper, we'll get noticied with an exception
 and the test will throw an error. Also, if you wanted to <a class="reference external" href="https://stackoverflow.com/a/4319870/2047185">receive a fail</a>
 instead of an error, which is more pythonic, you should do something like this in your test:</p>
-<pre class="code python"><a name="rest_code_edcaa41cb1e04a92be22f9c4d6d587b1-1"></a><span class="k">try</span><span class="p">:</span>
-<a name="rest_code_edcaa41cb1e04a92be22f9c4d6d587b1-2"></a>    <span class="n">users_from_github</span><span class="p">()</span>
-<a name="rest_code_edcaa41cb1e04a92be22f9c4d6d587b1-3"></a><span class="k">except</span> <span class="n">ExceptionType</span><span class="p">:</span>
-<a name="rest_code_edcaa41cb1e04a92be22f9c4d6d587b1-4"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"users_from_github() raised ExceptionType unexpectedly!"</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_434ab949be3e4ed2ad9ebfdb6befd659-1"></a><span class="k">try</span><span class="p">:</span>
+<a name="rest_code_434ab949be3e4ed2ad9ebfdb6befd659-2"></a>    <span class="n">users_from_github</span><span class="p">()</span>
+<a name="rest_code_434ab949be3e4ed2ad9ebfdb6befd659-3"></a><span class="k">except</span> <span class="n">ExceptionType</span><span class="p">:</span>
+<a name="rest_code_434ab949be3e4ed2ad9ebfdb6befd659-4"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"users_from_github() raised ExceptionType unexpectedly!"</span><span class="p">)</span>
 </pre>
 <p>Try isolating the scrapper as much as possible from the rest of your project, whenever you need
 to use selenium, avoid including bussiness logic in it as well, this difficults testing and makes
