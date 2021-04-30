@@ -46,7 +46,7 @@ Esta es mi recomendación inicial.
 3. [Responsive web design][web_design]
 4. [Algoritmos JavaScript][javascript]
 
-Puedes continuar siguiendo el [roadmap de frontender][frontend_roadmap].
+Puedes continuar siguiendo el [roadmap de frontender][frontend_roadmap] (inglés).
 
 Contácteme si necesitas ayuda o no está seguro de algo.
 
@@ -56,8 +56,8 @@ Santi
 
 [twitter]: https://twitter.com/santiwilly
 [santiwilly]: mailto:santiwilly@gmail.com
-[internet_works]: https://tutorial.djangogirls.org/en/how_the_internet_works/
+[internet_works]: https://tutorial.djangogirls.org/es/how_the_internet_works/
 [hedy]: https://www.hedycode.com/start?lang=es
-[web_design]: https://www.freecodecamp.org/learn/responsive-web-design/
-[javascript]: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/
+[web_design]: https://www.freecodecamp.org/espanol/learn/responsive-web-design/
+[javascript]: https://www.freecodecamp.org/espanol/learn/javascript-algorithms-and-data-structures/
 [frontend_roadmap]: https://roadmap.sh/frontend
