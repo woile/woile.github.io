@@ -200,6 +200,7 @@ recuperarías ese mismo año en teoría.
 
 En los Países Bajos, los fondos de inversión, están obligados a pagarte los dividendos
 al menos una vez por año, durante los primeros 8 meses del año.
+
 Northern Trust fund, por ejemplo, los suele pagar en febrero.
 
 ## No vivís en Holanda
