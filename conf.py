@@ -141,6 +141,7 @@ NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ("/", "🏠 Home"),
         ("/blog/", "📰 Blog"),
+        ("/mentoring/", "📗 Mentoring"),
         ("/archive.html", "🗄️ Archives"),
         ("/categories/index.html", "🏷️ Tags"),
         ("/rss.xml", "🛰️ RSS feed"),
