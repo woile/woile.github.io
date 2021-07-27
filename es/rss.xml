@@ -1,5 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 11 May 2021 17:45:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Hola!&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 27 Jul 2021 07:12:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
+at europython 2021, and I'm quite happy with the result.
+Sometimes I'm hesitant of workshops because I don't
+manage to extract value, but I really did from this one, and the hosts were great.
+I've been questioning myself on how to make better representations of software,
+specially among multiple developers and stakeholders, how to share a common language?&lt;/p&gt;
+&lt;h3&gt;Conclusions&lt;/h3&gt;
+&lt;p&gt;Let's start by my final conclusions: my models on how to design software collaboratively
+are outdated: mostly UML and random diagrams, not clear design process.
+There are new techniques used nowadays, so I will asses them I try to integrate
+into my toolbelt&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Asses &lt;a href="https://www.eventstorming.com/"&gt;event storming&lt;/a&gt;. I would like to be trained into this technique.&lt;/li&gt;
+&lt;li&gt;Asses &lt;a href="https://c4model.com/"&gt;C4 models&lt;/a&gt; and &lt;a href="https://github.com/plantuml-stdlib/C4-PlantUML"&gt;diagrams as code&lt;/a&gt;.&lt;ul&gt;
+&lt;li&gt;For KPN, I already added diagrams as code and C4 support in &lt;a href="https://kpn.github.io/mkdocs-kpn-theme/md-extensions/#plantuml-diagrams"&gt;mkdocs-kpn-theme&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;p&gt;Next, you can find my notes, they may not be complete, I tried adding
+some images to make them more understandable.&lt;/p&gt;
+&lt;h3&gt;Domain driven design&lt;/h3&gt;
+&lt;p&gt;Normally architecture grows organically, but it can have unexpected consequences.&lt;/p&gt;
+&lt;p&gt;Domain driven design helps with:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Identify domains -&amp;gt; core domains and secondary domains&lt;/li&gt;
+&lt;li&gt;Quick feedback -&amp;gt; same language between stakeholders and developers&lt;/li&gt;
+&lt;li&gt;Loosely coupled domains&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Phases&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Ritual dissent&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.eventstorming.com/"&gt;Event storming&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Defining domains&lt;/li&gt;
+&lt;li&gt;Building future of our project using &lt;a href="https://c4model.com/"&gt;C4 models&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Ritual dissent&lt;/h3&gt;
+&lt;p&gt;Small groups iterating over features, then one person from each group
+makes a pitch of 1 min to one of the other groups and gathers feedback.&lt;/p&gt;
+&lt;p&gt;It goes like this:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Teammate goes to other group and pitches&lt;/li&gt;
+&lt;li&gt;Once done, the pitcher just listens to the feedback and takes note, doesn't need
+  to answer anything&lt;/li&gt;
+&lt;li&gt;Goes back to the team and keeps refining&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The owner of a problem often has fixed ideas about both the problem and possible solutions. Ritual dissent, developed by Dave Snowden of Cognitive Edge, allows a group of people to discuss a problem whilst its ‘owner’ turns around and listens to the discussion without intervening.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Event storming&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;EventStorming is a flexible workshop format for collaborative exploration of complex business domains.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I was quite pleased of the way it went with &lt;a href="https://www.eventstorming.com/"&gt;event storming&lt;/a&gt;,
+because it's simple, easy to pick up technique, while being quite expressive.&lt;/p&gt;
+&lt;p&gt;At the end of the day, event storming should help find bounded contexts.&lt;/p&gt;
+&lt;p&gt;Check &lt;a href="https://github.com/ddd-crew/eventstorming-glossary-cheat-sheet"&gt;eventstorming glossary cheat sheet&lt;/a&gt; for more documentation.&lt;/p&gt;
+&lt;h3&gt;Defining domains&lt;/h3&gt;
+&lt;p&gt;Once you are done with the event storm, you can start identifying your domains, take a look
+at the next digram from miro.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="event storming context" src="https://woile.dev/images/domain-driven-design-at-europython-2021/event-storming-context.png"&gt;&lt;/p&gt;
+&lt;p&gt;Taken from a &lt;a href="https://miro.com/miroverse/event-storming/"&gt;miro board over event storming&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;These are the usual steps to finding the domains:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Collect Domain Events - discover them&lt;/li&gt;
+&lt;li&gt;Refine Domain Events - placing them in sequence&lt;/li&gt;
+&lt;li&gt;Track causes - modelling out the broader ecosystem&lt;/li&gt;
+&lt;li&gt;Re-sorting &amp;amp; result - categorize the events and build Bounded Contexts&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Messages between systems&lt;/h3&gt;
+&lt;p&gt;We didn't get to this step.&lt;/p&gt;
+&lt;h3&gt;Building the future of a project&lt;/h3&gt;
+&lt;p&gt;We didn't get to this step, either, but it's about using C4 diagrams.
+There was also a recommendation to use diagrams as a code, like plantUML, which
+has support for C4 diagrams.&lt;/p&gt;
+&lt;p&gt;In theory, C4 are zoom-in diagrams, with a very small surface of components to be learnt, different
+to other approaches like UML, which have a massive scope.&lt;/p&gt;
+&lt;p&gt;C4 has 4 levels of abstraction:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;System Context diagram&lt;/strong&gt;: allows you to step back and see the big picture
+   &lt;img src="https://c4model.com/img/bigbankplc-SystemContext.png" width="800"&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Container diagram&lt;/strong&gt;: shows the high-level shape of the software architecture and how responsibilities are distributed across it. It also shows the major technology choices and how the containers communicate with one another.
+   &lt;img src="https://c4model.com/img/bigbankplc-Containers.png" width="800"&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Component diagram&lt;/strong&gt;: decomposes each container further to identify the major structural building blocks and their interactions.
+   shows how a container is made up of a number of "components", what each of those components are, their responsibilities and the technology/implementation details.
+   &lt;img src="https://c4model.com/img/bigbankplc-Components.png" width="800"&gt;&lt;/li&gt;
+&lt;li&gt;Code: it is usually recommended to generate this automatically from the code, or do
+   it only when really necessary.&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</guid><pubDate>Mon, 26 Jul 2021 17:44:24 GMT</pubDate></item><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Hola!&lt;/p&gt;
 &lt;p&gt;Mi idea con este post es compartir un poco la información que he recolectado y tirarte
 la información necesaria para arrancar sin tener que pensar mucho.&lt;/p&gt;
 &lt;p&gt;El tema inversiones es algo que &lt;strong&gt;no me atrae&lt;/strong&gt;, así que estoy tratando de resolverlo
@@ -780,22 +868,4 @@ server built with raspberries.&lt;/p&gt;
 &lt;li&gt;&lt;p&gt;Long running jobs&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Batch execution&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://woile.dev/es/posts/raspberries-hobby-cluster/"&gt;Leer más…&lt;/a&gt; (quedan 3 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item><item><title>Moving from docker alpine to slim</title><link>https://woile.dev/es/posts/moving-from-docker-alpine-to-slim/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been running a docker python3.x image for a long time.
-I've used the base version, the slim and the alpine.&lt;/p&gt;
-&lt;p&gt;Initially I moved from the base python3.6 to the python3.6-slim and everything
-went great. The main win was that no change was required in the Dockerfile,
-it was smaller and more secure (less dependencies, more security, right?)&lt;/p&gt;
-&lt;p&gt;After a while, I decided to move from slim to alpine, because of the size benefit.
-While doing the migration I found these drawbacks:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Renaming dependencies&lt;/strong&gt;. I had to convert from &lt;code&gt;apt&lt;/code&gt; to &lt;code&gt;apk&lt;/code&gt; for every dependency.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Working with edge&lt;/strong&gt;. There's always a problem with the edge repository.
-Sometimes it's down. Sometimes the packages are broken.
-You have to dig a lot in order to have a proper configuration.
-Like using &lt;code&gt;--no-cache&lt;/code&gt; flag in apk. Or setting up the edge repo, then having to upgrade &lt;code&gt;apk-tools&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;This kind of problems break our pipeline when there's no new commit. And I don't want this.
-That's why I've decided to move back to &lt;code&gt;slim&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Don't get me wrong, alpine is great, small and secure, and if you don't have many edge dependencies,
-I guess it'll work flawlessly, and I would totally use it.
-But our image unfortunately has dependencies like postgis, and proj4, which fail a lot in alpine.&lt;/p&gt;
-&lt;p&gt;But my story is not over with alpine, I'll try it again in the future.
-I know with time it will get better and better, and I'll understand it more and more.&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/moving-from-docker-alpine-to-slim/</guid><pubDate>Sun, 13 Jan 2019 15:34:43 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;a href="https://woile.dev/es/posts/raspberries-hobby-cluster/"&gt;Leer más…&lt;/a&gt; (quedan 3 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item></channel></rss>
