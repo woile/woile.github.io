@@ -58,7 +58,7 @@ makes a pitch of 1 min to one of the other groups and gathers feedback.
 It goes like this:
 
 - Teammate goes to other group and pitches
-- Once done, the pitcher just listens to the feedback and takes note, doesn't need
+- Once done, the pitcher just listens to the feedback and takes notes, doesn't need
   to answer anything
 - Goes back to the team and keeps refining
 
@@ -73,12 +73,12 @@ because it's simple, easy to pick up technique, while being quite expressive.
 
 At the end of the day, event storming should help find bounded contexts.
 
-Check [eventstorming glossary cheat sheet][eventstorming-glossary-cheat-sheet] for more documentation.
+Check [event storming glossary cheat sheet][eventstorming-glossary-cheat-sheet] for more documentation.
 
 ## Defining domains
 
 Once you are done with the event storm, you can start identifying your domains, take a look
-at the next digram from miro.
+at the next digram.
 
 ![event storming context](/images/domain-driven-design-at-europython-2021/event-storming-context.png)
 
@@ -87,9 +87,9 @@ Taken from a [miro board over event storming][miro-storm]
 These are the usual steps to finding the domains:
 
 1. Collect Domain Events - discover them
-1. Refine Domain Events - placing them in sequence
-1. Track causes - modelling out the broader ecosystem
-1. Re-sorting & result - categorize the events and build Bounded Contexts
+2. Refine Domain Events - placing them in sequence
+3. Track causes - modelling out the broader ecosystem
+4. Re-sorting & result - categorize the events and build Bounded Contexts
 
 ## Messages between systems
 

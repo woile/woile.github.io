@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 27 Jul 2021 07:17:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 27 Jul 2021 07:19:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
 at europython 2021, and I'm quite happy with the result.
 Sometimes I'm hesitant of workshops because I don't
 manage to extract value, but I really did from this one, and the hosts were great.
@@ -41,7 +41,7 @@ makes a pitch of 1 min to one of the other groups and gathers feedback.&lt;/p&gt
 &lt;p&gt;It goes like this:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Teammate goes to other group and pitches&lt;/li&gt;
-&lt;li&gt;Once done, the pitcher just listens to the feedback and takes note, doesn't need
+&lt;li&gt;Once done, the pitcher just listens to the feedback and takes notes, doesn't need
   to answer anything&lt;/li&gt;
 &lt;li&gt;Goes back to the team and keeps refining&lt;/li&gt;
 &lt;/ul&gt;
@@ -55,10 +55,10 @@ makes a pitch of 1 min to one of the other groups and gathers feedback.&lt;/p&gt
 &lt;p&gt;I was quite pleased of the way it went with &lt;a href="https://www.eventstorming.com/"&gt;event storming&lt;/a&gt;,
 because it's simple, easy to pick up technique, while being quite expressive.&lt;/p&gt;
 &lt;p&gt;At the end of the day, event storming should help find bounded contexts.&lt;/p&gt;
-&lt;p&gt;Check &lt;a href="https://github.com/ddd-crew/eventstorming-glossary-cheat-sheet"&gt;eventstorming glossary cheat sheet&lt;/a&gt; for more documentation.&lt;/p&gt;
+&lt;p&gt;Check &lt;a href="https://github.com/ddd-crew/eventstorming-glossary-cheat-sheet"&gt;event storming glossary cheat sheet&lt;/a&gt; for more documentation.&lt;/p&gt;
 &lt;h3&gt;Defining domains&lt;/h3&gt;
 &lt;p&gt;Once you are done with the event storm, you can start identifying your domains, take a look
-at the next digram from miro.&lt;/p&gt;
+at the next digram.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="event storming context" src="https://woile.dev/images/domain-driven-design-at-europython-2021/event-storming-context.png"&gt;&lt;/p&gt;
 &lt;p&gt;Taken from a &lt;a href="https://miro.com/miroverse/event-storming/"&gt;miro board over event storming&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;These are the usual steps to finding the domains:&lt;/p&gt;
