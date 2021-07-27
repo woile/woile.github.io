@@ -18,10 +18,11 @@ specially among multiple developers and stakeholders, how to share a common lang
 
 ## Conclusions
 
-Let's start by my final conclusions: my models on how to design software collaboratively
-are outdated: mostly UML and random diagrams, not clear design process.
+Let's start by my final conclusions:
+
+My models on how to design software collaboratively are outdated; mostly UML and random diagrams, not clear design process.
 There are new techniques used nowadays, so I will asses them I try to integrate
-into my toolbelt
+into my tool-belt.
 
 - Asses [event storming][event-storming]. I would like to be trained into this technique.
 - Asses [C4 models][c4] and [diagrams as code][c4-plantuml].
