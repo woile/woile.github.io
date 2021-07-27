@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 27 Jul 2021 07:19:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 27 Jul 2021 10:09:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
 at europython 2021, and I'm quite happy with the result.
 Sometimes I'm hesitant of workshops because I don't
 manage to extract value, but I really did from this one, and the hosts were great.
@@ -7,8 +7,8 @@ I've been questioning myself on how to make better representations of software,
 specially among multiple developers and stakeholders, how to share a common language?&lt;/p&gt;
 &lt;h3&gt;Conclusions&lt;/h3&gt;
 &lt;p&gt;Let's start by my final conclusions:&lt;/p&gt;
-&lt;p&gt;My models on how to design software collaboratively are outdated; mostly UML and random diagrams, not clear design process.
-There are new techniques used nowadays, so I will asses them I try to integrate
+&lt;p&gt;My models on how to design software collaboratively are outdated; mostly UML and random diagrams, no clear design process.
+There are new techniques used nowadays, so I will asses them and try to integrate
 into my tool-belt.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Asses &lt;a href="https://www.eventstorming.com/"&gt;event storming&lt;/a&gt;. I would like to be trained into this technique.&lt;/li&gt;

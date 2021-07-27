@@ -20,8 +20,8 @@ specially among multiple developers and stakeholders, how to share a common lang
 
 Let's start by my final conclusions:
 
-My models on how to design software collaboratively are outdated; mostly UML and random diagrams, not clear design process.
-There are new techniques used nowadays, so I will asses them I try to integrate
+My models on how to design software collaboratively are outdated; mostly UML and random diagrams, no clear design process.
+There are new techniques used nowadays, so I will asses them and try to integrate
 into my tool-belt.
 
 - Asses [event storming][event-storming]. I would like to be trained into this technique.
