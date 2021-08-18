@@ -144,7 +144,7 @@ the JS ecosystem but which I found hard to use.</p>
 <p>It's really easy to use, first create a <code>.cz.toml</code> file in your project's root.</p>
 <pre class="code literal-block"><span class="k">[tool.commitizen]</span>
 <span class="n">version</span> <span class="o">=</span> <span class="s">"2.5.1"</span>
-<span class="n">version_files</span> <span class="o">=</span> <span class="k">["setup.py", "Dockerfile", "src/__version__.py", "scripts/publish"]</span>
+<span class="n">version_files</span> <span class="o">=</span> <span class="p">[</span><span class="s">"setup.py"</span><span class="p">,</span> <span class="s">"Dockerfile"</span><span class="p">,</span> <span class="s">"src/__version__.py"</span><span class="p">,</span> <span class="s">"scripts/publish"</span><span class="p">]</span>
 </pre>
 <p>And that's it, by running a single command we get the version and the changelog.</p>
 <pre class="code literal-block">cz bump --changelog

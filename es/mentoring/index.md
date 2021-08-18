@@ -12,21 +12,22 @@
 ¡Hola!
 
 Durante algún tiempo he estado ayudando a algunas personas a iniciarse en
-programación, así que pensé en abrirme a más gente aquí.
+programación, así que pensé en abrirme a más gente por aquí.
 
 Aprender a programar no es una tarea fácil, requiere tiempo y dedicación, pero gracias a
 Internet es bastante accesible y factible. No creo que exista otra profesión
 con la misma cantidad de material disponible.
 Pero con el tiempo, he observado que algunas veces, la gente que está aprendiendo
-necesita un poco de ayuda para unificar los conceptos e ideas. Ahí es donde puedo entrar y ayudar.
+necesita un poco de ayuda para unificar los conceptos e ideas.
+Ahí es donde te puedo dar una mano y ayudar.
 
-Desafortunadamente la mayoría del material está en Inglés, y toda la industria
-se maneja en Inglés, así que ese es un requerimiento básico. Comenzá por ahí.
+Desafortunadamente, la mayoría del material está en Inglés, y toda la industria
+se maneja en Inglés, así que es un requerimiento básico. Comenzá por ahí.
 
 Si estás aprendiendo a programar o te gustaría saber cómo / dónde empezar,
-o si tiene preguntas, no dudes en contactarme por email o twitter.
+o si tenes preguntas, no dudes en contactarme por email o [twitter][twitter].
 
-Podemos programar una llamada o puede enviarme una lista de preguntas si ya has comenzado tu aventura.
+Podemos coordinar una llamada o puedes enviarme una lista de preguntas por email si ya has comenzado tu aventura.
 
 Mi tutoría es gratis por el momento, y está sujeta a disponibilidad, mi único requisito es amabilidad.
 
@@ -37,7 +38,8 @@ Mi tutoría es gratis por el momento, y está sujeta a disponibilidad, mi único
 ## Roadmap
 
 Si tu conocimiento de programación es cero, la mejor manera de comenzar es
-haciendo trabajo de **frontend**. Esto significa, crear sitios web o aplicaciones web.
+enfocarse en **frontend**.
+Esto significa, crear sitios web o aplicaciones web.
 
 Esta es mi recomendación inicial.
 
@@ -48,7 +50,7 @@ Esta es mi recomendación inicial.
 
 Puedes continuar siguiendo el [roadmap de frontender][frontend_roadmap] (inglés).
 
-Contácteme si necesitas ayuda o no está seguro de algo.
+Contácteme si necesitas ayuda o no estás seguro de algo.
 
 ¡Buena suerte en tu viaje!
 
