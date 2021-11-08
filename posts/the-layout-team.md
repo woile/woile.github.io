@@ -5,7 +5,7 @@
 .. tags: architecture, javascript, html
 .. category: frontend
 .. link:
-.. description:
+.. description: The Layout Team maintains the layout, and checks that everyone operates inside the boundaries created by this team
 .. type: text
 -->
 
