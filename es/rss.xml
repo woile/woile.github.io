@@ -1,5 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 18 Aug 2021 17:25:15 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 08 Nov 2021 22:08:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Layout Team</title><link>https://woile.dev/es/posts/the-layout-team/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;For the last couple of months I've had this idea spinning in my head, which I'm
+calling:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The Layout Team&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Is a work in progress and I'll try to update it when new things come to my mind.
+The topic can be discussed forever, I will try to formalize the idea while keeping
+it short.&lt;/p&gt;
+&lt;p&gt;I see how the frontend industry is led mostly by hype, and this time I'm not fond of the
+direction we are going, specifically with micro-frontends. This pattern,
+spite of its benefits, I don't think it can be
+implemented properly by most teams, and it's not an idea we should keep suggesting.&lt;/p&gt;
+&lt;p&gt;Instead, I'm going to propose an alternative, mostly in the middle.
+And as you probably guessed... it's "The Layout Team".&lt;/p&gt;
+&lt;p&gt;As far as I'm concerned, the ultimate goal of a frontend is to deliver a good
+user experience, and this includes being fast.&lt;/p&gt;
+&lt;p&gt;Micro-frontends, make this target hard to achieve.
+If you pull parts from all around it will take longer than pulling from a single
+place. Of course some teams can accomplish this (out of the question), and they may need it,
+but most of the time, is not required, but... what do we do then?&lt;/p&gt;
+&lt;p&gt;The main issue to me, is that a frontend application has to be &lt;strong&gt;glued together&lt;/strong&gt; at
+some point, or somewhere. Whether you use a micro-frontend architecture or a monorepo, the final
+user has to experience one cohesive app, this is &lt;strong&gt;different&lt;/strong&gt; to backends, there's no UI there,
+mostly machines talk with APIs. Your frontend talks with the API, but the human interacts with
+the frontend.&lt;/p&gt;
+&lt;p&gt;Hence the introduction of &lt;strong&gt;"The Layout Team"&lt;/strong&gt; (I'm giving it a formal name)&lt;/p&gt;
+&lt;p&gt;This team could have many different flavours.
+But ideally, it should be an independent team, holding ownership of the layout of the app.&lt;/p&gt;
+&lt;p&gt;Yes, there's nothing fancy here, and the title is self-explanatory.&lt;/p&gt;
+&lt;p&gt;The Layout Team maintains the layout, and checks that everyone operates inside the
+boundaries created by this team.&lt;/p&gt;
+&lt;p&gt;Its responsibilities include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Monitor styles to prevent overlapping components or breaking issues&lt;/li&gt;
+&lt;li&gt;Review Pull Requests&lt;/li&gt;
+&lt;li&gt;Train other developers, whether through quarterly presentations or one-to-one coaching, but
+do it consistently over time. Not fire and forget.&lt;/li&gt;
+&lt;li&gt;Maintain &lt;em&gt;some&lt;/em&gt; shared state (logged user or is_authenticated or any other herbs).
+But most of the times teams should be able to add and manage their own global state&lt;/li&gt;
+&lt;li&gt;Write tools to assist other teams, like linters to prevent CSS or JS, where&lt;/li&gt;
+&lt;li&gt;Identify CSS or JS code that may affect the whole app, and potentially code them
+into the linters. Example:&lt;ul&gt;
+&lt;li&gt;Do not use fixed/absolute because... (unless approved to do so)&lt;/li&gt;
+&lt;li&gt;Do not use negative margins because we found that no one knows who to...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Write tests for the layout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;One easy way to do this, is by having a monorepo. The layout for the different pages
+is defined by "The Layout Team", and the rest of the teams write components,
+which can be later placed in the places designated by the layout team.&lt;/p&gt;
+&lt;p&gt;By doing this, it becomes very easy to produce a small bundle. Because the dependencies
+are shared. It's then potentially easier, to identify shared code and cache it in a
+separate bundle across the application.&lt;/p&gt;
+&lt;p&gt;One of the "benefits" of micro-frontend is supposed to be the freedom for teams to
+choose what framework to use, but you end up sending bigger assets to the end user.
+This goes against optimizing for the best user experience. So ideally, stick
+to a single framework, and deliver it once.&lt;/p&gt;
+&lt;p&gt;If you are using React in your monorepo, it means everyone will stick to that
+version. If you have multiple repos, even if everyone uses the same framework,
+you may end up with different versions, or even the same and still delivering them
+as part of each apps bundle!&lt;/p&gt;
+&lt;p&gt;Finally, &lt;strong&gt;The Layout Team&lt;/strong&gt; leverages the use of &lt;code&gt;flex&lt;/code&gt; and &lt;code&gt;grid&lt;/code&gt; heavily.
+They shape the app over time. And create &lt;em&gt;slots&lt;/em&gt; for each team.&lt;/p&gt;
+&lt;p&gt;Let's see an example:&lt;/p&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"box grid grid-cols-2"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;maintainer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"teamA"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ComponentFromTeamA&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;maintainer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"teamB"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ComponentFromTeamB&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;maintainer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"teamC"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ComponentFromTeamC&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;
+&lt;style&gt;
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid {
+    display: grid;
+  }
+  .box {
+    margin: 0.75rem;
+    width: 90%;
+    border-width: 4px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgba(107, 114, 128, var(--tw-border-opacity));
+    padding: 0.75rem;
+  }
+  .teamBox {
+    margin: 0.25rem;
+    border-width: 4px;
+    border-style: dashed;
+    padding: 0.5rem;
+  }
+  .border-indigo-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(99, 102, 241, var(--tw-border-opacity));
+  }
+  .border-red-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(239, 68, 68, var(--tw-border-opacity));
+  }
+  .border-green-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(16, 185, 129, var(--tw-border-opacity));
+  }
+&lt;/style&gt;
+
+&lt;div class="box grid grid-cols-2"&gt;
+  &lt;div class="teamBox border-indigo-500" maintainer="teamA"&gt;TEAM A&lt;/div&gt;
+  &lt;div&gt;
+    &lt;div class="teamBox border-red-500" maintainer="teamB"&gt;TEAM B&lt;/div&gt;
+    &lt;div class="teamBox border-green-500" maintainer="teamC"&gt;TEAM C&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;- Hey! It's almost the same example as a micro-frontend!&lt;/p&gt;
+&lt;p&gt;- Well... yes, what did you expect?&lt;/p&gt;
+&lt;p&gt;Each team now has a space to place their components, and there's full visibility
+over who maintains what.&lt;/p&gt;
+&lt;p&gt;It is very important, that the people, that are part of this team,
+understand &lt;code&gt;flex&lt;/code&gt; and &lt;code&gt;grid&lt;/code&gt; very well.&lt;/p&gt;
+&lt;p&gt;Useful layout resources&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"&gt;guide to flexbox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://1linelayouts.glitch.me/"&gt;1linelayouts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://csslayout.io/"&gt;csslayout&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I would very much like your feedback.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;What has been your experience with micro-frontends?&lt;/li&gt;
+&lt;li&gt;Do you think "the layout team" would work?&lt;/li&gt;
+&lt;li&gt;What do you think of this proposal?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thanks for reading&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/the-layout-team/</guid><pubDate>Mon, 08 Nov 2021 07:05:42 GMT</pubDate></item><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
 at europython 2021, and I'm quite happy with the result.
 Sometimes I'm hesitant of workshops because I don't
 manage to extract value, but I really did from this one, and the hosts were great.
@@ -853,19 +992,4 @@ Luckily I got positive feedback over my talk, so I left the conference quite pro
 &lt;div class="line"&gt;this post quite useful. If your answer was no, read it anyway, you are&lt;/div&gt;
 &lt;div class="line"&gt;already here.&lt;/div&gt;
 &lt;/div&gt;
-&lt;img src="https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif"&gt;&lt;p&gt;&lt;a href="https://woile.dev/es/posts/sharing-team-secrets/"&gt;Leer más…&lt;/a&gt; (quedan 6 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/sharing-team-secrets/</guid><pubDate>Mon, 18 Mar 2019 16:34:36 GMT</pubDate></item><item><title>Raspberry Pi hobby cluster</title><link>https://woile.dev/es/posts/raspberries-hobby-cluster/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;In this tutorial we are gonna try to setup a cluster in our home
-server built with raspberries.&lt;/p&gt;
-&lt;p&gt;In another post I'll describe how to configure a Kubernetes cluster in our raspberries.&lt;/p&gt;
-&lt;p&gt;Kubernetes is a container orchestration tool, it can do all of this:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;&lt;p&gt;Automatic bin packing&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Self-healing&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Horizontal scaling&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Service discovery and Load balancing&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Automated rollouts and rollbacks&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Secrets and configuration management&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Storage orchestration&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Long running jobs&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Batch execution&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://woile.dev/es/posts/raspberries-hobby-cluster/"&gt;Leer más…&lt;/a&gt; (quedan 3 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/raspberries-hobby-cluster/</guid><pubDate>Fri, 22 Feb 2019 07:46:17 GMT</pubDate></item></channel></rss>
+&lt;img src="https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif"&gt;&lt;p&gt;&lt;a href="https://woile.dev/es/posts/sharing-team-secrets/"&gt;Leer más…&lt;/a&gt; (quedan 6 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/sharing-team-secrets/</guid><pubDate>Mon, 18 Mar 2019 16:34:36 GMT</pubDate></item></channel></rss>

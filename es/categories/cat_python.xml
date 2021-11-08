@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/cat_python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Wed, 18 Aug 2021 17:25:15 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/cat_python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 08 Nov 2021 22:08:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
 Works in the user space, avoiding the system's python, therefore is less error prone.
 You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
@@ -94,25 +94,25 @@ I find it really hard to come up with the slides quickly.
 Luckily I got positive feedback over my talk, so I left the conference quite proud.&lt;/p&gt;
 &lt;p&gt;For my next pycon (whichever I end up attending), I think I know the topic I'll discuss about: &lt;strong&gt;Documentation&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Thanks for reading!&lt;/p&gt;
-&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="contents local topic" id="contents"&gt;
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Local HTTPS development in Python with Mkcert</title><link>https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;nav class="contents local" id="contents" role="doc-toc"&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="id5"&gt;About mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="id6"&gt;Configuring mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="id7"&gt;Python frameworks&lt;/a&gt;&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#about-mkcert" id="toc-entry-1"&gt;About mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#configuring-mkcert" id="toc-entry-2"&gt;Configuring mkcert&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#python-frameworks" id="toc-entry-3"&gt;Python frameworks&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="id8"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="id9"&gt;Django SSL Server&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#flask" id="id10"&gt;Flask&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="id11"&gt;Gunicorn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="id12"&gt;UWSGI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#uvicorn-starlette" id="toc-entry-4"&gt;Uvicorn + Starlette&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#django-ssl-server" id="toc-entry-5"&gt;Django SSL Server&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#flask" id="toc-entry-6"&gt;Flask&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#gunicorn" id="toc-entry-7"&gt;Gunicorn&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#uwsgi" id="toc-entry-8"&gt;UWSGI&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="id13"&gt;Security concerns&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#conclusion" id="id14"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#security-concerns" id="toc-entry-9"&gt;Security concerns&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference internal" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#conclusion" id="toc-entry-10"&gt;Conclusion&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
+&lt;/nav&gt;
 &lt;section id="about-mkcert"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#id5"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/#toc-entry-1" role="doc-backlink"&gt;About mkcert&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/FiloSottile/mkcert/"&gt;mkcert&lt;/a&gt; allows you to have a local
 certificate authority (CA).
 This means that you can run your development web server using HTTPS.
