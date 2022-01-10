@@ -1238,7 +1238,7 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'pymdownx.extra', 'pym
 # (translatable)
 EXTRA_HEAD_DATA = """
 <script>
-    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"-3"}))};sessionStorage.setItem("_swa","1");
+    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"your_user",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script>
 """
 
