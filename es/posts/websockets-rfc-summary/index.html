@@ -17,7 +17,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/websockets-rfc-summary/">
 <!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
-    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"-3"}))};sessionStorage.setItem("_swa","1");
+    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"your_user",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script><meta name="author" content="Woile">
 <meta name="robots" content="noindex">
 <meta property="og:site_name" content="Willy's blog">
@@ -88,8 +88,7 @@
         </span>
 </div>
         
-    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
-<section id="introduction"><h2>Introduction</h2>
+    </header><section class="e-content entry-content" itemprop="articleBody text"><section id="introduction"><h2>Introduction</h2>
 <p><a class="reference external" href="https://tools.ietf.org/html/rfc6455.html">RFC Link</a></p>
 <p>For bi-directional communication (e.g., instant messaging and gaming applications): abuse of <strong>HTTP poll</strong>.</p>
 <!-- TEASER_END -->
@@ -157,9 +156,7 @@ wss-URI = "wss:" "//" host [ ":" port ] path [ "?" query ]</pre>
 <li><p>server <strong>MUST NOT</strong> mask any frames that it sends to the client.</p></li>
 <li><p>client <strong>MUST</strong> close a connection if it detects a masked frame.</p></li>
 <li><p>client <strong>MAY</strong> use the status code 1002 to close connection</p></li>
-</ul></section>
-</div>
-    </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
+</ul></section></section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
 <li>
             <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/rfc-summary-websockets/" rel="tag">#rfc summary websockets</a>
           </li>

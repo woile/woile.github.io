@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 08 Nov 2021 22:15:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Layout Team</title><link>https://woile.dev/es/posts/the-layout-team/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;For the last couple of months I've had this idea spinning in my head, which I'm
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/es/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 10 Jan 2022 10:10:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Layout Team</title><link>https://woile.dev/es/posts/the-layout-team/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For the last couple of months I've had this idea spinning in my head, which I'm
 calling:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The Layout Team&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Is a work in progress and I'll try to update it when new things come to my mind.
@@ -138,7 +138,7 @@ understand &lt;code&gt;flex&lt;/code&gt; and &lt;code&gt;grid&lt;/code&gt; very 
 &lt;li&gt;Do you think "the layout team" would work?&lt;/li&gt;
 &lt;li&gt;What do you think of this proposal?&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Thanks for reading&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/the-layout-team/</guid><pubDate>Mon, 08 Nov 2021 07:05:42 GMT</pubDate></item><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
+&lt;p&gt;Thanks for reading&lt;/p&gt;</description><guid>https://woile.dev/es/posts/the-layout-team/</guid><pubDate>Mon, 08 Nov 2021 07:05:42 GMT</pubDate></item><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
 at europython 2021, and I'm quite happy with the result.
 Sometimes I'm hesitant of workshops because I don't
 manage to extract value, but I really did from this one, and the hosts were great.
@@ -226,7 +226,7 @@ to other approaches like UML, which have a massive scope.&lt;/p&gt;
    &lt;img src="https://c4model.com/img/bigbankplc-Components.png" width="800"&gt;&lt;/li&gt;
 &lt;li&gt;Code: it is usually recommended to generate this automatically from the code, or do
    it only when really necessary.&lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</guid><pubDate>Mon, 26 Jul 2021 17:44:24 GMT</pubDate></item><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;Hola!&lt;/p&gt;
+&lt;/ol&gt;</description><guid>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</guid><pubDate>Mon, 26 Jul 2021 17:44:24 GMT</pubDate></item><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Hola!&lt;/p&gt;
 &lt;p&gt;Mi idea con este post es compartir un poco la información que he recolectado y tirarte
 la información necesaria para arrancar sin tener que pensar mucho.&lt;/p&gt;
 &lt;p&gt;El tema inversiones es algo que &lt;strong&gt;no me atrae&lt;/strong&gt;, así que estoy tratando de resolverlo
@@ -442,7 +442,7 @@ las podes seguir manejando por ahí.&lt;/li&gt;
 &lt;p&gt;Hey, hola 👋&lt;/p&gt;
 &lt;p&gt;Si te interesa lo que escribo podes seguirme en &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;.
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><category>argentinos</category><category>dinero</category><category>fire</category><category>holanda</category><category>inversion</category><guid>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</guid><pubDate>Mon, 03 Aug 2020 16:08:26 GMT</pubDate></item><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
+&lt;/blockquote&gt;</description><category>argentinos</category><category>dinero</category><category>fire</category><category>holanda</category><category>inversion</category><guid>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</guid><pubDate>Mon, 03 Aug 2020 16:08:26 GMT</pubDate></item><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
 Languages like rust have &lt;a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-cratesio"&gt;fully embraced it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;A SemVer version looks like this: &lt;code&gt;1.2.0&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Quite simple, right?&lt;/p&gt;
@@ -491,9 +491,9 @@ the JS ecosystem but which I found hard to use.&lt;/p&gt;
 &lt;p&gt;But you can &lt;a href="https://commitizen-tools.github.io/commitizen/customization/#2-customize-through-customizing-a-class"&gt;easily extend commitizen&lt;/a&gt; to create the example given before.&lt;/p&gt;
 &lt;p&gt;Not only it will create the version, but it can also generate the changelog.&lt;/p&gt;
 &lt;p&gt;It's really easy to use, first create a &lt;code&gt;.cz.toml&lt;/code&gt; file in your project's root.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[tool.commitizen]&lt;/span&gt;
-&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"2.5.1"&lt;/span&gt;
-&lt;span class="n"&gt;version_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"setup.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"Dockerfile"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"src/__version__.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"scripts/publish"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[tool.commitizen]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"2.5.1"&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;version_files&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"setup.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"Dockerfile"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"src/__version__.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"scripts/publish"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;And that's it, by running a single command we get the version and the changelog.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;cz bump --changelog
@@ -503,10 +503,10 @@ the JS ecosystem but which I found hard to use.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="diagram of semantic release" src="https://woile.dev/images/automating-deployment-with-commitizen/semantic_release.png"&gt;&lt;/p&gt;
 &lt;p&gt;In this diagram, you'd execute commitizen during the "merge job" (green in the diagram), where "bump version" is highlighted.&lt;/p&gt;
 &lt;p&gt;For example, if you are using Github Actions, you'd add this to your job:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nt"&gt;branches&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;main&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;branches&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;main&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;Commitizen then, will generate a new commit, with the updated version in the files and the changelog; and a new tag.&lt;/p&gt;
 &lt;p&gt;Both are pushed back.&lt;/p&gt;
@@ -539,7 +539,7 @@ the tool is quite flexible, explore it, and see if it fits for your use cases.&l
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item><item><title>Helm 3 - Crafting a Chart</title><link>https://woile.dev/es/posts/helm-3-crafting-a-chart/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;This post focuses on &lt;strong&gt;creating and releasing a chart&lt;/strong&gt;, not consuming from a Helm Chart Repository.&lt;/p&gt;
+&lt;/blockquote&gt;</description><guid>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item><item><title>Helm 3 - Crafting a Chart</title><link>https://woile.dev/es/posts/helm-3-crafting-a-chart/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;This post focuses on &lt;strong&gt;creating and releasing a chart&lt;/strong&gt;, not consuming from a Helm Chart Repository.&lt;/p&gt;
 &lt;p&gt;Helm is an &lt;strong&gt;advanced&lt;/strong&gt; tool used by kubernetes people, some "lingo" (jargon) is used here.
 Please leave a comment if you want more information.&lt;/p&gt;
 &lt;p&gt;Helm allows to &lt;strong&gt;"package"&lt;/strong&gt; kubernetes applications, it simplifies the distribution
@@ -620,7 +620,7 @@ adding any extra stuff that you need.&lt;/p&gt;
 &lt;h4&gt;Templating&lt;/h4&gt;
 &lt;p&gt;If you have used other template systems like &lt;code&gt;jinja&lt;/code&gt;, or Django's template engine,
 Helm's system is not that different: you can apply functions using a pipeline &lt;code&gt;|&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;food&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;.Values.favorite.food | upper | quote&lt;/span&gt; &lt;span class="p p-Indicator"&gt;}}&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;food&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;{{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;.Values.favorite.food | upper | quote&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;}}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;Avoid adding complex template tags; the purpose of &lt;code&gt;yaml&lt;/code&gt; is to be &lt;strong&gt;readable&lt;/strong&gt;.
 By using templates, we make things more complex, and less readable, &lt;strong&gt;touch only when necessary&lt;/strong&gt;.&lt;/p&gt;
@@ -756,7 +756,7 @@ or a release upgrade.&lt;/p&gt;
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/helm-3-crafting-a-chart/</guid><pubDate>Wed, 15 Jul 2020 13:20:41 GMT</pubDate></item><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+&lt;/blockquote&gt;</description><guid>https://woile.dev/es/posts/helm-3-crafting-a-chart/</guid><pubDate>Wed, 15 Jul 2020 13:20:41 GMT</pubDate></item><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;h3&gt;Description&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
 Works in the user space, avoiding the system's python, therefore is less error prone.
 You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
@@ -805,7 +805,7 @@ same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &l
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item><item><title>2019 yearly retrospective</title><link>https://woile.dev/es/posts/2019-yearly-retrospective/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;So far it's been great. I just wanted to write a recap for my future self.&lt;/p&gt;
+&lt;/blockquote&gt;</description><guid>https://woile.dev/es/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item><item><title>2019 yearly retrospective</title><link>https://woile.dev/es/posts/2019-yearly-retrospective/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;So far it's been great. I just wanted to write a recap for my future self.&lt;/p&gt;
 &lt;h3&gt;Life&lt;/h3&gt;
 &lt;p&gt;This year will be almost 3 years since I've been in Amsterdam. I love living here.
 The more I think about it the more I'm sure of it: &lt;strong&gt;Amsterdam (or the whole Netherlands) is a bubble&lt;/strong&gt;,
@@ -880,7 +880,7 @@ I won't go into detail because it's stuff I build for the company.&lt;/p&gt;
 &lt;li&gt;Learn another programming language.&lt;/li&gt;
 &lt;li&gt;Read more books.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Thanks for reading and follow me on Twitter &lt;a href="https://twitter.com/santiwilly"&gt;santiwilly&lt;/a&gt; if you want to know more about my future.&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/2019-yearly-retrospective/</guid><pubDate>Tue, 31 Dec 2019 16:40:35 GMT</pubDate></item><item><title>Multiple configurations in kubernetes</title><link>https://woile.dev/es/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
+&lt;p&gt;Thanks for reading and follow me on Twitter &lt;a href="https://twitter.com/santiwilly"&gt;santiwilly&lt;/a&gt; if you want to know more about my future.&lt;/p&gt;</description><guid>https://woile.dev/es/posts/2019-yearly-retrospective/</guid><pubDate>Tue, 31 Dec 2019 16:40:35 GMT</pubDate></item><item><title>Multiple configurations in kubernetes</title><link>https://woile.dev/es/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
 kubernetes. At this point, you'll want to have multiple config files, instead of
 replacing &lt;code&gt;~/.kube/config&lt;/code&gt;, which is fine the first few times.&lt;/p&gt;
 &lt;p&gt;In order to do this we only need to set &lt;code&gt;KUBECONFIG&lt;/code&gt; env variable with the path to the kubeconfigs.&lt;/p&gt;
@@ -932,7 +932,7 @@ contexts and namespaces. I'll leave here the shortcuts&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;kubectl config set-context --current --namespace&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;new_namespace&amp;gt;
 &lt;/pre&gt;
 &lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Thanks for reading!&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/multiple-configurations-in-kubernetes/</guid><pubDate>Fri, 08 Nov 2019 18:15:28 GMT</pubDate></item><item><title>PyCon France 2019 experience</title><link>https://woile.dev/es/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.dev/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;</description><guid>https://woile.dev/es/posts/multiple-configurations-in-kubernetes/</guid><pubDate>Fri, 08 Nov 2019 18:15:28 GMT</pubDate></item><item><title>PyCon France 2019 experience</title><link>https://woile.dev/es/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.dev/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;This year (2019) I had the opportunity to participate as a speaker at &lt;a href="https://www.pycon.fr/2019/"&gt;PyCon France&lt;/a&gt;,
 and it was a great experience.
 The event was held in &lt;strong&gt;Bordeaux, France&lt;/strong&gt;, a super cozy city, famous for its wines.&lt;/p&gt;
@@ -978,7 +978,7 @@ I find it really hard to come up with the slides quickly.
 Luckily I got positive feedback over my talk, so I left the conference quite proud.&lt;/p&gt;
 &lt;p&gt;For my next pycon (whichever I end up attending), I think I know the topic I'll discuss about: &lt;strong&gt;Documentation&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Thanks for reading!&lt;/p&gt;
-&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Sharing passwords using gopass, git and gpg</title><link>https://woile.dev/es/posts/sharing-team-secrets/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="line-block"&gt;
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Sharing passwords using gopass, git and gpg</title><link>https://woile.dev/es/posts/sharing-team-secrets/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;div class="line-block"&gt;
 &lt;div class="line"&gt;Tired of storing your passwords in unreliable but convenient places?&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="line-block"&gt;

@@ -17,7 +17,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/helm-3-crafting-a-chart/">
 <!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
-    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"-3"}))};sessionStorage.setItem("_swa","1");
+    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"your_user",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script><meta name="author" content="Woile">
 <link rel="prev" href="../pyenv/" title="Pyenv" type="text/html">
 <link rel="next" href="../automating-semver-releases-with-commitizen/" title="Automating semver releases with commitizen" type="text/html">
@@ -91,8 +91,7 @@
         </span>
 </div>
         
-    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
-<p>This post focuses on <strong>creating and releasing a chart</strong>, not consuming from a Helm Chart Repository.</p>
+    </header><section class="e-content entry-content" itemprop="articleBody text"><p>This post focuses on <strong>creating and releasing a chart</strong>, not consuming from a Helm Chart Repository.</p>
 <p>Helm is an <strong>advanced</strong> tool used by kubernetes people, some "lingo" (jargon) is used here.
 Please leave a comment if you want more information.</p>
 <p>Helm allows to <strong>"package"</strong> kubernetes applications, it simplifies the distribution
@@ -179,7 +178,7 @@ adding any extra stuff that you need.</p>
 <h4>Templating</h4>
 <p>If you have used other template systems like <code>jinja</code>, or Django's template engine,
 Helm's system is not that different: you can apply functions using a pipeline <code>|</code>.</p>
-<pre class="code literal-block"><span class="nt">food</span><span class="p">:</span> <span class="p p-Indicator">{{</span> <span class="nv">.Values.favorite.food | upper | quote</span> <span class="p p-Indicator">}}</span>
+<pre class="code literal-block"><span class="nt">food</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.favorite.food | upper | quote</span><span class="w"> </span><span class="p p-Indicator">}}</span><span class="w"></span>
 </pre>
 <p>Avoid adding complex template tags; the purpose of <code>yaml</code> is to be <strong>readable</strong>.
 By using templates, we make things more complex, and less readable, <strong>touch only when necessary</strong>.</p>
@@ -320,7 +319,6 @@ or a release upgrade.</p>
 <p>If you are interested in what I write, follow me on <a href="https://twitter.com/santiwilly">twitter</a>
 </p>
 </blockquote>
-</div>
     </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
 <li>
             <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/helm/" rel="tag">#helm</a>

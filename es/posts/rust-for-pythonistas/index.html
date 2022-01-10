@@ -16,7 +16,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/rust-for-pythonistas/">
 <!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
-    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"-3"}))};sessionStorage.setItem("_swa","1");
+    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"your_user",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script><meta name="author" content="Woile">
 <meta name="robots" content="noindex">
 <meta property="og:site_name" content="Willy's blog">
@@ -103,8 +103,7 @@ let word: String = String::from("avo'>
         </span>
 </div>
         
-    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
-<h2>RUST FOR PYTHONISTAS</h2>
+    </header><section class="e-content entry-content" itemprop="articleBody text"><h2>RUST FOR PYTHONISTAS</h2>
 <h3>Data structures with typing</h3>
 <table>
 <thead><tr>
@@ -183,7 +182,6 @@ Instead the type <code>String</code> is the one that has useful functions.</p>
 <p>Now that our string has been cast to the type <code>String</code> we can start doing some operations on it.</p>
 <h4>Immutability</h4>
 <p>What does this mean?</p>
-</div>
     </section><aside class="postpromonav"><nav></nav></aside><section class="comments hidden-print"><div class="commentbox" id="commentbox"></div>
 
         <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script><script>

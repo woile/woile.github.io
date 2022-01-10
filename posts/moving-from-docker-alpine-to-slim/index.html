@@ -16,7 +16,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
 <link rel="canonical" href="https://woile.dev/posts/moving-from-docker-alpine-to-slim/">
 <!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
-    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"-3"}))};sessionStorage.setItem("_swa","1");
+    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"your_user",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script><meta name="author" content="Woile">
 <link rel="prev" href="../local-https-development-in-python-with-mkcert/" title="Local HTTPS development in Python with Mkcert" type="text/html">
 <link rel="next" href="../raspberries-hobby-cluster/" title="Raspberry Pi hobby cluster" type="text/html">
@@ -91,8 +91,7 @@ went gre">
         </span>
 </div>
         
-    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
-<p>I've been running a docker python3.x image for a long time.
+    </header><section class="e-content entry-content" itemprop="articleBody text"><p>I've been running a docker python3.x image for a long time.
 I've used the base version, the slim and the alpine.</p>
 <p>Initially I moved from the base python3.6 to the python3.6-slim and everything
 went great. The main win was that no change was required in the Dockerfile,
@@ -111,7 +110,6 @@ I guess it'll work flawlessly, and I would totally use it.
 But our image unfortunately has dependencies like postgis, and proj4, which fail a lot in alpine.</p>
 <p>But my story is not over with alpine, I'll try it again in the future.
 I know with time it will get better and better, and I'll understand it more and more.</p>
-</div>
     </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
 <li>
             <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/linux-python-containers-alpine-slim-debian/" rel="tag">#linux python containers alpine slim debian</a>

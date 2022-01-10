@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2021 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 08 Nov 2021 22:15:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 10 Jan 2022 10:10:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
 Languages like rust have &lt;a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-cratesio"&gt;fully embraced it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;A SemVer version looks like this: &lt;code&gt;1.2.0&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Quite simple, right?&lt;/p&gt;
@@ -48,9 +48,9 @@ the JS ecosystem but which I found hard to use.&lt;/p&gt;
 &lt;p&gt;But you can &lt;a href="https://commitizen-tools.github.io/commitizen/customization/#2-customize-through-customizing-a-class"&gt;easily extend commitizen&lt;/a&gt; to create the example given before.&lt;/p&gt;
 &lt;p&gt;Not only it will create the version, but it can also generate the changelog.&lt;/p&gt;
 &lt;p&gt;It's really easy to use, first create a &lt;code&gt;.cz.toml&lt;/code&gt; file in your project's root.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[tool.commitizen]&lt;/span&gt;
-&lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"2.5.1"&lt;/span&gt;
-&lt;span class="n"&gt;version_files&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"setup.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"Dockerfile"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"src/__version__.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"scripts/publish"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;[tool.commitizen]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;version&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"2.5.1"&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;version_files&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;"setup.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"Dockerfile"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"src/__version__.py"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;"scripts/publish"&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;And that's it, by running a single command we get the version and the changelog.&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;cz bump --changelog
@@ -60,10 +60,10 @@ the JS ecosystem but which I found hard to use.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="diagram of semantic release" src="https://woile.dev/images/automating-deployment-with-commitizen/semantic_release.png"&gt;&lt;/p&gt;
 &lt;p&gt;In this diagram, you'd execute commitizen during the "merge job" (green in the diagram), where "bump version" is highlighted.&lt;/p&gt;
 &lt;p&gt;For example, if you are using Github Actions, you'd add this to your job:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-  &lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="nt"&gt;branches&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;main&lt;/span&gt;
+&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;branches&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;main&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;Commitizen then, will generate a new commit, with the updated version in the files and the changelog; and a new tag.&lt;/p&gt;
 &lt;p&gt;Both are pushed back.&lt;/p&gt;
@@ -96,7 +96,7 @@ the tool is quite flexible, explore it, and see if it fits for your use cases.&l
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;h3&gt;Description&lt;/h3&gt;
+&lt;/blockquote&gt;</description><guid>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</guid><pubDate>Wed, 15 Jul 2020 15:27:20 GMT</pubDate></item><item><title>Pyenv</title><link>https://woile.dev/es/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;h3&gt;Description&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
 Works in the user space, avoiding the system's python, therefore is less error prone.
 You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
@@ -145,7 +145,7 @@ same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &l
 &lt;p&gt;Hey, hello 👋&lt;/p&gt;
 &lt;p&gt;If you are interested in what I write, follow me on &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;
 &lt;/p&gt;
-&lt;/blockquote&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item><item><title>PyCon France 2019 experience</title><link>https://woile.dev/es/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.dev/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description><guid>https://woile.dev/es/posts/pyenv/</guid><pubDate>Wed, 08 Jul 2020 09:07:26 GMT</pubDate></item><item><title>PyCon France 2019 experience</title><link>https://woile.dev/es/posts/pycon-france-2019-experience/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;&lt;img alt="mural in bordeaux city" src="https://woile.dev/images/pycon-fr-2019/fox.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;This year (2019) I had the opportunity to participate as a speaker at &lt;a href="https://www.pycon.fr/2019/"&gt;PyCon France&lt;/a&gt;,
 and it was a great experience.
 The event was held in &lt;strong&gt;Bordeaux, France&lt;/strong&gt;, a super cozy city, famous for its wines.&lt;/p&gt;
@@ -191,7 +191,7 @@ I find it really hard to come up with the slides quickly.
 Luckily I got positive feedback over my talk, so I left the conference quite proud.&lt;/p&gt;
 &lt;p&gt;For my next pycon (whichever I end up attending), I think I know the topic I'll discuss about: &lt;strong&gt;Documentation&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Thanks for reading!&lt;/p&gt;
-&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Guide to Sublime like a normal person</title><link>https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;First of all, verify that you have installed the
+&lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;</description><guid>https://woile.dev/es/posts/pycon-france-2019-experience/</guid><pubDate>Tue, 05 Nov 2019 15:59:16 GMT</pubDate></item><item><title>Guide to Sublime like a normal person</title><link>https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;First of all, verify that you have installed the
 latest version of &lt;a href="https://www.sublimetext.com/3"&gt;Sublime Text 3&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/"&gt;Leer más…&lt;/a&gt; (quedan 5 minutos de lectura)&lt;/p&gt;&lt;/div&gt;</description><guid>https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/</guid><pubDate>Thu, 08 Jun 2017 19:46:15 GMT</pubDate></item><item><title>How to filter Polymorphic Models with Django Filters</title><link>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</link><dc:creator>Woile</dc:creator><description>&lt;div&gt;&lt;p&gt;As the title says, I needed a way to filter my polymorphic models using my already defined
 &lt;code&gt;rest_framework.FilterSet&lt;/code&gt;, and as I didn't find much resources about it I'm sharing my experience here.&lt;/p&gt;
