@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre inversion)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/inversion.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 14 Jan 2022 10:40:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Hola!&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre inversion)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/inversion.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 14 Jan 2022 11:21:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>FIRE para Argentinos en los Países Bajos</title><link>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Hola!&lt;/p&gt;
 &lt;p&gt;Mi idea con este post es compartir un poco la información que he recolectado y tirarte
 la información necesaria para arrancar sin tener que pensar mucho.&lt;/p&gt;
 &lt;p&gt;El tema inversiones es algo que &lt;strong&gt;no me atrae&lt;/strong&gt;, así que estoy tratando de resolverlo
@@ -13,7 +13,8 @@ de nada. Tomalo como una introducción al tema.&lt;/p&gt;
 final o podes contactarme en &lt;a href="https://twitter.com/santiwilly"&gt;twitter&lt;/a&gt;.&lt;/p&gt;
 &lt;h3&gt;Introducción&lt;/h3&gt;
 &lt;p&gt;"Financial Independence, Retire Early" es un movimiento cuyo objetivo es acumular
-bienes, hasta poder vivir de los ingresos pasivos (&lt;em&gt;passive income&lt;/em&gt;) que estos generan.
+bienes, hasta poder vivir de los ingresos pasivos (&lt;em&gt;passive income&lt;/em&gt;) que estos generan
+e ir vendiendo los bines despacio.
 La idea es maximizar los ahorros, reducir los gastos y encontrar distintas formas de
 aumentar los ingresos.&lt;/p&gt;
 &lt;p&gt;Se teoriza que cuanto más ahorres de tu salario, más rápido te vas a poder retirar.&lt;/p&gt;
@@ -56,7 +57,7 @@ plazo no importa mucho la diferencia.&lt;/p&gt;
 &lt;p&gt;Los &lt;em&gt;index funds&lt;/em&gt; son un conjunto de acciones de muchas empresas.&lt;/p&gt;
 &lt;p&gt;Por los '70s, un tal &lt;a href="https://en.wikipedia.org/wiki/John_C._Bogle"&gt;John C. Bogle&lt;/a&gt; dijo que había que armar un index que
 imitara la performance del mercado en general a largo plazo.
-Si el mercado en un período genera 10% de interés, eso es lo que queremos.
+Si el mercado en un período largo de tiempo genera 10% de interés, eso es a lo que apuntamos.
 Dijo que el &lt;strong&gt;mercado siempre está creciendo&lt;/strong&gt;.
 Fundó entonces &lt;a href="https://investor.vanguard.com/corporate-portal/"&gt;The Vanguard Group&lt;/a&gt;, en la que
 los dueños son los mismos clientes, es decir, si tenés acciones del index sos en parte dueño.&lt;/p&gt;
@@ -74,8 +75,8 @@ un impacto (positivo o negativo) en el mundo.&lt;/p&gt;
 &lt;p&gt;Estando en los Países Bajos es muy fácil, puede ser a través de la app del banco,
 o usando &lt;a href="https://www.trading212.com/invite/GINwpabB"&gt;Trading 212&lt;/a&gt; (T212). DeGiro no la recomiendo, porque me pedía un número
 fiscal que no tengo y no pude activar mi cuenta.&lt;/p&gt;
-&lt;p&gt;En T212 te van a pedir una &lt;em&gt;proof of address&lt;/em&gt;, que puede ser la boleta del agua,
-pero en teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
+&lt;p&gt;En T212 te van a pedir una &lt;em&gt;proof of address&lt;/em&gt;, que puede ser la boleta del agua.&lt;/p&gt;
+&lt;p&gt;En teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
 está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en esas apps.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Si te vas a abrir una cuenta en T212, usa &lt;a href="https://www.trading212.com/invite/GINwpabB"&gt;mi link de referencia&lt;/a&gt; que
@@ -116,9 +117,7 @@ para configurar o crear una cuenta.&lt;/p&gt;
 &lt;p&gt;Habrás notado que para los bancos es el mismo fund the &lt;a href="https://www.northerntrust.com/netherlands/home"&gt;Northern Trust&lt;/a&gt; (NT), esto
 es así, porque están registrados en los Países Bajos, y no se qué mambo hay que
 terminamos pagando menos impuestos. (Actualizado &lt;a href="https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/#2021-03-22"&gt;2021-03-22&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;Además son &lt;strong&gt;ESG&lt;/strong&gt;, que significa "Environmental, social and corporate governance" y eso es genial.
-&lt;del&gt;NT tiene un fund nuevo, basado en low carbon emissions, pero todavía no aparece en esa lista&lt;/del&gt;,
-este no lo recomiendo más porque tiene un score de sustentabilidad muy bajo.&lt;/p&gt;
+&lt;p&gt;Además son &lt;strong&gt;ESG&lt;/strong&gt;, que significa "Environmental, social and corporate governance" y eso es genial.&lt;/p&gt;
 &lt;p&gt;T212 no tiene disponibles los fondos de NT, pero los de Vanguard son los más recomendados
 en la mayor parte del mundo y son buenos. No sé si tienen &lt;strong&gt;ESG&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;El porcentaje que aparece es cuánto hay que invertir en cada uno.

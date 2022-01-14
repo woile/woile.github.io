@@ -28,7 +28,8 @@ final o podes contactarme en [twitter][santiwilly].
 ## Introducción
 
 "Financial Independence, Retire Early" es un movimiento cuyo objetivo es acumular
-bienes, hasta poder vivir de los ingresos pasivos (_passive income_) que estos generan.
+bienes, hasta poder vivir de los ingresos pasivos (_passive income_) que estos generan
+e ir vendiendo los bines despacio.
 La idea es maximizar los ahorros, reducir los gastos y encontrar distintas formas de
 aumentar los ingresos.
 
@@ -93,7 +94,7 @@ Los _index funds_ son un conjunto de acciones de muchas empresas.
 
 Por los '70s, un tal [John C. Bogle][boggle] dijo que había que armar un index que
 imitara la performance del mercado en general a largo plazo.
-Si el mercado en un período genera 10% de interés, eso es lo que queremos.
+Si el mercado en un período largo de tiempo genera 10% de interés, eso es a lo que apuntamos.
 Dijo que el **mercado siempre está creciendo**.
 Fundó entonces [The Vanguard Group][vanguard], en la que
 los dueños son los mismos clientes, es decir, si tenés acciones del index sos en parte dueño.
@@ -118,8 +119,9 @@ Estando en los Países Bajos es muy fácil, puede ser a través de la app del ba
 o usando [Trading 212][t212] (T212). DeGiro no la recomiendo, porque me pedía un número
 fiscal que no tengo y no pude activar mi cuenta.
 
-En T212 te van a pedir una _proof of address_, que puede ser la boleta del agua,
-pero en teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
+En T212 te van a pedir una _proof of address_, que puede ser la boleta del agua.
+
+En teoría, ellos te abren una cuenta que es tuya, y no la pueden tocar, esto
 está protegido por leyes de la Unión Europea. A mi igual me cuesta confiar en esas apps.
 
 > Si te vas a abrir una cuenta en T212, usa [mi link de referencia][t212] que
@@ -146,8 +148,6 @@ es así, porque están registrados en los Países Bajos, y no se qué mambo hay 
 terminamos pagando menos impuestos. (Actualizado [2021-03-22](#2021-03-22)).
 
 Además son **ESG**, que significa "Environmental, social and corporate governance" y eso es genial.
-~~NT tiene un fund nuevo, basado en low carbon emissions, pero todavía no aparece en esa lista~~,
-este no lo recomiendo más porque tiene un score de sustentabilidad muy bajo.
 
 T212 no tiene disponibles los fondos de NT, pero los de Vanguard son los más recomendados
 en la mayor parte del mundo y son buenos. No sé si tienen **ESG**.
