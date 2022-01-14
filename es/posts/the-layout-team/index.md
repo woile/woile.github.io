@@ -65,7 +65,7 @@ into the linters. Example:
     - Do not use negative margins because we found that no one knows who to...
 - Write tests for the layout
 
-One easy way to do this, is by having a monorepo. The layout for the different pages
+One easy way to do this, is by having a monorepo (recommended). The layout for the different pages
 is defined by "The Layout Team", and the rest of the teams write components,
 which can be later placed in the places designated by the layout team.
 
@@ -173,3 +173,12 @@ I would very much like your feedback.
 
 Thanks for reading
 
+## Update 2022
+
+Seems like there are already some good tools designed for monorepos architecture,
+where you can use micro-frontends safely.
+
+See:
+
+- [turborepo](https://turborepo.org/)
+- [nx.dev](https://nx.dev/)
