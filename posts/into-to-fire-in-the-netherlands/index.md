@@ -66,7 +66,7 @@ better than real estate, and others [[0]][simple_path].
 We control the risk investing in a controlled way, and aiming long term which is what is explained in this post.
 Canadian Ben Felix explains, for example, the cost associated with buying a home in [this video][buying_vs_renting]. And in the book [Simple path to wealth][simple_path] expands a lot on the subject of index funds, highly **recommended**.
 
-![Stock market](/images/fire-for-argentinos-in-the-netherlands/stock.jpg)
+![Stock market](/images/fire-para-argentinos-en-los-paises-bajos/stock.jpg)
 
 But we are not going to invest in the way that one thinks of stocks, having to look at the cell phone screen every day, **not that please!** We'll see later.
 
@@ -130,7 +130,7 @@ Next, I leave a list that you can use as reference, depending on your
 platform:
 
 | Platform | Index Fund |
-| -------- | ---------- |-------------------------------------------------- -------------- |
+| -------- | ---------- |
 | T212 | 100% VWRL FTSE All-World Index (IE00B3RBWM25) |
 | ING Zelf op de beurs | 88% NT World MSCI World Custom **ESG** Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |
 | ABN Amro Zelf Beleggen Basis | 88% NT World MSCI World Custom **ESG** Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom **ESG** Index (NL0011515424) |

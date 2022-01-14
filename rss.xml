@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 14 Jan 2022 11:24:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Layout Team</title><link>https://woile.dev/posts/the-layout-team/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For the last couple of months I've had this idea spinning in my head, which I'm
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 14 Jan 2022 12:14:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Layout Team</title><link>https://woile.dev/posts/the-layout-team/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For the last couple of months I've had this idea spinning in my head, which I'm
 calling:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The Layout Team&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Is a work in progress and I'll try to update it when new things come to my mind.
@@ -272,7 +272,7 @@ to &lt;strong&gt;be able to live for 6 months&lt;/strong&gt;, before starting.&l
 better than real estate, and others &lt;a href="https://www.goodreads.com/book/show/30646587-the-simple-path-to-wealth"&gt;[0]&lt;/a&gt;.
 We control the risk investing in a controlled way, and aiming long term which is what is explained in this post.
 Canadian Ben Felix explains, for example, the cost associated with buying a home in &lt;a href="https://youtu.be/Uwl3-jBNEd4"&gt;this video&lt;/a&gt;. And in the book &lt;a href="https://www.goodreads.com/book/show/30646587-the-simple-path-to-wealth"&gt;Simple path to wealth&lt;/a&gt; expands a lot on the subject of index funds, highly &lt;strong&gt;recommended&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Stock market" src="https://woile.dev/images/fire-for-argentinos-in-the-netherlands/stock.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Stock market" src="https://woile.dev/images/fire-para-argentinos-en-los-paises-bajos/stock.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;But we are not going to invest in the way that one thinks of stocks, having to look at the cell phone screen every day, &lt;strong&gt;not that please!&lt;/strong&gt; We'll see later.&lt;/p&gt;
 &lt;h4&gt;How much do I need to retire&lt;/h4&gt;
 &lt;p&gt;The calculation is &lt;strong&gt;25 times your annual expenses&lt;/strong&gt; &lt;a href="https://en.wikipedia.org/wiki/Trinity_study"&gt;[1]&lt;/a&gt;&lt;/p&gt;
@@ -316,12 +316,32 @@ give us a share of up to €100 each.&lt;/p&gt;
 and their costs vary. But the cost issue is negligible, so it doesn't matter much.&lt;/p&gt;
 &lt;p&gt;Next, I leave a list that you can use as reference, depending on your
 platform:&lt;/p&gt;
-&lt;p&gt;| Platform | Index Fund |
-| -------- | ---------- |-------------------------------------------------- -------------- |
-| T212 | 100% VWRL FTSE All-World Index (IE00B3RBWM25) |
-| ING Zelf op de beurs | 88% NT World MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424) |
-| ABN Amro Zelf Beleggen Basis | 88% NT World MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424) |
-| Rabobank Zelf Beleggen | 88% NT World MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424) |&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Platform&lt;/th&gt;
+&lt;th&gt;Index Fund&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;T212&lt;/td&gt;
+&lt;td&gt;100% VWRL FTSE All-World Index (IE00B3RBWM25)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ING Zelf op de beurs&lt;/td&gt;
+&lt;td&gt;88% NT World MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ABN Amro Zelf Beleggen Basis&lt;/td&gt;
+&lt;td&gt;88% NT World MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Rabobank Zelf Beleggen&lt;/td&gt;
+&lt;td&gt;88% NT World MSCI World Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011225305) + 12% NT EM MSCI Emerging Markets Custom &lt;strong&gt;ESG&lt;/strong&gt; Index (NL0011515424)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;The platform you choose, you search for it in Google, and it will take you where to click
 to set up or create an account.&lt;/p&gt;
 &lt;p&gt;You may have noticed that for banks it is the same fund the &lt;a href="https://www.northerntrust.com/netherlands/home"&gt;Northern Trust&lt;/a&gt; (NT), this
