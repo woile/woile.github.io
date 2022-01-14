@@ -232,6 +232,10 @@ you can keep driving them there.
 
 > The Northern Trust indexfunds are domiciled in the Netherlands and thus avoid dividend leakage which increases their returns about 0.25% per year as compared with a similar indexfund or ETF domiciled in Ireland or Luxembourg (as most in Europe are). Dividend leakage means you'd pay capital gains taxes twice on the same gains. A 0.25% difference isn't the end of the world if you take into account you do pay service fees at ABN AMRO and Rabobank while for a similar ETF at DeGiro you wouldn't pay a service fee.
 
+### 2022-01-14
+
+- So far my bank reports a growth of 20% since I started mid 2020 and I've kept the same strategy so far.
+
 ## Recursos
 
 - [Analysis of the Index Fund and costs 2020 (Dutch)][analysis_dutch]
