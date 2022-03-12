@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html prefix="
         og: http://ogp.me/ns# article: http://ogp.me/ns/article#
-    " vocab="http://ogp.me/ns" lang="en">
+    " vocab="http://ogp.me/ns" lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it">
 <meta name="viewport" content="width=device-width">
 <title>Digesting Make and Makefiles | Willy's blog</title>
-<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../../assets/css/code.css" rel="stylesheet" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
-<link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
-<link rel="canonical" href="https://woile.dev/posts/makefile-dependencies-simplified/">
-<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
+<link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
+<link rel="canonical" href="https://woile.dev/es/posts/digesting-make-makefile/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
     if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script><meta name="author" content="Woile">
 <link rel="prev" href="../the-layout-team/" title="The Layout Team" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Digesting Make and Makefiles">
-<meta property="og:url" content="https://woile.dev/posts/makefile-dependencies-simplified/">
+<meta property="og:url" content="https://woile.dev/es/posts/digesting-make-makefile/">
 <meta property="og:description" content="Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2022-02-17T12:21:47Z">
@@ -32,7 +32,7 @@
 <meta property="article:tag" content="make">
 <meta property="article:tag" content="tutorial">
 <meta property="article:tag" content="unix">
-<link rel="alternate" hreflang="es" href="../../es/posts/makefile-dependencies-simplified/">
+<link rel="alternate" hreflang="en" href="../../../posts/digesting-make-makefile/">
 </head>
 <body>
     <input id="dark-mode" type="checkbox"><div class="theme">
@@ -40,12 +40,12 @@
     <header class="cover"><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
         <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
     <nav class="menu"><ul>
-<li><a class="hover:menu__link" href="../../">🏠 Home</a></li>
-                <li><a class="hover:menu__link" href="../../blog/">📰 Blog</a></li>
-                <li><a class="hover:menu__link" href="../../mentoring/">📗 Mentoring</a></li>
-                <li><a class="hover:menu__link" href="../../archive.html">🗄️ Archives</a></li>
+<li><a class="hover:menu__link" href="../../">🏠 Inicio</a></li>
+                <li><a class="hover:menu__link" href="../../../blog/">📰 Blog</a></li>
+                <li><a class="hover:menu__link" href="../../mentoring/">📗 Mentoreo</a></li>
+                <li><a class="hover:menu__link" href="../../archive.html">🗄️ Archivo</a></li>
                 <li><a class="hover:menu__link" href="../../categories/index.html">🏷️ Tags</a></li>
-                <li><a class="hover:menu__link" href="../../rss.xml">🛰️ RSS feed</a></li>
+                <li><a class="hover:menu__link" href="../../../rss.xml">🛰️ RSS feed</a></li>
 
         
         
@@ -54,7 +54,7 @@
 <ul>
 <li>
                         <span id="toptranslations">
-                        <a href="../../es/" class="hover:menu__link" rel="alternate" hreflang="es">Español</a>
+                        <a href="../../../" class="hover:menu__link" rel="alternate" hreflang="en">English</a>
 
         </span>
 
@@ -83,7 +83,7 @@
                     <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
                     <time class="published dt-published" datetime="2022-02-17T12:21:47Z" itemprop="datePublished" title="2022-02-17 12:21">2022-02-17 12:21</time></a>
                 </span>
-                        <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Source</a></span>
+                        <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Código fuente</a></span>
 
             </span>
             <br><span style="display: flex;column-gap: 1rem; flex-wrap: wrap;">
@@ -191,7 +191,7 @@ but we are getting the same message.</p>
 </pre>
 <p>This time, if <code>index.html</code> is modified, <code>make dist/index.html</code> will run again.
 Thus, when dependecies are updated, <strong>target files</strong> are recreated.</p>
-<p><img alt="Makefile targets and dependencies" src="../../images/makefile/make-targets-deps.png"></p>
+<p><img alt="Makefile targets and dependencies" src="../../../images/makefile/make-targets-deps.png"></p>
 <h3>Patterns</h3>
 <p>Now let's say we have many html files</p>
 <pre class="code literal-block">touch about.html privacy.html docs.html
@@ -318,7 +318,7 @@ you can also use:</p>
         </ul>
 <ul class="pager hidden-print pagination">
 <li class="previous">
-                <a class="hover:pagination__link" href="../the-layout-team/" rel="prev" title="The Layout Team">Previous post</a>
+                <a class="hover:pagination__link" href="../the-layout-team/" rel="prev" title="The Layout Team">Publicación anterior</a>
             </li>
         </ul></nav></aside><section class="comments hidden-print"><div class="commentbox" id="commentbox"></div>
 
@@ -331,7 +331,7 @@ you can also use:</p>
         </section></article></main>
 </div>
     </div>
-                <script src="../../assets/js/index.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
+                <script src="../../../assets/js/index.js"></script><script src="../../../assets/js/baguetteBox.min.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
         captions: function(element) {
