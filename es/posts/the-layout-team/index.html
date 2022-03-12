@@ -20,6 +20,7 @@
     if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script><meta name="author" content="Woile">
 <link rel="prev" href="../domain-driven-design-at-europython-2021/" title="Domain driven design at Europython 2021" type="text/html">
+<link rel="next" href="../makefile-dependencies-simplified/" title="Digesting Make and Makefiles" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="The Layout Team">
 <meta property="og:url" content="https://woile.dev/es/posts/the-layout-team/">
@@ -71,23 +72,27 @@
     </header><div class="layout">
             <main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">The Layout Team</a></h2>
 
-        <div class="metadata">
-            <span class="byline author vcard p-author h-card">
-            <span class="byline-name fn p-name" itemprop="author">
-                    Woile
+        <div class="metadata" style="margin-bottom: 3rem;">
+            <span class="byline author vcard p-author h-card" style="display: flex;column-gap: 1rem; flex-wrap: wrap;">
+                <span class="byline-name fn p-name" itemprop="author">
+                        Woile
+                </span>
+                <span class="dateline">
+                    <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+                    <time class="published dt-published" datetime="2021-11-08T07:05:42Z" itemprop="datePublished" title="2021-11-08 07:05">2021-11-08 07:05</time></a>
+                </span>
+                        <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Código fuente</a></span>
+
             </span>
+            <br><span style="display: flex;column-gap: 1rem; flex-wrap: wrap;">
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/architecture/" rel="tag">#architecture</a>
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/html/" rel="tag">#html</a>
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/javascript/" rel="tag">#javascript</a>
             </span>
-                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/architecture/" rel="tag">#architecture</a>
-                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/html/" rel="tag">#html</a>
-                | <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/javascript/" rel="tag">#javascript</a>
-            <span class="dateline">
-            <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
-            <time class="published dt-published" datetime="2021-11-08T07:05:42Z" itemprop="datePublished" title="2021-11-08 07:05">2021-11-08 07:05</time></a>
-            </span>
+
                 <span class="commentline">        
 
 
-                    | <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Código fuente</a></span>
 
         </span>
 </div>
@@ -252,6 +257,9 @@ where you can use micro-frontends safely.</p>
 <ul class="pager hidden-print pagination">
 <li class="previous">
                 <a class="hover:pagination__link" href="../domain-driven-design-at-europython-2021/" rel="prev" title="Domain driven design at Europython 2021">Publicación anterior</a>
+            </li>
+            <li class="next">
+                <a class="hover:pagination__link" href="../makefile-dependencies-simplified/" rel="next" title="Digesting Make and Makefiles">Siguiente publicación</a>
             </li>
         </ul></nav></aside><section class="comments hidden-print"><div class="commentbox" id="commentbox"></div>
 
