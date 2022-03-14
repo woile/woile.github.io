@@ -102,11 +102,12 @@
         </span>
 </div>
         
-    </header><section class="e-content entry-content" itemprop="articleBody text"><p>Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.</p>
+    </header><section class="e-content entry-content" itemprop="articleBody text"><p>Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.
+I have recently done a big refactor for a project, where we make heavy use of Make, and decided to write this small piece about Make.</p>
 <p>Just create a <code>Makefile</code> at the root of your project, start adding commands, and done... right? Not really.</p>
 <p>Let's explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
 closing with some magic you can do with Makefiles.</p>
-<p>Let's set up a practice field by running in the terminal:</p>
+<p>Set up a practice field by running in the terminal:</p>
 <pre class="code literal-block">mkdir /tmp/practice
 <span class="nb">cd</span> /tmp/practice
 touch index.html
@@ -278,14 +279,32 @@ make: Nothing to be done for `build'.
 <p>Make is a powerful tool, and provides much more functionality, so far with the web stack
 I haven't had the need for more complexity.</p>
 <p>I usually wrap docker commands, and make use of different variables, but if the need arises,
-you can also use:</p>
+make has extra functionality, life:</p>
 <ul>
 <li>functions</li>
 <li>if/conditions</li>
 <li>change the shell in which the commands are executed</li>
 <li><code>.delete_on_error</code></li>
 </ul>
-<p>And more</p>
+<h3>Notes</h3>
+<p>Make is usually a good way to keep track of a project's commands, as it's available in Unix systems,
+and you can be up and running fast.
+But by no means is perfect, it can sometimes be hard to read, or use.
+It's not available on Windows. And because it was designed for the C,C++ era, it plays well with files,
+but it doesn't mean it fits perfectly the web development paradigm, where you don't "transform" files much
+and where <code>docker</code> is used a lot.</p>
+<p>So depending on your situation, there are some popular alternatives:</p>
+<ul>
+<li>
+<a href="https://github.com/casey/just">just</a>: modern approach to make written in rust</li>
+<li>
+<a href="https://earthly.dev/">earthly.dev</a>: repeatable builds based on docker</li>
+<li>
+<a href="https://bazel.build/">bazel</a>: build tool from Google</li>
+<li>
+<a href="https://github.com/github/scripts-to-rule-them-all">scripts-to-rule-them-all</a>: just use scripts, like <a href="https://github.com/encode/starlette/tree/master/scripts">starlette</a>
+</li>
+</ul>
 <h3>Resources</h3>
 <ul>
 <li><a href="https://www.gnu.org/software/make/manual/html_node/">GNU Make Manual</a></li>

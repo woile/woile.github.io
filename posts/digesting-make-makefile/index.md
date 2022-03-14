@@ -10,13 +10,14 @@
 -->
 
 Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.
+I have recently done a big refactor for a project, where we make heavy use of Make, and decided to write this small piece about Make.
 
 Just create a `Makefile` at the root of your project, start adding commands, and done... right? Not really.
 
 Let's explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
 closing with some magic you can do with Makefiles.
 
-Let's set up a practice field by running in the terminal:
+Set up a practice field by running in the terminal:
 
 ```sh
 mkdir /tmp/practice
@@ -267,15 +268,28 @@ Make is a powerful tool, and provides much more functionality, so far with the w
 I haven't had the need for more complexity.
 
 I usually wrap docker commands, and make use of different variables, but if the need arises,
-you can also use:
+make has extra functionality, life:
 
 - functions
 - if/conditions
 - change the shell in which the commands are executed
 - `.delete_on_error`
 
-And more
+## Notes
 
+Make is usually a good way to keep track of a project's commands, as it's available in Unix systems,
+and you can be up and running fast.
+But by no means is perfect, it can sometimes be hard to read, or use.
+It's not available on Windows. And because it was designed for the C,C++ era, it plays well with files,
+but it doesn't mean it fits perfectly the web development paradigm, where you don't "transform" files much
+and where `docker` is used a lot.
+
+So depending on your situation, there are some popular alternatives:
+
+- [just](https://github.com/casey/just): modern approach to make written in rust
+- [earthly.dev](https://earthly.dev/): repeatable builds based on docker
+- [bazel](https://bazel.build/): build tool from Google
+- [scripts-to-rule-them-all](https://github.com/github/scripts-to-rule-them-all): just use scripts, like [starlette](https://github.com/encode/starlette/tree/master/scripts)
 
 ## Resources
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about tutorial)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/tutorial.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Sat, 12 Mar 2022 14:42:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Digesting Make and Makefiles</title><link>https://woile.dev/posts/digesting-make-makefile/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about tutorial)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/tutorial.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 14 Mar 2022 09:29:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Digesting Make and Makefiles</title><link>https://woile.dev/posts/digesting-make-makefile/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.
+I have recently done a big refactor for a project, where we make heavy use of Make, and decided to write this small piece about Make.&lt;/p&gt;
 &lt;p&gt;Just create a &lt;code&gt;Makefile&lt;/code&gt; at the root of your project, start adding commands, and done... right? Not really.&lt;/p&gt;
 &lt;p&gt;Let's explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
 closing with some magic you can do with Makefiles.&lt;/p&gt;
-&lt;p&gt;Let's set up a practice field by running in the terminal:&lt;/p&gt;
+&lt;p&gt;Set up a practice field by running in the terminal:&lt;/p&gt;
 &lt;pre class="code literal-block"&gt;mkdir /tmp/practice
 &lt;span class="nb"&gt;cd&lt;/span&gt; /tmp/practice
 touch index.html
@@ -170,14 +171,27 @@ make: Nothing to be done for `build'.
 &lt;p&gt;Make is a powerful tool, and provides much more functionality, so far with the web stack
 I haven't had the need for more complexity.&lt;/p&gt;
 &lt;p&gt;I usually wrap docker commands, and make use of different variables, but if the need arises,
-you can also use:&lt;/p&gt;
+make has extra functionality, life:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;functions&lt;/li&gt;
 &lt;li&gt;if/conditions&lt;/li&gt;
 &lt;li&gt;change the shell in which the commands are executed&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;.delete_on_error&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;And more&lt;/p&gt;
+&lt;h3&gt;Notes&lt;/h3&gt;
+&lt;p&gt;Make is usually a good way to keep track of a project's commands, as it's available in Unix systems,
+and you can be up and running fast.
+But by no means is perfect, it can sometimes be hard to read, or use.
+It's not available on Windows. And because it was designed for the C,C++ era, it plays well with files,
+but it doesn't mean it fits perfectly the web development paradigm, where you don't "transform" files much
+and where &lt;code&gt;docker&lt;/code&gt; is used a lot.&lt;/p&gt;
+&lt;p&gt;So depending on your situation, there are some popular alternatives:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/casey/just"&gt;just&lt;/a&gt;: modern approach to make written in rust&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://earthly.dev/"&gt;earthly.dev&lt;/a&gt;: repeatable builds based on docker&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://bazel.build/"&gt;bazel&lt;/a&gt;: build tool from Google&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/github/scripts-to-rule-them-all"&gt;scripts-to-rule-them-all&lt;/a&gt;: just use scripts, like &lt;a href="https://github.com/encode/starlette/tree/master/scripts"&gt;starlette&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3&gt;Resources&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://www.gnu.org/software/make/manual/html_node/"&gt;GNU Make Manual&lt;/a&gt;&lt;/li&gt;
