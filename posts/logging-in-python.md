@@ -45,7 +45,7 @@ You can also replace `name` with `pathname` to get the full path.
 In this case we want to configure the logs once, by using the popular dict logging conf:
 
 ```python
-# ./logs.py
+# ./my_app/logs.py
 LOGGING_CONFIG = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -62,7 +62,7 @@ LOGGING_CONFIG = {
             "stream": "ext://sys.stdout",  # Default is stderr
         },
     },
-    "loggers": {  # SPECIFY EACH FILE IN THE LOGGERS SECTION
+    "loggers": {
         "": {  # root logger
             "handlers": ["default"],
             "level": "WARNING",
@@ -73,7 +73,7 @@ LOGGING_CONFIG = {
             "level": "DEBUG",
             "propagate": False,
         },
-        "my_app": {
+        "my_app": {  # folder
 	        "handlers": ["default"],
 	        "level": "INFO",
 	        "propagate": False
@@ -89,7 +89,7 @@ def init():
 ```
 
 ```python
-# ./my_app.py
+# ./my_app/foo.py
 import logs
 
 logs.init()
@@ -100,7 +100,15 @@ logger.debug("Set LOGLEVEL=DEBUG to see this")
 logger.info("Hello world")
 ```
 
-If you create new files, remember to add them to the `loggers` section!
+And your folder structure should look something like:
+
+```sh
+my-app/
+└── my_app/
+    ├── foo.py
+    └── logs.py
+```
+
 
 ## Structured logging
 
