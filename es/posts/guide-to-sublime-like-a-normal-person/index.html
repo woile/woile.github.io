@@ -105,11 +105,11 @@ latest version of <a href="https://www.sublimetext.com/3">Sublime Text 3</a>.</p
 
 <h3>General settings</h3>
 <p>Add the following settings in <code>Preferences &gt; Settings &gt; User Tab</code></p>
-<pre class="code literal-block">"trim_trailing_white_space_on_save": true,
+<div class="code"><pre class="code literal-block">"trim_trailing_white_space_on_save": true,
 "auto_complete": false,
 "translate_tabs_to_spaces": true,
 "word_wrap": "false",
-</pre>
+</pre></div>
 <p><code>trim_trailing_white_space_on_save</code> deletes the trailing spaces. This is useful to select text
 properly and sometimes is required by many languages.</p>
 <p><code>auto_complete</code> improves sublime's performance. If the project is huge sublime will get slow while
@@ -247,23 +247,23 @@ This means that Sublime Linter will talk with the linter you have installed in y
 <ul>
 <li>If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.</li>
 <li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settigns:
-<pre class="code literal-block">"syntax_map": {
+<div class="code"><pre class="code literal-block">"syntax_map": {
     "python (django)": "python",
     "python django": "python"
 }
-</pre>
+</pre></div>
 </li>
 <li>To change the mark style, open the package control and type <strong>Choose Mark Style</strong>, I like the Squiggly underline.</li>
 <li>You can ignore rules, in the settings of the linter inside the sublime linter settings.</li>
 <li>If you are using <code>mypy</code> and you want to ignore import hints, add to <code>sublimelinter &gt; user settings &gt; linters</code> the following:
-<pre class="code literal-block">"mypy": {
+<div class="code"><pre class="code literal-block">"mypy": {
     "@disable": false,
     "args": [
         "--ignore-missing-imports"
     ],
     "excludes": []
 }
-</pre>
+</pre></div>
 </li>
 </ul>
 <h3>Another useful Packages</h3>

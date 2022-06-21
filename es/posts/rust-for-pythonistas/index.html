@@ -167,10 +167,10 @@ let word: String = String::from("avo'>
 This basically means, do not spread the content of a variable into multiple variables.
 This is not a problem with native data structures, but it's easy to forget about it.</p>
 <p>In rust something like this will fail:</p>
-<pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">mama</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">"pipo"</span><span class="p">);</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">mama</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">"pipo"</span><span class="p">);</span><span class="w"></span>
 <span class="kd">let</span><span class="w"> </span><span class="n">moma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mama</span><span class="p">;</span><span class="w"></span>
 <span class="fm">println!</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span><span class="w"> </span><span class="n">mama</span><span class="p">,</span><span class="w"> </span><span class="n">moma</span><span class="p">);</span><span class="w"></span>
-</pre>
+</pre></div>
 <p>Why? Security and robustness.</p>
 <h3>Strings</h3>
 <p><code>str</code> is not what we would normally refer to as a <code>str</code> in python, it is a string slice,
@@ -178,11 +178,11 @@ and something like <code>"hello human"</code> is a string literal.
 In rust, string slices are immutable,
 It does not map well to python's <code>str</code>.
 Instead the type <code>String</code> is the one that has useful functions.</p>
-<pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"jon"</span><span class="w"> </span><span class="c1">// literal string</span>
+<div class="code"><pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"jon"</span><span class="w"> </span><span class="c1">// literal string</span>
 <span class="kd">let</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span><span class="w"> </span><span class="c1">// String type</span>
 <span class="c1">// we could also do:</span>
 <span class="kd">let</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"></span>
-</pre>
+</pre></div>
 <p>Now that our string has been cast to the type <code>String</code> we can start doing some operations on it.</p>
 <h4>Immutability</h4>
 <p>What does this mean?</p>

@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre documentation)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/documentation.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 14 Mar 2022 09:29:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Digesting Make and Makefiles</title><link>https://woile.dev/es/posts/digesting-make-makefile/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre documentation)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/documentation.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 21 Jun 2022 05:49:21 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Digesting Make and Makefiles</title><link>https://woile.dev/es/posts/digesting-make-makefile/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.
 I have recently done a big refactor for a project, where we make heavy use of Make, and decided to write this small piece about Make.&lt;/p&gt;
 &lt;p&gt;Just create a &lt;code&gt;Makefile&lt;/code&gt; at the root of your project, start adding commands, and done... right? Not really.&lt;/p&gt;
 &lt;p&gt;Let's explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
 closing with some magic you can do with Makefiles.&lt;/p&gt;
 &lt;p&gt;Set up a practice field by running in the terminal:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;mkdir /tmp/practice
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;mkdir /tmp/practice
 &lt;span class="nb"&gt;cd&lt;/span&gt; /tmp/practice
 touch index.html
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And write a minimal &lt;code&gt;Makefile&lt;/code&gt; with your favourite editor (E.g: &lt;code&gt;vim Makefile&lt;/code&gt;)&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     mkdir dist
     cp index.html dist/index.html
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then execute in your terminal:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;make build
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;make build
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This will create a folder &lt;code&gt;dist&lt;/code&gt;, and copy &lt;code&gt;index.html&lt;/code&gt; into the folder &lt;code&gt;dist&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;This is good. Particularly for me, it documents the commands used by the project, and helps future me.&lt;/p&gt;
 &lt;p&gt;Let's refactor a bit, to show some extra functionality:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     mkdir dist
 
 &lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;
     cp index.html dist/index.html
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Notice the &lt;code&gt;build: dist&lt;/code&gt;, it means: call &lt;code&gt;dist&lt;/code&gt; command &lt;em&gt;before&lt;/em&gt; running &lt;code&gt;build&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;make build
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;make build
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The functionality remains the same.&lt;/p&gt;
 &lt;h4&gt;Recap&lt;/h4&gt;
 &lt;blockquote&gt;
@@ -44,18 +44,18 @@ In the Makefile world, commands are not commands... but files.&lt;/p&gt;
 &lt;li&gt;doing &lt;code&gt;build: dist&lt;/code&gt; means that &lt;code&gt;build&lt;/code&gt; depends on &lt;code&gt;dist&lt;/code&gt; existing first.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;If we had a file called &lt;code&gt;build&lt;/code&gt; , doing &lt;code&gt;make build&lt;/code&gt;, wouldn't execute anything.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;touch build
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;touch build
 make build
 $ make: `build' is up to date.
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we want to actually treat &lt;code&gt;build&lt;/code&gt; as a command, we have to add &lt;code&gt;.PHONY&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     mkdir dist
 
 &lt;span class="nf"&gt;.PHONY&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;
 &lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;
     cp index.html dist/index.html
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This way Make no longer sees &lt;code&gt;build&lt;/code&gt; as a file, but instead as a recipe, and it will be
 executed everytime.&lt;/p&gt;
 &lt;h3&gt;Back to targets&lt;/h3&gt;
@@ -64,49 +64,49 @@ Don't worry, I actually didn't say anything.&lt;/p&gt;
 &lt;p&gt;If you treat your targets as &lt;strong&gt;files&lt;/strong&gt;, Make can keep track of the files that have
 changed, and update only those.&lt;/p&gt;
 &lt;p&gt;By knowing this our previous example could be refactored into:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     mkdir dist
 
 &lt;span class="nf"&gt;dist/index.html&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;
     cp index.html dist/index.html
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And now we tell Make to create our target file:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;make dist/index.html
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;make dist/index.html
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we run multiple times, we get:&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;make: `dist/index.html' is up to date.
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;make: `dist/index.html' is up to date.
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We would expect that by modifying &lt;code&gt;index.html&lt;/code&gt;, and running &lt;code&gt;make dist/index.html&lt;/code&gt;, it would be rebuilt,
 but we are getting the same message.&lt;/p&gt;
 &lt;h3&gt;Dependencies&lt;/h3&gt;
 &lt;p&gt;We need to tell Make that it depends on another file: &lt;code&gt;index.html&lt;/code&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     mkdir dist
 
 &lt;span class="nf"&gt;dist/index.html&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt;
     cp index.html dist/index.html
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This time, if &lt;code&gt;index.html&lt;/code&gt; is modified, &lt;code&gt;make dist/index.html&lt;/code&gt; will run again.
 Thus, when dependecies are updated, &lt;strong&gt;target files&lt;/strong&gt; are recreated.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Makefile targets and dependencies" src="https://woile.dev/images/makefile/make-targets-deps.png"&gt;&lt;/p&gt;
 &lt;h3&gt;Patterns&lt;/h3&gt;
 &lt;p&gt;Now let's say we have many html files&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;touch about.html privacy.html docs.html
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;touch about.html privacy.html docs.html
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And we want to do the same for all the files, without creating many commands in Make.
 For this case we use a pattern (&lt;code&gt;%&lt;/code&gt;), and some Make variables:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;$@&lt;/code&gt;: the target file&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;$&amp;lt;&lt;/code&gt;: the input file&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;dist&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     mkdir dist
 
 &lt;span class="nf"&gt;dist/%.html&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; %.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;
     cp $&amp;lt; &lt;span class="nv"&gt;$@&lt;/span&gt;
-&lt;/pre&gt;
-&lt;pre class="code literal-block"&gt;make dist/about.html
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;make dist/about.html
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And we would be explicitly telling Make which file to create.&lt;/p&gt;
 &lt;p&gt;But what if we want to copy all the files at the same time?&lt;/p&gt;
 &lt;p&gt;Our current implementation, doesn't know about the available files.
@@ -115,7 +115,7 @@ And we are providing the &lt;code&gt;about&lt;/code&gt; to the &lt;code&gt;make 
 &lt;h3&gt;Variables&lt;/h3&gt;
 &lt;p&gt;We are gonna find the source files (&lt;code&gt;*.html&lt;/code&gt; files which are not in the &lt;code&gt;dist&lt;/code&gt; folder), store in a variable,
 and then use that information to create the target html files.&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;SRC_HTMLS&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;shell find . -name &lt;span class="s1"&gt;'*.html'&lt;/span&gt; -depth &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nv"&gt;SRC_HTMLS&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;shell find . -name &lt;span class="s1"&gt;'*.html'&lt;/span&gt; -depth &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
 
 &lt;span class="nv"&gt;TARGET_HTMLS&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;SRC_HTMLS:./%.html&lt;span class="o"&gt;=&lt;/span&gt;dist/%.html&lt;span class="k"&gt;)&lt;/span&gt;
 
@@ -128,9 +128,9 @@ and then use that information to create the target html files.&lt;/p&gt;
 
 &lt;span class="nf"&gt;dist/%.html&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; %.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;
     cp $&amp;lt; &lt;span class="nv"&gt;$@&lt;/span&gt;
-&lt;/pre&gt;
-&lt;pre class="code literal-block"&gt;make build
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;make build
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;What happens is:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;build&lt;/code&gt; has all the &lt;code&gt;TARGET_HTMLS&lt;/code&gt; files as dependency&lt;/li&gt;
@@ -139,11 +139,11 @@ and then use that information to create the target html files.&lt;/p&gt;
 &lt;li&gt;If the conditions are met, it runs the &lt;code&gt;cp&lt;/code&gt; command for each file, unless they are already present and not updated&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;You can think of&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;TARGET_HTMLS&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nv"&gt;TARGET_HTMLS&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;As&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;index&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;about&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;docs&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;privacy&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt;
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nf"&gt;build&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;index&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;about&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;docs&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="n"&gt;dist&lt;/span&gt;/&lt;span class="n"&gt;privacy&lt;/span&gt;.&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Variables can be reference using &lt;code&gt;$()&lt;/code&gt; or &lt;code&gt;${}&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;We also use &lt;code&gt;$(info Done)&lt;/code&gt; to send information messages to the user.
 Make also provides &lt;code&gt;$(warning text…)&lt;/code&gt; for warnings, and
@@ -151,9 +151,9 @@ Make also provides &lt;code&gt;$(warning text…)&lt;/code&gt; for warnings, and
 See &lt;a href="https://www.gnu.org/software/make/manual/html_node/Make-Control-Functions.html"&gt;Make-Control-Functions&lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;One more time&lt;/h3&gt;
 &lt;p&gt;Let's start over by removing the &lt;code&gt;dist&lt;/code&gt; folder, and see what happens&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;rm -rf dist
-&lt;/pre&gt;
-&lt;pre class="code literal-block"&gt;❯ make build
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;rm -rf dist
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;❯ make build
 mkdir dist
 cp index.html dist/index.html
 cp about.html dist/about.html
@@ -164,7 +164,7 @@ Done
 ❯ make build
 Done
 make: Nothing to be done for `build'.
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;As you can see, files that have not changed, won't be rebuilt by Make.&lt;/p&gt;
 &lt;p&gt;Now, try using &lt;code&gt;touch&lt;/code&gt; on the different &lt;code&gt;html&lt;/code&gt; files and running &lt;code&gt;make build&lt;/code&gt; to see what happens.&lt;/p&gt;
 &lt;h3&gt;More functionality&lt;/h3&gt;

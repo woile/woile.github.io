@@ -104,30 +104,30 @@ You can also control a per directory version (this creates a <code>.python-versi
 Doesn't require python.</p>
 <h3>Installation</h3>
 <p>Use <a href="https://github.com/pyenv/pyenv-installer">pyenv-installer</a></p>
-<pre class="code literal-block">curl https://pyenv.run <span class="p">|</span> bash
+<div class="code"><pre class="code literal-block">curl https://pyenv.run <span class="p">|</span> bash
 <span class="nb">exec</span> <span class="nv">$SHELL</span>  <span class="c1"># Restart shell or open new terminal</span>
-</pre>
+</pre></div>
 <h3>Usage</h3>
 <h4>Install different python versions</h4>
-<pre class="code literal-block">pyenv install <span class="m">3</span>.6.10
+<div class="code"><pre class="code literal-block">pyenv install <span class="m">3</span>.6.10
 pyenv install <span class="m">3</span>.7.6
-</pre>
+</pre></div>
 <h4>Set global python</h4>
-<pre class="code literal-block">pyenv global <span class="m">3</span>.7.6
-</pre>
+<div class="code"><pre class="code literal-block">pyenv global <span class="m">3</span>.7.6
+</pre></div>
 <p>Observe</p>
-<pre class="code literal-block">python --version
+<div class="code"><pre class="code literal-block">python --version
 <span class="nb">type</span> -a python
-</pre>
+</pre></div>
 <h4>Set local python</h4>
-<pre class="code literal-block"><span class="nb">cd</span> ~/my-project
+<div class="code"><pre class="code literal-block"><span class="nb">cd</span> ~/my-project
 pyenv <span class="nb">local</span> <span class="m">3</span>.6.10
-</pre>
+</pre></div>
 <p>Observe</p>
-<pre class="code literal-block">cat .python-version
+<div class="code"><pre class="code literal-block">cat .python-version
 python --version
 <span class="nb">type</span> -a python
-</pre>
+</pre></div>
 <h4>Other languages</h4>
 <p>There's a set of similar tools for other languages, following the
 same convention here, so if you know <code>pyenv</code>, you know <code>nodenv</code> for example.</p>

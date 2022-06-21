@@ -20,6 +20,7 @@
     if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
 </script><meta name="author" content="Woile">
 <link rel="prev" href="../the-layout-team/" title="The Layout Team" type="text/html">
+<link rel="next" href="../logging-in-python/" title="Logging in python" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Digesting Make and Makefiles">
 <meta property="og:url" content="https://woile.dev/posts/digesting-make-makefile/">
@@ -108,30 +109,30 @@ I have recently done a big refactor for a project, where we make heavy use of Ma
 <p>Let's explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
 closing with some magic you can do with Makefiles.</p>
 <p>Set up a practice field by running in the terminal:</p>
-<pre class="code literal-block">mkdir /tmp/practice
+<div class="code"><pre class="code literal-block">mkdir /tmp/practice
 <span class="nb">cd</span> /tmp/practice
 touch index.html
-</pre>
+</pre></div>
 <p>And write a minimal <code>Makefile</code> with your favourite editor (E.g: <code>vim Makefile</code>)</p>
-<pre class="code literal-block"><span class="nf">build</span><span class="o">:</span>
+<div class="code"><pre class="code literal-block"><span class="nf">build</span><span class="o">:</span>
     mkdir dist
     cp index.html dist/index.html
-</pre>
+</pre></div>
 <p>Then execute in your terminal:</p>
-<pre class="code literal-block">make build
-</pre>
+<div class="code"><pre class="code literal-block">make build
+</pre></div>
 <p>This will create a folder <code>dist</code>, and copy <code>index.html</code> into the folder <code>dist</code>.</p>
 <p>This is good. Particularly for me, it documents the commands used by the project, and helps future me.</p>
 <p>Let's refactor a bit, to show some extra functionality:</p>
-<pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
+<div class="code"><pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
     mkdir dist
 
 <span class="nf">build</span><span class="o">:</span> <span class="n">dist</span>
     cp index.html dist/index.html
-</pre>
+</pre></div>
 <p>Notice the <code>build: dist</code>, it means: call <code>dist</code> command <em>before</em> running <code>build</code></p>
-<pre class="code literal-block">make build
-</pre>
+<div class="code"><pre class="code literal-block">make build
+</pre></div>
 <p>The functionality remains the same.</p>
 <h4>Recap</h4>
 <blockquote>
@@ -148,18 +149,18 @@ In the Makefile world, commands are not commands... but files.</p>
 <li>doing <code>build: dist</code> means that <code>build</code> depends on <code>dist</code> existing first.</li>
 </ul>
 <p>If we had a file called <code>build</code> , doing <code>make build</code>, wouldn't execute anything.</p>
-<pre class="code literal-block">touch build
+<div class="code"><pre class="code literal-block">touch build
 make build
 $ make: `build' is up to date.
-</pre>
+</pre></div>
 <p>If we want to actually treat <code>build</code> as a command, we have to add <code>.PHONY</code>.</p>
-<pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
+<div class="code"><pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
     mkdir dist
 
 <span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span>
 <span class="nf">build</span><span class="o">:</span> <span class="n">dist</span>
     cp index.html dist/index.html
-</pre>
+</pre></div>
 <p>This way Make no longer sees <code>build</code> as a file, but instead as a recipe, and it will be
 executed everytime.</p>
 <h3>Back to targets</h3>
@@ -168,35 +169,35 @@ Don't worry, I actually didn't say anything.</p>
 <p>If you treat your targets as <strong>files</strong>, Make can keep track of the files that have
 changed, and update only those.</p>
 <p>By knowing this our previous example could be refactored into:</p>
-<pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
+<div class="code"><pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
     mkdir dist
 
 <span class="nf">dist/index.html</span><span class="o">:</span> <span class="n">dist</span>
     cp index.html dist/index.html
-</pre>
+</pre></div>
 <p>And now we tell Make to create our target file:</p>
-<pre class="code literal-block">make dist/index.html
-</pre>
+<div class="code"><pre class="code literal-block">make dist/index.html
+</pre></div>
 <p>If we run multiple times, we get:</p>
-<pre class="code literal-block">make: `dist/index.html' is up to date.
-</pre>
+<div class="code"><pre class="code literal-block">make: `dist/index.html' is up to date.
+</pre></div>
 <p>We would expect that by modifying <code>index.html</code>, and running <code>make dist/index.html</code>, it would be rebuilt,
 but we are getting the same message.</p>
 <h3>Dependencies</h3>
 <p>We need to tell Make that it depends on another file: <code>index.html</code></p>
-<pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
+<div class="code"><pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
     mkdir dist
 
 <span class="nf">dist/index.html</span><span class="o">:</span> <span class="n">dist</span> <span class="n">index</span>.<span class="n">html</span>
     cp index.html dist/index.html
-</pre>
+</pre></div>
 <p>This time, if <code>index.html</code> is modified, <code>make dist/index.html</code> will run again.
 Thus, when dependecies are updated, <strong>target files</strong> are recreated.</p>
 <p><img alt="Makefile targets and dependencies" src="../../images/makefile/make-targets-deps.png"></p>
 <h3>Patterns</h3>
 <p>Now let's say we have many html files</p>
-<pre class="code literal-block">touch about.html privacy.html docs.html
-</pre>
+<div class="code"><pre class="code literal-block">touch about.html privacy.html docs.html
+</pre></div>
 <p>And we want to do the same for all the files, without creating many commands in Make.
 For this case we use a pattern (<code>%</code>), and some Make variables:</p>
 <ul>
@@ -205,14 +206,14 @@ For this case we use a pattern (<code>%</code>), and some Make variables:</p>
 <li>
 <code>$&lt;</code>: the input file</li>
 </ul>
-<pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
+<div class="code"><pre class="code literal-block"><span class="nf">dist</span><span class="o">:</span>
     mkdir dist
 
 <span class="nf">dist/%.html</span><span class="o">:</span> %.<span class="n">html</span> <span class="n">dist</span>
     cp $&lt; <span class="nv">$@</span>
-</pre>
-<pre class="code literal-block">make dist/about.html
-</pre>
+</pre></div>
+<div class="code"><pre class="code literal-block">make dist/about.html
+</pre></div>
 <p>And we would be explicitly telling Make which file to create.</p>
 <p>But what if we want to copy all the files at the same time?</p>
 <p>Our current implementation, doesn't know about the available files.
@@ -221,7 +222,7 @@ And we are providing the <code>about</code> to the <code>make dist/about.html</c
 <h3>Variables</h3>
 <p>We are gonna find the source files (<code>*.html</code> files which are not in the <code>dist</code> folder), store in a variable,
 and then use that information to create the target html files.</p>
-<pre class="code literal-block"><span class="nv">SRC_HTMLS</span> <span class="o">:=</span> <span class="k">$(</span>shell find . -name <span class="s1">'*.html'</span> -depth <span class="m">1</span><span class="k">)</span>
+<div class="code"><pre class="code literal-block"><span class="nv">SRC_HTMLS</span> <span class="o">:=</span> <span class="k">$(</span>shell find . -name <span class="s1">'*.html'</span> -depth <span class="m">1</span><span class="k">)</span>
 
 <span class="nv">TARGET_HTMLS</span> <span class="o">:=</span> <span class="k">$(</span>SRC_HTMLS:./%.html<span class="o">=</span>dist/%.html<span class="k">)</span>
 
@@ -234,9 +235,9 @@ and then use that information to create the target html files.</p>
 
 <span class="nf">dist/%.html</span><span class="o">:</span> %.<span class="n">html</span> <span class="n">dist</span>
     cp $&lt; <span class="nv">$@</span>
-</pre>
-<pre class="code literal-block">make build
-</pre>
+</pre></div>
+<div class="code"><pre class="code literal-block">make build
+</pre></div>
 <p>What happens is:</p>
 <ul>
 <li>
@@ -247,11 +248,11 @@ and then use that information to create the target html files.</p>
 <li>If the conditions are met, it runs the <code>cp</code> command for each file, unless they are already present and not updated</li>
 </ul>
 <p>You can think of</p>
-<pre class="code literal-block"><span class="nf">build</span><span class="o">:</span> <span class="k">$(</span><span class="nv">TARGET_HTMLS</span><span class="k">)</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="nf">build</span><span class="o">:</span> <span class="k">$(</span><span class="nv">TARGET_HTMLS</span><span class="k">)</span>
+</pre></div>
 <p>As</p>
-<pre class="code literal-block"><span class="nf">build</span><span class="o">:</span> <span class="n">dist</span>/<span class="n">index</span>.<span class="n">html</span> <span class="n">dist</span>/<span class="n">about</span>.<span class="n">html</span> <span class="n">dist</span>/<span class="n">docs</span>.<span class="n">html</span> <span class="n">dist</span>/<span class="n">privacy</span>.<span class="n">html</span>
-</pre>
+<div class="code"><pre class="code literal-block"><span class="nf">build</span><span class="o">:</span> <span class="n">dist</span>/<span class="n">index</span>.<span class="n">html</span> <span class="n">dist</span>/<span class="n">about</span>.<span class="n">html</span> <span class="n">dist</span>/<span class="n">docs</span>.<span class="n">html</span> <span class="n">dist</span>/<span class="n">privacy</span>.<span class="n">html</span>
+</pre></div>
 <p>Variables can be reference using <code>$()</code> or <code>${}</code>.</p>
 <p>We also use <code>$(info Done)</code> to send information messages to the user.
 Make also provides <code>$(warning text…)</code> for warnings, and
@@ -259,9 +260,9 @@ Make also provides <code>$(warning text…)</code> for warnings, and
 See <a href="https://www.gnu.org/software/make/manual/html_node/Make-Control-Functions.html">Make-Control-Functions</a></p>
 <h3>One more time</h3>
 <p>Let's start over by removing the <code>dist</code> folder, and see what happens</p>
-<pre class="code literal-block">rm -rf dist
-</pre>
-<pre class="code literal-block">❯ make build
+<div class="code"><pre class="code literal-block">rm -rf dist
+</pre></div>
+<div class="code"><pre class="code literal-block">❯ make build
 mkdir dist
 cp index.html dist/index.html
 cp about.html dist/about.html
@@ -272,7 +273,7 @@ Done
 ❯ make build
 Done
 make: Nothing to be done for `build'.
-</pre>
+</pre></div>
 <p>As you can see, files that have not changed, won't be rebuilt by Make.</p>
 <p>Now, try using <code>touch</code> on the different <code>html</code> files and running <code>make build</code> to see what happens.</p>
 <h3>More functionality</h3>
@@ -338,6 +339,9 @@ and where <code>docker</code> is used a lot.</p>
 <ul class="pager hidden-print pagination">
 <li class="previous">
                 <a class="hover:pagination__link" href="../the-layout-team/" rel="prev" title="The Layout Team">Previous post</a>
+            </li>
+            <li class="next">
+                <a class="hover:pagination__link" href="../logging-in-python/" rel="next" title="Logging in python">Next post</a>
             </li>
         </ul></nav></aside><section class="comments hidden-print"><div class="commentbox" id="commentbox"></div>
 

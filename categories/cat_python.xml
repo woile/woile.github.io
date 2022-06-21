@@ -1,35 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/cat_python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 14 Mar 2022 09:29:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Pyenv</title><link>https://woile.dev/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;h3&gt;Description&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about python)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/cat_python.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 21 Jun 2022 05:49:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Logging in python</title><link>https://woile.dev/posts/logging-in-python/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For future reference, this is my logging configuration for a new project.&lt;/p&gt;
+&lt;p&gt;It is not intended for libraries which already have some kind of set up in place, like django.&lt;/p&gt;
+&lt;h3&gt;Simple logging configuration&lt;/h3&gt;
+&lt;p&gt;This is a good configuration to start logging right away.
+You can use it when you have a single file, or you can share the &lt;code&gt;logger&lt;/code&gt; if stored in a separated file,
+which is not recommended when you start growing.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="n"&gt;LOGLEVEL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'LOGLEVEL'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'INFO'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;upper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"my_app"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LOGLEVEL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;console_handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;StreamHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Formatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"[&lt;/span&gt;&lt;span class="si"&gt;%(asctime)s&lt;/span&gt;&lt;span class="s2"&gt;] &lt;/span&gt;&lt;span class="si"&gt;%(name)s&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%(lineno)d&lt;/span&gt;&lt;span class="s2"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(levelname)s&lt;/span&gt;&lt;span class="s2"&gt; :: &lt;/span&gt;&lt;span class="si"&gt;%(message)s&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;console_handler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setFormatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;formatter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;console_handler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LOGLEVEL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;console_handler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Send messages&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Set LOGLEVEL=DEBUG to see this"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"An info log"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can also replace &lt;code&gt;name&lt;/code&gt; with &lt;code&gt;pathname&lt;/code&gt; to get the full path.&lt;/p&gt;
+&lt;h3&gt;Project-wide logging configuration&lt;/h3&gt;
+&lt;p&gt;In this case we want to configure the logs once, by using the popular dict logging conf:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="c1"&gt;# ./my_app/logs.py&lt;/span&gt;
+&lt;span class="n"&gt;LOGGING_CONFIG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;"version"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"disable_existing_loggers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"formatters"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;"standard"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s2"&gt;"format"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"[&lt;/span&gt;&lt;span class="si"&gt;%(asctime)s&lt;/span&gt;&lt;span class="s2"&gt;] &lt;/span&gt;&lt;span class="si"&gt;%(name)s&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="si"&gt;%(lineno)d&lt;/span&gt;&lt;span class="s2"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(levelname)s&lt;/span&gt;&lt;span class="s2"&gt; :: &lt;/span&gt;&lt;span class="si"&gt;%(message)s&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s2"&gt;"handlers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;"default"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="s2"&gt;"level"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"INFO"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;"formatter"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"standard"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;"class"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"logging.StreamHandler"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;"stream"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"ext://sys.stdout"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="c1"&gt;# Default is stderr&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s2"&gt;"loggers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;  &lt;span class="c1"&gt;# root logger&lt;/span&gt;
+            &lt;span class="s2"&gt;"handlers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"default"&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+            &lt;span class="s2"&gt;"level"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"WARNING"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;"propagate"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="s2"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;  &lt;span class="c1"&gt;# if __name__ == '__main__'&lt;/span&gt;
+            &lt;span class="s2"&gt;"handlers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"default"&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+            &lt;span class="s2"&gt;"level"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"DEBUG"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;"propagate"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="s2"&gt;"my_app"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;  &lt;span class="c1"&gt;# folder&lt;/span&gt;
+            &lt;span class="s2"&gt;"handlers"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;"default"&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+            &lt;span class="s2"&gt;"level"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"INFO"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s2"&gt;"propagate"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+        &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging.config&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;init&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Run once at startup:&lt;/span&gt;
+    &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dictConfig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LOGGING_CONFIG&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="c1"&gt;# ./my_app/foo.py&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logs&lt;/span&gt;
+
+&lt;span class="n"&gt;logs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Send messages&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Set LOGLEVEL=DEBUG to see this"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Hello world"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And your folder structure should look something like:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;my-app/
+└── my_app/
+    ├── foo.py
+    └── logs.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Structured logging&lt;/h3&gt;
+&lt;p&gt;Structured logs are usually in JSON format, making it easy for machines to parse and index them. See for example &lt;a href="https://www.elastic.co/blog/structured-logging-filebeat"&gt;structured logging with filebeat&lt;/a&gt;.
+A common format is bunyan, based on &lt;a href="https://github.com/trentm/node-bunyan"&gt;bunyan-node&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;pip install bunyan
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;bunyan&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="n"&gt;logger&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"my_app"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;console_handler&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;StreamHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;bunyan&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BunyanFormatter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;console_handler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setFormatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;formatter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;console_handler&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;console_handler&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Send messages&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Set LOGLEVEL=DEBUG to see this"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Hello world"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The output of this script would only show the &lt;code&gt;info&lt;/code&gt; logger, and it would look like this:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nt"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"my_app"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"msg"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Hello world"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"time"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"2022-06-21T07:41:06Z"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"hostname"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&amp;lt;REDACTED&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"level"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"pid"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;40625&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"v"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For local development, pipe the logs to the buyan cli, so they become friendly for developers.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;wget -c https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz -O - &lt;span class="p"&gt;|&lt;/span&gt; tar -xz
+
+python my_app.py &lt;span class="p"&gt;|&lt;/span&gt; ./bunyan
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Docker issues&lt;/h3&gt;
+&lt;p&gt;Sometimes the logs are not sent to the terminal right away, specially if something is blocking. To prevent this, send right away the output to the terminal by setting the env &lt;code&gt;PYTHONUNBUFFERED=1&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;Dockerfile&lt;/h4&gt;
+&lt;p&gt;Include this line&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;ENV&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;PYTHONUNBUFFERED &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Running docker&lt;/h3&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;docker run --env &lt;span class="s2"&gt;"PYTHONUNBUFFERED=1"&lt;/span&gt; python:slim bash
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Docker-compose&lt;/h3&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;'3'&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="nt"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;my_app&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# ...&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;environment&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="p p-Indicator"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;PYTHONUNBUFFERED=1&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><category>logging</category><category>python</category><guid>https://woile.dev/posts/logging-in-python/</guid><pubDate>Wed, 11 May 2022 13:21:55 GMT</pubDate></item><item><title>Pyenv</title><link>https://woile.dev/posts/pyenv/</link><dc:creator>Woile</dc:creator><description>&lt;h3&gt;Description&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt; is a shell script to manage python versions.
 Works in the user space, avoiding the system's python, therefore is less error prone.
 You can also control a per directory version (this creates a &lt;code&gt;.python-version&lt;/code&gt;).
 Doesn't require python.&lt;/p&gt;
 &lt;h3&gt;Installation&lt;/h3&gt;
 &lt;p&gt;Use &lt;a href="https://github.com/pyenv/pyenv-installer"&gt;pyenv-installer&lt;/a&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;curl https://pyenv.run &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;curl https://pyenv.run &lt;span class="p"&gt;|&lt;/span&gt; bash
 &lt;span class="nb"&gt;exec&lt;/span&gt; &lt;span class="nv"&gt;$SHELL&lt;/span&gt;  &lt;span class="c1"&gt;# Restart shell or open new terminal&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Usage&lt;/h3&gt;
 &lt;h4&gt;Install different python versions&lt;/h4&gt;
-&lt;pre class="code literal-block"&gt;pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.6.10
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.6.10
 pyenv install &lt;span class="m"&gt;3&lt;/span&gt;.7.6
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;h4&gt;Set global python&lt;/h4&gt;
-&lt;pre class="code literal-block"&gt;pyenv global &lt;span class="m"&gt;3&lt;/span&gt;.7.6
-&lt;/pre&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;pyenv global &lt;span class="m"&gt;3&lt;/span&gt;.7.6
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Observe&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;python --version
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;python --version
 &lt;span class="nb"&gt;type&lt;/span&gt; -a python
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;h4&gt;Set local python&lt;/h4&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/my-project
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/my-project
 pyenv &lt;span class="nb"&gt;local&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;.6.10
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Observe&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;cat .python-version
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;cat .python-version
 python --version
 &lt;span class="nb"&gt;type&lt;/span&gt; -a python
-&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 &lt;h4&gt;Other languages&lt;/h4&gt;
 &lt;p&gt;There's a set of similar tools for other languages, following the
 same convention here, so if you know &lt;code&gt;pyenv&lt;/code&gt;, you know &lt;code&gt;nodenv&lt;/code&gt; for example.&lt;/p&gt;
