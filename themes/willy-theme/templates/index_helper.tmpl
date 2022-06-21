@@ -8,6 +8,9 @@
             <li>
                 <a class="hover:pagination__link" href="{{ prevlink }}" rel="prev">{{ messages("Newer posts") }}</a>
             </li>
+            {% else %}
+            <li>
+            </li>
             {% endif %}
             {% if nextlink %}
             <li>

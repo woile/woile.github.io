@@ -28,14 +28,17 @@
 {% macro html_pager(post) %}
     {% if post.prev_post or post.next_post %}
         <ul class="pager hidden-print pagination">
-        {% if post.prev_post %}
-            <li class="previous">
-                <a class="hover:pagination__link" href="{{ post.prev_post.permalink() }}" rel="prev" title="{{ post.prev_post.title()|e }}">{{ messages("Previous post") }}</a>
-            </li>
-        {% endif %}
         {% if post.next_post %}
             <li class="next">
                 <a class="hover:pagination__link" href="{{ post.next_post.permalink() }}" rel="next" title="{{ post.next_post.title()|e }}">{{ messages("Next post") }}</a>
+            </li>
+        {% else %}
+            <li class="next">
+            </li>
+        {% endif %}
+        {% if post.prev_post %}
+            <li class="previous">
+                <a class="hover:pagination__link" href="{{ post.prev_post.permalink() }}" rel="prev" title="{{ post.prev_post.title()|e }}">{{ messages("Previous post") }}</a>
             </li>
         {% endif %}
         </ul>
