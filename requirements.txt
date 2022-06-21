@@ -1,3 +1,2 @@
-
-Nikola[extra]==8.2.0
+git+https://github.com/getnikola/nikola#egg=Nikola[full]
 pymdown-extensions

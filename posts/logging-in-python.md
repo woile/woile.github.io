@@ -112,7 +112,7 @@ my-app/
 
 ## Structured logging
 
-Structured logs are usually in JSON format, making it easy for machines to parse and index them.
+Structured logs are usually in JSON format, making it easy for machines to parse and index them. See for example [structured logging with filebeat](https://www.elastic.co/blog/structured-logging-filebeat).
 A common format is bunyan, based on [bunyan-node](https://github.com/trentm/node-bunyan).
 
 ```
@@ -135,6 +135,12 @@ logger.addHandler(console_handler)
 # Send messages
 logger.debug("Set LOGLEVEL=DEBUG to see this")
 logger.info("Hello world")
+```
+
+The output of this script would only show the `info` logger, and it would look like this:
+
+```json
+{"name": "my_app", "msg": "Hello world", "time": "2022-06-21T07:41:06Z", "hostname": "<REDACTED>", "level": 30, "pid": 40625, "v": 0}
 ```
 
 For local development, pipe the logs to the buyan cli, so they become friendly for developers.
