@@ -7,6 +7,8 @@
 {% import 'comments_helper_isso.tmpl' as isso with context %}
 {% import 'comments_helper_commento.tmpl' as commento with context %}
 {% import 'comments_helper_commentbox.tmpl' as commentbox with context %}
+{% import 'comments_helper_cactus.tmpl' as cactus with context %}
+
 
 {% macro comment_form(url, title, identifier) %}
     {% if comment_system == 'disqus' %}
@@ -21,6 +23,8 @@
         {{ isso.comment_form(url, title, identifier) }}
     {% elif comment_system == 'commento' %}
         {{ commento.comment_form(url, title, identifier) }}
+    {% elif comment_system == 'cactus' %}
+        {{ cactus.comment_form(url, title, identifier) }}
     {% elif comment_system == 'commentbox' %}
         {{ commentbox.comment_form(url, title, identifier) }}
     {% endif %}
