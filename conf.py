@@ -1009,12 +1009,7 @@ COMMENT_SYSTEM = "cactus"
 # is in the manual.
 # COMMENT_SYSTEM_ID = "5692121306628096-proj"
 COMMENT_SYSTEM_ID = "woile.dev"
-GLOBAL_CONTEXT = {
-    "cactus_config": {
-        "defaultHomeserverUrl": "https://matrix.cactus.chat:8448",
-        "serverName": "cactus.chat"
-    }
-}
+
 # Create index.html for page folders?
 # WARNING: if a page would conflict with the index file (usually
 #          caused by setting slug to `index`), the PAGE_INDEX
@@ -1396,7 +1391,12 @@ WARN_ABOUT_TAG_METADATA = False
 
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
-GLOBAL_CONTEXT = {}
+GLOBAL_CONTEXT = {
+    "cactus_config": {
+        "defaultHomeserverUrl": "https://matrix.cactus.chat:8448",
+        "serverName": "cactus.chat"
+    }
+}
 
 # Add functions here and they will be called with template
 # GLOBAL_CONTEXT as parameter when the template is about to be
