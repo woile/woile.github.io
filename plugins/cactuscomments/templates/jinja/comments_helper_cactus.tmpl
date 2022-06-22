@@ -12,7 +12,7 @@ initComments({
   {% endfor %}
   {% endif %}
   siteName: "{{ comment_system_id }}",
-  commentSectionId: "{{ title|slugify }}"
+  commentSectionId: "{{ title|slugify|replace("-", ".") }}"
 })
 </script>
 {% endif %}
