@@ -5,7 +5,7 @@
 .. tags: kubernetes, helm
 .. category: devops
 .. link:
-.. description: create and releasing a Helm chart
+.. description: What is a Helm Chart? Where does it fit in K8s? How to release a Chart? How to rollback? All your questions are answered here
 .. type: text
 -->
 
