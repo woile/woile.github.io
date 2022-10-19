@@ -16,15 +16,44 @@
             white-space: pre;
         }
         </style>
+<style>
+        kbd {
+            font-family: Consolas, "Lucida Console", monospace;
+            display: inline-block;
+            border-radius: 3px;
+            padding: 0px 4px;
+            box-shadow: 1px 1px 1px #777;
+            margin: 2px;
+            font-size: small;
+            vertical-align: text-bottom;
+            background: #eee;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            font-variant: small-caps;
+            font-weight: 600;
+
+            /* This two work */
+            /* letter-spacing: 0.5px; */
+            letter-spacing: 1px;
+
+
+            /* Prevent selection */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        </style>
 <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script><link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
 <meta name="theme-color" content="#5670d4">
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/">
-<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script>
-    if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){ fetch("https://counter.dev/track?"+new URLSearchParams({ referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"Woile",utcoffset:"1"}), { referrerPolicy: "no-referrer-when-downgrade"})};sessionStorage.setItem("_swa","1");
-</script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
 <link rel="prev" href="../blog-inauguration/" title="Blog inauguration" type="text/html">
 <link rel="next" href="../eurotrip-2016/" title="Eurotrip 2016" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
@@ -119,26 +148,26 @@ Right now it doesn't support screensharing and some other features a normal pers
 <p>I got tired of installing skype so many times looking all over the internet, so I'll leave here some easy steps to make it work in Debian Stretch with GNOME 3.21 (and may be some earlier versions). It's just that there is not enough information around.
 Debian recommends to install the .deb package, but it usually does not work.</p>
 <p>As you probably know, skype is a 32bit software, so we'll need to enable that in our repository manager. Next we'll install some dependencies and finally we'll get the file in the specified folder.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_4ff276619b6f4092b2f0f2b465004568-1" name="rest_code_4ff276619b6f4092b2f0f2b465004568-1" href="#rest_code_4ff276619b6f4092b2f0f2b465004568-1"></a>sudo dpkg --add-architecture i386
-<a id="rest_code_4ff276619b6f4092b2f0f2b465004568-2" name="rest_code_4ff276619b6f4092b2f0f2b465004568-2" href="#rest_code_4ff276619b6f4092b2f0f2b465004568-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
-<a id="rest_code_4ff276619b6f4092b2f0f2b465004568-3" name="rest_code_4ff276619b6f4092b2f0f2b465004568-3" href="#rest_code_4ff276619b6f4092b2f0f2b465004568-3"></a>mkdir ~/.apps/
-<a id="rest_code_4ff276619b6f4092b2f0f2b465004568-4" name="rest_code_4ff276619b6f4092b2f0f2b465004568-4" href="#rest_code_4ff276619b6f4092b2f0f2b465004568-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
+<div class="code"><pre class="code bash"><a id="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-1" name="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-1" href="#rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-1"></a>sudo dpkg --add-architecture i386
+<a id="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-2" name="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-2" href="#rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-2"></a>sudo apt-get install libxv1:i386 libqtdbus4:i386 libqtwebkit4:i386 libxss1:i386
+<a id="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-3" name="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-3" href="#rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-3"></a>mkdir ~/.apps/
+<a id="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-4" name="rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-4" href="#rest_code_6a7d292f3b4c43c2a44a7273bdd89ef7-4"></a>wget -qO- https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="p">|</span> tar jx -C ~/.apps/
 </pre></div>
 <p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code> file to your gnome environment.</p>
 <p>The location for this file is either <code>~/.local/share/applications</code>, for the current user, or <code>/usr/share/applications</code> for everyone.</p>
 <p>The content for your <code>skype.desktop</code>, should be something like this:</p>
-<div class="code"><pre class="code bash"><a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-1" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-1" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-2" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-2" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-3" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-3" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-4" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-4" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-5" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-5" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-6" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-6" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-7" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-7" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-7"></a><span class="nv">Type</span><span class="o">=</span>Application
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-8" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-8" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-9" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-9" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-10" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-10" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-11" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-11" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-11"></a>X-KDE-Protocols<span class="o">=</span>skype
-<a id="rest_code_5e3ee62e90854e52ac711ceb922e6e19-12" name="rest_code_5e3ee62e90854e52ac711ceb922e6e19-12" href="#rest_code_5e3ee62e90854e52ac711ceb922e6e19-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
+<div class="code"><pre class="code bash"><a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-1" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-1" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-1"></a><span class="o">[</span>Desktop Entry<span class="o">]</span>
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-2" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-2" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-2"></a><span class="nv">Name</span><span class="o">=</span>Skype
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-3" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-3" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-3"></a><span class="nv">Comment</span><span class="o">=</span>Skype Internet Telephony
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-4" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-4" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-4"></a><span class="nv">Exec</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/skype
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-5" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-5" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-5"></a><span class="nv">Icon</span><span class="o">=</span>/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-6" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-6" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-6"></a><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-7" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-7" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-7"></a><span class="nv">Type</span><span class="o">=</span>Application
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-8" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-8" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-8"></a><span class="nv">Encoding</span><span class="o">=</span>UTF-8
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-9" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-9" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-9"></a><span class="nv">Categories</span><span class="o">=</span>Network<span class="p">;</span>Application<span class="p">;</span>
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-10" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-10" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-10"></a><span class="nv">MimeType</span><span class="o">=</span>x-scheme-handler/skype<span class="p">;</span>
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-11" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-11" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-11"></a>X-KDE-Protocols<span class="o">=</span>skype
+<a id="rest_code_a81a6c5e742046d3a89aaad0171a47e8-12" name="rest_code_a81a6c5e742046d3a89aaad0171a47e8-12" href="#rest_code_a81a6c5e742046d3a89aaad0171a47e8-12"></a>X-GNOME-Bugzilla-Product<span class="o">=</span>skype
 </pre></div>
 <p>PS: Remember to change the user for the one you are using.</p>
 <p>Good luck!</p>
@@ -172,7 +201,7 @@ initComments({
 </script></section></article></main>
 </div>
     </div>
-                <script src="../../../assets/js/index.js"></script><script src="../../../assets/js/baguetteBox.min.js"></script><script>
+                <script src="../../../assets/js/index.js"></script><script src="../../../assets/js/mermaid.min.js"></script><script src="../../../assets/js/baguetteBox.min.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
         captions: function(element) {
