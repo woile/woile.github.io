@@ -1,5 +1,5 @@
 <!--
-.. title: A rust web app with HTML templates
+.. title: A Rust web app with HTML templates
 .. slug: web-app-with-template-in-rust
 .. date: 2022-10-16 15:27:25 UTC
 .. tags: rust, templates, jinja, networking
@@ -9,7 +9,7 @@
 .. type: text
 -->
 
-The other day, I was helping my girlfriend with go templates in a web server, and the internet is full of tutorials and explanations. And I thought, what about doing the same in rust? How hard can it be?
+The other day, I was helping my girlfriend with Go templates in a web server, and the internet is full of tutorials and explanations. And I thought, what about doing the same in Rust? How hard can it be?
 
 Spoilers: it's easy, but there's not much information around
 
