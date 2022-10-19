@@ -16,5 +16,8 @@
         "latex",
         "plaintext"
     ],
-    "restructuredtext.languageServer.disabled": true
+    "restructuredtext.languageServer.disabled": true,
+    "spellchecker.ignoreWordsList": [
+        "lodash"
+    ]
 }
