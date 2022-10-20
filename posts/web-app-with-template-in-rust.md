@@ -191,7 +191,7 @@ True, true... I forgot where were we going with all this... but do we know what 
 
 ## Templates
 
-Or... a monstrosity. You mix a "custom language", with your target language. This way, you can output the target language from a different one. Let's say we want to create an HTML with a list of users from rust, python or go:
+You mix a "custom language", with your target language. This way, you can output the target language from a different one. Let's say we want to create an HTML with a list of users from Rust, Python or Go:
 
 ```html
 <ul>
@@ -217,7 +217,7 @@ Now with a template engine, we can write something like this:
 
 This way, our fictional user service, can take this template, fetch the users, and passing through the template, render the list of users.
 
-Why are templates a monstrosity? Well because, most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them. If you use Kubernetes, its famous package manager "Helm", uses templates on top of YAML. YAML is already a [controversial language](https://noyaml.com/), but add a template layer on top and it becomes incredibly hard to read and maintain.
+Templates can be a monstrosity. Most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them, you may not get syntax highlight. For example, around Kubernetes there's a famous package manager "Helm", which uses templates on top of YAML. YAML is already a [controversial language](https://noyaml.com/), and with a template layer on top, it can become incredibly hard to read and maintain. Spite of this, templates are still **convenient**, and I don't know of a better alternative.
 
 ## Axum with templates
 
