@@ -23,7 +23,7 @@ If you come from Python, even though there's a big standard library, when doing 
 
 This makes me wonder... will Go end up in the same direction as python? Is there something in the standard library that the community doesn't use, and instead, relies on a third party package? Anyways...
 
-If you come from Javascript, I pity you.
+If you come from Javascript, you are probably used to installing many dependencies, so you are already familiar with what's coming next.
 
 Let's get back to our stack.
 
