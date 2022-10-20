@@ -260,7 +260,7 @@ hello world
 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </pre></div>
 <p>This way, our fictional user service, can take this template, fetch the users, and passing through the template, render the list of users.</p>
-<p>Templates can be a monstrosity.Because, most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them. If you use Kubernetes, its famous package manager "Helm", uses templates on top of YAML. YAML is already a <a href="https://noyaml.com/">controversial language</a>, but add a template layer on top and it can becomes incredibly hard to read and maintain. Spite of this, they are still <strong>convenient</strong>.</p>
+<p>Templates can be a monstrosity. Most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them, you may not get syntax highlight. For example, around Kubernetes there's a famous package manager "Helm", which uses templates on top of YAML. YAML is already a <a href="https://noyaml.com/">controversial language</a>, and with a template layer on top, it can become incredibly hard to read and maintain. Spite of this, templates are still <strong>convenient</strong>, and I don't know of a better alternative.</p>
 <h3>Axum with templates</h3>
 <p>Back to our web application! This time, we are gonna create 2 fictional <code>structs</code>, that we'll use as examples.</p>
 <div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">serde</span>::<span class="n">Serialize</span><span class="p">;</span><span class="w"></span>
