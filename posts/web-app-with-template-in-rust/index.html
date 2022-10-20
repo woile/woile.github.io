@@ -243,7 +243,7 @@ hello world
 <p>Enough with networking lessons woile! I want to know how to use templates.</p>
 <p>True, true... I forgot where were we going with all this... but do we know what templates are?</p>
 <h3>Templates</h3>
-<p>Or... a monstrosity. You mix a "custom language", with your target language. This way, you can output the target language from a different one. Let's say we want to create an HTML with a list of users from rust, python or go:</p>
+<p>You mix a "custom language", with your target language. This way, you can output the target language from a different one. Let's say we want to create an HTML with a list of users from Rust, Python or Go:</p>
 <div class="code"><pre class="code literal-block"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Timmy<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Benji<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -260,7 +260,7 @@ hello world
 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </pre></div>
 <p>This way, our fictional user service, can take this template, fetch the users, and passing through the template, render the list of users.</p>
-<p>Why are templates a monstrosity? Well because, most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them. If you use Kubernetes, its famous package manager "Helm", uses templates on top of YAML. YAML is already a <a href="https://noyaml.com/">controversial language</a>, but add a template layer on top and it becomes incredibly hard to read and maintain.</p>
+<p>Templates can be a monstrosity.Because, most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them. If you use Kubernetes, its famous package manager "Helm", uses templates on top of YAML. YAML is already a <a href="https://noyaml.com/">controversial language</a>, but add a template layer on top and it can becomes incredibly hard to read and maintain. Spite of this, they are still <strong>convenient</strong>.</p>
 <h3>Axum with templates</h3>
 <p>Back to our web application! This time, we are gonna create 2 fictional <code>structs</code>, that we'll use as examples.</p>
 <div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">serde</span>::<span class="n">Serialize</span><span class="p">;</span><span class="w"></span>
