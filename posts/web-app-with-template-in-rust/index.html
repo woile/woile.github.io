@@ -171,15 +171,17 @@ and create a new rust project.</p>
 <p>A simple webserver retuning HTML without a template looks something like this:</p>
 <div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">};</span><span class="w"></span>
 
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
 <span class="cp">#[tokio::main]</span><span class="w"></span>
 <span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// build our application with a single route</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span><span class="w"></span>
 <span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
 <span class="w">            </span><span class="s">"/"</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="p">}),</span><span class="w"></span>
+<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span><span class="w"></span>
 <span class="w">        </span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// run it with hyper on localhost:3000</span>
@@ -219,11 +221,10 @@ a GET HTTP request, and send it over a TCP connection to the given IP. If you pr
 <p>The request will be received by our rust web server, and it will attempt to handle the "requested" path (<code>GET /</code>).
 No matter what language you use: rust, python, go, js, etc. requests are all plain text.</p>
 <p>Our rust web server, actually knows how to handle that request, because it includes a <code>route</code></p>
-<div class="code"><pre class="code literal-block"><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="c1">// ...</span>
+<span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
 <span class="w">    </span><span class="s">"/"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">get</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">}),</span><span class="w"></span>
+<span class="w">    </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span><span class="w"></span>
 <span class="p">);</span><span class="w"></span>
 </pre></div>
 <p><a href="https://github.com/tokio-rs/axum">Axum</a> sees the <code>/</code> and it know it has a function to handle that path. That function actually means something like</p>
@@ -309,35 +310,39 @@ hello world
 <div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">,</span><span class="w"> </span><span class="n">extract</span>::<span class="n">Path</span><span class="p">};</span><span class="w"></span>
 <span class="k">use</span><span class="w"> </span><span class="n">minijinja</span>::<span class="n">render</span><span class="p">;</span><span class="w"></span>
 
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_profile</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">profile_name</span><span class="p">)</span>: <span class="nc">Path</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">orders_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">id</span>: <span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">name</span>: <span class="s">"Article banana"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">id</span>: <span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">name</span>: <span class="s">"Article apple"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Profile</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">full_name</span>: <span class="nc">profile_name</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">items</span>: <span class="nc">orders_example</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
 <span class="cp">#[tokio::main]</span><span class="w"></span>
 <span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span><span class="w"></span>
 <span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
 <span class="w">            </span><span class="s">"/"</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="o">||</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="n">Html</span><span class="p">(</span><span class="n">HOME</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="p">}),</span><span class="w"></span>
+<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span><span class="w"></span>
 <span class="w">        </span><span class="p">)</span><span class="w"></span>
 <span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
 <span class="w">            </span><span class="s">"/:profile_name"</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="o">|</span><span class="n">Path</span><span class="p">(</span><span class="n">profile_name</span><span class="p">)</span>: <span class="nc">Path</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;|</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">orders_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="w"></span>
-<span class="w">                    </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                        </span><span class="n">id</span>: <span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="n">name</span>: <span class="s">"Article banana"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                    </span><span class="p">},</span><span class="w"></span>
-<span class="w">                    </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                        </span><span class="n">id</span>: <span class="mi">2</span><span class="p">,</span><span class="w"></span>
-<span class="w">                        </span><span class="n">name</span>: <span class="s">"Article apple"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span><span class="w"></span>
-<span class="w">                    </span><span class="p">},</span><span class="w"></span>
-<span class="w">                </span><span class="p">];</span><span class="w"></span>
-<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Profile</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                    </span><span class="n">full_name</span>: <span class="nc">profile_name</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="n">items</span>: <span class="nc">orders_example</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="p">};</span><span class="w"></span>
-<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">                </span><span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"></span>
-<span class="w">            </span><span class="p">}),</span><span class="w"></span>
+<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span><span class="w"></span>
 <span class="w">        </span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// run it with hyper on localhost:3000</span>
 <span class="w">    </span><span class="n">axum</span>::<span class="n">Server</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="s">"0.0.0.0:3000"</span><span class="p">.</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">())</span><span class="w"></span>
@@ -349,12 +354,12 @@ hello world
 <p>Too complicated?</p>
 <p>Let's take a look at this 2 lines:</p>
 <div class="code"><pre class="code literal-block"><span class="s">"/:profile_name"</span><span class="p">,</span><span class="w"></span>
-<span class="n">get</span><span class="p">(</span><span class="o">|</span><span class="n">Path</span><span class="p">(</span><span class="n">profile_name</span><span class="p">)</span>: <span class="nc">Path</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;|</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span><span class="w"></span>
 </pre></div>
 <p>The first line is the <code>path</code>, which is a the root <code>/</code> + a variable value <code>:profile_name</code>.
-And right in the next line, we can see how we use the <code>profile_name</code> variable, extracted from the <code>path</code>.</p>
+And right in the next line, we call the <code>get_profile</code>, which we can see how it uses the <code>profile_name</code> variable, extracted from the <code>path</code>.</p>
 <p>After that, we create the example <code>structs</code>. In a real example, that information would probably come from a database.</p>
-<p>And then, inside the <code>route</code> we have:</p>
+<p>And then, inside the <code>get_profile</code> we have:</p>
 <div class="code"><pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
 <span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"></span>
 </pre></div>

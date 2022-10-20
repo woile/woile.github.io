@@ -87,15 +87,17 @@ A simple webserver retuning HTML without a template looks something like this:
 ```rust
 use axum::{response::Html, routing::get, Router};
 
+async fn home() -> Html<&'static str> {
+    Html("hello world")
+}
+
 #[tokio::main]
 async fn main() {
     // build our application with a single route
     let app = Router::new()
         .route(
             "/",
-            get(|| async {
-                Html("hello world")
-            }),
+            get(home),
         );
 
     // run it with hyper on localhost:3000
@@ -159,11 +161,10 @@ No matter what language you use: rust, python, go, js, etc. requests are all pla
 Our rust web server, actually knows how to handle that request, because it includes a `route`
 
 ```rs
+// ...
 .route(
     "/",
-    get(|| async {
-        Html("hello world")
-    }),
+    get(home),
 );
 ```
 
@@ -278,35 +279,39 @@ And for Axum, we add a new route, that will create some example structs.
 use axum::{response::Html, routing::get, Router, extract::Path};
 use minijinja::render;
 
+async fn home() -> Html<&'static str> {
+    Html("hello world")
+}
+
+async fn get_profile(Path(profile_name): Path<String>) -> Html<String> {
+    let orders_example = vec![
+        Items {
+            id: 1,
+            name: "Article banana".into(),
+        },
+        Items {
+            id: 2,
+            name: "Article apple".into(),
+        },
+    ];
+    let profile_example = Profile {
+        full_name: profile_name,
+        items: orders_example,
+    };
+    let r = render!(PROFILE_TEMPLATE, profile => profile_example );
+    Html(r)
+}
+
 #[tokio::main]
 async fn main() {
     let app = Router::new()
         .route(
             "/",
-            get(|| async {
-                Html(HOME)
-            }),
+            get(home),
         )
         .route(
             "/:profile_name",
-            get(|Path(profile_name): Path<String>| async {
-                let orders_example = vec![
-                    Items {
-                        id: 1,
-                        name: "Article banana".into(),
-                    },
-                    Items {
-                        id: 2,
-                        name: "Article apple".into(),
-                    },
-                ];
-                let profile_example = Profile {
-                    full_name: profile_name,
-                    items: orders_example,
-                };
-                let r = render!(PROFILE_TEMPLATE, profile => profile_example );
-                Html(r)
-            }),
+            get(get_profile),
         );
     // run it with hyper on localhost:3000
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
@@ -322,15 +327,15 @@ Let's take a look at this 2 lines:
 
 ```rust
 "/:profile_name",
-get(|Path(profile_name): Path<String>| async {
+get(get_profile),
 ```
 
 The first line is the `path`, which is a the root `/` + a variable value `:profile_name`.
-And right in the next line, we can see how we use the `profile_name` variable, extracted from the `path`.
+And right in the next line, we call the `get_profile`, which we can see how it uses the `profile_name` variable, extracted from the `path`.
 
 After that, we create the example `structs`. In a real example, that information would probably come from a database.
 
-And then, inside the `route` we have:
+And then, inside the `get_profile` we have:
 
 ```rust
 let r = render!(PROFILE_TEMPLATE, profile => profile_example );
