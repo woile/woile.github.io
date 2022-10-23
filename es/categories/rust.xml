@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Thu, 20 Oct 2022 18:24:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Rust web app with HTML templates</title><link>https://woile.dev/es/posts/web-app-with-template-in-rust/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;The other day, I was helping my girlfriend with Go templates in a web server, and the internet is full of tutorials and explanations. And I thought, what about doing the same in Rust? How hard can it be?&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Sun, 23 Oct 2022 12:41:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Rust web app with HTML templates</title><link>https://woile.dev/es/posts/web-app-with-template-in-rust/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;The other day, I was helping my girlfriend with Go templates in a web server, and the internet is full of tutorials and explanations. And I thought, what about doing the same in Rust? How hard can it be?&lt;/p&gt;
 &lt;p&gt;Spoilers: it's easy, but there's not much information around&lt;/p&gt;
 &lt;p&gt;Let's change that!&lt;/p&gt;
 &lt;h3&gt;The stack&lt;/h3&gt;
@@ -35,7 +35,7 @@ and create a new rust project.&lt;/p&gt;
 &lt;p&gt;We use the &lt;code&gt;-F&lt;/code&gt; flag to signal which features to include from those crates.&lt;/p&gt;
 &lt;h3&gt;The Code&lt;/h3&gt;
 &lt;p&gt;We are now ready to start. And we won't need anything else.&lt;/p&gt;
-&lt;p&gt;A simple webserver retuning HTML without a template looks something like this:&lt;/p&gt;
+&lt;p&gt;A basic webserver returning HTML without a template looks something like this:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="k"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;axum&lt;/span&gt;::&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;::&lt;span class="n"&gt;Html&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;routing&lt;/span&gt;::&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Router&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
 &lt;span class="k"&gt;async&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;fn&lt;/span&gt; &lt;span class="nf"&gt;home&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-&amp;gt; &lt;span class="nc"&gt;Html&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;amp;'&lt;/span&gt;&lt;span class="nb"&gt;static&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;str&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
@@ -118,7 +118,7 @@ hello world
 &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;What happens when we have a new user? We would have to edit it manually, right? Can we make this behave "dynamically" instead?&lt;/p&gt;
-&lt;p&gt;Yes, using templates. Minijinja is a rust implementation of the popular python's &lt;code&gt;jinja2&lt;/code&gt;. A popular "template engine" with its own language. There are endless template engines, and they don't share the same syntax. Python django's template engine, go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use an if condition.&lt;/p&gt;
+&lt;p&gt;Yes, using templates. Minijinja is a rust implementation of the popular python's &lt;code&gt;jinja2&lt;/code&gt;. A popular "template engine" with its own language. Template engines are endless, and they don't share the same syntax. Python django's template engine, Go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use conditions.&lt;/p&gt;
 &lt;p&gt;Now with a template engine, we can write something like this:&lt;/p&gt;
 &lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ul&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
     {% for user in users %}
@@ -155,7 +155,7 @@ hello world
 &lt;span class="s"&gt;  &amp;lt;meta name="viewport" content="width=device-width, initial-scale=1"&amp;gt;&lt;/span&gt;
 
 &lt;span class="s"&gt;  &amp;lt;title&amp;gt;A Basic HTML5 Template&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class="s"&gt;  &amp;lt;meta name="description" content="A simple HTML5 Template for new projects."&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;  &amp;lt;meta name="description" content="A basic HTML5 Template for new projects."&amp;gt;&lt;/span&gt;
 &lt;span class="s"&gt;  &amp;lt;meta name="author" content="Woile"&amp;gt;&lt;/span&gt;
 &lt;span class="s"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
 

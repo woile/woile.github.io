@@ -168,7 +168,7 @@ and create a new rust project.</p>
 <p>We use the <code>-F</code> flag to signal which features to include from those crates.</p>
 <h3>The Code</h3>
 <p>We are now ready to start. And we won't need anything else.</p>
-<p>A simple webserver retuning HTML without a template looks something like this:</p>
+<p>A basic webserver returning HTML without a template looks something like this:</p>
 <div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">};</span><span class="w"></span>
 
 <span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -251,7 +251,7 @@ hello world
 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </pre></div>
 <p>What happens when we have a new user? We would have to edit it manually, right? Can we make this behave "dynamically" instead?</p>
-<p>Yes, using templates. Minijinja is a rust implementation of the popular python's <code>jinja2</code>. A popular "template engine" with its own language. There are endless template engines, and they don't share the same syntax. Python django's template engine, go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use an if condition.</p>
+<p>Yes, using templates. Minijinja is a rust implementation of the popular python's <code>jinja2</code>. A popular "template engine" with its own language. Template engines are endless, and they don't share the same syntax. Python django's template engine, Go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use conditions.</p>
 <p>Now with a template engine, we can write something like this:</p>
 <div class="code"><pre class="code literal-block"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
     {% for user in users %}
@@ -288,7 +288,7 @@ hello world
 <span class="s">  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</span>
 
 <span class="s">  &lt;title&gt;A Basic HTML5 Template&lt;/title&gt;</span>
-<span class="s">  &lt;meta name="description" content="A simple HTML5 Template for new projects."&gt;</span>
+<span class="s">  &lt;meta name="description" content="A basic HTML5 Template for new projects."&gt;</span>
 <span class="s">  &lt;meta name="author" content="Woile"&gt;</span>
 <span class="s">&lt;/head&gt;</span>
 

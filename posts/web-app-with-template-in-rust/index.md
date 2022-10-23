@@ -82,7 +82,7 @@ We use the `-F` flag to signal which features to include from those crates.
 
 We are now ready to start. And we won't need anything else.
 
-A simple webserver retuning HTML without a template looks something like this:
+A basic webserver returning HTML without a template looks something like this:
 
 ```rust
 use axum::{response::Html, routing::get, Router};
@@ -203,7 +203,7 @@ You mix a "custom language", with your target language. This way, you can output
 
 What happens when we have a new user? We would have to edit it manually, right? Can we make this behave "dynamically" instead?
 
-Yes, using templates. Minijinja is a rust implementation of the popular python's `jinja2`. A popular "template engine" with its own language. There are endless template engines, and they don't share the same syntax. Python django's template engine, go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use an if condition.
+Yes, using templates. Minijinja is a rust implementation of the popular python's `jinja2`. A popular "template engine" with its own language. Template engines are endless, and they don't share the same syntax. Python django's template engine, Go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use conditions.
 
 Now with a template engine, we can write something like this:
 
@@ -253,7 +253,7 @@ const PROFILE_TEMPLATE: &'static str = r#"
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>A Basic HTML5 Template</title>
-  <meta name="description" content="A simple HTML5 Template for new projects.">
+  <meta name="description" content="A basic HTML5 Template for new projects.">
   <meta name="author" content="Woile">
 </head>
 
