@@ -1,5 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Tue, 08 Nov 2022 10:03:46 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>A Rust web app with HTML templates</title><link>https://woile.dev/posts/web-app-with-template-in-rust/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;The other day, I was helping my girlfriend with Go templates in a web server, and the internet is full of tutorials and explanations. And I thought, what about doing the same in Rust? How hard can it be?&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 30 Dec 2022 16:28:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Nix journey part 1: creating a flake</title><link>https://woile.dev/posts/nix-journey-part-1-creating-a-flake/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;I've started building my own home media center, and I thought it would be a good idea to learn something new and try to make it reproducible, thus I thought of &lt;a href="https://nixos.org/"&gt;nix&lt;/a&gt; for this. Nix is an operating system (which we won't care now), a language (also don't care for now), and a &lt;strong&gt;package manager&lt;/strong&gt;.
+We are gonna focus on the package manager part alone, which is already a lot for my brain. This package manager works on mac and linux, and it already has many packages available (bye bye interop problems between mac/linux?)&lt;/p&gt;
+&lt;p&gt;The first thing I needed for my raspberry pi was to create a PSK password using &lt;code&gt;wpa_password&lt;/code&gt;, and I tried to run it inside a nix shell on my mac, which didn't work, because &lt;code&gt;wpa_password&lt;/code&gt; doesn't run on a mac.
+This was a good opportunity to write something fast, and to make it reusable and reproducible from any unix OS using nix.&lt;/p&gt;
+&lt;h3&gt;Objectives&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a nix package for &lt;code&gt;wpa_password&lt;/code&gt; (a nix flake)&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;wpa_password&lt;/code&gt; in my home-media project. I want to jump into a shell with the &lt;code&gt;wpa_password&lt;/code&gt; from any unix os, mac or linux (freebsd at some point?)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Creating a nix package&lt;/h3&gt;
+&lt;p&gt;I ended up writing the utility in rust, which took me a bunch of hours, the repo &lt;a href="https://github.com/woile/wpa_passphrase_rs"&gt;wpa_passphrase_rs&lt;/a&gt; contains the project finalized.&lt;/p&gt;
+&lt;p&gt;After a lot of reading, and wrapping my mind around nix, which I had 0 knowledge before, everything points out that flakes are the new kid in town, and that's what I should use in my project.&lt;/p&gt;
+&lt;p&gt;I have a take on nix status, which may need corroboration: nix is moving away from the old way to the new (flakes) way, and there are many outdated posts, and commands. Many commands that fit the pattern &lt;code&gt;nix-*&lt;/code&gt; are no longer used, and instead people now use the new &lt;code&gt;nix &amp;lt;command&amp;gt;&lt;/code&gt; instead. For example, things like &lt;code&gt;nix-shell&lt;/code&gt; are not used much anymore.&lt;/p&gt;
+&lt;p&gt;Going back to the nix flake, If you have &lt;a href="https://nixos.org/download.html"&gt;installed nix&lt;/a&gt;, &lt;strong&gt;flakes must be enabled&lt;/strong&gt;, because it's an experimental feature.&lt;/p&gt;
+&lt;p&gt;For mac (which only supports multiuser installation):&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'experimental-features = nix-command flakes'&lt;/span&gt; &amp;gt;&amp;gt; /etc/nix/nix.conf
+&lt;span class="c1"&gt;# you may use ~/.config/nix/nix.conf on linux&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;What are flakes?&lt;/h4&gt;
+&lt;p&gt;According to &lt;a href="https://nixos.wiki/wiki/Flakes"&gt;nix's wiki&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Flakes allow you to specify your code's dependencies (e.g. remote Git repositories) in a &lt;strong&gt;declarative way&lt;/strong&gt;, simply by listing them inside a &lt;code&gt;flake.nix&lt;/code&gt; file.
+Each dependency gets pinned, that is: its commit hash gets automatically stored into a file - named &lt;code&gt;flake.lock&lt;/code&gt; - making it easy to, upgrade it
+Flakes replace the nix-channels command and things like ad-hoc invocations of &lt;code&gt;builtins.fetchgit&lt;/code&gt; - no more worrying about keeping your channels in sync, no more worrying about forgetting about a dependency deep down in your tree: everything's at hand right inside &lt;code&gt;flake.lock&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Seems like we are gonna need two files: &lt;code&gt;flake.nix&lt;/code&gt; and &lt;code&gt;flake.lock&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The next step is to create the flake from a template. What available templates do we have? I wonder...&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix flake show templates
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;github:NixOS/templates/2d6dcce2f3898090c8eda16a16abdff8a80e8ebf
+├───defaultTemplate: template: A very basic flake
+└───templates
+    ├───bash-hello: template: An over-engineered Hello World in bash
+    ├───c-hello: template: An over-engineered Hello World in C
+    ├───compat: template: A default.nix and shell.nix for backward compatibility with Nix installations that don't support flakes
+    ├───full: template: A template that shows all standard flake outputs
+    ├───go-hello: template: A simple Go package
+    ├───haskell-hello: template: A Hello World in Haskell with one dependency
+    ├───haskell-nix: template: An haskell.nix template using hix
+    ├───hercules-ci: template: An example for Hercules-CI, containing only the necessary attributes for adding to your project.
+    ├───pandoc-xelatex: template: A report built with Pandoc, XeLaTex and a custom font
+    ├───python: template: Python template, using poetry2nix
+    ├───rust: template: Rust template, using Naersk
+    ├───rust-web-server: template: A Rust web server including a NixOS module
+    ├───simpleContainer: template: A NixOS container running apache-httpd
+    └───trivial: template: A very basic flake
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Fantastic! Look at that! There's a python version and even a rust web server. The one I need is the rust template, let's use that one as a base.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix flake init -t templates#rust
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And that was it, it worked. This is going well. I can create a binary inside &lt;code&gt;./result/bin&lt;/code&gt; by running&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or use it by running&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix run
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My mind is blown at this point 🤯&lt;/p&gt;
+&lt;h3&gt;Using the flake somewhere else&lt;/h3&gt;
+&lt;p&gt;I couldn't find much about this, as I said, there's a mix of old and new information.
+I think it clicked for me, when I realized that the &lt;code&gt;nix&lt;/code&gt; command is new, and it's integration with flakes goes to its core (am I correct on this?).&lt;/p&gt;
+&lt;p&gt;Using the flake becomes straightforward.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix shell &lt;span class="s1"&gt;'github:woile/wpa_passphrase_rs'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And &lt;code&gt;wpa_password&lt;/code&gt; will appear on my &lt;code&gt;PATH&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;wpa_password --help
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can exit with a &lt;kbd&gt;CTRL&lt;/kbd&gt; + &lt;kbd&gt;D&lt;/kbd&gt;.&lt;/p&gt;
+&lt;h3&gt;What's next?&lt;/h3&gt;
+&lt;p&gt;What's the right way to make it declarative? I want to have a file with the dependencies required for my home media project, and I'd like to jump into a shell with everything present.&lt;/p&gt;
+&lt;p&gt;Is there a different strategy for this?&lt;/p&gt;
+&lt;p&gt;How to use &lt;a href="https://github.com/NixOS/nixops"&gt;NixOps&lt;/a&gt; to provision all my raspberries and any other machine that joins the fleet?&lt;/p&gt;
+&lt;p&gt;This &lt;a href="https://nixos.wiki/wiki/Ubuntu_vs._NixOS"&gt;comparison between Ubuntu and Nix&lt;/a&gt; appears to be useful, I should read as well.&lt;/p&gt;
+&lt;p&gt;Please let me know in the comments section below or tag me on hachyderm &lt;a href="https://hachyderm.io/@woile"&gt;@woile&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Thanks for reading&lt;/p&gt;</description><category>flake</category><category>nix</category><category>package manager</category><category>rust</category><guid>https://woile.dev/posts/nix-journey-part-1-creating-a-flake/</guid><pubDate>Fri, 30 Dec 2022 16:04:18 GMT</pubDate></item><item><title>A Rust web app with HTML templates</title><link>https://woile.dev/posts/web-app-with-template-in-rust/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;The other day, I was helping my girlfriend with Go templates in a web server, and the internet is full of tutorials and explanations. And I thought, what about doing the same in Rust? How hard can it be?&lt;/p&gt;
 &lt;p&gt;Spoilers: it's easy, but there's not much information around&lt;/p&gt;
 &lt;p&gt;Let's change that!&lt;/p&gt;
 &lt;h3&gt;The stack&lt;/h3&gt;

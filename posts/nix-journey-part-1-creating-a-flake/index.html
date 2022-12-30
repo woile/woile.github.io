@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="How to create a flake and use it from another shell">
+<meta name="viewport" content="width=device-width">
+<title>Nix journey part 1: creating a flake | Willy's blog</title>
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<style>
+        .highlight pre, .code pre {
+            white-space: pre;
+        }
+        </style>
+<style>
+        kbd {
+            font-family: Consolas, "Lucida Console", monospace;
+            display: inline-block;
+            border-radius: 3px;
+            padding: 0px 4px;
+            box-shadow: 1px 1px 1px #777;
+            margin: 2px;
+            font-size: small;
+            vertical-align: text-bottom;
+            background: #eee;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            font-variant: small-caps;
+            font-weight: 600;
+
+            /* This two work */
+            /* letter-spacing: 0.5px; */
+            letter-spacing: 1px;
+
+
+            /* Prevent selection */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        </style>
+<script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script><link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
+<link rel="canonical" href="https://woile.dev/posts/nix-journey-part-1-creating-a-flake/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<link rel="prev" href="../web-app-with-template-in-rust/" title="A Rust web app with HTML templates" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Nix journey part 1: creating a flake">
+<meta property="og:url" content="https://woile.dev/posts/nix-journey-part-1-creating-a-flake/">
+<meta property="og:description" content="How to create a flake and use it from another shell">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-12-30T16:04:18Z">
+<meta property="article:tag" content="flake">
+<meta property="article:tag" content="nix">
+<meta property="article:tag" content="package manager">
+<meta property="article:tag" content="rust">
+<link rel="alternate" hreflang="es" href="../../es/posts/nix-journey-part-1-creating-a-flake/">
+<link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+</head>
+<body>
+    <input id="dark-mode" type="checkbox"><div class="theme">
+        
+    <header class="cover"><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+    <nav class="menu"><ul>
+<li><a class="hover:menu__link" href="../../">🏠 Home</a></li>
+                <li><a class="hover:menu__link" href="../../blog/">📰 Blog</a></li>
+                <li><a class="hover:menu__link" href="../../mentoring/">📗 Mentoring</a></li>
+                <li><a class="hover:menu__link" href="../../archive.html">🗄️ Archives</a></li>
+                <li><a class="hover:menu__link" href="../../categories/index.html">🏷️ Tags</a></li>
+                <li><a class="hover:menu__link" href="../../rss.xml">🛰️ RSS feed</a></li>
+
+        
+        
+        
+        </ul>
+<ul>
+<li>
+                        <span id="toptranslations">
+                        <a href="../../es/" class="hover:menu__link" rel="alternate" hreflang="es">Español</a>
+
+        </span>
+
+            </li>
+            <li>
+                <label class="dark-mode-label hover:dark-mode-label" for="dark-mode">
+                    <?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation: isolate;" viewbox="0 0 416 416" width="30px" height="30px"><defs><clippath id="_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC"><rect width="416" height="416"></rect></clippath></defs><g clip-path="url(#_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC)"><path d=" M 304 88 C 304 57.38 299.49 26.39 288 0 C 364.43 33.27 416 111.32 416 200 C 416 319.29 319.29 416 200 416 C 111.32 416 33.27 364.43 0 288 C 26.39 299.49 57.38 304 88 304 C 207.29 304 304 207.29 304 88 Z "></path></g></svg></label>
+            </li>
+        </ul></nav><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+            <span id="blog-title">Willy's blog</span>
+        </a></h3>
+
+    <div>
+
+    </div>
+
+    </header><div class="layout">
+            <main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Nix journey part 1: creating a flake</a></h2>
+
+        <div class="metadata" style="margin-bottom: 3rem;">
+            <span class="byline author vcard p-author h-card" style="display: flex;column-gap: 1rem; flex-wrap: wrap;">
+                <span class="byline-name fn p-name" itemprop="author">
+                        Woile
+                </span>
+                <span class="dateline">
+                    <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+                    <time class="published dt-published" datetime="2022-12-30T16:04:18Z" itemprop="datePublished" title="2022-12-30 16:04">2022-12-30 16:04</time></a>
+                </span>
+                        <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Source</a></span>
+
+            </span>
+            <br><span style="display: flex;column-gap: 1rem; flex-wrap: wrap;">
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/flake/" rel="tag">#flake</a>
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/nix/" rel="tag">#nix</a>
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/package-manager/" rel="tag">#package manager</a>
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/rust/" rel="tag">#rust</a>
+            </span>
+
+                <span class="commentline">
+
+        </span>
+</div>
+        
+    </header><section class="e-content entry-content" itemprop="articleBody text"><p>I've started building my own home media center, and I thought it would be a good idea to learn something new and try to make it reproducible, thus I thought of <a href="https://nixos.org/">nix</a> for this. Nix is an operating system (which we won't care now), a language (also don't care for now), and a <strong>package manager</strong>.
+We are gonna focus on the package manager part alone, which is already a lot for my brain. This package manager works on mac and linux, and it already has many packages available (bye bye interop problems between mac/linux?)</p>
+<p>The first thing I needed for my raspberry pi was to create a PSK password using <code>wpa_password</code>, and I tried to run it inside a nix shell on my mac, which didn't work, because <code>wpa_password</code> doesn't run on a mac.
+This was a good opportunity to write something fast, and to make it reusable and reproducible from any unix OS using nix.</p>
+<h3>Objectives</h3>
+<ol>
+<li>Create a nix package for <code>wpa_password</code> (a nix flake)</li>
+<li>Use <code>wpa_password</code> in my home-media project. I want to jump into a shell with the <code>wpa_password</code> from any unix os, mac or linux (freebsd at some point?)</li>
+</ol>
+<h3>Creating a nix package</h3>
+<p>I ended up writing the utility in rust, which took me a bunch of hours, the repo <a href="https://github.com/woile/wpa_passphrase_rs">wpa_passphrase_rs</a> contains the project finalized.</p>
+<p>After a lot of reading, and wrapping my mind around nix, which I had 0 knowledge before, everything points out that flakes are the new kid in town, and that's what I should use in my project.</p>
+<p>I have a take on nix status, which may need corroboration: nix is moving away from the old way to the new (flakes) way, and there are many outdated posts, and commands. Many commands that fit the pattern <code>nix-*</code> are no longer used, and instead people now use the new <code>nix &lt;command&gt;</code> instead. For example, things like <code>nix-shell</code> are not used much anymore.</p>
+<p>Going back to the nix flake, If you have <a href="https://nixos.org/download.html">installed nix</a>, <strong>flakes must be enabled</strong>, because it's an experimental feature.</p>
+<p>For mac (which only supports multiuser installation):</p>
+<div class="code"><pre class="code literal-block"><span class="nb">echo</span> <span class="s1">'experimental-features = nix-command flakes'</span> &gt;&gt; /etc/nix/nix.conf
+<span class="c1"># you may use ~/.config/nix/nix.conf on linux</span>
+</pre></div>
+<h4>What are flakes?</h4>
+<p>According to <a href="https://nixos.wiki/wiki/Flakes">nix's wiki</a>:</p>
+<blockquote>
+<p>Flakes allow you to specify your code's dependencies (e.g. remote Git repositories) in a <strong>declarative way</strong>, simply by listing them inside a <code>flake.nix</code> file.
+Each dependency gets pinned, that is: its commit hash gets automatically stored into a file - named <code>flake.lock</code> - making it easy to, upgrade it
+Flakes replace the nix-channels command and things like ad-hoc invocations of <code>builtins.fetchgit</code> - no more worrying about keeping your channels in sync, no more worrying about forgetting about a dependency deep down in your tree: everything's at hand right inside <code>flake.lock</code>.</p>
+</blockquote>
+<p>Seems like we are gonna need two files: <code>flake.nix</code> and <code>flake.lock</code>.</p>
+<p>The next step is to create the flake from a template. What available templates do we have? I wonder...</p>
+<div class="code"><pre class="code literal-block">nix flake show templates
+</pre></div>
+<div class="code"><pre class="code literal-block">github:NixOS/templates/2d6dcce2f3898090c8eda16a16abdff8a80e8ebf
+├───defaultTemplate: template: A very basic flake
+└───templates
+    ├───bash-hello: template: An over-engineered Hello World in bash
+    ├───c-hello: template: An over-engineered Hello World in C
+    ├───compat: template: A default.nix and shell.nix for backward compatibility with Nix installations that don't support flakes
+    ├───full: template: A template that shows all standard flake outputs
+    ├───go-hello: template: A simple Go package
+    ├───haskell-hello: template: A Hello World in Haskell with one dependency
+    ├───haskell-nix: template: An haskell.nix template using hix
+    ├───hercules-ci: template: An example for Hercules-CI, containing only the necessary attributes for adding to your project.
+    ├───pandoc-xelatex: template: A report built with Pandoc, XeLaTex and a custom font
+    ├───python: template: Python template, using poetry2nix
+    ├───rust: template: Rust template, using Naersk
+    ├───rust-web-server: template: A Rust web server including a NixOS module
+    ├───simpleContainer: template: A NixOS container running apache-httpd
+    └───trivial: template: A very basic flake
+</pre></div>
+<p>Fantastic! Look at that! There's a python version and even a rust web server. The one I need is the rust template, let's use that one as a base.</p>
+<div class="code"><pre class="code literal-block">nix flake init -t templates#rust
+</pre></div>
+<p>And that was it, it worked. This is going well. I can create a binary inside <code>./result/bin</code> by running</p>
+<div class="code"><pre class="code literal-block">nix build
+</pre></div>
+<p>or use it by running</p>
+<div class="code"><pre class="code literal-block">nix run
+</pre></div>
+<p>My mind is blown at this point 🤯</p>
+<h3>Using the flake somewhere else</h3>
+<p>I couldn't find much about this, as I said, there's a mix of old and new information.
+I think it clicked for me, when I realized that the <code>nix</code> command is new, and it's integration with flakes goes to its core (am I correct on this?).</p>
+<p>Using the flake becomes straightforward.</p>
+<div class="code"><pre class="code literal-block">nix shell <span class="s1">'github:woile/wpa_passphrase_rs'</span>
+</pre></div>
+<p>And <code>wpa_password</code> will appear on my <code>PATH</code>.</p>
+<div class="code"><pre class="code literal-block">wpa_password --help
+</pre></div>
+<p>And we can exit with a <kbd>CTRL</kbd> + <kbd>D</kbd>.</p>
+<h3>What's next?</h3>
+<p>What's the right way to make it declarative? I want to have a file with the dependencies required for my home media project, and I'd like to jump into a shell with everything present.</p>
+<p>Is there a different strategy for this?</p>
+<p>How to use <a href="https://github.com/NixOS/nixops">NixOps</a> to provision all my raspberries and any other machine that joins the fleet?</p>
+<p>This <a href="https://nixos.wiki/wiki/Ubuntu_vs._NixOS">comparison between Ubuntu and Nix</a> appears to be useful, I should read as well.</p>
+<p>Please let me know in the comments section below or tag me on hachyderm <a href="https://hachyderm.io/@woile">@woile</a></p>
+<p>Thanks for reading</p>
+    </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
+<li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/flake/" rel="tag">#flake</a>
+          </li>
+          <li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/nix/" rel="tag">#nix</a>
+          </li>
+          <li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/package-manager/" rel="tag">#package manager</a>
+          </li>
+          <li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/rust/" rel="tag">#rust</a>
+          </li>
+        </ul>
+<ul class="pager hidden-print pagination">
+<li class="next">
+            </li>
+            <li class="previous">
+                <a class="hover:pagination__link" href="../web-app-with-template-in-rust/" rel="prev" title="A Rust web app with HTML templates">Previous post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script><div id="comment-section"></div>
+<script>
+initComments({
+  node: document.getElementById("comment-section"),
+  defaultHomeserverUrl: "https://matrix.cactus.chat:8448",
+  serverName: "cactus.chat",
+  siteName: "woile.dev",
+  commentSectionId: "nix.journey.part.1.creating.a.flake"
+})
+</script></section></article></main>
+</div>
+    </div>
+                <script src="../../assets/js/index.js"></script><script src="../../assets/js/mermaid.min.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>
