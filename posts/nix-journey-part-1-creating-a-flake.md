@@ -3,7 +3,7 @@
 .. slug: nix-journey-part-1-creating-a-flake
 .. date: 2022-12-30 16:04:18 UTC
 .. tags: rust, nix, flake, package manager
-.. category: linux
+.. category: nix
 .. link:
 .. description: How to create a flake and use it from another shell
 .. type: text
