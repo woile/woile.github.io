@@ -200,8 +200,9 @@ CTRL+D<span class="w"> </span><span class="c1"># exit</span>
 <div class="code"><pre class="code literal-block">nix<span class="w"> </span>profile<span class="w"> </span>install<span class="w"> </span><span class="s1">'github:woile/npt#npt'</span>
 </pre></div>
 <p>And then run <code>npt --help</code> and check the commands, I hope it helps the transition to nix.</p>
-<p>Now you can do install packages by doing:</p>
-<div class="code"><pre class="code literal-block">npt<span class="w"> </span>i<span class="w"> </span>htop<span class="w"> </span>github:woile/wpa_passphrase_rs#wpa_passphrase
+<p>Now you can install packages by doing:</p>
+<div class="code"><pre class="code literal-block">npt<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span>github:woile/wpa_passphrase_rs#wpa_passphrase
+<span class="c1"># or npt i</span>
 </pre></div>
 <p>It's still a work in progress, but a good start. I want to add to it the ability to show the executed nix commands, as a way to learn.</p>
 <h3>Reproducible scripts</h3>

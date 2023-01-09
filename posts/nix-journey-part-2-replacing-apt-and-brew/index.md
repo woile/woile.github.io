@@ -121,10 +121,11 @@ nix profile install 'github:woile/npt#npt'
 
 And then run `npt --help` and check the commands, I hope it helps the transition to nix.
 
-Now you can do install packages by doing:
+Now you can install packages by doing:
 
 ```sh
-npt i htop github:woile/wpa_passphrase_rs#wpa_passphrase
+npt install htop github:woile/wpa_passphrase_rs#wpa_passphrase
+# or npt i
 ```
 
 It's still a work in progress, but a good start. I want to add to it the ability to show the executed nix commands, as a way to learn.
