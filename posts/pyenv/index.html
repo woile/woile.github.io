@@ -138,29 +138,29 @@ You can also control a per directory version (this creates a <code>.python-versi
 Doesn't require python.</p>
 <h3>Installation</h3>
 <p>Use <a href="https://github.com/pyenv/pyenv-installer">pyenv-installer</a></p>
-<div class="code"><pre class="code literal-block">curl https://pyenv.run <span class="p">|</span> bash
-<span class="nb">exec</span> <span class="nv">$SHELL</span>  <span class="c1"># Restart shell or open new terminal</span>
+<div class="code"><pre class="code literal-block">curl<span class="w"> </span>https://pyenv.run<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<span class="nb">exec</span><span class="w"> </span><span class="nv">$SHELL</span><span class="w">  </span><span class="c1"># Restart shell or open new terminal</span>
 </pre></div>
 <h3>Usage</h3>
 <h4>Install different python versions</h4>
-<div class="code"><pre class="code literal-block">pyenv install <span class="m">3</span>.6.10
-pyenv install <span class="m">3</span>.7.6
+<div class="code"><pre class="code literal-block">pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.6.10
+pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.7.6
 </pre></div>
 <h4>Set global python</h4>
-<div class="code"><pre class="code literal-block">pyenv global <span class="m">3</span>.7.6
+<div class="code"><pre class="code literal-block">pyenv<span class="w"> </span>global<span class="w"> </span><span class="m">3</span>.7.6
 </pre></div>
 <p>Observe</p>
-<div class="code"><pre class="code literal-block">python --version
-<span class="nb">type</span> -a python
+<div class="code"><pre class="code literal-block">python<span class="w"> </span>--version
+<span class="nb">type</span><span class="w"> </span>-a<span class="w"> </span>python
 </pre></div>
 <h4>Set local python</h4>
-<div class="code"><pre class="code literal-block"><span class="nb">cd</span> ~/my-project
-pyenv <span class="nb">local</span> <span class="m">3</span>.6.10
+<div class="code"><pre class="code literal-block"><span class="nb">cd</span><span class="w"> </span>~/my-project
+pyenv<span class="w"> </span><span class="nb">local</span><span class="w"> </span><span class="m">3</span>.6.10
 </pre></div>
 <p>Observe</p>
-<div class="code"><pre class="code literal-block">cat .python-version
-python --version
-<span class="nb">type</span> -a python
+<div class="code"><pre class="code literal-block">cat<span class="w"> </span>.python-version
+python<span class="w"> </span>--version
+<span class="nb">type</span><span class="w"> </span>-a<span class="w"> </span>python
 </pre></div>
 <h4>Other languages</h4>
 <p>There's a set of similar tools for other languages, following the

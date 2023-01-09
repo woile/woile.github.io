@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre nix)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/cat_nix.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2023 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 09 Jan 2023 09:00:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Nix journey part 2: replacing apt and brew</title><link>https://woile.dev/es/posts/nix-journey-part-2-replacing-apt-and-brew/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Even if I still cannot do much with &lt;a href="https://nixos.org/"&gt;nix&lt;/a&gt;, it still provide more advantages over other package managers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Multi-platform (mac, linux, etc.)&lt;/li&gt;
+&lt;li&gt;Supports side-by-side installation of multiple versions of a package&lt;/li&gt;
+&lt;li&gt;Makes it trivial to share development and build environments&lt;/li&gt;
+&lt;li&gt;Nix ensures that installing or upgrading one package cannot break other packages&lt;/li&gt;
+&lt;li&gt;It has the biggest database of packages (over 80.000 packages)&lt;/li&gt;
+&lt;li&gt;I can run other people's commands, for example if I clone a repo and it says "run this nix command to have a development environment", then it doesn't matter if I don't know, I have already started using it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A common situation I often have between linux and mac is running &lt;code&gt;grip&lt;/code&gt; or &lt;code&gt;sed&lt;/code&gt;.
+On linux, they are called GNU &lt;code&gt;grep&lt;/code&gt; or GNU &lt;code&gt;sed&lt;/code&gt;, and they are not the same as in mac (freebsd versin), they may not accept the same parameters.
+We are gonna see how can to avoid this using nix. And even without using complicated features, it can make your CI system more reproducible.&lt;/p&gt;
+&lt;p&gt;Remember &lt;code&gt;nix&lt;/code&gt; is 3 things at the same time: an OS, a package manager and a language.&lt;/p&gt;
+&lt;p&gt;This post is about the &lt;strong&gt;package manager&lt;/strong&gt;. I don't have much interest in the language, but more and more I think I'll have to learn it.&lt;/p&gt;
+&lt;p&gt;Let's start by acknowledging a source of confusion:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;There is an old interface with counterintuitive commands&lt;/strong&gt; (&lt;code&gt;nix-env -iA ...&lt;/code&gt;, &lt;code&gt;nix-shell -p ...&lt;/code&gt;), which I found hard to remember, and I don't get why they "commands" start with a dash (&lt;code&gt;-&lt;/code&gt;). I'm used to cli's doing &lt;code&gt;cli &amp;lt;command&amp;gt; [--options]&lt;/code&gt;. Nowadays there's a new cli called just &lt;code&gt;nix&lt;/code&gt;, let's see if we can do everything with it.&lt;/p&gt;
+&lt;p&gt;And make sure you have &lt;a href="https://nixos.org/download.html"&gt;installed Nix: the package manager&lt;/a&gt; in your system. The installation is straightforward. I was personally blocked, because at some point in my dotfiles I was hardcoding the &lt;code&gt;PATH&lt;/code&gt;, making nix never appear 🤦‍♂️.&lt;/p&gt;
+&lt;p&gt;And &lt;a href="https://nixos.wiki/wiki/Flakes#Enable_flakes"&gt;enable flakes&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Installing packages&lt;/h3&gt;
+&lt;p&gt;Install a package like on &lt;code&gt;brew&lt;/code&gt; or &lt;code&gt;apt&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;profile&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;nixpkgs#htop
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See also the &lt;a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-profile-install.html"&gt;profile install command reference&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the old version of nix, we would run:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix-env&lt;span class="w"&gt; &lt;/span&gt;-iA&lt;span class="w"&gt; &lt;/span&gt;nixpkgs.htop
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Nix forces us to specify a "repository" (or "namespace") when installing a package (&lt;code&gt;nixpkgs&lt;/code&gt;), which could be different, like github. And I think this is a good thing. From my understanding, nix doesn't care where the package is, because each package has a lock file, tracking all the dependencies. Okay, it could be a problem if one of the "repositories" is down, but using &lt;code&gt;nixpkgs&lt;/code&gt; mainly and github for niche packages should be fine.&lt;/p&gt;
+&lt;h4&gt;What are profiles?&lt;/h4&gt;
+&lt;p&gt;Disclaimer: I may be wrong on this, I'm starting to understand it.&lt;/p&gt;
+&lt;p&gt;The way to see &lt;code&gt;profiles&lt;/code&gt; is like "your user's packages". &lt;code&gt;nix profile&lt;/code&gt; links packages to your &lt;code&gt;~/.nix-profile/&lt;/code&gt;. You can specify other's profiles by using the flag &lt;code&gt;-p&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can find more in the &lt;a href="https://nixos.org/manual/nix/stable/package-management/profiles.html"&gt;package-management section of the manual&lt;/a&gt; and &lt;a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-profile.html"&gt;the profile command reference&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Searching packages&lt;/h3&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;search&lt;span class="w"&gt; &lt;/span&gt;nixpkgs#htop
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check the &lt;a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-search.html"&gt;search command reference&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We see again &lt;code&gt;nixpkgs&lt;/code&gt;, because we have to let nix know from where, and then what we are looking for (&lt;code&gt;htop&lt;/code&gt; in this case). To remember the word, I split it like this: &lt;code&gt;nix-p-k-gs&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For example, I've made a flake package, hosted on github, and you can search what is offering, by specifying the "repository" only (no &lt;code&gt;#&lt;/code&gt;):&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;search&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'github:woile/wpa_passphrase_rs'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can also search packages on &lt;a href="https://search.nixos.org/packages?channel=22.11&amp;amp;show=htop&amp;amp;from=0&amp;amp;size=50&amp;amp;sort=relevance&amp;amp;type=packages&amp;amp;query=htop"&gt;nix search index&lt;/a&gt;, but the commands shown are for the old nix interface, using &lt;code&gt;nix-env&lt;/code&gt; or &lt;code&gt;nix-shell&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Also, you can provide a regex like &lt;code&gt;firefox|chrome&lt;/code&gt;, run &lt;code&gt;nix search --help&lt;/code&gt; for more examples.&lt;/p&gt;
+&lt;h3&gt;Removing packages&lt;/h3&gt;
+&lt;p&gt;Now this is a bit tricky, to remove you cannot type &lt;code&gt;htop&lt;/code&gt;, you have to specify which dependency you want to clean. I think this is because one of your packages may depend on the version of another package, and if you also installed another version of the same package, then if you remove both, the original program that depends on one of them may break.&lt;/p&gt;
+&lt;p&gt;The solution to this is to list the installed packages in your profile, and then remove by position of said program.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;profile&lt;span class="w"&gt; &lt;/span&gt;list
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;profile&lt;span class="w"&gt; &lt;/span&gt;remove&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check the &lt;a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-profile-remove.html"&gt;profile remove command reference&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Open a package on a shell&lt;/h3&gt;
+&lt;p&gt;This can be useful to test in isolation without installing a package in your profile.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;nixpkgs#htop&lt;span class="w"&gt; &lt;/span&gt;nixpkgs#gnused&lt;span class="w"&gt; &lt;/span&gt;nixpkgs#youtube-dl
+
+sed&lt;span class="w"&gt; &lt;/span&gt;--help
+htop&lt;span class="w"&gt; &lt;/span&gt;--help
+youtube-dl&lt;span class="w"&gt; &lt;/span&gt;--version
+CTRL+D&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# exit&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Nix package manager (npt)&lt;/h3&gt;
+&lt;p&gt;Because I'm not used to most of the seen commands, I built a thin abstraction on top called &lt;a href="https://github.com/woile/npt"&gt;npt&lt;/a&gt;. Which aims to be a humble succesor to &lt;code&gt;apt&lt;/code&gt;. It also requires less characters to use it.&lt;/p&gt;
+&lt;p&gt;The installation, as we've seen before, can be done by running:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;profile&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'github:woile/npt#npt'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And then run &lt;code&gt;npt --help&lt;/code&gt; and check the commands, I hope it helps the transition to nix.&lt;/p&gt;
+&lt;p&gt;Now you can do install packages by doing:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;npt&lt;span class="w"&gt; &lt;/span&gt;i&lt;span class="w"&gt; &lt;/span&gt;htop&lt;span class="w"&gt; &lt;/span&gt;github:woile/wpa_passphrase_rs#wpa_passphrase
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It's still a work in progress, but a good start. I want to add to it the ability to show the executed nix commands, as a way to learn.&lt;/p&gt;
+&lt;h3&gt;Reproducible scripts&lt;/h3&gt;
+&lt;p&gt;Remember when I said even if you don't know much, someone else might, and having nix helps for this? and remember when I talked about my problems with &lt;code&gt;sed&lt;/code&gt; and &lt;code&gt;grep&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;Turns out nix can help in both of these situations, someone can write a reproducible shell script which you would execute, even without knowing much, it would work.&lt;/p&gt;
+&lt;p&gt;A minor problem is that we cannot use flakes yet, meaning we cannot run &lt;code&gt;nix shell&lt;/code&gt; and instead, we have to rely on &lt;code&gt;nix-shell&lt;/code&gt;. But it's coming, see &lt;a href="https://github.com/NixOS/nix/pull/5189"&gt;#5189&lt;/a&gt;, &lt;a href="https://github.com/NixOS/nix/issues/4715"&gt;#4715&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the meantime, let's try to solve the issue with what we have.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;touch&lt;span class="w"&gt; &lt;/span&gt;gnu-example.sh
+chmod&lt;span class="w"&gt; &lt;/span&gt;+x&lt;span class="w"&gt; &lt;/span&gt;gnu-example.sh
+vim&lt;span class="w"&gt; &lt;/span&gt;gnu-example.sh
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And paste the content of this script:&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="ch"&gt;#! /usr/bin/env nix-shell&lt;/span&gt;
+&lt;span class="c1"&gt;#! nix-shell gnused gnugrep&lt;/span&gt;
+
+grep&lt;span class="w"&gt; &lt;/span&gt;-V
+sed&lt;span class="w"&gt; &lt;/span&gt;--version
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If run &lt;code&gt;./gnu-example.sh&lt;/code&gt;, it would work both on linux, mac and probably also on freebsd.&lt;/p&gt;
+&lt;p&gt;Take a look at this other example, you can install a specific version of python and even dependencies.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="ch"&gt;#! /usr/bin/env nix-shell&lt;/span&gt;
+&lt;span class="c1"&gt;#! nix-shell --pure -i python -p "python38.withPackages (ps: [ ps.django ])"&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;django&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__version__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This opens the door to replace &lt;code&gt;pyenv&lt;/code&gt; and any &lt;code&gt;virtualenv&lt;/code&gt; you will ever need.&lt;/p&gt;
+&lt;p&gt;Imagine creating a nix file specific to your project with its dependencies, that you load only when in the project folder. Say goodbye any version manager (&lt;code&gt;pyenv&lt;/code&gt;, &lt;code&gt;nvm&lt;/code&gt;, etc).&lt;/p&gt;
+&lt;p&gt;You can read more about building a &lt;code&gt;shell.nix&lt;/code&gt; in the &lt;a href="https://nix.dev/tutorials/declarative-and-reproducible-developer-environments"&gt;nix.dev tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I hope you've learned something with this post, and if you liked it, please let me know in the comments section below or tag me on hachyderm &lt;a href="https://hachyderm.io/@woile"&gt;@woile&lt;/a&gt;.&lt;/p&gt;</description><guid>https://woile.dev/es/posts/nix-journey-part-2-replacing-apt-and-brew/</guid><pubDate>Sun, 08 Jan 2023 14:34:49 GMT</pubDate></item><item><title>Nix journey part 1: creating a flake</title><link>https://woile.dev/es/posts/nix-journey-part-1-creating-a-flake/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;I've started building my own home media center, and I thought it would be a good idea to learn something new and try to make it reproducible, thus I thought of &lt;a href="https://nixos.org/"&gt;nix&lt;/a&gt; for this. Nix is an operating system (which we won't care now), a language (also don't care for now), and a &lt;strong&gt;package manager&lt;/strong&gt;.
+We are gonna focus on the package manager part alone, which is already a lot for my brain. This package manager works on mac and linux, and it already has many packages available (bye bye interop problems between mac/linux?)&lt;/p&gt;
+&lt;p&gt;The first thing I needed for my raspberry pi was to create a PSK password using &lt;code&gt;wpa_password&lt;/code&gt;, and I tried to run it inside a nix shell on my mac, which didn't work, because &lt;code&gt;wpa_password&lt;/code&gt; doesn't run on a mac.
+This was a good opportunity to write something fast, and to make it reusable and reproducible from any unix OS using nix.&lt;/p&gt;
+&lt;h3&gt;Objectives&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a nix package for &lt;code&gt;wpa_password&lt;/code&gt; (a nix flake)&lt;/li&gt;
+&lt;li&gt;Use &lt;code&gt;wpa_password&lt;/code&gt; in my home-media project. I want to jump into a shell with the &lt;code&gt;wpa_password&lt;/code&gt; from any unix os, mac or linux (freebsd at some point?)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Creating a nix package&lt;/h3&gt;
+&lt;p&gt;I ended up writing the utility in rust, which took me a bunch of hours, the repo &lt;a href="https://github.com/woile/wpa_passphrase_rs"&gt;wpa_passphrase_rs&lt;/a&gt; contains the project finalized.&lt;/p&gt;
+&lt;p&gt;After a lot of reading, and wrapping my mind around nix, which I had 0 knowledge before, everything points out that flakes are the new kid in town, and that's what I should use in my project.&lt;/p&gt;
+&lt;p&gt;I have a take on nix status, which may need corroboration: nix is moving away from the old way to the new (flakes) way, and there are many outdated posts, and commands. Many commands that fit the pattern &lt;code&gt;nix-*&lt;/code&gt; are no longer used, and instead people now use the new &lt;code&gt;nix &amp;lt;command&amp;gt;&lt;/code&gt; instead. For example, things like &lt;code&gt;nix-shell&lt;/code&gt; are not used much anymore.&lt;/p&gt;
+&lt;p&gt;Going back to the nix flake, If you have &lt;a href="https://nixos.org/download.html"&gt;installed nix&lt;/a&gt;, &lt;strong&gt;flakes must be enabled&lt;/strong&gt;, because it's an experimental feature.&lt;/p&gt;
+&lt;p&gt;For mac (which only supports multiuser installation):&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'experimental-features = nix-command flakes'&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&amp;gt;&amp;gt;&lt;span class="w"&gt; &lt;/span&gt;/etc/nix/nix.conf
+&lt;span class="c1"&gt;# you may use ~/.config/nix/nix.conf on linux&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h4&gt;What are flakes?&lt;/h4&gt;
+&lt;p&gt;According to &lt;a href="https://nixos.wiki/wiki/Flakes"&gt;nix's wiki&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Flakes allow you to specify your code's dependencies (e.g. remote Git repositories) in a &lt;strong&gt;declarative way&lt;/strong&gt;, simply by listing them inside a &lt;code&gt;flake.nix&lt;/code&gt; file.
+Each dependency gets pinned, that is: its commit hash gets automatically stored into a file - named &lt;code&gt;flake.lock&lt;/code&gt; - making it easy to, upgrade it
+Flakes replace the nix-channels command and things like ad-hoc invocations of &lt;code&gt;builtins.fetchgit&lt;/code&gt; - no more worrying about keeping your channels in sync, no more worrying about forgetting about a dependency deep down in your tree: everything's at hand right inside &lt;code&gt;flake.lock&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Seems like we are gonna need two files: &lt;code&gt;flake.nix&lt;/code&gt; and &lt;code&gt;flake.lock&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The next step is to create the flake from a template. What available templates do we have? I wonder...&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;flake&lt;span class="w"&gt; &lt;/span&gt;show&lt;span class="w"&gt; &lt;/span&gt;templates
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;github:NixOS/templates/2d6dcce2f3898090c8eda16a16abdff8a80e8ebf
+├───defaultTemplate: template: A very basic flake
+└───templates
+    ├───bash-hello: template: An over-engineered Hello World in bash
+    ├───c-hello: template: An over-engineered Hello World in C
+    ├───compat: template: A default.nix and shell.nix for backward compatibility with Nix installations that don't support flakes
+    ├───full: template: A template that shows all standard flake outputs
+    ├───go-hello: template: A simple Go package
+    ├───haskell-hello: template: A Hello World in Haskell with one dependency
+    ├───haskell-nix: template: An haskell.nix template using hix
+    ├───hercules-ci: template: An example for Hercules-CI, containing only the necessary attributes for adding to your project.
+    ├───pandoc-xelatex: template: A report built with Pandoc, XeLaTex and a custom font
+    ├───python: template: Python template, using poetry2nix
+    ├───rust: template: Rust template, using Naersk
+    ├───rust-web-server: template: A Rust web server including a NixOS module
+    ├───simpleContainer: template: A NixOS container running apache-httpd
+    └───trivial: template: A very basic flake
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Fantastic! Look at that! There's a python version and even a rust web server. The one I need is the rust template, let's use that one as a base.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;flake&lt;span class="w"&gt; &lt;/span&gt;init&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;templates#rust
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And that was it, it worked. This is going well. I can create a binary inside &lt;code&gt;./result/bin&lt;/code&gt; by running&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or use it by running&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;run
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My mind is blown at this point 🤯&lt;/p&gt;
+&lt;h3&gt;Using the flake somewhere else&lt;/h3&gt;
+&lt;p&gt;I couldn't find much about this, as I said, there's a mix of old and new information.
+I think it clicked for me, when I realized that the &lt;code&gt;nix&lt;/code&gt; command is new, and it's integration with flakes goes to its core (am I correct on this?).&lt;/p&gt;
+&lt;p&gt;Using the flake becomes straightforward.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;nix&lt;span class="w"&gt; &lt;/span&gt;shell&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;'github:woile/wpa_passphrase_rs'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And &lt;code&gt;wpa_password&lt;/code&gt; will appear on my &lt;code&gt;PATH&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;wpa_password&lt;span class="w"&gt; &lt;/span&gt;--help
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And we can exit with a &lt;kbd&gt;CTRL&lt;/kbd&gt; + &lt;kbd&gt;D&lt;/kbd&gt;.&lt;/p&gt;
+&lt;h3&gt;What's next?&lt;/h3&gt;
+&lt;p&gt;What's the right way to make it declarative? I want to have a file with the dependencies required for my home media project, and I'd like to jump into a shell with everything present.&lt;/p&gt;
+&lt;p&gt;Is there a different strategy for this?&lt;/p&gt;
+&lt;p&gt;How to use &lt;a href="https://github.com/NixOS/nixops"&gt;NixOps&lt;/a&gt; to provision all my raspberries and any other machine that joins the fleet?&lt;/p&gt;
+&lt;p&gt;This &lt;a href="https://nixos.wiki/wiki/Ubuntu_vs._NixOS"&gt;comparison between Ubuntu and Nix&lt;/a&gt; appears to be useful, I should read as well.&lt;/p&gt;
+&lt;p&gt;Please let me know in the comments section below or tag me on hachyderm &lt;a href="https://hachyderm.io/@woile"&gt;@woile&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Thanks for reading&lt;/p&gt;</description><guid>https://woile.dev/es/posts/nix-journey-part-1-creating-a-flake/</guid><pubDate>Fri, 30 Dec 2022 16:04:18 GMT</pubDate></item></channel></rss>

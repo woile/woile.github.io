@@ -55,6 +55,7 @@
 <link rel="canonical" href="https://woile.dev/es/posts/nix-journey-part-1-creating-a-flake/">
 <!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
 <link rel="prev" href="../web-app-with-template-in-rust/" title="A Rust web app with HTML templates" type="text/html">
+<link rel="next" href="../nix-journey-part-2-replacing-apt-and-brew/" title="Nix journey part 2: replacing apt and brew" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Nix journey part 1: creating a flake">
 <meta property="og:url" content="https://woile.dev/es/posts/nix-journey-part-1-creating-a-flake/">
@@ -147,7 +148,7 @@ This was a good opportunity to write something fast, and to make it reusable and
 <p>I have a take on nix status, which may need corroboration: nix is moving away from the old way to the new (flakes) way, and there are many outdated posts, and commands. Many commands that fit the pattern <code>nix-*</code> are no longer used, and instead people now use the new <code>nix &lt;command&gt;</code> instead. For example, things like <code>nix-shell</code> are not used much anymore.</p>
 <p>Going back to the nix flake, If you have <a href="https://nixos.org/download.html">installed nix</a>, <strong>flakes must be enabled</strong>, because it's an experimental feature.</p>
 <p>For mac (which only supports multiuser installation):</p>
-<div class="code"><pre class="code literal-block"><span class="nb">echo</span> <span class="s1">'experimental-features = nix-command flakes'</span> &gt;&gt; /etc/nix/nix.conf
+<div class="code"><pre class="code literal-block"><span class="nb">echo</span><span class="w"> </span><span class="s1">'experimental-features = nix-command flakes'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/nix/nix.conf
 <span class="c1"># you may use ~/.config/nix/nix.conf on linux</span>
 </pre></div>
 <h4>What are flakes?</h4>
@@ -159,7 +160,7 @@ Flakes replace the nix-channels command and things like ad-hoc invocations of <
 </blockquote>
 <p>Seems like we are gonna need two files: <code>flake.nix</code> and <code>flake.lock</code>.</p>
 <p>The next step is to create the flake from a template. What available templates do we have? I wonder...</p>
-<div class="code"><pre class="code literal-block">nix flake show templates
+<div class="code"><pre class="code literal-block">nix<span class="w"> </span>flake<span class="w"> </span>show<span class="w"> </span>templates
 </pre></div>
 <div class="code"><pre class="code literal-block">github:NixOS/templates/2d6dcce2f3898090c8eda16a16abdff8a80e8ebf
 ├───defaultTemplate: template: A very basic flake
@@ -180,23 +181,23 @@ Flakes replace the nix-channels command and things like ad-hoc invocations of <
     └───trivial: template: A very basic flake
 </pre></div>
 <p>Fantastic! Look at that! There's a python version and even a rust web server. The one I need is the rust template, let's use that one as a base.</p>
-<div class="code"><pre class="code literal-block">nix flake init -t templates#rust
+<div class="code"><pre class="code literal-block">nix<span class="w"> </span>flake<span class="w"> </span>init<span class="w"> </span>-t<span class="w"> </span>templates#rust
 </pre></div>
 <p>And that was it, it worked. This is going well. I can create a binary inside <code>./result/bin</code> by running</p>
-<div class="code"><pre class="code literal-block">nix build
+<div class="code"><pre class="code literal-block">nix<span class="w"> </span>build
 </pre></div>
 <p>or use it by running</p>
-<div class="code"><pre class="code literal-block">nix run
+<div class="code"><pre class="code literal-block">nix<span class="w"> </span>run
 </pre></div>
 <p>My mind is blown at this point 🤯</p>
 <h3>Using the flake somewhere else</h3>
 <p>I couldn't find much about this, as I said, there's a mix of old and new information.
 I think it clicked for me, when I realized that the <code>nix</code> command is new, and it's integration with flakes goes to its core (am I correct on this?).</p>
 <p>Using the flake becomes straightforward.</p>
-<div class="code"><pre class="code literal-block">nix shell <span class="s1">'github:woile/wpa_passphrase_rs'</span>
+<div class="code"><pre class="code literal-block">nix<span class="w"> </span>shell<span class="w"> </span><span class="s1">'github:woile/wpa_passphrase_rs'</span>
 </pre></div>
 <p>And <code>wpa_password</code> will appear on my <code>PATH</code>.</p>
-<div class="code"><pre class="code literal-block">wpa_password --help
+<div class="code"><pre class="code literal-block">wpa_password<span class="w"> </span>--help
 </pre></div>
 <p>And we can exit with a <kbd>CTRL</kbd> + <kbd>D</kbd>.</p>
 <h3>What's next?</h3>
@@ -222,6 +223,7 @@ I think it clicked for me, when I realized that the <code>nix</code> command is 
         </ul>
 <ul class="pager hidden-print pagination">
 <li class="next">
+                <a class="hover:pagination__link" href="../nix-journey-part-2-replacing-apt-and-brew/" rel="next" title="Nix journey part 2: replacing apt and brew">Siguiente publicación</a>
             </li>
             <li class="previous">
                 <a class="hover:pagination__link" href="../web-app-with-template-in-rust/" rel="prev" title="A Rust web app with HTML templates">Publicación anterior</a>

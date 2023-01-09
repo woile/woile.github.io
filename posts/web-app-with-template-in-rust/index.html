@@ -157,43 +157,43 @@ you can probably read from, or serialize into different formats, many implemente
 <h3>Set up</h3>
 <p>You've already <a href="https://www.rust-lang.org/tools/install">installed rust</a>, so go to your projects folder
 and create a new rust project.</p>
-<div class="code"><pre class="code literal-block">cargo new web-template-rs
-<span class="nb">cd</span> web-template-rs/
+<div class="code"><pre class="code literal-block">cargo<span class="w"> </span>new<span class="w"> </span>web-template-rs
+<span class="nb">cd</span><span class="w"> </span>web-template-rs/
 </pre></div>
 <p>With the following dependencies.</p>
-<div class="code"><pre class="code literal-block">cargo add axum <span class="se">\</span>
-    tokio -F tokio/full <span class="se">\</span>
-    serde -F serde/derive <span class="se">\</span>
-    minijinja -F minijinja/builtins
+<div class="code"><pre class="code literal-block">cargo<span class="w"> </span>add<span class="w"> </span>axum<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>tokio<span class="w"> </span>-F<span class="w"> </span>tokio/full<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>serde<span class="w"> </span>-F<span class="w"> </span>serde/derive<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>minijinja<span class="w"> </span>-F<span class="w"> </span>minijinja/builtins
 </pre></div>
 <p>We use the <code>-F</code> flag to signal which features to include from those crates.</p>
 <h3>The Code</h3>
 <p>We are now ready to start. And we won't need anything else.</p>
 <p>A basic webserver returning HTML without a template looks something like this:</p>
-<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">};</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">};</span>
 
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span>
+<span class="p">}</span>
 
-<span class="cp">#[tokio::main]</span><span class="w"></span>
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#[tokio::main]</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// build our application with a single route</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="s">"/"</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span>
+<span class="w">            </span><span class="s">"/"</span><span class="p">,</span>
+<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span>
+<span class="w">        </span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">// run it with hyper on localhost:3000</span>
-<span class="w">    </span><span class="n">axum</span>::<span class="n">Server</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="s">"0.0.0.0:3000"</span><span class="p">.</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">())</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">into_make_service</span><span class="p">())</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="k">await</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">axum</span>::<span class="n">Server</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="s">"0.0.0.0:3000"</span><span class="p">.</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">())</span>
+<span class="w">        </span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">into_make_service</span><span class="p">())</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span>
+<span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 <p>To run our application we run</p>
-<div class="code"><pre class="code literal-block">cargo run
+<div class="code"><pre class="code literal-block">cargo<span class="w"> </span>run
 </pre></div>
 <p>Because we haven't configured any logging, you won't see anything in your terminal after running, that's fine.
 If you want to learn how to do it, check the <a href="https://github.com/tokio-rs/axum/tree/main/examples/tracing-aka-logging">tracing-example</a>.</p>
@@ -223,10 +223,10 @@ a GET HTTP request, and send it over a TCP connection to the given IP. If you pr
 No matter what language you use: rust, python, go, js, etc. requests are all plain text.</p>
 <p>Our rust web server, actually knows how to handle that request, because it includes a <code>route</code></p>
 <div class="code"><pre class="code literal-block"><span class="c1">// ...</span>
-<span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="s">"/"</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span><span class="w"></span>
-<span class="p">);</span><span class="w"></span>
+<span class="p">.</span><span class="n">route</span><span class="p">(</span>
+<span class="w">    </span><span class="s">"/"</span><span class="p">,</span>
+<span class="w">    </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span>
+<span class="p">);</span>
 </pre></div>
 <p><a href="https://github.com/tokio-rs/axum">Axum</a> sees the <code>/</code> and it know it has a function to handle that path. That function actually means something like</p>
 <blockquote>
@@ -264,19 +264,19 @@ hello world
 <p>Templates can be a monstrosity. Most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them, you may not get syntax highlight. For example, around Kubernetes there's a famous package manager "Helm", which uses templates on top of YAML. YAML is already a <a href="https://noyaml.com/">controversial language</a>, and with a template layer on top, it can become incredibly hard to read and maintain. Spite of this, templates are still <strong>convenient</strong>, and I don't know of a better alternative.</p>
 <h3>Axum with templates</h3>
 <p>Back to our web application! This time, we are gonna create 2 fictional <code>structs</code>, that we'll use as examples.</p>
-<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">serde</span>::<span class="n">Serialize</span><span class="p">;</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">serde</span>::<span class="n">Serialize</span><span class="p">;</span>
 
-<span class="cp">#[derive(Debug, Serialize)]</span><span class="w"></span>
-<span class="k">struct</span> <span class="nc">Items</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">id</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">name</span>: <span class="nb">String</span><span class="p">,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="cp">#[derive(Debug, Serialize)]</span>
+<span class="k">struct</span> <span class="nc">Items</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">id</span>: <span class="kt">i32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
 
-<span class="cp">#[derive(Debug, Serialize)]</span><span class="w"></span>
-<span class="k">struct</span> <span class="nc">Profile</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">full_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">items</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Items</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="cp">#[derive(Debug, Serialize)]</span>
+<span class="k">struct</span> <span class="nc">Profile</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">full_name</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="w">    </span><span class="n">items</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Items</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 <p>You can see we are using serde's <code>Serialize</code>, so minijinja can use them. And <code>Profile.items</code> is a <code>Vec</code>, this way we can showcase an iteration example in the template.</p>
 <p>As we've seen templates, we are ready to write our jinja2 like template in rust.</p>
@@ -304,65 +304,65 @@ hello world
 <span class="s">    &lt;ul&gt;</span>
 <span class="s">&lt;/body&gt;</span>
 <span class="s">&lt;/html&gt;</span>
-<span class="s">"#</span><span class="p">;</span><span class="w"></span>
+<span class="s">"#</span><span class="p">;</span>
 </pre></div>
 <p>Right in the body of the HTML, we show the <code>profile.full_name</code>, and then we iterate over each item, displaying the <code>name</code> and the <code>id</code>.</p>
 <p>And for Axum, we add a new route, that will create some example structs.</p>
-<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">,</span><span class="w"> </span><span class="n">extract</span>::<span class="n">Path</span><span class="p">};</span><span class="w"></span>
-<span class="k">use</span><span class="w"> </span><span class="n">minijinja</span>::<span class="n">render</span><span class="p">;</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">,</span><span class="w"> </span><span class="n">extract</span>::<span class="n">Path</span><span class="p">};</span>
+<span class="k">use</span><span class="w"> </span><span class="n">minijinja</span>::<span class="n">render</span><span class="p">;</span>
 
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span>
+<span class="p">}</span>
 
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_profile</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">profile_name</span><span class="p">)</span>: <span class="nc">Path</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">orders_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">id</span>: <span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">name</span>: <span class="s">"Article banana"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="n">id</span>: <span class="mi">2</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">name</span>: <span class="s">"Article apple"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">];</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Profile</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">full_name</span>: <span class="nc">profile_name</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="n">items</span>: <span class="nc">orders_example</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="p">};</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_profile</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">profile_name</span><span class="p">)</span>: <span class="nc">Path</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">orders_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span>
+<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">id</span>: <span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="n">name</span>: <span class="s">"Article banana"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">id</span>: <span class="mi">2</span><span class="p">,</span>
+<span class="w">            </span><span class="n">name</span>: <span class="s">"Article apple"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Profile</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">full_name</span>: <span class="nc">profile_name</span><span class="p">,</span>
+<span class="w">        </span><span class="n">items</span>: <span class="nc">orders_example</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="p">}</span>
 
-<span class="cp">#[tokio::main]</span><span class="w"></span>
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="s">"/"</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span><span class="w"></span>
-<span class="w">        </span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="w"></span>
-<span class="w">            </span><span class="s">"/:profile_name"</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span><span class="w"></span>
-<span class="w">        </span><span class="p">);</span><span class="w"></span>
+<span class="cp">#[tokio::main]</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span>
+<span class="w">            </span><span class="s">"/"</span><span class="p">,</span>
+<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span>
+<span class="w">            </span><span class="s">"/:profile_name"</span><span class="p">,</span>
+<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span>
+<span class="w">        </span><span class="p">);</span>
 <span class="w">    </span><span class="c1">// run it with hyper on localhost:3000</span>
-<span class="w">    </span><span class="n">axum</span>::<span class="n">Server</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="s">"0.0.0.0:3000"</span><span class="p">.</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">())</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">into_make_service</span><span class="p">())</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="k">await</span><span class="w"></span>
-<span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">axum</span>::<span class="n">Server</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="s">"0.0.0.0:3000"</span><span class="p">.</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">())</span>
+<span class="w">        </span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">into_make_service</span><span class="p">())</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span>
+<span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 <p>Too complicated?</p>
 <p>Let's take a look at this 2 lines:</p>
-<div class="code"><pre class="code literal-block"><span class="s">"/:profile_name"</span><span class="p">,</span><span class="w"></span>
-<span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="s">"/:profile_name"</span><span class="p">,</span>
+<span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span>
 </pre></div>
 <p>The first line is the <code>path</code>, which is a the root <code>/</code> + a variable value <code>:profile_name</code>.
 And right in the next line, we call the <code>get_profile</code>, which we can see how it uses the <code>profile_name</code> variable, extracted from the <code>path</code>.</p>
 <p>After that, we create the example <code>structs</code>. In a real example, that information would probably come from a database.</p>
 <p>And then, inside the <code>get_profile</code> we have:</p>
-<div class="code"><pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
-<span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span>
+<span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 <p>Where <code>render!</code> is minijinja's macro, that receives the template we previous declared, and then we provide some kind of "map" between the variables used in the template first, and then the rust variable.</p>
 <p>A downside here is, that if we have an error in our template, we are only going to see it during runtime.

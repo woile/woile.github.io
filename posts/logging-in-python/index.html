@@ -209,9 +209,9 @@ which is not recommended when you start growing.</p>
 </pre></div>
 <p>And your folder structure should look something like:</p>
 <div class="code"><pre class="code literal-block">my-app/
-└── my_app/
-    ├── foo.py
-    └── logs.py
+└──<span class="w"> </span>my_app/
+<span class="w">    </span>├──<span class="w"> </span>foo.py
+<span class="w">    </span>└──<span class="w"> </span>logs.py
 </pre></div>
 <h3>Structured logging</h3>
 <p>Structured logs are usually in JSON format, making it easy for machines to parse and index them. See for example <a href="https://www.elastic.co/blog/structured-logging-filebeat">structured logging with filebeat</a>.
@@ -235,29 +235,29 @@ A common format is bunyan, based on <a href="https://github.com/trentm/node-buny
 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">)</span>
 </pre></div>
 <p>The output of this script would only show the <code>info</code> logger, and it would look like this:</p>
-<div class="code"><pre class="code literal-block"><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_app"</span><span class="p">,</span><span class="w"> </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world"</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-21T07:41:06Z"</span><span class="p">,</span><span class="w"> </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;REDACTED&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nt">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">"pid"</span><span class="p">:</span><span class="w"> </span><span class="mi">40625</span><span class="p">,</span><span class="w"> </span><span class="nt">"v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_app"</span><span class="p">,</span><span class="w"> </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world"</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-21T07:41:06Z"</span><span class="p">,</span><span class="w"> </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;REDACTED&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nt">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">"pid"</span><span class="p">:</span><span class="w"> </span><span class="mi">40625</span><span class="p">,</span><span class="w"> </span><span class="nt">"v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
 </pre></div>
 <p>For local development, pipe the logs to the buyan cli, so they become friendly for developers.</p>
-<div class="code"><pre class="code literal-block">wget -c https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz -O - <span class="p">|</span> tar -xz
+<div class="code"><pre class="code literal-block">wget<span class="w"> </span>-c<span class="w"> </span>https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-xz
 
-python my_app.py <span class="p">|</span> ./bunyan
+python<span class="w"> </span>my_app.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>./bunyan
 </pre></div>
 <h3>Docker issues</h3>
 <p>Sometimes the logs are not sent to the terminal right away, specially if something is blocking. To prevent this, send right away the output to the terminal by setting the env <code>PYTHONUNBUFFERED=1</code>.</p>
 <h4>Dockerfile</h4>
 <p>Include this line</p>
-<div class="code"><pre class="code literal-block"><span class="k">ENV</span><span class="w"> </span>PYTHONUNBUFFERED <span class="m">1</span>
+<div class="code"><pre class="code literal-block"><span class="k">ENV</span><span class="w"> </span>PYTHONUNBUFFERED<span class="w"> </span><span class="m">1</span>
 </pre></div>
 <h3>Running docker</h3>
-<div class="code"><pre class="code literal-block">docker run --env <span class="s2">"PYTHONUNBUFFERED=1"</span> python:slim bash
+<div class="code"><pre class="code literal-block">docker<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">"PYTHONUNBUFFERED=1"</span><span class="w"> </span>python:slim<span class="w"> </span>bash
 </pre></div>
 <h3>Docker-compose</h3>
-<div class="code"><pre class="code literal-block"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">'3'</span><span class="w"></span>
-<span class="nt">services</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">my_app</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="c1"># ...</span><span class="w"></span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PYTHONUNBUFFERED=1</span><span class="w"></span>
+<div class="code"><pre class="code literal-block"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">'3'</span>
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_app</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PYTHONUNBUFFERED=1</span>
 </pre></div>
     </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
 <li>

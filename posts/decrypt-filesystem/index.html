@@ -144,34 +144,34 @@
 <p>Let's start opening a terminal and typing:</p>
 <p><code>lsblk</code></p>
 <p>Look for your encrypted partition, it might look something similar to:</p>
-<div class="code"><pre class="code literal-block">nvme0n1        <span class="m">259</span>:0    <span class="m">0</span> <span class="m">953</span>.9G  <span class="m">0</span> disk
-├─nvme0n1p1    <span class="m">259</span>:1    <span class="m">0</span>   512M  <span class="m">0</span> part
-├─nvme0n1p2    <span class="m">259</span>:2    <span class="m">0</span>   488M  <span class="m">0</span> part
-└─nvme0n1p3    <span class="m">259</span>:3    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> part
+<div class="code"><pre class="code literal-block">nvme0n1<span class="w">        </span><span class="m">259</span>:0<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">953</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+├─nvme0n1p1<span class="w">    </span><span class="m">259</span>:1<span class="w">    </span><span class="m">0</span><span class="w">   </span>512M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+├─nvme0n1p2<span class="w">    </span><span class="m">259</span>:2<span class="w">    </span><span class="m">0</span><span class="w">   </span>488M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+└─nvme0n1p3<span class="w">    </span><span class="m">259</span>:3<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">952</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
 </pre></div>
 <p>Then to decrypt:</p>
-<div class="code"><pre class="code literal-block">cryptsetup luksOpen &lt;path_to_encrypted&gt; &lt;name_for_unencrypted_partition&gt;
+<div class="code"><pre class="code literal-block">cryptsetup<span class="w"> </span>luksOpen<span class="w"> </span>&lt;path_to_encrypted&gt;<span class="w"> </span>&lt;name_for_unencrypted_partition&gt;
 <span class="c1"># This will prompt a password</span>
 </pre></div>
 <p>For example:</p>
-<div class="code"><pre class="code literal-block">cryptsetup luksOpen /dev/mapper/nvme0n1p3 woile
+<div class="code"><pre class="code literal-block">cryptsetup<span class="w"> </span>luksOpen<span class="w"> </span>/dev/mapper/nvme0n1p3<span class="w"> </span>woile
 </pre></div>
 <p>Once decrypted type again:</p>
 <p><code>lsblk</code></p>
 <p>And you'll see your partition unencrypted, something like this:</p>
-<div class="code"><pre class="code literal-block">nvme0n1        <span class="m">259</span>:0    <span class="m">0</span> <span class="m">953</span>.9G  <span class="m">0</span> disk
-├─nvme0n1p1    <span class="m">259</span>:1    <span class="m">0</span>   512M  <span class="m">0</span> part
-├─nvme0n1p2    <span class="m">259</span>:2    <span class="m">0</span>   488M  <span class="m">0</span> part
-└─nvme0n1p3    <span class="m">259</span>:3    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> part
-  └─woile <span class="m">253</span>:0    <span class="m">0</span> <span class="m">952</span>.9G  <span class="m">0</span> crypt
+<div class="code"><pre class="code literal-block">nvme0n1<span class="w">        </span><span class="m">259</span>:0<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">953</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+├─nvme0n1p1<span class="w">    </span><span class="m">259</span>:1<span class="w">    </span><span class="m">0</span><span class="w">   </span>512M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+├─nvme0n1p2<span class="w">    </span><span class="m">259</span>:2<span class="w">    </span><span class="m">0</span><span class="w">   </span>488M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+└─nvme0n1p3<span class="w">    </span><span class="m">259</span>:3<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">952</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+<span class="w">  </span>└─woile<span class="w"> </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">952</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>crypt
 </pre></div>
 <p>Now it's time to mount the new partition</p>
 <ol>
 <li>create a directory</li>
 <li>mount unencrypted partition</li>
 </ol>
-<div class="code"><pre class="code literal-block">mkdir /media/tmp_mount_location  <span class="c1"># (1)</span>
-mount /dev/mapper/woile /media/tmp_mount_location  <span class="c1"># (2)</span>
+<div class="code"><pre class="code literal-block">mkdir<span class="w"> </span>/media/tmp_mount_location<span class="w">  </span><span class="c1"># (1)</span>
+mount<span class="w"> </span>/dev/mapper/woile<span class="w"> </span>/media/tmp_mount_location<span class="w">  </span><span class="c1"># (2)</span>
 </pre></div>
 <p>That's it, if you go to /media/tmp_mount_location, your files should be there.</p>
 <p>This is mostly a mental note for me.</p>
