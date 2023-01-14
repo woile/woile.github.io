@@ -1126,6 +1126,9 @@ MARKDOWN_EXTENSION_CONFIGS = {
                     "format": "superfences.fence_div_format",
                 }
             ]
+        },
+        "pymdownx.highlight": {
+            "use_pygments": False
         }
     }
 }
@@ -1253,12 +1256,20 @@ MARKDOWN_EXTENSION_CONFIGS = {
 # (translatable)
 EXTRA_HEAD_DATA = """
 <script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script>
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script>
+<script>hljs.highlightAll();</script>
 """
 
 # Google Analytics or whatever else you use. Added to the bottom of <body>
 # in the default template (base.tmpl).
 # (translatable)
 # BODY_END = """
+
+
+# """
 # <script>
 #   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 #   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
