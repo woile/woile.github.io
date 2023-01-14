@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about configuration)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/configuration.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2023 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 09 Jan 2023 09:13:12 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Multiple configurations in kubernetes</title><link>https://woile.dev/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about configuration)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/configuration.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2023 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Sat, 14 Jan 2023 13:54:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Multiple configurations in kubernetes</title><link>https://woile.dev/posts/multiple-configurations-in-kubernetes/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;It may happen to you, that you start working with 2 or more different clusters in
 kubernetes. At this point, you'll want to have multiple config files, instead of
 replacing &lt;code&gt;~/.kube/config&lt;/code&gt;, which is fine the first few times.&lt;/p&gt;
 &lt;p&gt;In order to do this we only need to set &lt;code&gt;KUBECONFIG&lt;/code&gt; env variable with the path to the kubeconfigs.&lt;/p&gt;
 &lt;p&gt;Create a &lt;code&gt;configs&lt;/code&gt; folder, where the kubernetes config files will live.&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;~/.kube/configs
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;mkdir -p ~/.kube/configs&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The next thing is to add the env variable to our &lt;code&gt;.bashrc&lt;/code&gt;, &lt;code&gt;.zshrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt; file,
 with the location of our configurations. The paths should be separated by a &lt;code&gt;:&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/configs/gke-config:&lt;span class="nv"&gt;$HOME&lt;/span&gt;/.kube/configs/eks-config
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;export KUBECONFIG=$HOME/.kube/configs/gke-config:$HOME/.kube/configs/eks-config&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Reloading our terminal with &lt;code&gt;. ~/.bashrc&lt;/code&gt;, or opening a new one should pick up the changes.&lt;/p&gt;
 &lt;h4&gt;Automating the config detection&lt;/h4&gt;
 &lt;p&gt;Why not automate this? So everytime we add a new kubeconfig, it's detected automatically.&lt;/p&gt;
 &lt;p&gt;Here's my attempt, place this snippet in your &lt;code&gt;.bashrc&lt;/code&gt; or any other terminal file.&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;set_kubeconfig&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;{&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;entry&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$HOME&lt;/span&gt;&lt;span class="s2"&gt;/.kube/configs"&lt;/span&gt;/*
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;do&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="c1"&gt;# Get files which do not include "skip"&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$entry&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[[&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$entry&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;!&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;*&lt;span class="s2"&gt;"skip"&lt;/span&gt;*&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;]]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="k"&gt;then&lt;/span&gt;
-&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nv"&gt;kubeconfigs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="nv"&gt;$kubeconfigs&lt;/span&gt;&lt;span class="s2"&gt;:&lt;/span&gt;&lt;span class="nv"&gt;$entry&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;fi&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;set_kubeconfig() {
+    for entry in "$HOME/.kube/configs"/*
+    do
+        # Get files which do not include "skip"
+        if [ -f "$entry" ] &amp;amp;&amp;amp; [[ $entry != *"skip"* ]];then
+            kubeconfigs="$kubeconfigs:$entry"
+        fi
+    done
 
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="c1"&gt;# Clean first colons&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nv"&gt;kubeconfigs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;kubeconfigs&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="s2"&gt;":"&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
-&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;KUBECONFIG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$kubeconfigs&lt;/span&gt;
-&lt;span class="o"&gt;}&lt;/span&gt;
+    # Clean first colons
+    kubeconfigs=${kubeconfigs#":"}
+    export KUBECONFIG=$kubeconfigs
+}
 
-&lt;span class="c1"&gt;# Execute the function&lt;/span&gt;
-set_kubeconfig
-&lt;/pre&gt;&lt;/div&gt;
+# Execute the function
+set_kubeconfig&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This script will get all the &lt;strong&gt;files&lt;/strong&gt; inside &lt;code&gt;~/.kube/configs&lt;/code&gt;,
 which do not include &lt;code&gt;skip&lt;/code&gt; in their name, and will set the &lt;code&gt;KUBECONFIG&lt;/code&gt;
 variable to the found files.&lt;/p&gt;
@@ -39,16 +36,12 @@ variable to the found files.&lt;/p&gt;
 contexts and namespaces. I'll leave here the shortcuts&lt;/p&gt;
 &lt;p&gt;Remember that a context is a mix of [cluster, namespace, user].&lt;/p&gt;
 &lt;h5&gt;Current configuration&lt;/h5&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;kubectl&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;view&lt;span class="w"&gt; &lt;/span&gt;--minify&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="c1"&gt;# without minify we'll see all the configs&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;kubectl config view --minify  # without minify we'll see all the configs&lt;/code&gt;&lt;/pre&gt;
 &lt;h5&gt;List contexts&lt;/h5&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;kubectl&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;get-contexts
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;kubectl config get-contexts&lt;/code&gt;&lt;/pre&gt;
 &lt;h5&gt;Swtich context&lt;/h5&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;kubectl&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;use-context&lt;span class="w"&gt; &lt;/span&gt;&amp;lt;context_name&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;kubectl config use-context &amp;lt;context_name&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h5&gt;Switch namespace&lt;/h5&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;kubectl&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;set-context&lt;span class="w"&gt; &lt;/span&gt;--current&lt;span class="w"&gt; &lt;/span&gt;--namespace&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;new_namespace&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;kubectl config set-context --current --namespace=&amp;lt;new_namespace&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Find me on twitter: &lt;a href="https://twitter.com/santiwilly"&gt;@santiwilly&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Thanks for reading!&lt;/p&gt;</description><category>configuration</category><category>kubectl</category><category>kubernetes</category><category>linux</category><guid>https://woile.dev/posts/multiple-configurations-in-kubernetes/</guid><pubDate>Fri, 08 Nov 2019 18:15:28 GMT</pubDate></item></channel></rss>

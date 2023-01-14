@@ -53,8 +53,10 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/nix-journey-part-2-replacing-apt-and-brew/">
-<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
 <link rel="prev" href="../nix-journey-part-1-creating-a-flake/" title="Nix journey part 1: creating a flake" type="text/html">
+<link rel="next" href="../nix-journey-part-3-learning-nix-lang/" title="Nix journey part 3: learning nix-lang" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
 <meta property="og:title" content="Nix journey part 2: replacing apt and brew">
 <meta property="og:url" content="https://woile.dev/es/posts/nix-journey-part-2-replacing-apt-and-brew/">
@@ -156,79 +158,67 @@ We are gonna see how can to avoid this using nix. And even without using complic
 <p>And <a href="https://nixos.wiki/wiki/Flakes#Enable_flakes">enable flakes</a>.</p>
 <h3>Installing packages</h3>
 <p>Install a package like on <code>brew</code> or <code>apt</code>.</p>
-<div class="code"><pre class="code literal-block">nix<span class="w"> </span>profile<span class="w"> </span>install<span class="w"> </span>nixpkgs#htop
-</pre></div>
+<pre class="highlight"><code class="language-sh">nix profile install nixpkgs#htop</code></pre>
 <p>See also the <a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-profile-install.html">profile install command reference</a>.</p>
 <p>In the old version of nix, we would run:</p>
-<div class="code"><pre class="code literal-block">nix-env<span class="w"> </span>-iA<span class="w"> </span>nixpkgs.htop
-</pre></div>
+<pre class="highlight"><code class="language-sh">nix-env -iA nixpkgs.htop</code></pre>
 <p>Nix forces us to specify a "repository" (or "namespace") when installing a package (<code>nixpkgs</code>), which could be different, like github. And I think this is a good thing. From my understanding, nix doesn't care where the package is, because each package has a lock file, tracking all the dependencies. Okay, it could be a problem if one of the "repositories" is down, but using <code>nixpkgs</code> mainly and github for niche packages should be fine.</p>
 <h4>What are profiles?</h4>
 <p>Disclaimer: I may be wrong on this, I'm starting to understand it.</p>
 <p>The way to see <code>profiles</code> is like "your user's packages". <code>nix profile</code> links packages to your <code>~/.nix-profile/</code>. You can specify other's profiles by using the flag <code>-p</code>.</p>
 <p>You can find more in the <a href="https://nixos.org/manual/nix/stable/package-management/profiles.html">package-management section of the manual</a> and <a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-profile.html">the profile command reference</a></p>
 <h3>Searching packages</h3>
-<div class="code"><pre class="code literal-block">nix<span class="w"> </span>search<span class="w"> </span>nixpkgs#htop
-</pre></div>
+<pre class="highlight"><code class="language-sh">nix search nixpkgs#htop</code></pre>
 <p>Check the <a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-search.html">search command reference</a></p>
 <p>We see again <code>nixpkgs</code>, because we have to let nix know from where, and then what we are looking for (<code>htop</code> in this case). To remember the word, I split it like this: <code>nix-p-k-gs</code>.</p>
 <p>For example, I've made a flake package, hosted on github, and you can search what is offering, by specifying the "repository" only (no <code>#</code>):</p>
-<div class="code"><pre class="code literal-block">nix<span class="w"> </span>search<span class="w"> </span><span class="s1">'github:woile/wpa_passphrase_rs'</span>
-</pre></div>
+<pre class="highlight"><code class="language-sh">nix search 'github:woile/wpa_passphrase_rs'</code></pre>
 <p>You can also search packages on <a href="https://search.nixos.org/packages?channel=22.11&amp;show=htop&amp;from=0&amp;size=50&amp;sort=relevance&amp;type=packages&amp;query=htop">nix search index</a>, but the commands shown are for the old nix interface, using <code>nix-env</code> or <code>nix-shell</code>.</p>
 <p>Also, you can provide a regex like <code>firefox|chrome</code>, run <code>nix search --help</code> for more examples.</p>
 <h3>Removing packages</h3>
 <p>Now this is a bit tricky, to remove you cannot type <code>htop</code>, you have to specify which dependency you want to clean. I think this is because one of your packages may depend on the version of another package, and if you also installed another version of the same package, then if you remove both, the original program that depends on one of them may break.</p>
 <p>The solution to this is to list the installed packages in your profile, and then remove by position of said program.</p>
-<div class="code"><pre class="code literal-block">nix<span class="w"> </span>profile<span class="w"> </span>list
-</pre></div>
-<div class="code"><pre class="code literal-block">nix<span class="w"> </span>profile<span class="w"> </span>remove<span class="w"> </span><span class="m">4</span>
-</pre></div>
+<pre class="highlight"><code class="language-sh">nix profile list</code></pre>
+<pre class="highlight"><code class="language-sh">nix profile remove 4</code></pre>
 <p>Check the <a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-profile-remove.html">profile remove command reference</a>.</p>
 <h3>Open a package on a shell</h3>
 <p>This can be useful to test in isolation without installing a package in your profile.</p>
-<div class="code"><pre class="code literal-block">nix<span class="w"> </span>shell<span class="w"> </span>nixpkgs#htop<span class="w"> </span>nixpkgs#gnused<span class="w"> </span>nixpkgs#youtube-dl
+<pre class="highlight"><code class="language-sh">nix shell nixpkgs#htop nixpkgs#gnused nixpkgs#youtube-dl
 
-sed<span class="w"> </span>--help
-htop<span class="w"> </span>--help
-youtube-dl<span class="w"> </span>--version
-CTRL+D<span class="w"> </span><span class="c1"># exit</span>
-</pre></div>
+sed --help
+htop --help
+youtube-dl --version
+CTRL+D # exit</code></pre>
 <h3>Nix package manager (npt)</h3>
 <p>Because I'm not used to most of the seen commands, I built a thin abstraction on top called <a href="https://github.com/woile/npt">npt</a>. Which aims to be a humble succesor to <code>apt</code>. It also requires less characters to use it.</p>
 <p>The installation, as we've seen before, can be done by running:</p>
-<div class="code"><pre class="code literal-block">nix<span class="w"> </span>profile<span class="w"> </span>install<span class="w"> </span><span class="s1">'github:woile/npt#npt'</span>
-</pre></div>
+<pre class="highlight"><code class="language-sh">nix profile install 'github:woile/npt#npt'</code></pre>
 <p>And then run <code>npt --help</code> and check the commands, I hope it helps the transition to nix.</p>
 <p>Now you can install packages by doing:</p>
-<div class="code"><pre class="code literal-block">npt<span class="w"> </span>install<span class="w"> </span>htop<span class="w"> </span>github:woile/wpa_passphrase_rs#wpa_passphrase
-<span class="c1"># or npt i</span>
-</pre></div>
+<pre class="highlight"><code class="language-sh">npt install htop github:woile/wpa_passphrase_rs#wpa_passphrase
+# or npt i</code></pre>
 <p>It's still a work in progress, but a good start. I want to add to it the ability to show the executed nix commands, as a way to learn.</p>
 <h3>Reproducible scripts</h3>
 <p>Remember when I said even if you don't know much, someone else might, and having nix helps for this? and remember when I talked about my problems with <code>sed</code> and <code>grep</code>?</p>
 <p>Turns out nix can help in both of these situations, someone can write a reproducible shell script which you would execute, even without knowing much, it would work.</p>
 <p>A minor problem is that we cannot use flakes yet, meaning we cannot run <code>nix shell</code> and instead, we have to rely on <code>nix-shell</code>. But it's coming, see <a href="https://github.com/NixOS/nix/pull/5189">#5189</a>, <a href="https://github.com/NixOS/nix/issues/4715">#4715</a>.</p>
 <p>In the meantime, let's try to solve the issue with what we have.</p>
-<div class="code"><pre class="code literal-block">touch<span class="w"> </span>gnu-example.sh
-chmod<span class="w"> </span>+x<span class="w"> </span>gnu-example.sh
-vim<span class="w"> </span>gnu-example.sh
-</pre></div>
+<pre class="highlight"><code class="language-sh">touch gnu-example.sh
+chmod +x gnu-example.sh
+vim gnu-example.sh</code></pre>
 <p>And paste the content of this script:</p>
-<div class="code"><pre class="code literal-block"><span class="ch">#! /usr/bin/env nix-shell</span>
-<span class="c1">#! nix-shell gnused gnugrep</span>
+<pre class="highlight"><code class="language-sh">#! /usr/bin/env nix-shell
+#! nix-shell gnused gnugrep
 
-grep<span class="w"> </span>-V
-sed<span class="w"> </span>--version
-</pre></div>
+grep -V
+sed --version</code></pre>
 <p>If run <code>./gnu-example.sh</code>, it would work both on linux, mac and probably also on freebsd.</p>
 <p>Take a look at this other example, you can install a specific version of python and even dependencies.</p>
-<div class="code"><pre class="code literal-block"><span class="ch">#! /usr/bin/env nix-shell</span>
-<span class="c1">#! nix-shell --pure -i python -p "python38.withPackages (ps: [ ps.django ])"</span>
+<pre class="highlight"><code class="language-python">#! /usr/bin/env nix-shell
+#! nix-shell --pure -i python -p "python38.withPackages (ps: [ ps.django ])"
 
-<span class="kn">import</span> <span class="nn">django</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">django</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
-</pre></div>
+import django
+print(django.__version__)</code></pre>
 <p>This opens the door to replace <code>pyenv</code> and any <code>virtualenv</code> you will ever need.</p>
 <p>Imagine creating a nix file specific to your project with its dependencies, that you load only when in the project folder. Say goodbye any version manager (<code>pyenv</code>, <code>nvm</code>, etc).</p>
 <p>You can read more about building a <code>shell.nix</code> in the <a href="https://nix.dev/tutorials/declarative-and-reproducible-developer-environments">nix.dev tutorial</a>.</p>
@@ -255,6 +245,7 @@ sed<span class="w"> </span>--version
         </ul>
 <ul class="pager hidden-print pagination">
 <li class="next">
+                <a class="hover:pagination__link" href="../nix-journey-part-3-learning-nix-lang/" rel="next" title="Nix journey part 3: learning nix-lang">Siguiente publicación</a>
             </li>
             <li class="previous">
                 <a class="hover:pagination__link" href="../nix-journey-part-1-creating-a-flake/" rel="prev" title="Nix journey part 1: creating a flake">Publicación anterior</a>

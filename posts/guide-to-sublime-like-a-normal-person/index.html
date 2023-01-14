@@ -53,7 +53,8 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
 <link rel="canonical" href="https://woile.dev/posts/guide-to-sublime-like-a-normal-person/">
-<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
 <link rel="prev" href="../django-polymorphic-integration-with-django-filters/" title="How to filter Polymorphic Models with Django Filters" type="text/html">
 <link rel="next" href="../how-to-test-selenium-scrapper/" title="How to test Selenium scrapper with Python" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
@@ -139,11 +140,10 @@ latest version of <a href="https://www.sublimetext.com/3">Sublime Text 3</a>.</p
 
 <h3>General settings</h3>
 <p>Add the following settings in <code>Preferences &gt; Settings &gt; User Tab</code></p>
-<div class="code"><pre class="code literal-block">"trim_trailing_white_space_on_save": true,
+<pre class="highlight"><code>"trim_trailing_white_space_on_save": true,
 "auto_complete": false,
 "translate_tabs_to_spaces": true,
-"word_wrap": "false",
-</pre></div>
+"word_wrap": "false",</code></pre>
 <p><code>trim_trailing_white_space_on_save</code> deletes the trailing spaces. This is useful to select text
 properly and sometimes is required by many languages.</p>
 <p><code>auto_complete</code> improves sublime's performance. If the project is huge sublime will get slow while
@@ -281,23 +281,21 @@ This means that Sublime Linter will talk with the linter you have installed in y
 <ul>
 <li>If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reseted.</li>
 <li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settigns:
-<div class="code"><pre class="code literal-block">"syntax_map": {
+<pre class="highlight"><code>"syntax_map": {
     "python (django)": "python",
     "python django": "python"
-}
-</pre></div>
+}</code></pre>
 </li>
 <li>To change the mark style, open the package control and type <strong>Choose Mark Style</strong>, I like the Squiggly underline.</li>
 <li>You can ignore rules, in the settings of the linter inside the sublime linter settings.</li>
 <li>If you are using <code>mypy</code> and you want to ignore import hints, add to <code>sublimelinter &gt; user settings &gt; linters</code> the following:
-<div class="code"><pre class="code literal-block">"mypy": {
+<pre class="highlight"><code>"mypy": {
     "@disable": false,
     "args": [
         "--ignore-missing-imports"
     ],
     "excludes": []
-}
-</pre></div>
+}</code></pre>
 </li>
 </ul>
 <h3>Another useful Packages</h3>

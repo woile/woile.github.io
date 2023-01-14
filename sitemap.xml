@@ -7,982 +7,999 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://woile.dev/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2016/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2017/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2018/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2019/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2020/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2021/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2022/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/2023/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/archive.html</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/blog/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/blog/index-1.html</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/blog/index-2.html</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/api/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/apt/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/architecture/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/brew/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_containers/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_devops/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_docker/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_frontend/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_investment/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_kubernetes/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_linux/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_nix/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_programming/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_python/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_rust/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_security/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_self/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cat_travel/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/ci/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/cluster/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/conference/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/configuration/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/debian/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/django-rest-framework/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/django/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/docker/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/documentation/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/drf/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/encrypt/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/encryption/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/etf/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/europe/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/eurotrip/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/filters/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/fire/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/flake/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/friends/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/git-python-decli-cli-tutorial-programming/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/gnu/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/gopro/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/gpg/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/helm/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/html/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/init/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/investment/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/javascript/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/jinja/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/kubectl/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/kubernetes/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/linters/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/linux-python-containers-alpine-slim-debian/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/linux/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/logging/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/make/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/money/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/netherlands/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/networking/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.dev/categories/nix-lang/</loc>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/nix/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/package-manager/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/password-manager/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/polymorphic/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/programming/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/pycon/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/python-versions/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/python/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/raspberry/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/rust/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/security/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/selenium-python-testing/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/self/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/skype/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/sublime/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/templates/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/trip/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/tutorial/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/ubuntu/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/unix/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/categories/web-frameworks-development-security-https/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2016/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2017/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2018/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2019/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2020/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2021/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2022/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/2023/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/archive.html</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/blog/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/blog/index-1.html</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/blog/index-2.html</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/api/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/apt/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/architecture/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/argentinos/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/brew/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_containers/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_devops/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_docker/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_frontend/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_investment/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_kubernetes/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_linux/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_nix/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_programming/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_python/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_rust/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_security/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_self/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cat_travel/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/ci/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/cluster/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/conference/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/configuration/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/debian/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/dinero/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/django-rest-framework/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/django/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/docker/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/documentation/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/drf/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/encrypt/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/encryption/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/europe/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/eurotrip/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/filters/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/fire/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/flake/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/friends/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/git-python-decli-cli-tutorial-programming/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/gnu/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/gopro/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/gpg/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/helm/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/holanda/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/html/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/init/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/inversion/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/javascript/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/jinja/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/kubectl/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/kubernetes/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/linters/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/linux-python-containers-alpine-slim-debian/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/linux/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/logging/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/make/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/networking/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.dev/es/categories/nix-lang/</loc>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/nix/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/package-manager/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/password-manager/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/polymorphic/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/programming/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/pycon/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/python-versions/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/python/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/raspberry/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/rust/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/security/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/selenium-python-testing/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/self/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/skype/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/sublime/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/templates/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/trip/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/tutorial/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/ubuntu/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/unix/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/categories/web-frameworks-development-security-https/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/mentoring/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/es/posts/2019-yearly-retrospective/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/2019-yearly-retrospective/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/automating-semver-releases-with-commitizen/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/automating-semver-releases-with-commitizen/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/blog-inauguration/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/blog-inauguration/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/creating-a-small-git-like-cli-with-decli/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/creating-a-small-git-like-cli-with-decli/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/decrypt-filesystem/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/decrypt-filesystem/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/digesting-make-makefile/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/digesting-make-makefile/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/django-polymorphic-integration-with-django-filters/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/django-polymorphic-integration-with-django-filters/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/domain-driven-design-at-europython-2021/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/domain-driven-design-at-europython-2021/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/eurotrip-2016/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/eurotrip-2016/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/into-to-fire-in-the-netherlands/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/guide-to-sublime-like-a-normal-person/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/guide-to-sublime-like-a-normal-person/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/helm-3-crafting-a-chart/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/helm-3-crafting-a-chart/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/how-to-test-selenium-scrapper/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/how-to-test-selenium-scrapper/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/local-https-development-in-python-with-mkcert/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/local-https-development-in-python-with-mkcert/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/logging-in-python/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/logging-in-python/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/moving-from-docker-alpine-to-slim/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/moving-from-docker-alpine-to-slim/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/multiple-configurations-in-kubernetes/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/multiple-configurations-in-kubernetes/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/nix-journey-part-1-creating-a-flake/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/nix-journey-part-1-creating-a-flake/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/nix-journey-part-2-replacing-apt-and-brew/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/nix-journey-part-2-replacing-apt-and-brew/" />
  </url>
  <url>
+  <loc>https://woile.dev/es/posts/nix-journey-part-3-learning-nix-lang/</loc>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
+  <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/nix-journey-part-3-learning-nix-lang/" />
+ </url>
+ <url>
   <loc>https://woile.dev/es/posts/pycon-france-2019-experience/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/pycon-france-2019-experience/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/pyenv/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/pyenv/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/raspberries-hobby-cluster/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/raspberries-hobby-cluster/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/sharing-team-secrets/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/sharing-team-secrets/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/the-layout-team/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/the-layout-team/" />
  </url>
  <url>
   <loc>https://woile.dev/es/posts/web-app-with-template-in-rust/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="en" href="https://woile.dev/posts/web-app-with-template-in-rust/" />
  </url>
  <url>
   <loc>https://woile.dev/mentoring/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="es" href="https://woile.dev/es/mentoring/" />
  </url>
  <url>
   <loc>https://woile.dev/posts/2019-yearly-retrospective/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/automating-semver-releases-with-commitizen/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/blog-inauguration/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/creating-a-small-git-like-cli-with-decli/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/decrypt-filesystem/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/digesting-make-makefile/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/django-polymorphic-integration-with-django-filters/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/domain-driven-design-at-europython-2021/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/eurotrip-2016/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/get-skype-working-on-debian-stretch-x64-with-gnome3/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/guide-to-sublime-like-a-normal-person/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/helm-3-crafting-a-chart/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/how-to-test-selenium-scrapper/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/into-to-fire-in-the-netherlands/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
   <xhtml:link rel="alternate" hreflang="es" href="https://woile.dev/es/posts/fire-para-argentinos-en-los-paises-bajos/" />
  </url>
  <url>
   <loc>https://woile.dev/posts/local-https-development-in-python-with-mkcert/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/logging-in-python/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/moving-from-docker-alpine-to-slim/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/multiple-configurations-in-kubernetes/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/nix-journey-part-1-creating-a-flake/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/nix-journey-part-2-replacing-apt-and-brew/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://woile.dev/posts/nix-journey-part-3-learning-nix-lang/</loc>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/pycon-france-2019-experience/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/pyenv/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/raspberries-hobby-cluster/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/sharing-team-secrets/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/the-layout-team/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
  <url>
   <loc>https://woile.dev/posts/web-app-with-template-in-rust/</loc>
-  <lastmod>2023-01-09T09:13:00Z</lastmod>
+  <lastmod>2023-01-14T13:54:00Z</lastmod>
  </url>
 </urlset>

@@ -53,7 +53,8 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/logging-in-python/">
-<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
 <link rel="prev" href="../digesting-make-makefile/" title="Digesting Make and Makefiles" type="text/html">
 <link rel="next" href="../web-app-with-template-in-rust/" title="A Rust web app with HTML templates" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
@@ -135,130 +136,119 @@
 <p>This is a good configuration to start logging right away.
 You can use it when you have a single file, or you can share the <code>logger</code> if stored in a separated file,
 which is not recommended when you start growing.</p>
-<div class="code"><pre class="code literal-block"><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<pre class="highlight"><code class="language-python">import logging
+import os
+import sys
 
-<span class="n">LOGLEVEL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'LOGLEVEL'</span><span class="p">,</span> <span class="s1">'INFO'</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"my_app"</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOGLEVEL</span><span class="p">)</span>
-<span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
-<span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s2">"[</span><span class="si">%(asctime)s</span><span class="s2">] </span><span class="si">%(name)s</span><span class="s2">:</span><span class="si">%(lineno)d</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> :: </span><span class="si">%(message)s</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">console_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-<span class="n">console_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOGLEVEL</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console_handler</span><span class="p">)</span>
+LOGLEVEL = os.environ.get('LOGLEVEL', 'INFO').upper()
+logger = logging.getLogger("my_app")
+logger.setLevel(LOGLEVEL)
+console_handler = logging.StreamHandler(sys.stdout)
+formatter = logging.Formatter("[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s")
+console_handler.setFormatter(formatter)
+console_handler.setLevel(LOGLEVEL)
+logger.addHandler(console_handler)
 
-<span class="c1"># Send messages</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Set LOGLEVEL=DEBUG to see this"</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"An info log"</span><span class="p">)</span>
-</pre></div>
+# Send messages
+logger.debug("Set LOGLEVEL=DEBUG to see this")
+logger.info("An info log")</code></pre>
 <p>You can also replace <code>name</code> with <code>pathname</code> to get the full path.</p>
 <h3>Project-wide logging configuration</h3>
 <p>In this case we want to configure the logs once, by using the popular dict logging conf:</p>
-<div class="code"><pre class="code literal-block"><span class="c1"># ./my_app/logs.py</span>
-<span class="n">LOGGING_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"version"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"disable_existing_loggers"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">"formatters"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"standard"</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">"format"</span><span class="p">:</span> <span class="s2">"[</span><span class="si">%(asctime)s</span><span class="s2">] </span><span class="si">%(name)s</span><span class="s2">:</span><span class="si">%(lineno)d</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> :: </span><span class="si">%(message)s</span><span class="s2">"</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
-    <span class="s2">"handlers"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">"default"</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">"level"</span><span class="p">:</span> <span class="s2">"INFO"</span><span class="p">,</span>
-            <span class="s2">"formatter"</span><span class="p">:</span> <span class="s2">"standard"</span><span class="p">,</span>
-            <span class="s2">"class"</span><span class="p">:</span> <span class="s2">"logging.StreamHandler"</span><span class="p">,</span>
-            <span class="s2">"stream"</span><span class="p">:</span> <span class="s2">"ext://sys.stdout"</span><span class="p">,</span>  <span class="c1"># Default is stderr</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
-    <span class="s2">"loggers"</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">""</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># root logger</span>
-            <span class="s2">"handlers"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"default"</span><span class="p">],</span>
-            <span class="s2">"level"</span><span class="p">:</span> <span class="s2">"WARNING"</span><span class="p">,</span>
-            <span class="s2">"propagate"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="s2">"__main__"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># if __name__ == '__main__'</span>
-            <span class="s2">"handlers"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"default"</span><span class="p">],</span>
-            <span class="s2">"level"</span><span class="p">:</span> <span class="s2">"DEBUG"</span><span class="p">,</span>
-            <span class="s2">"propagate"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="s2">"my_app"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># folder</span>
-            <span class="s2">"handlers"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"default"</span><span class="p">],</span>
-            <span class="s2">"level"</span><span class="p">:</span> <span class="s2">"INFO"</span><span class="p">,</span>
-            <span class="s2">"propagate"</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">},</span>
-    <span class="p">},</span>
-<span class="p">}</span>
+<pre class="highlight"><code class="language-python"># ./my_app/logs.py
+LOGGING_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "standard": {
+            "format": "[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s"
+        },
+    },
+    "handlers": {
+        "default": {
+            "level": "INFO",
+            "formatter": "standard",
+            "class": "logging.StreamHandler",
+            "stream": "ext://sys.stdout",  # Default is stderr
+        },
+    },
+    "loggers": {
+        "": {  # root logger
+            "handlers": ["default"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "__main__": {  # if __name__ == '__main__'
+            "handlers": ["default"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "my_app": {  # folder
+            "handlers": ["default"],
+            "level": "INFO",
+            "propagate": False
+        },
+    },
+}
 
-<span class="kn">import</span> <span class="nn">logging.config</span>
+import logging.config
 
-<span class="k">def</span> <span class="nf">init</span><span class="p">():</span>
-    <span class="c1"># Run once at startup:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dictConfig</span><span class="p">(</span><span class="n">LOGGING_CONFIG</span><span class="p">)</span>
-</pre></div>
-<div class="code"><pre class="code literal-block"><span class="c1"># ./my_app/foo.py</span>
-<span class="kn">import</span> <span class="nn">logs</span>
+def init():
+    # Run once at startup:
+    logging.config.dictConfig(LOGGING_CONFIG)</code></pre>
+<pre class="highlight"><code class="language-python"># ./my_app/foo.py
+import logs
 
-<span class="n">logs</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+logs.init()
+logger = logging.getLogger(__name__)
 
-<span class="c1"># Send messages</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Set LOGLEVEL=DEBUG to see this"</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">)</span>
-</pre></div>
+# Send messages
+logger.debug("Set LOGLEVEL=DEBUG to see this")
+logger.info("Hello world")</code></pre>
 <p>And your folder structure should look something like:</p>
-<div class="code"><pre class="code literal-block">my-app/
-└──<span class="w"> </span>my_app/
-<span class="w">    </span>├──<span class="w"> </span>foo.py
-<span class="w">    </span>└──<span class="w"> </span>logs.py
-</pre></div>
+<pre class="highlight"><code class="language-sh">my-app/
+└── my_app/
+    ├── foo.py
+    └── logs.py</code></pre>
 <h3>Structured logging</h3>
 <p>Structured logs are usually in JSON format, making it easy for machines to parse and index them. See for example <a href="https://www.elastic.co/blog/structured-logging-filebeat">structured logging with filebeat</a>.
 A common format is bunyan, based on <a href="https://github.com/trentm/node-bunyan">bunyan-node</a>.</p>
-<div class="code"><pre class="code literal-block">pip install bunyan
-</pre></div>
-<div class="code"><pre class="code literal-block"><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">bunyan</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<pre class="highlight"><code>pip install bunyan</code></pre>
+<pre class="highlight"><code class="language-python">import logging
+import bunyan
+import sys
 
-<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"my_app"</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-<span class="n">console_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
-<span class="n">formatter</span> <span class="o">=</span> <span class="n">bunyan</span><span class="o">.</span><span class="n">BunyanFormatter</span><span class="p">()</span>
-<span class="n">console_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-<span class="n">console_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console_handler</span><span class="p">)</span>
+logger = logging.getLogger("my_app")
+logger.setLevel(logging.INFO)
+console_handler = logging.StreamHandler(sys.stdout)
+formatter = bunyan.BunyanFormatter()
+console_handler.setFormatter(formatter)
+console_handler.setLevel(logging.INFO)
+logger.addHandler(console_handler)
 
-<span class="c1"># Send messages</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Set LOGLEVEL=DEBUG to see this"</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Hello world"</span><span class="p">)</span>
-</pre></div>
+# Send messages
+logger.debug("Set LOGLEVEL=DEBUG to see this")
+logger.info("Hello world")</code></pre>
 <p>The output of this script would only show the <code>info</code> logger, and it would look like this:</p>
-<div class="code"><pre class="code literal-block"><span class="p">{</span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_app"</span><span class="p">,</span><span class="w"> </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello world"</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-06-21T07:41:06Z"</span><span class="p">,</span><span class="w"> </span><span class="nt">"hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;REDACTED&gt;"</span><span class="p">,</span><span class="w"> </span><span class="nt">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">"pid"</span><span class="p">:</span><span class="w"> </span><span class="mi">40625</span><span class="p">,</span><span class="w"> </span><span class="nt">"v"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
-</pre></div>
+<pre class="highlight"><code class="language-json">{"name": "my_app", "msg": "Hello world", "time": "2022-06-21T07:41:06Z", "hostname": "&lt;REDACTED&gt;", "level": 30, "pid": 40625, "v": 0}</code></pre>
 <p>For local development, pipe the logs to the buyan cli, so they become friendly for developers.</p>
-<div class="code"><pre class="code literal-block">wget<span class="w"> </span>-c<span class="w"> </span>https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>-xz
+<pre class="highlight"><code class="language-sh">wget -c https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz -O - | tar -xz
 
-python<span class="w"> </span>my_app.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>./bunyan
-</pre></div>
+python my_app.py | ./bunyan</code></pre>
 <h3>Docker issues</h3>
 <p>Sometimes the logs are not sent to the terminal right away, specially if something is blocking. To prevent this, send right away the output to the terminal by setting the env <code>PYTHONUNBUFFERED=1</code>.</p>
 <h4>Dockerfile</h4>
 <p>Include this line</p>
-<div class="code"><pre class="code literal-block"><span class="k">ENV</span><span class="w"> </span>PYTHONUNBUFFERED<span class="w"> </span><span class="m">1</span>
-</pre></div>
+<pre class="highlight"><code class="language-dockerfile">ENV PYTHONUNBUFFERED 1</code></pre>
 <h3>Running docker</h3>
-<div class="code"><pre class="code literal-block">docker<span class="w"> </span>run<span class="w"> </span>--env<span class="w"> </span><span class="s2">"PYTHONUNBUFFERED=1"</span><span class="w"> </span>python:slim<span class="w"> </span>bash
-</pre></div>
+<pre class="highlight"><code class="language-sh">docker run --env "PYTHONUNBUFFERED=1" python:slim bash</code></pre>
 <h3>Docker-compose</h3>
-<div class="code"><pre class="code literal-block"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">'3'</span>
-<span class="nt">services</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">my_app</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># ...</span>
-<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PYTHONUNBUFFERED=1</span>
-</pre></div>
+<pre class="highlight"><code class="language-yaml">version: '3'
+services:
+  my_app:
+    # ...
+    environment:
+      - PYTHONUNBUFFERED=1</code></pre>
     </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
 <li>
             <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/logging/" rel="tag">#logging</a>

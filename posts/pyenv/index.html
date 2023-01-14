@@ -53,7 +53,8 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
 <link rel="canonical" href="https://woile.dev/posts/pyenv/">
-<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
 <link rel="prev" href="../2019-yearly-retrospective/" title="2019 yearly retrospective" type="text/html">
 <link rel="next" href="../helm-3-crafting-a-chart/" title="Helm 3 - Crafting a Chart" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
@@ -138,30 +139,24 @@ You can also control a per directory version (this creates a <code>.python-versi
 Doesn't require python.</p>
 <h3>Installation</h3>
 <p>Use <a href="https://github.com/pyenv/pyenv-installer">pyenv-installer</a></p>
-<div class="code"><pre class="code literal-block">curl<span class="w"> </span>https://pyenv.run<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
-<span class="nb">exec</span><span class="w"> </span><span class="nv">$SHELL</span><span class="w">  </span><span class="c1"># Restart shell or open new terminal</span>
-</pre></div>
+<pre class="highlight"><code class="language-bash">curl https://pyenv.run | bash
+exec $SHELL  # Restart shell or open new terminal</code></pre>
 <h3>Usage</h3>
 <h4>Install different python versions</h4>
-<div class="code"><pre class="code literal-block">pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.6.10
-pyenv<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.7.6
-</pre></div>
+<pre class="highlight"><code class="language-bash">pyenv install 3.6.10
+pyenv install 3.7.6</code></pre>
 <h4>Set global python</h4>
-<div class="code"><pre class="code literal-block">pyenv<span class="w"> </span>global<span class="w"> </span><span class="m">3</span>.7.6
-</pre></div>
+<pre class="highlight"><code class="language-bash">pyenv global 3.7.6</code></pre>
 <p>Observe</p>
-<div class="code"><pre class="code literal-block">python<span class="w"> </span>--version
-<span class="nb">type</span><span class="w"> </span>-a<span class="w"> </span>python
-</pre></div>
+<pre class="highlight"><code class="language-bash">python --version
+type -a python</code></pre>
 <h4>Set local python</h4>
-<div class="code"><pre class="code literal-block"><span class="nb">cd</span><span class="w"> </span>~/my-project
-pyenv<span class="w"> </span><span class="nb">local</span><span class="w"> </span><span class="m">3</span>.6.10
-</pre></div>
+<pre class="highlight"><code class="language-bash">cd ~/my-project
+pyenv local 3.6.10</code></pre>
 <p>Observe</p>
-<div class="code"><pre class="code literal-block">cat<span class="w"> </span>.python-version
-python<span class="w"> </span>--version
-<span class="nb">type</span><span class="w"> </span>-a<span class="w"> </span>python
-</pre></div>
+<pre class="highlight"><code class="language-bash">cat .python-version
+python --version
+type -a python</code></pre>
 <h4>Other languages</h4>
 <p>There's a set of similar tools for other languages, following the
 same convention here, so if you know <code>pyenv</code>, you know <code>nodenv</code> for example.</p>

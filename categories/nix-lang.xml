@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about nix-lang)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/nix-lang.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2023 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Sat, 14 Jan 2023 13:54:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Nix journey part 3: learning nix-lang</title><link>https://woile.dev/posts/nix-journey-part-3-learning-nix-lang/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;I started reading the &lt;a href="https://nix.dev/tutorials/nix-language"&gt;nix-language&lt;/a&gt; tutorial that helps you understand the &lt;a href="https://nixos.org/manual/nix/stable/language/index.html"&gt;nix-lang&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The explanation that has made more sense so far is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you are familiar with JSON, imagine the Nix language as &lt;em&gt;JSON with functions&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Nix language data types &lt;em&gt;without functions&lt;/em&gt; work just like their counterparts in JSON and look very similar.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And here's a comparison:&lt;/p&gt;
+&lt;p&gt;nix:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;{
+  string = "hello";
+  integer = 1;
+  float = 3.141;
+  bool = true;
+  null = null;
+  list = [ 1 "two" false ];
+  attribute-set = {
+    a = "hello";
+    b = 2;
+    c = 2.718;
+    d = false;
+  }; # comments are supported
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;json:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-json"&gt;{
+  "string": "hello",
+  "integer": 1,
+  "float": 3.141,
+  "bool": true,
+  "null": null,
+  "list": [1, "two", false],
+  "object": {
+    "a": "hello",
+    "b": 1,
+    "c": 2.718,
+    "d": false
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I like what I see. Why not making it more similar to json though?&lt;/p&gt;
+&lt;p&gt;Here I'm listing my thoughts while reading. I hope this feedback can help improve the docs (I can't yet as I literally know nothing, taking it as a brain dump):&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Why no comma separated arrays? My hand automatically tries to add commas when making a list. Maybe an explanation would help to avoid people's complaints like me.&lt;/li&gt;
+&lt;li&gt;JSON with comments + functions? Sounds like a plan&lt;/li&gt;
+&lt;li&gt;Pure language, meaning no interaction with the outside world, except when reading files. I like this&lt;ol&gt;
+&lt;li&gt;Does it mean there's no &lt;code&gt;print&lt;/code&gt;? is the output of executing nix a &lt;code&gt;print&lt;/code&gt;?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;I bet I'll have to learn some builtin functions to understand it better&lt;/li&gt;
+&lt;li&gt;String concatenation is straightforward, nothing weird here &lt;code&gt;"a" + " " + "b"&lt;/code&gt; works as expected. Good.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;let .. in ...&lt;/code&gt; is weird, are they like function declarations? Strange way to create a local scope.&lt;/li&gt;
+&lt;li&gt;semicolons &lt;code&gt;;&lt;/code&gt; only  after initializing variables.&lt;/li&gt;
+&lt;li&gt;Could this language be used to replace &lt;code&gt;yaml&lt;/code&gt; and other configuration formats? What about &lt;code&gt;toml&lt;/code&gt; with functions? Okay, I'm derailing, back to reading.&lt;/li&gt;
+&lt;li&gt;It's not very intuitive, let's see some valid samples
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in
+a.x + a.y&lt;/code&gt;&lt;/pre&gt;
+it doesn't end with semicolon, outputs: 3. Ok
+Now the &lt;code&gt;with&lt;/code&gt; + assignment
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in
+b = with a; {t = x; u = y;}&lt;/code&gt;&lt;/pre&gt;
+error. Solution? wrap with &lt;code&gt;{}&lt;/code&gt; and introduce semicolon
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in {
+  b = with a; {t = x; u = y;};
+}&lt;/code&gt;&lt;/pre&gt;
+Works. Whatever. How do I add &lt;code&gt;b.x&lt;/code&gt; + &lt;code&gt;b.y&lt;/code&gt;?
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in {
+  b = with a; {t = x; u = y;};
+  b.t + b.u
+}&lt;/code&gt;&lt;/pre&gt;
+Nope, maybe the &lt;code&gt;let.. in...&lt;/code&gt; I just learned?
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;let
+  a = {
+    x = 1;
+    y = 2;
+    z = 3;
+  };
+in {
+  let b = with a; {t = x; u = y;};
+  in
+  b.t + b.u
+}&lt;/code&gt;&lt;/pre&gt;
+Nope. Couldn't find an explanation, maybe it's not allowed.&lt;/li&gt;
+&lt;li&gt;Why cannot coerce an int into a string? I don't see an explanation. Types could implement like a &lt;code&gt;Into&amp;lt;string&amp;gt;&lt;/code&gt; trait, right? Maybe there's a good reason, but I think this can be useful for naming things &lt;code&gt;[ home-1 home-2 ]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Integration with fs is dope.&lt;/li&gt;
+&lt;li&gt;How are search path populated? &lt;code&gt;&amp;lt;nixpkgs&amp;gt;&lt;/code&gt; works, but &lt;code&gt;&amp;lt;path&amp;gt;&lt;/code&gt; does not. Are there other variables? Good thing it's not recommended to use them.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Indented strings&lt;/code&gt; are fantastic. The equal amount of space trimmed is perfect for writing scripts that look good, without compromising style.
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;let
+  uglyyaml = ''
+  holis:
+    machines:
+      - m1
+      - m2
+  '';
+in
+  uglyyaml&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Well I'm done, it was worthy. After reading the quick overview I understand much more. So much I was able to create my own shell from a flake. This is the sample &lt;code&gt;flake.nix&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;/*
+  This flake provides a shell where you can add flakes
+
+  Adding dependencies:
+    1. Add your flake repository as an input url
+    2. Add the repository name to the function signature
+    3. Add your repo's package to buildInputs
+
+  Opening shell with your deps:
+    ```sh
+    nix develop
+    ```
+
+  For compatibility with nix-shell add the template compat:
+    ```sh
+    nix flake new . -t templates#compat
+    ```
+*/
+{
+  description = "Build your own shell";
+  inputs = {
+    utils = { url = "github:numtide/flake-utils"; };
+    wpa_passphrase_rs = { url = "github:woile/wpa_passphrase_rs/main"; };
+    # point 1: add repo url
+  };
+  # point 2: add to function
+  outputs = { self, nixpkgs, utils, wpa_passphrase_rs }:
+    utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        devShell = with pkgs; mkShell {
+          # point 3: add package
+          buildInputs = [
+            gnugrep
+            gnused
+            wpa_passphrase_rs.defaultPackage.${system}
+          ];
+        };
+      }
+    );
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Run &lt;code&gt;nix-develop&lt;/code&gt; and you'll have a shell with your dependencies.
+Question: How do I keep using my own shell?&lt;/p&gt;
+&lt;p&gt;You can copy-paste and extend that sample into your projects. I asked on github if it could be merged &lt;a href="https://github.com/NixOS/templates/issues/59"&gt;#59&lt;/a&gt;. Again, as a newbie in nix I don't know if it makes sense from nix perspective. Am I supposed to be doing things this way in nix?&lt;/p&gt;
+&lt;p&gt;What I've been thinking is that I would like a &lt;code&gt;cli&lt;/code&gt; that adds the code for me to the &lt;code&gt;flake.nix&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;$ flakectl add dep github:woile/wpa_passphrase_rs
+Searching packages...
+1. packages.x86_64-darwin.wpa_passphrase (0.1.0)
+
+Choose package to add [int]:
+1
+
+Does the package provide a service? [y/N]
+n&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And to add more things:&lt;/p&gt;
+&lt;p&gt;Environmental variables (maybe even encrypted using &lt;a href="https://github.com/ryantm/agenix"&gt;agenix&lt;/a&gt;):
+&lt;/p&gt;&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;$ flakectl add env SRC_FOLDER=foobar
+Adding variables to your flake.nix...
+
+After running `nix develop` or `nix-shell` to see your variable run:
+`echo $SRC_FOLDER`&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Language support&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;$ flakectl add lang python rust
+Adding support for python and rust to your flake.nix...
+
+Use `nix build py` to create a python wheel
+Use `nix build rs` to compile the rust code.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Commands&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;$ flakectl add cmd deploy
+Adding `deploy` script to your flake.nix...
+
+Use `nix run deploy` to execute the script.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And maybe some other ways to manipulate the flake itself. This way I can "ask" for the things I want, and later take a look at the result of the flake itself, without having to know much of nix-lang, and learning on the way.&lt;/p&gt;
+&lt;p&gt;The question is: What are common things people need?&lt;/p&gt;
+&lt;p&gt;It could be done with rust implementation of the AST parser &lt;a href="https://github.com/nix-community/rnix-parser"&gt;rnix-parser&lt;/a&gt;. Unfortunately I don't have much time to dig into this idea. Let me know if you do!&lt;/p&gt;
+&lt;p&gt;Thanks for reading again.&lt;/p&gt;
+&lt;p&gt;Find me on &lt;a href="https://hachyderm.io/@woile"&gt;@woile@hachyderm&lt;/a&gt;&lt;/p&gt;</description><category>flake</category><category>nix</category><category>nix-lang</category><guid>https://woile.dev/posts/nix-journey-part-3-learning-nix-lang/</guid><pubDate>Sat, 14 Jan 2023 13:26:08 GMT</pubDate></item></channel></rss>

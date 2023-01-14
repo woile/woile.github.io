@@ -53,7 +53,8 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/helm-3-crafting-a-chart/">
-<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
 <link rel="prev" href="../pyenv/" title="Pyenv" type="text/html">
 <link rel="next" href="../automating-semver-releases-with-commitizen/" title="Automating semver releases with commitizen" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
@@ -138,9 +139,8 @@ and installation. While doing so, it checks dependencies versions and some other
 <p><a href="https://helm.sh/docs/intro/">Official Helm 3 Documentation</a></p>
 <hr>
 <h3>Version used</h3>
-<div class="code"><pre class="code literal-block">$<span class="w"> </span>helm<span class="w"> </span>version<span class="w"> </span>--short
-v3.2.4+g0ad800e
-</pre></div>
+<pre class="highlight"><code class="language-bash">$ helm version --short
+v3.2.4+g0ad800e</code></pre>
 <h3>Helm Chart</h3>
 <blockquote>
 <p>A Chart is a Helm package. It contains all of the resource definitions necessary to run an application,
@@ -161,35 +161,31 @@ Homebrew formula, an apt dpkg, or a Yum RPM file <a href="https://helm.sh/docs/i
 or you can publish to a centralized chart repository like artifactory or your own github repo.</p>
 <p>In any case, calling it <code>charts/</code> is informative and flexible enough to choose any option.</p>
 <p>Inside <code>charts/</code>, we are going to use <code>helm</code> to create the first boilerplate of our app.</p>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>create<span class="w"> </span>&lt;package_name&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm create &lt;package_name&gt;</code></pre>
 <h5>Example</h5>
 <p>Along the post we'll use <code>auth-service</code> as our project example name.</p>
-<div class="code"><pre class="code literal-block">mkdir<span class="w"> </span>auth-service
-<span class="nb">cd</span><span class="w"> </span>auth-service/
-mkdir<span class="w"> </span>charts
-<span class="nb">cd</span><span class="w"> </span>charts/
-</pre></div>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>create<span class="w"> </span>auth-service
-</pre></div>
+<pre class="highlight"><code class="language-bash">mkdir auth-service
+cd auth-service/
+mkdir charts
+cd charts/</code></pre>
+<pre class="highlight"><code class="language-bash">helm create auth-service</code></pre>
 <h5>Structure</h5>
-<div class="code"><pre class="code literal-block">auth-service/
-└──<span class="w"> </span>charts/
-<span class="w">    </span>└──<span class="w"> </span>auth-service/
-<span class="w">        </span>├──<span class="w"> </span>charts/
-<span class="w">        </span>├──<span class="w"> </span>Chart.yaml
-<span class="w">        </span>├──<span class="w"> </span>templates/
-<span class="w">        </span>│<span class="w">   </span>├──<span class="w"> </span>deployment.yaml
-<span class="w">        </span>│<span class="w">   </span>├──<span class="w"> </span>_helpers.tpl
-<span class="w">        </span>│<span class="w">   </span>├──<span class="w"> </span>hpa.yaml
-<span class="w">        </span>│<span class="w">   </span>├──<span class="w"> </span>ingress.yaml
-<span class="w">        </span>│<span class="w">   </span>├──<span class="w"> </span>NOTES.txt
-<span class="w">        </span>│<span class="w">   </span>├──<span class="w"> </span>serviceaccount.yaml
-<span class="w">        </span>│<span class="w">   </span>├──<span class="w"> </span>service.yaml
-<span class="w">        </span>│<span class="w">   </span>└──<span class="w"> </span>tests/
-<span class="w">        </span>│<span class="w">       </span>└──<span class="w"> </span>test-connection.yaml
-<span class="w">        </span>└──<span class="w"> </span>values.yaml
-</pre></div>
+<pre class="highlight"><code class="language-bash">auth-service/
+└── charts/
+    └── auth-service/
+        ├── charts/
+        ├── Chart.yaml
+        ├── templates/
+        │   ├── deployment.yaml
+        │   ├── _helpers.tpl
+        │   ├── hpa.yaml
+        │   ├── ingress.yaml
+        │   ├── NOTES.txt
+        │   ├── serviceaccount.yaml
+        │   ├── service.yaml
+        │   └── tests/
+        │       └── test-connection.yaml
+        └── values.yaml</code></pre>
 <h5>Notes</h5>
 <ul>
 <li>
@@ -216,14 +212,12 @@ adding any extra stuff that you need.</p>
 <h4>Templating</h4>
 <p>If you have used other template systems like <code>jinja</code>, or Django's template engine,
 Helm's system is not that different: you can apply functions using a pipeline <code>|</code>.</p>
-<div class="code"><pre class="code literal-block"><span class="nt">food</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{{</span><span class="w"> </span><span class="nv">.Values.favorite.food | upper | quote</span><span class="w"> </span><span class="p p-Indicator">}}</span>
-</pre></div>
+<pre class="highlight"><code class="language-yaml">food: {{ .Values.favorite.food | upper | quote }}</code></pre>
 <p>Avoid adding complex template tags; the purpose of <code>yaml</code> is to be <strong>readable</strong>.
 By using templates, we make things more complex, and less readable, <strong>touch only when necessary</strong>.</p>
 <p><code>templates/_helpers.tpl</code> contains custom functions for your templates, like generating the release name based on values.</p>
 <p>To find problems with you charts, run:</p>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>lint<span class="w"> </span>&lt;package_name&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm lint &lt;package_name&gt;</code></pre>
 <h4>Values</h4>
 <p>Place the "configuration" that you want to expose to the users of the chart in
 the <code>values.yaml</code>, even if it's you who's gonna end up using it.
@@ -255,20 +249,18 @@ same principle applies to Helm. There's an interesting <a href="https://github.c
 about this.</p>
 <p>Ideally, your custom values should live outside the chart, and they should be given to the chart.</p>
 <p>Let's see a setup example for the <code>auth-service</code>.</p>
-<div class="code"><pre class="code literal-block">auth-service/
-├──<span class="w"> </span>charts/
-│<span class="w">   </span>└──<span class="w"> </span>auth-service/
-├──<span class="w"> </span>charts-values/
-│<span class="w">   </span>├──<span class="w"> </span>production/
-│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>redis.yaml
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>auth-service.yaml
-│<span class="w">   </span>└──<span class="w"> </span>staging/
-│<span class="w">       </span>└──<span class="w"> </span>auth-service.yaml
-└──<span class="w"> </span>src/
-</pre></div>
+<pre class="highlight"><code class="language-bash">auth-service/
+├── charts/
+│   └── auth-service/
+├── charts-values/
+│   ├── production/
+│   │   ├── redis.yaml
+│   │   └── auth-service.yaml
+│   └── staging/
+│       └── auth-service.yaml
+└── src/</code></pre>
 <p>The installation command would look like</p>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>install<span class="w"> </span>--values<span class="w"> </span>charts-values/production/auth-service.yaml<span class="w"> </span>auth-service-prod<span class="w"> </span>./auth-service
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm install --values charts-values/production/auth-service.yaml auth-service-prod ./auth-service</code></pre>
 <p>I'm not 100% happy with the above setup, mainly with the naming.
 But it allows having multiple values per chart per environment.
 We could easily add values for a redis pulled from the official Helm hub.
@@ -279,15 +271,12 @@ I'd like to hear opinions about it. How'd you do it?</p>
 Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have its own release, which will in turn have its own release name <a href="https://helm.sh/docs/intro/using_helm/#three-big-concepts">[3]</a>.</p>
 </blockquote>
 <h4>New release</h4>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>install<span class="w"> </span>&lt;release_name&gt;<span class="w"> </span>&lt;package_name&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm install &lt;release_name&gt; &lt;package_name&gt;</code></pre>
 <p>Deploy a new release to the cluster.</p>
 <p>We can also run a dry-run to check what's going to happen:</p>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>install<span class="w"> </span>&lt;release_name&gt;<span class="w"> </span>&lt;package_name&gt;<span class="w"> </span>--dry-run
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm install &lt;release_name&gt; &lt;package_name&gt; --dry-run</code></pre>
 <h5>Example</h5>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>install<span class="w"> </span>auth-service-prod<span class="w"> </span>./auth-service
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm install auth-service-prod ./auth-service</code></pre>
 <h5>Notes</h5>
 <ul>
 <li>
@@ -304,44 +293,35 @@ Consider a MySQL chart. If you want two databases running in your cluster, you c
 </ul>
 <h4>Check release status</h4>
 <p>After it is installed, we want to know if everything went well.</p>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>status<span class="w"> </span>&lt;release_name&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm status &lt;release_name&gt;</code></pre>
 <h5>Example</h5>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>status<span class="w"> </span>auth-service-prod
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm status auth-service-prod</code></pre>
 <blockquote>
 <p>An upgrade takes an existing release and upgrades it according to the information you provide. Because Kubernetes charts can be large and complex, Helm tries to perform the <strong>least invasive upgrade</strong>. It will only update things that have changed <strong>since the last release</strong>. <a href="https://helm.sh/docs/intro/using_helm/#helm-upgrade-and-helm-rollback-upgrading-a-release-and-recovering-on-failure">[6]</a></p>
 </blockquote>
 <h4>Uprgrade release</h4>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>upgrade<span class="w"> </span>-f<span class="w"> </span>&lt;custom_values.yaml&gt;<span class="w"> </span>&lt;release_name&gt;<span class="w"> </span>&lt;package_name&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm upgrade -f &lt;custom_values.yaml&gt; &lt;release_name&gt; &lt;package_name&gt;</code></pre>
 <h5>Example</h5>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>upgrade<span class="w"> </span>-f<span class="w"> </span>charts-values/production/auth-service.yaml<span class="w"> </span>auth-service-prod<span class="w"> </span>./auth-service
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm upgrade -f charts-values/production/auth-service.yaml auth-service-prod ./auth-service</code></pre>
 <h4>Rollback release</h4>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>rollback<span class="w"> </span>&lt;release_name&gt;<span class="w"> </span>&lt;revision&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm rollback &lt;release_name&gt; &lt;revision&gt;</code></pre>
 <h5>Example</h5>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>rollback<span class="w"> </span>auth-service-prod<span class="w"> </span><span class="m">1</span>
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm rollback auth-service-prod 1</code></pre>
 <h5>Notes</h5>
 <ul>
 <li>Any release version increment will produce a <code>revision</code> number. It goes from 1..N.</li>
 <li>Use <code>helm history &lt;release_name&gt;</code> to see the revisions of your <code>release_name</code>.</li>
 </ul>
 <h4>Uninstall release</h4>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>uninstall<span class="w"> </span>&lt;release_name&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm uninstall &lt;release_name&gt;</code></pre>
 <p>I won't go deep into this, but just know it exists, and you can remove an existing release.</p>
 <h4>Automating release cycle</h4>
 <p>A recommended best practice to avoid running <code>helm install</code> and <code>helm upgrade</code> <a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#install-or-upgrade-a-release-with-one-command">[7]</a> is to use:</p>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>&lt;release_name&gt;<span class="w"> </span>--values<span class="w"> </span>&lt;custom_values.yaml&gt;<span class="w"> </span>&lt;package_name&gt;
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm upgrade --install &lt;release_name&gt; --values &lt;custom_values.yaml&gt; &lt;package_name&gt;</code></pre>
 <p>This can be a benefit in an automated CI/CD pipeline. We let Helm perform the check to know if it's a first time,
 or a release upgrade.</p>
 <h5>Example</h5>
-<div class="code"><pre class="code literal-block">helm<span class="w"> </span>upgrade<span class="w"> </span>--install<span class="w"> </span>auth-service-prod<span class="w"> </span>--values<span class="w"> </span>charts-values/production/auth-service.yaml<span class="w"> </span>./auth-service
-</pre></div>
+<pre class="highlight"><code class="language-bash">helm upgrade --install auth-service-prod --values charts-values/production/auth-service.yaml ./auth-service</code></pre>
 <h5>Notes</h5>
 <ul>
 <li>Use <code>--atomic</code> to get automatic rollback on failures.<a href="https://lzone.de/blog/Helm-Best-Practices">[8]</a>

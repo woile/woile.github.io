@@ -53,7 +53,8 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
 <link rel="canonical" href="https://woile.dev/posts/web-app-with-template-in-rust/">
-<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
 <link rel="prev" href="../logging-in-python/" title="Logging in python" type="text/html">
 <link rel="next" href="../nix-journey-part-1-creating-a-flake/" title="Nix journey part 1: creating a flake" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
@@ -157,44 +158,40 @@ you can probably read from, or serialize into different formats, many implemente
 <h3>Set up</h3>
 <p>You've already <a href="https://www.rust-lang.org/tools/install">installed rust</a>, so go to your projects folder
 and create a new rust project.</p>
-<div class="code"><pre class="code literal-block">cargo<span class="w"> </span>new<span class="w"> </span>web-template-rs
-<span class="nb">cd</span><span class="w"> </span>web-template-rs/
-</pre></div>
+<pre class="highlight"><code class="language-sh">cargo new web-template-rs
+cd web-template-rs/</code></pre>
 <p>With the following dependencies.</p>
-<div class="code"><pre class="code literal-block">cargo<span class="w"> </span>add<span class="w"> </span>axum<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>tokio<span class="w"> </span>-F<span class="w"> </span>tokio/full<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>serde<span class="w"> </span>-F<span class="w"> </span>serde/derive<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>minijinja<span class="w"> </span>-F<span class="w"> </span>minijinja/builtins
-</pre></div>
+<pre class="highlight"><code class="language-sh">cargo add axum \
+    tokio -F tokio/full \
+    serde -F serde/derive \
+    minijinja -F minijinja/builtins</code></pre>
 <p>We use the <code>-F</code> flag to signal which features to include from those crates.</p>
 <h3>The Code</h3>
 <p>We are now ready to start. And we won't need anything else.</p>
 <p>A basic webserver returning HTML without a template looks something like this:</p>
-<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">};</span>
+<pre class="highlight"><code class="language-rust">use axum::{response::Html, routing::get, Router};
 
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span>
-<span class="p">}</span>
+async fn home() -&gt; Html&lt;&amp;'static str&gt; {
+    Html("hello world")
+}
 
-<span class="cp">#[tokio::main]</span>
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// build our application with a single route</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span>
-<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span>
-<span class="w">            </span><span class="s">"/"</span><span class="p">,</span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span>
-<span class="w">        </span><span class="p">);</span>
+#[tokio::main]
+async fn main() {
+    // build our application with a single route
+    let app = Router::new()
+        .route(
+            "/",
+            get(home),
+        );
 
-<span class="w">    </span><span class="c1">// run it with hyper on localhost:3000</span>
-<span class="w">    </span><span class="n">axum</span>::<span class="n">Server</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="s">"0.0.0.0:3000"</span><span class="p">.</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">())</span>
-<span class="w">        </span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">into_make_service</span><span class="p">())</span>
-<span class="w">        </span><span class="p">.</span><span class="k">await</span>
-<span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
+    // run it with hyper on localhost:3000
+    axum::Server::bind(&amp;"0.0.0.0:3000".parse().unwrap())
+        .serve(app.into_make_service())
+        .await
+        .unwrap();
+}</code></pre>
 <p>To run our application we run</p>
-<div class="code"><pre class="code literal-block">cargo<span class="w"> </span>run
-</pre></div>
+<pre class="highlight"><code class="language-sh">cargo run</code></pre>
 <p>Because we haven't configured any logging, you won't see anything in your terminal after running, that's fine.
 If you want to learn how to do it, check the <a href="https://github.com/tokio-rs/axum/tree/main/examples/tracing-aka-logging">tracing-example</a>.</p>
 <p>In the meanwhile, in your browser go to <code>0.0.0.0:3000</code> and observe the "hello world" text.</p>
@@ -204,166 +201,155 @@ a GET HTTP request, and send it over a TCP connection to the given IP. If you pr
 <p>What are all these acronyms? <a href="https://www.ietf.org/rfc/rfc793.html">TCP</a>, <a href="https://www.rfc-editor.org/rfc/rfc791.html">IP</a>, <a href="https://www.rfc-editor.org/rfc/rfc2616">HTTP</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035.html">DNS</a>. They are all Internet Standards. Conventions to guarantee interoperability, they make the internet work. Then is up to people to make actual tools around those protocols. If you want your coffee machine to communicate over the internet, when you start coding its code, you will have to handle all those protocols (or find libraries that already do it for you).</p>
 <p>Remember: <strong>HTTP is plain text</strong></p>
 <p>The request your browser will craft, will look something like this:</p>
-<div class="code"><pre class="code literal-block"><span class="nf">GET</span> <span class="nn">/</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="o">:</span> <span class="l">localhost:3000</span>
-<span class="na">User-Agent</span><span class="o">:</span> <span class="l">Mozilla/5.0</span>
-<span class="na">Accept</span><span class="o">:</span> <span class="l">*/*</span>
-</pre></div>
+<pre class="highlight"><code class="language-http">GET / HTTP/1.1
+Host: localhost:3000
+User-Agent: Mozilla/5.0
+Accept: */*</code></pre>
 <p>And it will be sent over the internet inside an HTTP request, which itself will travel inside a TCP packet, which itself travels inside an IP packet. But actually, we are doing this on our local machine, so it won't reach the internet, your computer knows there is someone listening to <code>0.0.0.0</code> right away.</p>
-<div class="code"><pre class="code literal-block">   IP
+<pre class="highlight"><code>   IP
  ┌────────────────────────────────┐
  │          TCP                   │
  │         ┌──────────────────────┤
  │         │           HTTP       │
  │         │          ┌───────────┤
  │         │          │  GET /    │
- └─────────┴──────────┴───────────┘
-</pre></div>
+ └─────────┴──────────┴───────────┘</code></pre>
 <p>The request will be received by our rust web server, and it will attempt to handle the "requested" path (<code>GET /</code>).
 No matter what language you use: rust, python, go, js, etc. requests are all plain text.</p>
 <p>Our rust web server, actually knows how to handle that request, because it includes a <code>route</code></p>
-<div class="code"><pre class="code literal-block"><span class="c1">// ...</span>
-<span class="p">.</span><span class="n">route</span><span class="p">(</span>
-<span class="w">    </span><span class="s">"/"</span><span class="p">,</span>
-<span class="w">    </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span>
-<span class="p">);</span>
-</pre></div>
+<pre class="highlight"><code class="language-rs">// ...
+.route(
+    "/",
+    get(home),
+);</code></pre>
 <p><a href="https://github.com/tokio-rs/axum">Axum</a> sees the <code>/</code> and it know it has a function to handle that path. That function actually means something like</p>
 <blockquote>
 <p>return an HTTP response containing HTML with the text "hello world"</p>
 </blockquote>
 <p>And what will axum create? <strong>a plain text HTTP response</strong></p>
-<div class="code"><pre class="code literal-block"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-<span class="na">content-type</span><span class="o">:</span> <span class="l">text/html; charset=utf-8</span>
-<span class="na">content-length</span><span class="o">:</span> <span class="l">11</span>
-<span class="na">date</span><span class="o">:</span> <span class="l">Mon, 17 Oct 2022 08:03:24 GMT</span>
+<pre class="highlight"><code class="language-http">HTTP/1.1 200 OK
+content-type: text/html; charset=utf-8
+content-length: 11
+date: Mon, 17 Oct 2022 08:03:24 GMT
 
-hello world
-</pre></div>
+hello world</code></pre>
 <p>Your browser will receive the response and render a nice white background with the given text.</p>
 <p>Enough with networking lessons woile! I want to know how to use templates.</p>
 <p>True, true... I forgot where were we going with all this... but do we know what templates are?</p>
 <h3>Templates</h3>
 <p>You mix a "custom language", with your target language. This way, you can output the target language from a different one. Let's say we want to create an HTML with a list of users from Rust, Python or Go:</p>
-<div class="code"><pre class="code literal-block"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Timmy<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Benji<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Mimi<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</pre></div>
+<pre class="highlight"><code class="language-html">&lt;ul&gt;
+    &lt;li&gt;Timmy&lt;/li&gt;
+    &lt;li&gt;Benji&lt;/li&gt;
+    &lt;li&gt;Mimi&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
 <p>What happens when we have a new user? We would have to edit it manually, right? Can we make this behave "dynamically" instead?</p>
 <p>Yes, using templates. Minijinja is a rust implementation of the popular python's <code>jinja2</code>. A popular "template engine" with its own language. Template engines are endless, and they don't share the same syntax. Python django's template engine, Go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use conditions.</p>
 <p>Now with a template engine, we can write something like this:</p>
-<div class="code"><pre class="code literal-block"><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<pre class="highlight"><code class="language-html">&lt;ul&gt;
     {% for user in users %}
-    <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>user.name<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    &lt;li&gt;user.name&lt;/li&gt;
     {% endfor %}
-<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</pre></div>
+&lt;/ul&gt;</code></pre>
 <p>This way, our fictional user service, can take this template, fetch the users, and passing through the template, render the list of users.</p>
 <p>Templates can be a monstrosity. Most of the time, the tooling around them is not good, and you don't get an error until you actually try to render them, you may not get syntax highlight. For example, around Kubernetes there's a famous package manager "Helm", which uses templates on top of YAML. YAML is already a <a href="https://noyaml.com/">controversial language</a>, and with a template layer on top, it can become incredibly hard to read and maintain. Spite of this, templates are still <strong>convenient</strong>, and I don't know of a better alternative.</p>
 <h3>Axum with templates</h3>
 <p>Back to our web application! This time, we are gonna create 2 fictional <code>structs</code>, that we'll use as examples.</p>
-<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">serde</span>::<span class="n">Serialize</span><span class="p">;</span>
+<pre class="highlight"><code class="language-rs">use serde::Serialize;
 
-<span class="cp">#[derive(Debug, Serialize)]</span>
-<span class="k">struct</span> <span class="nc">Items</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">id</span>: <span class="kt">i32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">name</span>: <span class="nb">String</span><span class="p">,</span>
-<span class="p">}</span>
+#[derive(Debug, Serialize)]
+struct Items {
+    id: i32,
+    name: String,
+}
 
-<span class="cp">#[derive(Debug, Serialize)]</span>
-<span class="k">struct</span> <span class="nc">Profile</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">full_name</span>: <span class="nb">String</span><span class="p">,</span>
-<span class="w">    </span><span class="n">items</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Items</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="p">}</span>
-</pre></div>
+#[derive(Debug, Serialize)]
+struct Profile {
+    full_name: String,
+    items: Vec&lt;Items&gt;,
+}</code></pre>
 <p>You can see we are using serde's <code>Serialize</code>, so minijinja can use them. And <code>Profile.items</code> is a <code>Vec</code>, this way we can showcase an iteration example in the template.</p>
 <p>As we've seen templates, we are ready to write our jinja2 like template in rust.</p>
-<div class="code"><pre class="code literal-block"><span class="k">const</span><span class="w"> </span><span class="n">PROFILE_TEMPLATE</span>: <span class="kp">&amp;</span><span class="o">'</span><span class="nb">static</span> <span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">r#"</span>
-<span class="s">&lt;!doctype html&gt;</span>
+<pre class="highlight"><code class="language-rust">const PROFILE_TEMPLATE: &amp;'static str = r#"
+&lt;!doctype html&gt;
 
-<span class="s">&lt;html lang="en"&gt;</span>
-<span class="s">&lt;head&gt;</span>
-<span class="s">  &lt;meta charset="utf-8"&gt;</span>
-<span class="s">  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</span>
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 
-<span class="s">  &lt;title&gt;A Basic HTML5 Template&lt;/title&gt;</span>
-<span class="s">  &lt;meta name="description" content="A basic HTML5 Template for new projects."&gt;</span>
-<span class="s">  &lt;meta name="author" content="Woile"&gt;</span>
-<span class="s">&lt;/head&gt;</span>
+  &lt;title&gt;A Basic HTML5 Template&lt;/title&gt;
+  &lt;meta name="description" content="A basic HTML5 Template for new projects."&gt;
+  &lt;meta name="author" content="Woile"&gt;
+&lt;/head&gt;
 
-<span class="s">&lt;body&gt;</span>
-<span class="s">    &lt;h1&gt;Profile of {{ profile.full_name|title }}&lt;/h1&gt;</span>
-<span class="s">    &lt;p&gt;This is a template example to show some functionality&lt;/p&gt;</span>
-<span class="s">    &lt;h2&gt;Items&lt;/h3&gt;</span>
-<span class="s">    &lt;ul&gt;</span>
-<span class="s">        {% for item in profile.items %}</span>
-<span class="s">        &lt;li&gt;{{ item.name }} ({{ item.id }})&lt;/li&gt;</span>
-<span class="s">        {% endfor %}</span>
-<span class="s">    &lt;ul&gt;</span>
-<span class="s">&lt;/body&gt;</span>
-<span class="s">&lt;/html&gt;</span>
-<span class="s">"#</span><span class="p">;</span>
-</pre></div>
+&lt;body&gt;
+    &lt;h1&gt;Profile of {{ profile.full_name|title }}&lt;/h1&gt;
+    &lt;p&gt;This is a template example to show some functionality&lt;/p&gt;
+    &lt;h2&gt;Items&lt;/h3&gt;
+    &lt;ul&gt;
+        {% for item in profile.items %}
+        &lt;li&gt;{{ item.name }} ({{ item.id }})&lt;/li&gt;
+        {% endfor %}
+    &lt;ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"#;</code></pre>
 <p>Right in the body of the HTML, we show the <code>profile.full_name</code>, and then we iterate over each item, displaying the <code>name</code> and the <code>id</code>.</p>
 <p>And for Axum, we add a new route, that will create some example structs.</p>
-<div class="code"><pre class="code literal-block"><span class="k">use</span><span class="w"> </span><span class="n">axum</span>::<span class="p">{</span><span class="n">response</span>::<span class="n">Html</span><span class="p">,</span><span class="w"> </span><span class="n">routing</span>::<span class="n">get</span><span class="p">,</span><span class="w"> </span><span class="n">Router</span><span class="p">,</span><span class="w"> </span><span class="n">extract</span>::<span class="n">Path</span><span class="p">};</span>
-<span class="k">use</span><span class="w"> </span><span class="n">minijinja</span>::<span class="n">render</span><span class="p">;</span>
+<pre class="highlight"><code class="language-rs">use axum::{response::Html, routing::get, Router, extract::Path};
+use minijinja::render;
 
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">home</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;&amp;'</span><span class="nb">static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span>
-<span class="p">}</span>
+async fn home() -&gt; Html&lt;&amp;'static str&gt; {
+    Html("hello world")
+}
 
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_profile</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">profile_name</span><span class="p">)</span>: <span class="nc">Path</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Html</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">orders_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span>
-<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">id</span>: <span class="mi">1</span><span class="p">,</span>
-<span class="w">            </span><span class="n">name</span>: <span class="s">"Article banana"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="n">Items</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">id</span>: <span class="mi">2</span><span class="p">,</span>
-<span class="w">            </span><span class="n">name</span>: <span class="s">"Article apple"</span><span class="p">.</span><span class="n">into</span><span class="p">(),</span>
-<span class="w">        </span><span class="p">},</span>
-<span class="w">    </span><span class="p">];</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Profile</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">full_name</span>: <span class="nc">profile_name</span><span class="p">,</span>
-<span class="w">        </span><span class="n">items</span>: <span class="nc">orders_example</span><span class="p">,</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span>
-<span class="w">    </span><span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-<span class="p">}</span>
+async fn get_profile(Path(profile_name): Path&lt;String&gt;) -&gt; Html&lt;String&gt; {
+    let orders_example = vec![
+        Items {
+            id: 1,
+            name: "Article banana".into(),
+        },
+        Items {
+            id: 2,
+            name: "Article apple".into(),
+        },
+    ];
+    let profile_example = Profile {
+        full_name: profile_name,
+        items: orders_example,
+    };
+    let r = render!(PROFILE_TEMPLATE, profile =&gt; profile_example );
+    Html(r)
+}
 
-<span class="cp">#[tokio::main]</span>
-<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Router</span>::<span class="n">new</span><span class="p">()</span>
-<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span>
-<span class="w">            </span><span class="s">"/"</span><span class="p">,</span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">home</span><span class="p">),</span>
-<span class="w">        </span><span class="p">)</span>
-<span class="w">        </span><span class="p">.</span><span class="n">route</span><span class="p">(</span>
-<span class="w">            </span><span class="s">"/:profile_name"</span><span class="p">,</span>
-<span class="w">            </span><span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span>
-<span class="w">        </span><span class="p">);</span>
-<span class="w">    </span><span class="c1">// run it with hyper on localhost:3000</span>
-<span class="w">    </span><span class="n">axum</span>::<span class="n">Server</span>::<span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="s">"0.0.0.0:3000"</span><span class="p">.</span><span class="n">parse</span><span class="p">().</span><span class="n">unwrap</span><span class="p">())</span>
-<span class="w">        </span><span class="p">.</span><span class="n">serve</span><span class="p">(</span><span class="n">app</span><span class="p">.</span><span class="n">into_make_service</span><span class="p">())</span>
-<span class="w">        </span><span class="p">.</span><span class="k">await</span>
-<span class="w">        </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
+#[tokio::main]
+async fn main() {
+    let app = Router::new()
+        .route(
+            "/",
+            get(home),
+        )
+        .route(
+            "/:profile_name",
+            get(get_profile),
+        );
+    // run it with hyper on localhost:3000
+    axum::Server::bind(&amp;"0.0.0.0:3000".parse().unwrap())
+        .serve(app.into_make_service())
+        .await
+        .unwrap();
+}</code></pre>
 <p>Too complicated?</p>
 <p>Let's take a look at this 2 lines:</p>
-<div class="code"><pre class="code literal-block"><span class="s">"/:profile_name"</span><span class="p">,</span>
-<span class="n">get</span><span class="p">(</span><span class="n">get_profile</span><span class="p">),</span>
-</pre></div>
+<pre class="highlight"><code class="language-rust">"/:profile_name",
+get(get_profile),</code></pre>
 <p>The first line is the <code>path</code>, which is a the root <code>/</code> + a variable value <code>:profile_name</code>.
 And right in the next line, we call the <code>get_profile</code>, which we can see how it uses the <code>profile_name</code> variable, extracted from the <code>path</code>.</p>
 <p>After that, we create the example <code>structs</code>. In a real example, that information would probably come from a database.</p>
 <p>And then, inside the <code>get_profile</code> we have:</p>
-<div class="code"><pre class="code literal-block"><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">render</span><span class="o">!</span><span class="p">(</span><span class="n">PROFILE_TEMPLATE</span><span class="p">,</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">profile_example</span><span class="w"> </span><span class="p">);</span>
-<span class="n">Html</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</pre></div>
+<pre class="highlight"><code class="language-rust">let r = render!(PROFILE_TEMPLATE, profile =&gt; profile_example );
+Html(r)</code></pre>
 <p>Where <code>render!</code> is minijinja's macro, that receives the template we previous declared, and then we provide some kind of "map" between the variables used in the template first, and then the rust variable.</p>
 <p>A downside here is, that if we have an error in our template, we are only going to see it during runtime.
 But on the bright side, this introduction was a quick way to get started with templates and axum in Rust.</p>

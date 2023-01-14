@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about frontend)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/cat_frontend.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2023 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 09 Jan 2023 09:13:13 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Layout Team</title><link>https://woile.dev/posts/the-layout-team/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For the last couple of months I've had this idea spinning in my head, which I'm
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about frontend)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/cat_frontend.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2023 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Sat, 14 Jan 2023 13:54:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>The Layout Team</title><link>https://woile.dev/posts/the-layout-team/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For the last couple of months I've had this idea spinning in my head, which I'm
 calling:&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The Layout Team&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Is a work in progress and I'll try to update it when new things come to my mind.
@@ -62,20 +62,19 @@ as part of each apps bundle!&lt;/p&gt;
 &lt;p&gt;Finally, &lt;strong&gt;The Layout Team&lt;/strong&gt; leverages the use of &lt;code&gt;flex&lt;/code&gt; and &lt;code&gt;grid&lt;/code&gt; heavily.
 They shape the app over time. And create &lt;em&gt;slots&lt;/em&gt; for each team.&lt;/p&gt;
 &lt;p&gt;Let's see an example:&lt;/p&gt;
-&lt;div class="code"&gt;&lt;pre class="code literal-block"&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"box grid grid-cols-2"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;maintainer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"teamA"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ComponentFromTeamA&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;maintainer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"teamB"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ComponentFromTeamB&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;maintainer&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"teamC"&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;ComponentFromTeamC&lt;/span&gt;&lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-html"&gt;&amp;lt;div class="box grid grid-cols-2"&amp;gt;
+  &amp;lt;div maintainer="teamA"&amp;gt;
+    &amp;lt;ComponentFromTeamA/&amp;gt;
+  &amp;lt;/div&amp;gt;
+  &amp;lt;div&amp;gt;
+    &amp;lt;div maintainer="teamB"&amp;gt;
+      &amp;lt;ComponentFromTeamB/&amp;gt;
+    &amp;lt;/div&amp;gt;
+    &amp;lt;div maintainer="teamC"&amp;gt;
+      &amp;lt;ComponentFromTeamC/&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;style&gt;
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -53,7 +53,8 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../rss.xml">
 <link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../../rss.xml">
 <link rel="canonical" href="https://woile.dev/es/posts/the-layout-team/">
-<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><meta name="author" content="Woile">
+<!--[if lt IE 9]><script src="../../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
 <link rel="prev" href="../domain-driven-design-at-europython-2021/" title="Domain driven design at Europython 2021" type="text/html">
 <link rel="next" href="../digesting-make-makefile/" title="Digesting Make and Makefiles" type="text/html">
 <meta property="og:site_name" content="Willy's blog">
@@ -194,20 +195,19 @@ as part of each apps bundle!</p>
 <p>Finally, <strong>The Layout Team</strong> leverages the use of <code>flex</code> and <code>grid</code> heavily.
 They shape the app over time. And create <em>slots</em> for each team.</p>
 <p>Let's see an example:</p>
-<div class="code"><pre class="code literal-block"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"box grid grid-cols-2"</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">maintainer</span><span class="o">=</span><span class="s">"teamA"</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">ComponentFromTeamA</span><span class="p">/&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">maintainer</span><span class="o">=</span><span class="s">"teamB"</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">ComponentFromTeamB</span><span class="p">/&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">maintainer</span><span class="o">=</span><span class="s">"teamC"</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">ComponentFromTeamC</span><span class="p">/&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</pre></div>
+<pre class="highlight"><code class="language-html">&lt;div class="box grid grid-cols-2"&gt;
+  &lt;div maintainer="teamA"&gt;
+    &lt;ComponentFromTeamA/&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;div maintainer="teamB"&gt;
+      &lt;ComponentFromTeamB/&gt;
+    &lt;/div&gt;
+    &lt;div maintainer="teamC"&gt;
+      &lt;ComponentFromTeamC/&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 <style>
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
