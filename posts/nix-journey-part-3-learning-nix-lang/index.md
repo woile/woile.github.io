@@ -241,10 +241,18 @@ Use `nix build rs` to compile the rust code.
 Commands
 
 ```sh
-$ flakectl add cmd deploy
+$ flakectl add script deploy --bang py
 Adding `deploy` script to your flake.nix...
 
 Use `nix run deploy` to execute the script.
+```
+
+Would something like this make sense as output?
+
+```sh
+$ tree scripts
+scripts/
+└── deploy.nix
 ```
 
 And maybe some other ways to manipulate the flake itself. This way I can "ask" for the things I want, and later take a look at the result of the flake itself, without having to know much of nix-lang, and learning on the way.
