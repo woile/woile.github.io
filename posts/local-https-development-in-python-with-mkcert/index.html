@@ -155,18 +155,18 @@ and websockets in some cases where SSL is already enabled.</p>
 </section><section id="configuring-mkcert"><h2><a class="toc-backref" href="#toc-entry-2" role="doc-backlink">Configuring mkcert</a></h2>
 <p>Install the <a class="reference external" href="https://github.com/FiloSottile/mkcert/#installation">dependencies for your os</a>.
 In my case I'm using a Linux Debian based os.</p>
-<div class="code"><pre class="code console"><a id="rest_code_4578263771d144e781cc47314bdf12a4-1" name="rest_code_4578263771d144e781cc47314bdf12a4-1" href="#rest_code_4578263771d144e781cc47314bdf12a4-1"></a><span class="go">sudo apt install libnss3-tools</span>
+<div class="code"><pre class="code console"><a id="rest_code_3dfc50402f9d4f26b168a209615ce334-1" name="rest_code_3dfc50402f9d4f26b168a209615ce334-1" href="#rest_code_3dfc50402f9d4f26b168a209615ce334-1"></a><span class="go">sudo apt install libnss3-tools</span>
 </pre></div>
 <p>Download the binary for your distribution from
 <a class="reference external" href="https://github.com/FiloSottile/mkcert/releases">mkcert release page</a></p>
 <p>Rename the file to <code>mkcert</code> and give execution permissions</p>
-<div class="code"><pre class="code console"><a id="rest_code_ea1767ad53894609b97dce9e8650d0d0-1" name="rest_code_ea1767ad53894609b97dce9e8650d0d0-1" href="#rest_code_ea1767ad53894609b97dce9e8650d0d0-1"></a><span class="go">chmod +x mkcert</span>
+<div class="code"><pre class="code console"><a id="rest_code_498e871be16446bc904153bccc39bdb0-1" name="rest_code_498e871be16446bc904153bccc39bdb0-1" href="#rest_code_498e871be16446bc904153bccc39bdb0-1"></a><span class="go">chmod +x mkcert</span>
 </pre></div>
 <p>Install the certificate authorities (CA) using</p>
-<div class="code"><pre class="code console"><a id="rest_code_09579731e1e04676b6535f9f50a37dee-1" name="rest_code_09579731e1e04676b6535f9f50a37dee-1" href="#rest_code_09579731e1e04676b6535f9f50a37dee-1"></a><span class="go">./mkcert -install</span>
+<div class="code"><pre class="code console"><a id="rest_code_5a70c4fe281f44fc9b33716e2c48e58b-1" name="rest_code_5a70c4fe281f44fc9b33716e2c48e58b-1" href="#rest_code_5a70c4fe281f44fc9b33716e2c48e58b-1"></a><span class="go">./mkcert -install</span>
 </pre></div>
 <p>Create certificates for the domains you'd like to use</p>
-<div class="code"><pre class="code console"><a id="rest_code_b2c41a91204b487580f1dc51062d8d70-1" name="rest_code_b2c41a91204b487580f1dc51062d8d70-1" href="#rest_code_b2c41a91204b487580f1dc51062d8d70-1"></a><span class="go">./mkcert -cert-file cert.pem -key-file key.pem 0.0.0.0 localhost 127.0.0.1 ::1</span>
+<div class="code"><pre class="code console"><a id="rest_code_a5ccb37c07ad4b99821add9c6e820832-1" name="rest_code_a5ccb37c07ad4b99821add9c6e820832-1" href="#rest_code_a5ccb37c07ad4b99821add9c6e820832-1"></a><span class="go">./mkcert -cert-file cert.pem -key-file key.pem 0.0.0.0 localhost 127.0.0.1 ::1</span>
 </pre></div>
 <p>This will create a <code>cert.pem</code> and a <code>key.pem</code> files in your current directory.
 We are gonna use this 2 files along the post.</p>
@@ -182,97 +182,97 @@ because it's simpler than writing a uvicorn App, but it's not required.</p>
 <p>I guess this should be fairly similar for <a class="reference external" href="https://github.com/tiangolo/fastapi">FastAPI</a>,
 <a class="reference external" href="https://github.com/bocadilloproject/bocadillo">Bocadillo</a> and <a class="reference external" href="https://github.com/kennethreitz/responder">Responder</a>.</p>
 <p>In your terminal run</p>
-<div class="code"><pre class="code console"><a id="rest_code_b4a38f79533947e0906959a42e35dec8-1" name="rest_code_b4a38f79533947e0906959a42e35dec8-1" href="#rest_code_b4a38f79533947e0906959a42e35dec8-1"></a><span class="go">pip install uvicorn starlette</span>
+<div class="code"><pre class="code console"><a id="rest_code_ff86e311fc4048ba96f2bd7038fecda4-1" name="rest_code_ff86e311fc4048ba96f2bd7038fecda4-1" href="#rest_code_ff86e311fc4048ba96f2bd7038fecda4-1"></a><span class="go">pip install uvicorn starlette</span>
 </pre></div>
 <p>Now create a file <code>star_app.py</code></p>
-<div class="code"><pre class="code python"><a id="rest_code_0ae8175b940048b89c850f967b55b72e-1" name="rest_code_0ae8175b940048b89c850f967b55b72e-1" href="#rest_code_0ae8175b940048b89c850f967b55b72e-1"></a><span class="c1"># star_app.py</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-2" name="rest_code_0ae8175b940048b89c850f967b55b72e-2" href="#rest_code_0ae8175b940048b89c850f967b55b72e-2"></a><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-3" name="rest_code_0ae8175b940048b89c850f967b55b72e-3" href="#rest_code_0ae8175b940048b89c850f967b55b72e-3"></a><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-4" name="rest_code_0ae8175b940048b89c850f967b55b72e-4" href="#rest_code_0ae8175b940048b89c850f967b55b72e-4"></a><span class="kn">import</span> <span class="nn">uvicorn</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-5" name="rest_code_0ae8175b940048b89c850f967b55b72e-5" href="#rest_code_0ae8175b940048b89c850f967b55b72e-5"></a><span class="kn">import</span> <span class="nn">ssl</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-6" name="rest_code_0ae8175b940048b89c850f967b55b72e-6" href="#rest_code_0ae8175b940048b89c850f967b55b72e-6"></a>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-7" name="rest_code_0ae8175b940048b89c850f967b55b72e-7" href="#rest_code_0ae8175b940048b89c850f967b55b72e-7"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-8" name="rest_code_0ae8175b940048b89c850f967b55b72e-8" href="#rest_code_0ae8175b940048b89c850f967b55b72e-8"></a>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-9" name="rest_code_0ae8175b940048b89c850f967b55b72e-9" href="#rest_code_0ae8175b940048b89c850f967b55b72e-9"></a>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-10" name="rest_code_0ae8175b940048b89c850f967b55b72e-10" href="#rest_code_0ae8175b940048b89c850f967b55b72e-10"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-11" name="rest_code_0ae8175b940048b89c850f967b55b72e-11" href="#rest_code_0ae8175b940048b89c850f967b55b72e-11"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-12" name="rest_code_0ae8175b940048b89c850f967b55b72e-12" href="#rest_code_0ae8175b940048b89c850f967b55b72e-12"></a>    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">})</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-13" name="rest_code_0ae8175b940048b89c850f967b55b72e-13" href="#rest_code_0ae8175b940048b89c850f967b55b72e-13"></a>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-14" name="rest_code_0ae8175b940048b89c850f967b55b72e-14" href="#rest_code_0ae8175b940048b89c850f967b55b72e-14"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-15" name="rest_code_0ae8175b940048b89c850f967b55b72e-15" href="#rest_code_0ae8175b940048b89c850f967b55b72e-15"></a>    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-16" name="rest_code_0ae8175b940048b89c850f967b55b72e-16" href="#rest_code_0ae8175b940048b89c850f967b55b72e-16"></a>        <span class="n">app</span><span class="p">,</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-17" name="rest_code_0ae8175b940048b89c850f967b55b72e-17" href="#rest_code_0ae8175b940048b89c850f967b55b72e-17"></a>        <span class="n">host</span><span class="o">=</span><span class="s2">"0.0.0.0"</span><span class="p">,</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-18" name="rest_code_0ae8175b940048b89c850f967b55b72e-18" href="#rest_code_0ae8175b940048b89c850f967b55b72e-18"></a>        <span class="n">port</span><span class="o">=</span><span class="mi">8433</span><span class="p">,</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-19" name="rest_code_0ae8175b940048b89c850f967b55b72e-19" href="#rest_code_0ae8175b940048b89c850f967b55b72e-19"></a>        <span class="n">ssl_version</span><span class="o">=</span><span class="n">ssl</span><span class="o">.</span><span class="n">PROTOCOL_SSLv23</span><span class="p">,</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-20" name="rest_code_0ae8175b940048b89c850f967b55b72e-20" href="#rest_code_0ae8175b940048b89c850f967b55b72e-20"></a>        <span class="n">cert_reqs</span><span class="o">=</span><span class="n">ssl</span><span class="o">.</span><span class="n">CERT_OPTIONAL</span><span class="p">,</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-21" name="rest_code_0ae8175b940048b89c850f967b55b72e-21" href="#rest_code_0ae8175b940048b89c850f967b55b72e-21"></a>        <span class="n">ssl_keyfile</span><span class="o">=</span><span class="s2">"./key.pem"</span><span class="p">,</span>        <span class="c1"># Note that the generated certificates</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-22" name="rest_code_0ae8175b940048b89c850f967b55b72e-22" href="#rest_code_0ae8175b940048b89c850f967b55b72e-22"></a>        <span class="n">ssl_certfile</span><span class="o">=</span><span class="s2">"./cert.pem"</span><span class="p">,</span>      <span class="c1"># are used here</span>
-<a id="rest_code_0ae8175b940048b89c850f967b55b72e-23" name="rest_code_0ae8175b940048b89c850f967b55b72e-23" href="#rest_code_0ae8175b940048b89c850f967b55b72e-23"></a>    <span class="p">)</span>
+<div class="code"><pre class="code python"><a id="rest_code_a20721948b6b47a79bda794518cafc41-1" name="rest_code_a20721948b6b47a79bda794518cafc41-1" href="#rest_code_a20721948b6b47a79bda794518cafc41-1"></a><span class="c1"># star_app.py</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-2" name="rest_code_a20721948b6b47a79bda794518cafc41-2" href="#rest_code_a20721948b6b47a79bda794518cafc41-2"></a><span class="kn">from</span> <span class="nn">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-3" name="rest_code_a20721948b6b47a79bda794518cafc41-3" href="#rest_code_a20721948b6b47a79bda794518cafc41-3"></a><span class="kn">from</span> <span class="nn">starlette.responses</span> <span class="kn">import</span> <span class="n">JSONResponse</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-4" name="rest_code_a20721948b6b47a79bda794518cafc41-4" href="#rest_code_a20721948b6b47a79bda794518cafc41-4"></a><span class="kn">import</span> <span class="nn">uvicorn</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-5" name="rest_code_a20721948b6b47a79bda794518cafc41-5" href="#rest_code_a20721948b6b47a79bda794518cafc41-5"></a><span class="kn">import</span> <span class="nn">ssl</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-6" name="rest_code_a20721948b6b47a79bda794518cafc41-6" href="#rest_code_a20721948b6b47a79bda794518cafc41-6"></a>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-7" name="rest_code_a20721948b6b47a79bda794518cafc41-7" href="#rest_code_a20721948b6b47a79bda794518cafc41-7"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">()</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-8" name="rest_code_a20721948b6b47a79bda794518cafc41-8" href="#rest_code_a20721948b6b47a79bda794518cafc41-8"></a>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-9" name="rest_code_a20721948b6b47a79bda794518cafc41-9" href="#rest_code_a20721948b6b47a79bda794518cafc41-9"></a>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-10" name="rest_code_a20721948b6b47a79bda794518cafc41-10" href="#rest_code_a20721948b6b47a79bda794518cafc41-10"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-11" name="rest_code_a20721948b6b47a79bda794518cafc41-11" href="#rest_code_a20721948b6b47a79bda794518cafc41-11"></a><span class="k">async</span> <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-12" name="rest_code_a20721948b6b47a79bda794518cafc41-12" href="#rest_code_a20721948b6b47a79bda794518cafc41-12"></a>    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">({</span><span class="s2">"hello"</span><span class="p">:</span> <span class="s2">"world"</span><span class="p">})</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-13" name="rest_code_a20721948b6b47a79bda794518cafc41-13" href="#rest_code_a20721948b6b47a79bda794518cafc41-13"></a>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-14" name="rest_code_a20721948b6b47a79bda794518cafc41-14" href="#rest_code_a20721948b6b47a79bda794518cafc41-14"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-15" name="rest_code_a20721948b6b47a79bda794518cafc41-15" href="#rest_code_a20721948b6b47a79bda794518cafc41-15"></a>    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-16" name="rest_code_a20721948b6b47a79bda794518cafc41-16" href="#rest_code_a20721948b6b47a79bda794518cafc41-16"></a>        <span class="n">app</span><span class="p">,</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-17" name="rest_code_a20721948b6b47a79bda794518cafc41-17" href="#rest_code_a20721948b6b47a79bda794518cafc41-17"></a>        <span class="n">host</span><span class="o">=</span><span class="s2">"0.0.0.0"</span><span class="p">,</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-18" name="rest_code_a20721948b6b47a79bda794518cafc41-18" href="#rest_code_a20721948b6b47a79bda794518cafc41-18"></a>        <span class="n">port</span><span class="o">=</span><span class="mi">8433</span><span class="p">,</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-19" name="rest_code_a20721948b6b47a79bda794518cafc41-19" href="#rest_code_a20721948b6b47a79bda794518cafc41-19"></a>        <span class="n">ssl_version</span><span class="o">=</span><span class="n">ssl</span><span class="o">.</span><span class="n">PROTOCOL_SSLv23</span><span class="p">,</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-20" name="rest_code_a20721948b6b47a79bda794518cafc41-20" href="#rest_code_a20721948b6b47a79bda794518cafc41-20"></a>        <span class="n">cert_reqs</span><span class="o">=</span><span class="n">ssl</span><span class="o">.</span><span class="n">CERT_OPTIONAL</span><span class="p">,</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-21" name="rest_code_a20721948b6b47a79bda794518cafc41-21" href="#rest_code_a20721948b6b47a79bda794518cafc41-21"></a>        <span class="n">ssl_keyfile</span><span class="o">=</span><span class="s2">"./key.pem"</span><span class="p">,</span>        <span class="c1"># Note that the generated certificates</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-22" name="rest_code_a20721948b6b47a79bda794518cafc41-22" href="#rest_code_a20721948b6b47a79bda794518cafc41-22"></a>        <span class="n">ssl_certfile</span><span class="o">=</span><span class="s2">"./cert.pem"</span><span class="p">,</span>      <span class="c1"># are used here</span>
+<a id="rest_code_a20721948b6b47a79bda794518cafc41-23" name="rest_code_a20721948b6b47a79bda794518cafc41-23" href="#rest_code_a20721948b6b47a79bda794518cafc41-23"></a>    <span class="p">)</span>
 </pre></div>
 <p>And then just run</p>
-<div class="code"><pre class="code console"><a id="rest_code_db399e7b1a0d4c1e81470bc8ac3d39d0-1" name="rest_code_db399e7b1a0d4c1e81470bc8ac3d39d0-1" href="#rest_code_db399e7b1a0d4c1e81470bc8ac3d39d0-1"></a><span class="go">python star_app.py</span>
+<div class="code"><pre class="code console"><a id="rest_code_58efce390630462986b54b332c1874e8-1" name="rest_code_58efce390630462986b54b332c1874e8-1" href="#rest_code_58efce390630462986b54b332c1874e8-1"></a><span class="go">python star_app.py</span>
 </pre></div>
 <p>Go to <code>https://0.0.0.0:8443</code> in your browser</p>
 </section><section id="django-ssl-server"><h3><a class="toc-backref" href="#toc-entry-5" role="doc-backlink">Django SSL Server</a></h3>
 <p><a class="reference external" href="https://github.com/teddziuba/django-sslserver">django-sslserver</a> is a small library which adds the ability to
 run a secure debug server with the certificates we just created.</p>
-<div class="code"><pre class="code console"><a id="rest_code_96d9bea2f43a462fb4552f481a201a9f-1" name="rest_code_96d9bea2f43a462fb4552f481a201a9f-1" href="#rest_code_96d9bea2f43a462fb4552f481a201a9f-1"></a><span class="go">pip install django-sslserver</span>
+<div class="code"><pre class="code console"><a id="rest_code_8b18772555dd416d860f753e4eedad9a-1" name="rest_code_8b18772555dd416d860f753e4eedad9a-1" href="#rest_code_8b18772555dd416d860f753e4eedad9a-1"></a><span class="go">pip install django-sslserver</span>
 </pre></div>
 <p>Update your <code>settings.py</code></p>
-<div class="code"><pre class="code python"><a id="rest_code_a97599f17558471e84b15b93668b7bc2-1" name="rest_code_a97599f17558471e84b15b93668b7bc2-1" href="#rest_code_a97599f17558471e84b15b93668b7bc2-1"></a><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span>
-<a id="rest_code_a97599f17558471e84b15b93668b7bc2-2" name="rest_code_a97599f17558471e84b15b93668b7bc2-2" href="#rest_code_a97599f17558471e84b15b93668b7bc2-2"></a>    <span class="s1">'sslserver'</span><span class="p">,</span>
-<a id="rest_code_a97599f17558471e84b15b93668b7bc2-3" name="rest_code_a97599f17558471e84b15b93668b7bc2-3" href="#rest_code_a97599f17558471e84b15b93668b7bc2-3"></a>    <span class="o">...</span>
-<a id="rest_code_a97599f17558471e84b15b93668b7bc2-4" name="rest_code_a97599f17558471e84b15b93668b7bc2-4" href="#rest_code_a97599f17558471e84b15b93668b7bc2-4"></a><span class="p">)</span>
+<div class="code"><pre class="code python"><a id="rest_code_4d348b744fc0411daa692f6393917e61-1" name="rest_code_4d348b744fc0411daa692f6393917e61-1" href="#rest_code_4d348b744fc0411daa692f6393917e61-1"></a><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span><span class="o">...</span>
+<a id="rest_code_4d348b744fc0411daa692f6393917e61-2" name="rest_code_4d348b744fc0411daa692f6393917e61-2" href="#rest_code_4d348b744fc0411daa692f6393917e61-2"></a>    <span class="s1">'sslserver'</span><span class="p">,</span>
+<a id="rest_code_4d348b744fc0411daa692f6393917e61-3" name="rest_code_4d348b744fc0411daa692f6393917e61-3" href="#rest_code_4d348b744fc0411daa692f6393917e61-3"></a>    <span class="o">...</span>
+<a id="rest_code_4d348b744fc0411daa692f6393917e61-4" name="rest_code_4d348b744fc0411daa692f6393917e61-4" href="#rest_code_4d348b744fc0411daa692f6393917e61-4"></a><span class="p">)</span>
 </pre></div>
 <p>And in your terminal run</p>
-<div class="code"><pre class="code console"><a id="rest_code_33a9a2d6d02d4bd6b65caddf35c96e51-1" name="rest_code_33a9a2d6d02d4bd6b65caddf35c96e51-1" href="#rest_code_33a9a2d6d02d4bd6b65caddf35c96e51-1"></a><span class="go">python manage.py runsslserver --certificate cert.pem --key key.pem</span>
+<div class="code"><pre class="code console"><a id="rest_code_6733effd40294c3e9482d31814f7a033-1" name="rest_code_6733effd40294c3e9482d31814f7a033-1" href="#rest_code_6733effd40294c3e9482d31814f7a033-1"></a><span class="go">python manage.py runsslserver --certificate cert.pem --key key.pem</span>
 </pre></div>
 <section id="django-extensions"><h4>Django extensions</h4>
 <p>There's another alternative which I haven't tested, but it has a lot of extra functionality,
 which I don't need, so I've skipped it.</p>
 <p>Feel free to try <a class="reference external" href="https://django-extensions.readthedocs.io/en/latest/runserver_plus.html">django-extensions</a></p>
 <p>I guess it would be something like</p>
-<div class="code"><pre class="code console"><a id="rest_code_aed519f62a1949679287a3ee1845d749-1" name="rest_code_aed519f62a1949679287a3ee1845d749-1" href="#rest_code_aed519f62a1949679287a3ee1845d749-1"></a><span class="go">python manage.py runserver_plus --cert-file cert.pem --key-file cert.pem</span>
+<div class="code"><pre class="code console"><a id="rest_code_d162573e4b2a4b14a1dc3a373872975a-1" name="rest_code_d162573e4b2a4b14a1dc3a373872975a-1" href="#rest_code_d162573e4b2a4b14a1dc3a373872975a-1"></a><span class="go">python manage.py runserver_plus --cert-file cert.pem --key-file cert.pem</span>
 </pre></div>
 </section></section><section id="flask"><h3><a class="toc-backref" href="#toc-entry-6" role="doc-backlink">Flask</a></h3>
 <p>Install <a class="reference external" href="http://flask.pocoo.org/">flask</a></p>
-<div class="code"><pre class="code console"><a id="rest_code_2a215701460b46849d3cba235fb9127f-1" name="rest_code_2a215701460b46849d3cba235fb9127f-1" href="#rest_code_2a215701460b46849d3cba235fb9127f-1"></a><span class="go">pip install flask</span>
+<div class="code"><pre class="code console"><a id="rest_code_6f377027c4cb449d81296fb116d88c69-1" name="rest_code_6f377027c4cb449d81296fb116d88c69-1" href="#rest_code_6f377027c4cb449d81296fb116d88c69-1"></a><span class="go">pip install flask</span>
 </pre></div>
 <p>Create a file <code>flask_app.py</code></p>
-<div class="code"><pre class="code python"><a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-1" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-1" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-1"></a><span class="c1"># flask_app.py</span>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-2" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-2" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-2"></a><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-3" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-3" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-3"></a>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-4" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-4" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-4"></a><span class="n">application</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-5" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-5" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-5"></a>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-6" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-6" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-6"></a><span class="nd">@application</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-7" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-7" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-7"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-8" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-8" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-8"></a>    <span class="k">return</span> <span class="s2">"&lt;h1 style='color:blue'&gt;Hello There!&lt;/h1&gt;"</span>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-9" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-9" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-9"></a>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-10" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-10" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-10"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-<a id="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-11" name="rest_code_2754b2e984b74aa3b6eb56bec5892b6a-11" href="#rest_code_2754b2e984b74aa3b6eb56bec5892b6a-11"></a>    <span class="n">application</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ssl_context</span><span class="o">=</span><span class="p">(</span><span class="s1">'cert.pem'</span><span class="p">,</span> <span class="s1">'key.pem'</span><span class="p">))</span>
+<div class="code"><pre class="code python"><a id="rest_code_be35d398984e4259a6dad397e653d855-1" name="rest_code_be35d398984e4259a6dad397e653d855-1" href="#rest_code_be35d398984e4259a6dad397e653d855-1"></a><span class="c1"># flask_app.py</span>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-2" name="rest_code_be35d398984e4259a6dad397e653d855-2" href="#rest_code_be35d398984e4259a6dad397e653d855-2"></a><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-3" name="rest_code_be35d398984e4259a6dad397e653d855-3" href="#rest_code_be35d398984e4259a6dad397e653d855-3"></a>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-4" name="rest_code_be35d398984e4259a6dad397e653d855-4" href="#rest_code_be35d398984e4259a6dad397e653d855-4"></a><span class="n">application</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-5" name="rest_code_be35d398984e4259a6dad397e653d855-5" href="#rest_code_be35d398984e4259a6dad397e653d855-5"></a>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-6" name="rest_code_be35d398984e4259a6dad397e653d855-6" href="#rest_code_be35d398984e4259a6dad397e653d855-6"></a><span class="nd">@application</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-7" name="rest_code_be35d398984e4259a6dad397e653d855-7" href="#rest_code_be35d398984e4259a6dad397e653d855-7"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-8" name="rest_code_be35d398984e4259a6dad397e653d855-8" href="#rest_code_be35d398984e4259a6dad397e653d855-8"></a>    <span class="k">return</span> <span class="s2">"&lt;h1 style='color:blue'&gt;Hello There!&lt;/h1&gt;"</span>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-9" name="rest_code_be35d398984e4259a6dad397e653d855-9" href="#rest_code_be35d398984e4259a6dad397e653d855-9"></a>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-10" name="rest_code_be35d398984e4259a6dad397e653d855-10" href="#rest_code_be35d398984e4259a6dad397e653d855-10"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+<a id="rest_code_be35d398984e4259a6dad397e653d855-11" name="rest_code_be35d398984e4259a6dad397e653d855-11" href="#rest_code_be35d398984e4259a6dad397e653d855-11"></a>    <span class="n">application</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ssl_context</span><span class="o">=</span><span class="p">(</span><span class="s1">'cert.pem'</span><span class="p">,</span> <span class="s1">'key.pem'</span><span class="p">))</span>
 </pre></div>
 <p>Run in your terminal</p>
-<div class="code"><pre class="code console"><a id="rest_code_544d27b2480c46f2afa7357812bf34b7-1" name="rest_code_544d27b2480c46f2afa7357812bf34b7-1" href="#rest_code_544d27b2480c46f2afa7357812bf34b7-1"></a><span class="go">python flask_app.py</span>
+<div class="code"><pre class="code console"><a id="rest_code_4e52cb9050f44b3d86de2629523c70ae-1" name="rest_code_4e52cb9050f44b3d86de2629523c70ae-1" href="#rest_code_4e52cb9050f44b3d86de2629523c70ae-1"></a><span class="go">python flask_app.py</span>
 </pre></div>
 </section><section id="gunicorn"><h3><a class="toc-backref" href="#toc-entry-7" role="doc-backlink">Gunicorn</a></h3>
 <p>Install <a class="reference external" href="https://gunicorn.org/">gunicorn</a>.</p>
-<div class="code"><pre class="code console"><a id="rest_code_394ea5df6af740098ce6481886282b4f-1" name="rest_code_394ea5df6af740098ce6481886282b4f-1" href="#rest_code_394ea5df6af740098ce6481886282b4f-1"></a><span class="go">pip install gunicorn</span>
+<div class="code"><pre class="code console"><a id="rest_code_baafeda42ad74e36a412fb4fb9c883e9-1" name="rest_code_baafeda42ad74e36a412fb4fb9c883e9-1" href="#rest_code_baafeda42ad74e36a412fb4fb9c883e9-1"></a><span class="go">pip install gunicorn</span>
 </pre></div>
 <p>Let's continue with the previous flask example</p>
-<div class="code"><pre class="code console"><a id="rest_code_415a0c5ed37b415ab9d825b10b728ad1-1" name="rest_code_415a0c5ed37b415ab9d825b10b728ad1-1" href="#rest_code_415a0c5ed37b415ab9d825b10b728ad1-1"></a><span class="go">gunicorn flask_app:application --keyfile=./key.pem --certfile=./cert.pem</span>
+<div class="code"><pre class="code console"><a id="rest_code_901dd7c40175409fa9d5596008cca1fd-1" name="rest_code_901dd7c40175409fa9d5596008cca1fd-1" href="#rest_code_901dd7c40175409fa9d5596008cca1fd-1"></a><span class="go">gunicorn flask_app:application --keyfile=./key.pem --certfile=./cert.pem</span>
 </pre></div>
 </section><section id="uwsgi"><h3><a class="toc-backref" href="#toc-entry-8" role="doc-backlink">UWSGI</a></h3>
 <p>Install <a class="reference external" href="https://uwsgi-docs.readthedocs.io">uwsgi</a>.</p>
-<div class="code"><pre class="code console"><a id="rest_code_671cebdd0e174d18b3a0256c9c51e18a-1" name="rest_code_671cebdd0e174d18b3a0256c9c51e18a-1" href="#rest_code_671cebdd0e174d18b3a0256c9c51e18a-1"></a><span class="go">pip install uwsgi</span>
+<div class="code"><pre class="code console"><a id="rest_code_c6e31fac9e6a4b1697802cf27f81dbc8-1" name="rest_code_c6e31fac9e6a4b1697802cf27f81dbc8-1" href="#rest_code_c6e31fac9e6a4b1697802cf27f81dbc8-1"></a><span class="go">pip install uwsgi</span>
 </pre></div>
 <p>Create a file called <code>wsgi.py</code></p>
-<div class="code"><pre class="code python"><a id="rest_code_d4bde960cb8e496f812724a00e266e1e-1" name="rest_code_d4bde960cb8e496f812724a00e266e1e-1" href="#rest_code_d4bde960cb8e496f812724a00e266e1e-1"></a><span class="c1"># wsgi.py</span>
-<a id="rest_code_d4bde960cb8e496f812724a00e266e1e-2" name="rest_code_d4bde960cb8e496f812724a00e266e1e-2" href="#rest_code_d4bde960cb8e496f812724a00e266e1e-2"></a><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-<a id="rest_code_d4bde960cb8e496f812724a00e266e1e-3" name="rest_code_d4bde960cb8e496f812724a00e266e1e-3" href="#rest_code_d4bde960cb8e496f812724a00e266e1e-3"></a>    <span class="n">start_response</span><span class="p">(</span><span class="s1">'200 OK'</span><span class="p">,</span> <span class="p">[(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">)])</span>
-<a id="rest_code_d4bde960cb8e496f812724a00e266e1e-4" name="rest_code_d4bde960cb8e496f812724a00e266e1e-4" href="#rest_code_d4bde960cb8e496f812724a00e266e1e-4"></a>    <span class="k">return</span> <span class="p">[</span><span class="sa">b</span><span class="s2">"Hello World"</span><span class="p">]</span>
+<div class="code"><pre class="code python"><a id="rest_code_3d628007f26c46589167867ff5385dc5-1" name="rest_code_3d628007f26c46589167867ff5385dc5-1" href="#rest_code_3d628007f26c46589167867ff5385dc5-1"></a><span class="c1"># wsgi.py</span>
+<a id="rest_code_3d628007f26c46589167867ff5385dc5-2" name="rest_code_3d628007f26c46589167867ff5385dc5-2" href="#rest_code_3d628007f26c46589167867ff5385dc5-2"></a><span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+<a id="rest_code_3d628007f26c46589167867ff5385dc5-3" name="rest_code_3d628007f26c46589167867ff5385dc5-3" href="#rest_code_3d628007f26c46589167867ff5385dc5-3"></a>    <span class="n">start_response</span><span class="p">(</span><span class="s1">'200 OK'</span><span class="p">,</span> <span class="p">[(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">)])</span>
+<a id="rest_code_3d628007f26c46589167867ff5385dc5-4" name="rest_code_3d628007f26c46589167867ff5385dc5-4" href="#rest_code_3d628007f26c46589167867ff5385dc5-4"></a>    <span class="k">return</span> <span class="p">[</span><span class="sa">b</span><span class="s2">"Hello World"</span><span class="p">]</span>
 </pre></div>
 <p>Run in your terminal</p>
-<div class="code"><pre class="code console"><a id="rest_code_0aec5252f9ba46278f39272ba1b392c1-1" name="rest_code_0aec5252f9ba46278f39272ba1b392c1-1" href="#rest_code_0aec5252f9ba46278f39272ba1b392c1-1"></a><span class="go">uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem</span>
+<div class="code"><pre class="code console"><a id="rest_code_733090a9b7294e89a703ad7e1a828344-1" name="rest_code_733090a9b7294e89a703ad7e1a828344-1" href="#rest_code_733090a9b7294e89a703ad7e1a828344-1"></a><span class="go">uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem</span>
 </pre></div>
 <p>Go to <code>https://0.0.0.0:8443</code></p>
 </section></section><section id="security-concerns"><h2><a class="toc-backref" href="#toc-entry-9" role="doc-backlink">Security concerns</a></h2>

@@ -185,7 +185,9 @@ If you are familiar with JSON, imagine the Nix language as JSON">
 <code>let .. in ...</code> is weird, are they like function declarations? Strange way to create a local scope.</li>
 <li>semicolons <code>;</code> only  after initializing variables.</li>
 <li>Could this language be used to replace <code>yaml</code> and other configuration formats? What about <code>toml</code> with functions? Okay, I'm derailing, back to reading.</li>
-<li>It's not very intuitive, let's see some valid samples
+<li>
+<p>It's not very intuitive, let's see some valid samples
+</p>
 <pre class="highlight"><code class="language-nix">let
   a = {
     x = 1;
@@ -237,8 +239,13 @@ in {
   in
   b.t + b.u
 }</code></pre>
-Nope. Couldn't find an explanation, maybe it's not allowed.</li>
-<li>Why cannot coerce an int into a string? I don't see an explanation. Types could implement like a <code>Into&lt;string&gt;</code> trait, right? Maybe there's a good reason, but I think this can be useful for naming things <code>[ home-1 home-2 ]</code>
+Nope. Couldn't find an explanation, maybe it's not allowed.
+<blockquote>
+<p><strong>Update</strong>: user <a href="https://www.reddit.com/user/benide/">benide</a> on <a href="https://www.reddit.com/r/Nix/comments/10bp1vw/nix_journey_part_3_learning_nixlang/">/r/nix</a> pointed out that my scoped curly braces <code>{}</code> are actually attrsets (json object), that's why the semi-colons <code>;</code> are required, makes much more sense.</p>
+</blockquote>
+</li>
+<li>
+<p>Why cannot coerce an int into a string? I don't see an explanation. Types could implement like a <code>Into&lt;string&gt;</code> trait, right? Maybe there's a good reason, but I think this can be useful for naming things <code>[ home-1 home-2 ]</code></p>
 </li>
 <li>Integration with fs is dope.</li>
 <li>How are search path populated? <code>&lt;nixpkgs&gt;</code> works, but <code>&lt;path&gt;</code> does not. Are there other variables? Good thing it's not recommended to use them.</li>

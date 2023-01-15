@@ -133,6 +133,8 @@ in {
 }
 ```
 Nope. Couldn't find an explanation, maybe it's not allowed.
+> **Update**: user [benide](https://www.reddit.com/user/benide/) on [/r/nix](https://www.reddit.com/r/Nix/comments/10bp1vw/nix_journey_part_3_learning_nixlang/) pointed out that my scoped curly braces `{}` are actually attrsets (json object), that's why the semi-colons `;` are required, makes much more sense.
+
 10. Why cannot coerce an int into a string? I don't see an explanation. Types could implement like a `Into<string>` trait, right? Maybe there's a good reason, but I think this can be useful for naming things `[ home-1 home-2 ]`
 11. Integration with fs is dope.
 12. How are search path populated? `<nixpkgs>` works, but `<path>` does not. Are there other variables? Good thing it's not recommended to use them.
