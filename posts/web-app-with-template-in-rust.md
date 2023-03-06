@@ -174,7 +174,7 @@ Our rust web server, actually knows how to handle that request, because it inclu
 
 And what will axum create? **a plain text HTTP response**
 
-```http
+```
 HTTP/1.1 200 OK
 content-type: text/html; charset=utf-8
 content-length: 11
