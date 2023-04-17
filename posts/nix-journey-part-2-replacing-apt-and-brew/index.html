@@ -138,7 +138,7 @@
         </span>
 </div>
         
-    </header><section class="e-content entry-content" itemprop="articleBody text"><p>Even if I still cannot do much with <a href="https://nixos.org/">nix</a>, it still provide more advantages over other package managers:</p>
+    </header><section class="e-content entry-content" itemprop="articleBody text"><p>Even if I still cannot do much with <a href="https://nixos.org/">nix</a>, it still provides more advantages over other package managers:</p>
 <ul>
 <li>Multi-platform (mac, linux, etc.)</li>
 <li>Supports side-by-side installation of multiple versions of a package</li>
@@ -147,15 +147,16 @@
 <li>It has the biggest database of packages (over 80.000 packages)</li>
 <li>I can run other people's commands, for example if I clone a repo and it says "run this nix command to have a development environment", then it doesn't matter if I don't know, I have already started using it.</li>
 </ul>
-<p>A common situation I often have between linux and mac is running <code>grip</code> or <code>sed</code>.
-On linux, they are called GNU <code>grep</code> or GNU <code>sed</code>, and they are not the same as in mac (freebsd versin), they may not accept the same parameters.
-We are gonna see how can to avoid this using nix. And even without using complicated features, it can make your CI system more reproducible.</p>
-<p>Remember <code>nix</code> is 3 things at the same time: an OS, a package manager and a language.</p>
-<p>This post is about the <strong>package manager</strong>. I don't have much interest in the language, but more and more I think I'll have to learn it.</p>
+<p>A common situation I often run into, is writing shell scripts for linux and mac, where <code>grip</code> or <code>sed</code> are used.
+On linux, they are called GNU <code>grep</code> or GNU <code>sed</code>, and they are not the same as in mac (freebsd version). Depending on the version, they may use different arguments.</p>
+<p>We are going to see how can we avoid this by using <code>nix</code>. Even without using complicated features, it can make your CI system more reproducible.</p>
+<p>Remember, <code>nix</code> is 3 things at the same time: an OS, a package manager and a language.</p>
+<p>This post is about the <strong>package manager</strong>. I don't have much interest in the language, yet. Though more and more, I think I'll have to learn it.</p>
 <p>Let's start by acknowledging a source of confusion:</p>
-<p><strong>There is an old interface with counterintuitive commands</strong> (<code>nix-env -iA ...</code>, <code>nix-shell -p ...</code>), which I found hard to remember, and I don't get why they "commands" start with a dash (<code>-</code>). I'm used to cli's doing <code>cli &lt;command&gt; [--options]</code>. Nowadays there's a new cli called just <code>nix</code>, let's see if we can do everything with it.</p>
+<p><strong>There is an old interface with counterintuitive commands</strong> (<code>nix-env -iA ...</code>, <code>nix-shell -p ...</code>), which I found hard to remember, and I don't get why the "commands" start with a dash (<code>-</code>). I'm used to cli's doing <code>cli &lt;command&gt; [--options]</code>. Nowadays, there's a new cli called just <code>nix</code>. Let's see if we can do everything with it.</p>
 <p>And make sure you have <a href="https://nixos.org/download.html">installed Nix: the package manager</a> in your system. The installation is straightforward. I was personally blocked, because at some point in my dotfiles I was hardcoding the <code>PATH</code>, making nix never appear 🤦‍♂️.</p>
 <p>And <a href="https://nixos.wiki/wiki/Flakes#Enable_flakes">enable flakes</a>.</p>
+<p>There's also a <a href="https://github.com/DeterminateSystems/nix-installer">new installer by determine systems</a>, which is quite good.</p>
 <h3>Installing packages</h3>
 <p>Install a package like on <code>brew</code> or <code>apt</code>.</p>
 <pre class="highlight"><code class="language-sh">nix profile install nixpkgs#htop</code></pre>
@@ -165,7 +166,7 @@ We are gonna see how can to avoid this using nix. And even without using complic
 <p>Nix forces us to specify a "repository" (or "namespace") when installing a package (<code>nixpkgs</code>), which could be different, like github. And I think this is a good thing. From my understanding, nix doesn't care where the package is, because each package has a lock file, tracking all the dependencies. Okay, it could be a problem if one of the "repositories" is down, but using <code>nixpkgs</code> mainly and github for niche packages should be fine.</p>
 <h4>What are profiles?</h4>
 <p>Disclaimer: I may be wrong on this, I'm starting to understand it.</p>
-<p>The way to see <code>profiles</code> is like "your user's packages". <code>nix profile</code> links packages to your <code>~/.nix-profile/</code>. You can specify other's profiles by using the flag <code>-p</code>.</p>
+<p>The way to see <code>profiles</code> is like, "your user's packages". <code>nix profile</code> links packages to your <code>~/.nix-profile/</code>. You can specify other's profiles by using the flag <code>-p</code>.</p>
 <p>You can find more in the <a href="https://nixos.org/manual/nix/stable/package-management/profiles.html">package-management section of the manual</a> and <a href="https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-profile.html">the profile command reference</a></p>
 <h3>Searching packages</h3>
 <pre class="highlight"><code class="language-sh">nix search nixpkgs#htop</code></pre>
@@ -176,7 +177,7 @@ We are gonna see how can to avoid this using nix. And even without using complic
 <p>You can also search packages on <a href="https://search.nixos.org/packages?channel=22.11&amp;show=htop&amp;from=0&amp;size=50&amp;sort=relevance&amp;type=packages&amp;query=htop">nix search index</a>, but the commands shown are for the old nix interface, using <code>nix-env</code> or <code>nix-shell</code>.</p>
 <p>Also, you can provide a regex like <code>firefox|chrome</code>, run <code>nix search --help</code> for more examples.</p>
 <h3>Removing packages</h3>
-<p>Now this is a bit tricky, to remove you cannot type <code>htop</code>, you have to specify which dependency you want to clean. I think this is because one of your packages may depend on the version of another package, and if you also installed another version of the same package, then if you remove both, the original program that depends on one of them may break.</p>
+<p>Now this is a bit tricky, to remove you cannot type <code>htop</code>, you have to specify which dependency you want to clean. I think this is because you can have multiple versions of the same program. Also, one of your packages may depend on the version of another package, and if you also installed another version of the same package, and if you remove both, the original program that depends on one of them may break.</p>
 <p>The solution to this is to list the installed packages in your profile, and then remove by position of said program.</p>
 <pre class="highlight"><code class="language-sh">nix profile list</code></pre>
 <pre class="highlight"><code class="language-sh">nix profile remove 4</code></pre>
@@ -189,18 +190,18 @@ sed --help
 htop --help
 youtube-dl --version
 CTRL+D # exit</code></pre>
-<h3>Nix package manager (npt)</h3>
-<p>Because I'm not used to most of the seen commands, I built a thin abstraction on top called <a href="https://github.com/woile/npt">npt</a>. Which aims to be a humble succesor to <code>apt</code>. It also requires less characters to use it.</p>
+<h3>Nix Package Tool (npt)</h3>
+<p>Because I'm not used to most of the seen commands, I built a thin abstraction on top of <code>nix</code> called <a href="https://github.com/woile/npt">npt</a>. Which aims to be a humble succesor to <code>apt</code>. It also requires less characters to use it.</p>
 <p>The installation, as we've seen before, can be done by running:</p>
 <pre class="highlight"><code class="language-sh">nix profile install 'github:woile/npt#npt'</code></pre>
 <p>And then run <code>npt --help</code> and check the commands, I hope it helps the transition to nix.</p>
 <p>Now you can install packages by doing:</p>
 <pre class="highlight"><code class="language-sh">npt install htop github:woile/wpa_passphrase_rs#wpa_passphrase
 # or npt i</code></pre>
-<p>It's still a work in progress, but a good start. I want to add to it the ability to show the executed nix commands, as a way to learn.</p>
+<p>It's still a work in progress, but a good start. I want to add the ability to show the executed nix commands, as a way of learning nix.</p>
 <h3>Reproducible scripts</h3>
-<p>Remember when I said even if you don't know much, someone else might, and having nix helps for this? and remember when I talked about my problems with <code>sed</code> and <code>grep</code>?</p>
-<p>Turns out nix can help in both of these situations, someone can write a reproducible shell script which you would execute, even without knowing much, it would work.</p>
+<p>Remember when I said "even if you don't know much, someone else might", and having nix helps for this? and remember when I talked about my problems with <code>sed</code> and <code>grep</code>?</p>
+<p>Turns out, nix can help in both of these situations, someone can write a reproducible shell script which you would execute, and even without knowing much, it would work.</p>
 <p>A minor problem is that we cannot use flakes yet, meaning we cannot run <code>nix shell</code> and instead, we have to rely on <code>nix-shell</code>. But it's coming, see <a href="https://github.com/NixOS/nix/pull/5189">#5189</a>, <a href="https://github.com/NixOS/nix/issues/4715">#4715</a>.</p>
 <p>In the meantime, let's try to solve the issue with what we have.</p>
 <pre class="highlight"><code class="language-sh">touch gnu-example.sh
@@ -220,8 +221,12 @@ sed --version</code></pre>
 import django
 print(django.__version__)</code></pre>
 <p>This opens the door to replace <code>pyenv</code> and any <code>virtualenv</code> you will ever need.</p>
-<p>Imagine creating a nix file specific to your project with its dependencies, that you load only when in the project folder. Say goodbye any version manager (<code>pyenv</code>, <code>nvm</code>, etc).</p>
-<p>You can read more about building a <code>shell.nix</code> in the <a href="https://nix.dev/tutorials/declarative-and-reproducible-developer-environments">nix.dev tutorial</a>.</p>
+<p>Imagine creating a nix file specific to your project with its dependencies, which loads a shell with the dependencies when you navigate to the project folder automatically. Yes, you can say goodbye to any version manager (<code>pyenv</code>, <code>nvm</code>, etc).</p>
+<p>You can read more about building a <code>shell.nix</code> in the <a href="https://nix.dev/tutorials/declarative-and-reproducible-developer-environments">nix.dev tutorial</a>. But keep in mind that <code>shell.nix</code> is being replaced by flakes.</p>
+<h3>Flakes</h3>
+<p>Flakes are becoming the universal way of doing things in nix. <a href="https://github.com/woile/wpa_passphrase_rs/blob/main/flake.nix#L19-L22">Creating shells</a>, build commands, <a href="https://github.com/woile/wpa_passphrase_rs/blob/main/flake.nix#L17">compiling your source code</a> or <a href="https://github.com/woile/rpi-iso-flake/blob/main/flake.nix#L22">creating ISO images</a>.</p>
+<p>And there's a whole set of new tools making use of flakes that allow you to build dev shells, like <a href="https://github.com/cachix/devenv">devenv</a> or <a href="https://github.com/flox/flox">flox</a>.</p>
+<p>An exciting future is ahead!</p>
 <p>I hope you've learned something with this post, and if you liked it, please let me know in the comments section below or tag me on hachyderm <a href="https://hachyderm.io/@woile">@woile</a>.</p>
     </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
 <li>
