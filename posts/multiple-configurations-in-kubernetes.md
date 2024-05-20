@@ -3,7 +3,7 @@
 .. slug: multiple-configurations-in-kubernetes
 .. date: 2019-11-08 15:15:28 UTC-03:00
 .. tags: kubernetes, linux, configuration, kubectl
-.. category: kubernetes
+.. category: devops
 .. link:
 .. description: How to manage multiple configuration files
 .. type: text

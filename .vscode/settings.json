@@ -1,22 +1,7 @@
 {
-    "python.formatting.provider": "black",
-    "python.linting.flake8Enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.enabled": true,
-    "python.pythonPath": ".venv/bin/python",
     "files.associations": {
         "*.tmpl": "jinja"
     },
-    "spellright.language": [
-        "Spanish",
-        "en_GB"
-    ],
-    "spellright.documentTypes": [
-        "markdown",
-        "latex",
-        "plaintext"
-    ],
-    "restructuredtext.languageServer.disabled": true,
     "spellchecker.ignoreWordsList": [
         "lodash"
     ]

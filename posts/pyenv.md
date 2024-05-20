@@ -3,7 +3,7 @@
 .. slug: pyenv
 .. date: 2020-07-08 09:07:26 UTC
 .. tags: python, python-versions, tutorial
-.. category: python
+.. category: programming
 .. link:
 .. description: How to configure pyenv in your system
 .. type: text
