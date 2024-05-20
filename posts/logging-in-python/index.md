@@ -3,7 +3,7 @@
 .. slug: logging-in-python
 .. date: 2022-05-11 13:21:55 UTC
 .. tags: python, logging
-.. category: python
+.. category: programming
 .. link:
 .. description: Easy and simple logging setup for a new python project. Are you tired of searching how to do it and why it doesn't work? this is your place
 .. type: text

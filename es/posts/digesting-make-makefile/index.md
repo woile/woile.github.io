@@ -3,7 +3,7 @@
 .. slug: digesting-make-makefile
 .. date: 2022-02-17 12:21:47 UTC
 .. tags: make, unix, gnu, linux, documentation, tutorial
-.. category: linux
+.. category: programming
 .. link:
 .. description: Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it
 .. type: text

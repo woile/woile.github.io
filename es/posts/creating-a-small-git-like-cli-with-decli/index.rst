@@ -2,7 +2,7 @@
 .. slug: creating-a-small-git-like-cli-with-decli
 .. date: 2018-09-14 14:33:02 UTC-03:00
 .. tags: git python decli cli tutorial programming
-.. category: python
+.. category: programming
 .. link:
 .. description: tutorial to write a command line interface with python decli
 .. type: text

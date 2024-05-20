@@ -2,7 +2,7 @@
 .. slug: moving-from-docker-alpine-to-slim
 .. date: 2019-01-13 12:34:43 UTC-03:00
 .. tags: linux python containers alpine slim debian
-.. category: docker
+.. category: programming
 .. link:
 .. description:
 .. type: text

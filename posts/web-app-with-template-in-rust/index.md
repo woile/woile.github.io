@@ -3,7 +3,7 @@
 .. slug: web-app-with-template-in-rust
 .. date: 2022-10-16 15:27:25 UTC
 .. tags: rust, templates, jinja, networking
-.. category: rust
+.. category: programming
 .. link:
 .. description: Writing a web application in rust using axum and minijinja. If you have used jinja2 in the past this will feel familiar. But we also dig into protocols and networking.
 .. type: text

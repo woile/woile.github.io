@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2023 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 17 Apr 2023 13:43:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Nix journey part 2: replacing apt and brew</title><link>https://woile.dev/posts/nix-journey-part-2-replacing-apt-and-brew/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Even if I still cannot do much with &lt;a href="https://nixos.org/"&gt;nix&lt;/a&gt;, it still provides more advantages over other package managers:&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2024 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 20 May 2024 13:49:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Network programming in Rust</title><link>https://woile.dev/posts/network-programming-in-rust/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;I recently finished &lt;a href="https://beej.us/guide/bgnet/"&gt;Beej's Guide to Network Programming&lt;/a&gt; and it was a very pleasant read.&lt;/p&gt;
+&lt;p&gt;Somehow the author manages to make writing sockets fun. While reading I decided to re-write the examples in &lt;code&gt;Rust&lt;/code&gt;, to get some hands-on experience, which helps me absorb the content better.&lt;/p&gt;
+&lt;p&gt;You can find the code on github: &lt;a href="https://github.com/woile/beej-rs"&gt;beej-rs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I remember studying &lt;code&gt;C&lt;/code&gt; at university and always being worried about my code failing. Which it did, constantly. Not only because of the endless memory leaks or segfaults, but also because of the lack of tests.&lt;/p&gt;
+&lt;p&gt;Being a student, I had no idea where to start, and I have to say, I still don't know how to write tests in &lt;code&gt;C&lt;/code&gt;. So I just executed the program multiple times, until it worked, for one or two scenarios.&lt;/p&gt;
+&lt;p&gt;The last couple of years, I've been writing &lt;code&gt;Rust&lt;/code&gt;, and I developed a new love for low level programming. The contrast with &lt;code&gt;C&lt;/code&gt; is amazing.&lt;/p&gt;
+&lt;p&gt;After installing the language, you get enough tools to survive:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;cargo&lt;/code&gt;: for package management, tests, etc&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rust-analyzer&lt;/code&gt;: the LSP ready to integrate with whichever IDE you are using&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rust-docs&lt;/code&gt;: ready to build all your code's documentation&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;rustfmt&lt;/code&gt;: to keep your code style consistent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now, in regards of the languages, let's make a short comparison of error handling in a scary &lt;code&gt;C&lt;/code&gt; snippet with its &lt;code&gt;Rust&lt;/code&gt; counterpart.&lt;/p&gt;
+&lt;p&gt;All the system calls you make, they &lt;em&gt;may&lt;/em&gt; return an error, and how do you know in &lt;code&gt;C&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;Well... the integer returned by a function will have different meanings:&lt;/p&gt;
+&lt;p&gt;For the &lt;a href="https://linux.die.net/man/2/sendto"&gt;sendto&lt;/a&gt; syscall:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;gt;=0&lt;/code&gt;: number of bytes sent&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-1&lt;/code&gt;: go and look the error code, that &lt;code&gt;C&lt;/code&gt; set in the global &lt;code&gt;errno&lt;/code&gt; variable, which is write only to the system calls&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;-1&lt;/code&gt;: No idea, is it possible?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-c"&gt;numbytes = sendto(sockfd, argv[2], strlen(argv[2]), 0, (struct sockaddr *)&amp;amp;their_addr, sizeof their_addr)
+
+if (numbytes == -1) {
+    perror("sendto");
+    exit(1);
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On this sample, you need to know that &lt;code&gt;perror&lt;/code&gt;, automatically reads the global error &lt;code&gt;errno&lt;/code&gt; and then it prints the message.&lt;/p&gt;
+&lt;p&gt;And you &lt;strong&gt;must NOT forget&lt;/strong&gt; to handle it, what happens otherwise? you continue the execution, probably causing catastrophic errors to planet Earth.&lt;/p&gt;
+&lt;p&gt;Let's take a look at rust:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-rust"&gt;let numbytes = nix::sys::socket::sendto(
+    sockfd.as_raw_fd(),
+    message.as_bytes(),
+    &amp;amp;socket,
+    nix::sys::socket::MsgFlags::empty(),
+).expect("Testing sendto");&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this case, we use &lt;code&gt;Rust&lt;/code&gt;'s &lt;code&gt;expect&lt;/code&gt;, which will automatically fail the program if there's an error. And if all goes well, you get the &lt;code&gt;numbytes&lt;/code&gt; sent.&lt;/p&gt;
+&lt;p&gt;Now, little details: &lt;code&gt;numbytes&lt;/code&gt; is also an unsigned &lt;code&gt;usize&lt;/code&gt;, which makes sense, because sending negative bytes would be strange.&lt;/p&gt;
+&lt;p&gt;And what would happen if we forget to use &lt;code&gt;expect&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;We would get a &lt;code&gt;Result&amp;lt;usize, Errno&amp;gt;&lt;/code&gt;, meaning that, in order to use the number of bytes sent (&lt;code&gt;usize&lt;/code&gt;), we must first do something to unpack it from the &lt;code&gt;Result&lt;/code&gt;, forcing us to handle the error.&lt;/p&gt;
+&lt;p&gt;But what if we don't care about the output of the function, and we don't even assign it to a variable, like this:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-rust"&gt;nix::sys::socket::sendto(
+    sockfd.as_raw_fd(),
+    message.as_bytes(),
+    &amp;amp;socket,
+    nix::sys::socket::MsgFlags::empty(),
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, you get a compiler warning:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-rust"&gt;warning: unused `Result` that must be used
+  --&amp;gt; src/examples/talker.rs:52:13
+   |
+52 | /             nix::sys::socket::sendto(
+53 | |                 sockfd.as_raw_fd(),
+54 | |                 message.as_bytes(),
+55 | |                 &amp;amp;socket,
+56 | |                 nix::sys::socket::MsgFlags::empty(),
+57 | |             )
+   | |_____________^
+   |
+   = note: this `Result` may be an `Err` variant, which should be handled
+   = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+   |
+52 |             let _ = nix::sys::socket::sendto(
+   |             +++++++&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which even tells you what to do if you &lt;strong&gt;really really&lt;/strong&gt; wanna ignore the &lt;code&gt;Result&lt;/code&gt;. But it also warns you into handling it.&lt;/p&gt;
+&lt;p&gt;Now, this is not to trash on &lt;code&gt;C&lt;/code&gt;, which is a language that helped us build modern society. I want to highlight how good &lt;code&gt;Rust&lt;/code&gt; is, which is a modern language, only possible because of all we've learned over the years. "we" as the human collective.&lt;/p&gt;
+&lt;p&gt;Going back to the book, here are my highlights:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;IPv6 does not support broadcast like on IPv4&lt;/strong&gt;. You have to use &lt;strong&gt;multicast&lt;/strong&gt;. I've heard about multicast, but it seemed a ethereal concept. Now I know that it's kind of like broadcast, but instead of sending to everyone, forcing every machine to decode the payload, and checking if it's for them by sending it to a port, instead, you just send it to "groups" of machines. And you could achieve essentially a broadcast using multicast.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Network Byte Order&lt;/strong&gt;: when you send data over the wire, always use &lt;code&gt;Big-Endian&lt;/code&gt;, ignoring the host machine's byte order&lt;/li&gt;
+&lt;li&gt;Prefer &lt;a href="https://docs.rs/nix/0.28.0/nix/index.html"&gt;nix&lt;/a&gt; over &lt;a href="https://docs.rs/libc/latest/libc/index.html"&gt;libc&lt;/a&gt; in Rust, as the bindings are safer&lt;/li&gt;
+&lt;li&gt;A file descriptor it's just an integer pointing to a file&lt;/li&gt;
+&lt;li&gt;File descriptor &lt;code&gt;0&lt;/code&gt; is stdin, &lt;code&gt;1&lt;/code&gt; is &lt;code&gt;stdout&lt;/code&gt; and &lt;code&gt;2&lt;/code&gt; is &lt;code&gt;stderr&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;A socket is a file descriptor, while a file descriptor is not a socket. When we say socket, we refer to a FD used for network communication&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cheers!&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://hachyderm.io/@woile"&gt;@woile&lt;/a&gt;&lt;/p&gt;</description><category>C</category><category>networking</category><category>rust</category><guid>https://woile.dev/posts/network-programming-in-rust/</guid><pubDate>Mon, 20 May 2024 08:31:45 GMT</pubDate></item><item><title>Nix journey part 2: replacing apt and brew</title><link>https://woile.dev/posts/nix-journey-part-2-replacing-apt-and-brew/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Even if I still cannot do much with &lt;a href="https://nixos.org/"&gt;nix&lt;/a&gt;, it still provides more advantages over other package managers:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Multi-platform (mac, linux, etc.)&lt;/li&gt;
 &lt;li&gt;Supports side-by-side installation of multiple versions of a package&lt;/li&gt;
