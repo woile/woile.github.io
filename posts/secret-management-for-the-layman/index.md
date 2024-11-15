@@ -11,22 +11,24 @@
 
 For a long time, I've been debating myself how to properly handle secrets in a convenient, cheap and reproducible fashion.
 
+I run a small website: [reciperium.com](https://www.reciperium.com) (check it out!) and I don't want to depend too much on the cloud.
+
 Most of the available tools have the following problems:
 
-- hard to setup
-- hard to integrate with your infra
-- hard to communicate / share with teammates (you can give access but they still have to discover the secrets, and build the files)
+- Hard to setup
+- Hard to integrate with your infra
+- Hard to communicate / share with teammates (you can give access but they still have to discover the secrets, and build the files)
 
 I've developed a straightforward solution using `age`, and `git`.
 
-- Secrets are stored as `.age` files in `git`
+- Secrets are stored as `.age` files in the `git` repo
 - Supports multiple users
 
-And I call it **"tracked secrets"**.
+I call this workflow **"tracked secrets"**.
 
 ## Setup
 
-First thing, prevent your private.key from being leaked into git.
+First thing, prevent your private key from being leaked into git.
 
 For that we add to our `.gitignore` the private keys:
 
@@ -34,16 +36,14 @@ For that we add to our `.gitignore` the private keys:
 *.key
 ```
 
-If you use `nix`, you can set up a development environemnt with all the dependencies we are gonna need:
+If you use [nix](https://github.com/DeterminateSystems/nix-installer), you can set up a development environment with all the dependencies needed. In my case, I use `just` and `age` for this.
 
 ```nix
 {
-  description = "Reciperium application";
-
+  description = "My Application";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
-
+  };å
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -61,10 +61,6 @@ If you use `nix`, you can set up a development environemnt with all the dependen
           ...
         }:
         {
-          ##################################
-          #             Shells             #
-          ##################################
-
           devShells.default = pkgs.mkShell {
             name = "reciperium";
             buildInputs = [
@@ -80,11 +76,12 @@ If you use `nix`, you can set up a development environemnt with all the dependen
 }
 ```
 
-You can also configure [direnv](https://direnv.net/) to load the nix dependencies as soon as you `cd` into the directory. This has been a powerful new method in my development workflow.
+You can also configure [direnv](https://direnv.net/), to load the nix dependencies, as soon as you `cd` into the directory.
+This has been a powerful new method in my development toolkit.
 
 ## Interface
 
-The commands we want to define are:
+The commands abstract we are gonna use are the following:
 
 ```sh
 # Create new key and add it to the recipients
@@ -130,11 +127,11 @@ It should encrypt with all the recipients present in `recipients.txt`.
 sec__decrypt
 ```
 
-It should decrypt everything in the **right** place. So the user is ready to work.
+It should decrypt everything in the **right** place. And the user is ready to work!
 
 ### Creating a secret for a CI
 
-One of the cool benefit of this approach, is that we can integrate it with our CI.
+One of the cool benefits of this approach, is that we can integrate it with our CI.
 
 ```sh
 sec__new-key github
@@ -147,7 +144,7 @@ The second command encrypts everything again.
 
 ## Implementation example
 
-Let's say we have a repository with the infrastructure. It has 2 folders, one with the terraform code, and another with the docker-compose which gets deployed to the server using docker-swarm
+Let's say we have a repository with our infrastructure. It has 2 folders, one with terraform code. And another with a docker-compose, which gets deployed to the server using docker-swarm.
 
 ```sh
 app
@@ -159,9 +156,9 @@ app
     └── docker-compose.yaml
 ```
 
-The secrets of our application in this example are `terraform.tfvars` and `.env`.
+The secrets of our application are `terraform.tfvars` and `.env`.
 
-In this example, I've used `just` for the interface, but you can use shell scripts or `make`.
+As I said, I've been using `just` for managing the commands, but you can use shell scripts or `make`.
 
 Let's take a look at the `justfile`:
 
@@ -191,9 +188,50 @@ _sec__encrypt__stack:
         age -R recipients.txt > stack/stack.env.tar.gz.age
 ```
 
+Okay, let's recap. For creating a private key for your current host:
+
+```sh
+just sec__new_key
+```
+
+The "new key" command is self-service, a user pulls the repo, runs the `just sec__new_key`,
+and then they push. Another user, with access to the secrets, runs the encrypt again. And finally, the original
+user pulls the latest commits, so they can use decrypt locally.
+
+For encryption, we run:
+
+```sh
+just sec__encrypt
+```
+
+And to decrypt:
+
+```sh
+just sec__decrypt
+```
+
+Finally, we want to create a secret for our CI
+
+```sh
+just sec__encrypt github
+```
+
+We can also on-board other users, but it involves sending the private key to them, which can be cumbersome.
+
+```sh
+just sec__encrypt lara
+```
+
+## What to do with the private key?
+
+After running `just sec__new_key`, we have a `me.key`. You can store a copy in your secret manager.
+
+I personally use `gopass`, but there are many, like `1password` or `bitwarden`.
+
 ## Potential improvements
 
 How can we handle different environments?
+
 One option is to have a `secrets` folder, with the different environments there.
 
 ```sh
@@ -212,8 +250,9 @@ just sec__encrypt prod
 
 ## Final comments
 
-Even though, I've seen a lot of people share publicly the nixos configuration, with the secrets encrypted, I still wonder if it's safe.
-I want to believe so, and I know that if the secrets get leaked, you have to update them all. The plus side, is that you know where they are, and you can probably write comments on how to retrieve or generate them again.
+Even though, I've seen a lot of people share their nixos configuration publicly, including their encrypted secrets, I still wonder if it's safe, and if so, why is it not used widely?
+I want to believe it's safe, and I know that if the secrets get leaked, I'll have to update them all.
+The plus side, is that you know where they are, and you can probably write comments on how to retrieve or generate them again, becaues it's just files.
 
 What do you think of this approach?
 

@@ -132,31 +132,29 @@
 </div>
         
     </header><section class="e-content entry-content" itemprop="articleBody text"><p>For a long time, I've been debating myself how to properly handle secrets in a convenient, cheap and reproducible fashion.</p>
+<p>I run a small website: <a href="https://www.reciperium.com">reciperium.com</a> (check it out!) and I don't want to depend too much on the cloud.</p>
 <p>Most of the available tools have the following problems:</p>
 <ul>
-<li>hard to setup</li>
-<li>hard to integrate with your infra</li>
-<li>hard to communicate / share with teammates (you can give access but they still have to discover the secrets, and build the files)</li>
+<li>Hard to setup</li>
+<li>Hard to integrate with your infra</li>
+<li>Hard to communicate / share with teammates (you can give access but they still have to discover the secrets, and build the files)</li>
 </ul>
 <p>I've developed a straightforward solution using <code>age</code>, and <code>git</code>.</p>
 <ul>
-<li>Secrets are stored as <code>.age</code> files in <code>git</code>
-</li>
+<li>Secrets are stored as <code>.age</code> files in the <code>git</code> repo</li>
 <li>Supports multiple users</li>
 </ul>
-<p>And I call it <strong>"tracked secrets"</strong>.</p>
+<p>I call this workflow <strong>"tracked secrets"</strong>.</p>
 <h3>Setup</h3>
-<p>First thing, prevent your private.key from being leaked into git.</p>
+<p>First thing, prevent your private key from being leaked into git.</p>
 <p>For that we add to our <code>.gitignore</code> the private keys:</p>
 <pre class="highlight"><code>*.key</code></pre>
-<p>If you use <code>nix</code>, you can set up a development environemnt with all the dependencies we are gonna need:</p>
+<p>If you use <a href="https://github.com/DeterminateSystems/nix-installer">nix</a>, you can set up a development environment with all the dependencies needed. In my case, I use <code>just</code> and <code>age</code> for this.</p>
 <pre class="highlight"><code class="language-nix">{
-  description = "Reciperium application";
-
+  description = "My Application";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
-
+  };å
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -174,10 +172,6 @@
           ...
         }:
         {
-          ##################################
-          #             Shells             #
-          ##################################
-
           devShells.default = pkgs.mkShell {
             name = "reciperium";
             buildInputs = [
@@ -191,9 +185,10 @@
         };
     };
 }</code></pre>
-<p>You can also configure <a href="https://direnv.net/">direnv</a> to load the nix dependencies as soon as you <code>cd</code> into the directory. This has been a powerful new method in my development workflow.</p>
+<p>You can also configure <a href="https://direnv.net/">direnv</a>, to load the nix dependencies, as soon as you <code>cd</code> into the directory.
+This has been a powerful new method in my development toolkit.</p>
 <h3>Interface</h3>
-<p>The commands we want to define are:</p>
+<p>The commands abstract we are gonna use are the following:</p>
 <pre class="highlight"><code class="language-sh"># Create new key and add it to the recipients
 sec__new-key
 
@@ -218,15 +213,15 @@ sec__encrypt</code></pre>
 It should encrypt with all the recipients present in <code>recipients.txt</code>.</p>
 <h4>Decrypting all secrets</h4>
 <pre class="highlight"><code class="language-sh">sec__decrypt</code></pre>
-<p>It should decrypt everything in the <strong>right</strong> place. So the user is ready to work.</p>
+<p>It should decrypt everything in the <strong>right</strong> place. And the user is ready to work!</p>
 <h4>Creating a secret for a CI</h4>
-<p>One of the cool benefit of this approach, is that we can integrate it with our CI.</p>
+<p>One of the cool benefits of this approach, is that we can integrate it with our CI.</p>
 <pre class="highlight"><code class="language-sh">sec__new-key github
 sec__encrypt</code></pre>
 <p>That should generate a <code>github.key</code>, and it should populate the <code>recipients.txt</code>. You can upload the <code>github.key</code> as a secret and your pipelines are ready to use it!</p>
 <p>The second command encrypts everything again.</p>
 <h3>Implementation example</h3>
-<p>Let's say we have a repository with the infrastructure. It has 2 folders, one with the terraform code, and another with the docker-compose which gets deployed to the server using docker-swarm</p>
+<p>Let's say we have a repository with our infrastructure. It has 2 folders, one with terraform code. And another with a docker-compose, which gets deployed to the server using docker-swarm.</p>
 <pre class="highlight"><code class="language-sh">app
 ├── infra-tf
 │   ├── main.tf
@@ -234,8 +229,8 @@ sec__encrypt</code></pre>
 └── stack
     ├── .env
     └── docker-compose.yaml</code></pre>
-<p>The secrets of our application in this example are <code>terraform.tfvars</code> and <code>.env</code>.</p>
-<p>In this example, I've used <code>just</code> for the interface, but you can use shell scripts or <code>make</code>.</p>
+<p>The secrets of our application are <code>terraform.tfvars</code> and <code>.env</code>.</p>
+<p>As I said, I've been using <code>just</code> for managing the commands, but you can use shell scripts or <code>make</code>.</p>
 <p>Let's take a look at the <code>justfile</code>:</p>
 <pre class="highlight"><code class="language-makefile"># Create a new private key and store public in recipients.txt
 sec__new_key name="me":
@@ -260,9 +255,25 @@ _sec__encrypt__stack:
     tar cvz \
         stack/.env \
         age -R recipients.txt &gt; stack/stack.env.tar.gz.age</code></pre>
+<p>Okay, let's recap. For creating a private key for your current host:</p>
+<pre class="highlight"><code class="language-sh">just sec__new_key</code></pre>
+<p>The "new key" command is self-service, a user pulls the repo, runs the <code>just sec__new_key</code>,
+and then they push. Another user, with access to the secrets, runs the encrypt again. And finally, the original
+user pulls the latest commits, so they can use decrypt locally.</p>
+<p>For encryption, we run:</p>
+<pre class="highlight"><code class="language-sh">just sec__encrypt</code></pre>
+<p>And to decrypt:</p>
+<pre class="highlight"><code class="language-sh">just sec__decrypt</code></pre>
+<p>Finally, we want to create a secret for our CI</p>
+<pre class="highlight"><code class="language-sh">just sec__encrypt github</code></pre>
+<p>We can also on-board other users, but it involves sending the private key to them, which can be cumbersome.</p>
+<pre class="highlight"><code class="language-sh">just sec__encrypt lara</code></pre>
+<h3>What to do with the private key?</h3>
+<p>After running <code>just sec__new_key</code>, we have a <code>me.key</code>. You can store a copy in your secret manager.</p>
+<p>I personally use <code>gopass</code>, but there are many, like <code>1password</code> or <code>bitwarden</code>.</p>
 <h3>Potential improvements</h3>
-<p>How can we handle different environments?
-One option is to have a <code>secrets</code> folder, with the different environments there.</p>
+<p>How can we handle different environments?</p>
+<p>One option is to have a <code>secrets</code> folder, with the different environments there.</p>
 <pre class="highlight"><code class="language-sh">secrets/
 ├── dev/
 ├── preview/
@@ -270,8 +281,9 @@ One option is to have a <code>secrets</code> folder, with the different environm
 <p>And we could make just accept different parameters when calling the commands:</p>
 <pre class="highlight"><code class="language-sh">just sec__encrypt prod</code></pre>
 <h3>Final comments</h3>
-<p>Even though, I've seen a lot of people share publicly the nixos configuration, with the secrets encrypted, I still wonder if it's safe.
-I want to believe so, and I know that if the secrets get leaked, you have to update them all. The plus side, is that you know where they are, and you can probably write comments on how to retrieve or generate them again.</p>
+<p>Even though, I've seen a lot of people share their nixos configuration publicly, including their encrypted secrets, I still wonder if it's safe, and if so, why is it not used widely?
+I want to believe it's safe, and I know that if the secrets get leaked, I'll have to update them all.
+The plus side, is that you know where they are, and you can probably write comments on how to retrieve or generate them again, becaues it's just files.</p>
 <p>What do you think of this approach?</p>
 <p>Thanks for reading</p>
     </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
