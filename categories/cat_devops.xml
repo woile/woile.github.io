@@ -1,5 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about devops)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/cat_devops.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2024 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 20 May 2024 13:49:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Posts about devops)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/categories/cat_devops.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2024 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Fri, 15 Nov 2024 16:18:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Secret management for the layman</title><link>https://woile.dev/posts/secret-management-for-the-layman/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For a long time, I've been debating myself how to properly handle secrets in a convenient, cheap and reproducible fashion.&lt;/p&gt;
+&lt;p&gt;Most of the available tools have the following problems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hard to setup&lt;/li&gt;
+&lt;li&gt;hard to integrate with your infra&lt;/li&gt;
+&lt;li&gt;hard to communicate / share with teammates (you can give access but they still have to discover the secrets, and build the files)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I've developed a straightforward solution using &lt;code&gt;age&lt;/code&gt;, and &lt;code&gt;git&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Secrets are stored as &lt;code&gt;.age&lt;/code&gt; files in &lt;code&gt;git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Supports multiple users&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And I call it &lt;strong&gt;"tracked secrets"&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;Setup&lt;/h3&gt;
+&lt;p&gt;First thing, prevent your private.key from being leaked into git.&lt;/p&gt;
+&lt;p&gt;For that we add to our &lt;code&gt;.gitignore&lt;/code&gt; the private keys:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code&gt;*.key&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you use &lt;code&gt;nix&lt;/code&gt;, you can set up a development environemnt with all the dependencies we are gonna need:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;{
+  description = "Reciperium application";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      perSystem =
+        {
+          config,
+          self',
+          inputs',
+          pkgs,
+          ...
+        }:
+        {
+          ##################################
+          #             Shells             #
+          ##################################
+
+          devShells.default = pkgs.mkShell {
+            name = "reciperium";
+            buildInputs = [
+              pkgs.age
+              pkgs.just
+            ];
+            shellHook = ''
+              just --list
+            '';
+          };
+        };
+    };
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can also configure &lt;a href="https://direnv.net/"&gt;direnv&lt;/a&gt; to load the nix dependencies as soon as you &lt;code&gt;cd&lt;/code&gt; into the directory. This has been a powerful new method in my development workflow.&lt;/p&gt;
+&lt;h3&gt;Interface&lt;/h3&gt;
+&lt;p&gt;The commands we want to define are:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;# Create new key and add it to the recipients
+sec__new-key
+
+# Decrypt ALL secrets
+sec__decrypt
+
+# Encrypt ALL secrets
+sec__encrypt&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Workflows&lt;/h3&gt;
+&lt;p&gt;With those 3 commands we can support several different workflows:&lt;/p&gt;
+&lt;h4&gt;Initializing my host&lt;/h4&gt;
+&lt;p&gt;The commands to be executed for this workflow should be:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;sec__new-key&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This should create a &lt;code&gt;me.key&lt;/code&gt; and populate &lt;code&gt;recipients.txt&lt;/code&gt; with the public key.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If working on an existing repository, then I should create a commit, push the changes to git and ask to a colleague to encrypt the secrets again (after doing a pull)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;Encrypting all the secrets&lt;/h4&gt;
+&lt;p&gt;The command to be executed:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;sec__encrypt&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This command can either encrypt everything necessary or it can be split into multiple commands internally.
+It should encrypt with all the recipients present in &lt;code&gt;recipients.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;Decrypting all secrets&lt;/h4&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;sec__decrypt&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It should decrypt everything in the &lt;strong&gt;right&lt;/strong&gt; place. So the user is ready to work.&lt;/p&gt;
+&lt;h4&gt;Creating a secret for a CI&lt;/h4&gt;
+&lt;p&gt;One of the cool benefit of this approach, is that we can integrate it with our CI.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;sec__new-key github
+sec__encrypt&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That should generate a &lt;code&gt;github.key&lt;/code&gt;, and it should populate the &lt;code&gt;recipients.txt&lt;/code&gt;. You can upload the &lt;code&gt;github.key&lt;/code&gt; as a secret and your pipelines are ready to use it!&lt;/p&gt;
+&lt;p&gt;The second command encrypts everything again.&lt;/p&gt;
+&lt;h3&gt;Implementation example&lt;/h3&gt;
+&lt;p&gt;Let's say we have a repository with the infrastructure. It has 2 folders, one with the terraform code, and another with the docker-compose which gets deployed to the server using docker-swarm&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;app
+├── infra-tf
+│   ├── main.tf
+│   └── terraform.tfvars
+└── stack
+    ├── .env
+    └── docker-compose.yaml&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The secrets of our application in this example are &lt;code&gt;terraform.tfvars&lt;/code&gt; and &lt;code&gt;.env&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In this example, I've used &lt;code&gt;just&lt;/code&gt; for the interface, but you can use shell scripts or &lt;code&gt;make&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Let's take a look at the &lt;code&gt;justfile&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-makefile"&gt;# Create a new private key and store public in recipients.txt
+sec__new_key name="me":
+    test -f "{{name}}.key" || age-keygen -o "{{name}}.key" &amp;amp;&amp;amp; age-keygen -y "{{name}}.key" &amp;gt;&amp;gt; recipients.txt
+
+# Decrypt ALL secrets
+sec__decrypt:
+    age -d -i me.key stack/stack.env.tar.gz.age | tar xvz
+    age -d -i me.key infra-tf/infra-tf.tar.gz.age | tar xvz
+
+# Encrypt ALL secrets
+sec__encrypt: _sec__encrypt__infra _sec__encrypt__stack
+
+# Encrypt terraform.tfvars
+_sec__encrypt__infra:
+    tar cvz \
+        infra-tf/terraform.tfvars | \
+        age -R recipients.txt &amp;gt; infra-tf/infra-tf.tar.gz.age
+
+# Encrypt the stack environment files
+_sec__encrypt__stack:
+    tar cvz \
+        stack/.env \
+        age -R recipients.txt &amp;gt; stack/stack.env.tar.gz.age&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Potential improvements&lt;/h3&gt;
+&lt;p&gt;How can we handle different environments?
+One option is to have a &lt;code&gt;secrets&lt;/code&gt; folder, with the different environments there.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;secrets/
+├── dev/
+├── preview/
+└── prod/&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we could make just accept different parameters when calling the commands:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;just sec__encrypt prod&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Final comments&lt;/h3&gt;
+&lt;p&gt;Even though, I've seen a lot of people share publicly the nixos configuration, with the secrets encrypted, I still wonder if it's safe.
+I want to believe so, and I know that if the secrets get leaked, you have to update them all. The plus side, is that you know where they are, and you can probably write comments on how to retrieve or generate them again.&lt;/p&gt;
+&lt;p&gt;What do you think of this approach?&lt;/p&gt;
+&lt;p&gt;Thanks for reading&lt;/p&gt;</description><category>age</category><category>secret management</category><category>security</category><guid>https://woile.dev/posts/secret-management-for-the-layman/</guid><pubDate>Wed, 13 Nov 2024 19:55:52 GMT</pubDate></item><item><title>Automating semver releases with commitizen</title><link>https://woile.dev/posts/automating-semver-releases-with-commitizen/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;&lt;a href="https://semver.org/"&gt;SemVer&lt;/a&gt; is a great way to version an application.
 Languages like rust have &lt;a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#specifying-dependencies-from-cratesio"&gt;fully embraced it&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;A SemVer version looks like this: &lt;code&gt;1.2.0&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Quite simple, right?&lt;/p&gt;
