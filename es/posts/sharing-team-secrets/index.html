@@ -76,12 +76,12 @@
     <header class="cover"><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
         <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
     <nav class="menu"><ul>
-<li><a class="hover:menu__link" href="../../">🏠 Inicio</a></li>
-                <li><a class="hover:menu__link" href="../../../blog/">📰 Blog</a></li>
-                <li><a class="hover:menu__link" href="../../mentoring/">📗 Mentoreo</a></li>
-                <li><a class="hover:menu__link" href="../../archive.html">🗄️ Archivo</a></li>
-                <li><a class="hover:menu__link" href="../../categories/index.html">🏷️ Tags</a></li>
-                <li><a class="hover:menu__link" href="../../../rss.xml">🛰️ RSS feed</a></li>
+<li><a class="hover:menu__link" href="../../">Inicio</a></li>
+                <li><a class="hover:menu__link" href="../../../blog/">Blog</a></li>
+                <li><a class="hover:menu__link" href="../../mentoring/">Mentoreo</a></li>
+                <li><a class="hover:menu__link" href="../../archive.html">Archivo</a></li>
+                <li><a class="hover:menu__link" href="../../categories/index.html">Tags</a></li>
+                <li><a class="hover:menu__link" href="../../../rss.xml">RSS feed</a></li>
 
         
         
@@ -202,60 +202,60 @@ employees, right?</p>
 <p><strong>Creating a key</strong></p>
 <p>Simple as following the prompt that appears after typing the command.
 If you don't know what to fill, use the default values.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_1f8b15a1911f484c9965a8a117e9161c-1" name="rest_code_1f8b15a1911f484c9965a8a117e9161c-1" href="#rest_code_1f8b15a1911f484c9965a8a117e9161c-1"></a>gpg<span class="w"> </span>--full-generate-key
+<div class="code"><pre class="code bash"><a id="rest_code_ba9427ec629347cc88a4b179260807c7-1" name="rest_code_ba9427ec629347cc88a4b179260807c7-1" href="#rest_code_ba9427ec629347cc88a4b179260807c7-1"></a>gpg<span class="w"> </span>--full-generate-key
 </pre></div>
 <p>And check the generatd key</p>
-<div class="code"><pre class="code bash"><a id="rest_code_c24c0a942426449cbc00fd9e9cf01346-1" name="rest_code_c24c0a942426449cbc00fd9e9cf01346-1" href="#rest_code_c24c0a942426449cbc00fd9e9cf01346-1"></a>gpg<span class="w"> </span>-k
+<div class="code"><pre class="code bash"><a id="rest_code_a5007c2e26194ba98d4eba57a2fa7139-1" name="rest_code_a5007c2e26194ba98d4eba57a2fa7139-1" href="#rest_code_a5007c2e26194ba98d4eba57a2fa7139-1"></a>gpg<span class="w"> </span>-k
 </pre></div>
 <section id="initializing-gopass"><h3>Initializing gopass</h3>
 <p>Easy as typing</p>
-<div class="code"><pre class="code bash"><a id="rest_code_300f27f0653146309cae445530d56748-1" name="rest_code_300f27f0653146309cae445530d56748-1" href="#rest_code_300f27f0653146309cae445530d56748-1"></a>gopass<span class="w"> </span>init
+<div class="code"><pre class="code bash"><a id="rest_code_8fb5fa9664f242ef9c65a89b48706f86-1" name="rest_code_8fb5fa9664f242ef9c65a89b48706f86-1" href="#rest_code_8fb5fa9664f242ef9c65a89b48706f86-1"></a>gopass<span class="w"> </span>init
 </pre></div>
 <p>This will set up some stuff and will create the default store.</p>
 <p>I recommend adding the autocomplete to your terminal</p>
-<div class="code"><pre class="code bash"><a id="rest_code_7d115375bf804b9aba45507802144a92-1" name="rest_code_7d115375bf804b9aba45507802144a92-1" href="#rest_code_7d115375bf804b9aba45507802144a92-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"source &lt;(gopass completion bash)"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<div class="code"><pre class="code bash"><a id="rest_code_c44beecfa5c94cd3a58126e1bf51250c-1" name="rest_code_c44beecfa5c94cd3a58126e1bf51250c-1" href="#rest_code_c44beecfa5c94cd3a58126e1bf51250c-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"source &lt;(gopass completion bash)"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
 </pre></div>
 </section><section id="using-gopass"><h3>Using gopass</h3>
 <p>Gopass works in a "unix" like way.
 You'll have a tree (folders) where the leaves are encrypted files.</p>
-<div class="code"><pre class="code text"><a id="rest_code_9e0aa3ee3370496eb8df503f27257887-1" name="rest_code_9e0aa3ee3370496eb8df503f27257887-1" href="#rest_code_9e0aa3ee3370496eb8df503f27257887-1"></a>gopass
-<a id="rest_code_9e0aa3ee3370496eb8df503f27257887-2" name="rest_code_9e0aa3ee3370496eb8df503f27257887-2" href="#rest_code_9e0aa3ee3370496eb8df503f27257887-2"></a>    ├── my-company
-<a id="rest_code_9e0aa3ee3370496eb8df503f27257887-3" name="rest_code_9e0aa3ee3370496eb8df503f27257887-3" href="#rest_code_9e0aa3ee3370496eb8df503f27257887-3"></a>    │   └── pepe@my-company.com
-<a id="rest_code_9e0aa3ee3370496eb8df503f27257887-4" name="rest_code_9e0aa3ee3370496eb8df503f27257887-4" href="#rest_code_9e0aa3ee3370496eb8df503f27257887-4"></a>    └── personal
-<a id="rest_code_9e0aa3ee3370496eb8df503f27257887-5" name="rest_code_9e0aa3ee3370496eb8df503f27257887-5" href="#rest_code_9e0aa3ee3370496eb8df503f27257887-5"></a>        └── pepe@personal.com
+<div class="code"><pre class="code text"><a id="rest_code_88e277dd0b994f8d9e70d1b37b019408-1" name="rest_code_88e277dd0b994f8d9e70d1b37b019408-1" href="#rest_code_88e277dd0b994f8d9e70d1b37b019408-1"></a>gopass
+<a id="rest_code_88e277dd0b994f8d9e70d1b37b019408-2" name="rest_code_88e277dd0b994f8d9e70d1b37b019408-2" href="#rest_code_88e277dd0b994f8d9e70d1b37b019408-2"></a>    ├── my-company
+<a id="rest_code_88e277dd0b994f8d9e70d1b37b019408-3" name="rest_code_88e277dd0b994f8d9e70d1b37b019408-3" href="#rest_code_88e277dd0b994f8d9e70d1b37b019408-3"></a>    │   └── pepe@my-company.com
+<a id="rest_code_88e277dd0b994f8d9e70d1b37b019408-4" name="rest_code_88e277dd0b994f8d9e70d1b37b019408-4" href="#rest_code_88e277dd0b994f8d9e70d1b37b019408-4"></a>    └── personal
+<a id="rest_code_88e277dd0b994f8d9e70d1b37b019408-5" name="rest_code_88e277dd0b994f8d9e70d1b37b019408-5" href="#rest_code_88e277dd0b994f8d9e70d1b37b019408-5"></a>        └── pepe@personal.com
 </pre></div>
 <p>Let's begin by <strong>inserting</strong> a secret.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_15d39f90424847da980835bf97056cbf-1" name="rest_code_15d39f90424847da980835bf97056cbf-1" href="#rest_code_15d39f90424847da980835bf97056cbf-1"></a>gopass<span class="w"> </span>insert<span class="w"> </span>personal/twitter/santiwilly
+<div class="code"><pre class="code bash"><a id="rest_code_fa103798bf494657aa729c2d174169fc-1" name="rest_code_fa103798bf494657aa729c2d174169fc-1" href="#rest_code_fa103798bf494657aa729c2d174169fc-1"></a>gopass<span class="w"> </span>insert<span class="w"> </span>personal/twitter/santiwilly
 </pre></div>
 <p>It will show a prompt and you'll have to fill the password twice.
 The structure I follow is this (most of them optional)
 <code class="docutils literal"><span class="pre">{store}/{org}/{env}/{username</span> or email}</code>.</p>
 <p>Now let's <strong>list</strong> our secret, by simply doing</p>
-<div class="code"><pre class="code bash"><a id="rest_code_a7ccc26d55a84244b49c8a61bc9debe4-1" name="rest_code_a7ccc26d55a84244b49c8a61bc9debe4-1" href="#rest_code_a7ccc26d55a84244b49c8a61bc9debe4-1"></a>gopass<span class="w"> </span>ls
+<div class="code"><pre class="code bash"><a id="rest_code_94f0d70633b84d77bb713987c82475c4-1" name="rest_code_94f0d70633b84d77bb713987c82475c4-1" href="#rest_code_94f0d70633b84d77bb713987c82475c4-1"></a>gopass<span class="w"> </span>ls
 </pre></div>
 <p>We should now see, something like this.</p>
-<div class="code"><pre class="code text"><a id="rest_code_195079900ef649f9924ddea95f124ade-1" name="rest_code_195079900ef649f9924ddea95f124ade-1" href="#rest_code_195079900ef649f9924ddea95f124ade-1"></a>gopass
-<a id="rest_code_195079900ef649f9924ddea95f124ade-2" name="rest_code_195079900ef649f9924ddea95f124ade-2" href="#rest_code_195079900ef649f9924ddea95f124ade-2"></a>    ├── my-company
-<a id="rest_code_195079900ef649f9924ddea95f124ade-3" name="rest_code_195079900ef649f9924ddea95f124ade-3" href="#rest_code_195079900ef649f9924ddea95f124ade-3"></a>    │   └── pepe@my-company.com
-<a id="rest_code_195079900ef649f9924ddea95f124ade-4" name="rest_code_195079900ef649f9924ddea95f124ade-4" href="#rest_code_195079900ef649f9924ddea95f124ade-4"></a>    └── personal
-<a id="rest_code_195079900ef649f9924ddea95f124ade-5" name="rest_code_195079900ef649f9924ddea95f124ade-5" href="#rest_code_195079900ef649f9924ddea95f124ade-5"></a>        ├── pepe@personal.com
-<a id="rest_code_195079900ef649f9924ddea95f124ade-6" name="rest_code_195079900ef649f9924ddea95f124ade-6" href="#rest_code_195079900ef649f9924ddea95f124ade-6"></a>        └── twitter
-<a id="rest_code_195079900ef649f9924ddea95f124ade-7" name="rest_code_195079900ef649f9924ddea95f124ade-7" href="#rest_code_195079900ef649f9924ddea95f124ade-7"></a>            └── santiwilly
+<div class="code"><pre class="code text"><a id="rest_code_acf641a46aa849ce8bba79f92a5fb994-1" name="rest_code_acf641a46aa849ce8bba79f92a5fb994-1" href="#rest_code_acf641a46aa849ce8bba79f92a5fb994-1"></a>gopass
+<a id="rest_code_acf641a46aa849ce8bba79f92a5fb994-2" name="rest_code_acf641a46aa849ce8bba79f92a5fb994-2" href="#rest_code_acf641a46aa849ce8bba79f92a5fb994-2"></a>    ├── my-company
+<a id="rest_code_acf641a46aa849ce8bba79f92a5fb994-3" name="rest_code_acf641a46aa849ce8bba79f92a5fb994-3" href="#rest_code_acf641a46aa849ce8bba79f92a5fb994-3"></a>    │   └── pepe@my-company.com
+<a id="rest_code_acf641a46aa849ce8bba79f92a5fb994-4" name="rest_code_acf641a46aa849ce8bba79f92a5fb994-4" href="#rest_code_acf641a46aa849ce8bba79f92a5fb994-4"></a>    └── personal
+<a id="rest_code_acf641a46aa849ce8bba79f92a5fb994-5" name="rest_code_acf641a46aa849ce8bba79f92a5fb994-5" href="#rest_code_acf641a46aa849ce8bba79f92a5fb994-5"></a>        ├── pepe@personal.com
+<a id="rest_code_acf641a46aa849ce8bba79f92a5fb994-6" name="rest_code_acf641a46aa849ce8bba79f92a5fb994-6" href="#rest_code_acf641a46aa849ce8bba79f92a5fb994-6"></a>        └── twitter
+<a id="rest_code_acf641a46aa849ce8bba79f92a5fb994-7" name="rest_code_acf641a46aa849ce8bba79f92a5fb994-7" href="#rest_code_acf641a46aa849ce8bba79f92a5fb994-7"></a>            └── santiwilly
 </pre></div>
 <p>Perfect!</p>
 <p>Let's continue. I'm just gonna throw you the commands, they don't have any
 complexity.</p>
 <p><strong>Show password</strong></p>
-<div class="code"><pre class="code bash"><a id="rest_code_30b1924d8c0943dc87015140eb47d859-1" name="rest_code_30b1924d8c0943dc87015140eb47d859-1" href="#rest_code_30b1924d8c0943dc87015140eb47d859-1"></a>gopass<span class="w"> </span>personal/twitter/santiwilly
+<div class="code"><pre class="code bash"><a id="rest_code_77ccb47971194b4a97b23c4d4b70eb2d-1" name="rest_code_77ccb47971194b4a97b23c4d4b70eb2d-1" href="#rest_code_77ccb47971194b4a97b23c4d4b70eb2d-1"></a>gopass<span class="w"> </span>personal/twitter/santiwilly
 </pre></div>
 <p><strong>Copy password to clipboard</strong></p>
-<div class="code"><pre class="code bash"><a id="rest_code_f714025a1c4a4578bd5f2a779899607d-1" name="rest_code_f714025a1c4a4578bd5f2a779899607d-1" href="#rest_code_f714025a1c4a4578bd5f2a779899607d-1"></a>gopass<span class="w"> </span>-c<span class="w"> </span>personal/twitter/santiwilly
+<div class="code"><pre class="code bash"><a id="rest_code_7574d90977d54d9db7578af8cdcc885c-1" name="rest_code_7574d90977d54d9db7578af8cdcc885c-1" href="#rest_code_7574d90977d54d9db7578af8cdcc885c-1"></a>gopass<span class="w"> </span>-c<span class="w"> </span>personal/twitter/santiwilly
 </pre></div>
 <p><strong>Generate random pass</strong></p>
-<div class="code"><pre class="code bash"><a id="rest_code_afb4c384aa174cc0b7eb46ca5bd58496-1" name="rest_code_afb4c384aa174cc0b7eb46ca5bd58496-1" href="#rest_code_afb4c384aa174cc0b7eb46ca5bd58496-1"></a>gopass<span class="w"> </span>generate<span class="w"> </span>my-company/anothername@rmail.com
+<div class="code"><pre class="code bash"><a id="rest_code_072506163a034124bfbe780bb6817e6d-1" name="rest_code_072506163a034124bfbe780bb6817e6d-1" href="#rest_code_072506163a034124bfbe780bb6817e6d-1"></a>gopass<span class="w"> </span>generate<span class="w"> </span>my-company/anothername@rmail.com
 </pre></div>
 <p><strong>Search secrets</strong></p>
-<div class="code"><pre class="code bash"><a id="rest_code_252135411f9d41159e82eff8f66a9d5a-1" name="rest_code_252135411f9d41159e82eff8f66a9d5a-1" href="#rest_code_252135411f9d41159e82eff8f66a9d5a-1"></a>gopass<span class="w"> </span>search<span class="w"> </span>@gmail.com
+<div class="code"><pre class="code bash"><a id="rest_code_5f951ca5d8a34c55934b9e4e0dc91d13-1" name="rest_code_5f951ca5d8a34c55934b9e4e0dc91d13-1" href="#rest_code_5f951ca5d8a34c55934b9e4e0dc91d13-1"></a>gopass<span class="w"> </span>search<span class="w"> </span>@gmail.com
 </pre></div>
 </section><section id="using-stores"><h3>Using stores</h3>
 <p>Here's were my journey got a bit complicated, as I mentioned the docs are
@@ -268,17 +268,17 @@ Each one can live in a different repository, and you could potentially,
 share <code>company</code> with your peers.</p>
 <p><strong>Initialize new store</strong></p>
 <p>Creates a new store located at <code class="docutils literal"><span class="pre">~/.password-store-my-company</span></code>.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_2caec74f380f4018b065523daa36118b-1" name="rest_code_2caec74f380f4018b065523daa36118b-1" href="#rest_code_2caec74f380f4018b065523daa36118b-1"></a>gopass<span class="w"> </span>init<span class="w"> </span>--store<span class="w"> </span>my-company
+<div class="code"><pre class="code bash"><a id="rest_code_992ca8d491734a23a0daba8142eab223-1" name="rest_code_992ca8d491734a23a0daba8142eab223-1" href="#rest_code_992ca8d491734a23a0daba8142eab223-1"></a>gopass<span class="w"> </span>init<span class="w"> </span>--store<span class="w"> </span>my-company
 </pre></div>
 <p><strong>Add git remote to store</strong></p>
-<div class="code"><pre class="code bash"><a id="rest_code_cbeb24c942f34703884245fc812da43a-1" name="rest_code_cbeb24c942f34703884245fc812da43a-1" href="#rest_code_cbeb24c942f34703884245fc812da43a-1"></a>gopass<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--store<span class="w"> </span>my-company<span class="w"> </span>origin<span class="w"> </span>git@gh.com/Woile/keys.git
+<div class="code"><pre class="code bash"><a id="rest_code_7f5f3afd46304d61a211d9005907bff6-1" name="rest_code_7f5f3afd46304d61a211d9005907bff6-1" href="#rest_code_7f5f3afd46304d61a211d9005907bff6-1"></a>gopass<span class="w"> </span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>--store<span class="w"> </span>my-company<span class="w"> </span>origin<span class="w"> </span>git@gh.com/Woile/keys.git
 </pre></div>
 <p><strong>Clone existing store</strong></p>
 <p>Let's say you move to another computer, now it's where gopass starts to shine.
 Whether you use the same private key (imported in different computers) or you
 choose to have a key per machine, to clone a repo, you just need
 access to it.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_defd87e4c895472bb229a593ec0e885a-1" name="rest_code_defd87e4c895472bb229a593ec0e885a-1" href="#rest_code_defd87e4c895472bb229a593ec0e885a-1"></a>gopass<span class="w"> </span>clone<span class="w"> </span>git@gh.com/Woile/keys.git<span class="w"> </span>my-company<span class="w"> </span>--sync<span class="w"> </span>gitcli
+<div class="code"><pre class="code bash"><a id="rest_code_1e4420c6569442a48cd8e7ce5e8fc7a7-1" name="rest_code_1e4420c6569442a48cd8e7ce5e8fc7a7-1" href="#rest_code_1e4420c6569442a48cd8e7ce5e8fc7a7-1"></a>gopass<span class="w"> </span>clone<span class="w"> </span>git@gh.com/Woile/keys.git<span class="w"> </span>my-company<span class="w"> </span>--sync<span class="w"> </span>gitcli
 </pre></div>
 <p>It's important to specify <code class="docutils literal">gitcli</code> as the <code class="docutils literal">sync</code> method. Otherwise gopass
 won't know how to synchronize the secret (it will use <code class="docutils literal">noop</code> by default).
@@ -291,19 +291,19 @@ Gopass provides other sync methods but I haven't checked them.</p>
 </ul>
 <p><strong>Removing existing store</strong></p>
 <p>To avoid having issues with gopass, first we need to unmount the store.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_34f14462be7344339de9071cb51dd1f6-1" name="rest_code_34f14462be7344339de9071cb51dd1f6-1" href="#rest_code_34f14462be7344339de9071cb51dd1f6-1"></a>gopass<span class="w"> </span>mounts<span class="w"> </span>umount<span class="w"> </span>my-company
+<div class="code"><pre class="code bash"><a id="rest_code_768cb4ca1c5446efb1ab32abec4abd23-1" name="rest_code_768cb4ca1c5446efb1ab32abec4abd23-1" href="#rest_code_768cb4ca1c5446efb1ab32abec4abd23-1"></a>gopass<span class="w"> </span>mounts<span class="w"> </span>umount<span class="w"> </span>my-company
 </pre></div>
 <p>Now that we've done this, it's safe to remove the folder.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_4872fd94a2b34554a886cee7cd5d5346-1" name="rest_code_4872fd94a2b34554a886cee7cd5d5346-1" href="#rest_code_4872fd94a2b34554a886cee7cd5d5346-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>~/.password-store-my-company
+<div class="code"><pre class="code bash"><a id="rest_code_5fdbc202a60045889df53b071e4d8935-1" name="rest_code_5fdbc202a60045889df53b071e4d8935-1" href="#rest_code_5fdbc202a60045889df53b071e4d8935-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>~/.password-store-my-company
 </pre></div>
 </section><section id="synchronization"><h3>Synchronization</h3>
 <p>In gopass, sync usually means <code class="docutils literal">git pull</code> and <code class="docutils literal">git push</code>, maybe also commit
 but I'm not sure. Usually the commits are done on <code class="docutils literal">gopass insert</code>.</p>
 <p><strong>Synchronize with git remotes</strong></p>
-<div class="code"><pre class="code bash"><a id="rest_code_f1a031ef8ce545598131ae1b352d8b9e-1" name="rest_code_f1a031ef8ce545598131ae1b352d8b9e-1" href="#rest_code_f1a031ef8ce545598131ae1b352d8b9e-1"></a>gopass<span class="w"> </span>sync
+<div class="code"><pre class="code bash"><a id="rest_code_6cc23109000447eab25108a73942ec21-1" name="rest_code_6cc23109000447eab25108a73942ec21-1" href="#rest_code_6cc23109000447eab25108a73942ec21-1"></a>gopass<span class="w"> </span>sync
 </pre></div>
 <p><strong>Synchronzing a single store</strong></p>
-<div class="code"><pre class="code bash"><a id="rest_code_e3e7cd9150214ca7b354e8f9c53f5e47-1" name="rest_code_e3e7cd9150214ca7b354e8f9c53f5e47-1" href="#rest_code_e3e7cd9150214ca7b354e8f9c53f5e47-1"></a>gopass<span class="w"> </span>sync<span class="w"> </span>--store<span class="w"> </span>my-company
+<div class="code"><pre class="code bash"><a id="rest_code_ab30a13b89784387b5d06c1d1b731ed3-1" name="rest_code_ab30a13b89784387b5d06c1d1b731ed3-1" href="#rest_code_ab30a13b89784387b5d06c1d1b731ed3-1"></a>gopass<span class="w"> </span>sync<span class="w"> </span>--store<span class="w"> </span>my-company
 </pre></div>
 </section><section id="team-sharing"><h3>Team sharing</h3>
 <p>We are finally on the last and most fantastic part,
@@ -311,7 +311,7 @@ sharing secrets with people.</p>
 <p>Suppose we have a colleague with an email <code class="docutils literal">logan@pm.me</code>. This person has
 already generated a gpg key, for that email, in they machine.</p>
 <p>Logan then, must <strong>export the public key</strong> and send it to us.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_e7be432d9d634c9b91ddafe47cd75a7a-1" name="rest_code_e7be432d9d634c9b91ddafe47cd75a7a-1" href="#rest_code_e7be432d9d634c9b91ddafe47cd75a7a-1"></a>gpg<span class="w"> </span>-a<span class="w"> </span>--export<span class="w"> </span>logan@pm.me<span class="w"> </span>&gt;<span class="w"> </span>logan.pub.asc
+<div class="code"><pre class="code bash"><a id="rest_code_40ad54560cba4a25921baf10b5b373a0-1" name="rest_code_40ad54560cba4a25921baf10b5b373a0-1" href="#rest_code_40ad54560cba4a25921baf10b5b373a0-1"></a>gpg<span class="w"> </span>-a<span class="w"> </span>--export<span class="w"> </span>logan@pm.me<span class="w"> </span>&gt;<span class="w"> </span>logan.pub.asc
 </pre></div>
 <p>It's okay, public keys can be shared in untrusted environments. If you are
 still not convinced, try <a class="reference external" href="https://send.firefox.com">send</a> from firefox. Keep in mind that people share
@@ -319,10 +319,10 @@ their public keys in keyservers, like <a class="reference external" href="https:
 <p><strong>Adding public key into gopass</strong></p>
 <p>We have the public key, now it's time to <strong>import</strong> it into our
 local gpg keyring.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_0def9a7bd8d940d794f6c2115534c85c-1" name="rest_code_0def9a7bd8d940d794f6c2115534c85c-1" href="#rest_code_0def9a7bd8d940d794f6c2115534c85c-1"></a>gpg<span class="w"> </span>--import<span class="w"> </span>&lt;<span class="w"> </span>logan.pub.asc
+<div class="code"><pre class="code bash"><a id="rest_code_0b1a5a4f6a5b42ac9fde251329348bbb-1" name="rest_code_0b1a5a4f6a5b42ac9fde251329348bbb-1" href="#rest_code_0b1a5a4f6a5b42ac9fde251329348bbb-1"></a>gpg<span class="w"> </span>--import<span class="w"> </span>&lt;<span class="w"> </span>logan.pub.asc
 </pre></div>
 <p>And lastly, we need to <strong>add the new key to a gopass store</strong>.</p>
-<div class="code"><pre class="code bash"><a id="rest_code_898d3c90621b431eb3b70e636f3ab800-1" name="rest_code_898d3c90621b431eb3b70e636f3ab800-1" href="#rest_code_898d3c90621b431eb3b70e636f3ab800-1"></a>gopass<span class="w"> </span>recipients<span class="w"> </span>add<span class="w"> </span>logan@pm.me
+<div class="code"><pre class="code bash"><a id="rest_code_0da17b3994104f83a0e0096e7c89b606-1" name="rest_code_0da17b3994104f83a0e0096e7c89b606-1" href="#rest_code_0da17b3994104f83a0e0096e7c89b606-1"></a>gopass<span class="w"> </span>recipients<span class="w"> </span>add<span class="w"> </span>logan@pm.me
 </pre></div>
 <p>You'll see a prompt with all of your stores. Choose the one you want, and it
 will re-encrypt your secrets with the new public key (plus the existing ones).</p>
