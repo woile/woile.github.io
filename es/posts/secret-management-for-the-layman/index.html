@@ -188,36 +188,37 @@
 <p>You can also configure <a href="https://direnv.net/">direnv</a>, to load the nix dependencies, as soon as you <code>cd</code> into the directory.
 This has been a powerful new method in my development toolkit.</p>
 <h3>Interface</h3>
-<p>The commands abstract we are gonna use are the following:</p>
+<p>The generic commands we are gonna define are the following</p>
 <pre class="highlight"><code class="language-sh"># Create new key and add it to the recipients
-sec__new-key
+new-key
 
 # Decrypt ALL secrets
-sec__decrypt
+decrypt
 
 # Encrypt ALL secrets
-sec__encrypt</code></pre>
+encrypt</code></pre>
+<p>These commands can be implemented in a <code>Makefile</code>, <code>justfile</code>, bash scripts, or any scripting mechanism.</p>
 <h3>Workflows</h3>
 <p>With those 3 commands we can support several different workflows:</p>
 <h4>Initializing my host</h4>
 <p>The commands to be executed for this workflow should be:</p>
-<pre class="highlight"><code class="language-sh">sec__new-key</code></pre>
+<pre class="highlight"><code class="language-sh">new-key</code></pre>
 <p>This should create a <code>me.key</code> and populate <code>recipients.txt</code> with the public key.</p>
 <blockquote>
 <p>If working on an existing repository, then I should create a commit, push the changes to git and ask to a colleague to encrypt the secrets again (after doing a pull)</p>
 </blockquote>
 <h4>Encrypting all the secrets</h4>
 <p>The command to be executed:</p>
-<pre class="highlight"><code class="language-sh">sec__encrypt</code></pre>
+<pre class="highlight"><code class="language-sh">encrypt</code></pre>
 <p>This command can either encrypt everything necessary or it can be split into multiple commands internally.
 It should encrypt with all the recipients present in <code>recipients.txt</code>.</p>
 <h4>Decrypting all secrets</h4>
-<pre class="highlight"><code class="language-sh">sec__decrypt</code></pre>
+<pre class="highlight"><code class="language-sh">decrypt</code></pre>
 <p>It should decrypt everything in the <strong>right</strong> place. And the user is ready to work!</p>
 <h4>Creating a secret for a CI</h4>
 <p>One of the cool benefits of this approach, is that we can integrate it with our CI.</p>
-<pre class="highlight"><code class="language-sh">sec__new-key github
-sec__encrypt</code></pre>
+<pre class="highlight"><code class="language-sh">new-key github
+encrypt</code></pre>
 <p>That should generate a <code>github.key</code>, and it should populate the <code>recipients.txt</code>. You can upload the <code>github.key</code> as a secret and your pipelines are ready to use it!</p>
 <p>The second command encrypts everything again.</p>
 <h3>Implementation example</h3>
@@ -266,11 +267,12 @@ user pulls the latest commits, so they can use decrypt locally.</p>
 <pre class="highlight"><code class="language-sh">just sec__decrypt</code></pre>
 <p>Finally, we want to create a secret for our CI</p>
 <pre class="highlight"><code class="language-sh">just sec__encrypt github</code></pre>
-<p>We can also on-board other users, but it involves sending the private key to them, which can be cumbersome.</p>
-<pre class="highlight"><code class="language-sh">just sec__encrypt lara</code></pre>
+<p>We can also on-board other users, but it involves sending the private key to them, which can be cumbersome, the recommendation is to let people onboard themselves, and they are responsible for their private key.</p>
+<pre class="highlight"><code class="language-sh">just sec__encrypt lara
+just sec__encrypt jon</code></pre>
 <h3>What to do with the private key?</h3>
 <p>After running <code>just sec__new_key</code>, we have a <code>me.key</code>. You can store a copy in your secret manager.</p>
-<p>I personally use <code>gopass</code>, but there are many, like <code>1password</code> or <code>bitwarden</code>.</p>
+<p>I personally use <code>gopass</code>, but there are more options, e.g: <code>1password</code>, <code>lastpass</code> or <code>bitwarden</code>.</p>
 <h3>Potential improvements</h3>
 <p>How can we handle different environments?</p>
 <p>One option is to have a <code>secrets</code> folder, with the different environments there.</p>
