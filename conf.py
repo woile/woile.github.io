@@ -139,20 +139,20 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ("/", "🏠 Home"),
-        ("/blog/", "📰 Blog"),
-        ("/mentoring/", "📗 Mentoring"),
-        ("/archive.html", "🗄️ Archives"),
-        ("/categories/index.html", "🏷️ Tags"),
-        ("/rss.xml", "🛰️ RSS feed"),
+        ("/", "Home"),
+        ("/blog/", "Blog"),
+        ("/mentoring/", "Mentoring"),
+        ("/archive.html", "Archives"),
+        ("/categories/index.html", "Tags"),
+        ("/rss.xml", "RSS feed"),
     ),
     "es": (
-        ("/es/", "🏠 Inicio"),
-        ("/blog/", "📰 Blog"),
-        ("/es/mentoring/", "📗 Mentoreo"),
-        ("/es/archive.html", "🗄️ Archivo"),
-        ("/es/categories/index.html", "🏷️ Tags"),
-        ("/rss.xml", "🛰️ RSS feed"),
+        ("/es/", "Inicio"),
+        ("/blog/", "Blog"),
+        ("/es/mentoring/", "Mentoreo"),
+        ("/es/archive.html", "Archivo"),
+        ("/es/categories/index.html", "Tags"),
+        ("/rss.xml", "RSS feed"),
     ),
 }
 
