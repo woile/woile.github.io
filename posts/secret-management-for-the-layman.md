@@ -81,18 +81,20 @@ This has been a powerful new method in my development toolkit.
 
 ## Interface
 
-The commands abstract we are gonna use are the following:
+The generic commands we are gonna define are the following
 
 ```sh
 # Create new key and add it to the recipients
-sec__new-key
+new-key
 
 # Decrypt ALL secrets
-sec__decrypt
+decrypt
 
 # Encrypt ALL secrets
-sec__encrypt
+encrypt
 ```
+
+These commands can be implemented in a `Makefile`, `justfile`, bash scripts, or any scripting mechanism.
 
 ## Workflows
 
@@ -103,7 +105,7 @@ With those 3 commands we can support several different workflows:
 The commands to be executed for this workflow should be:
 
 ```sh
-sec__new-key
+new-key
 ```
 
 This should create a `me.key` and populate `recipients.txt` with the public key.
@@ -115,7 +117,7 @@ This should create a `me.key` and populate `recipients.txt` with the public key.
 The command to be executed:
 
 ```sh
-sec__encrypt
+encrypt
 ```
 
 This command can either encrypt everything necessary or it can be split into multiple commands internally.
@@ -124,7 +126,7 @@ It should encrypt with all the recipients present in `recipients.txt`.
 ### Decrypting all secrets
 
 ```sh
-sec__decrypt
+decrypt
 ```
 
 It should decrypt everything in the **right** place. And the user is ready to work!
@@ -134,8 +136,8 @@ It should decrypt everything in the **right** place. And the user is ready to wo
 One of the cool benefits of this approach, is that we can integrate it with our CI.
 
 ```sh
-sec__new-key github
-sec__encrypt
+new-key github
+encrypt
 ```
 
 That should generate a `github.key`, and it should populate the `recipients.txt`. You can upload the `github.key` as a secret and your pipelines are ready to use it!
@@ -216,17 +218,18 @@ Finally, we want to create a secret for our CI
 just sec__encrypt github
 ```
 
-We can also on-board other users, but it involves sending the private key to them, which can be cumbersome.
+We can also on-board other users, but it involves sending the private key to them, which can be cumbersome, the recommendation is to let people onboard themselves, and they are responsible for their private key.
 
 ```sh
 just sec__encrypt lara
+just sec__encrypt jon
 ```
 
 ## What to do with the private key?
 
 After running `just sec__new_key`, we have a `me.key`. You can store a copy in your secret manager.
 
-I personally use `gopass`, but there are many, like `1password` or `bitwarden`.
+I personally use `gopass`, but there are more options, e.g: `1password`, `lastpass` or `bitwarden`.
 
 ## Potential improvements
 
