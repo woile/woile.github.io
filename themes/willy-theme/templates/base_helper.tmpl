@@ -78,7 +78,6 @@ lang="{{ lang }}">
             <script src="/assets/js/index.js"></script>
         {% endif %}
         <script src="/assets/js/mermaid.min.js"></script>
-        <script src="/assets/js/cactus.js"></script>
     {% endif %}
     <script src="/assets/js/baguetteBox.min.js"></script>
     {% if date_fanciness != 0 %}
@@ -156,8 +155,8 @@ lang="{{ lang }}">
         <link href="/assets/css/ipython.min.css" rel="stylesheet" type="text/css">
         <link href="/assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
     {% endif %}
-    <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
-    <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+    <script src="/assets/js/cactus.js"></script>
+    <link rel="stylesheet" href="/assets/css/cactus.style.css" type="text/css">
 {% endmacro %}
 
 {#  This function is deprecated; use feed_helper directly. #}
