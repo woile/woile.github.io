@@ -255,7 +255,8 @@ just sec__encrypt prod
 
 Even though, I've seen a lot of people share their nixos configuration publicly, including their encrypted secrets, I still wonder if it's safe, and if so, why is it not used widely?
 I want to believe it's safe, and I know that if the secrets get leaked, I'll have to update them all.
-The plus side, is that you know where they are, and you can probably write comments on how to retrieve or generate them again, becaues it's just files.
+The plus side, is that you know where they are, and you can probably write comments on how to retrieve or generate them again,
+because it's just files.
 
 What do you think of this approach?
 
