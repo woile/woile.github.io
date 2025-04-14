@@ -1,5 +1,480 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Sun, 13 Apr 2025 16:34:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Secret management for the layman</title><link>https://woile.dev/posts/secret-management-for-the-layman/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For a long time, I've been debating myself how to properly handle secrets in a convenient, cheap and reproducible fashion.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog</title><link>https://woile.dev/</link><description>Software Engineer, Python dev</description><atom:link href="https://woile.dev/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2025 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 14 Apr 2025 07:18:13 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Android apps with Slint on NixOS</title><link>https://woile.dev/posts/android-apps-with-slint-nixos/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Before moving to the south of Holland, and later starting traveling with my girlfriend,
+we were using a blackboard to keep track of the days we hadn't eaten added sugars.
+I was inspired by &lt;a href="https://simonwillison.net/2024/Jan/2/escalating-streaks/"&gt;Simon Willision's blog&lt;/a&gt; about the power of streaks. Thus I created some mechanics for this streaks game, and we started "playing" it at home.
+It was a success, one of our streaks even lasted 45 days without added sugar (with some caveats).
+I've always wanted to transform the experience into an app, so we wouldn't depend on the location we were in.&lt;/p&gt;
+&lt;p&gt;Now, while traveling, I've been setting up the environment to run the android app. As it was such a struggle, because I know little to nothing of android development, I decided to document the journey.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The goal of this blog is to set up a nix flake, in order to run an android app built with slint.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;Slint&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://slint.dev"&gt;Slint&lt;/a&gt; is a rust UI library. Might not be the most popular right now, but unlike other UI libraries,
+slint has its own UI language to describe the layout. Making it akin to Qt's QML. I'm not entirely sure if it's the best
+approach (that says more about my ignorance than the approach). However, it's a proven approach, as there's a plethora of
+Qt applications out there, which run quite smoothly, like KDE, Ableton Live, Krita, OBS and more. Therefore, I'm quite
+happy there's an alternative to QML in rust.&lt;/p&gt;
+&lt;p&gt;Separating layout from code also makes it easier for designers to work on the UI without needing to know rust,
+and the slint team has even built a live preview, and a plugin for Figma.
+I saw &lt;a href="https://www.youtube.com/watch?v=6mfzlaBSZUw"&gt;Tobias's talk in RustLab 2024&lt;/a&gt; and I was quite blown away by its capabilities.&lt;/p&gt;
+&lt;p&gt;This is how the slint code looks like:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-slint"&gt;component MemoryTile inherits Rectangle {
+    width: 64px;
+    height: 64px;
+    background: #3960D5;
+
+    Image {
+        source: @image-url("icons/bus.png");
+        width: parent.width;
+        height: parent.height;
+    }
+}
+
+export component MainWindow inherits Window {
+    MemoryTile {}
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Prerequisites&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://nixos.org/download/#nixos-iso"&gt;NixOS&lt;/a&gt; (or &lt;a href="https://nixos.org/download/#nix-install-linux"&gt;nix&lt;/a&gt; installed)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Initial flake&lt;/h3&gt;
+&lt;p&gt;Let's start by creating a folder and using my template for a rust development shell:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;mkdir android-app
+cd android-app
+nix flake init -t github:woile/nix-config#rust-shell
+git init &amp;amp;&amp;amp; git add -N .  # promise to add the files later, so we get a hash for the flake&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;At the time of writing, we'll get a &lt;code&gt;flake.nix&lt;/code&gt; and a &lt;code&gt;.envrc&lt;/code&gt;,
+with a &lt;code&gt;flake.nix&lt;/code&gt; that looks like this (I've added the &lt;code&gt;self&lt;/code&gt; because we are gonna use it later):&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;{
+  description = "A development shell for rust";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  outputs =
+    inputs@{
+      flake-parts,
+      self,
+      ...
+    }:
+    # https://flake.parts/
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      perSystem =
+        { pkgs, inputs', ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            name = "dev";
+
+            # Available packages on https://search.nixos.org/packages
+            buildInputs = with pkgs; [
+              just
+              inputs'.fenix.packages.stable.toolchain
+            ];
+
+            shellHook = ''
+              echo "Welcome to the rust devshell!"
+            '';
+          };
+        };
+    };
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we have &lt;a href="https://direnv.net/"&gt;direnv&lt;/a&gt; installed and configured, we can just run &lt;code&gt;direnv allow&lt;/code&gt; and we'll have the shell setup and configured for us, as soon as we jump into the folder in our terminals.&lt;/p&gt;
+&lt;p&gt;Otherwise, you'll have to run &lt;code&gt;nix develop&lt;/code&gt; to get into the shell.&lt;/p&gt;
+&lt;h3&gt;Exploring the nix flake&lt;/h3&gt;
+&lt;p&gt;If we start looking at the &lt;code&gt;flake.nix&lt;/code&gt;, we'll notice that it has 2 inputs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nixpkgs&lt;/code&gt; which is the nixpkgs flake, where all the packages come from&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fenix&lt;/code&gt; which provides an &lt;strong&gt;up-to-date&lt;/strong&gt; rust toolchain, and with it, we can set up everything we need for rust development.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Next, the &lt;code&gt;outputs&lt;/code&gt; are created using &lt;a href="https://flake.parts/"&gt;flake-parts&lt;/a&gt;. Which makes it easy to create per-system configurations that run on most popular platforms.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;systems = [
+  "x86_64-linux"
+  "aarch64-darwin"
+  "x86_64-darwin"
+];
+perSystem =
+  { pkgs, inputs', ... }:
+  {
+    ...
+  };&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Inside the &lt;code&gt;perSystem&lt;/code&gt; function, we have a &lt;code&gt;devShells.default&lt;/code&gt; that sets up a shell with the &lt;code&gt;just&lt;/code&gt; package and the &lt;code&gt;fenix&lt;/code&gt; toolchain.&lt;/p&gt;
+&lt;h3&gt;Create the rust project&lt;/h3&gt;
+&lt;p&gt;Once we jump into the shell, the rust toolchain should be available and we can create a rust project and start adding the dependencies for slint:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;cargo init --lib .
+cargo add slint -F backend-android-activity-06&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the &lt;code&gt;lib.rs&lt;/code&gt; let's add all the slint code we are using in this blog.
+We are embedding the &lt;code&gt;*.slint&lt;/code&gt; file directly into the rust code, for simplicity.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-rs"&gt;#[unsafe(no_mangle)]
+fn android_main(app: slint::android::AndroidApp) {
+    slint::android::init(app).unwrap();
+
+    slint::slint! {
+        export component MainWindow inherits Window {
+            Text { text: "Hello World"; }
+        }
+    }
+    MainWindow::new().unwrap().run().unwrap();
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Configuring the rust project&lt;/h3&gt;
+&lt;p&gt;Next, we'll take a look at the the &lt;a href="https://docs.slint.dev/latest/docs/rust/slint/android/"&gt;slint documentation for android&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;First thing I've noticed, is that we need to update the &lt;code&gt;Cargo.toml&lt;/code&gt; to include the lib configuration:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-toml"&gt;[lib]
+crate-type = ["cdylib"]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And it mentions that we need to add a new target: &lt;code&gt;aarch64-linux-android&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This was a problem for me when setting up android, as I'm on a linux with &lt;code&gt;x86_64&lt;/code&gt;, and I didn't know the emulator &lt;em&gt;should&lt;/em&gt; run on your host arch.&lt;/p&gt;
+&lt;p&gt;Therefore, we are going to add 2 target architectures:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;aarch64-linux-android&lt;/code&gt;: in case you want to run the app on your phone&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;x86_64-linux-android&lt;/code&gt;: in case you want to run the app on an emulator&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We need to update the flake to reflect this, our &lt;code&gt;devShells.default.buildInput&lt;/code&gt;
+will now look like this:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;buildInputs = with pkgs; [
+  just
+-  inputs'.fenix.packages.stable.toolchain
++  (
++    with inputs'.fenix.packages;
++    combine [
++      stable.toolchain
++      targets.aarch64-linux-android.stable.rust-std
++      targets.x86_64-linux-android.stable.rust-std
++    ]
++  )
+];&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Plus, &lt;code&gt;cargo-apk&lt;/code&gt; as recommended in the slint docs:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;buildInputs = with pkgs; [
+  just
+  (
+    with inputs'.fenix.packages;
+    combine [
+      stable.toolchain
+      targets.aarch64-linux-android.stable.rust-std
+      targets.x86_64-linux-android.stable.rust-std
+    ]
+  )
++ cargo-apk
+];&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let's keep track of the command we are going to run in the &lt;code&gt;justfile&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;touch justfile&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-just"&gt;# Run the android app
+run-android:
+    cargo apk run --target x86_64-linux-android --lib&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice that we are using the host's architecture to build the apk, because we are going to run the emulator with that arch. If you are running on a different architecture, like for example, if you are actually running against your device, you should change the &lt;code&gt;--target&lt;/code&gt; flag to match your host's architecture.&lt;/p&gt;
+&lt;h3&gt;Android setup&lt;/h3&gt;
+&lt;p&gt;To run the android app, we'll have to configure a bunch of things.
+Knowing little to nothing about android development, and looking at the &lt;a href="https://docs.slint.dev/latest/docs/rust/slint/android/"&gt;slint docs&lt;/a&gt;,
+we know that in order to run an android app we need the following env variables:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ANDROID_HOME&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ANDROID_NDK_ROOT&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;JAVA_HOME&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The way I see it, if we have those variable set right, slint should be able to build an &lt;code&gt;apk&lt;/code&gt; and install it on the android device.&lt;/p&gt;
+&lt;p&gt;The last one: &lt;code&gt;JAVA_HOME&lt;/code&gt; should be the easiest to set up, we add the dependency
+to the &lt;code&gt;buildInputs&lt;/code&gt; of the &lt;code&gt;devShells.default&lt;/code&gt;. Which will automatically add
+the env variable.&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;buildInputs = with pkgs; [
+  just
+  (
+    with inputs'.fenix.packages;
+    combine [
+      stable.toolchain
+      targets.aarch64-linux-android.stable.rust-std
+      targets.x86_64-linux-android.stable.rust-std
+    ]
+  )
+  cargo-apk
++  jdk
+];&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For the other 2 variables, we read what nix has to say about android:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://wiki.nixos.org/wiki/Android"&gt;Nix Android wiki&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://nixos.org/manual/nixpkgs/stable/#android"&gt;Nixpks android language framework&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developer.android.com/studio/command-line/sdkmanager"&gt;Android SDK&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It took me a while to figure out exactly what I needed, I don't know if it's a
+docs problem, or my utter ignorance about android development, probably a bit of both.
+But we cannot use &lt;code&gt;android-studio-full&lt;/code&gt;.
+Instead we are gonna have to refactor the flake quite a bit, by initializing a bunch of variables:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;      perSystem =
+        {
+          pkgs,
+          inputs',
++          lib,
++          system,
+          ...
+        }:
++        let
++          platformVersion = "35";
++          systemImageType = "default";
++          currentPath = builtins.getEnv "PWD";
++          androidEnv = pkgs.androidenv.override { licenseAccepted = true; };
++          androidComp = (
++            androidEnv.composeAndroidPackages {
++              cmdLineToolsVersion = "8.0";
++              includeNDK = true;
++              # we need some platforms
++              platformVersions = [
++                "30"
++                platformVersion
++              ];
++              # we need an emulator
++              includeEmulator = true;
++              includeSystemImages = true;
++              systemImageTypes = [
++                systemImageType
++                # "google_apis"
++              ];
++              abiVersions = [
++                "x86"
++                "x86_64"
++                "armeabi-v7a"
++                "arm64-v8a"
++              ];
++              cmakeVersions = [ "3.10.2" ];
++            }
++          );
++          android-sdk = (pkgs.android-studio.withSdk androidComp.androidsdk);
++        in
+        {
+         # accept android license (id-2)
++         _module.args.pkgs = import self.inputs.nixpkgs {
++           inherit system;
++           config.allowUnfree = true;
++           config.android_sdk.accept_license = true;
++           config.allowUnfreePredicate =
++             pkg:
++             builtins.elem (lib.getName pkg) [
++               "terraform"
++             ];
++         };
+          # same as we previously saw (id-1)
+          devShells.default = {
+            ...
+          };
+          ...
+        }&lt;/code&gt;&lt;/pre&gt;
+These variables will not only be used to initialize the android environment,
+but also to configure the android emulator, system images and environment variables for the android development tools.
+They all kind of have to match the android environment.
+&lt;p&gt;That's why we set &lt;code&gt;platformVersion&lt;/code&gt; to "35" which refers to the API for "Vanilla Ice Cream", which is android 15.
+Most of the other variables are set based on the nix docs about android.&lt;/p&gt;
+&lt;p&gt;We also accept android license, by temporarly modifying the nixpkgs configuration on the flake (&lt;code&gt;id-2&lt;/code&gt;).&lt;/p&gt;
+&lt;h4&gt;Android emulator&lt;/h4&gt;
+&lt;p&gt;We can either use our phone, or run an emulator.
+We are choosing the second option, and for that, we'll use our system's architecture.&lt;/p&gt;
+&lt;p&gt;In nix terms, we are gonna add a package, and use nix to run it.&lt;/p&gt;
+&lt;p&gt;Let's see how it would look:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;let
+  ...
+in {
+  # continue from id-1
+  packages.android-emulator = androidEnv.emulateApp {
+    name = "emulate-MyAndroidApp";
+    platformVersion = platformVersion;
+    abiVersion = "x86_64"; # armeabi-v7a, mips, x86_64, arm64-v8a
+    systemImageType = systemImageType;
+  };
+  # same as we previously saw (id-1)
+  devShells.default = {
+    ...
+  };
+  ...
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now with this package, we can update our &lt;code&gt;justfile&lt;/code&gt; to build and run the emulator in a single command:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;# Run the android app
+run-android:
+    cargo apk run --target x86_64-linux-android --lib
+
++ # Run the android emulator
++ run-emulator:
++     nix run .#android-emulator&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can run the emulator with the following command:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-bash"&gt;just run-emulator&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Trying the set up out&lt;/h3&gt;
+&lt;p&gt;What happens if we run the android app?&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;just run-android&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We get the following error:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-console"&gt;Error: Android SDK is not found. Please set the path to the Android SDK with the $ANDROID_SDK_ROOT environment variable.
+error: Recipe `run-android` failed on line 2 with exit code 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hence, slint is smart enough to detect android's not fully configured.&lt;/p&gt;
+&lt;h3&gt;Configuring env variables&lt;/h3&gt;
+&lt;p&gt;Part of the reason we set some variables with &lt;code&gt;let .. in ..&lt;/code&gt; in the flake,
+is to be able to set the android env variables in the devshell.&lt;/p&gt;
+&lt;p&gt;Let's finish that:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;{
+  devshell.default = {
+    ...
++   ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
++   ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
++   ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+  };
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now with this variables in place, we can run the android app:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;just run-android&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We should see the emulator opening our android app with a "Hello World" message.&lt;/p&gt;
+&lt;h3&gt;Final result&lt;/h3&gt;
+&lt;p&gt;We get this beautiful &lt;code&gt;flake.nix&lt;/code&gt;&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;{
+  description = "A development shell for rust";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  outputs =
+    inputs@{
+      flake-parts,
+      self,
+      ...
+    }:
+    # https://flake.parts/
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      perSystem =
+        {
+          pkgs,
+          inputs',
+          lib,
+          system,
+          ...
+        }:
+        let
+          platformVersion = "35";
+          systemImageType = "default";
+          currentPath = builtins.getEnv "PWD";
+          androidEnv = pkgs.androidenv.override { licenseAccepted = true; };
+          androidComp = (
+            androidEnv.composeAndroidPackages {
+              cmdLineToolsVersion = "8.0";
+              includeNDK = true;
+              # we need some platforms
+              platformVersions = [
+                "30"
+                platformVersion
+              ];
+              # we need an emulator
+              includeEmulator = true;
+              includeSystemImages = true;
+              systemImageTypes = [
+                systemImageType
+                # "google_apis"
+              ];
+              abiVersions = [
+                "x86"
+                "x86_64"
+                "armeabi-v7a"
+                "arm64-v8a"
+              ];
+              cmakeVersions = [ "3.10.2" ];
+            }
+          );
+          android-sdk = (pkgs.android-studio.withSdk androidComp.androidsdk);
+        in
+        {
+          _module.args.pkgs = import self.inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            config.android_sdk.accept_license = true;
+            config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (lib.getName pkg) [
+                "terraform"
+              ];
+          };
+          packages.android-emulator = androidEnv.emulateApp {
+            name = "emulate-MyAndroidApp";
+            platformVersion = platformVersion;
+            abiVersion = "x86_64"; # armeabi-v7a, mips, x86_64, arm64-v8a
+            systemImageType = systemImageType;
+          };
+          devShells.default = pkgs.mkShell {
+            name = "dev";
+
+            # Available packages on https://search.nixos.org/packages
+            buildInputs = with pkgs; [
+              just
+              (
+                with inputs'.fenix.packages;
+                combine [
+                  stable.toolchain
+                  targets.aarch64-linux-android.stable.rust-std
+                  targets.x86_64-linux-android.stable.rust-std
+                ]
+              )
+              cargo-apk
+              jdk
+              android-sdk
+            ];
+
+            shellHook = ''
+              echo "Welcome to the rust devshell!"
+            '';
+
+            ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
+            ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
+            ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+
+            CARGO_HOME = "${currentPath}/.cargo-home";
+            LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
+              with pkgs;
+              lib.makeLibraryPath [
+                wayland
+                libxkbcommon
+                fontconfig
+              ]
+            }";
+          };
+        };
+    };
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you are running direnv a simple &lt;code&gt;direnv allow&lt;/code&gt; should load everything into your
+terminal, otherwise you'll have to run &lt;code&gt;nix develop&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;Troubleshooting&lt;/h3&gt;
+&lt;p&gt;There are 2 extra variables I've set that help things go smooth on linux:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;{
+  devshell.default = {
+    ...
+    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+
++    CARGO_HOME = "${currentPath}/.cargo-home";
++    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
++      with pkgs;
++      lib.makeLibraryPath [
++        wayland
++        libxkbcommon
++        fontconfig
++      ]
++    }";
+  };
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first one, &lt;code&gt;CARGO_HOME&lt;/code&gt; is for rust to not share the same directory with other rust installations.
+The second one, &lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt; is for running the application on KDE.&lt;/p&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;After a long struggle, I managed to set up NixOS for android applications with Slint.
+It was tough!&lt;/p&gt;
+&lt;p&gt;Slint's documentation is relatively good, and NixOS's documentation could be better,
+by explaining concepts more in depth. Why?
+Because NixOS's users know they cannot &lt;strong&gt;start&lt;/strong&gt; as everybody else.
+For example, this case, if I'm starting with Android, I won't go to Android documentation first, but to NixOS documentation,
+cause for sure it's going to be different than what Android docs say.&lt;/p&gt;
+&lt;p&gt;On the plus side, once you get things right, they just work, which is mind blowing, &lt;strong&gt;and reproducible&lt;/strong&gt;!&lt;/p&gt;
+&lt;p&gt;I hope you enjoyed this article and let me know your thoughts in mastodon:&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://hachyderm.io/@woile"&gt;@woile&lt;/a&gt;&lt;/p&gt;</description><category>android</category><category>gui</category><category>rust</category><guid>https://woile.dev/posts/android-apps-with-slint-nixos/</guid><pubDate>Sun, 13 Apr 2025 18:00:45 GMT</pubDate></item><item><title>Secret management for the layman</title><link>https://woile.dev/posts/secret-management-for-the-layman/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;For a long time, I've been debating myself how to properly handle secrets in a convenient, cheap and reproducible fashion.&lt;/p&gt;
 &lt;p&gt;I run a small website: &lt;a href="https://www.reciperium.com"&gt;reciperium.com&lt;/a&gt; (check it out!) and I don't want to depend too much on the cloud.&lt;/p&gt;
 &lt;p&gt;Most of the available tools have the following problems:&lt;/p&gt;
 &lt;ul&gt;
@@ -1266,92 +1741,4 @@ where you can use micro-frontends safely.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://turborepo.org/"&gt;turborepo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://nx.dev/"&gt;nx.dev&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description><category>architecture</category><category>html</category><category>javascript</category><guid>https://woile.dev/posts/the-layout-team/</guid><pubDate>Mon, 08 Nov 2021 07:05:42 GMT</pubDate></item><item><title>Domain driven design at Europython 2021</title><link>https://woile.dev/posts/domain-driven-design-at-europython-2021/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Today I participated of the training &lt;a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/"&gt;transcend the realms of development&lt;/a&gt;
-at europython 2021, and I'm quite happy with the result.
-Sometimes I'm hesitant of workshops because I don't
-manage to extract value, but I really did from this one, and the hosts were great.
-I've been questioning myself on how to make better representations of software,
-specially among multiple developers and stakeholders, how to share a common language?&lt;/p&gt;
-&lt;h3&gt;Conclusions&lt;/h3&gt;
-&lt;p&gt;Let's start by my final conclusions:&lt;/p&gt;
-&lt;p&gt;My models on how to design software collaboratively are outdated; mostly UML and random diagrams, no clear design process.
-There are new techniques used nowadays, so I will asses them and try to integrate
-into my tool-belt.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Asses &lt;a href="https://www.eventstorming.com/"&gt;event storming&lt;/a&gt;. I would like to be trained into this technique.&lt;/li&gt;
-&lt;li&gt;Asses &lt;a href="https://c4model.com/"&gt;C4 models&lt;/a&gt; and &lt;a href="https://github.com/plantuml-stdlib/C4-PlantUML"&gt;diagrams as code&lt;/a&gt;.&lt;ul&gt;
-&lt;li&gt;For KPN, I already added diagrams as code and C4 support in &lt;a href="https://kpn.github.io/mkdocs-kpn-theme/md-extensions/#plantuml-diagrams"&gt;mkdocs-kpn-theme&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Notes&lt;/h3&gt;
-&lt;p&gt;Next, you can find my notes, they may not be complete, I tried adding
-some images to make them more understandable.&lt;/p&gt;
-&lt;h3&gt;Domain driven design&lt;/h3&gt;
-&lt;p&gt;Normally architecture grows organically, but it can have unexpected consequences.&lt;/p&gt;
-&lt;p&gt;Domain driven design helps with:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Identify domains -&amp;gt; core domains and secondary domains&lt;/li&gt;
-&lt;li&gt;Quick feedback -&amp;gt; same language between stakeholders and developers&lt;/li&gt;
-&lt;li&gt;Loosely coupled domains&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3&gt;Phases&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Ritual dissent&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.eventstorming.com/"&gt;Event storming&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Defining domains&lt;/li&gt;
-&lt;li&gt;Building future of our project using &lt;a href="https://c4model.com/"&gt;C4 models&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;Ritual dissent&lt;/h3&gt;
-&lt;p&gt;Small groups iterating over features, then one person from each group
-makes a pitch of 1 min to one of the other groups and gathers feedback.&lt;/p&gt;
-&lt;p&gt;It goes like this:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Teammate goes to other group and pitches&lt;/li&gt;
-&lt;li&gt;Once done, the pitcher just listens to the feedback and takes notes, doesn't need
-  to answer anything&lt;/li&gt;
-&lt;li&gt;Goes back to the team and keeps refining&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The owner of a problem often has fixed ideas about both the problem and possible solutions. Ritual dissent, developed by Dave Snowden of Cognitive Edge, allows a group of people to discuss a problem whilst its ‘owner’ turns around and listens to the discussion without intervening.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3&gt;Event storming&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;EventStorming is a flexible workshop format for collaborative exploration of complex business domains.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;I was quite pleased of the way it went with &lt;a href="https://www.eventstorming.com/"&gt;event storming&lt;/a&gt;,
-because it's simple, easy to pick up technique, while being quite expressive.&lt;/p&gt;
-&lt;p&gt;At the end of the day, event storming should help find bounded contexts.&lt;/p&gt;
-&lt;p&gt;Check &lt;a href="https://github.com/ddd-crew/eventstorming-glossary-cheat-sheet"&gt;event storming glossary cheat sheet&lt;/a&gt; for more documentation.&lt;/p&gt;
-&lt;h3&gt;Defining domains&lt;/h3&gt;
-&lt;p&gt;Once you are done with the event storm, you can start identifying your domains, take a look
-at the next digram.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="event storming context" src="https://woile.dev/images/domain-driven-design-at-europython-2021/event-storming-context.png"&gt;&lt;/p&gt;
-&lt;p&gt;Taken from a &lt;a href="https://miro.com/miroverse/event-storming/"&gt;miro board over event storming&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;These are the usual steps to finding the domains:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Collect Domain Events - discover them&lt;/li&gt;
-&lt;li&gt;Refine Domain Events - placing them in sequence&lt;/li&gt;
-&lt;li&gt;Track causes - modelling out the broader ecosystem&lt;/li&gt;
-&lt;li&gt;Re-sorting &amp;amp; result - categorize the events and build Bounded Contexts&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3&gt;Messages between systems&lt;/h3&gt;
-&lt;p&gt;We didn't get to this step.&lt;/p&gt;
-&lt;h3&gt;Building the future of a project&lt;/h3&gt;
-&lt;p&gt;We didn't get to this step, either, but it's about using C4 diagrams.
-There was also a recommendation to use diagrams as a code, like plantUML, which
-has support for C4 diagrams.&lt;/p&gt;
-&lt;p&gt;In theory, C4 are zoom-in diagrams, with a very small surface of components to be learnt, different
-to other approaches like UML, which have a massive scope.&lt;/p&gt;
-&lt;p&gt;C4 has 4 levels of abstraction:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;System Context diagram&lt;/strong&gt;: allows you to step back and see the big picture
-   &lt;img src="https://c4model.com/img/bigbankplc-SystemContext.png" width="800"&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Container diagram&lt;/strong&gt;: shows the high-level shape of the software architecture and how responsibilities are distributed across it. It also shows the major technology choices and how the containers communicate with one another.
-   &lt;img src="https://c4model.com/img/bigbankplc-Containers.png" width="800"&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Component diagram&lt;/strong&gt;: decomposes each container further to identify the major structural building blocks and their interactions.
-   shows how a container is made up of a number of "components", what each of those components are, their responsibilities and the technology/implementation details.
-   &lt;img src="https://c4model.com/img/bigbankplc-Components.png" width="800"&gt;&lt;/li&gt;
-&lt;li&gt;Code: it is usually recommended to generate this automatically from the code, or do
-   it only when really necessary.&lt;/li&gt;
-&lt;/ol&gt;</description><guid>https://woile.dev/posts/domain-driven-design-at-europython-2021/</guid><pubDate>Mon, 26 Jul 2021 17:44:24 GMT</pubDate></item></channel></rss>
+&lt;/ul&gt;</description><category>architecture</category><category>html</category><category>javascript</category><guid>https://woile.dev/posts/the-layout-team/</guid><pubDate>Mon, 08 Nov 2021 07:05:42 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html prefix="
+        og: http://ogp.me/ns# article: http://ogp.me/ns/article#
+    " vocab="http://ogp.me/ns" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="A step-by-step guide to setting up an Android development environment on NixOS using Slint UI library and Rust. Learn how to configure Nix flakes, handle Android SDK integration, and run applications in an emulator with reproducible builds">
+<meta name="viewport" content="width=device-width">
+<title>Android apps with Slint on NixOS | Willy's blog</title>
+<link href="../../assets/css/baguetteBox.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/rst_base.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/index.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<style>
+        .highlight pre, .code pre {
+            white-space: pre;
+        }
+        </style>
+<style>
+        kbd {
+            font-family: Consolas, "Lucida Console", monospace;
+            display: inline-block;
+            border-radius: 3px;
+            padding: 0px 4px;
+            box-shadow: 1px 1px 1px #777;
+            margin: 2px;
+            font-size: small;
+            vertical-align: text-bottom;
+            background: #eee;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            font-variant: small-caps;
+            font-weight: 600;
+
+            /* This two work */
+            /* letter-spacing: 0.5px; */
+            letter-spacing: 1px;
+
+
+            /* Prevent selection */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        </style>
+<script src="../../assets/js/cactus.js"></script><link rel="stylesheet" href="../../assets/css/cactus.style.css" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS (en)" hreflang="en" href="../../rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS (es)" hreflang="es" href="../../es/rss.xml">
+<link rel="canonical" href="https://woile.dev/posts/android-apps-with-slint-nixos/">
+<!--[if lt IE 9]><script src="../../assets/js/html5shiv-printshiv.min.js"></script><![endif]--><script src="https://cdn.counter.dev/script.js" data-id="acc7e853-fadb-4b91-a2f2-801890951f1e" data-utcoffset="1"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/nix.min.js"></script><script>hljs.highlightAll();</script><meta name="author" content="Woile">
+<link rel="prev" href="../secret-management-for-the-layman/" title="Secret management for the layman" type="text/html">
+<meta property="og:site_name" content="Willy's blog">
+<meta property="og:title" content="Android apps with Slint on NixOS">
+<meta property="og:url" content="https://woile.dev/posts/android-apps-with-slint-nixos/">
+<meta property="og:description" content="A step-by-step guide to setting up an Android development environment on NixOS using Slint UI library and Rust. Learn how to configure Nix flakes, handle Android SDK integration, and run applications ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2025-04-13T18:00:45Z">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="gui">
+<meta property="article:tag" content="rust">
+<link rel="alternate" hreflang="es" href="../../es/posts/android-apps-with-slint-nixos/">
+<link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+</head>
+<body>
+    <input id="dark-mode" type="checkbox"><div class="theme">
+        
+    <header class="cover"><input id="cool-menu" type="checkbox"><label for="cool-menu" class="cool-menu__label">
+        <svg class="cool-menu hover:cool-menu checked:cool-menu" viewbox="0 0 100 100" width="40" height="40" aria-hidden="true"><circle cx="50" cy="50" r="50" fill-opacity="0.5"></circle></svg></label>
+    <nav class="menu"><ul>
+<li><a class="hover:menu__link" href="../../">Home</a></li>
+                <li><a class="hover:menu__link" href="../../blog/">Blog</a></li>
+                <li><a class="hover:menu__link" href="../../mentoring/">Mentoring</a></li>
+                <li><a class="hover:menu__link" href="../../archive.html">Archives</a></li>
+                <li><a class="hover:menu__link" href="../../categories/index.html">Tags</a></li>
+                <li><a class="hover:menu__link" href="../../rss.xml">RSS feed</a></li>
+
+        
+        
+        
+        </ul>
+<ul>
+<li>
+                        <span id="toptranslations">
+                        <a href="../../es/" class="hover:menu__link" rel="alternate" hreflang="es">Español</a>
+
+        </span>
+
+            </li>
+            <li>
+                <label class="dark-mode-label hover:dark-mode-label" for="dark-mode">
+                    <?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation: isolate;" viewbox="0 0 416 416" width="30px" height="30px"><defs><clippath id="_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC"><rect width="416" height="416"></rect></clippath></defs><g clip-path="url(#_clipPath_qEPwrMg7OPn6mDBNPkG6Nqc7qffgU4IC)"><path d=" M 304 88 C 304 57.38 299.49 26.39 288 0 C 364.43 33.27 416 111.32 416 200 C 416 319.29 319.29 416 200 416 C 111.32 416 33.27 364.43 0 288 C 26.39 299.49 57.38 304 88 304 C 207.29 304 304 207.29 304 88 Z "></path></g></svg></label>
+            </li>
+        </ul></nav><h3 id="brand"><a href="../../" title="Willy's blog" rel="home">
+            <span id="blog-title">Willy's blog</span>
+        </a></h3>
+
+    <div>
+
+    </div>
+
+    </header><div class="layout">
+            <main id="content" class="content"><article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h2 class="p-name entry-title header__title" itemprop="headline name"><a href="." class="u-url hover:header__title__link">Android apps with Slint on NixOS</a></h2>
+
+        <div class="metadata" style="margin-bottom: 3rem;">
+            <span class="byline author vcard p-author h-card" style="display: flex;column-gap: 1rem; flex-wrap: wrap;">
+                <span class="byline-name fn p-name" itemprop="author">
+                        Woile
+                </span>
+                <span class="dateline">
+                    <a class="article__meta__link hover:article__meta__link" href="." rel="bookmark">
+                    <time class="published dt-published" datetime="2025-04-13T18:00:45Z" itemprop="datePublished" title="2025-04-13 18:00">2025-04-13 18:00</time></a>
+                </span>
+                        <span class="sourceline"><a class="article__meta__link hover:article__meta__link" href="index.md">Source</a></span>
+
+            </span>
+            <br><span style="display: flex;column-gap: 1rem; flex-wrap: wrap;">
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/android/" rel="tag">#android</a>
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/gui/" rel="tag">#gui</a>
+                <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/rust/" rel="tag">#rust</a>
+            </span>
+
+                <span class="commentline">
+
+        </span>
+</div>
+        
+    </header><section class="e-content entry-content" itemprop="articleBody text"><p>Before moving to the south of Holland, and later starting traveling with my girlfriend,
+we were using a blackboard to keep track of the days we hadn't eaten added sugars.
+I was inspired by <a href="https://simonwillison.net/2024/Jan/2/escalating-streaks/">Simon Willision's blog</a> about the power of streaks. Thus I created some mechanics for this streaks game, and we started "playing" it at home.
+It was a success, one of our streaks even lasted 45 days without added sugar (with some caveats).
+I've always wanted to transform the experience into an app, so we wouldn't depend on the location we were in.</p>
+<p>Now, while traveling, I've been setting up the environment to run the android app. As it was such a struggle, because I know little to nothing of android development, I decided to document the journey.</p>
+<p><strong>The goal of this blog is to set up a nix flake, in order to run an android app built with slint.</strong></p>
+<h3>Slint</h3>
+<p><a href="https://slint.dev">Slint</a> is a rust UI library. Might not be the most popular right now, but unlike other UI libraries,
+slint has its own UI language to describe the layout. Making it akin to Qt's QML. I'm not entirely sure if it's the best
+approach (that says more about my ignorance than the approach). However, it's a proven approach, as there's a plethora of
+Qt applications out there, which run quite smoothly, like KDE, Ableton Live, Krita, OBS and more. Therefore, I'm quite
+happy there's an alternative to QML in rust.</p>
+<p>Separating layout from code also makes it easier for designers to work on the UI without needing to know rust,
+and the slint team has even built a live preview, and a plugin for Figma.
+I saw <a href="https://www.youtube.com/watch?v=6mfzlaBSZUw">Tobias's talk in RustLab 2024</a> and I was quite blown away by its capabilities.</p>
+<p>This is how the slint code looks like:</p>
+<pre class="highlight"><code class="language-slint">component MemoryTile inherits Rectangle {
+    width: 64px;
+    height: 64px;
+    background: #3960D5;
+
+    Image {
+        source: @image-url("icons/bus.png");
+        width: parent.width;
+        height: parent.height;
+    }
+}
+
+export component MainWindow inherits Window {
+    MemoryTile {}
+}</code></pre>
+<h3>Prerequisites</h3>
+<ul>
+<li>
+<a href="https://nixos.org/download/#nixos-iso">NixOS</a> (or <a href="https://nixos.org/download/#nix-install-linux">nix</a> installed)</li>
+</ul>
+<h3>Initial flake</h3>
+<p>Let's start by creating a folder and using my template for a rust development shell:</p>
+<pre class="highlight"><code class="language-sh">mkdir android-app
+cd android-app
+nix flake init -t github:woile/nix-config#rust-shell
+git init &amp;&amp; git add -N .  # promise to add the files later, so we get a hash for the flake</code></pre>
+<p>At the time of writing, we'll get a <code>flake.nix</code> and a <code>.envrc</code>,
+with a <code>flake.nix</code> that looks like this (I've added the <code>self</code> because we are gonna use it later):</p>
+<pre class="highlight"><code class="language-nix">{
+  description = "A development shell for rust";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  outputs =
+    inputs@{
+      flake-parts,
+      self,
+      ...
+    }:
+    # https://flake.parts/
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      perSystem =
+        { pkgs, inputs', ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            name = "dev";
+
+            # Available packages on https://search.nixos.org/packages
+            buildInputs = with pkgs; [
+              just
+              inputs'.fenix.packages.stable.toolchain
+            ];
+
+            shellHook = ''
+              echo "Welcome to the rust devshell!"
+            '';
+          };
+        };
+    };
+}</code></pre>
+<p>If we have <a href="https://direnv.net/">direnv</a> installed and configured, we can just run <code>direnv allow</code> and we'll have the shell setup and configured for us, as soon as we jump into the folder in our terminals.</p>
+<p>Otherwise, you'll have to run <code>nix develop</code> to get into the shell.</p>
+<h3>Exploring the nix flake</h3>
+<p>If we start looking at the <code>flake.nix</code>, we'll notice that it has 2 inputs:</p>
+<ul>
+<li>
+<code>nixpkgs</code> which is the nixpkgs flake, where all the packages come from</li>
+<li>
+<code>fenix</code> which provides an <strong>up-to-date</strong> rust toolchain, and with it, we can set up everything we need for rust development.</li>
+</ul>
+<p>Next, the <code>outputs</code> are created using <a href="https://flake.parts/">flake-parts</a>. Which makes it easy to create per-system configurations that run on most popular platforms.</p>
+<pre class="highlight"><code class="language-nix">systems = [
+  "x86_64-linux"
+  "aarch64-darwin"
+  "x86_64-darwin"
+];
+perSystem =
+  { pkgs, inputs', ... }:
+  {
+    ...
+  };</code></pre>
+<p>Inside the <code>perSystem</code> function, we have a <code>devShells.default</code> that sets up a shell with the <code>just</code> package and the <code>fenix</code> toolchain.</p>
+<h3>Create the rust project</h3>
+<p>Once we jump into the shell, the rust toolchain should be available and we can create a rust project and start adding the dependencies for slint:</p>
+<pre class="highlight"><code class="language-sh">cargo init --lib .
+cargo add slint -F backend-android-activity-06</code></pre>
+<p>In the <code>lib.rs</code> let's add all the slint code we are using in this blog.
+We are embedding the <code>*.slint</code> file directly into the rust code, for simplicity.</p>
+<pre class="highlight"><code class="language-rs">#[unsafe(no_mangle)]
+fn android_main(app: slint::android::AndroidApp) {
+    slint::android::init(app).unwrap();
+
+    slint::slint! {
+        export component MainWindow inherits Window {
+            Text { text: "Hello World"; }
+        }
+    }
+    MainWindow::new().unwrap().run().unwrap();
+}</code></pre>
+<h3>Configuring the rust project</h3>
+<p>Next, we'll take a look at the the <a href="https://docs.slint.dev/latest/docs/rust/slint/android/">slint documentation for android</a>.</p>
+<p>First thing I've noticed, is that we need to update the <code>Cargo.toml</code> to include the lib configuration:</p>
+<pre class="highlight"><code class="language-toml">[lib]
+crate-type = ["cdylib"]</code></pre>
+<p>And it mentions that we need to add a new target: <code>aarch64-linux-android</code></p>
+<p>This was a problem for me when setting up android, as I'm on a linux with <code>x86_64</code>, and I didn't know the emulator <em>should</em> run on your host arch.</p>
+<p>Therefore, we are going to add 2 target architectures:</p>
+<ul>
+<li>
+<code>aarch64-linux-android</code>: in case you want to run the app on your phone</li>
+<li>
+<code>x86_64-linux-android</code>: in case you want to run the app on an emulator</li>
+</ul>
+<p>We need to update the flake to reflect this, our <code>devShells.default.buildInput</code>
+will now look like this:</p>
+<pre class="highlight"><code class="language-diff">buildInputs = with pkgs; [
+  just
+-  inputs'.fenix.packages.stable.toolchain
++  (
++    with inputs'.fenix.packages;
++    combine [
++      stable.toolchain
++      targets.aarch64-linux-android.stable.rust-std
++      targets.x86_64-linux-android.stable.rust-std
++    ]
++  )
+];</code></pre>
+<p>Plus, <code>cargo-apk</code> as recommended in the slint docs:</p>
+<pre class="highlight"><code class="language-diff">buildInputs = with pkgs; [
+  just
+  (
+    with inputs'.fenix.packages;
+    combine [
+      stable.toolchain
+      targets.aarch64-linux-android.stable.rust-std
+      targets.x86_64-linux-android.stable.rust-std
+    ]
+  )
++ cargo-apk
+];</code></pre>
+<p>Let's keep track of the command we are going to run in the <code>justfile</code>:</p>
+<pre class="highlight"><code class="language-sh">touch justfile</code></pre>
+<pre class="highlight"><code class="language-just"># Run the android app
+run-android:
+    cargo apk run --target x86_64-linux-android --lib</code></pre>
+<p>Notice that we are using the host's architecture to build the apk, because we are going to run the emulator with that arch. If you are running on a different architecture, like for example, if you are actually running against your device, you should change the <code>--target</code> flag to match your host's architecture.</p>
+<h3>Android setup</h3>
+<p>To run the android app, we'll have to configure a bunch of things.
+Knowing little to nothing about android development, and looking at the <a href="https://docs.slint.dev/latest/docs/rust/slint/android/">slint docs</a>,
+we know that in order to run an android app we need the following env variables:</p>
+<ul>
+<li><code>ANDROID_HOME</code></li>
+<li><code>ANDROID_NDK_ROOT</code></li>
+<li><code>JAVA_HOME</code></li>
+</ul>
+<p>The way I see it, if we have those variable set right, slint should be able to build an <code>apk</code> and install it on the android device.</p>
+<p>The last one: <code>JAVA_HOME</code> should be the easiest to set up, we add the dependency
+to the <code>buildInputs</code> of the <code>devShells.default</code>. Which will automatically add
+the env variable.</p>
+<pre class="highlight"><code class="language-diff">buildInputs = with pkgs; [
+  just
+  (
+    with inputs'.fenix.packages;
+    combine [
+      stable.toolchain
+      targets.aarch64-linux-android.stable.rust-std
+      targets.x86_64-linux-android.stable.rust-std
+    ]
+  )
+  cargo-apk
++  jdk
+];</code></pre>
+<p>For the other 2 variables, we read what nix has to say about android:</p>
+<ul>
+<li><a href="https://wiki.nixos.org/wiki/Android">Nix Android wiki</a></li>
+<li><a href="https://nixos.org/manual/nixpkgs/stable/#android">Nixpks android language framework</a></li>
+<li><a href="https://developer.android.com/studio/command-line/sdkmanager">Android SDK</a></li>
+</ul>
+<p>It took me a while to figure out exactly what I needed, I don't know if it's a
+docs problem, or my utter ignorance about android development, probably a bit of both.
+But we cannot use <code>android-studio-full</code>.
+Instead we are gonna have to refactor the flake quite a bit, by initializing a bunch of variables:</p>
+<p></p>
+<pre class="highlight"><code class="language-diff">      perSystem =
+        {
+          pkgs,
+          inputs',
++          lib,
++          system,
+          ...
+        }:
++        let
++          platformVersion = "35";
++          systemImageType = "default";
++          currentPath = builtins.getEnv "PWD";
++          androidEnv = pkgs.androidenv.override { licenseAccepted = true; };
++          androidComp = (
++            androidEnv.composeAndroidPackages {
++              cmdLineToolsVersion = "8.0";
++              includeNDK = true;
++              # we need some platforms
++              platformVersions = [
++                "30"
++                platformVersion
++              ];
++              # we need an emulator
++              includeEmulator = true;
++              includeSystemImages = true;
++              systemImageTypes = [
++                systemImageType
++                # "google_apis"
++              ];
++              abiVersions = [
++                "x86"
++                "x86_64"
++                "armeabi-v7a"
++                "arm64-v8a"
++              ];
++              cmakeVersions = [ "3.10.2" ];
++            }
++          );
++          android-sdk = (pkgs.android-studio.withSdk androidComp.androidsdk);
++        in
+        {
+         # accept android license (id-2)
++         _module.args.pkgs = import self.inputs.nixpkgs {
++           inherit system;
++           config.allowUnfree = true;
++           config.android_sdk.accept_license = true;
++           config.allowUnfreePredicate =
++             pkg:
++             builtins.elem (lib.getName pkg) [
++               "terraform"
++             ];
++         };
+          # same as we previously saw (id-1)
+          devShells.default = {
+            ...
+          };
+          ...
+        }</code></pre>
+These variables will not only be used to initialize the android environment,
+but also to configure the android emulator, system images and environment variables for the android development tools.
+They all kind of have to match the android environment.
+<p>That's why we set <code>platformVersion</code> to "35" which refers to the API for "Vanilla Ice Cream", which is android 15.
+Most of the other variables are set based on the nix docs about android.</p>
+<p>We also accept android license, by temporarly modifying the nixpkgs configuration on the flake (<code>id-2</code>).</p>
+<h4>Android emulator</h4>
+<p>We can either use our phone, or run an emulator.
+We are choosing the second option, and for that, we'll use our system's architecture.</p>
+<p>In nix terms, we are gonna add a package, and use nix to run it.</p>
+<p>Let's see how it would look:</p>
+<pre class="highlight"><code class="language-nix">let
+  ...
+in {
+  # continue from id-1
+  packages.android-emulator = androidEnv.emulateApp {
+    name = "emulate-MyAndroidApp";
+    platformVersion = platformVersion;
+    abiVersion = "x86_64"; # armeabi-v7a, mips, x86_64, arm64-v8a
+    systemImageType = systemImageType;
+  };
+  # same as we previously saw (id-1)
+  devShells.default = {
+    ...
+  };
+  ...
+}</code></pre>
+<p>Now with this package, we can update our <code>justfile</code> to build and run the emulator in a single command:</p>
+<pre class="highlight"><code class="language-diff"># Run the android app
+run-android:
+    cargo apk run --target x86_64-linux-android --lib
+
++ # Run the android emulator
++ run-emulator:
++     nix run .#android-emulator</code></pre>
+<p>Now we can run the emulator with the following command:</p>
+<pre class="highlight"><code class="language-bash">just run-emulator</code></pre>
+<h3>Trying the set up out</h3>
+<p>What happens if we run the android app?</p>
+<pre class="highlight"><code class="language-sh">just run-android</code></pre>
+<p>We get the following error:</p>
+<pre class="highlight"><code class="language-console">Error: Android SDK is not found. Please set the path to the Android SDK with the $ANDROID_SDK_ROOT environment variable.
+error: Recipe `run-android` failed on line 2 with exit code 1</code></pre>
+<p>Hence, slint is smart enough to detect android's not fully configured.</p>
+<h3>Configuring env variables</h3>
+<p>Part of the reason we set some variables with <code>let .. in ..</code> in the flake,
+is to be able to set the android env variables in the devshell.</p>
+<p>Let's finish that:</p>
+<pre class="highlight"><code class="language-diff">{
+  devshell.default = {
+    ...
++   ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
++   ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
++   ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+  };
+}</code></pre>
+<p>Now with this variables in place, we can run the android app:</p>
+<pre class="highlight"><code class="language-sh">just run-android</code></pre>
+<p>We should see the emulator opening our android app with a "Hello World" message.</p>
+<h3>Final result</h3>
+<p>We get this beautiful <code>flake.nix</code></p>
+<pre class="highlight"><code class="language-nix">{
+  description = "A development shell for rust";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  outputs =
+    inputs@{
+      flake-parts,
+      self,
+      ...
+    }:
+    # https://flake.parts/
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      perSystem =
+        {
+          pkgs,
+          inputs',
+          lib,
+          system,
+          ...
+        }:
+        let
+          platformVersion = "35";
+          systemImageType = "default";
+          currentPath = builtins.getEnv "PWD";
+          androidEnv = pkgs.androidenv.override { licenseAccepted = true; };
+          androidComp = (
+            androidEnv.composeAndroidPackages {
+              cmdLineToolsVersion = "8.0";
+              includeNDK = true;
+              # we need some platforms
+              platformVersions = [
+                "30"
+                platformVersion
+              ];
+              # we need an emulator
+              includeEmulator = true;
+              includeSystemImages = true;
+              systemImageTypes = [
+                systemImageType
+                # "google_apis"
+              ];
+              abiVersions = [
+                "x86"
+                "x86_64"
+                "armeabi-v7a"
+                "arm64-v8a"
+              ];
+              cmakeVersions = [ "3.10.2" ];
+            }
+          );
+          android-sdk = (pkgs.android-studio.withSdk androidComp.androidsdk);
+        in
+        {
+          _module.args.pkgs = import self.inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            config.android_sdk.accept_license = true;
+            config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (lib.getName pkg) [
+                "terraform"
+              ];
+          };
+          packages.android-emulator = androidEnv.emulateApp {
+            name = "emulate-MyAndroidApp";
+            platformVersion = platformVersion;
+            abiVersion = "x86_64"; # armeabi-v7a, mips, x86_64, arm64-v8a
+            systemImageType = systemImageType;
+          };
+          devShells.default = pkgs.mkShell {
+            name = "dev";
+
+            # Available packages on https://search.nixos.org/packages
+            buildInputs = with pkgs; [
+              just
+              (
+                with inputs'.fenix.packages;
+                combine [
+                  stable.toolchain
+                  targets.aarch64-linux-android.stable.rust-std
+                  targets.x86_64-linux-android.stable.rust-std
+                ]
+              )
+              cargo-apk
+              jdk
+              android-sdk
+            ];
+
+            shellHook = ''
+              echo "Welcome to the rust devshell!"
+            '';
+
+            ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
+            ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
+            ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+
+            CARGO_HOME = "${currentPath}/.cargo-home";
+            LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
+              with pkgs;
+              lib.makeLibraryPath [
+                wayland
+                libxkbcommon
+                fontconfig
+              ]
+            }";
+          };
+        };
+    };
+}</code></pre>
+<p>If you are running direnv a simple <code>direnv allow</code> should load everything into your
+terminal, otherwise you'll have to run <code>nix develop</code>.</p>
+<h3>Troubleshooting</h3>
+<p>There are 2 extra variables I've set that help things go smooth on linux:</p>
+<pre class="highlight"><code class="language-diff">{
+  devshell.default = {
+    ...
+    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+
++    CARGO_HOME = "${currentPath}/.cargo-home";
++    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
++      with pkgs;
++      lib.makeLibraryPath [
++        wayland
++        libxkbcommon
++        fontconfig
++      ]
++    }";
+  };
+}</code></pre>
+<p>The first one, <code>CARGO_HOME</code> is for rust to not share the same directory with other rust installations.
+The second one, <code>LD_LIBRARY_PATH</code> is for running the application on KDE.</p>
+<h3>Conclusion</h3>
+<p>After a long struggle, I managed to set up NixOS for android applications with Slint.
+It was tough!</p>
+<p>Slint's documentation is relatively good, and NixOS's documentation could be better,
+by explaining concepts more in depth. Why?
+Because NixOS's users know they cannot <strong>start</strong> as everybody else.
+For example, this case, if I'm starting with Android, I won't go to Android documentation first, but to NixOS documentation,
+cause for sure it's going to be different than what Android docs say.</p>
+<p>On the plus side, once you get things right, they just work, which is mind blowing, <strong>and reproducible</strong>!</p>
+<p>I hope you enjoyed this article and let me know your thoughts in mastodon:</p>
+<p><a href="https://hachyderm.io/@woile">@woile</a></p>
+    </section><aside class="postpromonav"><nav><ul itemprop="keywords" class="tags article__meta">
+<li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/android/" rel="tag">#android</a>
+          </li>
+          <li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/gui/" rel="tag">#gui</a>
+          </li>
+          <li>
+            <a class="tag p-category article__meta__link hover:article__meta__link" href="../../categories/rust/" rel="tag">#rust</a>
+          </li>
+        </ul>
+<ul class="pager hidden-print pagination">
+<li class="next">
+            </li>
+            <li class="previous">
+                <a class="hover:pagination__link" href="../secret-management-for-the-layman/" rel="prev" title="Secret management for the layman">Previous post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><script src="../../assets/js/cactus.js"></script><div id="comment-section"></div>
+<script>
+initComments({
+  node: document.getElementById("comment-section"),
+  defaultHomeserverUrl: "https://matrix.cactus.chat:8448",
+  serverName: "cactus.chat",
+  siteName: "woile.dev",
+  commentSectionId: "android.apps.with.slint.on.nixos"
+})
+</script></section></article></main>
+</div>
+    </div>
+                <script src="../../assets/js/index.js"></script><script src="../../assets/js/mermaid.min.js"></script><script src="../../assets/js/baguetteBox.min.js"></script><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
+</body>
+</html>
