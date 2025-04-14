@@ -148,7 +148,7 @@ happy there's an alternative to QML in rust.</p>
 and the slint team has even built a live preview, and a plugin for Figma.
 I saw <a href="https://www.youtube.com/watch?v=6mfzlaBSZUw">Tobias's talk in RustLab 2024</a> and I was quite blown away by its capabilities.</p>
 <p>This is how the slint code looks like:</p>
-<pre class="highlight"><code class="language-slint">component MemoryTile inherits Rectangle {
+<pre class="highlight"><code>component MemoryTile inherits Rectangle {
     width: 64px;
     height: 64px;
     background: #3960D5;
@@ -299,7 +299,7 @@ will now look like this:</p>
 ];</code></pre>
 <p>Let's keep track of the command we are going to run in the <code>justfile</code>:</p>
 <pre class="highlight"><code class="language-sh">touch justfile</code></pre>
-<pre class="highlight"><code class="language-just"># Run the android app
+<pre class="highlight"><code class="language-make"># Run the android app
 run-android:
     cargo apk run --target x86_64-linux-android --lib</code></pre>
 <p>Notice that we are using the host's architecture to build the apk, because we are going to run the emulator with that arch. If you are running on a different architecture, like for example, if you are actually running against your device, you should change the <code>--target</code> flag to match your host's architecture.</p>
@@ -457,6 +457,28 @@ is to be able to set the android env variables in the devshell.</p>
 <p>Now with this variables in place, we can run the android app:</p>
 <pre class="highlight"><code class="language-sh">just run-android</code></pre>
 <p>We should see the emulator opening our android app with a "Hello World" message.</p>
+<h3>Troubleshooting</h3>
+<p>There are 2 extra variables I've set that help things go smooth on linux:</p>
+<pre class="highlight"><code class="language-diff">{
+  devshell.default = {
+    ...
+    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+
++    CARGO_HOME = "${currentPath}/.cargo-home";
++    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
++      with pkgs;
++      lib.makeLibraryPath [
++        wayland
++        libxkbcommon
++        fontconfig
++      ]
++    }";
+  };
+}</code></pre>
+<p>The first one, <code>CARGO_HOME</code> is for rust to not share the same directory with other rust installations.
+The second one, <code>LD_LIBRARY_PATH</code> is for running the application on KDE.</p>
 <h3>Final result</h3>
 <p>We get this beautiful <code>flake.nix</code></p>
 <pre class="highlight"><code class="language-nix">{
@@ -580,28 +602,14 @@ is to be able to set the android env variables in the devshell.</p>
 }</code></pre>
 <p>If you are running direnv a simple <code>direnv allow</code> should load everything into your
 terminal, otherwise you'll have to run <code>nix develop</code>.</p>
-<h3>Troubleshooting</h3>
-<p>There are 2 extra variables I've set that help things go smooth on linux:</p>
-<pre class="highlight"><code class="language-diff">{
-  devshell.default = {
-    ...
-    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
-    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
-    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+<p>And our <code>justfile</code> would stay the same:</p>
+<pre class="highlight"><code class="language-make"># Run the android app
+run-android:
+    cargo apk run --target x86_64-linux-android --lib
 
-+    CARGO_HOME = "${currentPath}/.cargo-home";
-+    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
-+      with pkgs;
-+      lib.makeLibraryPath [
-+        wayland
-+        libxkbcommon
-+        fontconfig
-+      ]
-+    }";
-  };
-}</code></pre>
-<p>The first one, <code>CARGO_HOME</code> is for rust to not share the same directory with other rust installations.
-The second one, <code>LD_LIBRARY_PATH</code> is for running the application on KDE.</p>
+# Run the android emulator
+run-emulator:
+    nix run .#android-emulator</code></pre>
 <h3>Conclusion</h3>
 <p>After a long struggle, I managed to set up NixOS for android applications with Slint.
 It was tough!</p>

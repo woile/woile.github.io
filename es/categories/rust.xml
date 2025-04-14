@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2025 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 14 Apr 2025 07:18:13 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Android apps with Slint on NixOS</title><link>https://woile.dev/es/posts/android-apps-with-slint-nixos/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Before moving to the south of Holland, and later starting traveling with my girlfriend,
+<?xml-stylesheet type="text/xsl" href="../../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Willy's blog (Publicaciones sobre rust)</title><link>https://woile.dev/</link><description></description><atom:link href="https://woile.dev/es/categories/rust.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2025 &lt;a href="mailto:santiwilly@gmail.com"&gt;Woile&lt;/a&gt; </copyright><lastBuildDate>Mon, 14 Apr 2025 07:40:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Android apps with Slint on NixOS</title><link>https://woile.dev/es/posts/android-apps-with-slint-nixos/</link><dc:creator>Woile</dc:creator><description>&lt;p&gt;Before moving to the south of Holland, and later starting traveling with my girlfriend,
 we were using a blackboard to keep track of the days we hadn't eaten added sugars.
 I was inspired by &lt;a href="https://simonwillison.net/2024/Jan/2/escalating-streaks/"&gt;Simon Willision's blog&lt;/a&gt; about the power of streaks. Thus I created some mechanics for this streaks game, and we started "playing" it at home.
 It was a success, one of our streaks even lasted 45 days without added sugar (with some caveats).
@@ -16,7 +16,7 @@ happy there's an alternative to QML in rust.&lt;/p&gt;
 and the slint team has even built a live preview, and a plugin for Figma.
 I saw &lt;a href="https://www.youtube.com/watch?v=6mfzlaBSZUw"&gt;Tobias's talk in RustLab 2024&lt;/a&gt; and I was quite blown away by its capabilities.&lt;/p&gt;
 &lt;p&gt;This is how the slint code looks like:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-slint"&gt;component MemoryTile inherits Rectangle {
+&lt;pre class="highlight"&gt;&lt;code&gt;component MemoryTile inherits Rectangle {
     width: 64px;
     height: 64px;
     background: #3960D5;
@@ -162,7 +162,7 @@ will now look like this:&lt;/p&gt;
 ];&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Let's keep track of the command we are going to run in the &lt;code&gt;justfile&lt;/code&gt;:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;touch justfile&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-just"&gt;# Run the android app
+&lt;pre class="highlight"&gt;&lt;code class="language-make"&gt;# Run the android app
 run-android:
     cargo apk run --target x86_64-linux-android --lib&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Notice that we are using the host's architecture to build the apk, because we are going to run the emulator with that arch. If you are running on a different architecture, like for example, if you are actually running against your device, you should change the &lt;code&gt;--target&lt;/code&gt; flag to match your host's architecture.&lt;/p&gt;
@@ -319,6 +319,28 @@ is to be able to set the android env variables in the devshell.&lt;/p&gt;
 &lt;p&gt;Now with this variables in place, we can run the android app:&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-sh"&gt;just run-android&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We should see the emulator opening our android app with a "Hello World" message.&lt;/p&gt;
+&lt;h3&gt;Troubleshooting&lt;/h3&gt;
+&lt;p&gt;There are 2 extra variables I've set that help things go smooth on linux:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;{
+  devshell.default = {
+    ...
+    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+
++    CARGO_HOME = "${currentPath}/.cargo-home";
++    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
++      with pkgs;
++      lib.makeLibraryPath [
++        wayland
++        libxkbcommon
++        fontconfig
++      ]
++    }";
+  };
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first one, &lt;code&gt;CARGO_HOME&lt;/code&gt; is for rust to not share the same directory with other rust installations.
+The second one, &lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt; is for running the application on KDE.&lt;/p&gt;
 &lt;h3&gt;Final result&lt;/h3&gt;
 &lt;p&gt;We get this beautiful &lt;code&gt;flake.nix&lt;/code&gt;&lt;/p&gt;
 &lt;pre class="highlight"&gt;&lt;code class="language-nix"&gt;{
@@ -442,28 +464,14 @@ is to be able to set the android env variables in the devshell.&lt;/p&gt;
 }&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you are running direnv a simple &lt;code&gt;direnv allow&lt;/code&gt; should load everything into your
 terminal, otherwise you'll have to run &lt;code&gt;nix develop&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;Troubleshooting&lt;/h3&gt;
-&lt;p&gt;There are 2 extra variables I've set that help things go smooth on linux:&lt;/p&gt;
-&lt;pre class="highlight"&gt;&lt;code class="language-diff"&gt;{
-  devshell.default = {
-    ...
-    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
-    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
-    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+&lt;p&gt;And our &lt;code&gt;justfile&lt;/code&gt; would stay the same:&lt;/p&gt;
+&lt;pre class="highlight"&gt;&lt;code class="language-make"&gt;# Run the android app
+run-android:
+    cargo apk run --target x86_64-linux-android --lib
 
-+    CARGO_HOME = "${currentPath}/.cargo-home";
-+    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
-+      with pkgs;
-+      lib.makeLibraryPath [
-+        wayland
-+        libxkbcommon
-+        fontconfig
-+      ]
-+    }";
-  };
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The first one, &lt;code&gt;CARGO_HOME&lt;/code&gt; is for rust to not share the same directory with other rust installations.
-The second one, &lt;code&gt;LD_LIBRARY_PATH&lt;/code&gt; is for running the application on KDE.&lt;/p&gt;
+# Run the android emulator
+run-emulator:
+    nix run .#android-emulator&lt;/code&gt;&lt;/pre&gt;
 &lt;h3&gt;Conclusion&lt;/h3&gt;
 &lt;p&gt;After a long struggle, I managed to set up NixOS for android applications with Slint.
 It was tough!&lt;/p&gt;

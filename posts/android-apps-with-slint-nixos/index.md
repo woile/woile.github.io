@@ -34,7 +34,7 @@ I saw [Tobias's talk in RustLab 2024](https://www.youtube.com/watch?v=6mfzlaBSZU
 
 This is how the slint code looks like:
 
-```slint
+```
 component MemoryTile inherits Rectangle {
     width: 64px;
     height: 64px;
@@ -229,7 +229,7 @@ Let's keep track of the command we are going to run in the `justfile`:
 touch justfile
 ```
 
-```just
+```make
 # Run the android app
 run-android:
     cargo apk run --target x86_64-linux-android --lib
@@ -439,6 +439,34 @@ just run-android
 
 We should see the emulator opening our android app with a "Hello World" message.
 
+## Troubleshooting
+
+There are 2 extra variables I've set that help things go smooth on linux:
+
+```diff
+{
+  devshell.default = {
+    ...
+    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
+    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
+
++    CARGO_HOME = "${currentPath}/.cargo-home";
++    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
++      with pkgs;
++      lib.makeLibraryPath [
++        wayland
++        libxkbcommon
++        fontconfig
++      ]
++    }";
+  };
+}
+```
+
+The first one, `CARGO_HOME` is for rust to not share the same directory with other rust installations.
+The second one, `LD_LIBRARY_PATH` is for running the application on KDE.
+
 ## Final result
 
 We get this beautiful `flake.nix`
@@ -568,34 +596,17 @@ We get this beautiful `flake.nix`
 If you are running direnv a simple `direnv allow` should load everything into your
 terminal, otherwise you'll have to run `nix develop`.
 
-## Troubleshooting
+And our `justfile` would stay the same:
 
-There are 2 extra variables I've set that help things go smooth on linux:
+```make
+# Run the android app
+run-android:
+    cargo apk run --target x86_64-linux-android --lib
 
-
-```diff
-{
-  devshell.default = {
-    ...
-    ANDROID_HOME = "${androidComp.androidsdk}/libexec/android-sdk";
-    ANDROID_SDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk";
-    ANDROID_NDK_ROOT = "${androidComp.androidsdk}/libexec/android-sdk/ndk-bundle";
-
-+    CARGO_HOME = "${currentPath}/.cargo-home";
-+    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${
-+      with pkgs;
-+      lib.makeLibraryPath [
-+        wayland
-+        libxkbcommon
-+        fontconfig
-+      ]
-+    }";
-  };
-}
+# Run the android emulator
+run-emulator:
+    nix run .#android-emulator
 ```
-
-The first one, `CARGO_HOME` is for rust to not share the same directory with other rust installations.
-The second one, `LD_LIBRARY_PATH` is for running the application on KDE.
 
 ## Conclusion
 
