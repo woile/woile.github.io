@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block content %}
+<section>
+    <h1>{{ section.title }}</h1>
+    {% if section.description %}
+    <p>{{ section.description }}</p>
+    {% endif %}
+    <ul>
+        {% for item in items %}
+        <li>
+            <a href="{{ prefix }}{{ item.path }}">
+                <span>{{ item.frontmatter.title }}</span>
+                {% if item.frontmatter.description %}
+                <span>{{ item.frontmatter.description }}</span>
+                {% endif %}
+            </a>
+            <time>{{ item.frontmatter.date }}</time>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock content %}
