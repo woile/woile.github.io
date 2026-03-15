@@ -1,7 +1,7 @@
 +++
 title = "Bar"
-description = "A description for Bar"
+description = "How to introduce reproducible environments into legacy teams without the steep learning curve friction."
+date = 2026-02-24
 +++
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-This is Bar
+Nix is often seen as a steep mountain to climb. But for a pragmatic consultant, it's the ultimate tool for consistency.

@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% block content %}
+<section class="flex gap-20 px-[100px] py-[100px] items-center">
+    <div class="flex-1 flex flex-col gap-8">
+        <span class="text-accent font-mono text-sm tracking-[2px]"
+            >SOFTWARE CRAFTSMANSHIP</span
+        >
+        <h1 class="text-[72px] leading-[1.1] font-bold text-white">
+            Building software with a human touch.
+        </h1>
+        <p class="text-[22px] text-text-secondary leading-relaxed">
+            I help businesses scale through thoughtful architecture and expert
+            implementation. Specialized in Rust, Python, and System Design.
+        </p>
+    </div>
+    <div
+        class="w-[500px] h-[600px] rounded-3xl overflow-hidden bg-bg-secondary"
+    >
+        <img
+            src="https://images.unsplash.com/photo-1768295981880-f68facee7a8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzM1OTA1MTB8&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Workspace"
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+        />
+    </div>
+</section>
+
+<section class="px-[100px] py-[100px] flex flex-col gap-15">
+    <h2 class="text-5xl font-bold text-white">What I bring to your project</h2>
+    <div class="grid grid-cols-3 gap-8">
+        <div
+            class="flex flex-col gap-6 p-10 rounded-2xl bg-bg-secondary border border-border"
+        >
+            <h3 class="text-[28px] font-bold text-accent">
+                Systems & Infrastructure
+            </h3>
+            <p class="text-[18px] text-text-secondary">
+                Building reliable, low-level systems with Rust and managing
+                reproducible infrastructure with Nix.
+            </p>
+        </div>
+        <div
+            class="flex flex-col gap-6 p-10 rounded-2xl bg-bg-secondary border border-border"
+        >
+            <h3 class="text-[28px] font-bold text-accent">
+                Full-Stack Development
+            </h3>
+            <p class="text-[18px] text-text-secondary">
+                Scalable web applications using Python, TypeScript, and
+                event-driven architectures.
+            </p>
+        </div>
+        <div
+            class="flex flex-col gap-6 p-10 rounded-2xl bg-bg-secondary border border-border"
+        >
+            <h3 class="text-[28px] font-bold text-accent">
+                Cloud & Kubernetes
+            </h3>
+            <p class="text-[18px] text-text-secondary">
+                Expert deployment and orchestration of complex distributed
+                systems on Kubernetes.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock content %}

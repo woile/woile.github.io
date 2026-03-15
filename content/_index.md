@@ -1,6 +1,6 @@
 +++
-title = "Woile"
-description = "Santiago Fraire Willemoes site and blog"
+title = "woile"
+description = "Building software with a human touch. Consultancy for Rust, Python, and Kubernetes."
 +++
 
-# Building software with a human touch.
+Building software with a human touch.

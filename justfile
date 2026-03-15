@@ -5,7 +5,7 @@ update:
 
 # Build styles and site
 build:
-    tailwindcss -i input.css -o static/style.css
+    tailwindcss -i input.css -o static/style.css --minify
     sukr
 
 # Serve site

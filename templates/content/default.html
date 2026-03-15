@@ -1,3 +1,35 @@
 {% extends "base.html" %} {% block content %}
-<article>{{ content | safe }}</article>
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="{{ prefix }}/blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >{{ page.frontmatter.date | default(value="March 10, 2026") }}</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            {{ page.frontmatter.title | default(value=page.title) }}
+        </h1>
+        <div>
+            {% if page.tags | length > 0 %}
+            <div class="flex flex-wrap gap-4">
+                {% for tag in page.tags %}
+                <a href="{{ prefix }}/tags/{{ tag }}.html">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        {{ content | safe }}
+    </div>
+</article>
+
 {% endblock content %}
