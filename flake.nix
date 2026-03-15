@@ -32,7 +32,8 @@
               just
               sukr
               miniserve
-              tailwindcss
+              tailwindcss_4
+              tailwindcss-language-server
               gemini-cli
             ];
 
