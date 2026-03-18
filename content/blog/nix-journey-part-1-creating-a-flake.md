@@ -2,7 +2,6 @@
 title = "Nix journey part 1: creating a flake"
 description = "How to create a flake and use it from another shell"
 date = 2022-12-30
-section_type = "blog"
 tags = ["rust", "nix", "flake", "package manager"]
 aliases = ["/blog/nix-journey-part-1-creating-a-flake"]
 +++

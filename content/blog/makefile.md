@@ -2,7 +2,6 @@
 title = "Digesting Make and Makefiles"
 description = "Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it"
 date = 2022-02-17
-section_type = "blog"
 tags = ["make", "unix", "gnu", "linux", "documentation", "tutorial"]
 aliases = ["/blog/digesting-make-makefile"]
 +++

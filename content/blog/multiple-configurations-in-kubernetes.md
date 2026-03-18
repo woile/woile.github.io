@@ -2,7 +2,6 @@
 title = "Multiple configurations in kubernetes"
 description = "How to manage multiple configuration files"
 date = 2019-11-08
-section_type = "blog"
 tags = ["kubernetes", "linux", "configuration", "kubectl"]
 aliases = ["/blog/multiple-configurations-in-kubernetes"]
 +++

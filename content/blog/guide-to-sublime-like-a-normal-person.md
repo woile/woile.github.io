@@ -1,6 +1,5 @@
 +++
 title = "Sublime guide"
-section_type = "blog"
 date = 2020-07-08
 +++
 

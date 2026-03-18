@@ -2,7 +2,6 @@
 title = "Adding signature to KDE Okular"
 description = "A step-by-step guide to creating digital signatures and configuring Okular to sign PDF documents on Linux systems, particularly NixOS."
 date = 2025-04-23
-section_type = "blog"
 tags = ["KDE", "linux", "PDF", "signature", "esignature", "nixos", "security"]
 aliases = ["/blog/adding-signature-to-kde-okular"]
 +++

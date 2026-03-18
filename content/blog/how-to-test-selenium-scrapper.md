@@ -1,7 +1,6 @@
 +++
 title = "How to test Selenium scrapper with Python"
 date = 2017-09-12
-section_type = "blog"
 tags = ["selenium python testing", "python"]
 aliases = ["/blog/how-to-test-selenium-scrapper"]
 +++

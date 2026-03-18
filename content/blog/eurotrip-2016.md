@@ -2,7 +2,6 @@
 title = "Eurotrip 2016"
 description = "traveling with friends"
 date = 2017-01-08
-section_type = "blog"
 tags = ["eurotrip", "europe", "trip", "friends", "gopro", "travel"]
 aliases = ["/blog/eurotrip-2016"]
 +++

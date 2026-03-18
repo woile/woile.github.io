@@ -1,7 +1,6 @@
 +++
 title = "Review 2020"
 date = 2020-12-31
-section_type = "blog"
 aliases = ["/blog/review-2020"]
 +++
 

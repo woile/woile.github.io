@@ -2,7 +2,6 @@
 title = "Pyenv"
 description = "How to configure pyenv in your system"
 date = 2020-07-08
-section_type = "blog"
 tags = ["python", "python-versions", "tutorial"]
 aliases = ["/blog/pyenv"]
 +++

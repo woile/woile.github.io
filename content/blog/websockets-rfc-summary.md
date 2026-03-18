@@ -2,7 +2,6 @@
 title = "Websockets RFC summary"
 description = "a"
 date = 2018-09-28
-section_type = "blog"
 tags = ["rfc summary websockets", "networking"]
 aliases = ["/blog/websockets-rfc-summary"]
 draft = true

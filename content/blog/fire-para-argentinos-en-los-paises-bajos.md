@@ -2,7 +2,6 @@
 title = "Intro to FIRE in the Netherlands"
 description = "How to invest in the Netherlands"
 date = 2020-08-03
-section_type = "blog"
 tags = ["fire", "netherlands", "money", "investment", "ETF"]
 aliases = ["/blog/into-to-fire-in-the-netherlands"]
 +++

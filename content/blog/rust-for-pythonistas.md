@@ -1,7 +1,6 @@
 +++
 title = "Rust for pythonistas"
 date = 2019-05-28
-section_type = "blog"
 tags = ["python", "rust"]
 aliases = ["/blog/rust-for-pythonistas"]
 drafy = true

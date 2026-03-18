@@ -2,7 +2,6 @@
 title = "Tutorial: writing my dreamt cli using decli"
 description = "tutorial to write a command line interface with python decli"
 date = 2018-09-14
-section_type = "blog"
 tags = ["git python decli cli tutorial programming", "programming"]
 aliases = ["/blog/creating-a-small-git-like-cli-with-decli"]
 +++

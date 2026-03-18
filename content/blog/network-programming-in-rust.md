@@ -2,7 +2,6 @@
 title = "Network programming in Rust"
 description = "Rust and C comparisons for network programming"
 date = 2024-05-20
-section_type = "blog"
 tags = ["rust", "C", "networking"]
 aliases = ["/blog/network-programming-in-rust"]
 +++

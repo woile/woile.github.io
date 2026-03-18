@@ -2,7 +2,6 @@
 title = "Secret management for the layman"
 description = "How I manage secrets as a solo dev, using age and make, and a bit of nix"
 date = 2024-11-13
-section_type = "blog"
 tags = ["age", "secret management", "security"]
 aliases = ["/blog/secret-management-for-the-layman"]
 +++

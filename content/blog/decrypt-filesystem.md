@@ -1,6 +1,5 @@
 +++
 title = "Decrypt filesystem"
-section_type = "blog"
 draft = true
 +++
 

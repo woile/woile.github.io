@@ -2,7 +2,6 @@
 title = "PyCon France 2019 experience"
 description = "My experience at the conference in 2019"
 date = 2019-11-05
-section_type = "blog"
 tags = ["python", "pycon", "conference"]
 aliases = ["/blog/pycon-france-2019-experience"]
 +++

@@ -2,7 +2,6 @@
 title = "2019 yearly retrospective"
 description = "My 2019 retrospective talking about life"
 date = 2019-12-31
-section_type = "blog"
 tags = ["self"]
 aliases = ["/blog/2019-yearly-retrospective"]
 +++

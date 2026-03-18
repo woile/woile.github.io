@@ -1,7 +1,6 @@
 +++
 title = "Flex and grid"
 date = 2020-11-24
-section_type = "blog"
 aliases = ["/blog/flex-and-grid"]
 +++
 

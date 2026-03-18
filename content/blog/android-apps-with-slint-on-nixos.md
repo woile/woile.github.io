@@ -2,7 +2,6 @@
 title = "Android apps with Slint on NixOS"
 description = "A step-by-step guide to setting up an Android development environment on NixOS using Slint UI library and Rust. Learn how to configure Nix flakes, handle Android SDK integration, and run applications in an emulator with reproducible builds"
 date = 2025-04-13
-section_type = "blog"
 tags = ["rust", "android", "gui"]
 aliases = ["/blog/android-apps-with-slint-nixos"]
 +++

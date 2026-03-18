@@ -1,7 +1,6 @@
 +++
 title = "Domain driven design at Europython 2021"
 date = 2021-07-26
-section_type = "blog"
 aliases = ["/blog/domain-driven-design-at-europython-2021"]
 +++
 

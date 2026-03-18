@@ -2,7 +2,6 @@
 title = "Nix journey part 2: replacing apt and brew"
 description = "Moving away from brew and apt, to welcome nix and all it's benefits"
 date = 2023-01-08
-section_type = "blog"
 tags = ["rust", "nix", "flake", "package manager", "apt", "brew"]
 aliases = ["/blog/nix-journey-part-2-replacing-apt-and-brew"]
 +++

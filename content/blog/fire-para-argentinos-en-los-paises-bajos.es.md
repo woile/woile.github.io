@@ -2,7 +2,6 @@
 title = "FIRE para Argentinos en los Países Bajos"
 description = "Como invertir siendo argentino en los Países Bajos"
 date = 2020-08-03
-section_type = "blog"
 tags = ["fire", "argentinos", "holanda", "dinero", "inversion"]
 aliases = ["/blog/fire-para-argentinos-en-los-paises-bajos"]
 +++

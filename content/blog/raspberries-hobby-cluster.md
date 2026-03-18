@@ -2,7 +2,6 @@
 title = "Raspberry Pi hobby cluster"
 description = "set up a kubernetes cluster with raspberry pi"
 date = 2019-02-22
-section_type = "blog"
 tags = ["kubernetes", "docker", "cluster", "raspberry", "containers"]
 aliases = ["/blog/raspberries-hobby-cluster"]
 +++

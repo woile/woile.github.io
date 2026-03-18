@@ -2,7 +2,6 @@
 title = "Get Skype working on Debian Stretch x64 with GNOME3"
 description = "Skype working in Debian Stretch"
 date = 2016-09-19
-section_type = "blog"
 tags = ["skype", "debian", "linux"]
 aliases = ["/blog/get-skype-working-on-debian-stretch-x64-with-gnome3"]
 +++

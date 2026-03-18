@@ -1,7 +1,6 @@
 +++
 title = "Nix journey part 3: learning nix-lang"
 date = 2023-01-14
-section_type = "blog"
 tags = ["nix", "flake", "nix-lang"]
 aliases = ["/blog/nix-journey-part-3-learning-nix-lang"]
 +++

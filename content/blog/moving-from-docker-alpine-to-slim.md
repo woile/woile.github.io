@@ -1,7 +1,6 @@
 +++
 title = "Moving from docker alpine to slim"
 date = 2019-01-13
-section_type = "blog"
 tags = ["linux python containers alpine slim debian", "programming"]
 aliases = ["/blog/moving-from-docker-alpine-to-slim"]
 +++

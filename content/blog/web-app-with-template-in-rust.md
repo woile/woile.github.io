@@ -2,7 +2,6 @@
 title = "A Rust web app with HTML templates"
 description = "Writing a web application in rust using axum and minijinja. If you have used jinja2 in the past this will feel familiar. But we also dig into protocols and networking."
 date = 2022-10-16
-section_type = "blog"
 tags = ["rust", "templates", "jinja", "networking"]
 aliases = ["/blog/web-app-with-template-in-rust"]
 +++

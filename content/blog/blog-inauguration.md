@@ -2,7 +2,6 @@
 title = "Blog inauguration"
 description = "initial post"
 date = 2016-05-18
-section_type = "blog"
 tags = ["init"]
 aliases = ["/blog/blog-inauguration"]
 +++

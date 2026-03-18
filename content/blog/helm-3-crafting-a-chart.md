@@ -2,7 +2,6 @@
 title = "Helm 3 - Crafting a Chart"
 description = "What is a Helm Chart? Where does it fit in K8s? How to release a Chart? How to rollback? All your questions are answered here"
 date = 2020-07-15
-section_type = "blog"
 tags = ["kubernetes", "helm"]
 aliases = ["/blog/helm-3-crafting-a-chart"]
 +++

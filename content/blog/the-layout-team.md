@@ -2,7 +2,6 @@
 title = "The Layout Team"
 description = "The Layout Team maintains the layout, and checks that everyone operates inside the boundaries created by this team"
 date = 2021-11-08
-section_type = "blog"
 tags = ["architecture", "javascript", "html"]
 aliases = ["/blog/the-layout-team"]
 +++
