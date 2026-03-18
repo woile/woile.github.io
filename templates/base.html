@@ -1,15 +1,51 @@
+{% set fediverse = "@woile@hachyderm.io" %}
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ title }} | {{ config.title }}</title>
+        <link rel="canonical" href="{{ config.base_url }}{{ page_path }}" />
+        <meta
+            name="description"
+            content="{% if page.description %}{{ page.description }}{% elif config.description %}{{ config.description }}{% else %}Santiago Fraire Willemoes website{% endif %}"
+        />
+        {% if fediverse %}
+        <meta name="fediverse:creator" content="{{ fediverse }}" />
+        <link rel="me" href="https://hachyderm.io/" />
+        {% endif %}
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
             rel="stylesheet"
         />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="{{ title }}" />
+        <meta
+            property="og:url"
+            content="{{ config.base_url | safe }}{{ page_path }}"
+        />
+        <meta property="og:site_name" content="{{ config.title }}" />
+        <meta
+            property="og:type"
+            content="{% if page.date %}article{% else %}website{% endif %}"
+        />
+        {% if page.description %}
+        <meta property="og:description" content="{{ page.description }}" />
+        {% elif config.description %}
+        <meta property="og:description" content="{{ config.description }}" />
+        {% endif %}
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="{{ config.base_url | safe }}/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
         <link rel="stylesheet" href="{{ prefix }}/style.css" />
         <link rel="stylesheet" href="{{ prefix }}/theme.css" />
     </head>
