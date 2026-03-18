@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Raspberry Pi hobby cluster | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Raspberry Pi hobby cluster
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/kubernetes.html">#kubernetes</a>
+                
+                <a href="../tags/docker.html">#docker</a>
+                
+                <a href="../tags/cluster.html">#cluster</a>
+                
+                <a href="../tags/raspberry.html">#raspberry</a>
+                
+                <a href="../tags/containers.html">#containers</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>In this tutorial we are gonna try to setup a cluster in our home server
+built with raspberries.</p>
+<p>In another post I&#39;ll describe how to configure a Kubernetes cluster in
+our raspberries.</p>
+<p>Kubernetes is a container orchestration tool, it can do all of this:</p>
+<ul>
+<li>Automatic bin packing</li>
+<li>Self-healing</li>
+<li>Horizontal scaling</li>
+<li>Service discovery and Load balancing</li>
+<li>Automated rollouts and rollbacks</li>
+<li>Secrets and configuration management</li>
+<li>Storage orchestration</li>
+<li>Long running jobs</li>
+<li>Batch execution</li>
+</ul>
+<h2 id="hardware">Hardware<a class="heading-anchor" href="#hardware">¶</a></h2>
+<ul>
+<li>4x <a href="https://www.amazon.de/gp/product/B07BDR5PDW/ref=oh_aui_detailpage_o04_s01?ie=UTF8&amp;psc=1">Raspberry Pi 3
+B+</a></li>
+<li>4x <a href="https://www.amazon.de/gp/product/B01AWK81VM/ref=oh_aui_detailpage_o04_s03?ie=UTF8&amp;psc=1">RJ45 Cat6 ethernet
+cable</a></li>
+<li>4x <a href="https://www.amazon.de/gp/product/B06XFSZGCC/ref=oh_aui_detailpage_o04_s02?ie=UTF8&amp;psc=1">32GB Micro
+SDHC</a></li>
+<li>4x <a href="https://www.amazon.de/gp/product/B016BEVNK4/ref=oh_aui_detailpage_o02_s00?ie=UTF8&amp;psc=1">Micro USB
+cable</a></li>
+<li>1x <a href="https://www.amazon.de/gp/product/B000FNFSPY/ref=oh_aui_detailpage_o04_s03?ie=UTF8&amp;psc=1">Switch TP-LINK TL-SF1005D 5-Port 10/100Mbps Unmanaged
+Desktop</a></li>
+<li>1x <a href="https://www.amazon.de/gp/product/B00VUGOSWY/ref=oh_aui_detailpage_o04_s04?ie=UTF8&amp;psc=1">Anker Port Wall
+Chargers</a></li>
+<li>1x <a href="https://www.amazon.de/DELOCK-Kabel-USB-Power-Hohlstecker/dp/B001XM49Y2/ref=sr_1_7?s=computers&amp;ie=UTF8&amp;qid=1540141485&amp;sr=1-7&amp;keywords=usb+to+barrel">USB to
+barrel</a>
+(optional)</li>
+</ul>
+<h2 id="requirements">Requirements<a class="heading-anchor" href="#requirements">¶</a></h2>
+<ul>
+<li>unix system (linux or mac)</li>
+<li>flash v2.2.0
+<a href="https://github.com/hypriot/flash/tree/2.2.0#installation">installation</a></li>
+<li>hypriot OS v1.9.0
+<a href="https://github.com/hypriot/image-builder-rpi/releases/download/v1.9.0/hypriotos-rpi-v1.9.0.img.zip">download</a></li>
+</ul>
+<h2 id="ssh-keys">SSH keys<a class="heading-anchor" href="#ssh-keys">¶</a></h2>
+<p>We need a SSH key in order to connect to the cluster without having to
+type the password every time we access.</p>
+<p>In case you don&#39;t have any, run this command and follow the steps.</p>
+<pre><code class="language-bash"><span class="hl-function">ssh-keygen <span class="hl-variable-parameter">-t <span class="hl-variable-parameter">rsa <span class="hl-variable-parameter">-b <span class="hl-constant-numeric">4096 <span class="hl-variable-parameter">-C <span class="hl-string">"your_email@example.com"
+</code></pre>
+<p>Add the key to your ssh agent, assuming our keys generated are <code>id_rsa</code>
+and <code>id_rsa.pub</code>.</p>
+<pre><code class="language-bash"><span class="hl-function">ssh-add <span class="hl-variable-parameter">~/.ssh/id_rsa
+</code></pre>
+<p>You can find a more in depth explanation in this
+<a href="https://confluence.atlassian.com/bitbucketserver/creating-ssh-keys-776639788.html">tutorial</a></p>
+<h2 id="creating-cloud-init-config">Creating cloud-init-config<a class="heading-anchor" href="#creating-cloud-init-config">¶</a></h2>
+<p>The <code>flash</code> command line utility, uses a cloud-init-conf in order to
+configure the debian system that it&#39;s going to be installed. We are
+gonna use hypriot debian, which is optimized for containers.</p>
+<p>Let&#39;s generate the conf using a template I&#39;ve created, remember to
+update the environment variables with your values.</p>
+<table>
+<thead>
+<tr>
+<td>Variable</td>
+<td>Description</td>
+</tr>
+</thead>
+<tr>
+<td><code>USERNAME</code></td>
+<td>Username to login into the os</td>
+</tr>
+<tr>
+<td><code>SSH_PUBLIC_KEY</code></td>
+<td>A public key to log in without typing the password.</td>
+</tr>
+<tr>
+<td><code>WIFI_SSID_NAME</code></td>
+<td>The name of your wifi</td>
+</tr>
+<tr>
+<td><code>WIFI_PASSWORD</code></td>
+<td>Use <code>wpa_passphrase SSID PASSWORD</code> for preshared key</td>
+</tr>
+</table>
+<pre><code class="language-bash"><span class="hl-keyword-control-import">export <span class="hl-constant">USERNAME<span class="hl-operator">=<span class="hl-string">willy
+<span class="hl-keyword-control-import">export <span class="hl-constant">WIFI_SSID_NAME<span class="hl-operator">=<span class="hl-string">"Bla bla"
+<span class="hl-keyword-control-import">export <span class="hl-constant">WIFI_PASSWORD<span class="hl-operator">=<span class="hl-string">"longandsecurepassword"
+<span class="hl-keyword-control-import">export <span class="hl-constant">WIFI_COUNTRY<span class="hl-operator">=<span class="hl-string">NL
+<span class="hl-keyword-control-import">export <span class="hl-constant">TIMEZONE<span class="hl-operator">=<span class="hl-punctuation-special">$(<span class="hl-function">curl <span class="hl-variable-parameter">-s <span class="hl-variable-parameter">https://ipapi.co/timezone<span class="hl-punctuation-special">)
+<span class="hl-keyword-control-import">export <span class="hl-constant">SSH_PUBLIC_KEY<span class="hl-operator">=<span class="hl-punctuation-special">$(<span class="hl-function">cat <span class="hl-variable-parameter">~/.ssh/id_rsa.pub<span class="hl-punctuation-special">)
+
+<span class="hl-function">curl <span class="hl-variable-parameter">-s <span class="hl-variable-parameter">https://gist.githubusercontent.com/Woile/51eca58047b6bd51c60eeae80d60ec14/raw/db05664b5e90a28472f139bc8757562c2ed13026/cloud-init-config-template.yaml <span class="hl-operator">| \
+<span class="hl-function">sed <span class="hl-variable-parameter">-e <span class="hl-string">"s/\${USERNAME}/<span class="hl-punctuation-special">$<span class="hl-constant">USERNAME<span class="hl-string">/" \
+<span class="hl-variable-parameter">-e <span class="hl-string">"s/\${WIFI_SSID_NAME}/<span class="hl-punctuation-special">$<span class="hl-constant">WIFI_SSID_NAME<span class="hl-string">/" \
+<span class="hl-variable-parameter">-e <span class="hl-string">"s/\${WIFI_PASSWORD}/<span class="hl-punctuation-special">$<span class="hl-constant">WIFI_PASSWORD<span class="hl-string">/" \
+<span class="hl-variable-parameter">-e <span class="hl-string">"s/\${WIFI_COUNTRY}/<span class="hl-punctuation-special">$<span class="hl-constant">WIFI_COUNTRY<span class="hl-string">/" \
+<span class="hl-variable-parameter">-e <span class="hl-string">"s|\${TIMEZONE}|<span class="hl-punctuation-special">$<span class="hl-constant">TIMEZONE<span class="hl-string">|" \
+<span class="hl-variable-parameter">-e <span class="hl-string">"s|\${SSH_PUBLIC_KEY}|<span class="hl-punctuation-special">$<span class="hl-constant">SSH_PUBLIC_KEY<span class="hl-string">|" <span class="hl-operator">&gt; <span class="hl-string-special-path">cloud-init-config.yaml
+</code></pre>
+<h2 id="flashing-sd-cards">Flashing SD cards<a class="heading-anchor" href="#flashing-sd-cards">¶</a></h2>
+<p>Insert the SD card and find it with <code>df</code>.</p>
+<p>Flash the <code>cloud-init-conf.yaml</code> in all of your SD cards. It&#39;s
+important to change the hostname per raspberry. Pay attention to param
+<code>--hostname</code>.</p>
+<p>For my 4 raspberries I am going to use these hostnames:</p>
+<pre><code class="language-bash"><span class="hl-function">willy-1
+<span class="hl-function">willy-2
+<span class="hl-function">willy-3
+<span class="hl-function">willy-4
+</code></pre>
+<pre><code class="language-sh"><span class="hl-function">flash <span class="hl-variable-parameter">-f <span class="hl-variable-parameter">--hostname <span class="hl-variable-parameter">willy-1 <span class="hl-variable-parameter">--device <span class="hl-operator">&lt;<span class="hl-string-special-path">device_found_using_df<span class="hl-operator">&gt; <span class="hl-string-special-path">-u <span class="hl-string-special-path">cloud-init-config.yaml <span class="hl-string-special-path">hypriotos-rpi-v1.9.0.img <span class="hl-string-special-path">pv
+</code></pre>
+<p>Example:</p>
+<pre><code class="language-sh"><span class="hl-function">flash <span class="hl-variable-parameter">-f <span class="hl-variable-parameter">--hostname <span class="hl-variable-parameter">willy-1 <span class="hl-variable-parameter">--device <span class="hl-variable-parameter">/dev/mmcblk0 <span class="hl-variable-parameter">-u <span class="hl-variable-parameter">cloud-init-config.yaml <span class="hl-variable-parameter">hypriotos-rpi-v1.9.0.img <span class="hl-variable-parameter">pv
+</code></pre>
+<p>Plug the SD card on each raspberry and connect them to the wall.</p>
+<h2 id="setting-up-the-nodes">Setting up the nodes<a class="heading-anchor" href="#setting-up-the-nodes">¶</a></h2>
+<p>To find the IPs of your raspberries run:</p>
+<pre><code class="language-bash"><span class="hl-comment"># For Debian based OS
+<span class="hl-function">sudo <span class="hl-variable-parameter">apt-get <span class="hl-variable-parameter">install <span class="hl-variable-parameter">arp-scan
+<span class="hl-comment"># For Mac
+<span class="hl-function">brew <span class="hl-variable-parameter">install <span class="hl-variable-parameter">arp-scan
+</code></pre>
+<pre><code class="language-bash"><span class="hl-function">ip <span class="hl-variable-parameter">a  <span class="hl-comment"># here found the interface, like wlp2s0
+<span class="hl-function">sudo <span class="hl-variable-parameter">arp-scan <span class="hl-variable-parameter">--interface=<span class="hl-operator">&lt;<span class="hl-string-special-path">your_interface<span class="hl-operator">&gt; <span class="hl-string-special-path">--localnet
+</code></pre>
+<p>Connect to each one of them using <code>ssh &lt;username&gt;@&lt;hostname&gt;</code>, because
+we previously added the ssh key, we should not need to type a password.</p>
+<p>Execute on each node the next steps.</p>
+<h3 id="reset-password">Reset password<a class="heading-anchor" href="#reset-password">¶</a></h3>
+<blockquote>
+<p>WARNING!</p>
+<p>This is an important step!</p>
+</blockquote>
+<p>Update your user&#39;s password with <code>passwd</code>. Remember that by default is
+<code>hypriot</code>.</p>
+<h3 id="configure-firewall">Configure Firewall<a class="heading-anchor" href="#configure-firewall">¶</a></h3>
+<p>For simplicity and in case you want to have a multi master cluster, we
+are gonna allow ports for master kubernetes and for kubernetes workers.</p>
+<p>Run this as root typing <code>sudo su</code></p>
+<pre><code class="language-bash"><span class="hl-function">ufw <span class="hl-variable-parameter">--force <span class="hl-variable-parameter">reset  <span class="hl-comment"># ok
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-variable-parameter">ssh
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">6443 <span class="hl-comment"># Kubernetes API (master)
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">80  <span class="hl-comment"># HTTP
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">443  <span class="hl-comment"># HTTPS
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">8443  <span class="hl-comment"># kubectl proxy
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">10250  <span class="hl-comment"># Kubelet API (master and worker)
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">10251  <span class="hl-comment"># kube-scheduler (master)
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">10252  <span class="hl-comment"># kube-controller-manager (master)
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-variable-parameter">2379:2380/tcp  <span class="hl-comment"># etcd server client API (master)
+<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-variable-parameter">30000:32767/tcp  <span class="hl-comment"># NodePort Services** (worker)
+<span class="hl-function">ufw <span class="hl-variable-parameter">default <span class="hl-variable-parameter">deny <span class="hl-variable-parameter">incoming
+<span class="hl-function">yes <span class="hl-operator">| <span class="hl-function">ufw <span class="hl-variable-parameter">enable
+</code></pre>
+<p><a href="https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports">Ports used by
+kubernetes</a></p>
+<h2 id="configuring-master-node">Configuring master node<a class="heading-anchor" href="#configuring-master-node">¶</a></h2>
+<p>Choose one of the raspberries as the master, I use <code>willy-1</code> as master.</p>
+<h3 id="set-static-ip">Set static IP<a class="heading-anchor" href="#set-static-ip">¶</a></h3>
+<p>Edit <code>/etc/network/interfaces.d/eth0</code> and set it to</p>
+<pre><code class="language-ini">allow-hotplug eth0
+iface eth0 inet static
+address 10.0.0.1
+netmask 255.255.255.0
+broadcast 10.0.0.255
+gateway 10.0.0.1
+</code></pre>
+<p>Reboot to claim the IP <code>10.0.0.1</code> in your internal cluster&#39;s network
+(the switch network)</p>
+<h3 id="allocate-addresses-to-the-worker-nodes-using-dhcp">Allocate addresses to the worker nodes using DHCP<a class="heading-anchor" href="#allocate-addresses-to-the-worker-nodes-using-dhcp">¶</a></h3>
+<p>The cloud-init template already includes <code>isc-dhcp-server</code></p>
+<p>Edit <code>/etc/default/isc-dhcp-server</code>, comment out <code># INTERFACESv6=&quot;&quot;</code> and
+set <code>INTERFACESv4=&quot;eth0&quot;</code></p>
+<p>Or run this</p>
+<pre><code class="language-bash"><span class="hl-function">sudo <span class="hl-variable-parameter">sed <span class="hl-variable-parameter">-e <span class="hl-string">'/INTERFACESv6=/ s/^#*/#/' <span class="hl-variable-parameter">-e <span class="hl-string">'s/INTERFACESv4=""/INTERFACESv4="eth0"/g' <span class="hl-variable-parameter">-i <span class="hl-variable-parameter">/etc/default/isc-dhcp-server
+</code></pre>
+<p>Backup and edit <code>/etc/dhcp/dhcpd.conf</code>. Set it like this:</p>
+<pre><code class="language-ini">option domain-name "willy.home"; # Set a domain name, can be anything
+option domain-name-servers 8.8.8.8, 8.8.4.4; # Use Google DNS by default, you can substitute ISP-supplied values here
+subnet 10.0.0.0 netmask 255.255.255.0 { # We'll use 10.0.0.X for our subnet
+    range 10.0.0.1 10.0.0.50;
+    option subnet-mask 255.255.255.0;
+    option broadcast-address 10.0.0.255;
+    option routers 10.0.0.1;
+}
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+</code></pre>
+<p>Restart service <code>sudo systemctl restart dhcpcd.service</code></p>
+<p>Now our master will start assigning addresses to the other nodes.</p>
+<p>In case it&#39;s not assigning IPs, try unplugging from the switch and
+restarting all the other nodes but the master. You can check the IPs by
+doing <code>ip a</code> or <code>hostname -I</code>, remember that this is the range
+<code>range 10.0.0.1 10.0.0.50</code></p>
+<p>Our cluster is set up now.</p>
+<h2 id="credits">Credits<a class="heading-anchor" href="#credits">¶</a></h2>
+<p>This tutorial is based on <a href="http://shop.oreilly.com/product/0636920043874.do">Kubernetes: Up and
+Running</a>, <a href="">Hypriot
+\| Setup Kubernetes on a Raspberry Pi Cluster easily the official
+way!</a> and <a href="https://imti.co/hobby-cluster/#swap">Production Hobby
+Cluster</a>.</p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Sublime guide | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Sublime guide
+        </h1>
+        <div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <h2 id="general-settings">General settings<a class="heading-anchor" href="#general-settings">¶</a></h2>
+<p>Add the following settings in <code>Preferences &gt; Settings &gt; User Tab</code></p>
+<pre><code>"trim_trailing_white_space_on_save": true,
+"auto_complete": false,
+"translate_tabs_to_spaces": true,
+"word_wrap": "false",
+</code></pre>
+<p><code>trim_trailing_white_space_on_save</code> deletes the trailing spaces. This is useful to select text
+properly and sometimes is required by many languages.</p>
+<p><code>auto_complete</code> improves sublime&#39;s performance. If the project is huge sublime will get slow while
+this feature is on by default, having to look up for everything you write. Autocomplete still will be
+triggered if you press <code>tab</code> while writing.</p>
+<p><code>translate_tabs_to_spaces</code> forces to always use spaces when tabbing. This is a personal choice, you can
+use either <code>tabs</code> or <code>spaces</code>, but be consistent with the one you or your team use.</p>
+<p><code>word_wrap</code> if set to false, helps avoiding problems when using features like multiline select.</p>
+<h2 id="installing-packages">Installing packages<a class="heading-anchor" href="#installing-packages">¶</a></h2>
+<p>Install the <a href="https://packagecontrol.io/installation">package control</a> as explained there.</p>
+<p>To use it go to <code>Tools &gt; Command Palette</code> or by default the shortcut keys are:</p>
+<p>Linux: <code>ctrl+shit+P</code>
+Os X: <code>cmd+shift+p</code></p>
+<p>Finally, the steps to install a new package are:</p>
+<ol start="1">
+<li>Select the option: <code>Package Control: install package</code>.</li>
+<li>Wait until the packages are loaded.</li>
+<li>Write the name of the package you want to install.</li>
+</ol>
+<h2 id="a-talk-about-linters-first">A talk about linters first<a class="heading-anchor" href="#a-talk-about-linters-first">¶</a></h2>
+<p>A <strong>lint tool</strong> performs static analysis of source code and flags patterns that might have errors or
+otherwise cause problems for the developer.
+In other words, it tells you where you are writing incorrect/badly-formatted code.
+A linter is a software, that receives the files to analyze as parameters, and it will
+return an output indicating in which lines somethings is weird.</p>
+<h2 id="sublime-linter">Sublime Linter<a class="heading-anchor" href="#sublime-linter">¶</a></h2>
+<p>In my opinion, this is the <strong>most important package</strong> everyone should install, that&#39;s why I introduced
+linters first. Sublime Linter provides an interface
+to communicate with the linters, and the errors will be displayed in the editor in an elegant manner.
+This means that Sublime Linter will talk with the linter you have installed in your system globally, and will
+display in the editor the errors reported by the linter.</p>
+<p>As the site reads:</p>
+<blockquote>
+<p>SublimeLinter is a plugin for Sublime Text 3 that provides a framework for linting code. Whatever language
+you code in, SublimeLinter can help you write cleaner, better, more bug-free code. SublimeLinter
+has been designed to provide maximum flexibility and usability for users and maximum simplicity
+for linter authors.</p>
+</blockquote>
+<p>The concept behind it is very simple:
+1. Install globally in your system a linter for the language of your choice (pep8, eslint, csslint, rubocop, etc).
+2. Install the corresponding sublime linter through the <strong>package control</strong>.</p>
+<h3 id="useful-linters">Useful linters<a class="heading-anchor" href="#useful-linters">¶</a></h3>
+<p>Choose the one that suits you more, and install it through the package manager of the corresponding language. Eg: pip for python, gem for ruby, etc.</p>
+<table>
+<thead>
+<tr>
+<td>Language</td>
+<td>Linter</td>
+<td>Sublime package name</td>
+<td>Description</td>
+</tr>
+</thead>
+<tr>
+<td>python</td>
+<td>pep8</td>
+<td>SublimeLinter-pep8</td>
+<td>tool to check your Python code against some of the style conventions in PEP 8</td>
+</tr>
+<tr>
+<td>python</td>
+<td>pep257</td>
+<td>SublimeLinter-pep257</td>
+<td>static analysis tool for checking compliance with Python docstring conventions</td>
+</tr>
+<tr>
+<td>python</td>
+<td>pyflakes</td>
+<td>SublimeLinter-pyflakes</td>
+<td>checks Python source files for errors</td>
+</tr>
+<tr>
+<td>python</td>
+<td>flake8</td>
+<td>SublimeLinter-flake8</td>
+<td><strong>[recommended]</strong> includes lint checks provided by the PyFlakes project, PEP-0008 inspired style checks provided by the PyCodeStyle project, and McCabe complexity checking provided by the McCabe project</td>
+</tr>
+<tr>
+<td>python</td>
+<td>mypy</td>
+<td>SublimeLinter-contrib-mypy</td>
+<td><strong>[recommended]</strong> includes static type checker (python 3)</td>
+</tr>
+<tr>
+<td>javascript</td>
+<td>jshint</td>
+<td>SublimeLinter-jshint</td>
+<td>JSHint is a program that flags suspicious usage in programs written in JavaScript</td>
+</tr>
+<tr>
+<td>javascript</td>
+<td>eslint</td>
+<td>SublimeLinter-eslint</td>
+<td><strong>[recommended]</strong> tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exception</td>
+</tr>
+<tr>
+<td>css</td>
+<td>csslint</td>
+<td>SublimeLinter-csslint</td>
+<td>open source CSS code quality tool</td>
+</tr>
+<tr>
+<td>sass</td>
+<td>sass-lint</td>
+<td>SublimeLinter-contrib-sass-lint</td>
+<td>A Node-only Sass linter for both sass and scss syntax!</td>
+</tr>
+<tr>
+<td>ruby</td>
+<td>rubocop</td>
+<td>SublimeLinter-rubocop</td>
+<td>A Ruby static code analyzer, based on the community Ruby style guide.</td>
+</tr>
+<tr>
+<td>golang</td>
+<td>golint</td>
+<td>Sublime​Linter-contrib-golint</td>
+<td>Golint is a linter for Go source code.</td>
+</tr>
+</table>
+<p>Note: I work with python and javascript so I&#39;ve marked those which I consider good for those languages.</p>
+<p>Let&#39;s say we want to lint python files with <code>flake8</code>. The procedure would go like this:</p>
+<ol start="1">
+<li>Check <code>SublimeLinter</code> is installed first.</li>
+<li>Install flake8 globally, in a debian based machine: <code>sudo pip install flake8</code></li>
+<li>Install the related sublime linter plugin. In this case <a href="https://github.com/SublimeLinter/SublimeLinter-flake8">SublimeLinter-flake8</a></li>
+<li>That&#39;s it, try restarting sublime and everything should be up an running.</li>
+</ol>
+<p><img src="/images/guide-to-sublime-like-a-normal-person/slinter_diagram.jpg" alt="" /></p>
+<h3 id="tips-to-configure-sublime-linter">Tips to configure sublime linter<a class="heading-anchor" href="#tips-to-configure-sublime-linter">¶</a></h3>
+<ul>
+<li>If your sublime linter user settings are empty, copy the default ones, because if you overwrite the default, everytime SL is updated, the settings will be reset.</li>
+<li>After installing a custom language that wraps another language, link it in sublimelinter, so the linter still works. For example, for python/django put in your sublime linter settings:</li>
+</ul>
+<pre><code>"syntax_map": {
+    "python (django)": "python",
+    "python django": "python"
+}
+</code></pre>
+<ul>
+<li>To change the mark style, open the package control and type <strong>Choose Mark Style</strong>, I like the Squiggly underline.</li>
+<li>You can ignore rules, in the settings of the linter inside the sublime linter settings.</li>
+<li>If you are using <code>mypy</code> and you want to ignore import hints, add to <code>sublimelinter &gt; user settings &gt; linters</code> the following:</li>
+</ul>
+<pre><code>"mypy": {
+    "@disable": false,
+    "args": [
+        "--ignore-missing-imports"
+    ],
+    "excludes": []
+}
+</code></pre>
+<h2 id="another-useful-packages">Another useful Packages<a class="heading-anchor" href="#another-useful-packages">¶</a></h2>
+<p><code>DockBlockr</code> Helps commenting (go to the web for more information)</p>
+<p><code>Colorhighlighter</code> Highlights hexa colors, useful for CSS</p>
+<p><code>SidebarEnhancements</code> Allows options as move, copy, remove, etc in the side bar</p>
+<p><code>Emmet</code> Write HTML faster, introduces many sweet snippets.</p>
+<h2 id="must-know-shortcuts">MUST KNOW SHORTCUTS<a class="heading-anchor" href="#must-know-shortcuts">¶</a></h2>
+<p>Using this shortcuts will make your life much easier.</p>
+<p>Search them in your key bindin settings, and observe the keys.</p>
+<p><code>toggle_comment</code> usually <code>Ctrl + /</code>
+<img src="/images/guide-to-sublime-like-a-normal-person/toggle_comment.gif" alt="" /></p>
+<p><code>select_lines</code> usually by pressing <code>Ctrl</code> and click
+<img src="/images/guide-to-sublime-like-a-normal-person/select_lines.gif" alt="" /></p>
+<p><code>find_under_expand</code> to filter with case, open the search panel and enable the &quot;Case Sensitive&quot; option.</p>
+<p>No image for this sorry.</p>
+<h2 id="recommended-theme">RECOMMENDED THEME<a class="heading-anchor" href="#recommended-theme">¶</a></h2>
+<p><a href="https://github.com/Miw0/SoDaReloaded-Theme">SoDaReloaded-Theme</a></p>
+<p>This awesome theme also includes cool icons for every extension, like in the image below.</p>
+<p><img src="https://raw.githubusercontent.com/Miw0/sodareloaded-theme/master/dark/example.png" alt="" /></p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

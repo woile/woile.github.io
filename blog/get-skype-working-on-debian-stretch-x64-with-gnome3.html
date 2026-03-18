@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Get Skype working on Debian Stretch x64 with GNOME3 | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Get Skype working on Debian Stretch x64 with GNOME3
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/skype.html">#skype</a>
+                
+                <a href="../tags/debian.html">#debian</a>
+                
+                <a href="../tags/linux.html">#linux</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <blockquote>
+<p>WARNING</p>
+<p>This info is no longer relevant. Skype no longer exists.
+And many good apps support calls or videocalls</p>
+</blockquote>
+<p>Some alternatives I recommend:</p>
+<ul>
+<li><a href="https://matrix.org/ecosystem/clients/">matrix</a></li>
+<li><a href="https://signal.org/">signal</a></li>
+<li><a href="https://discordapp.com/">discord</a></li>
+</ul>
+<p>If you really need to install this software, for legacy reasions, then proceed at your own risk.</p>
+<p>I got tired of installing skype so many times looking all over the
+internet, so I&#39;ll leave here some easy steps to make it work in Debian
+Stretch with GNOME 3.21 (and may be some earlier versions). It&#39;s just
+that there is not enough information around. Debian recommends to
+install the .deb package, but it usually does not work.</p>
+<p>As you probably know, skype is a 32bit software, so we&#39;ll need to
+enable that in our repository manager. Next we&#39;ll install some
+dependencies and finally we&#39;ll get the file in the specified folder.</p>
+<pre><code class="language-bash"><span class="hl-function">sudo <span class="hl-variable-parameter">dpkg <span class="hl-variable-parameter">--add-architecture <span class="hl-variable-parameter">i386
+<span class="hl-function">sudo <span class="hl-variable-parameter">apt-get <span class="hl-variable-parameter">install <span class="hl-variable-parameter">libxv1:i386 <span class="hl-variable-parameter">libqtdbus4:i386 <span class="hl-variable-parameter">libqtwebkit4:i386 <span class="hl-variable-parameter">libxss1:i386
+<span class="hl-function">mkdir <span class="hl-variable-parameter">~/.apps/
+<span class="hl-function">wget <span class="hl-variable-parameter">-qO- <span class="hl-variable-parameter">https://download.skype.com/linux/skype-4.3.0.37.tar.bz2 <span class="hl-operator">| <span class="hl-function">tar <span class="hl-variable-parameter">jx <span class="hl-variable-parameter">-C <span class="hl-variable-parameter">~/.apps/
+</code></pre>
+<p>Instead of launching the <code>./skype</code> script, you can add a <code>skype.desktop</code>
+file to your gnome environment.</p>
+<p>The location for this file is either <code>~/.local/share/applications</code>, for
+the current user, or <code>/usr/share/applications</code> for everyone.</p>
+<p>The content for your <code>skype.desktop</code>, should be something like this:</p>
+<pre><code class="language-bash"><span class="hl-punctuation-bracket">[<span class="hl-function">Desktop <span class="hl-variable-parameter">Entry<span class="hl-variable-parameter">]
+<span class="hl-variable-parameter">Name=Skype
+<span class="hl-variable-parameter">Comment=Skype <span class="hl-variable-parameter">Internet <span class="hl-variable-parameter">Telephony
+<span class="hl-variable-parameter">Exec=/home/**santiago**/.apps/skype-4.3.0.37/skype
+<span class="hl-variable-parameter">Icon=/home/**santiago**/.apps/skype-4.3.0.37/icons/SkypeBlue_96x96.png
+<span class="hl-variable-parameter">Terminal=false
+<span class="hl-variable-parameter">Type=Application
+<span class="hl-variable-parameter">Encoding=UTF-8
+<span class="hl-variable-parameter">Categories=Network<span class="hl-punctuation-delimiter">;<span class="hl-variable-parameter">Application<span class="hl-punctuation-delimiter">;
+<span class="hl-variable-parameter">MimeType=x-scheme-handler/skype<span class="hl-punctuation-delimiter">;
+<span class="hl-variable-parameter">X-KDE-Protocols=skype
+<span class="hl-variable-parameter">X-GNOME-Bugzilla-Product=skype
+</code></pre>
+<p>PS: Remember to change the user for the one you are using.</p>
+<p>Good luck!</p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

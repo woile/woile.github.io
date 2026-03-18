@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Adding signature to KDE Okular | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Adding signature to KDE Okular
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/KDE.html">#KDE</a>
+                
+                <a href="../tags/linux.html">#linux</a>
+                
+                <a href="../tags/PDF.html">#PDF</a>
+                
+                <a href="../tags/signature.html">#signature</a>
+                
+                <a href="../tags/esignature.html">#esignature</a>
+                
+                <a href="../tags/nixos.html">#nixos</a>
+                
+                <a href="../tags/security.html">#security</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>I&#39;ve been using <a href="https://okular.kde.org/">Okular</a> to open and annotate PDFs on NixOS.
+It&#39;s an excellent piece of software. But I had trouble adding signatures to PDFs.</p>
+<p>I was confused by the instructions. Turns out you have to do the following:</p>
+<ol start="1">
+<li>Create a digital signature certificate</li>
+<li>Import the certificate into <a href="https://firefox-source-docs.mozilla.org/security/nss/index.html">nss</a> (through Firefox)</li>
+<li>Configure Okular backend</li>
+<li>Sign documents</li>
+</ol>
+<p>In order to create a digital signature, we can use the following script:</p>
+<pre><code class="language-sh"><span class="hl-comment">#! /usr/bin/env nix-shell
+<span class="hl-comment">#! nix-shell openssl
+<span class="hl-keyword-control-import">export <span class="hl-constant">USER_ID<span class="hl-operator">=<span class="hl-string">woile
+<span class="hl-keyword-control-import">export <span class="hl-constant">FULL_NAME<span class="hl-operator">=<span class="hl-string">"Your Full Name"
+
+<span class="hl-function">mkdir <span class="hl-variable-parameter">~/.signatures
+<span class="hl-function-builtin">cd <span class="hl-variable-parameter">~/.signatures
+<span class="hl-function">openssl <span class="hl-variable-parameter">genrsa <span class="hl-variable-parameter">-out <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.priv.key" <span class="hl-constant-numeric">2048
+
+<span class="hl-comment"># Here you'll get a bunch of questions, remember to use '.' if you want an empty field
+<span class="hl-function">openssl <span class="hl-variable-parameter">req <span class="hl-variable-parameter">-new <span class="hl-variable-parameter">-key <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.priv.key" <span class="hl-variable-parameter">-out <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.csr"
+
+<span class="hl-function">openssl <span class="hl-variable-parameter">x509 <span class="hl-variable-parameter">-req <span class="hl-variable-parameter">-days <span class="hl-constant-numeric">365 <span class="hl-variable-parameter">-in <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.csr" <span class="hl-variable-parameter">-signkey <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.priv.key" <span class="hl-variable-parameter">-out <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.certificate.crt"
+<span class="hl-function">openssl <span class="hl-variable-parameter">pkcs12 <span class="hl-variable-parameter">-export <span class="hl-variable-parameter">-out <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.sign.p12" <span class="hl-variable-parameter">-inkey <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.priv.key" <span class="hl-variable-parameter">-in <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">USER_ID<span class="hl-string">.certificate.crt" <span class="hl-variable-parameter">-name <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-constant">FULL_NAME<span class="hl-string">"
+</code></pre>
+<p>The end result will be a file named <code>woile.sign.p12</code> in the <code>~/.signatures</code> directory.</p>
+<p>Then we load the <code>p12</code> certificate file into Firefox:</p>
+<p>Firefox &gt;&gt; Settings &gt;&gt; Privacy and Security &gt;&gt; View Certificates &gt;&gt; Your Certificates (1st tab)</p>
+<p>And finally we go to Okular &gt;&gt; Settings &gt;&gt; Configure Backends</p>
+<p>You may have to change the &quot;Certificate Database&quot;, mine for example is created by NixOS as <code>~/.mozilla/firefox/9q8doo6z.Santiago</code></p>
+<p>It would be nice if provisioning certificates could be done through NixOS, but I&#39;m still not sure how to do it.</p>
+<p>I hope you enjoyed this article and let me know your thoughts in mastodon:</p>
+<p><a href="https://hachyderm.io/@woile">@woile</a></p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

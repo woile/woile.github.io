@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Helm 3 - Crafting a Chart | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Helm 3 - Crafting a Chart
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/kubernetes.html">#kubernetes</a>
+                
+                <a href="../tags/helm.html">#helm</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>This post focuses on <strong>creating and releasing a chart</strong>, not consuming from a Helm Chart Repository.</p>
+<p>Helm is an <strong>advanced</strong> tool used by kubernetes people, some &quot;lingo&quot; (jargon) is used here.
+Please leave a comment if you want more information.</p>
+<p>Helm allows to <strong>&quot;package&quot;</strong> kubernetes applications, it simplifies the distribution
+and installation. While doing so, it checks dependencies versions and some other validations.</p>
+<hr />
+<p><a href="https://helm.sh/docs/intro/">Official Helm 3 Documentation</a></p>
+<hr />
+<h2 id="version-used">Version used<a class="heading-anchor" href="#version-used">¶</a></h2>
+<pre><code class="language-bash"><span class="hl-punctuation-special">$ <span class="hl-variable">helm <span class="hl-variable-parameter">version <span class="hl-variable-parameter">--short
+<span class="hl-function">v3.2.4+g0ad800e
+</code></pre>
+<h2 id="helm-chart">Helm Chart<a class="heading-anchor" href="#helm-chart">¶</a></h2>
+<blockquote>
+<p>A Chart is a Helm package. It contains all of the resource definitions necessary to run an application,
+tool, or service inside of a Kubernetes cluster. Think of it as the Kubernetes equivalent of a
+Homebrew formula, an apt dpkg, or a Yum RPM file <a href="https://helm.sh/docs/intro/using_helm/#three-big-concepts">[0]</a>.</p>
+</blockquote>
+<p>For OOP people:</p>
+<ul>
+<li>Chart ~= class</li>
+<li>Release ~= instance</li>
+</ul>
+<p>This is important to remember, we are going to be building a <strong>package</strong>.</p>
+<h2 id="development-of-a-chart">Development of a Chart<a class="heading-anchor" href="#development-of-a-chart">¶</a></h2>
+<h3 id="creating-a-new-chart">Creating a new Chart<a class="heading-anchor" href="#creating-a-new-chart">¶</a></h3>
+<p>My recommendation is to create a <code>charts/</code> folder in the root of your project(s).</p>
+<p>This way each of your projects could become a &quot;chart repository&quot;, similar to how hub.helm.sh consumes repositories from different sources in a descentralized way.</p>
+<p>You could do the same for your projects. Each git project becomes a descentralized chart repository,
+or you can publish to a centralized chart repository like artifactory or your own github repo.</p>
+<p>In any case, calling it <code>charts/</code> is informative and flexible enough to choose any option.</p>
+<p>Inside <code>charts/</code>, we are going to use <code>helm</code> to create the first boilerplate of our app.</p>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">create <span class="hl-operator">&lt;<span class="hl-string-special-path">package_name<span class="hl-operator">&gt;
+</code></pre>
+<h4 id="example">Example<a class="heading-anchor" href="#example">¶</a></h4>
+<p>Along the post we&#39;ll use <code>auth-service</code> as our project example name.</p>
+<pre><code class="language-bash"><span class="hl-function">mkdir <span class="hl-variable-parameter">auth-service
+<span class="hl-function-builtin">cd <span class="hl-variable-parameter">auth-service/
+<span class="hl-function">mkdir <span class="hl-variable-parameter">charts
+<span class="hl-function-builtin">cd <span class="hl-variable-parameter">charts/
+</code></pre>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">create <span class="hl-variable-parameter">auth-service
+</code></pre>
+<h4 id="structure">Structure<a class="heading-anchor" href="#structure">¶</a></h4>
+<pre><code class="language-bash"><span class="hl-function">auth-service/
+<span class="hl-function">└── <span class="hl-variable-parameter">charts/
+    <span class="hl-function">└── <span class="hl-variable-parameter">auth-service/
+        <span class="hl-function">├── <span class="hl-variable-parameter">charts/
+        <span class="hl-function">├── <span class="hl-variable-parameter">Chart.yaml
+        <span class="hl-function">├── <span class="hl-variable-parameter">templates/
+        <span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">deployment.yaml
+        <span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">_helpers.tpl
+        <span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">hpa.yaml
+        <span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">ingress.yaml
+        <span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">NOTES.txt
+        <span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">serviceaccount.yaml
+        <span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">service.yaml
+        <span class="hl-function">│   <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">tests/
+        <span class="hl-function">│       <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">test-connection.yaml
+        <span class="hl-function">└── <span class="hl-variable-parameter">values.yaml
+</code></pre>
+<h4 id="notes">Notes<a class="heading-anchor" href="#notes">¶</a></h4>
+<ul>
+<li><code>appVersion</code> inside <code>Chart.yaml</code> references the <strong>application version</strong> <a href="https://stackoverflow.com/a/60054111/2047185">[1]</a></li>
+<li><code>image.tag</code> inside <code>values.yaml</code> references the <strong>docker image version/tag</strong>.</li>
+<li>if <code>image.tag</code> is skipped, <code>appVersion</code> is used instead.</li>
+<li><strong>recommendation</strong>: use a tool to automatically bump the version, like <a href="https://github.com/commitizen-tools/commitizen">commitizen</a>,
+during the CI execution, and push back to the repo.</li>
+<li>Whether to use <code>image.tag</code> or <code>appVersion</code> is still under debate, you can read more in the
+<a href="https://github.com/helm/helm/issues/8194">github issue</a></li>
+<li>If you use <code>appVersion</code> you can use <code>helm history &lt;release_name&gt;</code> to get info on the versions
+per revision.</li>
+<li>You can re-use the same chart to deploy multiple django/rails applications, <a href="https://github.com/helm/helm/issues/8194#issuecomment-658715462">seems like a
+common practice</a></li>
+</ul>
+<h3 id="chart-customization">Chart customization<a class="heading-anchor" href="#chart-customization">¶</a></h3>
+<p>I recommend to start with the default helm chart and from there, start
+adding any extra stuff that you need.</p>
+<h3 id="templating">Templating<a class="heading-anchor" href="#templating">¶</a></h3>
+<p>If you have used other template systems like <code>jinja</code>, or Django&#39;s template engine,
+Helm&#39;s system is not that different: you can apply functions using a pipeline <code>|</code>.</p>
+<pre><code class="language-yaml"><span class="hl-variable-other-member">food<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{<span class="hl-punctuation-bracket">{ <span class="hl-string">.Values.favorite.food | upper | quote <span class="hl-punctuation-bracket">}<span class="hl-punctuation-bracket">}
+</code></pre>
+<p>Avoid adding complex template tags; the purpose of <code>yaml</code> is to be <strong>readable</strong>.
+By using templates, we make things more complex, and less readable, <strong>touch only when necessary</strong>.</p>
+<p><code>templates/_helpers.tpl</code> contains custom functions for your templates, like generating the release name based on values.</p>
+<p>To find problems with you charts, run:</p>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">lint <span class="hl-operator">&lt;<span class="hl-string-special-path">package_name<span class="hl-operator">&gt;
+</code></pre>
+<h3 id="values">Values<a class="heading-anchor" href="#values">¶</a></h3>
+<p>Place the &quot;configuration&quot; that you want to expose to the users of the chart in
+the <code>values.yaml</code>, even if it&#39;s you who&#39;s gonna end up using it.
+There&#39;s no need to parametrize everything, and try to use sensible defaults.</p>
+<p>A good rule is to expose only the things you are going to use and make new
+parameters only when you have to.</p>
+<p>Let developers specify unconventional aspects of the application.</p>
+<p>You can also define a <code>values.schema.json</code> which will be used by helm to validate
+the parameters given to Helm <a href="https://helm.sh/docs/topics/charts/#schema-files">[2]</a>.</p>
+<h3 id="using-custom-values">Using custom values<a class="heading-anchor" href="#using-custom-values">¶</a></h3>
+<p><code>values.yaml</code> is used as default and any extra values provided through <code>--set</code> or <code>--values</code>
+will be merged into the default <code>values.yaml</code> inside the chart.</p>
+<p>There are 2 approaches to deal with custom values that I know.</p>
+<h4 id="centralized-values">Centralized values<a class="heading-anchor" href="#centralized-values">¶</a></h4>
+<p>The first one is to have a centralized place with all the configuration. At the
+moment, I know <a href="https://github.com/roboll/helmfile">helmfile</a> is being used for this.
+You&#39;d specify every configuration per environment per chart in a <code>helmfile.yaml</code>.</p>
+<h4 id="per-repository">Per repository<a class="heading-anchor" href="#per-repository">¶</a></h4>
+<p>This is the most popular approach. Each &quot;project&quot; is responsible to set the values
+per environment (<code>production</code>, <code>staging</code>).</p>
+<p>If you are going to modify small aspects of your app, using <code>--set</code> should be enough.</p>
+<p>A common practice, is to place the production and staging files inside the chart folder,
+but in my opinion this should be avoided when possible.</p>
+<p>A Helm chart is a package: <strong>Helm is a package manager</strong>.
+Like apt, pip or npm.
+When we use tools like Docker, for example, we provide env variables from outside, they are
+not packaged inside the image. This gives the container a lot of flexibility and the
+same principle applies to Helm. There&#39;s an interesting <a href="https://github.com/helm/helm/issues/6715">discussion in the helm repo</a>
+about this.</p>
+<p>Ideally, your custom values should live outside the chart, and they should be given to the chart.</p>
+<p>Let&#39;s see a setup example for the <code>auth-service</code>.</p>
+<pre><code class="language-bash"><span class="hl-function">auth-service/
+<span class="hl-function">├── <span class="hl-variable-parameter">charts/
+<span class="hl-function">│   <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">auth-service/
+<span class="hl-function">├── <span class="hl-variable-parameter">charts-values/
+<span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">production/
+<span class="hl-function">│   <span class="hl-variable-parameter">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">redis.yaml
+<span class="hl-function">│   <span class="hl-variable-parameter">│   <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">auth-service.yaml
+<span class="hl-function">│   <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">staging/
+<span class="hl-function">│       <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">auth-service.yaml
+<span class="hl-function">└── <span class="hl-variable-parameter">src/
+</code></pre>
+<p>The installation command would look like</p>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">install <span class="hl-variable-parameter">--values <span class="hl-variable-parameter">charts-values/production/auth-service.yaml <span class="hl-variable-parameter">auth-service-prod <span class="hl-variable-parameter">./auth-service
+</code></pre>
+<p>I&#39;m not 100% happy with the above setup, mainly with the naming.
+But it allows having multiple values per chart per environment.
+We could easily add values for a redis pulled from the official Helm hub.
+I&#39;d like to hear opinions about it. How&#39;d you do it?</p>
+<h2 id="release">Release<a class="heading-anchor" href="#release">¶</a></h2>
+<blockquote>
+<p>A Release is an instance of a chart running in a Kubernetes cluster. One chart can often be installed many times into the same cluster. And each time it is installed, a <strong>new release is created</strong>.
+Consider a MySQL chart. If you want two databases running in your cluster, you can install that chart twice. Each one will have its own release, which will in turn have its own release name <a href="https://helm.sh/docs/intro/using_helm/#three-big-concepts">[3]</a>.</p>
+</blockquote>
+<h3 id="new-release">New release<a class="heading-anchor" href="#new-release">¶</a></h3>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">install <span class="hl-operator">&lt;<span class="hl-string-special-path">release_name<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">package_name<span class="hl-operator">&gt;
+</code></pre>
+<p>Deploy a new release to the cluster.</p>
+<p>We can also run a dry-run to check what&#39;s going to happen:</p>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">install <span class="hl-operator">&lt;<span class="hl-string-special-path">release_name<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">package_name<span class="hl-operator">&gt; <span class="hl-string-special-path">--dry-run
+</code></pre>
+<h4 id="example">Example<a class="heading-anchor" href="#example">¶</a></h4>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">install <span class="hl-variable-parameter">auth-service-prod <span class="hl-variable-parameter">./auth-service
+</code></pre>
+<h4 id="notes">Notes<a class="heading-anchor" href="#notes">¶</a></h4>
+<ul>
+<li><code>package_name</code> can be a folder, a <code>.tgz</code> or a url.</li>
+<li><code>release_name</code>: the name of this particular release. If the name is different another &quot;instance&quot; will be deployed. So for redis instances it may be worth using different <code>release_name</code>s, but for your JavaScript app it may not.</li>
+<li>The output of <code>templates/NOTES.txt</code> is shown in the prompt when making a new release, useful for CI logs.</li>
+<li>If you don&#39;t want to provide a <code>&lt;release_name&gt;</code>, use <code>--generate-name</code> and it will assign a random <code>&lt;release_name&gt;</code>.</li>
+<li>Helm stores release config per namespace, so if you want to release 2 redis instances in the same namespace, they should have different <code>&lt;release_name&gt;</code>s <a href="https://github.com/helm/community/blob/master/helm-v3/003-state.md#namespacing-changes">[4]</a>.</li>
+<li>Helm does not wait until all of the resources are running before it exits <a href="https://helm.sh/docs/intro/using_helm/#helm-install-installing-a-package">[5]</a>.</li>
+<li><strong>personal</strong>: use different <code>release_name</code>s per environment (<code>production</code>, <code>staging</code>). Even though it may not be necessary, giving that extra information in the name is useful and cheap.</li>
+<li>Use <code>helm get values &lt;release_name&gt;</code> to get the values used for the release, useful to check if our custom values were applied properly.</li>
+</ul>
+<h3 id="check-release-status">Check release status<a class="heading-anchor" href="#check-release-status">¶</a></h3>
+<p>After it is installed, we want to know if everything went well.</p>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">status <span class="hl-operator">&lt;<span class="hl-string-special-path">release_name<span class="hl-operator">&gt;
+</code></pre>
+<h4 id="example">Example<a class="heading-anchor" href="#example">¶</a></h4>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">status <span class="hl-variable-parameter">auth-service-prod
+</code></pre>
+<blockquote>
+<p>An upgrade takes an existing release and upgrades it according to the information you provide. Because Kubernetes charts can be large and complex, Helm tries to perform the <strong>least invasive upgrade</strong>. It will only update things that have changed <strong>since the last release</strong>. <a href="https://helm.sh/docs/intro/using_helm/#helm-upgrade-and-helm-rollback-upgrading-a-release-and-recovering-on-failure">[6]</a></p>
+</blockquote>
+<h3 id="uprgrade-release">Uprgrade release<a class="heading-anchor" href="#uprgrade-release">¶</a></h3>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">upgrade <span class="hl-variable-parameter">-f <span class="hl-operator">&lt;<span class="hl-string-special-path">custom_values.yaml<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">release_name<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">package_name<span class="hl-operator">&gt;
+</code></pre>
+<h4 id="example">Example<a class="heading-anchor" href="#example">¶</a></h4>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">upgrade <span class="hl-variable-parameter">-f <span class="hl-variable-parameter">charts-values/production/auth-service.yaml <span class="hl-variable-parameter">auth-service-prod <span class="hl-variable-parameter">./auth-service
+</code></pre>
+<h3 id="rollback-release">Rollback release<a class="heading-anchor" href="#rollback-release">¶</a></h3>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">rollback <span class="hl-operator">&lt;<span class="hl-string-special-path">release_name<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">revision<span class="hl-operator">&gt;
+</code></pre>
+<h4 id="example">Example<a class="heading-anchor" href="#example">¶</a></h4>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">rollback <span class="hl-variable-parameter">auth-service-prod <span class="hl-constant-numeric">1
+</code></pre>
+<h4 id="notes">Notes<a class="heading-anchor" href="#notes">¶</a></h4>
+<ul>
+<li>Any release version increment will produce a <code>revision</code> number. It goes from 1..N.</li>
+<li>Use <code>helm history &lt;release_name&gt;</code> to see the revisions of your <code>release_name</code>.</li>
+</ul>
+<h3 id="uninstall-release">Uninstall release<a class="heading-anchor" href="#uninstall-release">¶</a></h3>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">uninstall <span class="hl-operator">&lt;<span class="hl-string-special-path">release_name<span class="hl-operator">&gt;
+</code></pre>
+<p>I won&#39;t go deep into this, but just know it exists, and you can remove an existing release.</p>
+<h3 id="automating-release-cycle">Automating release cycle<a class="heading-anchor" href="#automating-release-cycle">¶</a></h3>
+<p>A recommended best practice to avoid running <code>helm install</code> and <code>helm upgrade</code> <a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#install-or-upgrade-a-release-with-one-command">[7]</a> is to use:</p>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">upgrade <span class="hl-variable-parameter">--install <span class="hl-operator">&lt;<span class="hl-string-special-path">release_name<span class="hl-operator">&gt; <span class="hl-string-special-path">--values <span class="hl-operator">&lt;<span class="hl-string-special-path">custom_values.yaml<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">package_name<span class="hl-operator">&gt;
+</code></pre>
+<p>This can be a benefit in an automated CI/CD pipeline. We let Helm perform the check to know if it&#39;s a first time,
+or a release upgrade.</p>
+<h4 id="example">Example<a class="heading-anchor" href="#example">¶</a></h4>
+<pre><code class="language-bash"><span class="hl-function">helm <span class="hl-variable-parameter">upgrade <span class="hl-variable-parameter">--install <span class="hl-variable-parameter">auth-service-prod <span class="hl-variable-parameter">--values <span class="hl-variable-parameter">charts-values/production/auth-service.yaml <span class="hl-variable-parameter">./auth-service
+</code></pre>
+<h4 id="notes">Notes<a class="heading-anchor" href="#notes">¶</a></h4>
+<ul>
+<li>Use <code>--atomic</code> to get automatic rollback on failures.<a href="https://lzone.de/blog/Helm-Best-Practices">[8]</a></li>
+</ul>
+<h3 id="complex-charts-with-many-dependencies">Complex Charts with Many Dependencies<a class="heading-anchor" href="#complex-charts-with-many-dependencies">¶</a></h3>
+<blockquote>
+<p>The current best practice for composing a complex application from discrete parts is to create a top-level umbrella chart that exposes the global configurations, and then use the charts/ subdirectory to embed each of the components.<a href="https://helm.sh/docs/howto/charts_tips_and_tricks/#complex-charts-with-many-dependencies">5</a></p>
+</blockquote>
+<p>I think this is an improving point; I haven&#39;t understood it by reading the documentation yet.</p>
+<blockquote>
+<p>Hey, hello 👋</p>
+<p>If you are interested in what I write, follow me on <a href="https://twitter.com/santiwilly">twitter</a></p>
+</blockquote>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>How to filter Polymorphic Models with Django Filters | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            How to filter Polymorphic Models with Django Filters
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/python.html">#python</a>
+                
+                <a href="../tags/django.html">#django</a>
+                
+                <a href="../tags/drf.html">#drf</a>
+                
+                <a href="../tags/django-rest-framework.html">#django-rest-framework</a>
+                
+                <a href="../tags/api.html">#api</a>
+                
+                <a href="../tags/polymorphic.html">#polymorphic</a>
+                
+                <a href="../tags/filters.html">#filters</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>As the title says, I needed a way to filter my polymorphic models using
+my already defined <code>rest_framework.FilterSet</code>, and as I didn&#39;t find
+much resources about it I&#39;m sharing my experience here.</p>
+<p>First, let&#39;s talk about <code>django-polymorphic</code> and <code>django-filters</code>, what
+are these libraries for.</p>
+<h2 id="django-polymorphic">Django-polymorphic<a class="heading-anchor" href="#django-polymorphic">¶</a></h2>
+<sup class="footnote-ref" id="fn-ref-1"><a href="#fn-1">1</a></sup><blockquote>
+<p>Simplifies using inherited models in Django projects. When a query is made at the base
+model, the inherited model classes are returned.</p>
+</blockquote>
+<p>One of the most important things to understand of polymorphic is, that
+when you ask for the queryset of the parent, every element is
+represented with its children classes. Let&#39;s see this.</p>
+<p>I&#39;ll use the models examples provided by the
+<a href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
+<pre><code class="language-python"><span class="hl-keyword-control">from <span class="hl-namespace">polymorphic<span class="hl-punctuation-delimiter">.<span class="hl-variable">models <span class="hl-keyword-control-import">import <span class="hl-type">PolymorphicModel
+
+<span class="hl-keyword">class <span class="hl-type">Project<span class="hl-punctuation-bracket">(<span class="hl-type">PolymorphicModel<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+    <span class="hl-variable">topic <span class="hl-operator">= <span class="hl-variable">models<span class="hl-punctuation-delimiter">.<span class="hl-constructor">CharField<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">max_length<span class="hl-operator">=<span class="hl-constant-numeric-integer">30<span class="hl-punctuation-bracket">)
+    <span class="hl-variable">start_date <span class="hl-operator">= <span class="hl-variable">models<span class="hl-punctuation-delimiter">.<span class="hl-constructor">DateField<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">null<span class="hl-operator">=<span class="hl-constant-builtin-boolean">True<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">blank<span class="hl-operator">=<span class="hl-constant-builtin-boolean">True<span class="hl-punctuation-bracket">)
+    <span class="hl-variable">finish_date <span class="hl-operator">= <span class="hl-variable">models<span class="hl-punctuation-delimiter">.<span class="hl-constructor">DateField<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">null<span class="hl-operator">=<span class="hl-constant-builtin-boolean">True<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">blank<span class="hl-operator">=<span class="hl-constant-builtin-boolean">True<span class="hl-punctuation-bracket">)
+
+<span class="hl-keyword">class <span class="hl-type">ArtProject<span class="hl-punctuation-bracket">(<span class="hl-type">Project<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+    <span class="hl-variable">artist <span class="hl-operator">= <span class="hl-variable">models<span class="hl-punctuation-delimiter">.<span class="hl-constructor">CharField<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">max_length<span class="hl-operator">=<span class="hl-constant-numeric-integer">30<span class="hl-punctuation-bracket">)
+
+<span class="hl-keyword">class <span class="hl-type">ResearchProject<span class="hl-punctuation-bracket">(<span class="hl-type">Project<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+    <span class="hl-variable">supervisor <span class="hl-operator">= <span class="hl-variable">models<span class="hl-punctuation-delimiter">.<span class="hl-constructor">CharField<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">max_length<span class="hl-operator">=<span class="hl-constant-numeric-integer">30<span class="hl-punctuation-bracket">)
+</code></pre>
+<pre><code class="language-python"><span class="hl-operator">&gt;<span class="hl-operator">&gt;&gt; <span class="hl-type">Project<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">objects<span class="hl-punctuation-delimiter">.<span class="hl-function-method">create<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">topic<span class="hl-operator">=<span class="hl-string">"Department Party"<span class="hl-punctuation-bracket">)
+<span class="hl-operator">&gt;<span class="hl-operator">&gt;&gt; <span class="hl-type">ArtProject<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">objects<span class="hl-punctuation-delimiter">.<span class="hl-function-method">create<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">topic<span class="hl-operator">=<span class="hl-string">"Painting with Tim"<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">artist<span class="hl-operator">=<span class="hl-string">"T. Turner"<span class="hl-punctuation-bracket">)
+<span class="hl-operator">&gt;<span class="hl-operator">&gt;&gt; <span class="hl-type">ResearchProject<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">objects<span class="hl-punctuation-delimiter">.<span class="hl-function-method">create<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">topic<span class="hl-operator">=<span class="hl-string">"Swallow Aerodynamics"<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">supervisor<span class="hl-operator">=<span class="hl-string">"Dr. Winter"<span class="hl-punctuation-bracket">)
+</code></pre>
+<pre><code class="language-python"><span class="hl-operator">&gt;<span class="hl-operator">&gt;&gt; <span class="hl-type">Project<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">objects<span class="hl-punctuation-delimiter">.<span class="hl-function-method">all<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+<span class="hl-punctuation-bracket">[ <span class="hl-operator">&lt;<span class="hl-type">Project<span class="hl-punctuation-delimiter">:         <span class="hl-variable">id <span class="hl-constant-numeric-integer">1<span class="hl-punctuation-delimiter">, <span class="hl-variable">topic <span class="hl-string">"Department Party"<span class="hl-operator">&gt;<span class="hl-punctuation-delimiter">,
+  <span class="hl-operator">&lt;<span class="hl-type">ArtProject<span class="hl-punctuation-delimiter">:      <span class="hl-variable">id <span class="hl-constant-numeric-integer">2<span class="hl-punctuation-delimiter">, <span class="hl-variable">topic <span class="hl-string">"Painting with Tim"<span class="hl-punctuation-delimiter">, <span class="hl-variable">artist <span class="hl-string">"T. Turner"<span class="hl-operator">&gt;<span class="hl-punctuation-delimiter">,
+  <span class="hl-operator">&lt;<span class="hl-type">ResearchProject<span class="hl-punctuation-delimiter">: <span class="hl-variable">id <span class="hl-constant-numeric-integer">3<span class="hl-punctuation-delimiter">, <span class="hl-variable">topic <span class="hl-string">"Swallow Aerodynamics"<span class="hl-punctuation-delimiter">, <span class="hl-variable">supervisor <span class="hl-string">"Dr. Winter"<span class="hl-operator">&gt; <span class="hl-punctuation-bracket">]
+</code></pre>
+<p>As you can see, this can be really helpful when using Django Rest
+Framework (DRF) and model inheritance. It allows to use just one model,
+in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the
+instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into
+account that your serializer will have to handle the representation of
+each of the models.</p>
+<h2 id="django-filter">Django-filter<a class="heading-anchor" href="#django-filter">¶</a></h2>
+<sup class="footnote-ref" id="fn-ref-2"><a href="#fn-2">2</a></sup><blockquote>
+<p>Is a generic, reusable application to alleviate writing some of the more mundane bits of view code. Specifically, it allows users to filter down a queryset based on a model’s fields.</p>
+</blockquote>
+<p>Fundamentally, when using django filters you&#39;ll want to create a class
+specifying the model&#39;s fields by which a queryset can be filtered.</p>
+<p>Let&#39;s modified a bit the example of the
+<a href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import <span class="hl-namespace">django_filters
+
+<span class="hl-keyword">class <span class="hl-type">ProjectFilter<span class="hl-punctuation-bracket">(<span class="hl-namespace">django_filters<span class="hl-punctuation-delimiter">.<span class="hl-type">FilterSet<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+    <span class="hl-variable">topic <span class="hl-operator">= <span class="hl-namespace">django_filters<span class="hl-punctuation-delimiter">.<span class="hl-constructor">CharFilter<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">lookup_expr<span class="hl-operator">=<span class="hl-string">'iexact'<span class="hl-punctuation-bracket">)
+
+    <span class="hl-keyword">class <span class="hl-type">Meta<span class="hl-punctuation-delimiter">:
+        <span class="hl-variable">model <span class="hl-operator">= <span class="hl-type">Project
+        <span class="hl-variable">fields <span class="hl-operator">= <span class="hl-punctuation-bracket">[<span class="hl-string">'start_date'<span class="hl-punctuation-delimiter">, <span class="hl-string">'finish_date'<span class="hl-punctuation-bracket">]
+</code></pre>
+<p>And the view should look something like:</p>
+<pre><code class="language-python"><span class="hl-keyword-function">def <span class="hl-function">project_list<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">request<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+    <span class="hl-variable">f <span class="hl-operator">= <span class="hl-constructor">ProjectFilter<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">request<span class="hl-punctuation-delimiter">.<span class="hl-constant">GET<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">queryset<span class="hl-operator">=<span class="hl-type">Project<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">objects<span class="hl-punctuation-delimiter">.<span class="hl-function-method">all<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">)
+    <span class="hl-keyword-control-return">return <span class="hl-function">render<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">request<span class="hl-punctuation-delimiter">, <span class="hl-string">'my_app/template.html'<span class="hl-punctuation-delimiter">, <span class="hl-punctuation-bracket">{<span class="hl-string">'filter'<span class="hl-punctuation-delimiter">: <span class="hl-variable">f<span class="hl-punctuation-bracket">}<span class="hl-punctuation-bracket">)
+</code></pre>
+<p>Obviously, this will help reduce the amount of code written, and will be
+way easier to maintain. The good thing about this library, and what
+matters to me the most, is that it has a great <a href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with
+DRF</a>
+by providing a DRF-specific FilterSet and a filter backend.</p>
+<h2 id="filtering-by-a-polymorphic-model">Filtering by a polymorphic model<a class="heading-anchor" href="#filtering-by-a-polymorphic-model">¶</a></h2>
+<p>As we stated at the beginning what I wanted to do is filter by a
+<strong>polymorphic model</strong>, because we have different types of projects. This
+can be easily achieved by reading the docs, no seriously, by essentially
+using the <code>rest_framework.FilterSet</code> and using a customized filter with
+<a href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a>
+in our FilterSet.</p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import <span class="hl-namespace">django_filters
+
+
+<span class="hl-keyword-function">def <span class="hl-function">get_subclasses_as_choice<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">klass<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+    <span class="hl-variable">choices <span class="hl-operator">= <span class="hl-punctuation-bracket">{<span class="hl-variable">subclass<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">__name__<span class="hl-punctuation-delimiter">.<span class="hl-function-method">lower<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">: <span class="hl-variable">subclass
+               <span class="hl-keyword-control-repeat">for <span class="hl-variable">subclass <span class="hl-keyword-control-repeat">in <span class="hl-variable-parameter">klass<span class="hl-punctuation-delimiter">.<span class="hl-function-method">__subclasses__<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">}
+    <span class="hl-keyword-control-return">return <span class="hl-variable">choices
+
+
+<span class="hl-keyword">class <span class="hl-type">ProjectFilter<span class="hl-punctuation-bracket">(<span class="hl-namespace">django_filters<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">rest_framework<span class="hl-punctuation-delimiter">.<span class="hl-type">FilterSet<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+    <span class="hl-variable">project_type <span class="hl-operator">= <span class="hl-namespace">django_filters<span class="hl-punctuation-delimiter">.<span class="hl-constructor">MultipleChoiceFilter<span class="hl-punctuation-bracket">(
+        <span class="hl-variable-parameter">method<span class="hl-operator">=<span class="hl-string">'project_type_filter'<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">choices<span class="hl-operator">=<span class="hl-function">get_subclasses_as_choice<span class="hl-punctuation-bracket">(<span class="hl-type">Project<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">)
+
+    <span class="hl-keyword">class <span class="hl-type">Meta<span class="hl-punctuation-delimiter">:
+        <span class="hl-variable">model <span class="hl-operator">= <span class="hl-type">Project
+        <span class="hl-variable">fields <span class="hl-operator">= <span class="hl-punctuation-bracket">[<span class="hl-string">'topic'<span class="hl-punctuation-delimiter">, <span class="hl-string">'start_date'<span class="hl-punctuation-delimiter">, <span class="hl-string">'end_date'<span class="hl-punctuation-bracket">]
+
+    <span class="hl-keyword-function">def <span class="hl-function">project_type_filter<span class="hl-punctuation-bracket">(<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">queryset<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">name<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">value<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
+        <span class="hl-variable">project_choices <span class="hl-operator">= <span class="hl-function">get_subclasses_as_choice<span class="hl-punctuation-bracket">(<span class="hl-type">Project<span class="hl-punctuation-bracket">)
+        <span class="hl-variable">selected_projects <span class="hl-operator">= <span class="hl-punctuation-bracket">[<span class="hl-variable-parameter">value <span class="hl-keyword-control-repeat">for <span class="hl-variable">key<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">value <span class="hl-keyword-control-repeat">in <span class="hl-variable">project_choices<span class="hl-punctuation-delimiter">.<span class="hl-function-method">items<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+                             <span class="hl-keyword-control-conditional">if <span class="hl-variable">key <span class="hl-keyword-operator">in <span class="hl-variable-parameter">value<span class="hl-punctuation-bracket">]
+        <span class="hl-keyword-control-return">return <span class="hl-variable-parameter">queryset<span class="hl-punctuation-delimiter">.<span class="hl-function-method">instance_of<span class="hl-punctuation-bracket">(<span class="hl-operator">*<span class="hl-variable">selected_projects<span class="hl-punctuation-bracket">)
+</code></pre>
+<p>Now, if our querystring includes a key <code>project_type</code>, it will check if
+the values match any of the choices and it will return the queryset
+filtered by the specified choices. And that&#39;s it, we have successfully
+filtered polymorphic models. Now we just need to add <code>ProjectFilter</code> to
+the <code>filter_class</code> in the <code>viewsets.ModelViewSet</code>.</p>
+<p>Cheers!</p>
+<div class="footnote" id="fn-1"><span class="footnote-num">[1]</span> <p><a href="https://github.com/django-polymorphic/django-polymorphic">https://github.com/django-polymorphic/django-polymorphic</a></p>
+ <a href="#fn-ref-1" class="footnote-backref" title="Back to text">↩</a></div>
+<div class="footnote" id="fn-2"><span class="footnote-num">[2]</span> <p><a href="https://github.com/carltongibson/django-filter">https://github.com/carltongibson/django-filter</a></p>
+ <a href="#fn-ref-2" class="footnote-backref" title="Back to text">↩</a></div>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

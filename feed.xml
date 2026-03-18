@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Woile</title>
+  <link href="https://woile.dev" rel="alternate"/>
+  <link href="https://woile.dev/feed.xml" rel="self"/>
+  <id>https://woile.dev/</id>
+  <updated>2025-04-23T00:00:00Z</updated>
+  <author>
+    <name>Santiago Fraire Willemoes</name>
+  </author>
+  <entry>
+    <title>Adding signature to KDE Okular</title>
+    <link href="https://woile.dev/blog/adding-signature-to-kde-okular.html" rel="alternate"/>
+    <id>https://woile.dev/blog/adding-signature-to-kde-okular.html</id>
+    <updated>2025-04-23T00:00:00Z</updated>
+    <summary>A step-by-step guide to creating digital signatures and configuring Okular to sign PDF documents on Linux systems, particularly NixOS.</summary>
+  </entry>
+  <entry>
+    <title>Android apps with Slint on NixOS</title>
+    <link href="https://woile.dev/blog/android-apps-with-slint-on-nixos.html" rel="alternate"/>
+    <id>https://woile.dev/blog/android-apps-with-slint-on-nixos.html</id>
+    <updated>2025-04-13T00:00:00Z</updated>
+    <summary>A step-by-step guide to setting up an Android development environment on NixOS using Slint UI library and Rust. Learn how to configure Nix flakes, handle Android SDK integration, and run applications in an emulator with reproducible builds</summary>
+  </entry>
+  <entry>
+    <title>Secret management for the layman</title>
+    <link href="https://woile.dev/blog/secret-management-for-the-layman.html" rel="alternate"/>
+    <id>https://woile.dev/blog/secret-management-for-the-layman.html</id>
+    <updated>2024-11-13T00:00:00Z</updated>
+    <summary>How I manage secrets as a solo dev, using age and make, and a bit of nix</summary>
+  </entry>
+  <entry>
+    <title>Network programming in Rust</title>
+    <link href="https://woile.dev/blog/network-programming-in-rust.html" rel="alternate"/>
+    <id>https://woile.dev/blog/network-programming-in-rust.html</id>
+    <updated>2024-05-20T00:00:00Z</updated>
+    <summary>Rust and C comparisons for network programming</summary>
+  </entry>
+  <entry>
+    <title>Nix journey part 3: learning nix-lang</title>
+    <link href="https://woile.dev/blog/nix-journey-part-3-learning-nix-lang.html" rel="alternate"/>
+    <id>https://woile.dev/blog/nix-journey-part-3-learning-nix-lang.html</id>
+    <updated>2023-01-14T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Nix journey part 2: replacing apt and brew</title>
+    <link href="https://woile.dev/blog/nix-journey-part-2-replacing-apt-and-brew.html" rel="alternate"/>
+    <id>https://woile.dev/blog/nix-journey-part-2-replacing-apt-and-brew.html</id>
+    <updated>2023-01-08T00:00:00Z</updated>
+    <summary>Moving away from brew and apt, to welcome nix and all it&apos;s benefits</summary>
+  </entry>
+  <entry>
+    <title>Nix journey part 1: creating a flake</title>
+    <link href="https://woile.dev/blog/nix-journey-part-1-creating-a-flake.html" rel="alternate"/>
+    <id>https://woile.dev/blog/nix-journey-part-1-creating-a-flake.html</id>
+    <updated>2022-12-30T00:00:00Z</updated>
+    <summary>How to create a flake and use it from another shell</summary>
+  </entry>
+  <entry>
+    <title>A Rust web app with HTML templates</title>
+    <link href="https://woile.dev/blog/web-app-with-template-in-rust.html" rel="alternate"/>
+    <id>https://woile.dev/blog/web-app-with-template-in-rust.html</id>
+    <updated>2022-10-16T00:00:00Z</updated>
+    <summary>Writing a web application in rust using axum and minijinja. If you have used jinja2 in the past this will feel familiar. But we also dig into protocols and networking.</summary>
+  </entry>
+  <entry>
+    <title>Logging in python</title>
+    <link href="https://woile.dev/blog/logging-in-python.html" rel="alternate"/>
+    <id>https://woile.dev/blog/logging-in-python.html</id>
+    <updated>2022-05-11T00:00:00Z</updated>
+    <summary>Easy and simple logging setup for a new python project. Are you tired of searching how to do it and why it doesn&apos;t work? this is your place</summary>
+  </entry>
+  <entry>
+    <title>Digesting Make and Makefiles</title>
+    <link href="https://woile.dev/blog/makefile.html" rel="alternate"/>
+    <id>https://woile.dev/blog/makefile.html</id>
+    <updated>2022-02-17T00:00:00Z</updated>
+    <summary>Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it</summary>
+  </entry>
+  <entry>
+    <title>The Layout Team</title>
+    <link href="https://woile.dev/blog/the-layout-team.html" rel="alternate"/>
+    <id>https://woile.dev/blog/the-layout-team.html</id>
+    <updated>2021-11-08T00:00:00Z</updated>
+    <summary>The Layout Team maintains the layout, and checks that everyone operates inside the boundaries created by this team</summary>
+  </entry>
+  <entry>
+    <title>Domain driven design at Europython 2021</title>
+    <link href="https://woile.dev/blog/domain-driven-design-at-europython-2021.html" rel="alternate"/>
+    <id>https://woile.dev/blog/domain-driven-design-at-europython-2021.html</id>
+    <updated>2021-07-26T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Review 2020</title>
+    <link href="https://woile.dev/blog/review-2020.html" rel="alternate"/>
+    <id>https://woile.dev/blog/review-2020.html</id>
+    <updated>2020-12-31T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Flex and grid</title>
+    <link href="https://woile.dev/blog/flex-and-grid.html" rel="alternate"/>
+    <id>https://woile.dev/blog/flex-and-grid.html</id>
+    <updated>2020-11-24T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Intro to FIRE in the Netherlands</title>
+    <link href="https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html" rel="alternate"/>
+    <id>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html</id>
+    <updated>2020-08-03T00:00:00Z</updated>
+    <summary>How to invest in the Netherlands</summary>
+  </entry>
+  <entry>
+    <title>FIRE para Argentinos en los Países Bajos</title>
+    <link href="https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.es.html" rel="alternate"/>
+    <id>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.es.html</id>
+    <updated>2020-08-03T00:00:00Z</updated>
+    <summary>Como invertir siendo argentino en los Países Bajos</summary>
+  </entry>
+  <entry>
+    <title>Helm 3 - Crafting a Chart</title>
+    <link href="https://woile.dev/blog/helm-3-crafting-a-chart.html" rel="alternate"/>
+    <id>https://woile.dev/blog/helm-3-crafting-a-chart.html</id>
+    <updated>2020-07-15T00:00:00Z</updated>
+    <summary>What is a Helm Chart? Where does it fit in K8s? How to release a Chart? How to rollback? All your questions are answered here</summary>
+  </entry>
+  <entry>
+    <title>Automating semver releases with commitizen</title>
+    <link href="https://woile.dev/blog/automating-deployment-with-commitizen.html" rel="alternate"/>
+    <id>https://woile.dev/blog/automating-deployment-with-commitizen.html</id>
+    <updated>2020-07-15T00:00:00Z</updated>
+    <summary>How to make a deployment almost hassle free</summary>
+  </entry>
+  <entry>
+    <title>Pyenv</title>
+    <link href="https://woile.dev/blog/pyenv.html" rel="alternate"/>
+    <id>https://woile.dev/blog/pyenv.html</id>
+    <updated>2020-07-08T00:00:00Z</updated>
+    <summary>How to configure pyenv in your system</summary>
+  </entry>
+  <entry>
+    <title>Sublime guide</title>
+    <link href="https://woile.dev/blog/guide-to-sublime-like-a-normal-person.html" rel="alternate"/>
+    <id>https://woile.dev/blog/guide-to-sublime-like-a-normal-person.html</id>
+    <updated>2020-07-08T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>2019 yearly retrospective</title>
+    <link href="https://woile.dev/blog/2019-yearly-retrospective.html" rel="alternate"/>
+    <id>https://woile.dev/blog/2019-yearly-retrospective.html</id>
+    <updated>2019-12-31T00:00:00Z</updated>
+    <summary>My 2019 retrospective talking about life</summary>
+  </entry>
+  <entry>
+    <title>Multiple configurations in kubernetes</title>
+    <link href="https://woile.dev/blog/multiple-configurations-in-kubernetes.html" rel="alternate"/>
+    <id>https://woile.dev/blog/multiple-configurations-in-kubernetes.html</id>
+    <updated>2019-11-08T00:00:00Z</updated>
+    <summary>How to manage multiple configuration files</summary>
+  </entry>
+  <entry>
+    <title>PyCon France 2019 experience</title>
+    <link href="https://woile.dev/blog/pycon-france-2019-experience.html" rel="alternate"/>
+    <id>https://woile.dev/blog/pycon-france-2019-experience.html</id>
+    <updated>2019-11-05T00:00:00Z</updated>
+    <summary>My experience at the conference in 2019</summary>
+  </entry>
+  <entry>
+    <title>Rust for pythonistas</title>
+    <link href="https://woile.dev/blog/rust-for-pythonistas.html" rel="alternate"/>
+    <id>https://woile.dev/blog/rust-for-pythonistas.html</id>
+    <updated>2019-05-28T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Sharing passwords using gopass, git and gpg</title>
+    <link href="https://woile.dev/blog/sharing-team-secrets.html" rel="alternate"/>
+    <id>https://woile.dev/blog/sharing-team-secrets.html</id>
+    <updated>2019-03-18T00:00:00Z</updated>
+    <summary>Share secrets between team members, manage your personal password, multi device, gpg, happiness.</summary>
+  </entry>
+  <entry>
+    <title>Raspberry Pi hobby cluster</title>
+    <link href="https://woile.dev/blog/raspberries-hobby-cluster.html" rel="alternate"/>
+    <id>https://woile.dev/blog/raspberries-hobby-cluster.html</id>
+    <updated>2019-02-22T00:00:00Z</updated>
+    <summary>set up a kubernetes cluster with raspberry pi</summary>
+  </entry>
+  <entry>
+    <title>Moving from docker alpine to slim</title>
+    <link href="https://woile.dev/blog/moving-from-docker-alpine-to-slim.html" rel="alternate"/>
+    <id>https://woile.dev/blog/moving-from-docker-alpine-to-slim.html</id>
+    <updated>2019-01-13T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>Local HTTPS development in Python with Mkcert</title>
+    <link href="https://woile.dev/blog/local-https-development-in-python-with-mkcert.html" rel="alternate"/>
+    <id>https://woile.dev/blog/local-https-development-in-python-with-mkcert.html</id>
+    <updated>2019-01-10T00:00:00Z</updated>
+    <summary>setting https in our local development servers with python and mkcert</summary>
+  </entry>
+  <entry>
+    <title>Tutorial: writing my dreamt cli using decli</title>
+    <link href="https://woile.dev/blog/creating-a-small-git-like-cli-with-decli.html" rel="alternate"/>
+    <id>https://woile.dev/blog/creating-a-small-git-like-cli-with-decli.html</id>
+    <updated>2018-09-14T00:00:00Z</updated>
+    <summary>tutorial to write a command line interface with python decli</summary>
+  </entry>
+  <entry>
+    <title>How to test Selenium scrapper with Python</title>
+    <link href="https://woile.dev/blog/how-to-test-selenium-scrapper.html" rel="alternate"/>
+    <id>https://woile.dev/blog/how-to-test-selenium-scrapper.html</id>
+    <updated>2017-09-12T00:00:00Z</updated>
+    <summary></summary>
+  </entry>
+  <entry>
+    <title>How to filter Polymorphic Models with Django Filters</title>
+    <link href="https://woile.dev/blog/django-polymorphic-integration-with-django-filters.html" rel="alternate"/>
+    <id>https://woile.dev/blog/django-polymorphic-integration-with-django-filters.html</id>
+    <updated>2017-03-02T00:00:00Z</updated>
+    <summary>Integration of two python/django libraries</summary>
+  </entry>
+  <entry>
+    <title>Eurotrip 2016</title>
+    <link href="https://woile.dev/blog/eurotrip-2016.html" rel="alternate"/>
+    <id>https://woile.dev/blog/eurotrip-2016.html</id>
+    <updated>2017-01-08T00:00:00Z</updated>
+    <summary>traveling with friends</summary>
+  </entry>
+  <entry>
+    <title>Get Skype working on Debian Stretch x64 with GNOME3</title>
+    <link href="https://woile.dev/blog/get-skype-working-on-debian-stretch-x64-with-gnome3.html" rel="alternate"/>
+    <id>https://woile.dev/blog/get-skype-working-on-debian-stretch-x64-with-gnome3.html</id>
+    <updated>2016-09-19T00:00:00Z</updated>
+    <summary>Skype working in Debian Stretch</summary>
+  </entry>
+  <entry>
+    <title>Blog inauguration</title>
+    <link href="https://woile.dev/blog/blog-inauguration.html" rel="alternate"/>
+    <id>https://woile.dev/blog/blog-inauguration.html</id>
+    <updated>2016-05-18T00:00:00Z</updated>
+    <summary>initial post</summary>
+  </entry>
+
+</feed>

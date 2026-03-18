@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Digesting Make and Makefiles | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Digesting Make and Makefiles
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/make.html">#make</a>
+                
+                <a href="../tags/unix.html">#unix</a>
+                
+                <a href="../tags/gnu.html">#gnu</a>
+                
+                <a href="../tags/linux.html">#linux</a>
+                
+                <a href="../tags/documentation.html">#documentation</a>
+                
+                <a href="../tags/tutorial.html">#tutorial</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.
+I have recently done a big refactor for a project, where we make heavy use of Make, and decided to write this small piece about Make.</p>
+<p>Just create a <code>Makefile</code> at the root of your project, start adding commands, and done... right? Not really.</p>
+<p>Let&#39;s explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
+closing with some magic you can do with Makefiles.</p>
+<p>Set up a practice field by running in the terminal:</p>
+<pre><code class="language-sh"><span class="hl-function">mkdir <span class="hl-variable-parameter">/tmp/practice
+<span class="hl-function-builtin">cd <span class="hl-variable-parameter">/tmp/practice
+<span class="hl-function">touch <span class="hl-variable-parameter">index.html
+</code></pre>
+<p>And write a minimal <code>Makefile</code> with your favourite editor (E.g: <code>vim Makefile</code>)</p>
+<pre><code class="language-Makefile">build:
+	mkdir dist
+	cp index.html dist/index.html
+</code></pre>
+<p>Then execute in your terminal:</p>
+<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">build
+</code></pre>
+<p>This will create a folder <code>dist</code>, and copy <code>index.html</code> into the folder <code>dist</code>.</p>
+<p>This is good. Particularly for me, it documents the commands used by the project, and helps future me.</p>
+<p>Let&#39;s refactor a bit, to show some extra functionality:</p>
+<pre><code class="language-Makefile">dist:
+	mkdir dist
+
+build: dist
+	cp index.html dist/index.html
+</code></pre>
+<p>Notice the <code>build: dist</code>, it means: call <code>dist</code> command <em>before</em> running <code>build</code></p>
+<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">build
+</code></pre>
+<p>The functionality remains the same.</p>
+<h3 id="recap">Recap<a class="heading-anchor" href="#recap">¶</a></h3>
+<blockquote>
+<p>We created two commands: <code>build</code> and <code>dist</code>.</p>
+<p>And <code>dist</code> is executed by the <code>build</code> before running itself.</p>
+</blockquote>
+<p>This is ok, but it&#39;s not necessary a correct mental model.
+In the Makefile world, commands are not commands... but files.</p>
+<h2 id="new-mental-model">New mental model<a class="heading-anchor" href="#new-mental-model">¶</a></h2>
+<p>In a nutshell, make builds a <a href="https://en.wikipedia.org/wiki/Dependency_graph">dependency graph</a> of files and folders.</p>
+<ul>
+<li><code>build</code> and <code>dist</code> are actually <strong>target files</strong> (or folders).</li>
+<li>doing <code>build: dist</code> means that <code>build</code> depends on <code>dist</code> existing first.</li>
+</ul>
+<p>If we had a file called <code>build</code> , doing <code>make build</code>, wouldn&#39;t execute anything.</p>
+<pre><code>touch build
+make build
+$ make: `build' is up to date.
+</code></pre>
+<p>If we want to actually treat <code>build</code> as a command, we have to add <code>.PHONY</code>.</p>
+<pre><code class="language-Makefile">dist:
+	mkdir dist
+
+.PHONY: build
+build: dist
+	cp index.html dist/index.html
+</code></pre>
+<p>This way Make no longer sees <code>build</code> as a file, but instead as a recipe, and it will be
+executed everytime.</p>
+<h2 id="back-to-targets">Back to targets<a class="heading-anchor" href="#back-to-targets">¶</a></h2>
+<p>Remember what we said about targets and dependency graph? No? Me neither.
+Don&#39;t worry, I actually didn&#39;t say anything.</p>
+<p>If you treat your targets as <strong>files</strong>, Make can keep track of the files that have
+changed, and update only those.</p>
+<p>By knowing this our previous example could be refactored into:</p>
+<pre><code class="language-Makefile">dist:
+	mkdir dist
+
+dist/index.html: dist
+	cp index.html dist/index.html
+</code></pre>
+<p>And now we tell Make to create our target file:</p>
+<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">dist/index.html
+</code></pre>
+<p>If we run multiple times, we get:</p>
+<pre><code>make: `dist/index.html' is up to date.
+</code></pre>
+<p>We would expect that by modifying <code>index.html</code>, and running <code>make dist/index.html</code>, it would be rebuilt,
+but we are getting the same message.</p>
+<h2 id="dependencies">Dependencies<a class="heading-anchor" href="#dependencies">¶</a></h2>
+<p>We need to tell Make that it depends on another file: <code>index.html</code></p>
+<pre><code class="language-Makefile">dist:
+	mkdir dist
+
+dist/index.html: dist index.html
+	cp index.html dist/index.html
+</code></pre>
+<p>This time, if <code>index.html</code> is modified, <code>make dist/index.html</code> will run again.
+Thus, when dependencies are updated, <strong>target files</strong> are recreated.</p>
+<p><img src="/images/makefile/make-targets-deps.png" alt="Makefile targets and dependencies" /></p>
+<h2 id="patterns">Patterns<a class="heading-anchor" href="#patterns">¶</a></h2>
+<p>Now let&#39;s say we have many html files</p>
+<pre><code class="language-sh"><span class="hl-function">touch <span class="hl-variable-parameter">about.html <span class="hl-variable-parameter">privacy.html <span class="hl-variable-parameter">docs.html
+</code></pre>
+<p>And we want to do the same for all the files, without creating many commands in Make.
+For this case we use a pattern (<code>%</code>), and some Make variables:</p>
+<ul>
+<li><code>$@</code>: the target file</li>
+<li><code>$&lt;</code>: the input file</li>
+</ul>
+<pre><code class="language-Makefile">dist:
+	mkdir dist
+
+dist/%.html: %.html dist
+	cp $&lt; $@
+</code></pre>
+<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">dist/about.html
+</code></pre>
+<p>And we would be explicitly telling Make which file to create.</p>
+<p>But what if we want to copy all the files at the same time?</p>
+<p>Our current implementation, doesn&#39;t know about the available files.
+And we are providing the <code>about</code> to the <code>make dist/about.html</code>.</p>
+<p>We have to find a way to &quot;know&quot; all the possible targets.</p>
+<h2 id="variables">Variables<a class="heading-anchor" href="#variables">¶</a></h2>
+<p>We are gonna find the source files (<code>*.html</code> files which are not in the <code>dist</code> folder), store in a variable,
+and then use that information to create the target html files.</p>
+<pre><code class="language-Makefile">SRC_HTMLS := $(shell find . -name '*.html' -depth 1)
+
+TARGET_HTMLS := $(SRC_HTMLS:./%.html=dist/%.html)
+
+.PHONY: build
+build: $(TARGET_HTMLS)
+	$(info Done)
+
+dist:
+	mkdir dist
+
+dist/%.html: %.html dist
+	cp $&lt; $@
+</code></pre>
+<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">build
+</code></pre>
+<p>What happens is:</p>
+<ul>
+<li><code>build</code> has all the <code>TARGET_HTMLS</code> files as dependency</li>
+<li>Make also sees <code>dist/%.html</code> and the pattern will fit the criteria for each <code>TARGET_HTMLS</code></li>
+<li>In <code>dist/%.html</code> we have as dependency  the <code>%.html</code>, so Make takes the pattern and checks if a <code>%.html</code> file exist</li>
+<li>If the conditions are met, it runs the <code>cp</code> command for each file, unless they are already present and not updated</li>
+</ul>
+<p>You can think of</p>
+<pre><code class="language-Makefile">build: $(TARGET_HTMLS)
+</code></pre>
+<p>As</p>
+<pre><code class="language-Makefile">build: dist/index.html dist/about.html dist/docs.html dist/privacy.html
+</code></pre>
+<p>Variables can be reference using <code>$()</code> or <code>${}</code>.</p>
+<p>We also use <code>$(info Done)</code> to send information messages to the user.
+Make also provides <code>$(warning text…)</code> for warnings, and
+<code>$(error text...)</code> to exit earlier with an error code different than 0.
+See <a href="https://www.gnu.org/software/make/manual/html_node/Make-Control-Functions.html">Make-Control-Functions</a></p>
+<h2 id="one-more-time">One more time<a class="heading-anchor" href="#one-more-time">¶</a></h2>
+<p>Let&#39;s start over by removing the <code>dist</code> folder, and see what happens</p>
+<pre><code class="language-sh"><span class="hl-function">rm <span class="hl-variable-parameter">-rf <span class="hl-variable-parameter">dist
+</code></pre>
+<pre><code>❯ make build
+mkdir dist
+cp index.html dist/index.html
+cp about.html dist/about.html
+cp docs.html dist/docs.html
+cp privacy.html dist/privacy.html
+Done
+
+❯ make build
+Done
+make: Nothing to be done for `build'.
+</code></pre>
+<p>As you can see, files that have not changed, won&#39;t be rebuilt by Make.</p>
+<p>Now, try using <code>touch</code> on the different <code>html</code> files and running <code>make build</code> to see what happens.</p>
+<h2 id="more-functionality">More functionality<a class="heading-anchor" href="#more-functionality">¶</a></h2>
+<p>Make is a powerful tool, and provides much more functionality, so far with the web stack
+I haven&#39;t had the need for more complexity.</p>
+<p>I usually wrap docker commands, and make use of different variables, but if the need arises,
+make has extra functionality, life:</p>
+<ul>
+<li>functions</li>
+<li>if/conditions</li>
+<li>change the shell in which the commands are executed</li>
+<li><code>.delete_on_error</code></li>
+</ul>
+<h2 id="notes">Notes<a class="heading-anchor" href="#notes">¶</a></h2>
+<p>Make is usually a good way to keep track of a project&#39;s commands, as it&#39;s available in Unix systems,
+and you can be up and running fast.
+But by no means is perfect, it can sometimes be hard to read, or use.
+It&#39;s not available on Windows. And because it was designed for the C,C++ era, it plays well with files,
+but it doesn&#39;t mean it fits perfectly the web development paradigm, where you don&#39;t &quot;transform&quot; files much
+and where <code>docker</code> is used a lot.</p>
+<p>So depending on your situation, there are some popular alternatives:</p>
+<ul>
+<li><a href="https://github.com/casey/just">just</a>: modern approach to make written in rust</li>
+<li><a href="https://earthly.dev/">earthly.dev</a>: repeatable builds based on docker</li>
+<li><a href="https://bazel.build/">bazel</a>: build tool from Google</li>
+<li><a href="https://github.com/github/scripts-to-rule-them-all">scripts-to-rule-them-all</a>: just use scripts, like <a href="https://github.com/encode/starlette/tree/master/scripts">starlette</a></li>
+</ul>
+<h2 id="resources">Resources<a class="heading-anchor" href="#resources">¶</a></h2>
+<ul>
+<li><a href="https://www.gnu.org/software/make/manual/html_node/">GNU Make Manual</a></li>
+<li><a href="https://makefiletutorial.com/">Makefiletutorial</a></li>
+</ul>
+<blockquote>
+<p>Thanks for reading! 👋</p>
+<p>If you are interested in what I write, follow me on <a href="https://twitter.com/santiwilly">twitter</a></p>
+</blockquote>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

@@ -1,4 +1,0 @@
-Sitemap: https://woile.dev/sitemapindex.xml
-
-User-Agent: *
-Host: woile.dev

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Network programming in Rust | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Network programming in Rust
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/rust.html">#rust</a>
+                
+                <a href="../tags/C.html">#C</a>
+                
+                <a href="../tags/networking.html">#networking</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>I recently finished <a href="https://beej.us/guide/bgnet/">Beej&#39;s Guide to Network Programming</a> and it was a very pleasant read.</p>
+<p>Somehow the author manages to make writing sockets fun. While reading I decided to re-write the examples in <code>Rust</code>, to get some hands-on experience, which helps me absorb the content better.</p>
+<p>You can find the code on github: <a href="https://github.com/woile/beej-rs">beej-rs</a></p>
+<p>I remember studying <code>C</code> at university and always being worried about my code failing. Which it did, constantly. Not only because of the endless memory leaks or segfaults, but also because of the lack of tests.</p>
+<p>Being a student, I had no idea where to start, and I have to say, I still don&#39;t know how to write tests in <code>C</code>. So I just executed the program multiple times, until it worked, for one or two scenarios.</p>
+<p>The last couple of years, I&#39;ve been writing <code>Rust</code>, and I developed a new love for low level programming. The contrast with <code>C</code> is amazing.</p>
+<p>After installing the language, you get enough tools to survive:</p>
+<ul>
+<li><code>cargo</code>: for package management, tests, etc</li>
+<li><code>rust-analyzer</code>: the LSP ready to integrate with whichever IDE you are using</li>
+<li><code>rust-docs</code>: ready to build all your code&#39;s documentation</li>
+<li><code>rustfmt</code>: to keep your code style consistent</li>
+</ul>
+<p>Now, in regards of the languages, let&#39;s make a short comparison of error handling in a scary <code>C</code> snippet with its <code>Rust</code> counterpart.</p>
+<p>All the system calls you make, they <em>may</em> return an error, and how do you know in <code>C</code>?</p>
+<p>Well... the integer returned by a function will have different meanings:</p>
+<p>For the <a href="https://linux.die.net/man/2/sendto">sendto</a> syscall:</p>
+<ul>
+<li><code>&gt;=0</code>: number of bytes sent</li>
+<li><code>-1</code>: go and look the error code, that <code>C</code> set in the global <code>errno</code> variable, which is write only to the system calls</li>
+<li><code>&lt;-1</code>: No idea, is it possible?</li>
+</ul>
+<pre><code class="language-c"><span class="hl-variable">numbytes <span class="hl-operator">= <span class="hl-function">sendto<span class="hl-punctuation-bracket">(<span class="hl-variable">sockfd<span class="hl-punctuation-delimiter">, <span class="hl-variable">argv<span class="hl-punctuation-bracket">[<span class="hl-constant-numeric">2<span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">, <span class="hl-function">strlen<span class="hl-punctuation-bracket">(<span class="hl-variable">argv<span class="hl-punctuation-bracket">[<span class="hl-constant-numeric">2<span class="hl-punctuation-bracket">]<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">, <span class="hl-constant-numeric">0<span class="hl-punctuation-delimiter">, <span class="hl-punctuation-bracket">(<span class="hl-keyword-storage-type">struct <span class="hl-type">sockaddr <span class="hl-type-builtin">*<span class="hl-punctuation-bracket">)<span class="hl-operator">&amp;<span class="hl-variable">their_addr<span class="hl-punctuation-delimiter">, <span class="hl-keyword">sizeof <span class="hl-variable">their_addr<span class="hl-punctuation-bracket">)
+
+<span class="hl-keyword-control-conditional">if <span class="hl-punctuation-bracket">(<span class="hl-variable">numbytes <span class="hl-operator">== <span class="hl-constant-numeric">-1<span class="hl-punctuation-bracket">) <span class="hl-punctuation-bracket">{
+	<span class="hl-function">perror<span class="hl-punctuation-bracket">(<span class="hl-string">"sendto"<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
+	<span class="hl-function">exit<span class="hl-punctuation-bracket">(<span class="hl-constant-numeric">1<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
+<span class="hl-punctuation-bracket">}
+</code></pre>
+<p>On this sample, you need to know that <code>perror</code>, automatically reads the global error <code>errno</code> and then it prints the message.</p>
+<p>And you <strong>must NOT forget</strong> to handle it, what happens otherwise? you continue the execution, probably causing catastrophic errors to planet Earth.</p>
+<p>Let&#39;s take a look at rust:</p>
+<pre><code class="language-rust"><span class="hl-keyword-storage">let <span class="hl-variable">numbytes <span class="hl-operator">= <span class="hl-namespace">nix<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">::<span class="hl-namespace">socket<span class="hl-punctuation-delimiter">::<span class="hl-function">sendto<span class="hl-punctuation-bracket">(
+    <span class="hl-variable">sockfd<span class="hl-punctuation-delimiter">.<span class="hl-function">as_raw_fd<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+    <span class="hl-variable">message<span class="hl-punctuation-delimiter">.<span class="hl-function">as_bytes<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+    <span class="hl-operator">&amp;<span class="hl-variable">socket<span class="hl-punctuation-delimiter">,
+    <span class="hl-namespace">nix<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">::<span class="hl-namespace">socket<span class="hl-punctuation-delimiter">::<span class="hl-type">MsgFlags<span class="hl-punctuation-delimiter">::<span class="hl-function">empty<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">.<span class="hl-function">expect<span class="hl-punctuation-bracket">(<span class="hl-string">"Testing sendto"<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
+</code></pre>
+<p>In this case, we use <code>Rust</code>&#39;s <code>expect</code>, which will automatically fail the program if there&#39;s an error. And if all goes well, you get the <code>numbytes</code> sent.</p>
+<p>Now, little details: <code>numbytes</code> is also an unsigned <code>usize</code>, which makes sense, because sending negative bytes would be strange.</p>
+<p>And what would happen if we forget to use <code>expect</code>?</p>
+<p>We would get a <code>Result&lt;usize, Errno&gt;</code>, meaning that, in order to use the number of bytes sent (<code>usize</code>), we must first do something to unpack it from the <code>Result</code>, forcing us to handle the error.</p>
+<p>But what if we don&#39;t care about the output of the function, and we don&#39;t even assign it to a variable, like this:</p>
+<pre><code class="language-rust"><span class="hl-namespace">nix<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">::<span class="hl-namespace">socket<span class="hl-punctuation-delimiter">::<span class="hl-function">sendto<span class="hl-punctuation-bracket">(
+    <span class="hl-variable">sockfd<span class="hl-punctuation-delimiter">.<span class="hl-function">as_raw_fd<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+    <span class="hl-variable">message<span class="hl-punctuation-delimiter">.<span class="hl-function">as_bytes<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+    <span class="hl-operator">&amp;<span class="hl-variable">socket<span class="hl-punctuation-delimiter">,
+    <span class="hl-namespace">nix<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">::<span class="hl-namespace">socket<span class="hl-punctuation-delimiter">::<span class="hl-type">MsgFlags<span class="hl-punctuation-delimiter">::<span class="hl-function">empty<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+<span class="hl-punctuation-bracket">)
+</code></pre>
+<p>Then, you get a compiler warning:</p>
+<pre><code class="language-rust"><span class="hl-variable">warning<span class="hl-punctuation-delimiter">: <span class="hl-variable">unused `<span class="hl-type">Result` <span class="hl-variable">that <span class="hl-variable">must <span class="hl-variable">be <span class="hl-variable">used
+  <span class="hl-operator">-<span class="hl-operator">-<span class="hl-operator">&gt; <span class="hl-variable">src<span class="hl-operator">/<span class="hl-variable">examples<span class="hl-operator">/<span class="hl-variable">talker<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">rs<span class="hl-punctuation-delimiter">:<span class="hl-constant-numeric-integer">52<span class="hl-punctuation-delimiter">:<span class="hl-constant-numeric-integer">13
+   <span class="hl-operator">|
+<span class="hl-constant-numeric-integer">52 <span class="hl-operator">| <span class="hl-operator">/             <span class="hl-namespace">nix<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">::<span class="hl-namespace">socket<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sendto<span class="hl-punctuation-bracket">(
+<span class="hl-constant-numeric-integer">53 <span class="hl-operator">| <span class="hl-punctuation-bracket">|                 <span class="hl-variable">sockfd<span class="hl-punctuation-delimiter">.<span class="hl-constructor">as_raw_fd<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+<span class="hl-constant-numeric-integer">54 <span class="hl-punctuation-bracket">| <span class="hl-punctuation-bracket">|                 <span class="hl-variable">message<span class="hl-punctuation-delimiter">.<span class="hl-constructor">as_bytes<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+<span class="hl-constant-numeric-integer">55 <span class="hl-punctuation-bracket">| <span class="hl-punctuation-bracket">|                 <span class="hl-operator">&amp;<span class="hl-variable">socket<span class="hl-punctuation-delimiter">,
+<span class="hl-constant-numeric-integer">56 <span class="hl-punctuation-bracket">| <span class="hl-punctuation-bracket">|                 <span class="hl-namespace">nix<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">::<span class="hl-namespace">socket<span class="hl-punctuation-delimiter">::<span class="hl-type">MsgFlags<span class="hl-punctuation-delimiter">::<span class="hl-constructor">empty<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+<span class="hl-constant-numeric-integer">57 <span class="hl-punctuation-bracket">| <span class="hl-punctuation-bracket">|             <span class="hl-punctuation-bracket">)
+   <span class="hl-punctuation-bracket">| <span class="hl-punctuation-bracket">|<span class="hl-variable-parameter">_____________<span class="hl-operator">^
+   <span class="hl-punctuation-bracket">|
+   <span class="hl-operator">= <span class="hl-variable">note<span class="hl-punctuation-delimiter">: <span class="hl-variable">this `<span class="hl-type">Result` <span class="hl-variable">may <span class="hl-variable">be <span class="hl-variable">an `<span class="hl-type-enum-variant-builtin">Err` <span class="hl-variable">variant<span class="hl-punctuation-delimiter">, <span class="hl-variable">which <span class="hl-variable">should <span class="hl-variable">be <span class="hl-variable">handled
+   <span class="hl-operator">= <span class="hl-variable">note<span class="hl-punctuation-delimiter">: `<span class="hl-punctuation-bracket">#<span class="hl-punctuation-bracket">[<span class="hl-function-macro">warn<span class="hl-punctuation-bracket">(<span class="hl-function-macro">unused_must_use<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">]` <span class="hl-variable">on <span class="hl-variable">by <span class="hl-variable">default
+<span class="hl-variable">help<span class="hl-punctuation-delimiter">: <span class="hl-keyword-control-import">use `<span class="hl-keyword-storage">let _ <span class="hl-operator">= <span class="hl-operator">..<span class="hl-punctuation-delimiter">.` <span class="hl-variable">to <span class="hl-variable">ignore <span class="hl-variable">the <span class="hl-variable">resulting <span class="hl-variable-other-member">value
+   <span class="hl-operator">|
+<span class="hl-constant-numeric-integer">52 <span class="hl-operator">|             <span class="hl-variable">let <span class="hl-variable">_ <span class="hl-operator">= <span class="hl-namespace">nix<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">::<span class="hl-namespace">socket<span class="hl-punctuation-delimiter">::<span class="hl-namespace">sendto<span class="hl-punctuation-bracket">(
+   <span class="hl-operator">|             <span class="hl-operator">+<span class="hl-operator">+<span class="hl-operator">+<span class="hl-operator">+<span class="hl-operator">+<span class="hl-operator">+<span class="hl-operator">+
+</code></pre>
+<p>Which even tells you what to do if you <strong>really really</strong> wanna ignore the <code>Result</code>. But it also warns you into handling it.</p>
+<p>Now, this is not to trash on <code>C</code>, which is a language that helped us build modern society. I want to highlight how good <code>Rust</code> is, which is a modern language, only possible because of all we&#39;ve learned over the years. &quot;we&quot; as the human collective.</p>
+<p>Going back to the book, here are my highlights:</p>
+<ul>
+<li><strong>IPv6 does not support broadcast like on IPv4</strong>. You have to use <strong>multicast</strong>. I&#39;ve heard about multicast, but it seemed a ethereal concept. Now I know that it&#39;s kind of like broadcast, but instead of sending to everyone, forcing every machine to decode the payload, and checking if it&#39;s for them by sending it to a port, instead, you just send it to &quot;groups&quot; of machines. And you could achieve essentially a broadcast using multicast.</li>
+<li><strong>Network Byte Order</strong>: when you send data over the wire, always use <code>Big-Endian</code>, ignoring the host machine&#39;s byte order</li>
+<li>Prefer <a href="https://docs.rs/nix/0.28.0/nix/index.html">nix</a> over <a href="https://docs.rs/libc/latest/libc/index.html">libc</a> in Rust, as the bindings are safer</li>
+<li>A file descriptor it&#39;s just an integer pointing to a file</li>
+<li>File descriptor <code>0</code> is stdin, <code>1</code> is <code>stdout</code> and <code>2</code> is <code>stderr</code></li>
+<li>A socket is a file descriptor, while a file descriptor is not a socket. When we say socket, we refer to a FD used for network communication</li>
+</ul>
+<p>Cheers!</p>
+<p><a href="https://hachyderm.io/@woile">@woile</a></p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

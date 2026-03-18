@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Pyenv | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Pyenv
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/python.html">#python</a>
+                
+                <a href="../tags/python-versions.html">#python-versions</a>
+                
+                <a href="../tags/tutorial.html">#tutorial</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <h2 id="description">Description<a class="heading-anchor" href="#description">¶</a></h2>
+<p><a href="https://github.com/pyenv/pyenv">pyenv</a> is a shell script to manage python versions.
+Works in the user space, avoiding the system&#39;s python, therefore is less error prone.
+You can also control a per directory version (this creates a <code>.python-version</code>).
+Doesn&#39;t require python.</p>
+<h2 id="installation">Installation<a class="heading-anchor" href="#installation">¶</a></h2>
+<p>Use <a href="https://github.com/pyenv/pyenv-installer">pyenv-installer</a></p>
+<pre><code class="language-bash"><span class="hl-function">curl <span class="hl-variable-parameter">https://pyenv.run <span class="hl-operator">| <span class="hl-function">bash
+<span class="hl-function-builtin">exec <span class="hl-punctuation-special">$<span class="hl-variable-builtin">SHELL  <span class="hl-comment"># Restart shell or open new terminal
+</code></pre>
+<h2 id="usage">Usage<a class="heading-anchor" href="#usage">¶</a></h2>
+<h3 id="install-different-python-versions">Install different python versions<a class="heading-anchor" href="#install-different-python-versions">¶</a></h3>
+<pre><code class="language-bash"><span class="hl-function">pyenv <span class="hl-variable-parameter">install <span class="hl-variable-parameter">3.6.10
+<span class="hl-function">pyenv <span class="hl-variable-parameter">install <span class="hl-variable-parameter">3.7.6
+</code></pre>
+<h3 id="set-global-python">Set global python<a class="heading-anchor" href="#set-global-python">¶</a></h3>
+<pre><code class="language-bash"><span class="hl-function">pyenv <span class="hl-variable-parameter">global <span class="hl-variable-parameter">3.7.6
+</code></pre>
+<p>Observe</p>
+<pre><code class="language-bash"><span class="hl-function">python <span class="hl-variable-parameter">--version
+<span class="hl-function-builtin">type <span class="hl-variable-parameter">-a <span class="hl-variable-parameter">python
+</code></pre>
+<h3 id="set-local-python">Set local python<a class="heading-anchor" href="#set-local-python">¶</a></h3>
+<pre><code class="language-bash"><span class="hl-function-builtin">cd <span class="hl-variable-parameter">~/my-project
+<span class="hl-function">pyenv <span class="hl-variable-parameter">local <span class="hl-variable-parameter">3.6.10
+</code></pre>
+<p>Observe</p>
+<pre><code class="language-bash"><span class="hl-function">cat <span class="hl-variable-parameter">.python-version
+<span class="hl-function">python <span class="hl-variable-parameter">--version
+<span class="hl-function-builtin">type <span class="hl-variable-parameter">-a <span class="hl-variable-parameter">python
+</code></pre>
+<h3 id="other-languages">Other languages<a class="heading-anchor" href="#other-languages">¶</a></h3>
+<p>There&#39;s a set of similar tools for other languages, following the
+same convention here, so if you know <code>pyenv</code>, you know <code>nodenv</code> for example.</p>
+<ul>
+<li><strong>ruby:</strong> <a href="https://github.com/rbenv/rbenv">rbenv</a></li>
+<li><strong>javascript:</strong> <a href="https://github.com/nodenv/nodenv">nodenv</a></li>
+<li><strong>go:</strong> <a href="https://github.com/syndbg/goenv">goenv</a></li>
+<li><strong>php:</strong> <a href="https://github.com/phpenv/phpenv">phpenv</a></li>
+</ul>
+<h3 id="more-resources">More resources<a class="heading-anchor" href="#more-resources">¶</a></h3>
+<ul>
+<li><a href="https://realpython.com/intro-to-pyenv/">In depth tutorial by real python</a></li>
+<li><a href="https://github.com/pyenv/pyenv">Official docs</a></li>
+</ul>
+<blockquote>
+<p>Hey, hello 👋</p>
+<p>If you are interested in what I write, follow me on <a href="https://twitter.com/santiwilly">twitter</a></p>
+</blockquote>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

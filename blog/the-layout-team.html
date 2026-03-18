@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>The Layout Team | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            The Layout Team
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/architecture.html">#architecture</a>
+                
+                <a href="../tags/javascript.html">#javascript</a>
+                
+                <a href="../tags/html.html">#html</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>For the last couple of months I&#39;ve had this idea spinning in my head, which I&#39;m
+calling:</p>
+<p><strong>The Layout Team</strong></p>
+<p>Is a work in progress and I&#39;ll try to update it when new things come to my mind.
+The topic can be discussed forever, I will try to formalize the idea while keeping
+it short.</p>
+<p>I see how the frontend industry is led mostly by hype, and this time I&#39;m not fond of the
+direction we are going, specifically with <strong>micro-frontends</strong>.
+This pattern, spite of its benefits, I don&#39;t think it can be
+implemented properly by most teams, and it&#39;s not an idea we should keep suggesting.</p>
+<p>The Micro-frontends idea, in case you don&#39;t know, proposes to have a layer in your architecture,
+that finds the different chunks of code and sends them back to the user.
+Like having a loadbalancer, that fetches different chunks of the frontend, and streams
+them to the browser.</p>
+<p>Instead, I&#39;m going to propose an alternative, mostly in the middle.
+And as you probably guessed... it&#39;s &quot;<strong>The Layout Team</strong>&quot;.</p>
+<p>As far as I&#39;m concerned, the ultimate goal of a frontend is to deliver a good
+user experience, and this includes being fast.</p>
+<p>Micro-frontends, make this target hard to achieve.
+If you pull parts from all around it will take longer than pulling from a single
+place. Of course some teams can accomplish this (out of the question), and they may need it,
+but most of the time, is not required, but... what do we do then?</p>
+<p>The main issue to me, is that a frontend application, composed by many chunks belonging to different teams,
+has to be <strong>glued together</strong> at some point, or somewhere.
+Whether you use a micro-frontend architecture or a monorepo, the final
+user has to experience one cohesive app, this is <strong>different</strong> than developing api backends, there&#39;s no UI there,
+mostly machines talk with APIs. Your frontend talks with the API, but the human interacts with
+the frontend.</p>
+<p>Hence the introduction of <strong>&quot;The Layout Team&quot;</strong> (I&#39;m giving it a formal name)</p>
+<p>This team could have many different flavours.
+But ideally, it should be an independent team, holding ownership of the layout of the app.</p>
+<p>Yes, there&#39;s nothing fancy here, and the title is self-explanatory.</p>
+<p>The Layout Team maintains the layout, and checks that everyone operates inside the
+boundaries created by this team.</p>
+<p>Its <strong>responsibilities include</strong>:</p>
+<ul>
+<li>Monitor styles to prevent overlapping components or breaking issues</li>
+<li>Review Pull Requests</li>
+<li>Train other developers, whether through quarterly presentations or one-to-one coaching, but
+do it consistently over time. Not fire and forget.</li>
+<li>Maintain <em>some</em> shared state (logged user or is_authenticated or any other herbs), or libraries.
+But most of the times teams should be able to add and manage their own global state</li>
+<li>Write tools to assist other teams, like linting rules</li>
+<li>Identify CSS or JS code that may affect the whole app, and potentially code them
+into the linters. Example:<ul>
+<li>Do not use fixed/absolute because... (unless approved to do so)</li>
+<li>Do not use negative margins because we found that no one knows who to...</li>
+</ul>
+</li>
+<li>Write tests for the layout, and explain how to easily start writing tests</li>
+</ul>
+<p>One easy way to do this, is <strong>by having a monorepo</strong> (recommended). The layout for the different pages
+is defined by &quot;The Layout Team&quot;, and the rest of the teams write components,
+which can be later placed in the places designated by the layout team.</p>
+<pre><code>frontend-app/
+├── package.json
+├── apps/
+│   ├── docs/
+│   └── web/
+└── packages/
+    ├── ComponentFromTeamA/
+    ├── ComponentFromTeamB/
+    ├── ComponentFromTeamC/
+    └── ui/
+</code></pre>
+<p>By doing this, it becomes very easy to produce a small bundle. Because the dependencies
+are shared. It&#39;s then potentially easier, to identify shared code and cache it in a
+separate bundle across the application.</p>
+<p>One of the &quot;benefits&quot; of micro-frontend is supposed to be the freedom for teams to
+choose what framework to use, but you end up sending bigger assets to the end user.
+This goes against optimizing for the best user experience. So ideally, stick
+to a single framework, and deliver it once.</p>
+<p>If you are using React in your monorepo, it means everyone will stick to that
+version. If you have multiple repos, even if everyone uses the same framework,
+you may end up with different versions, or even the same and still delivering them
+as part of each apps bundle!</p>
+<p>Finally, <strong>The Layout Team</strong> leverages the use of <code>flex</code> and <code>grid</code> heavily.
+They shape the app over time. And create <em>slots</em> for each team.</p>
+<p>Let&#39;s see an example:</p>
+<pre><code class="language-html"><span class="hl-punctuation-bracket">&lt;<span class="hl-tag">div <span class="hl-attribute">class<span class="hl-punctuation-delimiter">=<span class="hl-string">"box grid grid-cols-2"<span class="hl-punctuation-bracket">&gt;
+  <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">div <span class="hl-attribute">maintainer<span class="hl-punctuation-delimiter">=<span class="hl-string">"teamA"<span class="hl-punctuation-bracket">&gt;
+    <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">ComponentFromTeamA<span class="hl-punctuation-bracket">/&gt;
+  <span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">div<span class="hl-punctuation-bracket">&gt;
+  <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">div<span class="hl-punctuation-bracket">&gt;
+    <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">div <span class="hl-attribute">maintainer<span class="hl-punctuation-delimiter">=<span class="hl-string">"teamB"<span class="hl-punctuation-bracket">&gt;
+      <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">ComponentFromTeamB<span class="hl-punctuation-bracket">/&gt;
+    <span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">div<span class="hl-punctuation-bracket">&gt;
+    <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">div <span class="hl-attribute">maintainer<span class="hl-punctuation-delimiter">=<span class="hl-string">"teamC"<span class="hl-punctuation-bracket">&gt;
+      <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">ComponentFromTeamC<span class="hl-punctuation-bracket">/&gt;
+    <span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">div<span class="hl-punctuation-bracket">&gt;
+  <span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">div<span class="hl-punctuation-bracket">&gt;
+<span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">div<span class="hl-punctuation-bracket">&gt;
+</code></pre>
+<style>
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid {
+    display: grid;
+  }
+  .box {
+    margin: 0.75rem;
+    width: 90%;
+    border-width: 4px;
+    border-style: solid;
+    --tw-border-opacity: 1;
+    border-color: rgba(107, 114, 128, var(--tw-border-opacity));
+    padding: 0.75rem;
+  }
+  .teamBox {
+    margin: 0.25rem;
+    border-width: 4px;
+    border-style: dashed;
+    padding: 0.5rem;
+  }
+  .border-indigo-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(99, 102, 241, var(--tw-border-opacity));
+  }
+  .border-red-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(239, 68, 68, var(--tw-border-opacity));
+  }
+  .border-green-500 {
+    --tw-border-opacity: 1;
+    border-color: rgba(16, 185, 129, var(--tw-border-opacity));
+  }
+</style>
+<div class="box grid grid-cols-2">
+  <div class="teamBox border-indigo-500" maintainer="teamA">TEAM A</div>
+  <div>
+    <div class="teamBox border-red-500" maintainer="teamB">TEAM B</div>
+    <div class="teamBox border-green-500" maintainer="teamC">TEAM C</div>
+  </div>
+</div>
+<p>- Hey! It&#39;s almost the same example as a micro-frontend!</p>
+<p>- Well... yes, what did you expect?</p>
+<p>Each team now has a space to place their components, and there&#39;s full visibility
+over who maintains what.</p>
+<p>It is very important, that the people, that are part of this team,
+understand <code>flex</code> and <code>grid</code> very well.</p>
+<p>Useful layout resources</p>
+<ul>
+<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">guide to flexbox</a></li>
+<li><a href="http://1linelayouts.glitch.me/">1linelayouts</a></li>
+</ul>
+<p>I would very much like your feedback.</p>
+<ul>
+<li>What has been your experience with micro-frontends?</li>
+<li>Do you think &quot;the layout team&quot; would work?</li>
+<li>What do you think of this proposal?</li>
+</ul>
+<p>Thanks for reading</p>
+<h2 id="update-2026">Update 2026<a class="heading-anchor" href="#update-2026">¶</a></h2>
+<p>Seems like there are already some good tools designed for monorepos architecture.</p>
+<p>See:</p>
+<ul>
+<li><a href="https://turborepo.org/">turborepo</a></li>
+<li><a href="https://nx.dev/">nx.dev</a></li>
+<li><a href="https://moonrepo.dev/">moon</a></li>
+</ul>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

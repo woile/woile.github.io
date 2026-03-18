@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Domain driven design at Europython 2021 | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Domain driven design at Europython 2021
+        </h1>
+        <div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>Today I participated of the training <a href="https://ep2021.europython.eu/talks/Bvzn5TH-transcend-the-realms-of-development-a-day-in-life-of-a-software-architect/">transcend the realms of development</a>
+at europython 2021, and I&#39;m quite happy with the result.
+Sometimes I&#39;m hesitant of workshops because I don&#39;t
+manage to extract value, but I really did from this one, and the hosts were great.
+I&#39;ve been questioning myself on how to make better representations of software,
+specially among multiple developers and stakeholders, how to share a common language?</p>
+<h2 id="conclusions">Conclusions<a class="heading-anchor" href="#conclusions">¶</a></h2>
+<p>Let&#39;s start by my final conclusions:</p>
+<p>My models on how to design software collaboratively are outdated; mostly UML and random diagrams, no clear design process.
+There are new techniques used nowadays, so I will asses them and try to integrate
+into my tool-belt.</p>
+<ul>
+<li>Asses <a href="https://www.eventstorming.com/">event storming</a>. I would like to be trained into this technique.</li>
+<li>Asses <a href="https://c4model.com/">C4 models</a> and <a href="https://github.com/plantuml-stdlib/C4-PlantUML">diagrams as code</a>.<ul>
+<li>For KPN, I already added diagrams as code and C4 support in <a href="https://kpn.github.io/mkdocs-kpn-theme/md-extensions/#plantuml-diagrams">mkdocs-kpn-theme</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="notes">Notes<a class="heading-anchor" href="#notes">¶</a></h2>
+<p>Next, you can find my notes, they may not be complete, I tried adding
+some images to make them more understandable.</p>
+<h2 id="domain-driven-design">Domain driven design<a class="heading-anchor" href="#domain-driven-design">¶</a></h2>
+<p>Normally architecture grows organically, but it can have unexpected consequences.</p>
+<p>Domain driven design helps with:</p>
+<ul>
+<li>Identify domains -&gt; core domains and secondary domains</li>
+<li>Quick feedback -&gt; same language between stakeholders and developers</li>
+<li>Loosely coupled domains</li>
+</ul>
+<h2 id="phases">Phases<a class="heading-anchor" href="#phases">¶</a></h2>
+<ol start="1">
+<li>Ritual dissent</li>
+<li><a href="https://www.eventstorming.com/">Event storming</a></li>
+<li>Defining domains</li>
+<li>Building future of our project using <a href="https://c4model.com/">C4 models</a></li>
+</ol>
+<h2 id="ritual-dissent">Ritual dissent<a class="heading-anchor" href="#ritual-dissent">¶</a></h2>
+<p>Small groups iterating over features, then one person from each group
+makes a pitch of 1 min to one of the other groups and gathers feedback.</p>
+<p>It goes like this:</p>
+<ul>
+<li>Teammate goes to other group and pitches</li>
+<li>Once done, the pitcher just listens to the feedback and takes notes, doesn&#39;t need
+to answer anything</li>
+<li>Goes back to the team and keeps refining</li>
+</ul>
+<blockquote>
+<p>The owner of a problem often has fixed ideas about both the problem and possible solutions. Ritual dissent, developed by Dave Snowden of Cognitive Edge, allows a group of people to discuss a problem whilst its ‘owner’ turns around and listens to the discussion without intervening.</p>
+</blockquote>
+<h2 id="event-storming">Event storming<a class="heading-anchor" href="#event-storming">¶</a></h2>
+<blockquote>
+<p>EventStorming is a flexible workshop format for collaborative exploration of complex business domains.</p>
+</blockquote>
+<p>I was quite pleased of the way it went with <a href="https://www.eventstorming.com/">event storming</a>,
+because it&#39;s simple, easy to pick up technique, while being quite expressive.</p>
+<p>At the end of the day, event storming should help find bounded contexts.</p>
+<p>Check <a href="https://github.com/ddd-crew/eventstorming-glossary-cheat-sheet">event storming glossary cheat sheet</a> for more documentation.</p>
+<h2 id="defining-domains">Defining domains<a class="heading-anchor" href="#defining-domains">¶</a></h2>
+<p>Once you are done with the event storm, you can start identifying your domains, take a look
+at the next digram.</p>
+<p><img src="/images/domain-driven-design-at-europython-2021/event-storming-context.png" alt="event storming context" /></p>
+<p>Taken from a <a href="https://miro.com/miroverse/event-storming/">miro board over event storming</a></p>
+<p>These are the usual steps to finding the domains:</p>
+<ol start="1">
+<li>Collect Domain Events - discover them</li>
+<li>Refine Domain Events - placing them in sequence</li>
+<li>Track causes - modelling out the broader ecosystem</li>
+<li>Re-sorting &amp; result - categorize the events and build Bounded Contexts</li>
+</ol>
+<h2 id="messages-between-systems">Messages between systems<a class="heading-anchor" href="#messages-between-systems">¶</a></h2>
+<p>We didn&#39;t get to this step.</p>
+<h2 id="building-the-future-of-a-project">Building the future of a project<a class="heading-anchor" href="#building-the-future-of-a-project">¶</a></h2>
+<p>We didn&#39;t get to this step, either, but it&#39;s about using C4 diagrams.
+There was also a recommendation to use diagrams as a code, like plantUML, which
+has support for C4 diagrams.</p>
+<p>In theory, C4 are zoom-in diagrams, with a very small surface of components to be learnt, different
+to other approaches like UML, which have a massive scope.</p>
+<p>C4 has 4 levels of abstraction:</p>
+<ol start="1">
+<li><strong>System Context diagram</strong>: allows you to step back and see the big picture
+<img src="https://c4model.com/img/bigbankplc-SystemContext.png" width="800" /></li>
+<li><strong>Container diagram</strong>: shows the high-level shape of the software architecture and how responsibilities are distributed across it. It also shows the major technology choices and how the containers communicate with one another.
+<img src="https://c4model.com/img/bigbankplc-Containers.png" width="800" /></li>
+<li><strong>Component diagram</strong>: decomposes each container further to identify the major structural building blocks and their interactions.
+shows how a container is made up of a number of &quot;components&quot;, what each of those components are, their responsibilities and the technology/implementation details.
+<img src="https://c4model.com/img/bigbankplc-Components.png" width="800" /></li>
+<li>Code: it is usually recommended to generate this automatically from the code, or do
+it only when really necessary.</li>
+</ol>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

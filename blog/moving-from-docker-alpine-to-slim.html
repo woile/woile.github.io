@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Moving from docker alpine to slim | Woile</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    About
+                </a>
+                <a
+                    href="../blog/"
+                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+            Moving from docker alpine to slim
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/linux python containers alpine slim debian.html">#linux python containers alpine slim debian</a>
+                
+                <a href="../tags/programming.html">#programming</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans"
+        id="content-rendered"
+    >
+        <p>I&#39;ve been running a docker python3.x image for a long time. I&#39;ve used
+the base version, the slim and the alpine.</p>
+<p>Initially I moved from the base python3.6 to the python3.6-slim and
+everything went great. The main win was that no change was required in
+the Dockerfile, it was smaller and more secure (less dependencies, more
+security, right?)</p>
+<p>After a while, I decided to move from slim to alpine, because of the
+size benefit. While doing the migration I found these drawbacks:</p>
+<p><strong>Renaming dependencies</strong>. I had to convert from <code>apt</code> to <code>apk</code> for
+every dependency.</p>
+<p><strong>Working with edge</strong>. There&#39;s always a problem with the edge
+repository. Sometimes it&#39;s down. Sometimes the packages are broken. You
+have to dig a lot in order to have a proper configuration. Like using
+<code>--no-cache</code> flag in apk. Or setting up the edge repo, then having to
+upgrade <code>apk-tools</code></p>
+<p>This kind of problems break our pipeline when there&#39;s no new commit.
+And I don&#39;t want this. That&#39;s why I&#39;ve decided to move back to
+<code>slim</code>.</p>
+<p>Don&#39;t get me wrong, alpine is great, small and secure, and if you
+don&#39;t have many edge dependencies, I guess it&#39;ll work flawlessly, and
+I would totally use it. But our image unfortunately has dependencies
+like postgis, and proj4, which fail a lot in alpine.</p>
+<p>But my story is not over with alpine, I&#39;ll try it again in the future.
+I know with time it will get better and better, and I&#39;ll understand it
+more and more.</p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            &copy; 2026 woile. Built with craft.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>
