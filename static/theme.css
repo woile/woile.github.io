@@ -1,0 +1,332 @@
+/* GitHub Dark Theme for Sukr
+ * Based on https://primer.style/primitives/colors
+ * Ported from Helix editor theme
+ */
+
+:root {
+    /* GitHub Dark Palette */
+    --hl-bg: #0d1117;
+    --hl-fg: #c9d1d9;
+    --hl-muted: #8b949e;
+    --hl-red: #ff7b72;
+    --hl-orange: #ffa657;
+    --hl-blue-light: #a5d6ff;
+    --hl-blue: #79c0ff;
+    --hl-purple: #d2a8ff;
+    --hl-green: #7ee787;
+}
+
+/* Keywords */
+.hl-keyword {
+    color: var(--hl-red);
+}
+
+.hl-keyword-control {
+    color: var(--hl-red);
+}
+
+.hl-keyword-control-conditional {
+    color: var(--hl-red);
+}
+
+.hl-keyword-control-repeat {
+    color: var(--hl-red);
+}
+
+.hl-keyword-control-import {
+    color: var(--hl-red);
+}
+
+.hl-keyword-control-return {
+    color: var(--hl-red);
+}
+
+.hl-keyword-control-exception {
+    color: var(--hl-red);
+}
+
+.hl-keyword-operator {
+    color: var(--hl-red);
+}
+
+.hl-keyword-directive {
+    color: var(--hl-red);
+}
+
+.hl-keyword-function {
+    color: var(--hl-red);
+}
+
+.hl-keyword-return {
+    color: var(--hl-red);
+}
+
+.hl-keyword-storage {
+    color: var(--hl-red);
+}
+
+.hl-keyword-storage-type {
+    color: var(--hl-blue);
+}
+
+.hl-keyword-storage-modifier {
+    color: var(--hl-red);
+}
+
+.hl-keyword-storage-modifier-mut {
+    color: var(--hl-red);
+}
+
+.hl-keyword-storage-modifier-ref {
+    color: var(--hl-red);
+}
+
+.hl-keyword-special {
+    color: var(--hl-red);
+}
+
+/* Functions */
+.hl-function {
+    color: var(--hl-purple);
+}
+
+.hl-function-builtin {
+    color: var(--hl-purple);
+}
+
+.hl-function-call {
+    color: var(--hl-purple);
+}
+
+.hl-function-macro {
+    color: var(--hl-purple);
+}
+
+.hl-function-method {
+    color: var(--hl-purple);
+}
+
+/* Types */
+.hl-type {
+    color: var(--hl-orange);
+}
+
+.hl-type-builtin {
+    color: var(--hl-blue);
+}
+
+.hl-type-parameter {
+    color: var(--hl-orange);
+}
+
+.hl-type-enum-variant {
+    color: var(--hl-fg);
+    font-style: italic;
+}
+
+.hl-type-enum-variant-builtin {
+    color: var(--hl-fg);
+    font-style: italic;
+}
+
+/* Constants */
+.hl-constant {
+    color: var(--hl-blue);
+}
+
+.hl-constant-builtin {
+    color: var(--hl-blue);
+}
+
+.hl-constant-builtin-boolean {
+    color: var(--hl-blue);
+}
+
+.hl-constant-character {
+    color: var(--hl-blue);
+}
+
+.hl-constant-character-escape {
+    color: var(--hl-blue);
+}
+
+.hl-constant-macro {
+    color: var(--hl-blue);
+}
+
+.hl-constant-numeric {
+    color: var(--hl-blue);
+}
+
+.hl-constant-numeric-integer {
+    color: var(--hl-blue);
+}
+
+.hl-constant-numeric-float {
+    color: var(--hl-blue);
+}
+
+/* Strings */
+.hl-string {
+    color: var(--hl-blue-light);
+}
+
+.hl-string-regexp {
+    color: var(--hl-blue-light);
+}
+
+.hl-string-special {
+    color: var(--hl-blue-light);
+}
+
+.hl-string-special-path {
+    color: var(--hl-blue-light);
+}
+
+.hl-string-special-symbol {
+    color: var(--hl-blue-light);
+}
+
+/* Variables */
+.hl-variable {
+    color: var(--hl-fg);
+}
+
+.hl-variable-builtin {
+    color: var(--hl-red);
+}
+
+.hl-variable-parameter {
+    color: var(--hl-orange);
+}
+
+.hl-variable-other {
+    color: var(--hl-fg);
+}
+
+.hl-variable-other-member {
+    color: var(--hl-blue-light);
+}
+
+/* Comments */
+.hl-comment {
+    color: var(--hl-muted);
+}
+
+.hl-comment-line {
+    color: var(--hl-muted);
+}
+
+.hl-comment-block {
+    color: var(--hl-muted);
+}
+
+.hl-comment-block-documentation {
+    color: var(--hl-muted);
+}
+
+.hl-comment-line-documentation {
+    color: var(--hl-muted);
+}
+
+.hl-comment-unused {
+    color: var(--hl-muted);
+    opacity: 0.6;
+}
+
+/* Punctuation */
+.hl-punctuation {
+    color: var(--hl-fg);
+}
+
+.hl-punctuation-bracket {
+    color: var(--hl-fg);
+}
+
+.hl-punctuation-delimiter {
+    color: var(--hl-fg);
+}
+
+.hl-punctuation-special {
+    color: var(--hl-blue-light);
+}
+
+/* Operators */
+.hl-operator {
+    color: var(--hl-blue-light);
+}
+
+/* Other */
+.hl-attribute {
+    color: var(--hl-fg);
+}
+
+.hl-label {
+    color: var(--hl-red);
+}
+
+.hl-namespace {
+    color: var(--hl-orange);
+}
+
+.hl-constructor {
+    color: var(--hl-purple);
+}
+
+.hl-special {
+    color: var(--hl-blue-light);
+}
+
+.hl-tag {
+    color: var(--hl-green);
+}
+
+.hl-tag-attribute {
+    color: var(--hl-purple);
+}
+
+.hl-tag-delimiter {
+    color: var(--hl-fg);
+}
+
+/* Markup */
+.hl-markup-bold {
+    font-weight: bold;
+}
+
+.hl-markup-italic {
+    font-style: italic;
+}
+
+.hl-markup-strikethrough {
+    text-decoration: line-through;
+}
+
+.hl-markup-heading {
+    color: var(--hl-blue);
+}
+
+.hl-markup-link-text {
+    color: var(--hl-blue-light);
+    text-decoration: underline;
+}
+
+.hl-markup-link-url {
+    text-decoration: underline;
+}
+
+.hl-markup-list {
+    color: var(--hl-red);
+}
+
+.hl-markup-quote {
+    font-style: italic;
+}
+
+.hl-markup-raw {
+    color: var(--hl-blue);
+}
+
+.hl-unknown {
+    color: var(--hl-fg);
+}
