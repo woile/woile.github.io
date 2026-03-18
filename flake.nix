@@ -23,6 +23,25 @@
           sukr = inputs'.sukr.packages.sukr;
         in
         {
+          packages = {
+            site = pkgs.stdenv.mkDerivation {
+              name = "site";
+              src = pkgs.nix-gitignore.gitignoreSource [ ] ./.;
+              #
+              nativeBuildInputs = with pkgs; [
+                sukr
+                just
+                tailwindcss_4
+              ];
+              buildPhase = ''
+                just build
+              '';
+              installPhase = ''
+                mkdir -p $out
+                cp -R public/* $out
+              '';
+            };
+          };
           # Default shell opened with `nix develop`
           devShells.default = pkgs.mkShell {
             name = "dev";
@@ -36,7 +55,6 @@
               tailwindcss-language-server
               gemini-cli
               watchexec
-              pandoc
             ];
 
             shellHook = ''
