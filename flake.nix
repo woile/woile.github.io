@@ -35,6 +35,8 @@
               tailwindcss_4
               tailwindcss-language-server
               gemini-cli
+              watchexec
+              pandoc
             ];
 
             shellHook = ''

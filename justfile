@@ -15,3 +15,7 @@ serve:
 # Watch styles
 twatch:
     tailwindcss -i ./input.css -o static/style.css --watch
+
+# Watch (except gitignore) and rebuild
+watch:
+    watchexec just build
