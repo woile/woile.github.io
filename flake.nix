@@ -59,6 +59,7 @@
 
             shellHook = ''
               echo "Welcome to the devshell!"
+              just --list
             '';
           };
         };
