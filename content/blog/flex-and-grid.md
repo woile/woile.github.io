@@ -1,7 +1,7 @@
 +++
 title = "Flex and grid"
 date = 2020-11-24
-aliases = ["/blog/flex-and-grid"]
+aliases = ["/posts/flex-and-grid"]
 +++
 
 This is a quick explanation to flex and grid.

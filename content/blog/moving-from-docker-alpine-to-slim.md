@@ -2,7 +2,7 @@
 title = "Moving from docker alpine to slim"
 date = 2019-01-13
 tags = ["linux python containers alpine slim debian", "programming"]
-aliases = ["/blog/moving-from-docker-alpine-to-slim"]
+aliases = ["/posts/moving-from-docker-alpine-to-slim"]
 +++
 
 I\'ve been running a docker python3.x image for a long time. I\'ve used

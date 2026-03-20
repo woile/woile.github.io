@@ -1,7 +1,7 @@
 +++
 title = "Domain driven design at Europython 2021"
 date = 2021-07-26
-aliases = ["/blog/domain-driven-design-at-europython-2021"]
+aliases = ["/posts/domain-driven-design-at-europython-2021"]
 +++
 
 Today I participated of the training [transcend the realms of development][training-ep2021]

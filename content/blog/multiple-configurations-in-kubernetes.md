@@ -3,7 +3,7 @@ title = "Multiple configurations in kubernetes"
 description = "How to manage multiple configuration files"
 date = 2019-11-08
 tags = ["kubernetes", "linux", "configuration", "kubectl"]
-aliases = ["/blog/multiple-configurations-in-kubernetes"]
+aliases = ["/posts/multiple-configurations-in-kubernetes"]
 +++
 
 It may happen to you, that you start working with 2 or more different clusters in

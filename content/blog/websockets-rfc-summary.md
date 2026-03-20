@@ -3,7 +3,7 @@ title = "Websockets RFC summary"
 description = "a"
 date = 2018-09-28
 tags = ["rfc summary websockets", "networking"]
-aliases = ["/blog/websockets-rfc-summary"]
+aliases = ["/posts/websockets-rfc-summary"]
 draft = true
 +++
 

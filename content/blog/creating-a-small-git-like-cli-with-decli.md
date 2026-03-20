@@ -3,7 +3,7 @@ title = "Tutorial: writing my dreamt cli using decli"
 description = "tutorial to write a command line interface with python decli"
 date = 2018-09-14
 tags = ["git python decli cli tutorial programming", "programming"]
-aliases = ["/blog/creating-a-small-git-like-cli-with-decli"]
+aliases = ["/posts/creating-a-small-git-like-cli-with-decli"]
 +++
 
 So for a long time I\'ve been using different cli tools, mostly

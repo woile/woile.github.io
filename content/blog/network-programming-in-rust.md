@@ -3,7 +3,7 @@ title = "Network programming in Rust"
 description = "Rust and C comparisons for network programming"
 date = 2024-05-20
 tags = ["rust", "C", "networking"]
-aliases = ["/blog/network-programming-in-rust"]
+aliases = ["/posts/network-programming-in-rust"]
 +++
 
 I recently finished [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) and it was a very pleasant read.

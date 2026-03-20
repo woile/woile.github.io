@@ -3,7 +3,7 @@ title = "A Rust web app with HTML templates"
 description = "Writing a web application in rust using axum and minijinja. If you have used jinja2 in the past this will feel familiar. But we also dig into protocols and networking."
 date = 2022-10-16
 tags = ["rust", "templates", "jinja", "networking"]
-aliases = ["/blog/web-app-with-template-in-rust"]
+aliases = ["/posts/web-app-with-template-in-rust"]
 +++
 
 The other day, I was helping my girlfriend with Go templates in a web server, and the internet is full of tutorials and explanations. And I thought, what about doing the same in Rust? How hard can it be?

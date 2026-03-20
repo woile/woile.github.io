@@ -3,7 +3,7 @@ title = "How to filter Polymorphic Models with Django Filters"
 description = "Integration of two python/django libraries"
 date = 2017-03-02
 tags = ["python", "django", "drf", "django-rest-framework", "api", "polymorphic", "filters"]
-aliases = ["/blog/django-polymorphic-integration-with-django-filters"]
+aliases = ["/posts/django-polymorphic-integration-with-django-filters"]
 +++
 
 As the title says, I needed a way to filter my polymorphic models using

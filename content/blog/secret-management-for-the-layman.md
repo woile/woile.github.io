@@ -3,7 +3,7 @@ title = "Secret management for the layman"
 description = "How I manage secrets as a solo dev, using age and make, and a bit of nix"
 date = 2024-11-13
 tags = ["age", "secret management", "security"]
-aliases = ["/blog/secret-management-for-the-layman"]
+aliases = ["/posts/secret-management-for-the-layman"]
 +++
 
 For a long time, I've been debating myself how to properly handle secrets in a convenient, cheap and reproducible fashion.

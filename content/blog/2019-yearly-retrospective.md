@@ -3,7 +3,7 @@ title = "2019 yearly retrospective"
 description = "My 2019 retrospective talking about life"
 date = 2019-12-31
 tags = ["self"]
-aliases = ["/blog/2019-yearly-retrospective"]
+aliases = ["/posts/2019-yearly-retrospective"]
 +++
 
 So far it's been great. I just wanted to write a recap for my future self.

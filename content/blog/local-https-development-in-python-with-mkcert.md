@@ -3,7 +3,7 @@ title = "Local HTTPS development in Python with Mkcert"
 description = "setting https in our local development servers with python and mkcert"
 date = 2019-01-10
 tags = ["web frameworks development security https", "python", "programming"]
-aliases = ["/blog/local-https-development-in-python-with-mkcert"]
+aliases = ["/posts/local-https-development-in-python-with-mkcert"]
 +++
 
 ## About mkcert

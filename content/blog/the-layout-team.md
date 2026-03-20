@@ -3,7 +3,7 @@ title = "The Layout Team"
 description = "The Layout Team maintains the layout, and checks that everyone operates inside the boundaries created by this team"
 date = 2021-11-08
 tags = ["architecture", "javascript", "html"]
-aliases = ["/blog/the-layout-team"]
+aliases = ["/posts/the-layout-team"]
 +++
 
 For the last couple of months I've had this idea spinning in my head, which I'm

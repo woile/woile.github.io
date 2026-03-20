@@ -3,7 +3,7 @@ title = "Eurotrip 2016"
 description = "traveling with friends"
 date = 2017-01-08
 tags = ["eurotrip", "europe", "trip", "friends", "gopro", "travel"]
-aliases = ["/blog/eurotrip-2016"]
+aliases = ["/posts/eurotrip-2016"]
 +++
 
 Hi guys, from may to november 2016, I\'ve been traveling around Europe

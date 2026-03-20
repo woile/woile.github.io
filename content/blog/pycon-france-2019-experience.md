@@ -3,7 +3,7 @@ title = "PyCon France 2019 experience"
 description = "My experience at the conference in 2019"
 date = 2019-11-05
 tags = ["python", "pycon", "conference"]
-aliases = ["/blog/pycon-france-2019-experience"]
+aliases = ["/posts/pycon-france-2019-experience"]
 +++
 
 ![mural in bordeaux city](/images/pycon-fr-2019/fox.jpg)

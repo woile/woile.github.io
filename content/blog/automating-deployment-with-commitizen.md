@@ -3,7 +3,7 @@ title = "Automating semver releases with commitizen"
 description = "How to make a deployment almost hassle free"
 date = 2020-07-15
 tags = ["python", "ci"]
-aliases = ["/blog/automating-semver-releases-with-commitizen"]
+aliases = ["/posts/automating-semver-releases-with-commitizen"]
 +++
 
 [SemVer][semver] is a great way to version an application.

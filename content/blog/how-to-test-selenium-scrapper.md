@@ -2,7 +2,7 @@
 title = "How to test Selenium scrapper with Python"
 date = 2017-09-12
 tags = ["selenium python testing", "python"]
-aliases = ["/blog/how-to-test-selenium-scrapper"]
+aliases = ["/posts/how-to-test-selenium-scrapper"]
 +++
 
 This week I\'ve been writing tests for [a

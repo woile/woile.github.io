@@ -3,7 +3,7 @@ title = "Raspberry Pi hobby cluster"
 description = "set up a kubernetes cluster with raspberry pi"
 date = 2019-02-22
 tags = ["kubernetes", "docker", "cluster", "raspberry", "containers"]
-aliases = ["/blog/raspberries-hobby-cluster"]
+aliases = ["/posts/raspberries-hobby-cluster"]
 +++
 
 In this tutorial we are gonna try to setup a cluster in our home server

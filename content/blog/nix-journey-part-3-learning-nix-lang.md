@@ -2,7 +2,7 @@
 title = "Nix journey part 3: learning nix-lang"
 date = 2023-01-14
 tags = ["nix", "flake", "nix-lang"]
-aliases = ["/blog/nix-journey-part-3-learning-nix-lang"]
+aliases = ["/posts/nix-journey-part-3-learning-nix-lang"]
 +++
 
 I started reading the [nix-language](https://nix.dev/tutorials/nix-language) tutorial that helps you understand the [nix-lang](https://nixos.org/manual/nix/stable/language/index.html).

@@ -3,7 +3,7 @@ title = "Logging in python"
 description = "Easy and simple logging setup for a new python project. Are you tired of searching how to do it and why it doesn't work? this is your place"
 date = 2022-05-11
 tags = ["python", "logging"]
-aliases = ["/blog/logging-in-python"]
+aliases = ["/posts/logging-in-python"]
 +++
 
 For future reference, this is my logging configuration for a new project.

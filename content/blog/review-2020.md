@@ -1,7 +1,7 @@
 +++
 title = "Review 2020"
 date = 2020-12-31
-aliases = ["/blog/review-2020"]
+aliases = ["/posts/review-2020"]
 +++
 
 The infamous pandemic year is gone. I don't know if it could've been better,

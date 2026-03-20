@@ -3,7 +3,7 @@ title = "Digesting Make and Makefiles"
 description = "Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it"
 date = 2022-02-17
 tags = ["make", "unix", "gnu", "linux", "documentation", "tutorial"]
-aliases = ["/blog/digesting-make-makefile"]
+aliases = ["/posts/digesting-make-makefile"]
 +++
 
 Make and its makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.

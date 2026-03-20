@@ -3,7 +3,7 @@ title = "Nix journey part 1: creating a flake"
 description = "How to create a flake and use it from another shell"
 date = 2022-12-30
 tags = ["rust", "nix", "flake", "package manager"]
-aliases = ["/blog/nix-journey-part-1-creating-a-flake"]
+aliases = ["/posts/nix-journey-part-1-creating-a-flake"]
 +++
 
 I've started building my own home media center, and I thought it would be a good idea to learn something new and try to make it reproducible, thus I thought of [nix](https://nixos.org/) for this. Nix is an operating system (which we won't care now), a language (also don't care for now), and a **package manager**.
