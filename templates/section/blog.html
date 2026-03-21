@@ -16,7 +16,17 @@
     class="max-w-3xl mx-auto py-10 flex flex-col gap-12 md:gap-20 px-6 md:px-1"
 >
     {% for item in items %}
-    <article class="flex flex-col gap-4 max-w-3xl">
+    <article
+        class="flex flex-col gap-4 max-w-3xl"
+        {%
+        if
+        item.frontmatter.lang
+        %}
+        lang="{{ item.frontmatter.lang }}"
+        {%
+        endif
+        %}
+    >
         <div
             class="flex items-center gap-4 text-accent font-mono text-[10px] md:text-xs tracking-[2px]"
         >

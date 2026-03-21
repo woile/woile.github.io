@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10">
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="{{ page.lang | default(value="en") }}">
     <a
         href="{{ prefix }}/blog/"
         class="text-accent font-mono text-xs tracking-[2px] hover:underline"
