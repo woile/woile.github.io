@@ -1,11 +1,10 @@
 # Update dependencies
 update:
     nix flake update
-    cargo update
 
 # Build styles and site
 build:
-    tailwindcss -i input.css -o static/style.css --minify
+    tailwindcss -i ./styles/input.css -o static/style.css --minify
     sukr
 
 # Serve site
@@ -14,7 +13,7 @@ serve:
 
 # Watch styles
 twatch:
-    tailwindcss -i ./input.css -o static/style.css --watch
+    tailwindcss -i ./styles/input.css -o static/style.css --watch
 
 # Watch (except gitignore) and rebuild
 watch:

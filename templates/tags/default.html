@@ -1,18 +1,18 @@
 {% extends "base.html" %} {% block content %}
-<section class="tag-listing">
-    <h1>Posts tagged &ldquo;{{ tag }}&rdquo;</h1>
-    <ul class="post-list">
+<section class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="{{ page.lang | default(value="en") }}">
+    <h1 class="text-5xl font-bold">Posts tagged &ldquo;{{ tag }}&rdquo;</h1>
+    <ul class="flex flex-col divide-y divide-dashed divide-accent">
         {% for item in items %}
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">{{ item.frontmatter.date }}</time>
             <a href="{{ prefix }}{{ item.path }}" class="post-link">
                 <span class="post-title">{{ item.frontmatter.title }}</span>
-                {% if item.frontmatter.description %}
-                <span class="post-desc"
-                    >{{ item.frontmatter.description }}</span
-                >
-                {% endif %}
             </a>
-            <time>{{ item.frontmatter.date }}</time>
+            {% if item.frontmatter.description %}
+            <span class="post-desc">
+                {{ item.frontmatter.description }}
+            </span>
+            {% endif %}
         </li>
         {% endfor %}
     </ul>
