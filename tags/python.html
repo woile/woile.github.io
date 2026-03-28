@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="../style.css" />
         <link rel="stylesheet" href="../theme.css" />
     </head>
-    <body class="bg-bg-primary text-text-secondary min-h-screen">
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
         <header
             class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
         >
@@ -76,98 +76,98 @@
                 Let's Talk &rarr;
             </a>
         </header>
-        <main class="w-full max-w-[1440px] mx-auto">
+        <main class="w-full max-w-[1440px] mx-auto grow">
             
-<section class="tag-listing">
-    <h1>Posts tagged &ldquo;python&rdquo;</h1>
-    <ul class="post-list">
+<section class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="en">
+    <h1 class="text-5xl font-bold">Posts tagged &ldquo;python&rdquo;</h1>
+    <ul class="flex flex-col divide-y divide-dashed divide-accent">
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2022-05-11</time>
             <a href="..&#x2F;blog&#x2F;logging-in-python.html" class="post-link">
                 <span class="post-title">Logging in python</span>
-                
-                <span class="post-desc"
-                    >Easy and simple logging setup for a new python project. Are you tired of searching how to do it and why it doesn&#x27;t work? this is your place</span
-                >
-                
             </a>
-            <time>2022-05-11</time>
+            
+            <span class="post-desc">
+                Easy and simple logging setup for a new python project. Are you tired of searching how to do it and why it doesn&#x27;t work? this is your place
+            </span>
+            
         </li>
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2020-07-15</time>
             <a href="..&#x2F;blog&#x2F;automating-deployment-with-commitizen.html" class="post-link">
                 <span class="post-title">Automating semver releases with commitizen</span>
-                
-                <span class="post-desc"
-                    >How to make a deployment almost hassle free</span
-                >
-                
             </a>
-            <time>2020-07-15</time>
+            
+            <span class="post-desc">
+                How to make a deployment almost hassle free
+            </span>
+            
         </li>
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2020-07-08</time>
             <a href="..&#x2F;blog&#x2F;pyenv.html" class="post-link">
                 <span class="post-title">Pyenv</span>
-                
-                <span class="post-desc"
-                    >How to configure pyenv in your system</span
-                >
-                
             </a>
-            <time>2020-07-08</time>
+            
+            <span class="post-desc">
+                How to configure pyenv in your system
+            </span>
+            
         </li>
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2019-11-05</time>
             <a href="..&#x2F;blog&#x2F;pycon-france-2019-experience.html" class="post-link">
                 <span class="post-title">PyCon France 2019 experience</span>
-                
-                <span class="post-desc"
-                    >My experience at the conference in 2019</span
-                >
-                
             </a>
-            <time>2019-11-05</time>
+            
+            <span class="post-desc">
+                My experience at the conference in 2019
+            </span>
+            
         </li>
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2019-05-28</time>
             <a href="..&#x2F;blog&#x2F;rust-for-pythonistas.html" class="post-link">
                 <span class="post-title">Rust for pythonistas</span>
-                
             </a>
-            <time>2019-05-28</time>
+            
         </li>
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2019-01-10</time>
             <a href="..&#x2F;blog&#x2F;local-https-development-in-python-with-mkcert.html" class="post-link">
                 <span class="post-title">Local HTTPS development in Python with Mkcert</span>
-                
-                <span class="post-desc"
-                    >setting https in our local development servers with python and mkcert</span
-                >
-                
             </a>
-            <time>2019-01-10</time>
+            
+            <span class="post-desc">
+                setting https in our local development servers with python and mkcert
+            </span>
+            
         </li>
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2017-09-12</time>
             <a href="..&#x2F;blog&#x2F;how-to-test-selenium-scrapper.html" class="post-link">
                 <span class="post-title">How to test Selenium scrapper with Python</span>
-                
             </a>
-            <time>2017-09-12</time>
+            
         </li>
         
-        <li>
+        <li class="flex flex-col gap-4 py-6">
+            <time class="md:text-xs">2017-03-02</time>
             <a href="..&#x2F;blog&#x2F;django-polymorphic-integration-with-django-filters.html" class="post-link">
                 <span class="post-title">How to filter Polymorphic Models with Django Filters</span>
-                
-                <span class="post-desc"
-                    >Integration of two python&#x2F;django libraries</span
-                >
-                
             </a>
-            <time>2017-03-02</time>
+            
+            <span class="post-desc">
+                Integration of two python&#x2F;django libraries
+            </span>
+            
         </li>
         
     </ul>
@@ -177,7 +177,7 @@
         <footer
             class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
         >
-            &copy; 2026 woile. Built with craft.
+            &copy; 2026 woile. Built with care.
             <a href="../feed.xml" title="Atom Feed">⚛</a>
         </footer>
     </body>
