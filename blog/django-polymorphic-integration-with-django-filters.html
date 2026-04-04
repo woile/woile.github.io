@@ -91,7 +91,7 @@
         <time class="text-text-muted font-mono text-sm"
             >March 10, 2026</time
         >
-        <h1 class="text-6xl font-bold text-white leading-[1.1]">
+        <h1 class="text-4xl md:text-6xl break-words font-bold text-white leading-[1.1]">
             How to filter Polymorphic Models with Django Filters
         </h1>
         <div>
@@ -127,7 +127,7 @@ much resources about it I&#39;m sharing my experience here.</p>
 <p>First, let&#39;s talk about <code>django-polymorphic</code> and <code>django-filters</code>, what
 are these libraries for.</p>
 <h2 id="django-polymorphic">Django-polymorphic<a class="heading-anchor" href="#django-polymorphic">¶</a></h2>
-<sup class="footnote-ref" id="fn-ref-1"><a href="#fn-1">1</a></sup><blockquote>
+<sup class="footnote-ref" id="fn-ref-1"><a href="#fn-1" data-footnote="1" aria-label="Footnote 1"></a></sup><blockquote>
 <p>Simplifies using inherited models in Django projects. When a query is made at the base
 model, the inherited model classes are returned.</p>
 </blockquote>
@@ -165,7 +165,7 @@ instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchPr
 account that your serializer will have to handle the representation of
 each of the models.</p>
 <h2 id="django-filter">Django-filter<a class="heading-anchor" href="#django-filter">¶</a></h2>
-<sup class="footnote-ref" id="fn-ref-2"><a href="#fn-2">2</a></sup><blockquote>
+<sup class="footnote-ref" id="fn-ref-2"><a href="#fn-2" data-footnote="2" aria-label="Footnote 2"></a></sup><blockquote>
 <p>Is a generic, reusable application to alleviate writing some of the more mundane bits of view code. Specifically, it allows users to filter down a queryset based on a model’s fields.</p>
 </blockquote>
 <p>Fundamentally, when using django filters you&#39;ll want to create a class
@@ -227,10 +227,12 @@ filtered by the specified choices. And that&#39;s it, we have successfully
 filtered polymorphic models. Now we just need to add <code>ProjectFilter</code> to
 the <code>filter_class</code> in the <code>viewsets.ModelViewSet</code>.</p>
 <p>Cheers!</p>
+<aside class="footnotes">
 <div class="footnote" id="fn-1"><span class="footnote-num">[1]</span> <p><a href="https://github.com/django-polymorphic/django-polymorphic">https://github.com/django-polymorphic/django-polymorphic</a></p>
  <a href="#fn-ref-1" class="footnote-backref" title="Back to text">↩</a></div>
 <div class="footnote" id="fn-2"><span class="footnote-num">[2]</span> <p><a href="https://github.com/carltongibson/django-filter">https://github.com/carltongibson/django-filter</a></p>
  <a href="#fn-ref-2" class="footnote-backref" title="Back to text">↩</a></div>
+</aside>
 
     </div>
 </article>
