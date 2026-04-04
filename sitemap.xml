@@ -7,6 +7,10 @@
     <loc>https://woile.dev/blog/index.html</loc>
   </url>
   <url>
+    <loc>https://woile.dev/blog/ux-intuition-list.html</loc>
+    <lastmod>2026-04-03</lastmod>
+  </url>
+  <url>
     <loc>https://woile.dev/blog/adding-signature-to-kde-okular.html</loc>
     <lastmod>2025-04-23</lastmod>
   </url>
@@ -215,6 +219,9 @@
     <loc>https://woile.dev/tags/encryption.html</loc>
   </url>
   <url>
+    <loc>https://woile.dev/tags/engineering.html</loc>
+  </url>
+  <url>
     <loc>https://woile.dev/tags/esignature.html</loc>
   </url>
   <url>
@@ -320,6 +327,9 @@
     <loc>https://woile.dev/tags/polymorphic.html</loc>
   </url>
   <url>
+    <loc>https://woile.dev/tags/product.html</loc>
+  </url>
+  <url>
     <loc>https://woile.dev/tags/programming.html</loc>
   </url>
   <url>
@@ -369,6 +379,9 @@
   </url>
   <url>
     <loc>https://woile.dev/tags/unix.html</loc>
+  </url>
+  <url>
+    <loc>https://woile.dev/tags/ux.html</loc>
   </url>
   <url>
     <loc>https://woile.dev/tags/web frameworks development security https.html</loc>

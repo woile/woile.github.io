@@ -4,10 +4,17 @@
   <link href="https://woile.dev" rel="alternate"/>
   <link href="https://woile.dev/feed.xml" rel="self"/>
   <id>https://woile.dev/</id>
-  <updated>2025-04-23T00:00:00Z</updated>
+  <updated>2026-04-03T00:00:00Z</updated>
   <author>
     <name>Santiago Fraire Willemoes</name>
   </author>
+  <entry>
+    <title>Bad UX Intuition List</title>
+    <link href="https://woile.dev/blog/ux-intuition-list.html" rel="alternate"/>
+    <id>https://woile.dev/blog/ux-intuition-list.html</id>
+    <updated>2026-04-03T00:00:00Z</updated>
+    <summary>An irritating collection of common app frictions that signal a deeper disconnect between data architecture and user needs.</summary>
+  </entry>
   <entry>
     <title>Adding signature to KDE Okular</title>
     <link href="https://woile.dev/blog/adding-signature-to-kde-okular.html" rel="alternate"/>
