@@ -55,10 +55,11 @@
               tailwindcss-language-server
               gemini-cli
               watchexec
+              mozjpeg
             ];
 
             shellHook = ''
-              echo "Welcome to the devshell!"
+              echo "Welcome to the woile.dev source code!"
               just --list
             '';
           };

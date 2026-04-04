@@ -90,105 +90,26 @@
         <a href="#competencies" class="heading-anchor"></a>
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {% for item in page.extra.competencies %}
         <div
-            class="flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl bg-bg-secondary border border-border"
+            class="flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl bg-bg-secondary border border-border group relative overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl"
         >
+            <div
+                class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 ease-in-out group-hover:translate-x-full"
+            ></div>
             <h3
                 class="text-2xl md:text-[28px] font-bold text-accent font-serif"
             >
-                Deterministic Environments
+                {{ item.title }}
             </h3>
             <p
                 class="text-base md:text-[18px] text-text-secondary leading-relaxed"
             >
-                Eliminating "it works on my machine" with Nix, Docker, and Helm.
-                I bridge the gap between DX and production with reproducible
-                pipelines that ensure reliable, deterministic deployments.
+                {{ item.description }}
             </p>
         </div>
-        <div
-            class="flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl bg-bg-secondary border border-border"
-        >
-            <h3
-                class="text-2xl md:text-[28px] font-bold text-accent font-serif"
-            >
-                Full-Stack Delivery
-            </h3>
-            <p
-                class="text-base md:text-[18px] text-text-secondary leading-relaxed"
-            >
-                Rapidly shipping greenfield prototypes and hardening legacy
-                systems. I leverage Python, Rust, and TypeScript to build
-                maintainable applications that scale without technical debt.
-            </p>
-        </div>
-        <div
-            class="flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl bg-bg-secondary border border-border"
-        >
-            <h3
-                class="text-2xl md:text-[28px] font-bold text-accent font-serif"
-            >
-                Architectural Efficiency
-            </h3>
-            <p
-                class="text-base md:text-[18px] text-text-secondary leading-relaxed"
-            >
-                Lowering cloud bills through performance-first engineering. By
-                utilizing Rust and optimized infrastructure patterns, I reduce
-                compute requirements and overall operational overhead.
-            </p>
-        </div>
-        <div
-            class="flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl bg-bg-secondary border border-border"
-        >
-            <h3
-                class="text-2xl md:text-[28px] font-bold text-accent font-serif"
-            >
-                Decoupled Systems
-            </h3>
-            <p
-                class="text-base md:text-[18px] text-text-secondary leading-relaxed"
-            >
-                Designing resilient, event-driven architectures that scale with
-                your organization. I help teams move faster by decoupling
-                services, enabling independent deployments and robust error
-                handling.
-            </p>
-        </div>
-        <div
-            class="flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl bg-bg-secondary border border-border"
-        >
-            <h3
-                class="text-2xl md:text-[28px] font-bold text-accent font-serif"
-            >
-                Strategic Mentorship
-            </h3>
-            <p
-                class="text-base md:text-[18px] text-text-secondary leading-relaxed"
-            >
-                Building high-performing engineering cultures through hands-on
-                leadership. I ensure long-term system maintainability by
-                upskilling teams in Rust, Nix, and advanced architectural
-                patterns.
-            </p>
-        </div>
-        <div
-            class="flex flex-col gap-4 md:gap-6 p-6 md:p-10 rounded-2xl bg-bg-secondary border border-border"
-        >
-            <h3
-                class="text-2xl md:text-[28px] font-bold text-accent font-serif"
-            >
-                Pragmatic AI Integration
-            </h3>
-            <p
-                class="text-base md:text-[18px] text-text-secondary leading-relaxed"
-            >
-                Navigating the AI hype with a focus on tangible results. I use
-                AI tools as high-leverage assistants for boilerplate and
-                research, while maintaining strict human oversight to ensure
-                architectural integrity and security.
-            </p>
-        </div>
+
+        {% endfor %}
     </div>
 </section>
 {% endblock content %}

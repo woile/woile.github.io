@@ -55,7 +55,7 @@ body {
     }
 
     blockquote {
-        @apply border-l-4 border-accent pl-6 my-4 italic text-text-primary;
+        @apply border-l-4 border-accent pl-6 py-4 pr-1 my-4 text-text-primary bg-accent/10 rounded-sm;
     }
 
     blockquote p {
