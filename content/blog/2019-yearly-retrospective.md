@@ -108,8 +108,7 @@ Things I plan to do:
 - Learn another programming language.
 - Read more books.
 
-Thanks for reading and follow me on Twitter [santiwilly][santiwilly] if you want to know more about my future.
+Thanks for reading.
 
-[santiwilly]: https://twitter.com/santiwilly
 [rentee]: https://rentee.app
 [veck]: https://veck.app

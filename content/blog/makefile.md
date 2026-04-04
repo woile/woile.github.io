@@ -296,7 +296,5 @@ So depending on your situation, there are some popular alternatives:
 
 > Thanks for reading! 👋
 >
-> If you are interested in what I write, follow me on [twitter][santiwilly]
+> If you are interested in what I write, follow me! below
 >
-
-[santiwilly]: https://twitter.com/santiwilly

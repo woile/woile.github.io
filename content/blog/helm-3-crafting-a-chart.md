@@ -326,10 +326,9 @@ I think this is an improving point; I haven't understood it by reading the docum
 
 > Hey, hello 👋
 >
-> If you are interested in what I write, follow me on [twitter][santiwilly]
+> If you are interested in what I write, find my socials below
 >
 
-[santiwilly]: https://twitter.com/santiwilly
 [three-big-concepts]: https://helm.sh/docs/intro/using_helm/#three-big-concepts
 [appVersion]: https://stackoverflow.com/a/60054111/2047185
 [commitizen]: https://github.com/commitizen-tools/commitizen

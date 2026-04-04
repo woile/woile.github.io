@@ -149,10 +149,9 @@ the tool is quite flexible, explore it, and see if it fits for your use cases.
 
 > Hey, hello 👋
 >
-> If you are interested in what I write, follow me on [twitter][santiwilly]
+> If you are interested in what I write, find my socials below
 >
 
-[santiwilly]: https://twitter.com/santiwilly
 
 [cz]: https://github.com/commitizen-tools/commitizen
 [semver]: https://semver.org/

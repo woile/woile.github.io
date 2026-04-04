@@ -76,10 +76,9 @@ same convention here, so if you know `pyenv`, you know `nodenv` for example.
 
 > Hey, hello 👋
 >
-> If you are interested in what I write, follow me on [twitter][santiwilly]
+> If you are interested in what I write, find my socials below
 >
 
-[santiwilly]: https://twitter.com/santiwilly
 [pyenv]: https://github.com/pyenv/pyenv
 [rvenv]: https://github.com/rbenv/rbenv
 [nodenv]: https://github.com/nodenv/nodenv

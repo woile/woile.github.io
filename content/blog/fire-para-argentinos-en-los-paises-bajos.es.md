@@ -19,8 +19,7 @@ efectivamente, para no tener que pensar en eso en el futuro.
 > No me dedico a esto, y tampoco me gusta, así que no te puedo dar ninguna garantía
 > de nada. Tomalo como una introducción al tema.
 
-Cualquier duda, aporte o corrección son bienvenidos, hay una sección de comentarios al
-final o podes contactarme en [twitter][santiwilly].
+Cualquier duda, aporte o corrección son bienvenidos, mi socials están al final de la página.
 
 ## Introducción
 
@@ -246,11 +245,10 @@ las podes seguir manejando por ahí.
 
 > Hey, hola 👋
 >
-> Si te interesa lo que escribo podes seguirme en [twitter][santiwilly].
+> Si te interesa lo que escribo seguime.
 >
 
 [trinity_study]: https://en.wikipedia.org/wiki/Trinity_study
-[santiwilly]: https://twitter.com/santiwilly
 [faq_fi]: https://www.reddit.com/r/financialindependence/wiki/faq
 [shocking]: https://www.mrmoneymustache.com/2012/01/13/the-shockingly-simple-math-behind-early-retirement/
 [boggle]: https://en.wikipedia.org/wiki/John_C._Bogle

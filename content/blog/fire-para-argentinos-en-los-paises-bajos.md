@@ -19,8 +19,7 @@ effectively, so I don't have to think about it in the future.
 > I'm not a professional at this, and I don't like it either, so I can't give you
 > any guarantees of anything. Take it as an introduction to the topic. And explore further yourself.
 
-Any questions, contributions or corrections are welcome, there is a comments section at
-end or you can find me on [twitter][santiwilly].
+Any questions, contributions or corrections are welcome, you can find my socials below.
 
 ## Introduction
 
@@ -243,11 +242,10 @@ you can keep driving them there.
 
 > Hey hi 👋
 >
-> If you are interested in what I write you can follow me on [twitter][santiwilly].
+> If you are interested in what I write you can find my socials below.
 >
 
 [trinity_study]: https://en.wikipedia.org/wiki/Trinity_study
-[santiwilly]: https://twitter.com/santiwilly
 [faq_fi]: https://www.reddit.com/r/financialindependence/wiki/faq
 [shocking]: https://www.mrmoneymustache.com/2012/01/13/the-shockingly-simple-math-behind-early-retirement/
 [boggle]: https://en.wikipedia.org/wiki/John_C._Bogle

@@ -348,7 +348,5 @@ The code is available on [github.com/woile/web-template-rs-example](https://gith
 
 > Hey, hello 👋
 >
-> Interested in what I write? follow me on [twitter][santiwilly]
+> Interested in what I write? find my socials below
 >
-
-[santiwilly]: https://twitter.com/santiwilly

@@ -71,8 +71,5 @@ For my next pycon (whichever I end up attending), I think I know the topic I'll 
 
 Thanks for reading!
 
-Find me on twitter: [@santiwilly]
-
 [PyCon France]: https://www.pycon.fr/2019/
 [Pytest yes, let's go]: https://woile.github.io/pytest-presentation/
-[@santiwilly]: https://twitter.com/santiwilly

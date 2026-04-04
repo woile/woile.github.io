@@ -14,7 +14,7 @@ aliases = ["/posts/sharing-team-secrets"]
 > Tired of having your team passwords in no specific place?
 
 If you have answer to any of this questions with a yes, then you might find
-this post useful. 
+this post useful.
 
 <img src="https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif">
 
@@ -125,7 +125,7 @@ echo "source <(gopass completion bash)" >> ~/.bashrc
 Gopass works in a \"unix\" like way. You\'ll have a tree (folders) where
 the leaves are encrypted files.
 
-``` 
+```
 gopass
     ├── my-company
     │   └── pepe@my-company.com
@@ -136,7 +136,7 @@ gopass
 Let\'s begin by **inserting** a secret.
 
 ``` bash
-gopass insert personal/twitter/santiwilly
+gopass insert personal/mastodon/santiwilly
 ```
 
 It will show a prompt and you\'ll have to fill the password twice. The
@@ -151,13 +151,13 @@ gopass ls
 
 We should now see, something like this.
 
-``` 
+```
 gopass
     ├── my-company
     │   └── pepe@my-company.com
     └── personal
         ├── pepe@personal.com
-        └── twitter
+        └── mastodon
             └── santiwilly
 ```
 
@@ -169,13 +169,13 @@ have any complexity.
 **Show password**
 
 ``` bash
-gopass personal/twitter/santiwilly
+gopass personal/mastodon/santiwilly
 ```
 
 **Copy password to clipboard**
 
 ``` bash
-gopass -c personal/twitter/santiwilly
+gopass -c personal/mastodon/santiwilly
 ```
 
 **Generate random pass**
