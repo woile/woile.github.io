@@ -114,13 +114,6 @@
     <summary></summary>
   </entry>
   <entry>
-    <title>Intro to FIRE in the Netherlands</title>
-    <link href="https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html" rel="alternate"/>
-    <id>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html</id>
-    <updated>2020-08-03T00:00:00Z</updated>
-    <summary>How to invest in the Netherlands</summary>
-  </entry>
-  <entry>
     <title>FIRE para Argentinos en los Países Bajos</title>
     <link href="https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.es.html" rel="alternate"/>
     <id>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.es.html</id>
@@ -128,11 +121,11 @@
     <summary>Como invertir siendo argentino en los Países Bajos</summary>
   </entry>
   <entry>
-    <title>Helm 3 - Crafting a Chart</title>
-    <link href="https://woile.dev/blog/helm-3-crafting-a-chart.html" rel="alternate"/>
-    <id>https://woile.dev/blog/helm-3-crafting-a-chart.html</id>
-    <updated>2020-07-15T00:00:00Z</updated>
-    <summary>What is a Helm Chart? Where does it fit in K8s? How to release a Chart? How to rollback? All your questions are answered here</summary>
+    <title>Intro to FIRE in the Netherlands</title>
+    <link href="https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html" rel="alternate"/>
+    <id>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html</id>
+    <updated>2020-08-03T00:00:00Z</updated>
+    <summary>How to invest in the Netherlands</summary>
   </entry>
   <entry>
     <title>Automating semver releases with commitizen</title>
@@ -140,6 +133,13 @@
     <id>https://woile.dev/blog/automating-deployment-with-commitizen.html</id>
     <updated>2020-07-15T00:00:00Z</updated>
     <summary>How to make a deployment almost hassle free</summary>
+  </entry>
+  <entry>
+    <title>Helm 3 - Crafting a Chart</title>
+    <link href="https://woile.dev/blog/helm-3-crafting-a-chart.html" rel="alternate"/>
+    <id>https://woile.dev/blog/helm-3-crafting-a-chart.html</id>
+    <updated>2020-07-15T00:00:00Z</updated>
+    <summary>What is a Helm Chart? Where does it fit in K8s? How to release a Chart? How to rollback? All your questions are answered here</summary>
   </entry>
   <entry>
     <title>Pyenv</title>

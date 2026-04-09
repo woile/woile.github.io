@@ -67,19 +67,19 @@
     <lastmod>2020-11-24</lastmod>
   </url>
   <url>
-    <loc>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html</loc>
-    <lastmod>2020-08-03</lastmod>
-  </url>
-  <url>
     <loc>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.es.html</loc>
     <lastmod>2020-08-03</lastmod>
   </url>
   <url>
-    <loc>https://woile.dev/blog/helm-3-crafting-a-chart.html</loc>
-    <lastmod>2020-07-15</lastmod>
+    <loc>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.html</loc>
+    <lastmod>2020-08-03</lastmod>
   </url>
   <url>
     <loc>https://woile.dev/blog/automating-deployment-with-commitizen.html</loc>
+    <lastmod>2020-07-15</lastmod>
+  </url>
+  <url>
+    <loc>https://woile.dev/blog/helm-3-crafting-a-chart.html</loc>
     <lastmod>2020-07-15</lastmod>
   </url>
   <url>
@@ -145,6 +145,9 @@
   <url>
     <loc>https://woile.dev/blog/blog-inauguration.html</loc>
     <lastmod>2016-05-18</lastmod>
+  </url>
+  <url>
+    <loc>https://woile.dev/bio.html</loc>
   </url>
   <url>
     <loc>https://woile.dev/tags/C.html</loc>
