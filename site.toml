@@ -3,9 +3,9 @@ author = "Santiago Fraire Willemoes"
 base_url = "https://woile.dev"
 
 [paths]
-content   = "content"
-output    = "public"
-static    = "static"
+content = "content"
+output = "public"
+static = "static"
 templates = "templates"
 
 [nav]
