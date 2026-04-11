@@ -100,20 +100,6 @@
     <summary></summary>
   </entry>
   <entry>
-    <title>Review 2020</title>
-    <link href="https://woile.dev/blog/review-2020.html" rel="alternate"/>
-    <id>https://woile.dev/blog/review-2020.html</id>
-    <updated>2020-12-31T00:00:00Z</updated>
-    <summary></summary>
-  </entry>
-  <entry>
-    <title>Flex and grid</title>
-    <link href="https://woile.dev/blog/flex-and-grid.html" rel="alternate"/>
-    <id>https://woile.dev/blog/flex-and-grid.html</id>
-    <updated>2020-11-24T00:00:00Z</updated>
-    <summary></summary>
-  </entry>
-  <entry>
     <title>FIRE para Argentinos en los Países Bajos</title>
     <link href="https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.es.html" rel="alternate"/>
     <id>https://woile.dev/blog/fire-para-argentinos-en-los-paises-bajos.es.html</id>
@@ -175,13 +161,6 @@
     <id>https://woile.dev/blog/pycon-france-2019-experience.html</id>
     <updated>2019-11-05T00:00:00Z</updated>
     <summary>My experience at the conference in 2019</summary>
-  </entry>
-  <entry>
-    <title>Rust for pythonistas</title>
-    <link href="https://woile.dev/blog/rust-for-pythonistas.html" rel="alternate"/>
-    <id>https://woile.dev/blog/rust-for-pythonistas.html</id>
-    <updated>2019-05-28T00:00:00Z</updated>
-    <summary></summary>
   </entry>
   <entry>
     <title>Sharing passwords using gopass, git and gpg</title>
