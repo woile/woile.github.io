@@ -77,7 +77,7 @@ data = [
 ]
 +++
 
-## whoami
+# whoami
 
 I'm Santiago, known as [@woile](https://woile.dev), an engineer dedicated to the craft of building scalable, human-centric software.
 I find joy in building high-performance backend systems and intuitive developer experiences, while keeping simplicity in mind.

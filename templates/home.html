@@ -7,7 +7,7 @@
         <span class="text-accent font-mono text-xs md:text-sm tracking-[2px]"
             >SOFTWARE CRAFTSMANSHIP</span
         >
-        <div
+        <h1
             class="text-4xl md:text-6xl lg:text-[72px] leading-[1.1] font-bold text-white font-serif prose prose-invert max-w-none group relative tracking-tighter transition-all duration-200"
         >
             {{ page.title }}
@@ -15,7 +15,7 @@
             <span
                 class="hidden group-hover:inline-block group-active:inline-block h-[0.6em] w-[18px] bg-green-400/50 align-middle animate-terminal ml-2"
             ></span>
-        </div>
+        </h1>
         <p
             class="text-lg md:text-[22px] text-text-secondary leading-relaxed max-w-[600px]"
         >
@@ -116,7 +116,11 @@
 >
     <h2 class="text-3xl md:text-5xl font-bold text-white">
         My Approach to Engineering
-        <a href="#competencies" class="heading-anchor"></a>
+        <a
+            href="#competencies"
+            class="heading-anchor"
+            aria-label="Link to Competencies section"
+        ></a>
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {% for item in page.extra.competencies %}
