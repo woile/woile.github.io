@@ -8,9 +8,13 @@
             >SOFTWARE CRAFTSMANSHIP</span
         >
         <div
-            class="text-4xl md:text-6xl lg:text-[72px] leading-[1.1] font-bold text-white font-serif prose prose-invert max-w-none"
+            class="text-4xl md:text-6xl lg:text-[72px] leading-[1.1] font-bold text-white font-serif prose prose-invert max-w-none group relative tracking-tighter transition-all duration-200"
         >
             {{ page.title }}
+            <!-- Continuous blinking cursor -->
+            <span
+                class="hidden group-hover:inline-block group-active:inline-block h-[0.6em] w-[18px] bg-green-400/50 align-middle animate-terminal ml-2"
+            ></span>
         </div>
         <p
             class="text-lg md:text-[22px] text-text-secondary leading-relaxed max-w-[600px]"
@@ -76,7 +80,7 @@
         <img
             src="{{ prefix }}/me-1024x1024.jpg"
             alt="woile"
-            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+            class="w-full h-full object-cover grayscale hover:grayscale-0 active:grayscale-0 transition-all duration-500"
         />
     </div>
 </section>

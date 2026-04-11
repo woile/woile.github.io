@@ -99,7 +99,7 @@ body {
     }
 }
 a {
-    @apply text-accent underline underline-offset-4 decoration-accent/30 hover:decoration-accent transition-colors rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    @apply text-accent underline underline-offset-4 decoration-accent/30 hover:decoration-accent transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
 }
 
 .heading-anchor {
@@ -114,4 +114,30 @@ a {
 .heading-anchor:hover::before {
     content: "#";
     @apply text-accent;
+}
+
+@keyframes blink-step {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animate-terminal {
+    animation: blink 1s step-end infinite;
 }

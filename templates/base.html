@@ -62,14 +62,26 @@
             <nav class="flex gap-6 md:gap-12">
                 <a
                     href="{{ prefix }}/bio.html"
-                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
                 >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
                     Bio
                 </a>
                 <a
                     href="{{ prefix }}/blog/"
-                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
                 >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
                     Writing
                 </a>
             </nav>
