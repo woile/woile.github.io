@@ -2,6 +2,7 @@
 title = "Review 2020"
 date = 2020-12-31
 aliases = ["/posts/review-2020"]
+draft = true
 +++
 
 The infamous pandemic year is gone. I don't know if it could've been better,

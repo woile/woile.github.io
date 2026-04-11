@@ -31,7 +31,7 @@ I saw [Tobias's talk in RustLab 2024](https://www.youtube.com/watch?v=6mfzlaBSZU
 
 This is how the slint code looks like:
 
-```
+```slint
 component MemoryTile inherits Rectangle {
     width: 64px;
     height: 64px;

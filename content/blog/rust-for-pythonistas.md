@@ -3,7 +3,7 @@ title = "Rust for pythonistas"
 date = 2019-05-28
 tags = ["python", "rust"]
 aliases = ["/posts/rust-for-pythonistas"]
-drafy = true
+draft = true
 +++
 
 # RUST FOR PYTHONISTAS

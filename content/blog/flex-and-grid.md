@@ -2,6 +2,7 @@
 title = "Flex and grid"
 date = 2020-11-24
 aliases = ["/posts/flex-and-grid"]
+draft = true
 +++
 
 This is a quick explanation to flex and grid.
