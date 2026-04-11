@@ -41,9 +41,6 @@ body {
         @apply text-xl font-semibold;
     }
 
-    p {
-        @apply my-2;
-    }
     code {
         @apply font-mono text-accent bg-bg-secondary px-1.5 py-0.5 rounded-sm text-lg;
     }

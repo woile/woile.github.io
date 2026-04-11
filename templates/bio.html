@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <div class="max-w-5xl mx-auto p-6 flex flex-col gap-10 justify-center items-center w-full" lang="{{ page.lang | default(value="en") }}">
     <div
-        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans mb-8"
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans mb-8 space-y-6"
         id="content-rendered"
     >
         {{ content | safe }}
