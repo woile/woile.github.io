@@ -1,24 +1,25 @@
 +++
-title = "Bad UX Intuition List"
+title = "Flawed UX Intuition List"
 description = "An irritating collection of common app frictions that signal a deeper disconnect between data architecture and user needs."
 date = 2026-04-03
 tags = ["ux", "engineering", "product"]
 +++
 
 Systems surround our daily life, from a checkout at a cafe, to a doctor's appointment.
-And everyone has felt that friction, the moments where a system stops serving the user and starts demanding they serve it instead.
+We all have felt that friction, the moments where a system stops serving us and starts demanding we serve it instead.
 
-Engineers often spend their days discussing what to build (the requirements) and their nights arguing about how to build it (the tech stack).
-But they rarely talk about the intuition that connects them: how the system actually feels to a human being.
+As engineers, we often spend our time discussing what to build (the requirements) and our nights arguing about how to build it (the tech stack).
+But we rarely talk about the intuition that connects them: how the system actually feels to a human being.
 
 ## Data Architecture is User Experience
 
-At the root of most "bad UX" isn't just a misplaced button; it's often a failure in **data architecture**.
+At the root of most "bad UX" isn't just a misplaced button; it's often a **failure in data architecture**.
 
 Data architecture is the blueprint for how information is structured, stored, and retrieved.
 When this blueprint is designed in a vacuum, without considering the human workflow, **we get friction**.
+
 If your database knows my address but your checkout form asks for it again, that's not just a UI redundancy;
-it's a failure of the system to "remember" and utilize its own internal knowledge to help the user.
+it's a failure of the system to utilize its own internal knowledge to help the user.
 
 **A great system respects the user's time**. It treats data as a shared memory between the machine and the human.
 When that memory fails, friction occurs.
@@ -42,9 +43,10 @@ When you click "Back" to fix it, you find that the application has wiped the ent
 
 ### 3. Wild hunt
 
-Primary actions (like "Export," "Download," or "Delete") that are buried three levels deep under a generic "Settings" or "More" icon.
+Primary actions (like "Export," "Download," or "Delete") that are buried three levels deep.
 If it's a core part of the workflow, it should be visible.
 When building a User Interface, consider the usually ignored axis "**task frequency**", not just "logical" grouping.
+Learn your user's workflows!
 
 > Thought: maybe as the industry, we could come up with some type of benchmark to measure core workflows
 
@@ -64,7 +66,7 @@ Which can be easily fixed with a meaningful progress indicator that communicates
 Spotting these issues isn't about being "picky", it's about **empathy**.
 Every extra click, every redundant field, and every lost scroll position is a tiny withdrawal from the user's "trust bank.".
 
-In this post, I've focus mostly on frontend and visuals, but it can be easily extrapolated to terminal CLIs, backend applications or even writing code.
-A post for another time.
+This can be easily extrapolated, not only to backends or CLI's, but also to any aspect of life, that's my belief.
+A road with no signs, a street so wide it encourages speeding, or a kitchen without plugs.
 
 As engineers, our job isn't just to make the code run; it's to make the friction disappear.
