@@ -46,6 +46,11 @@
         <!-- Styles -->
         <link rel="stylesheet" href="./style.css" />
         <link rel="stylesheet" href="./theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
     </head>
     <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
         <header
@@ -60,14 +65,26 @@
             <nav class="flex gap-6 md:gap-12">
                 <a
                     href="./bio.html"
-                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
                 >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
                     Bio
                 </a>
                 <a
                     href="./blog/"
-                    class="text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
                 >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
                     Writing
                 </a>
             </nav>
@@ -85,7 +102,7 @@
         class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans mb-8"
         id="content-rendered"
     >
-        <h2 id="whoami">whoami<a class="heading-anchor" href="#whoami">¶</a></h2>
+        <h1 id="whoami">whoami<a class="heading-anchor" href="#whoami">¶</a></h1>
 <p>I&#39;m Santiago, known as <a href="https://woile.dev">@woile</a>, an engineer dedicated to the craft of building scalable, human-centric software.
 I find joy in building high-performance backend systems and intuitive developer experiences, while keeping simplicity in mind.</p>
 <p>Throughout my career, I have had the opportunity to work across the entire stack.
