@@ -147,8 +147,8 @@ This was a good opportunity to write something fast, and to make it reusable and
 <p>I have a take on nix status, which may need corroboration: nix is moving away from the old way to the new (flakes) way, and there are many outdated posts, and commands. Many commands that fit the pattern <code>nix-*</code> are no longer used, and instead people now use the new <code>nix &lt;command&gt;</code> instead. For example, things like <code>nix-shell</code> are not used much anymore.</p>
 <p>Going back to the nix flake, If you have <a href="https://nixos.org/download.html">installed nix</a>, <strong>flakes must be enabled</strong>, because it&#39;s an experimental feature.</p>
 <p>For mac (which only supports multiuser installation):</p>
-<pre><code class="language-sh"><span class="hl-function-builtin">echo <span class="hl-string">'experimental-features = nix-command flakes' <span class="hl-operator">&gt;&gt; <span class="hl-string-special-path">/etc/nix/nix.conf
-<span class="hl-comment"># you may use ~/.config/nix/nix.conf on linux
+<pre><code class="language-sh"><span class="hl-function-builtin">echo</span> <span class="hl-string">'experimental-features = nix-command flakes'</span> <span class="hl-operator">&gt;&gt;</span> <span class="hl-string-special-path">/etc/nix/nix.conf</span>
+<span class="hl-comment"># you may use ~/.config/nix/nix.conf on linux</span>
 </code></pre>
 <h3 id="what-are-flakes">What are flakes?<a class="heading-anchor" href="#what-are-flakes">¶</a></h3>
 <p>According to <a href="https://nixos.wiki/wiki/Flakes">nix&#39;s wiki</a>:</p>
@@ -159,7 +159,7 @@ Flakes replace the nix-channels command and things like ad-hoc invocations of <
 </blockquote>
 <p>Seems like we are gonna need two files: <code>flake.nix</code> and <code>flake.lock</code>.</p>
 <p>The next step is to create the flake from a template. What available templates do we have? I wonder...</p>
-<pre><code class="language-sh"><span class="hl-function">nix <span class="hl-variable-parameter">flake <span class="hl-variable-parameter">show <span class="hl-variable-parameter">templates
+<pre><code class="language-sh"><span class="hl-function">nix</span> <span class="hl-variable-parameter">flake</span> <span class="hl-variable-parameter">show</span> <span class="hl-variable-parameter">templates</span>
 </code></pre>
 <pre><code>github:NixOS/templates/2d6dcce2f3898090c8eda16a16abdff8a80e8ebf
 ├───defaultTemplate: template: A very basic flake
@@ -180,23 +180,23 @@ Flakes replace the nix-channels command and things like ad-hoc invocations of <
     └───trivial: template: A very basic flake
 </code></pre>
 <p>Fantastic! Look at that! There&#39;s a python version and even a rust web server. The one I need is the rust template, let&#39;s use that one as a base.</p>
-<pre><code class="language-sh"><span class="hl-function">nix <span class="hl-variable-parameter">flake <span class="hl-variable-parameter">init <span class="hl-variable-parameter">-t <span class="hl-variable-parameter">templates#rust
+<pre><code class="language-sh"><span class="hl-function">nix</span> <span class="hl-variable-parameter">flake</span> <span class="hl-variable-parameter">init</span> <span class="hl-variable-parameter">-t</span> <span class="hl-variable-parameter">templates#rust</span>
 </code></pre>
 <p>And that was it, it worked. This is going well. I can create a binary inside <code>./result/bin</code> by running</p>
-<pre><code class="language-sh"><span class="hl-function">nix <span class="hl-variable-parameter">build
+<pre><code class="language-sh"><span class="hl-function">nix</span> <span class="hl-variable-parameter">build</span>
 </code></pre>
 <p>or use it by running</p>
-<pre><code class="language-sh"><span class="hl-function">nix <span class="hl-variable-parameter">run
+<pre><code class="language-sh"><span class="hl-function">nix</span> <span class="hl-variable-parameter">run</span>
 </code></pre>
 <p>My mind is blown at this point 🤯</p>
 <h2 id="using-the-flake-somewhere-else">Using the flake somewhere else<a class="heading-anchor" href="#using-the-flake-somewhere-else">¶</a></h2>
 <p>I couldn&#39;t find much about this, as I said, there&#39;s a mix of old and new information.
 I think it clicked for me, when I realized that the <code>nix</code> command is new, and it&#39;s integration with flakes goes to its core (am I correct on this?).</p>
 <p>Using the flake becomes straightforward.</p>
-<pre><code class="language-sh"><span class="hl-function">nix <span class="hl-variable-parameter">shell <span class="hl-string">'github:woile/wpa_passphrase_rs'
+<pre><code class="language-sh"><span class="hl-function">nix</span> <span class="hl-variable-parameter">shell</span> <span class="hl-string">'github:woile/wpa_passphrase_rs'</span>
 </code></pre>
 <p>And <code>wpa_password</code> will appear on my <code>PATH</code>.</p>
-<pre><code class="language-sh"><span class="hl-function">wpa_password <span class="hl-variable-parameter">--help
+<pre><code class="language-sh"><span class="hl-function">wpa_password</span> <span class="hl-variable-parameter">--help</span>
 </code></pre>
 <p>And we can exit with a <kbd>CTRL</kbd> + <kbd>D</kbd>.</p>
 <h2 id="what-s-next">What&#39;s next?<a class="heading-anchor" href="#what-s-next">¶</a></h2>

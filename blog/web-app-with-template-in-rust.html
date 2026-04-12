@@ -156,43 +156,43 @@ you can probably read from, or serialize into different formats, many implemente
 <h2 id="set-up">Set up<a class="heading-anchor" href="#set-up">¶</a></h2>
 <p>You&#39;ve already <a href="https://www.rust-lang.org/tools/install">installed rust</a>, so go to your projects folder
 and create a new rust project.</p>
-<pre><code class="language-sh"><span class="hl-function">cargo <span class="hl-variable-parameter">new <span class="hl-variable-parameter">web-template-rs
-<span class="hl-function-builtin">cd <span class="hl-variable-parameter">web-template-rs/
+<pre><code class="language-sh"><span class="hl-function">cargo</span> <span class="hl-variable-parameter">new</span> <span class="hl-variable-parameter">web-template-rs</span>
+<span class="hl-function-builtin">cd</span> <span class="hl-variable-parameter">web-template-rs/</span>
 </code></pre>
 <p>With the following dependencies.</p>
-<pre><code class="language-sh"><span class="hl-function">cargo <span class="hl-variable-parameter">add <span class="hl-variable-parameter">axum \
-    <span class="hl-variable-parameter">tokio <span class="hl-variable-parameter">-F <span class="hl-variable-parameter">tokio/full \
-    <span class="hl-variable-parameter">serde <span class="hl-variable-parameter">-F <span class="hl-variable-parameter">serde/derive \
-    <span class="hl-variable-parameter">minijinja <span class="hl-variable-parameter">-F <span class="hl-variable-parameter">minijinja/builtins
+<pre><code class="language-sh"><span class="hl-function">cargo</span> <span class="hl-variable-parameter">add</span> <span class="hl-variable-parameter">axum</span> \
+    <span class="hl-variable-parameter">tokio</span> <span class="hl-variable-parameter">-F</span> <span class="hl-variable-parameter">tokio/full</span> \
+    <span class="hl-variable-parameter">serde</span> <span class="hl-variable-parameter">-F</span> <span class="hl-variable-parameter">serde/derive</span> \
+    <span class="hl-variable-parameter">minijinja</span> <span class="hl-variable-parameter">-F</span> <span class="hl-variable-parameter">minijinja/builtins</span>
 </code></pre>
 <p>We use the <code>-F</code> flag to signal which features to include from those crates.</p>
 <h2 id="the-code">The Code<a class="heading-anchor" href="#the-code">¶</a></h2>
 <p>We are now ready to start. And we won&#39;t need anything else.</p>
 <p>A basic webserver returning HTML without a template looks something like this:</p>
-<pre><code class="language-rust"><span class="hl-keyword-control-import">use <span class="hl-namespace">axum<span class="hl-punctuation-delimiter">::<span class="hl-punctuation-bracket">{<span class="hl-namespace">response<span class="hl-punctuation-delimiter">::<span class="hl-type">Html<span class="hl-punctuation-delimiter">, <span class="hl-namespace">routing<span class="hl-punctuation-delimiter">::<span class="hl-namespace">get<span class="hl-punctuation-delimiter">, <span class="hl-type">Router<span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">;
+<pre><code class="language-rust"><span class="hl-keyword-control-import">use</span> <span class="hl-namespace">axum</span><span class="hl-punctuation-delimiter">::</span><span class="hl-punctuation-bracket">{</span><span class="hl-namespace">response</span><span class="hl-punctuation-delimiter">::</span><span class="hl-type">Html</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-namespace">routing</span><span class="hl-punctuation-delimiter">::</span><span class="hl-namespace">get</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">Router</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
 
-<span class="hl-keyword">async <span class="hl-keyword-function">fn <span class="hl-function">home<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">) <span class="hl-operator">-&gt; <span class="hl-type">Html<span class="hl-punctuation-bracket">&lt;<span class="hl-keyword-storage-modifier-ref">&amp;<span class="hl-label">'<span class="hl-label">static <span class="hl-type-builtin">str<span class="hl-punctuation-bracket">&gt; <span class="hl-punctuation-bracket">{
-    <span class="hl-constructor">Html<span class="hl-punctuation-bracket">(<span class="hl-string">"hello world"<span class="hl-punctuation-bracket">)
-<span class="hl-punctuation-bracket">}
+<span class="hl-keyword">async</span> <span class="hl-keyword-function">fn</span> <span class="hl-function">home</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span> <span class="hl-operator">-&gt;</span> <span class="hl-type">Html</span><span class="hl-punctuation-bracket">&lt;</span><span class="hl-keyword-storage-modifier-ref">&amp;</span><span class="hl-label">'</span><span class="hl-label">static</span> <span class="hl-type-builtin">str</span><span class="hl-punctuation-bracket">&gt;</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-constructor">Html</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"hello world"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-punctuation-bracket">#<span class="hl-punctuation-bracket">[<span class="hl-namespace">tokio<span class="hl-punctuation-delimiter">::<span class="hl-function-macro">main<span class="hl-punctuation-bracket">]
-<span class="hl-keyword">async <span class="hl-keyword-function">fn <span class="hl-function">main<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">) <span class="hl-punctuation-bracket">{
-    <span class="hl-comment-line">// build our application with a single route
-    <span class="hl-keyword-storage">let <span class="hl-variable">app <span class="hl-operator">= <span class="hl-type">Router<span class="hl-punctuation-delimiter">::<span class="hl-function">new<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
-        <span class="hl-punctuation-delimiter">.<span class="hl-function">route<span class="hl-punctuation-bracket">(
-            <span class="hl-string">"/"<span class="hl-punctuation-delimiter">,
-            <span class="hl-function">get<span class="hl-punctuation-bracket">(<span class="hl-variable">home<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
+<span class="hl-punctuation-bracket">#</span><span class="hl-punctuation-bracket">[</span><span class="hl-namespace">tokio</span><span class="hl-punctuation-delimiter">::</span><span class="hl-function-macro">main</span><span class="hl-punctuation-bracket">]</span>
+<span class="hl-keyword">async</span> <span class="hl-keyword-function">fn</span> <span class="hl-function">main</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-comment-line">// build our application with a single route</span>
+    <span class="hl-keyword-storage">let</span> <span class="hl-variable">app</span> <span class="hl-operator">=</span> <span class="hl-type">Router</span><span class="hl-punctuation-delimiter">::</span><span class="hl-function">new</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-function">route</span><span class="hl-punctuation-bracket">(</span>
+            <span class="hl-string">"/"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-function">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">home</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
 
-    <span class="hl-comment-line">// run it with hyper on localhost:3000
-    <span class="hl-namespace">axum<span class="hl-punctuation-delimiter">::<span class="hl-type">Server<span class="hl-punctuation-delimiter">::<span class="hl-function">bind<span class="hl-punctuation-bracket">(<span class="hl-operator">&amp;<span class="hl-string">"0.0.0.0:3000"<span class="hl-punctuation-delimiter">.<span class="hl-function">parse<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">.<span class="hl-function">unwrap<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">)
-        <span class="hl-punctuation-delimiter">.<span class="hl-function">serve<span class="hl-punctuation-bracket">(<span class="hl-variable">app<span class="hl-punctuation-delimiter">.<span class="hl-function">into_make_service<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">)
-        <span class="hl-punctuation-delimiter">.<span class="hl-keyword-control-return">await
-        <span class="hl-punctuation-delimiter">.<span class="hl-function">unwrap<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
-<span class="hl-punctuation-bracket">}
+    <span class="hl-comment-line">// run it with hyper on localhost:3000</span>
+    <span class="hl-namespace">axum</span><span class="hl-punctuation-delimiter">::</span><span class="hl-type">Server</span><span class="hl-punctuation-delimiter">::</span><span class="hl-function">bind</span><span class="hl-punctuation-bracket">(</span><span class="hl-operator">&amp;</span><span class="hl-string">"0.0.0.0:3000"</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">parse</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">unwrap</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-function">serve</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">app</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">into_make_service</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-keyword-control-return">await</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-function">unwrap</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-punctuation-bracket">}</span>
 </code></pre>
 <p>To run our application we run</p>
-<pre><code class="language-sh"><span class="hl-function">cargo <span class="hl-variable-parameter">run
+<pre><code class="language-sh"><span class="hl-function">cargo</span> <span class="hl-variable-parameter">run</span>
 </code></pre>
 <p>Because we haven&#39;t configured any logging, you won&#39;t see anything in your terminal after running, that&#39;s fine.
 If you want to learn how to do it, check the <a href="https://github.com/tokio-rs/axum/tree/main/examples/tracing-aka-logging">tracing-example</a>.</p>
@@ -221,11 +221,11 @@ Accept: */*
 <p>The request will be received by our rust web server, and it will attempt to handle the &quot;requested&quot; path (<code>GET /</code>).
 No matter what language you use: rust, python, go, js, etc. requests are all plain text.</p>
 <p>Our rust web server, actually knows how to handle that request, because it includes a <code>route</code></p>
-<pre><code class="language-rs"><span class="hl-comment-line">// ...
-<span class="hl-punctuation-delimiter">.<span class="hl-function">route<span class="hl-punctuation-bracket">(
-    <span class="hl-string">"/"<span class="hl-punctuation-delimiter">,
-    <span class="hl-function">get<span class="hl-punctuation-bracket">(<span class="hl-variable">home<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
+<pre><code class="language-rs"><span class="hl-comment-line">// ...</span>
+<span class="hl-punctuation-delimiter">.</span><span class="hl-function">route</span><span class="hl-punctuation-bracket">(</span>
+    <span class="hl-string">"/"</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-function">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">home</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
 </code></pre>
 <p><a href="https://github.com/tokio-rs/axum">Axum</a> sees the <code>/</code> and it know it has a function to handle that path. That function actually means something like</p>
 <blockquote>
@@ -244,42 +244,42 @@ hello world
 <p>True, true... I forgot where were we going with all this... but do we know what templates are?</p>
 <h2 id="templates">Templates<a class="heading-anchor" href="#templates">¶</a></h2>
 <p>You mix a &quot;custom language&quot;, with your target language. This way, you can output the target language from a different one. Let&#39;s say we want to create an HTML with a list of users from Rust, Python or Go:</p>
-<pre><code class="language-html"><span class="hl-punctuation-bracket">&lt;<span class="hl-tag">ul<span class="hl-punctuation-bracket">&gt;
-    <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;Timmy<span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;
-    <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;Benji<span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;
-    <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;Mimi<span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;
-<span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">ul<span class="hl-punctuation-bracket">&gt;
+<pre><code class="language-html"><span class="hl-punctuation-bracket">&lt;</span><span class="hl-tag">ul</span><span class="hl-punctuation-bracket">&gt;</span>
+    <span class="hl-punctuation-bracket">&lt;</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>Timmy<span class="hl-punctuation-bracket">&lt;/</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>
+    <span class="hl-punctuation-bracket">&lt;</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>Benji<span class="hl-punctuation-bracket">&lt;/</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>
+    <span class="hl-punctuation-bracket">&lt;</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>Mimi<span class="hl-punctuation-bracket">&lt;/</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>
+<span class="hl-punctuation-bracket">&lt;/</span><span class="hl-tag">ul</span><span class="hl-punctuation-bracket">&gt;</span>
 </code></pre>
 <p>What happens when we have a new user? We would have to edit it manually, right? Can we make this behave &quot;dynamically&quot; instead?</p>
 <p>Yes, using templates. Minijinja is a rust implementation of the popular python&#39;s <code>jinja2</code>. A popular &quot;template engine&quot; with its own language. Template engines are endless, and they don&#39;t share the same syntax. Python django&#39;s template engine, Go templates, JSX (right?), lodash templates, and more. They end up being similar, they have a way to iterate, show data, or use conditions.</p>
 <p>Now with a template engine, we can write something like this:</p>
-<pre><code class="language-html"><span class="hl-punctuation-bracket">&lt;<span class="hl-tag">ul<span class="hl-punctuation-bracket">&gt;
+<pre><code class="language-html"><span class="hl-punctuation-bracket">&lt;</span><span class="hl-tag">ul</span><span class="hl-punctuation-bracket">&gt;</span>
     {% for user in users %}
-    <span class="hl-punctuation-bracket">&lt;<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;user.name<span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">li<span class="hl-punctuation-bracket">&gt;
+    <span class="hl-punctuation-bracket">&lt;</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>user.name<span class="hl-punctuation-bracket">&lt;/</span><span class="hl-tag">li</span><span class="hl-punctuation-bracket">&gt;</span>
     {% endfor %}
-<span class="hl-punctuation-bracket">&lt;/<span class="hl-tag">ul<span class="hl-punctuation-bracket">&gt;
+<span class="hl-punctuation-bracket">&lt;/</span><span class="hl-tag">ul</span><span class="hl-punctuation-bracket">&gt;</span>
 </code></pre>
 <p>This way, our fictional user service, can take this template, fetch the users, and passing through the template, render the list of users.</p>
 <p>Templates can be a monstrosity. Most of the time, the tooling around them is not good, and you don&#39;t get an error until you actually try to render them, you may not get syntax highlight. For example, around Kubernetes there&#39;s a famous package manager &quot;Helm&quot;, which uses templates on top of YAML. YAML is already a <a href="https://noyaml.com/">controversial language</a>, and with a template layer on top, it can become incredibly hard to read and maintain. Spite of this, templates are still <strong>convenient</strong>, and I don&#39;t know of a better alternative.</p>
 <h2 id="axum-with-templates">Axum with templates<a class="heading-anchor" href="#axum-with-templates">¶</a></h2>
 <p>Back to our web application! This time, we are gonna create 2 fictional <code>structs</code>, that we&#39;ll use as examples.</p>
-<pre><code class="language-rs"><span class="hl-keyword-control-import">use <span class="hl-namespace">serde<span class="hl-punctuation-delimiter">::<span class="hl-type">Serialize<span class="hl-punctuation-delimiter">;
+<pre><code class="language-rs"><span class="hl-keyword-control-import">use</span> <span class="hl-namespace">serde</span><span class="hl-punctuation-delimiter">::</span><span class="hl-type">Serialize</span><span class="hl-punctuation-delimiter">;</span>
 
-<span class="hl-punctuation-bracket">#<span class="hl-punctuation-bracket">[<span class="hl-special">derive<span class="hl-punctuation-bracket">(<span class="hl-type">Debug<span class="hl-punctuation-delimiter">, <span class="hl-type">Serialize<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">]
-<span class="hl-keyword-storage-type">struct <span class="hl-type">Items <span class="hl-punctuation-bracket">{
-    <span class="hl-variable-other-member">id<span class="hl-punctuation-delimiter">: <span class="hl-type-builtin">i32<span class="hl-punctuation-delimiter">,
-    <span class="hl-variable-other-member">name<span class="hl-punctuation-delimiter">: <span class="hl-type-builtin">String<span class="hl-punctuation-delimiter">,
-<span class="hl-punctuation-bracket">}
+<span class="hl-punctuation-bracket">#</span><span class="hl-punctuation-bracket">[</span><span class="hl-special">derive</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">Debug</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">Serialize</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">]</span>
+<span class="hl-keyword-storage-type">struct</span> <span class="hl-type">Items</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">id</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type-builtin">i32</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-variable-other-member">name</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type-builtin">String</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-punctuation-bracket">#<span class="hl-punctuation-bracket">[<span class="hl-special">derive<span class="hl-punctuation-bracket">(<span class="hl-type">Debug<span class="hl-punctuation-delimiter">, <span class="hl-type">Serialize<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">]
-<span class="hl-keyword-storage-type">struct <span class="hl-type">Profile <span class="hl-punctuation-bracket">{
-    <span class="hl-variable-other-member">full_name<span class="hl-punctuation-delimiter">: <span class="hl-type-builtin">String<span class="hl-punctuation-delimiter">,
-    <span class="hl-variable-other-member">items<span class="hl-punctuation-delimiter">: <span class="hl-type-builtin">Vec<span class="hl-punctuation-bracket">&lt;<span class="hl-type">Items<span class="hl-punctuation-bracket">&gt;<span class="hl-punctuation-delimiter">,
-<span class="hl-punctuation-bracket">}
+<span class="hl-punctuation-bracket">#</span><span class="hl-punctuation-bracket">[</span><span class="hl-special">derive</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">Debug</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">Serialize</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">]</span>
+<span class="hl-keyword-storage-type">struct</span> <span class="hl-type">Profile</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">full_name</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type-builtin">String</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-variable-other-member">items</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type-builtin">Vec</span><span class="hl-punctuation-bracket">&lt;</span><span class="hl-type">Items</span><span class="hl-punctuation-bracket">&gt;</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-punctuation-bracket">}</span>
 </code></pre>
 <p>You can see we are using serde&#39;s <code>Serialize</code>, so minijinja can use them. And <code>Profile.items</code> is a <code>Vec</code>, this way we can showcase an iteration example in the template.</p>
 <p>As we&#39;ve seen templates, we are ready to write our jinja2 like template in rust.</p>
-<pre><code class="language-rust"><span class="hl-keyword-storage-modifier">const <span class="hl-constant">PROFILE_TEMPLATE<span class="hl-punctuation-delimiter">: <span class="hl-keyword-storage-modifier-ref">&amp;<span class="hl-label">'<span class="hl-label">static <span class="hl-type-builtin">str <span class="hl-operator">= <span class="hl-string">r#"
+<pre><code class="language-rust"><span class="hl-keyword-storage-modifier">const</span> <span class="hl-constant">PROFILE_TEMPLATE</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-keyword-storage-modifier-ref">&amp;</span><span class="hl-label">'</span><span class="hl-label">static</span> <span class="hl-type-builtin">str</span> <span class="hl-operator">=</span> <span class="hl-string">r#"
 &lt;!doctype html&gt;
 
 &lt;html lang="en"&gt;
@@ -303,65 +303,65 @@ hello world
     &lt;ul&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-"#<span class="hl-punctuation-delimiter">;
+"#</span><span class="hl-punctuation-delimiter">;</span>
 </code></pre>
 <p>Right in the body of the HTML, we show the <code>profile.full_name</code>, and then we iterate over each item, displaying the <code>name</code> and the <code>id</code>.</p>
 <p>And for Axum, we add a new route, that will create some example structs.</p>
-<pre><code class="language-rs"><span class="hl-keyword-control-import">use <span class="hl-namespace">axum<span class="hl-punctuation-delimiter">::<span class="hl-punctuation-bracket">{<span class="hl-namespace">response<span class="hl-punctuation-delimiter">::<span class="hl-type">Html<span class="hl-punctuation-delimiter">, <span class="hl-namespace">routing<span class="hl-punctuation-delimiter">::<span class="hl-namespace">get<span class="hl-punctuation-delimiter">, <span class="hl-type">Router<span class="hl-punctuation-delimiter">, <span class="hl-namespace">extract<span class="hl-punctuation-delimiter">::<span class="hl-type">Path<span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">;
-<span class="hl-keyword-control-import">use <span class="hl-namespace">minijinja<span class="hl-punctuation-delimiter">::<span class="hl-namespace">render<span class="hl-punctuation-delimiter">;
+<pre><code class="language-rs"><span class="hl-keyword-control-import">use</span> <span class="hl-namespace">axum</span><span class="hl-punctuation-delimiter">::</span><span class="hl-punctuation-bracket">{</span><span class="hl-namespace">response</span><span class="hl-punctuation-delimiter">::</span><span class="hl-type">Html</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-namespace">routing</span><span class="hl-punctuation-delimiter">::</span><span class="hl-namespace">get</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">Router</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-namespace">extract</span><span class="hl-punctuation-delimiter">::</span><span class="hl-type">Path</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword-control-import">use</span> <span class="hl-namespace">minijinja</span><span class="hl-punctuation-delimiter">::</span><span class="hl-namespace">render</span><span class="hl-punctuation-delimiter">;</span>
 
-<span class="hl-keyword">async <span class="hl-keyword-function">fn <span class="hl-function">home<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">) <span class="hl-operator">-&gt; <span class="hl-type">Html<span class="hl-punctuation-bracket">&lt;<span class="hl-keyword-storage-modifier-ref">&amp;<span class="hl-label">'<span class="hl-label">static <span class="hl-type-builtin">str<span class="hl-punctuation-bracket">&gt; <span class="hl-punctuation-bracket">{
-    <span class="hl-constructor">Html<span class="hl-punctuation-bracket">(<span class="hl-string">"hello world"<span class="hl-punctuation-bracket">)
-<span class="hl-punctuation-bracket">}
+<span class="hl-keyword">async</span> <span class="hl-keyword-function">fn</span> <span class="hl-function">home</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span> <span class="hl-operator">-&gt;</span> <span class="hl-type">Html</span><span class="hl-punctuation-bracket">&lt;</span><span class="hl-keyword-storage-modifier-ref">&amp;</span><span class="hl-label">'</span><span class="hl-label">static</span> <span class="hl-type-builtin">str</span><span class="hl-punctuation-bracket">&gt;</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-constructor">Html</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"hello world"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-keyword">async <span class="hl-keyword-function">fn <span class="hl-function">get_profile<span class="hl-punctuation-bracket">(<span class="hl-constructor">Path<span class="hl-punctuation-bracket">(<span class="hl-variable">profile_name<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">: <span class="hl-type">Path<span class="hl-punctuation-bracket">&lt;<span class="hl-type-builtin">String<span class="hl-punctuation-bracket">&gt;<span class="hl-punctuation-bracket">) <span class="hl-operator">-&gt; <span class="hl-type">Html<span class="hl-punctuation-bracket">&lt;<span class="hl-type-builtin">String<span class="hl-punctuation-bracket">&gt; <span class="hl-punctuation-bracket">{
-    <span class="hl-keyword-storage">let <span class="hl-variable">orders_example <span class="hl-operator">= <span class="hl-function-macro">vec<span class="hl-function-macro">!<span class="hl-punctuation-bracket">[
-        <span class="hl-constructor">Items <span class="hl-punctuation-bracket">{
-            <span class="hl-variable-other-member">id<span class="hl-punctuation-delimiter">: <span class="hl-constant-numeric-integer">1<span class="hl-punctuation-delimiter">,
-            <span class="hl-variable-other-member">name<span class="hl-punctuation-delimiter">: <span class="hl-string">"Article banana"<span class="hl-punctuation-delimiter">.<span class="hl-function">into<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-        <span class="hl-constructor">Items <span class="hl-punctuation-bracket">{
-            <span class="hl-variable-other-member">id<span class="hl-punctuation-delimiter">: <span class="hl-constant-numeric-integer">2<span class="hl-punctuation-delimiter">,
-            <span class="hl-variable-other-member">name<span class="hl-punctuation-delimiter">: <span class="hl-string">"Article apple"<span class="hl-punctuation-delimiter">.<span class="hl-function">into<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">;
-    <span class="hl-keyword-storage">let <span class="hl-variable">profile_example <span class="hl-operator">= <span class="hl-constructor">Profile <span class="hl-punctuation-bracket">{
-        <span class="hl-variable-other-member">full_name<span class="hl-punctuation-delimiter">: <span class="hl-variable">profile_name<span class="hl-punctuation-delimiter">,
-        <span class="hl-variable-other-member">items<span class="hl-punctuation-delimiter">: <span class="hl-variable">orders_example<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">;
-    <span class="hl-keyword-storage">let <span class="hl-variable">r <span class="hl-operator">= <span class="hl-function-macro">render<span class="hl-function-macro">!<span class="hl-punctuation-bracket">(<span class="hl-constant">PROFILE_TEMPLATE<span class="hl-punctuation-delimiter">, <span class="hl-variable">profile <span class="hl-operator">=<span class="hl-operator">&gt; <span class="hl-variable">profile_example <span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
-    <span class="hl-constructor">Html<span class="hl-punctuation-bracket">(<span class="hl-variable">r<span class="hl-punctuation-bracket">)
-<span class="hl-punctuation-bracket">}
+<span class="hl-keyword">async</span> <span class="hl-keyword-function">fn</span> <span class="hl-function">get_profile</span><span class="hl-punctuation-bracket">(</span><span class="hl-constructor">Path</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">profile_name</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type">Path</span><span class="hl-punctuation-bracket">&lt;</span><span class="hl-type-builtin">String</span><span class="hl-punctuation-bracket">&gt;</span><span class="hl-punctuation-bracket">)</span> <span class="hl-operator">-&gt;</span> <span class="hl-type">Html</span><span class="hl-punctuation-bracket">&lt;</span><span class="hl-type-builtin">String</span><span class="hl-punctuation-bracket">&gt;</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-keyword-storage">let</span> <span class="hl-variable">orders_example</span> <span class="hl-operator">=</span> <span class="hl-function-macro">vec</span><span class="hl-function-macro">!</span><span class="hl-punctuation-bracket">[</span>
+        <span class="hl-constructor">Items</span> <span class="hl-punctuation-bracket">{</span>
+            <span class="hl-variable-other-member">id</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-variable-other-member">name</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"Article banana"</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">into</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-constructor">Items</span> <span class="hl-punctuation-bracket">{</span>
+            <span class="hl-variable-other-member">id</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-variable-other-member">name</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"Article apple"</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">into</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-keyword-storage">let</span> <span class="hl-variable">profile_example</span> <span class="hl-operator">=</span> <span class="hl-constructor">Profile</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-variable-other-member">full_name</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-variable">profile_name</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-other-member">items</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-variable">orders_example</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-keyword-storage">let</span> <span class="hl-variable">r</span> <span class="hl-operator">=</span> <span class="hl-function-macro">render</span><span class="hl-function-macro">!</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">PROFILE_TEMPLATE</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">profile</span> <span class="hl-operator">=</span><span class="hl-operator">&gt;</span> <span class="hl-variable">profile_example</span> <span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-constructor">Html</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">r</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-punctuation-bracket">#<span class="hl-punctuation-bracket">[<span class="hl-namespace">tokio<span class="hl-punctuation-delimiter">::<span class="hl-function-macro">main<span class="hl-punctuation-bracket">]
-<span class="hl-keyword">async <span class="hl-keyword-function">fn <span class="hl-function">main<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">) <span class="hl-punctuation-bracket">{
-    <span class="hl-keyword-storage">let <span class="hl-variable">app <span class="hl-operator">= <span class="hl-type">Router<span class="hl-punctuation-delimiter">::<span class="hl-function">new<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
-        <span class="hl-punctuation-delimiter">.<span class="hl-function">route<span class="hl-punctuation-bracket">(
-            <span class="hl-string">"/"<span class="hl-punctuation-delimiter">,
-            <span class="hl-function">get<span class="hl-punctuation-bracket">(<span class="hl-variable">home<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">)
-        <span class="hl-punctuation-delimiter">.<span class="hl-function">route<span class="hl-punctuation-bracket">(
-            <span class="hl-string">"/:profile_name"<span class="hl-punctuation-delimiter">,
-            <span class="hl-function">get<span class="hl-punctuation-bracket">(<span class="hl-variable">get_profile<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
-    <span class="hl-comment-line">// run it with hyper on localhost:3000
-    <span class="hl-namespace">axum<span class="hl-punctuation-delimiter">::<span class="hl-type">Server<span class="hl-punctuation-delimiter">::<span class="hl-function">bind<span class="hl-punctuation-bracket">(<span class="hl-operator">&amp;<span class="hl-string">"0.0.0.0:3000"<span class="hl-punctuation-delimiter">.<span class="hl-function">parse<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">.<span class="hl-function">unwrap<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">)
-        <span class="hl-punctuation-delimiter">.<span class="hl-function">serve<span class="hl-punctuation-bracket">(<span class="hl-variable">app<span class="hl-punctuation-delimiter">.<span class="hl-function">into_make_service<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">)
-        <span class="hl-punctuation-delimiter">.<span class="hl-keyword-control-return">await
-        <span class="hl-punctuation-delimiter">.<span class="hl-function">unwrap<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
-<span class="hl-punctuation-bracket">}
+<span class="hl-punctuation-bracket">#</span><span class="hl-punctuation-bracket">[</span><span class="hl-namespace">tokio</span><span class="hl-punctuation-delimiter">::</span><span class="hl-function-macro">main</span><span class="hl-punctuation-bracket">]</span>
+<span class="hl-keyword">async</span> <span class="hl-keyword-function">fn</span> <span class="hl-function">main</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-keyword-storage">let</span> <span class="hl-variable">app</span> <span class="hl-operator">=</span> <span class="hl-type">Router</span><span class="hl-punctuation-delimiter">::</span><span class="hl-function">new</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-function">route</span><span class="hl-punctuation-bracket">(</span>
+            <span class="hl-string">"/"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-function">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">home</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">)</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-function">route</span><span class="hl-punctuation-bracket">(</span>
+            <span class="hl-string">"/:profile_name"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-function">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">get_profile</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-comment-line">// run it with hyper on localhost:3000</span>
+    <span class="hl-namespace">axum</span><span class="hl-punctuation-delimiter">::</span><span class="hl-type">Server</span><span class="hl-punctuation-delimiter">::</span><span class="hl-function">bind</span><span class="hl-punctuation-bracket">(</span><span class="hl-operator">&amp;</span><span class="hl-string">"0.0.0.0:3000"</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">parse</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">unwrap</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-function">serve</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">app</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function">into_make_service</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-keyword-control-return">await</span>
+        <span class="hl-punctuation-delimiter">.</span><span class="hl-function">unwrap</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-punctuation-bracket">}</span>
 </code></pre>
 <p>Too complicated?</p>
 <p>Let&#39;s take a look at this 2 lines:</p>
-<pre><code class="language-rust"><span class="hl-string">"/:profile_name"<span class="hl-punctuation-delimiter">,
-<span class="hl-function">get<span class="hl-punctuation-bracket">(<span class="hl-variable">get_profile<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
+<pre><code class="language-rust"><span class="hl-string">"/:profile_name"</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-function">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">get_profile</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
 </code></pre>
 <p>The first line is the <code>path</code>, which is a the root <code>/</code> + a variable value <code>:profile_name</code>.
 And right in the next line, we call the <code>get_profile</code>, which we can see how it uses the <code>profile_name</code> variable, extracted from the <code>path</code>.</p>
 <p>After that, we create the example <code>structs</code>. In a real example, that information would probably come from a database.</p>
 <p>And then, inside the <code>get_profile</code> we have:</p>
-<pre><code class="language-rust"><span class="hl-keyword-storage">let <span class="hl-variable">r <span class="hl-operator">= <span class="hl-function-macro">render<span class="hl-function-macro">!<span class="hl-punctuation-bracket">(<span class="hl-constant">PROFILE_TEMPLATE<span class="hl-punctuation-delimiter">, <span class="hl-variable">profile <span class="hl-operator">=<span class="hl-operator">&gt; <span class="hl-variable">profile_example <span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">;
-<span class="hl-constructor">Html<span class="hl-punctuation-bracket">(<span class="hl-variable">r<span class="hl-punctuation-bracket">)
+<pre><code class="language-rust"><span class="hl-keyword-storage">let</span> <span class="hl-variable">r</span> <span class="hl-operator">=</span> <span class="hl-function-macro">render</span><span class="hl-function-macro">!</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">PROFILE_TEMPLATE</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">profile</span> <span class="hl-operator">=</span><span class="hl-operator">&gt;</span> <span class="hl-variable">profile_example</span> <span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-constructor">Html</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">r</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>Where <code>render!</code> is minijinja&#39;s macro, that receives the template we previous declared, and then we provide some kind of &quot;map&quot; between the variables used in the template first, and then the rust variable.</p>
 <p>A downside here is, that if we have an error in our template, we are only going to see it during runtime.

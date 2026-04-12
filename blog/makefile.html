@@ -142,29 +142,29 @@ I have recently done a big refactor for a project, where we make heavy use of Ma
 <p>Let&#39;s explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
 closing with some magic you can do with Makefiles.</p>
 <p>Set up a practice field by running in the terminal:</p>
-<pre><code class="language-sh"><span class="hl-function">mkdir <span class="hl-variable-parameter">/tmp/practice
-<span class="hl-function-builtin">cd <span class="hl-variable-parameter">/tmp/practice
-<span class="hl-function">touch <span class="hl-variable-parameter">index.html
+<pre><code class="language-sh"><span class="hl-function">mkdir</span> <span class="hl-variable-parameter">/tmp/practice</span>
+<span class="hl-function-builtin">cd</span> <span class="hl-variable-parameter">/tmp/practice</span>
+<span class="hl-function">touch</span> <span class="hl-variable-parameter">index.html</span>
 </code></pre>
 <p>And write a minimal <code>Makefile</code> with your favourite editor (E.g: <code>vim Makefile</code>)</p>
-<pre><code class="language-Makefile">build:
-	mkdir dist
-	cp index.html dist/index.html
+<pre><code class="language-Makefile"><span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
 </code></pre>
 <p>Then execute in your terminal:</p>
-<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">build
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
 </code></pre>
 <p>This will create a folder <code>dist</code>, and copy <code>index.html</code> into the folder <code>dist</code>.</p>
 <p>This is good. Particularly for me, it documents the commands used by the project, and helps future me.</p>
 <p>Let&#39;s refactor a bit, to show some extra functionality:</p>
-<pre><code class="language-Makefile">dist:
-	mkdir dist
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
 
-build: dist
-	cp index.html dist/index.html
+<span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> dist
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
 </code></pre>
 <p>Notice the <code>build: dist</code>, it means: call <code>dist</code> command <em>before</em> running <code>build</code></p>
-<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">build
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
 </code></pre>
 <p>The functionality remains the same.</p>
 <h3 id="recap">Recap<a class="heading-anchor" href="#recap">¶</a></h3>
@@ -186,12 +186,12 @@ make build
 $ make: `build' is up to date.
 </code></pre>
 <p>If we want to actually treat <code>build</code> as a command, we have to add <code>.PHONY</code>.</p>
-<pre><code class="language-Makefile">dist:
-	mkdir dist
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
 
-.PHONY: build
-build: dist
-	cp index.html dist/index.html
+<span class="hl-constant">.PHONY</span><span class="hl-punctuation-delimiter">:</span> build
+<span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> dist
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
 </code></pre>
 <p>This way Make no longer sees <code>build</code> as a file, but instead as a recipe, and it will be
 executed everytime.</p>
@@ -201,14 +201,14 @@ Don&#39;t worry, I actually didn&#39;t say anything.</p>
 <p>If you treat your targets as <strong>files</strong>, Make can keep track of the files that have
 changed, and update only those.</p>
 <p>By knowing this our previous example could be refactored into:</p>
-<pre><code class="language-Makefile">dist:
-	mkdir dist
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
 
-dist/index.html: dist
-	cp index.html dist/index.html
+<span class="hl-constant">dist/index.html</span><span class="hl-punctuation-delimiter">:</span> dist
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
 </code></pre>
 <p>And now we tell Make to create our target file:</p>
-<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">dist/index.html
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">dist/index.html</span>
 </code></pre>
 <p>If we run multiple times, we get:</p>
 <pre><code>make: `dist/index.html' is up to date.
@@ -217,18 +217,18 @@ dist/index.html: dist
 but we are getting the same message.</p>
 <h2 id="dependencies">Dependencies<a class="heading-anchor" href="#dependencies">¶</a></h2>
 <p>We need to tell Make that it depends on another file: <code>index.html</code></p>
-<pre><code class="language-Makefile">dist:
-	mkdir dist
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
 
-dist/index.html: dist index.html
-	cp index.html dist/index.html
+<span class="hl-constant">dist/index.html</span><span class="hl-punctuation-delimiter">:</span> dist index.html
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
 </code></pre>
 <p>This time, if <code>index.html</code> is modified, <code>make dist/index.html</code> will run again.
 Thus, when dependencies are updated, <strong>target files</strong> are recreated.</p>
 <p><img src="/images/makefile/make-targets-deps.png" alt="Makefile targets and dependencies" /></p>
 <h2 id="patterns">Patterns<a class="heading-anchor" href="#patterns">¶</a></h2>
 <p>Now let&#39;s say we have many html files</p>
-<pre><code class="language-sh"><span class="hl-function">touch <span class="hl-variable-parameter">about.html <span class="hl-variable-parameter">privacy.html <span class="hl-variable-parameter">docs.html
+<pre><code class="language-sh"><span class="hl-function">touch</span> <span class="hl-variable-parameter">about.html</span> <span class="hl-variable-parameter">privacy.html</span> <span class="hl-variable-parameter">docs.html</span>
 </code></pre>
 <p>And we want to do the same for all the files, without creating many commands in Make.
 For this case we use a pattern (<code>%</code>), and some Make variables:</p>
@@ -236,13 +236,13 @@ For this case we use a pattern (<code>%</code>), and some Make variables:</p>
 <li><code>$@</code>: the target file</li>
 <li><code>$&lt;</code>: the input file</li>
 </ul>
-<pre><code class="language-Makefile">dist:
-	mkdir dist
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
 
-dist/%.html: %.html dist
-	cp $&lt; $@
+<span class="hl-constant">dist/%.html</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string-regexp">%.html</span> dist
+	<span class="hl-function">cp</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-special">&lt;</span> <span class="hl-punctuation-special">$</span><span class="hl-operator">@</span>
 </code></pre>
-<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">dist/about.html
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">dist/about.html</span>
 </code></pre>
 <p>And we would be explicitly telling Make which file to create.</p>
 <p>But what if we want to copy all the files at the same time?</p>
@@ -252,21 +252,21 @@ And we are providing the <code>about</code> to the <code>make dist/about.html</c
 <h2 id="variables">Variables<a class="heading-anchor" href="#variables">¶</a></h2>
 <p>We are gonna find the source files (<code>*.html</code> files which are not in the <code>dist</code> folder), store in a variable,
 and then use that information to create the target html files.</p>
-<pre><code class="language-Makefile">SRC_HTMLS := $(shell find . -name '*.html' -depth 1)
+<pre><code class="language-Makefile"><span class="hl-variable">SRC_HTMLS</span> <span class="hl-operator">:=</span> <span class="hl-string"><span class="hl-punctuation-special">$</span></span><span class="hl-string"><span class="hl-punctuation-bracket">(</span></span><span class="hl-string"><span class="hl-keyword-function">shell</span></span><span class="hl-string"> find . -name '*.html' -depth 1</span><span class="hl-punctuation-bracket">)</span>
 
-TARGET_HTMLS := $(SRC_HTMLS:./%.html=dist/%.html)
+<span class="hl-variable">TARGET_HTMLS</span> <span class="hl-operator">:=</span> <span class="hl-string"><span class="hl-punctuation-special">$</span></span><span class="hl-string"><span class="hl-punctuation-bracket">(</span></span><span class="hl-string">SRC_HTMLS</span><span class="hl-punctuation-delimiter">:</span><span class="hl-string"><span class="hl-string-regexp">./%.html</span></span><span class="hl-string"><span class="hl-operator">=</span></span><span class="hl-string"><span class="hl-string-regexp">dist/%.html</span></span><span class="hl-string"><span class="hl-punctuation-bracket">)</span></span>
 
-.PHONY: build
-build: $(TARGET_HTMLS)
-	$(info Done)
+<span class="hl-constant">.PHONY</span><span class="hl-punctuation-delimiter">:</span> build
+<span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">TARGET_HTMLS</span><span class="hl-punctuation-bracket">)</span>
+	<span class="hl-punctuation-special">$</span><span class="hl-punctuation-bracket">(</span><span class="hl-keyword-control-exception">info</span> Done<span class="hl-punctuation-bracket">)</span>
 
-dist:
-	mkdir dist
+<span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
 
-dist/%.html: %.html dist
-	cp $&lt; $@
+<span class="hl-constant">dist/%.html</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string-regexp">%.html</span> dist
+	<span class="hl-function">cp</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-special">&lt;</span> <span class="hl-punctuation-special">$</span><span class="hl-operator">@</span>
 </code></pre>
-<pre><code class="language-sh"><span class="hl-function">make <span class="hl-variable-parameter">build
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
 </code></pre>
 <p>What happens is:</p>
 <ul>
@@ -276,10 +276,10 @@ dist/%.html: %.html dist
 <li>If the conditions are met, it runs the <code>cp</code> command for each file, unless they are already present and not updated</li>
 </ul>
 <p>You can think of</p>
-<pre><code class="language-Makefile">build: $(TARGET_HTMLS)
+<pre><code class="language-Makefile"><span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">TARGET_HTMLS</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>As</p>
-<pre><code class="language-Makefile">build: dist/index.html dist/about.html dist/docs.html dist/privacy.html
+<pre><code class="language-Makefile"><span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> dist/index.html dist/about.html dist/docs.html dist/privacy.html
 </code></pre>
 <p>Variables can be reference using <code>$()</code> or <code>${}</code>.</p>
 <p>We also use <code>$(info Done)</code> to send information messages to the user.
@@ -288,7 +288,7 @@ Make also provides <code>$(warning text…)</code> for warnings, and
 See <a href="https://www.gnu.org/software/make/manual/html_node/Make-Control-Functions.html">Make-Control-Functions</a></p>
 <h2 id="one-more-time">One more time<a class="heading-anchor" href="#one-more-time">¶</a></h2>
 <p>Let&#39;s start over by removing the <code>dist</code> folder, and see what happens</p>
-<pre><code class="language-sh"><span class="hl-function">rm <span class="hl-variable-parameter">-rf <span class="hl-variable-parameter">dist
+<pre><code class="language-sh"><span class="hl-function">rm</span> <span class="hl-variable-parameter">-rf</span> <span class="hl-variable-parameter">dist</span>
 </code></pre>
 <pre><code>❯ make build
 mkdir dist

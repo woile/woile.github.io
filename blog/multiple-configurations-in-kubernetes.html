@@ -137,32 +137,32 @@ kubernetes. At this point, you&#39;ll want to have multiple config files, instea
 replacing <code>~/.kube/config</code>, which is fine the first few times.</p>
 <p>In order to do this we only need to set <code>KUBECONFIG</code> env variable with the path to the kubeconfigs.</p>
 <p>Create a <code>configs</code> folder, where the kubernetes config files will live.</p>
-<pre><code class="language-bash"><span class="hl-function">mkdir <span class="hl-variable-parameter">-p <span class="hl-variable-parameter">~/.kube/configs
+<pre><code class="language-bash"><span class="hl-function">mkdir</span> <span class="hl-variable-parameter">-p</span> <span class="hl-variable-parameter">~/.kube/configs</span>
 </code></pre>
 <p>The next thing is to add the env variable to our <code>.bashrc</code>, <code>.zshrc</code> or <code>.profile</code> file,
 with the location of our configurations. The paths should be separated by a <code>:</code>.</p>
-<pre><code class="language-bash"><span class="hl-keyword-control-import">export <span class="hl-constant">KUBECONFIG<span class="hl-operator">=<span class="hl-punctuation-special">$<span class="hl-variable-builtin">HOME<span class="hl-string">/.kube/configs/gke-config:$<span class="hl-variable-parameter">HOME/.kube/configs/eks-config
+<pre><code class="language-bash"><span class="hl-keyword-control-import">export</span> <span class="hl-constant">KUBECONFIG</span><span class="hl-operator">=</span><span class="hl-punctuation-special">$</span><span class="hl-variable-builtin">HOME</span><span class="hl-string">/.kube/configs/gke-config:</span>$<span class="hl-variable-parameter">HOME/.kube/configs/eks-config</span>
 </code></pre>
 <p>Reloading our terminal with <code>. ~/.bashrc</code>, or opening a new one should pick up the changes.</p>
 <h3 id="automating-the-config-detection">Automating the config detection<a class="heading-anchor" href="#automating-the-config-detection">¶</a></h3>
 <p>Why not automate this? So everytime we add a new kubeconfig, it&#39;s detected automatically.</p>
 <p>Here&#39;s my attempt, place this snippet in your <code>.bashrc</code> or any other terminal file.</p>
-<pre><code class="language-bash"><span class="hl-function">set_kubeconfig<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">) <span class="hl-punctuation-bracket">{
-    <span class="hl-keyword-control-repeat">for <span class="hl-variable">entry <span class="hl-keyword-control-conditional">in <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-variable-builtin">HOME<span class="hl-string">/.kube/configs"<span class="hl-string">/*
-    <span class="hl-keyword-control-repeat">do
-        <span class="hl-comment"># Get files which do not include "skip"
-        <span class="hl-keyword-control-conditional">if <span class="hl-punctuation-bracket">[ <span class="hl-operator">-f <span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-variable">entry<span class="hl-string">" <span class="hl-punctuation-bracket">] <span class="hl-operator">&amp;&amp; <span class="hl-punctuation-bracket">[[ <span class="hl-punctuation-special">$<span class="hl-variable">entry <span class="hl-operator">!= <span class="hl-string-regexp">*<span class="hl-string">"skip"<span class="hl-string-regexp">* <span class="hl-punctuation-bracket">]]<span class="hl-punctuation-delimiter">;<span class="hl-keyword-control-conditional">then
-            <span class="hl-variable">kubeconfigs<span class="hl-operator">=<span class="hl-string">"<span class="hl-punctuation-special">$<span class="hl-variable">kubeconfigs<span class="hl-string">:<span class="hl-punctuation-special">$<span class="hl-variable">entry<span class="hl-string">"
-        <span class="hl-keyword-control-conditional">fi
-    <span class="hl-keyword-control-repeat">done
+<pre><code class="language-bash"><span class="hl-function">set_kubeconfig</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-keyword-control-repeat">for</span> <span class="hl-variable">entry</span> <span class="hl-keyword-control-conditional">in</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-variable-builtin">HOME</span></span><span class="hl-string">/.kube/configs"</span><span class="hl-string">/*</span>
+    <span class="hl-keyword-control-repeat">do</span>
+        <span class="hl-comment"># Get files which do not include "skip"</span>
+        <span class="hl-keyword-control-conditional">if</span> <span class="hl-punctuation-bracket">[</span> <span class="hl-operator">-f</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-variable">entry</span></span><span class="hl-string">"</span> <span class="hl-punctuation-bracket">]</span> <span class="hl-operator">&amp;&amp;</span> <span class="hl-punctuation-bracket">[[</span> <span class="hl-punctuation-special">$</span><span class="hl-variable">entry</span> <span class="hl-operator">!=</span> <span class="hl-string-regexp">*</span><span class="hl-string">"skip"</span><span class="hl-string-regexp">*</span> <span class="hl-punctuation-bracket">]]</span><span class="hl-punctuation-delimiter">;</span><span class="hl-keyword-control-conditional">then</span>
+            <span class="hl-variable">kubeconfigs</span><span class="hl-operator">=</span><span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-variable">kubeconfigs</span></span><span class="hl-string">:</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-variable">entry</span></span><span class="hl-string">"</span>
+        <span class="hl-keyword-control-conditional">fi</span>
+    <span class="hl-keyword-control-repeat">done</span>
 
-    <span class="hl-comment"># Clean first colons
-    <span class="hl-variable">kubeconfigs<span class="hl-operator">=<span class="hl-punctuation-special">${<span class="hl-variable">kubeconfigs<span class="hl-punctuation-special">#<span class="hl-string">":"<span class="hl-punctuation-special">}
-    <span class="hl-keyword-control-import">export <span class="hl-constant">KUBECONFIG<span class="hl-operator">=<span class="hl-punctuation-special">$<span class="hl-variable">kubeconfigs
-<span class="hl-punctuation-bracket">}
+    <span class="hl-comment"># Clean first colons</span>
+    <span class="hl-variable">kubeconfigs</span><span class="hl-operator">=</span><span class="hl-punctuation-special">${</span><span class="hl-variable">kubeconfigs</span><span class="hl-punctuation-special">#</span><span class="hl-string">":"</span><span class="hl-punctuation-special">}</span>
+    <span class="hl-keyword-control-import">export</span> <span class="hl-constant">KUBECONFIG</span><span class="hl-operator">=</span><span class="hl-punctuation-special">$</span><span class="hl-variable">kubeconfigs</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-comment"># Execute the function
-<span class="hl-function">set_kubeconfig
+<span class="hl-comment"># Execute the function</span>
+<span class="hl-function">set_kubeconfig</span>
 </code></pre>
 <p>This script will get all the <strong>files</strong> inside <code>~/.kube/configs</code>,
 which do not include <code>skip</code> in their name, and will set the <code>KUBECONFIG</code>
@@ -172,16 +172,16 @@ variable to the found files.</p>
 contexts and namespaces. I&#39;ll leave here the shortcuts</p>
 <p>Remember that a context is a mix of [cluster, namespace, user].</p>
 <h4 id="current-configuration">Current configuration<a class="heading-anchor" href="#current-configuration">¶</a></h4>
-<pre><code class="language-bash"><span class="hl-function">kubectl <span class="hl-variable-parameter">config <span class="hl-variable-parameter">view <span class="hl-variable-parameter">--minify  <span class="hl-comment"># without minify we'll see all the configs
+<pre><code class="language-bash"><span class="hl-function">kubectl</span> <span class="hl-variable-parameter">config</span> <span class="hl-variable-parameter">view</span> <span class="hl-variable-parameter">--minify</span>  <span class="hl-comment"># without minify we'll see all the configs</span>
 </code></pre>
 <h4 id="list-contexts">List contexts<a class="heading-anchor" href="#list-contexts">¶</a></h4>
-<pre><code class="language-bash"><span class="hl-function">kubectl <span class="hl-variable-parameter">config <span class="hl-variable-parameter">get-contexts
+<pre><code class="language-bash"><span class="hl-function">kubectl</span> <span class="hl-variable-parameter">config</span> <span class="hl-variable-parameter">get-contexts</span>
 </code></pre>
 <h4 id="switch-context">Switch context<a class="heading-anchor" href="#switch-context">¶</a></h4>
-<pre><code class="language-bash"><span class="hl-function">kubectl <span class="hl-variable-parameter">config <span class="hl-variable-parameter">use-context <span class="hl-operator">&lt;<span class="hl-string-special-path">context_name<span class="hl-operator">&gt;
+<pre><code class="language-bash"><span class="hl-function">kubectl</span> <span class="hl-variable-parameter">config</span> <span class="hl-variable-parameter">use-context</span> <span class="hl-operator">&lt;</span><span class="hl-string-special-path">context_name</span><span class="hl-operator">&gt;</span>
 </code></pre>
 <h4 id="switch-namespace">Switch namespace<a class="heading-anchor" href="#switch-namespace">¶</a></h4>
-<pre><code class="language-bash"><span class="hl-function">kubectl <span class="hl-variable-parameter">config <span class="hl-variable-parameter">set-context <span class="hl-variable-parameter">--current <span class="hl-variable-parameter">--namespace=<span class="hl-operator">&lt;<span class="hl-string-special-path">new_namespace<span class="hl-operator">&gt;
+<pre><code class="language-bash"><span class="hl-function">kubectl</span> <span class="hl-variable-parameter">config</span> <span class="hl-variable-parameter">set-context</span> <span class="hl-variable-parameter">--current</span> <span class="hl-variable-parameter">--namespace=</span><span class="hl-operator">&lt;</span><span class="hl-string-special-path">new_namespace</span><span class="hl-operator">&gt;</span>
 </code></pre>
 <p>Thanks for reading!</p>
 

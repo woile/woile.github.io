@@ -134,112 +134,112 @@
 <p>This is a good configuration to start logging right away.
 You can use it when you have a single file, or you can share the <code>logger</code> if stored in a separated file,
 which is not recommended when you start growing.</p>
-<pre><code class="language-python"><span class="hl-keyword-control-import">import <span class="hl-namespace">logging
-<span class="hl-keyword-control-import">import <span class="hl-namespace">os
-<span class="hl-keyword-control-import">import <span class="hl-namespace">sys
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logging</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">os</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">sys</span>
 
-<span class="hl-constant">LOGLEVEL <span class="hl-operator">= <span class="hl-namespace">os<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">environ<span class="hl-punctuation-delimiter">.<span class="hl-function-method">get<span class="hl-punctuation-bracket">(<span class="hl-string">'LOGLEVEL'<span class="hl-punctuation-delimiter">, <span class="hl-string">'INFO'<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">.<span class="hl-function-method">upper<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger <span class="hl-operator">= <span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-function-method">getLogger<span class="hl-punctuation-bracket">(<span class="hl-string">"my_app"<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">setLevel<span class="hl-punctuation-bracket">(<span class="hl-constant">LOGLEVEL<span class="hl-punctuation-bracket">)
-<span class="hl-variable">console_handler <span class="hl-operator">= <span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-constructor">StreamHandler<span class="hl-punctuation-bracket">(<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">stdout<span class="hl-punctuation-bracket">)
-<span class="hl-variable">formatter <span class="hl-operator">= <span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-constructor">Formatter<span class="hl-punctuation-bracket">(<span class="hl-string">"[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s"<span class="hl-punctuation-bracket">)
-<span class="hl-variable">console_handler<span class="hl-punctuation-delimiter">.<span class="hl-function-method">setFormatter<span class="hl-punctuation-bracket">(<span class="hl-variable">formatter<span class="hl-punctuation-bracket">)
-<span class="hl-variable">console_handler<span class="hl-punctuation-delimiter">.<span class="hl-function-method">setLevel<span class="hl-punctuation-bracket">(<span class="hl-constant">LOGLEVEL<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">addHandler<span class="hl-punctuation-bracket">(<span class="hl-variable">console_handler<span class="hl-punctuation-bracket">)
+<span class="hl-constant">LOGLEVEL</span> <span class="hl-operator">=</span> <span class="hl-namespace">os</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">environ</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'LOGLEVEL'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'INFO'</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">upper</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">getLogger</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"my_app"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">LOGLEVEL</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">StreamHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">stdout</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">formatter</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">Formatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setFormatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">formatter</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">LOGLEVEL</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">addHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">console_handler</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-comment"># Send messages
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">debug<span class="hl-punctuation-bracket">(<span class="hl-string">"Set LOGLEVEL=DEBUG to see this"<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">info<span class="hl-punctuation-bracket">(<span class="hl-string">"An info log"<span class="hl-punctuation-bracket">)
+<span class="hl-comment"># Send messages</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">debug</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Set LOGLEVEL=DEBUG to see this"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">info</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"An info log"</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>You can also replace <code>name</code> with <code>pathname</code> to get the full path.</p>
 <h2 id="project-wide-logging-configuration">Project-wide logging configuration<a class="heading-anchor" href="#project-wide-logging-configuration">¶</a></h2>
 <p>In this case we want to configure the logs once, by using the popular dict logging conf:</p>
-<pre><code class="language-python"><span class="hl-comment"># ./my_app/logs.py
-<span class="hl-constant">LOGGING_CONFIG <span class="hl-operator">= <span class="hl-punctuation-bracket">{
-    <span class="hl-string">"version"<span class="hl-punctuation-delimiter">: <span class="hl-constant-numeric-integer">1<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"disable_existing_loggers"<span class="hl-punctuation-delimiter">: <span class="hl-constant-builtin-boolean">True<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"formatters"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{
-        <span class="hl-string">"standard"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{
-            <span class="hl-string">"format"<span class="hl-punctuation-delimiter">: <span class="hl-string">"[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s"
-        <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"handlers"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{
-        <span class="hl-string">"default"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{
-            <span class="hl-string">"level"<span class="hl-punctuation-delimiter">: <span class="hl-string">"INFO"<span class="hl-punctuation-delimiter">,
-            <span class="hl-string">"formatter"<span class="hl-punctuation-delimiter">: <span class="hl-string">"standard"<span class="hl-punctuation-delimiter">,
-            <span class="hl-string">"class"<span class="hl-punctuation-delimiter">: <span class="hl-string">"logging.StreamHandler"<span class="hl-punctuation-delimiter">,
-            <span class="hl-string">"stream"<span class="hl-punctuation-delimiter">: <span class="hl-string">"ext://sys.stdout"<span class="hl-punctuation-delimiter">,  <span class="hl-comment"># Default is stderr
-        <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"loggers"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{
-        <span class="hl-string">""<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{  <span class="hl-comment"># root logger
-            <span class="hl-string">"handlers"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[<span class="hl-string">"default"<span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-            <span class="hl-string">"level"<span class="hl-punctuation-delimiter">: <span class="hl-string">"WARNING"<span class="hl-punctuation-delimiter">,
-            <span class="hl-string">"propagate"<span class="hl-punctuation-delimiter">: <span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-        <span class="hl-string">"__main__"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{  <span class="hl-comment"># if __name__ == '__main__'
-            <span class="hl-string">"handlers"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[<span class="hl-string">"default"<span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-            <span class="hl-string">"level"<span class="hl-punctuation-delimiter">: <span class="hl-string">"DEBUG"<span class="hl-punctuation-delimiter">,
-            <span class="hl-string">"propagate"<span class="hl-punctuation-delimiter">: <span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-        <span class="hl-string">"my_app"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{  <span class="hl-comment"># folder
-	        <span class="hl-string">"handlers"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[<span class="hl-string">"default"<span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-	        <span class="hl-string">"level"<span class="hl-punctuation-delimiter">: <span class="hl-string">"INFO"<span class="hl-punctuation-delimiter">,
-	        <span class="hl-string">"propagate"<span class="hl-punctuation-delimiter">: <span class="hl-constant-builtin-boolean">False
-	    <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-<span class="hl-punctuation-bracket">}
+<pre><code class="language-python"><span class="hl-comment"># ./my_app/logs.py</span>
+<span class="hl-constant">LOGGING_CONFIG</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-string">"version"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"disable_existing_loggers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">True</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"formatters"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-string">"standard"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+            <span class="hl-string">"format"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s"</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-string">"default"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+            <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"INFO"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"formatter"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"standard"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"class"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"logging.StreamHandler"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"stream"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"ext://sys.stdout"</span><span class="hl-punctuation-delimiter">,</span>  <span class="hl-comment"># Default is stderr</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"loggers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-string">""</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>  <span class="hl-comment"># root logger</span>
+            <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"default"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"WARNING"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"propagate"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-string">"__main__"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>  <span class="hl-comment"># if __name__ == '__main__'</span>
+            <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"default"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"DEBUG"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"propagate"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-string">"my_app"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>  <span class="hl-comment"># folder</span>
+	        <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"default"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+	        <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"INFO"</span><span class="hl-punctuation-delimiter">,</span>
+	        <span class="hl-string">"propagate"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">False</span>
+	    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-keyword-control-import">import <span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-variable">config
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">config</span>
 
-<span class="hl-keyword-function">def <span class="hl-function">init<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-    <span class="hl-comment"># Run once at startup:
-    <span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-namespace">config<span class="hl-punctuation-delimiter">.<span class="hl-function-method">dictConfig<span class="hl-punctuation-bracket">(<span class="hl-constant">LOGGING_CONFIG<span class="hl-punctuation-bracket">)
+<span class="hl-keyword-function">def</span> <span class="hl-function">init</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-comment"># Run once at startup:</span>
+    <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-namespace">config</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">dictConfig</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">LOGGING_CONFIG</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
-<pre><code class="language-python"><span class="hl-comment"># ./my_app/foo.py
-<span class="hl-keyword-control-import">import <span class="hl-namespace">logs
+<pre><code class="language-python"><span class="hl-comment"># ./my_app/foo.py</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logs</span>
 
-<span class="hl-namespace">logs<span class="hl-punctuation-delimiter">.<span class="hl-function-method">init<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger <span class="hl-operator">= <span class="hl-variable">logging<span class="hl-punctuation-delimiter">.<span class="hl-function-method">getLogger<span class="hl-punctuation-bracket">(<span class="hl-variable">__name__<span class="hl-punctuation-bracket">)
+<span class="hl-namespace">logs</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">init</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span> <span class="hl-operator">=</span> <span class="hl-variable">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">getLogger</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">__name__</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-comment"># Send messages
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">debug<span class="hl-punctuation-bracket">(<span class="hl-string">"Set LOGLEVEL=DEBUG to see this"<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">info<span class="hl-punctuation-bracket">(<span class="hl-string">"Hello world"<span class="hl-punctuation-bracket">)
+<span class="hl-comment"># Send messages</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">debug</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Set LOGLEVEL=DEBUG to see this"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">info</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Hello world"</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>And your folder structure should look something like:</p>
-<pre><code class="language-sh"><span class="hl-function">my-app/
-<span class="hl-function">└── <span class="hl-variable-parameter">my_app/
-    <span class="hl-function">├── <span class="hl-variable-parameter">foo.py
-    <span class="hl-function">└── <span class="hl-variable-parameter">logs.py
+<pre><code class="language-sh"><span class="hl-function">my-app/</span>
+<span class="hl-function">└──</span> <span class="hl-variable-parameter">my_app/</span>
+    <span class="hl-function">├──</span> <span class="hl-variable-parameter">foo.py</span>
+    <span class="hl-function">└──</span> <span class="hl-variable-parameter">logs.py</span>
 </code></pre>
 <h2 id="structured-logging">Structured logging<a class="heading-anchor" href="#structured-logging">¶</a></h2>
 <p>Structured logs are usually in JSON format, making it easy for machines to parse and index them. See for example <a href="https://www.elastic.co/blog/structured-logging-filebeat">structured logging with filebeat</a>.
 A common format is bunyan, based on <a href="https://github.com/trentm/node-bunyan">bunyan-node</a>.</p>
 <pre><code>pip install bunyan
 </code></pre>
-<pre><code class="language-python"><span class="hl-keyword-control-import">import <span class="hl-namespace">logging
-<span class="hl-keyword-control-import">import <span class="hl-namespace">bunyan
-<span class="hl-keyword-control-import">import <span class="hl-namespace">sys
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logging</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">bunyan</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">sys</span>
 
-<span class="hl-variable">logger <span class="hl-operator">= <span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-function-method">getLogger<span class="hl-punctuation-bracket">(<span class="hl-string">"my_app"<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">setLevel<span class="hl-punctuation-bracket">(<span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-constant">INFO<span class="hl-punctuation-bracket">)
-<span class="hl-variable">console_handler <span class="hl-operator">= <span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-constructor">StreamHandler<span class="hl-punctuation-bracket">(<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">stdout<span class="hl-punctuation-bracket">)
-<span class="hl-variable">formatter <span class="hl-operator">= <span class="hl-namespace">bunyan<span class="hl-punctuation-delimiter">.<span class="hl-constructor">BunyanFormatter<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
-<span class="hl-variable">console_handler<span class="hl-punctuation-delimiter">.<span class="hl-function-method">setFormatter<span class="hl-punctuation-bracket">(<span class="hl-variable">formatter<span class="hl-punctuation-bracket">)
-<span class="hl-variable">console_handler<span class="hl-punctuation-delimiter">.<span class="hl-function-method">setLevel<span class="hl-punctuation-bracket">(<span class="hl-namespace">logging<span class="hl-punctuation-delimiter">.<span class="hl-constant">INFO<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">addHandler<span class="hl-punctuation-bracket">(<span class="hl-variable">console_handler<span class="hl-punctuation-bracket">)
+<span class="hl-variable">logger</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">getLogger</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"my_app"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">INFO</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">StreamHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">stdout</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">formatter</span> <span class="hl-operator">=</span> <span class="hl-namespace">bunyan</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">BunyanFormatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setFormatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">formatter</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">INFO</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">addHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">console_handler</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-comment"># Send messages
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">debug<span class="hl-punctuation-bracket">(<span class="hl-string">"Set LOGLEVEL=DEBUG to see this"<span class="hl-punctuation-bracket">)
-<span class="hl-variable">logger<span class="hl-punctuation-delimiter">.<span class="hl-function-method">info<span class="hl-punctuation-bracket">(<span class="hl-string">"Hello world"<span class="hl-punctuation-bracket">)
+<span class="hl-comment"># Send messages</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">debug</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Set LOGLEVEL=DEBUG to see this"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">info</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Hello world"</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>The output of this script would only show the <code>info</code> logger, and it would look like this:</p>
-<pre><code class="language-json"><span class="hl-punctuation-bracket">{<span class="hl-variable-other-member">"name": <span class="hl-string">"my_app"<span class="hl-punctuation-delimiter">, <span class="hl-variable-other-member">"msg": <span class="hl-string">"Hello world"<span class="hl-punctuation-delimiter">, <span class="hl-variable-other-member">"time": <span class="hl-string">"2022-06-21T07:41:06Z"<span class="hl-punctuation-delimiter">, <span class="hl-variable-other-member">"hostname": <span class="hl-string">"&lt;REDACTED&gt;"<span class="hl-punctuation-delimiter">, <span class="hl-variable-other-member">"level": <span class="hl-constant-numeric">30<span class="hl-punctuation-delimiter">, <span class="hl-variable-other-member">"pid": <span class="hl-constant-numeric">40625<span class="hl-punctuation-delimiter">, <span class="hl-variable-other-member">"v": <span class="hl-constant-numeric">0<span class="hl-punctuation-bracket">}
+<pre><code class="language-json"><span class="hl-punctuation-bracket">{</span><span class="hl-variable-other-member">"name"</span>: <span class="hl-string">"my_app"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"msg"</span>: <span class="hl-string">"Hello world"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"time"</span>: <span class="hl-string">"2022-06-21T07:41:06Z"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"hostname"</span>: <span class="hl-string">"&lt;REDACTED&gt;"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"level"</span>: <span class="hl-constant-numeric">30</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"pid"</span>: <span class="hl-constant-numeric">40625</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"v"</span>: <span class="hl-constant-numeric">0</span><span class="hl-punctuation-bracket">}</span>
 </code></pre>
 <p>For local development, pipe the logs to the buyan cli, so they become friendly for developers.</p>
-<pre><code class="language-sh"><span class="hl-function">wget <span class="hl-variable-parameter">-c <span class="hl-variable-parameter">https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz <span class="hl-variable-parameter">-O <span class="hl-variable-parameter">- <span class="hl-operator">| <span class="hl-function">tar <span class="hl-variable-parameter">-xz
+<pre><code class="language-sh"><span class="hl-function">wget</span> <span class="hl-variable-parameter">-c</span> <span class="hl-variable-parameter">https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz</span> <span class="hl-variable-parameter">-O</span> <span class="hl-variable-parameter">-</span> <span class="hl-operator">|</span> <span class="hl-function">tar</span> <span class="hl-variable-parameter">-xz</span>
 
-<span class="hl-function">python <span class="hl-variable-parameter">my_app.py <span class="hl-operator">| <span class="hl-function">./bunyan
+<span class="hl-function">python</span> <span class="hl-variable-parameter">my_app.py</span> <span class="hl-operator">|</span> <span class="hl-function">./bunyan</span>
 </code></pre>
 <h2 id="docker-issues">Docker issues<a class="heading-anchor" href="#docker-issues">¶</a></h2>
 <p>Sometimes the logs are not sent to the terminal right away, specially if something is blocking. To prevent this, send right away the output to the terminal by setting the env <code>PYTHONUNBUFFERED=1</code>.</p>
@@ -248,15 +248,15 @@ A common format is bunyan, based on <a href="https://github.com/trentm/node-buny
 <pre><code class="language-dockerfile">ENV PYTHONUNBUFFERED 1
 </code></pre>
 <h2 id="running-docker">Running docker<a class="heading-anchor" href="#running-docker">¶</a></h2>
-<pre><code class="language-sh"><span class="hl-function">docker <span class="hl-variable-parameter">run <span class="hl-variable-parameter">--env <span class="hl-string">"PYTHONUNBUFFERED=1" <span class="hl-variable-parameter">python:slim <span class="hl-variable-parameter">bash
+<pre><code class="language-sh"><span class="hl-function">docker</span> <span class="hl-variable-parameter">run</span> <span class="hl-variable-parameter">--env</span> <span class="hl-string">"PYTHONUNBUFFERED=1"</span> <span class="hl-variable-parameter">python:slim</span> <span class="hl-variable-parameter">bash</span>
 </code></pre>
 <h2 id="docker-compose">Docker-compose<a class="heading-anchor" href="#docker-compose">¶</a></h2>
-<pre><code class="language-yaml"><span class="hl-variable-other-member">version<span class="hl-punctuation-delimiter">: <span class="hl-string">'3'
-<span class="hl-variable-other-member">services<span class="hl-punctuation-delimiter">:
-  <span class="hl-variable-other-member">my_app<span class="hl-punctuation-delimiter">:
-    <span class="hl-comment"># ...
-    <span class="hl-variable-other-member">environment<span class="hl-punctuation-delimiter">:
-      <span class="hl-punctuation-delimiter">- <span class="hl-string">PYTHONUNBUFFERED=1
+<pre><code class="language-yaml"><span class="hl-variable-other-member">version</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">'3'</span>
+<span class="hl-variable-other-member">services</span><span class="hl-punctuation-delimiter">:</span>
+  <span class="hl-variable-other-member">my_app</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-comment"># ...</span>
+    <span class="hl-variable-other-member">environment</span><span class="hl-punctuation-delimiter">:</span>
+      <span class="hl-punctuation-delimiter">-</span> <span class="hl-string">PYTHONUNBUFFERED=1</span>
 </code></pre>
 
     </div>

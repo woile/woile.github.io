@@ -148,16 +148,16 @@ commit
 push
 </code></pre>
 <p>Our file structure will result in something like this:</p>
-<pre><code class="language-sh"><span class="hl-function">git-demo
-<span class="hl-function">├── <span class="hl-variable-parameter">git
-<span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">commands
-<span class="hl-function">│   <span class="hl-variable-parameter">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">__init__.py
-<span class="hl-function">│   <span class="hl-variable-parameter">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">add.py
-<span class="hl-function">│   <span class="hl-variable-parameter">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">commit.py
-<span class="hl-function">│   <span class="hl-variable-parameter">│   <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">push.py
-<span class="hl-function">│   <span class="hl-variable-parameter">├── <span class="hl-variable-parameter">__init__.py
-<span class="hl-function">│   <span class="hl-variable-parameter">└── <span class="hl-variable-parameter">__main__.py
-<span class="hl-function">└── <span class="hl-variable-parameter">pyproject.toml
+<pre><code class="language-sh"><span class="hl-function">git-demo</span>
+<span class="hl-function">├──</span> <span class="hl-variable-parameter">git</span>
+<span class="hl-function">│</span>   <span class="hl-variable-parameter">├──</span> <span class="hl-variable-parameter">commands</span>
+<span class="hl-function">│</span>   <span class="hl-variable-parameter">│</span>   <span class="hl-variable-parameter">├──</span> <span class="hl-variable-parameter">__init__.py</span>
+<span class="hl-function">│</span>   <span class="hl-variable-parameter">│</span>   <span class="hl-variable-parameter">├──</span> <span class="hl-variable-parameter">add.py</span>
+<span class="hl-function">│</span>   <span class="hl-variable-parameter">│</span>   <span class="hl-variable-parameter">├──</span> <span class="hl-variable-parameter">commit.py</span>
+<span class="hl-function">│</span>   <span class="hl-variable-parameter">│</span>   <span class="hl-variable-parameter">└──</span> <span class="hl-variable-parameter">push.py</span>
+<span class="hl-function">│</span>   <span class="hl-variable-parameter">├──</span> <span class="hl-variable-parameter">__init__.py</span>
+<span class="hl-function">│</span>   <span class="hl-variable-parameter">└──</span> <span class="hl-variable-parameter">__main__.py</span>
+<span class="hl-function">└──</span> <span class="hl-variable-parameter">pyproject.toml</span>
 </code></pre>
 <p>If you are gonna write code along with the tutorial, you can create
 those files already. You can skip the <strong>pyproject.toml</strong>.</p>
@@ -166,29 +166,29 @@ github</a>.</p>
 <h2 id="installation">Installation<a class="heading-anchor" href="#installation">¶</a></h2>
 <p>I like the new package manager <code>poetry</code> which uses the new
 <strong>pyproject.toml</strong> file. So let&#39;s install:</p>
-<pre><code class="language-sh"><span class="hl-function">poetry <span class="hl-variable-parameter">add <span class="hl-variable-parameter">decli
+<pre><code class="language-sh"><span class="hl-function">poetry</span> <span class="hl-variable-parameter">add</span> <span class="hl-variable-parameter">decli</span>
 </code></pre>
 <p>Otherwise if you want to use pip:</p>
-<pre><code class="language-sh"><span class="hl-function">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">venv <span class="hl-variable-parameter">venv
-<span class="hl-function-builtin">source <span class="hl-variable-parameter">venv/bin/activate
-<span class="hl-function">pip <span class="hl-variable-parameter">install <span class="hl-variable-parameter">-U <span class="hl-variable-parameter">decli
+<pre><code class="language-sh"><span class="hl-function">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">venv</span> <span class="hl-variable-parameter">venv</span>
+<span class="hl-function-builtin">source</span> <span class="hl-variable-parameter">venv/bin/activate</span>
+<span class="hl-function">pip</span> <span class="hl-variable-parameter">install</span> <span class="hl-variable-parameter">-U</span> <span class="hl-variable-parameter">decli</span>
 </code></pre>
 <h3 id="the-pyproject-toml-file">The pyproject.toml file<a class="heading-anchor" href="#the-pyproject-toml-file">¶</a></h3>
 <p>If you haven&#39;t seen how a <strong>pyproject.toml</strong> looks, it&#39;s something
 like this:</p>
-<pre><code class="language-toml"><span class="hl-punctuation-bracket">[<span class="hl-type">tool<span class="hl-punctuation-delimiter">.<span class="hl-type">poetry<span class="hl-punctuation-bracket">]
-<span class="hl-variable-other-member">name <span class="hl-operator">= <span class="hl-string">"decli-git-demo"
-<span class="hl-variable-other-member">version <span class="hl-operator">= <span class="hl-string">"0.1.0"
-<span class="hl-variable-other-member">description <span class="hl-operator">= <span class="hl-string">"A git like demo"
+<pre><code class="language-toml"><span class="hl-punctuation-bracket">[</span><span class="hl-type">tool</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">poetry</span><span class="hl-punctuation-bracket">]</span>
+<span class="hl-variable-other-member">name</span> <span class="hl-operator">=</span> <span class="hl-string">"decli-git-demo"</span>
+<span class="hl-variable-other-member">version</span> <span class="hl-operator">=</span> <span class="hl-string">"0.1.0"</span>
+<span class="hl-variable-other-member">description</span> <span class="hl-operator">=</span> <span class="hl-string">"A git like demo"</span>
 
-<span class="hl-punctuation-bracket">[<span class="hl-type">tool<span class="hl-punctuation-delimiter">.<span class="hl-type">poetry<span class="hl-punctuation-delimiter">.<span class="hl-type">dependencies<span class="hl-punctuation-bracket">]
-<span class="hl-variable-other-member">python <span class="hl-operator">= <span class="hl-string">"*"
-<span class="hl-variable-other-member">decli <span class="hl-operator">= <span class="hl-string">"^0.5.0"
+<span class="hl-punctuation-bracket">[</span><span class="hl-type">tool</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">poetry</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">dependencies</span><span class="hl-punctuation-bracket">]</span>
+<span class="hl-variable-other-member">python</span> <span class="hl-operator">=</span> <span class="hl-string">"*"</span>
+<span class="hl-variable-other-member">decli</span> <span class="hl-operator">=</span> <span class="hl-string">"^0.5.0"</span>
 
-<span class="hl-punctuation-bracket">[<span class="hl-type">tool<span class="hl-punctuation-delimiter">.<span class="hl-type">poetry<span class="hl-punctuation-delimiter">.<span class="hl-type">dev-dependencies<span class="hl-punctuation-bracket">]
-<span class="hl-variable-other-member">pytest <span class="hl-operator">= <span class="hl-string">"^3.0"
-<span class="hl-variable-other-member">flake8 <span class="hl-operator">= <span class="hl-string">"^3.5"
-<span class="hl-variable-other-member">mypy <span class="hl-operator">= <span class="hl-string">"^0.620.0"
+<span class="hl-punctuation-bracket">[</span><span class="hl-type">tool</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">poetry</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">dev-dependencies</span><span class="hl-punctuation-bracket">]</span>
+<span class="hl-variable-other-member">pytest</span> <span class="hl-operator">=</span> <span class="hl-string">"^3.0"</span>
+<span class="hl-variable-other-member">flake8</span> <span class="hl-operator">=</span> <span class="hl-string">"^3.5"</span>
+<span class="hl-variable-other-member">mypy</span> <span class="hl-operator">=</span> <span class="hl-string">"^0.620.0"</span>
 </code></pre>
 <p>Pretty simple, right?</p>
 <h2 id="writing-the-interface">Writing the interface<a class="heading-anchor" href="#writing-the-interface">¶</a></h2>
@@ -198,77 +198,77 @@ doubt.</p>
 <p>In order to use it as a module, we need to provide the <code>-m</code> flag, to the
 python interpreter. Our resulting command would look something like
 this:</p>
-<pre><code class="language-sh"><span class="hl-function">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-operator">&lt;<span class="hl-string-special-path">top_level_arguments<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">subcommand<span class="hl-operator">&gt; <span class="hl-operator">&lt;<span class="hl-string-special-path">sub_arguments<span class="hl-operator">&gt;
+<pre><code class="language-sh"><span class="hl-function">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-operator">&lt;</span><span class="hl-string-special-path">top_level_arguments</span><span class="hl-operator">&gt;</span> <span class="hl-operator">&lt;</span><span class="hl-string-special-path">subcommand</span><span class="hl-operator">&gt;</span> <span class="hl-operator">&lt;</span><span class="hl-string-special-path">sub_arguments</span><span class="hl-operator">&gt;</span>
 </code></pre>
 <p>Example:</p>
-<pre><code class="language-sh"><span class="hl-function">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">--debug <span class="hl-variable-parameter">commit <span class="hl-variable-parameter">--amend
+<pre><code class="language-sh"><span class="hl-function">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">--debug</span> <span class="hl-variable-parameter">commit</span> <span class="hl-variable-parameter">--amend</span>
 </code></pre>
 <p>For the interface, using <strong>decli</strong>, we need to create a dict. Let&#39;s
 dive into it.</p>
 <h3 id="main-component">Main component<a class="heading-anchor" href="#main-component">¶</a></h3>
-<pre><code class="language-python"><span class="hl-keyword-control">from <span class="hl-namespace">decli <span class="hl-keyword-control-import">import <span class="hl-namespace">cli
+<pre><code class="language-python"><span class="hl-keyword-control">from</span> <span class="hl-namespace">decli</span> <span class="hl-keyword-control-import">import</span> <span class="hl-namespace">cli</span>
 
-<span class="hl-variable">data <span class="hl-operator">= <span class="hl-punctuation-bracket">{
-    <span class="hl-string">"prog"<span class="hl-punctuation-delimiter">: <span class="hl-string">"git"<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"description"<span class="hl-punctuation-delimiter">: <span class="hl-string">"These are common Git commands used in various situations"
-<span class="hl-punctuation-bracket">}
+<span class="hl-variable">data</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-string">"prog"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"git"</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"description"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"These are common Git commands used in various situations"</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-variable">parser <span class="hl-operator">= <span class="hl-function">cli<span class="hl-punctuation-bracket">(<span class="hl-variable">data<span class="hl-punctuation-bracket">)
-<span class="hl-variable">args <span class="hl-operator">= <span class="hl-variable">parser<span class="hl-punctuation-delimiter">.<span class="hl-function-method">parse_args<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+<span class="hl-variable">parser</span> <span class="hl-operator">=</span> <span class="hl-function">cli</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">data</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">args</span> <span class="hl-operator">=</span> <span class="hl-variable">parser</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">parse_args</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>This part is the entrypoint of our cli.</p>
 <p>The <code>prog</code> key is the name of the app, it will be used in the help
 information, same as <code>description</code>. Let&#39;s see how this works:</p>
-<pre><code class="language-sh"><span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">--help
-<span class="hl-function">usage: <span class="hl-variable-parameter">git <span class="hl-variable-parameter">[<span class="hl-variable-parameter">-h<span class="hl-variable-parameter">]
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">--help</span>
+<span class="hl-function">usage:</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">-h</span><span class="hl-variable-parameter">]</span>
 
-<span class="hl-function">These <span class="hl-variable-parameter">are <span class="hl-variable-parameter">common <span class="hl-variable-parameter">Git <span class="hl-variable-parameter">commands <span class="hl-variable-parameter">used <span class="hl-variable-parameter">in <span class="hl-variable-parameter">various <span class="hl-variable-parameter">situations
+<span class="hl-function">These</span> <span class="hl-variable-parameter">are</span> <span class="hl-variable-parameter">common</span> <span class="hl-variable-parameter">Git</span> <span class="hl-variable-parameter">commands</span> <span class="hl-variable-parameter">used</span> <span class="hl-variable-parameter">in</span> <span class="hl-variable-parameter">various</span> <span class="hl-variable-parameter">situations</span>
 
-<span class="hl-function">optional <span class="hl-variable-parameter">arguments:
-<span class="hl-function">-h, <span class="hl-variable-parameter">--help  <span class="hl-variable-parameter">show <span class="hl-variable-parameter">this <span class="hl-variable-parameter">help <span class="hl-variable-parameter">message <span class="hl-variable-parameter">and <span class="hl-variable-parameter">exit
+<span class="hl-function">optional</span> <span class="hl-variable-parameter">arguments:</span>
+<span class="hl-function">-h,</span> <span class="hl-variable-parameter">--help</span>  <span class="hl-variable-parameter">show</span> <span class="hl-variable-parameter">this</span> <span class="hl-variable-parameter">help</span> <span class="hl-variable-parameter">message</span> <span class="hl-variable-parameter">and</span> <span class="hl-variable-parameter">exit</span>
 </code></pre>
 <h3 id="arguments">Arguments<a class="heading-anchor" href="#arguments">¶</a></h3>
 <p>Let&#39;s add some global arguments, we want to have <code>debug</code> and <code>version</code>
 available. We are also going to add some code to handle the version
 flag. And for now, if nothing is provided we&#39;ll print the args.</p>
-<pre><code class="language-python"><span class="hl-keyword-control-import">import <span class="hl-namespace">sys
-<span class="hl-keyword-control">from <span class="hl-namespace">decli <span class="hl-keyword-control-import">import <span class="hl-namespace">cli
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">sys</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">decli</span> <span class="hl-keyword-control-import">import</span> <span class="hl-namespace">cli</span>
 
-<span class="hl-variable">data <span class="hl-operator">= <span class="hl-punctuation-bracket">{
-    <span class="hl-string">"prog"<span class="hl-punctuation-delimiter">: <span class="hl-string">"git"<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"description"<span class="hl-punctuation-delimiter">: <span class="hl-string">"These are common Git commands used in various situations"<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"arguments"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[
-        <span class="hl-punctuation-bracket">{<span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[<span class="hl-string">"-v"<span class="hl-punctuation-delimiter">, <span class="hl-string">"--version"<span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">, <span class="hl-string">"action"<span class="hl-punctuation-delimiter">: <span class="hl-string">"store_true"<span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">{<span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"--debug"<span class="hl-punctuation-delimiter">, <span class="hl-string">"action"<span class="hl-punctuation-delimiter">: <span class="hl-string">"store_true"<span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-<span class="hl-punctuation-bracket">}
+<span class="hl-variable">data</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-string">"prog"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"git"</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"description"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"These are common Git commands used in various situations"</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"arguments"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span>
+        <span class="hl-punctuation-bracket">{</span><span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"-v"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"--version"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"action"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"store_true"</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">{</span><span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"--debug"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"action"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"store_true"</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-variable">parser <span class="hl-operator">= <span class="hl-function">cli<span class="hl-punctuation-bracket">(<span class="hl-variable">data<span class="hl-punctuation-bracket">)
-<span class="hl-variable">args <span class="hl-operator">= <span class="hl-variable">parser<span class="hl-punctuation-delimiter">.<span class="hl-function-method">parse_args<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+<span class="hl-variable">parser</span> <span class="hl-operator">=</span> <span class="hl-function">cli</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">data</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">args</span> <span class="hl-operator">=</span> <span class="hl-variable">parser</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">parse_args</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-keyword-control-conditional">if <span class="hl-variable">args<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">version<span class="hl-punctuation-delimiter">:
-    <span class="hl-function-builtin">print<span class="hl-punctuation-bracket">(<span class="hl-string">"0.1.0"<span class="hl-punctuation-bracket">)
-    <span class="hl-namespace">sys<span class="hl-punctuation-delimiter">.<span class="hl-function-method">exit<span class="hl-punctuation-bracket">(<span class="hl-constant-numeric-integer">0<span class="hl-punctuation-bracket">)
+<span class="hl-keyword-control-conditional">if</span> <span class="hl-variable">args</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">version</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-function-builtin">print</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"0.1.0"</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">exit</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant-numeric-integer">0</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-function-builtin">print<span class="hl-punctuation-bracket">(<span class="hl-variable">args<span class="hl-punctuation-bracket">)
+<span class="hl-function-builtin">print</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">args</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>Let&#39;s take a look at the help, also to what happens when calling with
 the <code>version</code> flag, and when nothing is provided.</p>
-<pre><code class="language-sh"><span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">--help
-<span class="hl-function">usage: <span class="hl-variable-parameter">git <span class="hl-variable-parameter">[<span class="hl-variable-parameter">-h<span class="hl-variable-parameter">] <span class="hl-variable-parameter">[<span class="hl-variable-parameter">-v<span class="hl-variable-parameter">] <span class="hl-variable-parameter">[<span class="hl-variable-parameter">--debug<span class="hl-variable-parameter">]
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">--help</span>
+<span class="hl-function">usage:</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">-h</span><span class="hl-variable-parameter">]</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">-v</span><span class="hl-variable-parameter">]</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">--debug</span><span class="hl-variable-parameter">]</span>
 
-<span class="hl-function">These <span class="hl-variable-parameter">are <span class="hl-variable-parameter">common <span class="hl-variable-parameter">Git <span class="hl-variable-parameter">commands <span class="hl-variable-parameter">used <span class="hl-variable-parameter">in <span class="hl-variable-parameter">various <span class="hl-variable-parameter">situations
+<span class="hl-function">These</span> <span class="hl-variable-parameter">are</span> <span class="hl-variable-parameter">common</span> <span class="hl-variable-parameter">Git</span> <span class="hl-variable-parameter">commands</span> <span class="hl-variable-parameter">used</span> <span class="hl-variable-parameter">in</span> <span class="hl-variable-parameter">various</span> <span class="hl-variable-parameter">situations</span>
 
-<span class="hl-function">optional <span class="hl-variable-parameter">arguments:
-<span class="hl-function">-h, <span class="hl-variable-parameter">--help     <span class="hl-variable-parameter">show <span class="hl-variable-parameter">this <span class="hl-variable-parameter">help <span class="hl-variable-parameter">message <span class="hl-variable-parameter">and <span class="hl-variable-parameter">exit
-<span class="hl-function">-v, <span class="hl-variable-parameter">--version
-<span class="hl-function">--debug
+<span class="hl-function">optional</span> <span class="hl-variable-parameter">arguments:</span>
+<span class="hl-function">-h,</span> <span class="hl-variable-parameter">--help</span>     <span class="hl-variable-parameter">show</span> <span class="hl-variable-parameter">this</span> <span class="hl-variable-parameter">help</span> <span class="hl-variable-parameter">message</span> <span class="hl-variable-parameter">and</span> <span class="hl-variable-parameter">exit</span>
+<span class="hl-function">-v,</span> <span class="hl-variable-parameter">--version</span>
+<span class="hl-function">--debug</span>
 
-<span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">--version
-<span class="hl-function">0.1.0
+<span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">--version</span>
+<span class="hl-function">0.1.0</span>
 
-<span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git
-<span class="hl-function">Namespace<span class="hl-punctuation-bracket">(<span class="hl-variable">debug<span class="hl-operator">=<span class="hl-string">False, <span class="hl-variable">version<span class="hl-operator">=<span class="hl-string">False<span class="hl-punctuation-bracket">)
+<span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span>
+<span class="hl-function">Namespace</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">debug</span><span class="hl-operator">=</span><span class="hl-string">False,</span> <span class="hl-variable">version</span><span class="hl-operator">=</span><span class="hl-string">False</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>Awesome, this is looking promising.</p>
 <h3 id="subcommands">Subcommands<a class="heading-anchor" href="#subcommands">¶</a></h3>
@@ -282,75 +282,75 @@ we are gonna implement later. So no output example for now.</p>
 <li>We are gonna call a <code>run</code> method from the classes that we are gonna
 define later.</li>
 </ul>
-<pre><code class="language-python"><span class="hl-keyword-control-import">import <span class="hl-namespace">sys
-<span class="hl-keyword-control">from <span class="hl-namespace">decli <span class="hl-keyword-control-import">import <span class="hl-namespace">cli
-<span class="hl-keyword-control">from <span class="hl-punctuation-delimiter">.<span class="hl-namespace">commands <span class="hl-keyword-control-import">import <span class="hl-type">Add<span class="hl-punctuation-delimiter">, <span class="hl-type">Commit<span class="hl-punctuation-delimiter">, <span class="hl-type">Push
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">sys</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">decli</span> <span class="hl-keyword-control-import">import</span> <span class="hl-namespace">cli</span>
+<span class="hl-keyword-control">from</span> <span class="hl-punctuation-delimiter">.</span><span class="hl-namespace">commands</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Add</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">Commit</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">Push</span>
 
-<span class="hl-variable">data <span class="hl-operator">= <span class="hl-punctuation-bracket">{
-    <span class="hl-string">"prog"<span class="hl-punctuation-delimiter">: <span class="hl-string">"git"<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"description"<span class="hl-punctuation-delimiter">: <span class="hl-string">"These are common Git commands used in various situations"<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"arguments"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[
-        <span class="hl-punctuation-bracket">{<span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[<span class="hl-string">"-v"<span class="hl-punctuation-delimiter">, <span class="hl-string">"--version"<span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">, <span class="hl-string">"action"<span class="hl-punctuation-delimiter">: <span class="hl-string">"store_true"<span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">{<span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"--debug"<span class="hl-punctuation-delimiter">, <span class="hl-string">"action"<span class="hl-punctuation-delimiter">: <span class="hl-string">"store_true"<span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">"subcommands"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">{
-        <span class="hl-string">"title"<span class="hl-punctuation-delimiter">: <span class="hl-string">"main"<span class="hl-punctuation-delimiter">,
-        <span class="hl-string">"commands"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[
-            <span class="hl-punctuation-bracket">{
-                <span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"add"<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"help"<span class="hl-punctuation-delimiter">: <span class="hl-string">"Add file contents to the index"<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"func"<span class="hl-punctuation-delimiter">: <span class="hl-type">Add<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"arguments"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[<span class="hl-punctuation-bracket">{<span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"--update"<span class="hl-punctuation-delimiter">, <span class="hl-string">"action"<span class="hl-punctuation-delimiter">: <span class="hl-string">"store_true"<span class="hl-punctuation-bracket">}<span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-            <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-            <span class="hl-punctuation-bracket">{
-                <span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"commit"<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"help"<span class="hl-punctuation-delimiter">: <span class="hl-string">"Record changes to the repository"<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"func"<span class="hl-punctuation-delimiter">: <span class="hl-type">Commit<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"arguments"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[
-                    <span class="hl-punctuation-bracket">{
-                        <span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"--amend"<span class="hl-punctuation-delimiter">,
-                        <span class="hl-string">"action"<span class="hl-punctuation-delimiter">: <span class="hl-string">"store_true"<span class="hl-punctuation-delimiter">,
-                        <span class="hl-string">"help"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">(
-                            <span class="hl-string">"Replace the tip of the current "
-                            <span class="hl-string">"branch by creating a new commit."
-                        <span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-                    <span class="hl-punctuation-bracket">}
-                <span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-            <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-            <span class="hl-punctuation-bracket">{
-                <span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"push"<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"help"<span class="hl-punctuation-delimiter">: <span class="hl-string">"Update remote refs along with associated objects"<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"func"<span class="hl-punctuation-delimiter">: <span class="hl-type">Push<span class="hl-punctuation-delimiter">,
-                <span class="hl-string">"arguments"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">[
-                    <span class="hl-punctuation-bracket">{
-                        <span class="hl-string">"name"<span class="hl-punctuation-delimiter">: <span class="hl-string">"--tags"<span class="hl-punctuation-delimiter">,
-                        <span class="hl-string">"action"<span class="hl-punctuation-delimiter">: <span class="hl-string">"store_true"<span class="hl-punctuation-delimiter">,
-                        <span class="hl-string">"help"<span class="hl-punctuation-delimiter">: <span class="hl-punctuation-bracket">(
-                            <span class="hl-string">"All refs under refs/tags are pushed, in"
-                            <span class="hl-string">" addition to refspecs explicitly listed "
-                            <span class="hl-string">"on the command line."
-                        <span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">,
-                    <span class="hl-punctuation-bracket">}
-                <span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-            <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-        <span class="hl-punctuation-bracket">]<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-bracket">}<span class="hl-punctuation-delimiter">,
-<span class="hl-punctuation-bracket">}
+<span class="hl-variable">data</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-string">"prog"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"git"</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"description"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"These are common Git commands used in various situations"</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"arguments"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span>
+        <span class="hl-punctuation-bracket">{</span><span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"-v"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"--version"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"action"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"store_true"</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">{</span><span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"--debug"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"action"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"store_true"</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"subcommands"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-string">"title"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"main"</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-string">"commands"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span>
+            <span class="hl-punctuation-bracket">{</span>
+                <span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"add"</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"help"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"Add file contents to the index"</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"func"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type">Add</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"arguments"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-punctuation-bracket">{</span><span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"--update"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"action"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"store_true"</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-punctuation-bracket">{</span>
+                <span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"commit"</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"help"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"Record changes to the repository"</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"func"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type">Commit</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"arguments"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span>
+                    <span class="hl-punctuation-bracket">{</span>
+                        <span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"--amend"</span><span class="hl-punctuation-delimiter">,</span>
+                        <span class="hl-string">"action"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"store_true"</span><span class="hl-punctuation-delimiter">,</span>
+                        <span class="hl-string">"help"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">(</span>
+                            <span class="hl-string">"Replace the tip of the current "</span>
+                            <span class="hl-string">"branch by creating a new commit."</span>
+                        <span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+                    <span class="hl-punctuation-bracket">}</span>
+                <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-punctuation-bracket">{</span>
+                <span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"push"</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"help"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"Update remote refs along with associated objects"</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"func"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-type">Push</span><span class="hl-punctuation-delimiter">,</span>
+                <span class="hl-string">"arguments"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span>
+                    <span class="hl-punctuation-bracket">{</span>
+                        <span class="hl-string">"name"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"--tags"</span><span class="hl-punctuation-delimiter">,</span>
+                        <span class="hl-string">"action"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"store_true"</span><span class="hl-punctuation-delimiter">,</span>
+                        <span class="hl-string">"help"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">(</span>
+                            <span class="hl-string">"All refs under refs/tags are pushed, in"</span>
+                            <span class="hl-string">" addition to refspecs explicitly listed "</span>
+                            <span class="hl-string">"on the command line."</span>
+                        <span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span>
+                    <span class="hl-punctuation-bracket">}</span>
+                <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-punctuation-bracket">}</span>
 
-<span class="hl-variable">parser <span class="hl-operator">= <span class="hl-function">cli<span class="hl-punctuation-bracket">(<span class="hl-variable">data<span class="hl-punctuation-bracket">)
-<span class="hl-variable">args <span class="hl-operator">= <span class="hl-variable">parser<span class="hl-punctuation-delimiter">.<span class="hl-function-method">parse_args<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+<span class="hl-variable">parser</span> <span class="hl-operator">=</span> <span class="hl-function">cli</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">data</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">args</span> <span class="hl-operator">=</span> <span class="hl-variable">parser</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">parse_args</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-keyword-control-conditional">if <span class="hl-variable">args<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">version<span class="hl-punctuation-delimiter">:
-    <span class="hl-function-builtin">print<span class="hl-punctuation-bracket">(<span class="hl-string">"0.1.0"<span class="hl-punctuation-bracket">)
-    <span class="hl-namespace">sys<span class="hl-punctuation-delimiter">.<span class="hl-function-method">exit<span class="hl-punctuation-bracket">(<span class="hl-constant-numeric-integer">0<span class="hl-punctuation-bracket">)
+<span class="hl-keyword-control-conditional">if</span> <span class="hl-variable">args</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">version</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-function-builtin">print</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"0.1.0"</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">exit</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant-numeric-integer">0</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-comment">## print help if no arguments are provided
-<span class="hl-keyword-control-conditional">if <span class="hl-function-builtin">len<span class="hl-punctuation-bracket">(<span class="hl-namespace">sys<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">argv<span class="hl-punctuation-bracket">) <span class="hl-operator">&lt; <span class="hl-constant-numeric-integer">2<span class="hl-punctuation-delimiter">:
-    <span class="hl-variable">parser<span class="hl-punctuation-delimiter">.<span class="hl-function-method">print_help<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
-    <span class="hl-namespace">sys<span class="hl-punctuation-delimiter">.<span class="hl-function-method">exit<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+<span class="hl-comment">## print help if no arguments are provided</span>
+<span class="hl-keyword-control-conditional">if</span> <span class="hl-function-builtin">len</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">argv</span><span class="hl-punctuation-bracket">)</span> <span class="hl-operator">&lt;</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">parser</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">print_help</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">exit</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-variable">cmd <span class="hl-operator">= <span class="hl-variable">args<span class="hl-punctuation-delimiter">.<span class="hl-function-method">func<span class="hl-punctuation-bracket">(<span class="hl-operator">**<span class="hl-variable">args<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">__dict__<span class="hl-punctuation-bracket">)
-<span class="hl-variable">cmd<span class="hl-punctuation-delimiter">.<span class="hl-function-method">run<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+<span class="hl-variable">cmd</span> <span class="hl-operator">=</span> <span class="hl-variable">args</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">func</span><span class="hl-punctuation-bracket">(</span><span class="hl-operator">**</span><span class="hl-variable">args</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">__dict__</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">cmd</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">run</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>So this is how <code>___main__.py</code> should look like.</p>
 <h2 id="writing-the-commands">Writing the commands<a class="heading-anchor" href="#writing-the-commands">¶</a></h2>
@@ -367,90 +367,90 @@ defining the interface and handling global arguments, would be
 interesting. But I&#39;ll leave that for you.</p>
 <h3 id="add">Add<a class="heading-anchor" href="#add">¶</a></h3>
 <p>For <code>commands/app.py</code></p>
-<pre><code class="language-python"><span class="hl-keyword">class <span class="hl-type">Add<span class="hl-punctuation-delimiter">:
+<pre><code class="language-python"><span class="hl-keyword">class</span> <span class="hl-type">Add</span><span class="hl-punctuation-delimiter">:</span>
 
-    <span class="hl-keyword-function">def <span class="hl-constructor">__init__<span class="hl-punctuation-bracket">(<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">debug<span class="hl-operator">=<span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">update<span class="hl-operator">=<span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">, <span class="hl-operator">**<span class="hl-variable-parameter">kwargs<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-        <span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-parameter">debug <span class="hl-operator">= <span class="hl-variable-parameter">debug
-        <span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-parameter">update <span class="hl-operator">= <span class="hl-variable-parameter">update
+    <span class="hl-keyword-function">def</span> <span class="hl-constructor">__init__</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">debug</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">update</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-operator">**</span><span class="hl-variable-parameter">kwargs</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-parameter">debug</span> <span class="hl-operator">=</span> <span class="hl-variable-parameter">debug</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-parameter">update</span> <span class="hl-operator">=</span> <span class="hl-variable-parameter">update</span>
 
-    <span class="hl-keyword-function">def <span class="hl-function">run<span class="hl-punctuation-bracket">(<span class="hl-variable-builtin">self<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-        <span class="hl-function-builtin">print<span class="hl-punctuation-bracket">(<span class="hl-string">f'running add... update: <span class="hl-punctuation-special">{<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">update<span class="hl-punctuation-special">}<span class="hl-string">, debug: <span class="hl-punctuation-special">{<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">debug<span class="hl-punctuation-special">}<span class="hl-string">'<span class="hl-punctuation-bracket">)
+    <span class="hl-keyword-function">def</span> <span class="hl-function">run</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-function-builtin">print</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">f'running add... update: </span><span class="hl-punctuation-special">{</span><span class="hl-string"><span class="hl-variable-builtin">self</span></span><span class="hl-string"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-string"><span class="hl-variable-other-member">update</span></span><span class="hl-string"><span class="hl-punctuation-special">}</span></span><span class="hl-string">, debug: </span><span class="hl-punctuation-special">{</span><span class="hl-string"><span class="hl-variable-builtin">self</span></span><span class="hl-string"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-string"><span class="hl-variable-other-member">debug</span></span><span class="hl-string"><span class="hl-punctuation-special">}</span></span><span class="hl-string">'</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <h3 id="commit">Commit<a class="heading-anchor" href="#commit">¶</a></h3>
 <p>For <code>commands/commit.py</code></p>
-<pre><code class="language-python"><span class="hl-keyword">class <span class="hl-type">Commit<span class="hl-punctuation-delimiter">:
+<pre><code class="language-python"><span class="hl-keyword">class</span> <span class="hl-type">Commit</span><span class="hl-punctuation-delimiter">:</span>
 
-    <span class="hl-keyword-function">def <span class="hl-constructor">__init__<span class="hl-punctuation-bracket">(<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">debug<span class="hl-operator">=<span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">amend<span class="hl-operator">=<span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">, <span class="hl-operator">**<span class="hl-variable-parameter">kwargs<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-        <span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-parameter">debug <span class="hl-operator">= <span class="hl-variable-parameter">debug
-        <span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-parameter">amend <span class="hl-operator">= <span class="hl-variable-parameter">amend
+    <span class="hl-keyword-function">def</span> <span class="hl-constructor">__init__</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">debug</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">amend</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-operator">**</span><span class="hl-variable-parameter">kwargs</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-parameter">debug</span> <span class="hl-operator">=</span> <span class="hl-variable-parameter">debug</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-parameter">amend</span> <span class="hl-operator">=</span> <span class="hl-variable-parameter">amend</span>
 
-    <span class="hl-keyword-function">def <span class="hl-function">run<span class="hl-punctuation-bracket">(<span class="hl-variable-builtin">self<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-        <span class="hl-function-builtin">print<span class="hl-punctuation-bracket">(<span class="hl-string">f'Committing... debug: <span class="hl-punctuation-special">{<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">debug<span class="hl-punctuation-special">}<span class="hl-string">, amend: <span class="hl-punctuation-special">{<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">amend<span class="hl-punctuation-special">}<span class="hl-string">'<span class="hl-punctuation-bracket">)
+    <span class="hl-keyword-function">def</span> <span class="hl-function">run</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-function-builtin">print</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">f'Committing... debug: </span><span class="hl-punctuation-special">{</span><span class="hl-string"><span class="hl-variable-builtin">self</span></span><span class="hl-string"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-string"><span class="hl-variable-other-member">debug</span></span><span class="hl-string"><span class="hl-punctuation-special">}</span></span><span class="hl-string">, amend: </span><span class="hl-punctuation-special">{</span><span class="hl-string"><span class="hl-variable-builtin">self</span></span><span class="hl-string"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-string"><span class="hl-variable-other-member">amend</span></span><span class="hl-string"><span class="hl-punctuation-special">}</span></span><span class="hl-string">'</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <h3 id="push">Push<a class="heading-anchor" href="#push">¶</a></h3>
 <p>For <code>commands/push.py</code></p>
-<pre><code class="language-python"><span class="hl-keyword">class <span class="hl-type">Push<span class="hl-punctuation-delimiter">:
+<pre><code class="language-python"><span class="hl-keyword">class</span> <span class="hl-type">Push</span><span class="hl-punctuation-delimiter">:</span>
 
-    <span class="hl-keyword-function">def <span class="hl-constructor">__init__<span class="hl-punctuation-bracket">(<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">debug<span class="hl-operator">=<span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">tags<span class="hl-operator">=<span class="hl-constant-builtin-boolean">False<span class="hl-punctuation-delimiter">, <span class="hl-operator">**<span class="hl-variable-parameter">kwargs<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-        <span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-parameter">debug <span class="hl-operator">= <span class="hl-variable-parameter">debug
-        <span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-parameter">tags <span class="hl-operator">= <span class="hl-variable-parameter">tags
+    <span class="hl-keyword-function">def</span> <span class="hl-constructor">__init__</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">debug</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">tags</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-operator">**</span><span class="hl-variable-parameter">kwargs</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-parameter">debug</span> <span class="hl-operator">=</span> <span class="hl-variable-parameter">debug</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-parameter">tags</span> <span class="hl-operator">=</span> <span class="hl-variable-parameter">tags</span>
 
-    <span class="hl-keyword-function">def <span class="hl-function">run<span class="hl-punctuation-bracket">(<span class="hl-variable-builtin">self<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-        <span class="hl-function-builtin">print<span class="hl-punctuation-bracket">(<span class="hl-string">f'Pushing... debug: <span class="hl-punctuation-special">{<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">debug<span class="hl-punctuation-special">}<span class="hl-string">, tags: <span class="hl-punctuation-special">{<span class="hl-variable-builtin">self<span class="hl-punctuation-delimiter">.<span class="hl-variable-other-member">tags<span class="hl-punctuation-special">}<span class="hl-string">'<span class="hl-punctuation-bracket">)
+    <span class="hl-keyword-function">def</span> <span class="hl-function">run</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-function-builtin">print</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">f'Pushing... debug: </span><span class="hl-punctuation-special">{</span><span class="hl-string"><span class="hl-variable-builtin">self</span></span><span class="hl-string"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-string"><span class="hl-variable-other-member">debug</span></span><span class="hl-string"><span class="hl-punctuation-special">}</span></span><span class="hl-string">, tags: </span><span class="hl-punctuation-special">{</span><span class="hl-string"><span class="hl-variable-builtin">self</span></span><span class="hl-string"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-string"><span class="hl-variable-other-member">tags</span></span><span class="hl-string"><span class="hl-punctuation-special">}</span></span><span class="hl-string">'</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <h3 id="init">Init<a class="heading-anchor" href="#init">¶</a></h3>
 <p>We are gonna add this, in order to import directly from <code>commands</code>,
 instead of one by one.</p>
 <p>For <code>commands/__init__.py</code></p>
-<pre><code class="language-python"><span class="hl-keyword-control">from <span class="hl-punctuation-delimiter">.<span class="hl-namespace">add <span class="hl-keyword-control-import">import <span class="hl-type">Add
-<span class="hl-keyword-control">from <span class="hl-punctuation-delimiter">.<span class="hl-namespace">commit <span class="hl-keyword-control-import">import <span class="hl-type">Commit
-<span class="hl-keyword-control">from <span class="hl-punctuation-delimiter">.<span class="hl-namespace">push <span class="hl-keyword-control-import">import <span class="hl-type">Push
+<pre><code class="language-python"><span class="hl-keyword-control">from</span> <span class="hl-punctuation-delimiter">.</span><span class="hl-namespace">add</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Add</span>
+<span class="hl-keyword-control">from</span> <span class="hl-punctuation-delimiter">.</span><span class="hl-namespace">commit</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Commit</span>
+<span class="hl-keyword-control">from</span> <span class="hl-punctuation-delimiter">.</span><span class="hl-namespace">push</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Push</span>
 
-<span class="hl-variable">__all__ <span class="hl-operator">= <span class="hl-punctuation-bracket">(
-    <span class="hl-string">'Add'<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">'Commit'<span class="hl-punctuation-delimiter">,
-    <span class="hl-string">'Push'
-<span class="hl-punctuation-bracket">)
+<span class="hl-variable">__all__</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">(</span>
+    <span class="hl-string">'Add'</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">'Commit'</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">'Push'</span>
+<span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <h2 id="now-what">Now what?<a class="heading-anchor" href="#now-what">¶</a></h2>
 <p>That&#39;s it, our application is completed, let&#39;s see some output
 results.</p>
 <h3 id="providing-nothing">Providing nothing<a class="heading-anchor" href="#providing-nothing">¶</a></h3>
-<pre><code class="language-sh"><span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git
-<span class="hl-function">usage: <span class="hl-variable-parameter">git <span class="hl-variable-parameter">[<span class="hl-variable-parameter">-h<span class="hl-variable-parameter">] <span class="hl-variable-parameter">[<span class="hl-variable-parameter">-v<span class="hl-variable-parameter">] <span class="hl-variable-parameter">[<span class="hl-variable-parameter">--debug<span class="hl-variable-parameter">] <span class="hl-variable-parameter">{<span class="hl-variable-parameter">add,commit,push<span class="hl-variable-parameter">} <span class="hl-variable-parameter">...
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span>
+<span class="hl-function">usage:</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">-h</span><span class="hl-variable-parameter">]</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">-v</span><span class="hl-variable-parameter">]</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">--debug</span><span class="hl-variable-parameter">]</span> <span class="hl-variable-parameter">{</span><span class="hl-variable-parameter">add,commit,push</span><span class="hl-variable-parameter">}</span> <span class="hl-variable-parameter">...</span>
 
-<span class="hl-function">These <span class="hl-variable-parameter">are <span class="hl-variable-parameter">common <span class="hl-variable-parameter">Git <span class="hl-variable-parameter">commands <span class="hl-variable-parameter">used <span class="hl-variable-parameter">in <span class="hl-variable-parameter">various <span class="hl-variable-parameter">situations
+<span class="hl-function">These</span> <span class="hl-variable-parameter">are</span> <span class="hl-variable-parameter">common</span> <span class="hl-variable-parameter">Git</span> <span class="hl-variable-parameter">commands</span> <span class="hl-variable-parameter">used</span> <span class="hl-variable-parameter">in</span> <span class="hl-variable-parameter">various</span> <span class="hl-variable-parameter">situations</span>
 
-<span class="hl-function">optional <span class="hl-variable-parameter">arguments:
-<span class="hl-function">-h, <span class="hl-variable-parameter">--help         <span class="hl-variable-parameter">show <span class="hl-variable-parameter">this <span class="hl-variable-parameter">help <span class="hl-variable-parameter">message <span class="hl-variable-parameter">and <span class="hl-variable-parameter">exit
-<span class="hl-function">-v, <span class="hl-variable-parameter">--version
-<span class="hl-function">--debug
+<span class="hl-function">optional</span> <span class="hl-variable-parameter">arguments:</span>
+<span class="hl-function">-h,</span> <span class="hl-variable-parameter">--help</span>         <span class="hl-variable-parameter">show</span> <span class="hl-variable-parameter">this</span> <span class="hl-variable-parameter">help</span> <span class="hl-variable-parameter">message</span> <span class="hl-variable-parameter">and</span> <span class="hl-variable-parameter">exit</span>
+<span class="hl-function">-v,</span> <span class="hl-variable-parameter">--version</span>
+<span class="hl-function">--debug</span>
 
-<span class="hl-function">main:
-<span class="hl-punctuation-bracket">{<span class="hl-string">add,commit,push<span class="hl-string">}
-    <span class="hl-function">add              <span class="hl-variable-parameter">Add <span class="hl-variable-parameter">file <span class="hl-variable-parameter">contents <span class="hl-variable-parameter">to <span class="hl-variable-parameter">the <span class="hl-variable-parameter">index
-    <span class="hl-function">commit           <span class="hl-variable-parameter">Record <span class="hl-variable-parameter">changes <span class="hl-variable-parameter">to <span class="hl-variable-parameter">the <span class="hl-variable-parameter">repository
-    <span class="hl-function">push             <span class="hl-variable-parameter">Update <span class="hl-variable-parameter">remote <span class="hl-variable-parameter">refs <span class="hl-variable-parameter">along <span class="hl-variable-parameter">with <span class="hl-variable-parameter">associated <span class="hl-variable-parameter">objects
+<span class="hl-function">main:</span>
+<span class="hl-punctuation-bracket">{</span><span class="hl-string">add,commit,push</span><span class="hl-string">}</span>
+    <span class="hl-function">add</span>              <span class="hl-variable-parameter">Add</span> <span class="hl-variable-parameter">file</span> <span class="hl-variable-parameter">contents</span> <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">the</span> <span class="hl-variable-parameter">index</span>
+    <span class="hl-function">commit</span>           <span class="hl-variable-parameter">Record</span> <span class="hl-variable-parameter">changes</span> <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">the</span> <span class="hl-variable-parameter">repository</span>
+    <span class="hl-function">push</span>             <span class="hl-variable-parameter">Update</span> <span class="hl-variable-parameter">remote</span> <span class="hl-variable-parameter">refs</span> <span class="hl-variable-parameter">along</span> <span class="hl-variable-parameter">with</span> <span class="hl-variable-parameter">associated</span> <span class="hl-variable-parameter">objects</span>
 </code></pre>
 <h3 id="calling-add-command">Calling add command<a class="heading-anchor" href="#calling-add-command">¶</a></h3>
-<pre><code class="language-sh"><span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">add
-<span class="hl-function">running <span class="hl-variable-parameter">add... <span class="hl-variable-parameter">update: <span class="hl-variable-parameter">False, <span class="hl-variable-parameter">debug: <span class="hl-variable-parameter">False
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">add</span>
+<span class="hl-function">running</span> <span class="hl-variable-parameter">add...</span> <span class="hl-variable-parameter">update:</span> <span class="hl-variable-parameter">False,</span> <span class="hl-variable-parameter">debug:</span> <span class="hl-variable-parameter">False</span>
 </code></pre>
 <h3 id="calling-commit-command-with-a-sub-argument">Calling commit command with a sub-argument<a class="heading-anchor" href="#calling-commit-command-with-a-sub-argument">¶</a></h3>
-<pre><code class="language-sh"><span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">commit <span class="hl-variable-parameter">--amend
-<span class="hl-function">Committing... <span class="hl-variable-parameter">debug: <span class="hl-variable-parameter">False, <span class="hl-variable-parameter">amend: <span class="hl-variable-parameter">True
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">commit</span> <span class="hl-variable-parameter">--amend</span>
+<span class="hl-function">Committing...</span> <span class="hl-variable-parameter">debug:</span> <span class="hl-variable-parameter">False,</span> <span class="hl-variable-parameter">amend:</span> <span class="hl-variable-parameter">True</span>
 </code></pre>
 <h3 id="calling-push-command-with-global-and-sub-arguments">Calling push command with global and sub arguments<a class="heading-anchor" href="#calling-push-command-with-global-and-sub-arguments">¶</a></h3>
-<pre><code class="language-sh"><span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">--debug <span class="hl-variable-parameter">push <span class="hl-variable-parameter">--tags
-<span class="hl-function">Pushing... <span class="hl-variable-parameter">debug: <span class="hl-variable-parameter">True, <span class="hl-variable-parameter">tags: <span class="hl-variable-parameter">True
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">--debug</span> <span class="hl-variable-parameter">push</span> <span class="hl-variable-parameter">--tags</span>
+<span class="hl-function">Pushing...</span> <span class="hl-variable-parameter">debug:</span> <span class="hl-variable-parameter">True,</span> <span class="hl-variable-parameter">tags:</span> <span class="hl-variable-parameter">True</span>
 </code></pre>
 <h3 id="help-for-one-of-the-commands">Help for one of the commands<a class="heading-anchor" href="#help-for-one-of-the-commands">¶</a></h3>
-<pre><code class="language-sh"><span class="hl-punctuation-special">$ <span class="hl-variable">python <span class="hl-variable-parameter">-m <span class="hl-variable-parameter">git <span class="hl-variable-parameter">commit <span class="hl-variable-parameter">--help
-<span class="hl-function">usage: <span class="hl-variable-parameter">git <span class="hl-variable-parameter">commit <span class="hl-variable-parameter">[<span class="hl-variable-parameter">-h<span class="hl-variable-parameter">] <span class="hl-variable-parameter">[<span class="hl-variable-parameter">--amend<span class="hl-variable-parameter">]
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">python</span> <span class="hl-variable-parameter">-m</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">commit</span> <span class="hl-variable-parameter">--help</span>
+<span class="hl-function">usage:</span> <span class="hl-variable-parameter">git</span> <span class="hl-variable-parameter">commit</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">-h</span><span class="hl-variable-parameter">]</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">--amend</span><span class="hl-variable-parameter">]</span>
 
-<span class="hl-function">optional <span class="hl-variable-parameter">arguments:
-<span class="hl-function">-h, <span class="hl-variable-parameter">--help  <span class="hl-variable-parameter">show <span class="hl-variable-parameter">this <span class="hl-variable-parameter">help <span class="hl-variable-parameter">message <span class="hl-variable-parameter">and <span class="hl-variable-parameter">exit
-<span class="hl-function">--amend     <span class="hl-variable-parameter">Replace <span class="hl-variable-parameter">the <span class="hl-variable-parameter">tip <span class="hl-variable-parameter">of <span class="hl-variable-parameter">the <span class="hl-variable-parameter">current <span class="hl-variable-parameter">branch <span class="hl-variable-parameter">by <span class="hl-variable-parameter">creating <span class="hl-variable-parameter">a <span class="hl-variable-parameter">new <span class="hl-variable-parameter">commit.
+<span class="hl-function">optional</span> <span class="hl-variable-parameter">arguments:</span>
+<span class="hl-function">-h,</span> <span class="hl-variable-parameter">--help</span>  <span class="hl-variable-parameter">show</span> <span class="hl-variable-parameter">this</span> <span class="hl-variable-parameter">help</span> <span class="hl-variable-parameter">message</span> <span class="hl-variable-parameter">and</span> <span class="hl-variable-parameter">exit</span>
+<span class="hl-function">--amend</span>     <span class="hl-variable-parameter">Replace</span> <span class="hl-variable-parameter">the</span> <span class="hl-variable-parameter">tip</span> <span class="hl-variable-parameter">of</span> <span class="hl-variable-parameter">the</span> <span class="hl-variable-parameter">current</span> <span class="hl-variable-parameter">branch</span> <span class="hl-variable-parameter">by</span> <span class="hl-variable-parameter">creating</span> <span class="hl-variable-parameter">a</span> <span class="hl-variable-parameter">new</span> <span class="hl-variable-parameter">commit.</span>
 </code></pre>
 <p>And that&#39;s it, we have successfully created a nice and maintainable cli.</p>
 <p>If you already have a project without a clear interface, now you know how to provide one.</p>

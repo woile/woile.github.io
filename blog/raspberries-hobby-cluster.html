@@ -180,11 +180,11 @@ barrel</a>
 <p>We need a SSH key in order to connect to the cluster without having to
 type the password every time we access.</p>
 <p>In case you don&#39;t have any, run this command and follow the steps.</p>
-<pre><code class="language-bash"><span class="hl-function">ssh-keygen <span class="hl-variable-parameter">-t <span class="hl-variable-parameter">rsa <span class="hl-variable-parameter">-b <span class="hl-constant-numeric">4096 <span class="hl-variable-parameter">-C <span class="hl-string">"your_email@example.com"
+<pre><code class="language-bash"><span class="hl-function">ssh-keygen</span> <span class="hl-variable-parameter">-t</span> <span class="hl-variable-parameter">rsa</span> <span class="hl-variable-parameter">-b</span> <span class="hl-constant-numeric">4096</span> <span class="hl-variable-parameter">-C</span> <span class="hl-string">"your_email@example.com"</span>
 </code></pre>
 <p>Add the key to your ssh agent, assuming our keys generated are <code>id_rsa</code>
 and <code>id_rsa.pub</code>.</p>
-<pre><code class="language-bash"><span class="hl-function">ssh-add <span class="hl-variable-parameter">~/.ssh/id_rsa
+<pre><code class="language-bash"><span class="hl-function">ssh-add</span> <span class="hl-variable-parameter">~/.ssh/id_rsa</span>
 </code></pre>
 <p>You can find a more in depth explanation in this
 <a href="https://confluence.atlassian.com/bitbucketserver/creating-ssh-keys-776639788.html">tutorial</a></p>
@@ -218,20 +218,20 @@ update the environment variables with your values.</p>
 <td>Use <code>wpa_passphrase SSID PASSWORD</code> for preshared key</td>
 </tr>
 </table>
-<pre><code class="language-bash"><span class="hl-keyword-control-import">export <span class="hl-constant">USERNAME<span class="hl-operator">=<span class="hl-string">willy
-<span class="hl-keyword-control-import">export <span class="hl-constant">WIFI_SSID_NAME<span class="hl-operator">=<span class="hl-string">"Bla bla"
-<span class="hl-keyword-control-import">export <span class="hl-constant">WIFI_PASSWORD<span class="hl-operator">=<span class="hl-string">"longandsecurepassword"
-<span class="hl-keyword-control-import">export <span class="hl-constant">WIFI_COUNTRY<span class="hl-operator">=<span class="hl-string">NL
-<span class="hl-keyword-control-import">export <span class="hl-constant">TIMEZONE<span class="hl-operator">=<span class="hl-punctuation-special">$(<span class="hl-function">curl <span class="hl-variable-parameter">-s <span class="hl-variable-parameter">https://ipapi.co/timezone<span class="hl-punctuation-special">)
-<span class="hl-keyword-control-import">export <span class="hl-constant">SSH_PUBLIC_KEY<span class="hl-operator">=<span class="hl-punctuation-special">$(<span class="hl-function">cat <span class="hl-variable-parameter">~/.ssh/id_rsa.pub<span class="hl-punctuation-special">)
+<pre><code class="language-bash"><span class="hl-keyword-control-import">export</span> <span class="hl-constant">USERNAME</span><span class="hl-operator">=</span><span class="hl-string">willy</span>
+<span class="hl-keyword-control-import">export</span> <span class="hl-constant">WIFI_SSID_NAME</span><span class="hl-operator">=</span><span class="hl-string">"Bla bla"</span>
+<span class="hl-keyword-control-import">export</span> <span class="hl-constant">WIFI_PASSWORD</span><span class="hl-operator">=</span><span class="hl-string">"longandsecurepassword"</span>
+<span class="hl-keyword-control-import">export</span> <span class="hl-constant">WIFI_COUNTRY</span><span class="hl-operator">=</span><span class="hl-string">NL</span>
+<span class="hl-keyword-control-import">export</span> <span class="hl-constant">TIMEZONE</span><span class="hl-operator">=</span><span class="hl-punctuation-special">$(</span><span class="hl-function">curl</span> <span class="hl-variable-parameter">-s</span> <span class="hl-variable-parameter">https://ipapi.co/timezone</span><span class="hl-punctuation-special">)</span>
+<span class="hl-keyword-control-import">export</span> <span class="hl-constant">SSH_PUBLIC_KEY</span><span class="hl-operator">=</span><span class="hl-punctuation-special">$(</span><span class="hl-function">cat</span> <span class="hl-variable-parameter">~/.ssh/id_rsa.pub</span><span class="hl-punctuation-special">)</span>
 
-<span class="hl-function">curl <span class="hl-variable-parameter">-s <span class="hl-variable-parameter">https://gist.githubusercontent.com/Woile/51eca58047b6bd51c60eeae80d60ec14/raw/db05664b5e90a28472f139bc8757562c2ed13026/cloud-init-config-template.yaml <span class="hl-operator">| \
-<span class="hl-function">sed <span class="hl-variable-parameter">-e <span class="hl-string">"s/\${USERNAME}/<span class="hl-punctuation-special">$<span class="hl-constant">USERNAME<span class="hl-string">/" \
-<span class="hl-variable-parameter">-e <span class="hl-string">"s/\${WIFI_SSID_NAME}/<span class="hl-punctuation-special">$<span class="hl-constant">WIFI_SSID_NAME<span class="hl-string">/" \
-<span class="hl-variable-parameter">-e <span class="hl-string">"s/\${WIFI_PASSWORD}/<span class="hl-punctuation-special">$<span class="hl-constant">WIFI_PASSWORD<span class="hl-string">/" \
-<span class="hl-variable-parameter">-e <span class="hl-string">"s/\${WIFI_COUNTRY}/<span class="hl-punctuation-special">$<span class="hl-constant">WIFI_COUNTRY<span class="hl-string">/" \
-<span class="hl-variable-parameter">-e <span class="hl-string">"s|\${TIMEZONE}|<span class="hl-punctuation-special">$<span class="hl-constant">TIMEZONE<span class="hl-string">|" \
-<span class="hl-variable-parameter">-e <span class="hl-string">"s|\${SSH_PUBLIC_KEY}|<span class="hl-punctuation-special">$<span class="hl-constant">SSH_PUBLIC_KEY<span class="hl-string">|" <span class="hl-operator">&gt; <span class="hl-string-special-path">cloud-init-config.yaml
+<span class="hl-function">curl</span> <span class="hl-variable-parameter">-s</span> <span class="hl-variable-parameter">https://gist.githubusercontent.com/Woile/51eca58047b6bd51c60eeae80d60ec14/raw/db05664b5e90a28472f139bc8757562c2ed13026/cloud-init-config-template.yaml</span> <span class="hl-operator">|</span> \
+<span class="hl-function">sed</span> <span class="hl-variable-parameter">-e</span> <span class="hl-string">"s/\${USERNAME}/</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USERNAME</span></span><span class="hl-string">/"</span> \
+<span class="hl-variable-parameter">-e</span> <span class="hl-string">"s/\${WIFI_SSID_NAME}/</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">WIFI_SSID_NAME</span></span><span class="hl-string">/"</span> \
+<span class="hl-variable-parameter">-e</span> <span class="hl-string">"s/\${WIFI_PASSWORD}/</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">WIFI_PASSWORD</span></span><span class="hl-string">/"</span> \
+<span class="hl-variable-parameter">-e</span> <span class="hl-string">"s/\${WIFI_COUNTRY}/</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">WIFI_COUNTRY</span></span><span class="hl-string">/"</span> \
+<span class="hl-variable-parameter">-e</span> <span class="hl-string">"s|\${TIMEZONE}|</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">TIMEZONE</span></span><span class="hl-string">|"</span> \
+<span class="hl-variable-parameter">-e</span> <span class="hl-string">"s|\${SSH_PUBLIC_KEY}|</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">SSH_PUBLIC_KEY</span></span><span class="hl-string">|"</span> <span class="hl-operator">&gt;</span> <span class="hl-string-special-path">cloud-init-config.yaml</span>
 </code></pre>
 <h2 id="flashing-sd-cards">Flashing SD cards<a class="heading-anchor" href="#flashing-sd-cards">¶</a></h2>
 <p>Insert the SD card and find it with <code>df</code>.</p>
@@ -239,26 +239,26 @@ update the environment variables with your values.</p>
 important to change the hostname per raspberry. Pay attention to param
 <code>--hostname</code>.</p>
 <p>For my 4 raspberries I am going to use these hostnames:</p>
-<pre><code class="language-bash"><span class="hl-function">willy-1
-<span class="hl-function">willy-2
-<span class="hl-function">willy-3
-<span class="hl-function">willy-4
+<pre><code class="language-bash"><span class="hl-function">willy-1</span>
+<span class="hl-function">willy-2</span>
+<span class="hl-function">willy-3</span>
+<span class="hl-function">willy-4</span>
 </code></pre>
-<pre><code class="language-sh"><span class="hl-function">flash <span class="hl-variable-parameter">-f <span class="hl-variable-parameter">--hostname <span class="hl-variable-parameter">willy-1 <span class="hl-variable-parameter">--device <span class="hl-operator">&lt;<span class="hl-string-special-path">device_found_using_df<span class="hl-operator">&gt; <span class="hl-string-special-path">-u <span class="hl-string-special-path">cloud-init-config.yaml <span class="hl-string-special-path">hypriotos-rpi-v1.9.0.img <span class="hl-string-special-path">pv
+<pre><code class="language-sh"><span class="hl-function">flash</span> <span class="hl-variable-parameter">-f</span> <span class="hl-variable-parameter">--hostname</span> <span class="hl-variable-parameter">willy-1</span> <span class="hl-variable-parameter">--device</span> <span class="hl-operator">&lt;</span><span class="hl-string-special-path">device_found_using_df</span><span class="hl-operator">&gt;</span> <span class="hl-string-special-path">-u</span> <span class="hl-string-special-path">cloud-init-config.yaml</span> <span class="hl-string-special-path">hypriotos-rpi-v1.9.0.img</span> <span class="hl-string-special-path">pv</span>
 </code></pre>
 <p>Example:</p>
-<pre><code class="language-sh"><span class="hl-function">flash <span class="hl-variable-parameter">-f <span class="hl-variable-parameter">--hostname <span class="hl-variable-parameter">willy-1 <span class="hl-variable-parameter">--device <span class="hl-variable-parameter">/dev/mmcblk0 <span class="hl-variable-parameter">-u <span class="hl-variable-parameter">cloud-init-config.yaml <span class="hl-variable-parameter">hypriotos-rpi-v1.9.0.img <span class="hl-variable-parameter">pv
+<pre><code class="language-sh"><span class="hl-function">flash</span> <span class="hl-variable-parameter">-f</span> <span class="hl-variable-parameter">--hostname</span> <span class="hl-variable-parameter">willy-1</span> <span class="hl-variable-parameter">--device</span> <span class="hl-variable-parameter">/dev/mmcblk0</span> <span class="hl-variable-parameter">-u</span> <span class="hl-variable-parameter">cloud-init-config.yaml</span> <span class="hl-variable-parameter">hypriotos-rpi-v1.9.0.img</span> <span class="hl-variable-parameter">pv</span>
 </code></pre>
 <p>Plug the SD card on each raspberry and connect them to the wall.</p>
 <h2 id="setting-up-the-nodes">Setting up the nodes<a class="heading-anchor" href="#setting-up-the-nodes">¶</a></h2>
 <p>To find the IPs of your raspberries run:</p>
-<pre><code class="language-bash"><span class="hl-comment"># For Debian based OS
-<span class="hl-function">sudo <span class="hl-variable-parameter">apt-get <span class="hl-variable-parameter">install <span class="hl-variable-parameter">arp-scan
-<span class="hl-comment"># For Mac
-<span class="hl-function">brew <span class="hl-variable-parameter">install <span class="hl-variable-parameter">arp-scan
+<pre><code class="language-bash"><span class="hl-comment"># For Debian based OS</span>
+<span class="hl-function">sudo</span> <span class="hl-variable-parameter">apt-get</span> <span class="hl-variable-parameter">install</span> <span class="hl-variable-parameter">arp-scan</span>
+<span class="hl-comment"># For Mac</span>
+<span class="hl-function">brew</span> <span class="hl-variable-parameter">install</span> <span class="hl-variable-parameter">arp-scan</span>
 </code></pre>
-<pre><code class="language-bash"><span class="hl-function">ip <span class="hl-variable-parameter">a  <span class="hl-comment"># here found the interface, like wlp2s0
-<span class="hl-function">sudo <span class="hl-variable-parameter">arp-scan <span class="hl-variable-parameter">--interface=<span class="hl-operator">&lt;<span class="hl-string-special-path">your_interface<span class="hl-operator">&gt; <span class="hl-string-special-path">--localnet
+<pre><code class="language-bash"><span class="hl-function">ip</span> <span class="hl-variable-parameter">a</span>  <span class="hl-comment"># here found the interface, like wlp2s0</span>
+<span class="hl-function">sudo</span> <span class="hl-variable-parameter">arp-scan</span> <span class="hl-variable-parameter">--interface=</span><span class="hl-operator">&lt;</span><span class="hl-string-special-path">your_interface</span><span class="hl-operator">&gt;</span> <span class="hl-string-special-path">--localnet</span>
 </code></pre>
 <p>Connect to each one of them using <code>ssh &lt;username&gt;@&lt;hostname&gt;</code>, because
 we previously added the ssh key, we should not need to type a password.</p>
@@ -274,19 +274,19 @@ we previously added the ssh key, we should not need to type a password.</p>
 <p>For simplicity and in case you want to have a multi master cluster, we
 are gonna allow ports for master kubernetes and for kubernetes workers.</p>
 <p>Run this as root typing <code>sudo su</code></p>
-<pre><code class="language-bash"><span class="hl-function">ufw <span class="hl-variable-parameter">--force <span class="hl-variable-parameter">reset  <span class="hl-comment"># ok
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-variable-parameter">ssh
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">6443 <span class="hl-comment"># Kubernetes API (master)
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">80  <span class="hl-comment"># HTTP
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">443  <span class="hl-comment"># HTTPS
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">8443  <span class="hl-comment"># kubectl proxy
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">10250  <span class="hl-comment"># Kubelet API (master and worker)
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">10251  <span class="hl-comment"># kube-scheduler (master)
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-constant-numeric">10252  <span class="hl-comment"># kube-controller-manager (master)
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-variable-parameter">2379:2380/tcp  <span class="hl-comment"># etcd server client API (master)
-<span class="hl-function">ufw <span class="hl-variable-parameter">allow <span class="hl-variable-parameter">30000:32767/tcp  <span class="hl-comment"># NodePort Services** (worker)
-<span class="hl-function">ufw <span class="hl-variable-parameter">default <span class="hl-variable-parameter">deny <span class="hl-variable-parameter">incoming
-<span class="hl-function">yes <span class="hl-operator">| <span class="hl-function">ufw <span class="hl-variable-parameter">enable
+<pre><code class="language-bash"><span class="hl-function">ufw</span> <span class="hl-variable-parameter">--force</span> <span class="hl-variable-parameter">reset</span>  <span class="hl-comment"># ok</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-variable-parameter">ssh</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-constant-numeric">6443</span> <span class="hl-comment"># Kubernetes API (master)</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-constant-numeric">80</span>  <span class="hl-comment"># HTTP</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-constant-numeric">443</span>  <span class="hl-comment"># HTTPS</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-constant-numeric">8443</span>  <span class="hl-comment"># kubectl proxy</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-constant-numeric">10250</span>  <span class="hl-comment"># Kubelet API (master and worker)</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-constant-numeric">10251</span>  <span class="hl-comment"># kube-scheduler (master)</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-constant-numeric">10252</span>  <span class="hl-comment"># kube-controller-manager (master)</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-variable-parameter">2379:2380/tcp</span>  <span class="hl-comment"># etcd server client API (master)</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">allow</span> <span class="hl-variable-parameter">30000:32767/tcp</span>  <span class="hl-comment"># NodePort Services** (worker)</span>
+<span class="hl-function">ufw</span> <span class="hl-variable-parameter">default</span> <span class="hl-variable-parameter">deny</span> <span class="hl-variable-parameter">incoming</span>
+<span class="hl-function">yes</span> <span class="hl-operator">|</span> <span class="hl-function">ufw</span> <span class="hl-variable-parameter">enable</span>
 </code></pre>
 <p><a href="https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports">Ports used by
 kubernetes</a></p>
@@ -308,7 +308,7 @@ gateway 10.0.0.1
 <p>Edit <code>/etc/default/isc-dhcp-server</code>, comment out <code># INTERFACESv6=&quot;&quot;</code> and
 set <code>INTERFACESv4=&quot;eth0&quot;</code></p>
 <p>Or run this</p>
-<pre><code class="language-bash"><span class="hl-function">sudo <span class="hl-variable-parameter">sed <span class="hl-variable-parameter">-e <span class="hl-string">'/INTERFACESv6=/ s/^#*/#/' <span class="hl-variable-parameter">-e <span class="hl-string">'s/INTERFACESv4=""/INTERFACESv4="eth0"/g' <span class="hl-variable-parameter">-i <span class="hl-variable-parameter">/etc/default/isc-dhcp-server
+<pre><code class="language-bash"><span class="hl-function">sudo</span> <span class="hl-variable-parameter">sed</span> <span class="hl-variable-parameter">-e</span> <span class="hl-string">'/INTERFACESv6=/ s/^#*/#/'</span> <span class="hl-variable-parameter">-e</span> <span class="hl-string">'s/INTERFACESv4=""/INTERFACESv4="eth0"/g'</span> <span class="hl-variable-parameter">-i</span> <span class="hl-variable-parameter">/etc/default/isc-dhcp-server</span>
 </code></pre>
 <p>Backup and edit <code>/etc/dhcp/dhcpd.conf</code>. Set it like this:</p>
 <pre><code class="language-ini">option domain-name "willy.home"; # Set a domain name, can be anything

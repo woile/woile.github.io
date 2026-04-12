@@ -137,29 +137,29 @@ You can also control a per directory version (this creates a <code>.python-versi
 Doesn&#39;t require python.</p>
 <h2 id="installation">Installation<a class="heading-anchor" href="#installation">¶</a></h2>
 <p>Use <a href="https://github.com/pyenv/pyenv-installer">pyenv-installer</a></p>
-<pre><code class="language-bash"><span class="hl-function">curl <span class="hl-variable-parameter">https://pyenv.run <span class="hl-operator">| <span class="hl-function">bash
-<span class="hl-function-builtin">exec <span class="hl-punctuation-special">$<span class="hl-variable-builtin">SHELL  <span class="hl-comment"># Restart shell or open new terminal
+<pre><code class="language-bash"><span class="hl-function">curl</span> <span class="hl-variable-parameter">https://pyenv.run</span> <span class="hl-operator">|</span> <span class="hl-function">bash</span>
+<span class="hl-function-builtin">exec</span> <span class="hl-punctuation-special">$</span><span class="hl-variable-builtin">SHELL</span>  <span class="hl-comment"># Restart shell or open new terminal</span>
 </code></pre>
 <h2 id="usage">Usage<a class="heading-anchor" href="#usage">¶</a></h2>
 <h3 id="install-different-python-versions">Install different python versions<a class="heading-anchor" href="#install-different-python-versions">¶</a></h3>
-<pre><code class="language-bash"><span class="hl-function">pyenv <span class="hl-variable-parameter">install <span class="hl-variable-parameter">3.6.10
-<span class="hl-function">pyenv <span class="hl-variable-parameter">install <span class="hl-variable-parameter">3.7.6
+<pre><code class="language-bash"><span class="hl-function">pyenv</span> <span class="hl-variable-parameter">install</span> <span class="hl-variable-parameter">3.6.10</span>
+<span class="hl-function">pyenv</span> <span class="hl-variable-parameter">install</span> <span class="hl-variable-parameter">3.7.6</span>
 </code></pre>
 <h3 id="set-global-python">Set global python<a class="heading-anchor" href="#set-global-python">¶</a></h3>
-<pre><code class="language-bash"><span class="hl-function">pyenv <span class="hl-variable-parameter">global <span class="hl-variable-parameter">3.7.6
+<pre><code class="language-bash"><span class="hl-function">pyenv</span> <span class="hl-variable-parameter">global</span> <span class="hl-variable-parameter">3.7.6</span>
 </code></pre>
 <p>Observe</p>
-<pre><code class="language-bash"><span class="hl-function">python <span class="hl-variable-parameter">--version
-<span class="hl-function-builtin">type <span class="hl-variable-parameter">-a <span class="hl-variable-parameter">python
+<pre><code class="language-bash"><span class="hl-function">python</span> <span class="hl-variable-parameter">--version</span>
+<span class="hl-function-builtin">type</span> <span class="hl-variable-parameter">-a</span> <span class="hl-variable-parameter">python</span>
 </code></pre>
 <h3 id="set-local-python">Set local python<a class="heading-anchor" href="#set-local-python">¶</a></h3>
-<pre><code class="language-bash"><span class="hl-function-builtin">cd <span class="hl-variable-parameter">~/my-project
-<span class="hl-function">pyenv <span class="hl-variable-parameter">local <span class="hl-variable-parameter">3.6.10
+<pre><code class="language-bash"><span class="hl-function-builtin">cd</span> <span class="hl-variable-parameter">~/my-project</span>
+<span class="hl-function">pyenv</span> <span class="hl-variable-parameter">local</span> <span class="hl-variable-parameter">3.6.10</span>
 </code></pre>
 <p>Observe</p>
-<pre><code class="language-bash"><span class="hl-function">cat <span class="hl-variable-parameter">.python-version
-<span class="hl-function">python <span class="hl-variable-parameter">--version
-<span class="hl-function-builtin">type <span class="hl-variable-parameter">-a <span class="hl-variable-parameter">python
+<pre><code class="language-bash"><span class="hl-function">cat</span> <span class="hl-variable-parameter">.python-version</span>
+<span class="hl-function">python</span> <span class="hl-variable-parameter">--version</span>
+<span class="hl-function-builtin">type</span> <span class="hl-variable-parameter">-a</span> <span class="hl-variable-parameter">python</span>
 </code></pre>
 <h3 id="other-languages">Other languages<a class="heading-anchor" href="#other-languages">¶</a></h3>
 <p>There&#39;s a set of similar tools for other languages, following the

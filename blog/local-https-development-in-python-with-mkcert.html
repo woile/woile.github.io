@@ -177,29 +177,29 @@ it&#39;s simpler than writing a uvicorn App, but it&#39;s not required.</p>
 <pre><code class="language-console">pip install uvicorn starlette
 </code></pre>
 <p>Now create a file <code>star_app.py</code></p>
-<pre><code class="language-python"><span class="hl-comment">## star_app.py
-<span class="hl-keyword-control">from <span class="hl-namespace">starlette<span class="hl-punctuation-delimiter">.<span class="hl-variable">applications <span class="hl-keyword-control-import">import <span class="hl-type">Starlette
-<span class="hl-keyword-control">from <span class="hl-namespace">starlette<span class="hl-punctuation-delimiter">.<span class="hl-variable">responses <span class="hl-keyword-control-import">import <span class="hl-type">JSONResponse
-<span class="hl-keyword-control-import">import <span class="hl-namespace">uvicorn
-<span class="hl-keyword-control-import">import <span class="hl-namespace">ssl
+<pre><code class="language-python"><span class="hl-comment">## star_app.py</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">starlette</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">applications</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Starlette</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">starlette</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">responses</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">JSONResponse</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">uvicorn</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">ssl</span>
 
-<span class="hl-variable">app <span class="hl-operator">= <span class="hl-constructor">Starlette<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)
+<span class="hl-variable">app</span> <span class="hl-operator">=</span> <span class="hl-constructor">Starlette</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
 
 
-<span class="hl-function">@<span class="hl-variable">app<span class="hl-punctuation-delimiter">.<span class="hl-function-method">route<span class="hl-punctuation-bracket">(<span class="hl-string">"/"<span class="hl-punctuation-bracket">)
-<span class="hl-keyword">async <span class="hl-keyword-function">def <span class="hl-function">homepage<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">request<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-    <span class="hl-keyword-control-return">return <span class="hl-constructor">JSONResponse<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">{<span class="hl-string">"hello"<span class="hl-punctuation-delimiter">: <span class="hl-string">"world"<span class="hl-punctuation-bracket">}<span class="hl-punctuation-bracket">)
+<span class="hl-function">@</span><span class="hl-variable">app</span><span class="hl-function"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-function"><span class="hl-function-method">route</span></span><span class="hl-function"><span class="hl-punctuation-bracket">(</span></span><span class="hl-function"><span class="hl-string">"/"</span></span><span class="hl-function"><span class="hl-punctuation-bracket">)</span></span>
+<span class="hl-keyword">async</span> <span class="hl-keyword-function">def</span> <span class="hl-function">homepage</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">request</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-constructor">JSONResponse</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">{</span><span class="hl-string">"hello"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"world"</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-keyword-control-conditional">if <span class="hl-variable">__name__ <span class="hl-operator">== <span class="hl-string">"__main__"<span class="hl-punctuation-delimiter">:
-    <span class="hl-namespace">uvicorn<span class="hl-punctuation-delimiter">.<span class="hl-function-method">run<span class="hl-punctuation-bracket">(
-        <span class="hl-variable">app<span class="hl-punctuation-delimiter">,
-        <span class="hl-variable-parameter">host<span class="hl-operator">=<span class="hl-string">"0.0.0.0"<span class="hl-punctuation-delimiter">,
-        <span class="hl-variable-parameter">port<span class="hl-operator">=<span class="hl-constant-numeric-integer">8433<span class="hl-punctuation-delimiter">,
-        <span class="hl-variable-parameter">ssl_version<span class="hl-operator">=<span class="hl-namespace">ssl<span class="hl-punctuation-delimiter">.<span class="hl-type">PROTOCOL_SSLv23<span class="hl-punctuation-delimiter">,
-        <span class="hl-variable-parameter">cert_reqs<span class="hl-operator">=<span class="hl-namespace">ssl<span class="hl-punctuation-delimiter">.<span class="hl-constant">CERT_OPTIONAL<span class="hl-punctuation-delimiter">,
-        <span class="hl-variable-parameter">ssl_keyfile<span class="hl-operator">=<span class="hl-string">"./key.pem"<span class="hl-punctuation-delimiter">,        <span class="hl-comment">## Note that the generated certificates
-        <span class="hl-variable-parameter">ssl_certfile<span class="hl-operator">=<span class="hl-string">"./cert.pem"<span class="hl-punctuation-delimiter">,      <span class="hl-comment">## are used here
-    <span class="hl-punctuation-bracket">)
+<span class="hl-keyword-control-conditional">if</span> <span class="hl-variable">__name__</span> <span class="hl-operator">==</span> <span class="hl-string">"__main__"</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-namespace">uvicorn</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">run</span><span class="hl-punctuation-bracket">(</span>
+        <span class="hl-variable">app</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">host</span><span class="hl-operator">=</span><span class="hl-string">"0.0.0.0"</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">port</span><span class="hl-operator">=</span><span class="hl-constant-numeric-integer">8433</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">ssl_version</span><span class="hl-operator">=</span><span class="hl-namespace">ssl</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">PROTOCOL_SSLv23</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">cert_reqs</span><span class="hl-operator">=</span><span class="hl-namespace">ssl</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">CERT_OPTIONAL</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">ssl_keyfile</span><span class="hl-operator">=</span><span class="hl-string">"./key.pem"</span><span class="hl-punctuation-delimiter">,</span>        <span class="hl-comment">## Note that the generated certificates</span>
+        <span class="hl-variable-parameter">ssl_certfile</span><span class="hl-operator">=</span><span class="hl-string">"./cert.pem"</span><span class="hl-punctuation-delimiter">,</span>      <span class="hl-comment">## are used here</span>
+    <span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>And then just run</p>
 <pre><code class="language-console">python star_app.py
@@ -212,10 +212,10 @@ the certificates we just created.</p>
 <pre><code class="language-console">pip install django-sslserver
 </code></pre>
 <p>Update your <code>settings.py</code></p>
-<pre><code class="language-python"><span class="hl-constant">INSTALLED_APPS <span class="hl-operator">= <span class="hl-punctuation-bracket">(<span class="hl-punctuation-delimiter">...
-    <span class="hl-string">'sslserver'<span class="hl-punctuation-delimiter">,
-    <span class="hl-punctuation-delimiter">...
-<span class="hl-punctuation-bracket">)
+<pre><code class="language-python"><span class="hl-constant">INSTALLED_APPS</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-delimiter">...</span>
+    <span class="hl-string">'sslserver'</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-delimiter">...</span>
+<span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>And in your terminal run</p>
 <pre><code class="language-console">python manage.py runsslserver --certificate cert.pem --key key.pem
@@ -233,17 +233,17 @@ of extra functionality, which I don&#39;t need, so I&#39;ve skipped it.</p>
 <pre><code class="language-console">pip install flask
 </code></pre>
 <p>Create a file <code>flask_app.py</code></p>
-<pre><code class="language-python"><span class="hl-comment">## flask_app.py
-<span class="hl-keyword-control">from <span class="hl-namespace">flask <span class="hl-keyword-control-import">import <span class="hl-type">Flask
+<pre><code class="language-python"><span class="hl-comment">## flask_app.py</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">flask</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Flask</span>
 
-<span class="hl-variable">application <span class="hl-operator">= <span class="hl-constructor">Flask<span class="hl-punctuation-bracket">(<span class="hl-variable">__name__<span class="hl-punctuation-bracket">)
+<span class="hl-variable">application</span> <span class="hl-operator">=</span> <span class="hl-constructor">Flask</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">__name__</span><span class="hl-punctuation-bracket">)</span>
 
-<span class="hl-function">@<span class="hl-variable">application<span class="hl-punctuation-delimiter">.<span class="hl-function-method">route<span class="hl-punctuation-bracket">(<span class="hl-string">"/"<span class="hl-punctuation-bracket">)
-<span class="hl-keyword-function">def <span class="hl-function">hello<span class="hl-punctuation-bracket">(<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-    <span class="hl-keyword-control-return">return <span class="hl-string">"&lt;h1 style='color:blue'&gt;Hello There!&lt;/h1&gt;"
+<span class="hl-function">@</span><span class="hl-variable">application</span><span class="hl-function"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-function"><span class="hl-function-method">route</span></span><span class="hl-function"><span class="hl-punctuation-bracket">(</span></span><span class="hl-function"><span class="hl-string">"/"</span></span><span class="hl-function"><span class="hl-punctuation-bracket">)</span></span>
+<span class="hl-keyword-function">def</span> <span class="hl-function">hello</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-string">"&lt;h1 style='color:blue'&gt;Hello There!&lt;/h1&gt;"</span>
 
-<span class="hl-keyword-control-conditional">if <span class="hl-variable">__name__ <span class="hl-operator">== <span class="hl-string">"__main__"<span class="hl-punctuation-delimiter">:
-    <span class="hl-variable">application<span class="hl-punctuation-delimiter">.<span class="hl-function-method">run<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">ssl_context<span class="hl-operator">=<span class="hl-punctuation-bracket">(<span class="hl-string">'cert.pem'<span class="hl-punctuation-delimiter">, <span class="hl-string">'key.pem'<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">)
+<span class="hl-keyword-control-conditional">if</span> <span class="hl-variable">__name__</span> <span class="hl-operator">==</span> <span class="hl-string">"__main__"</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">application</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">run</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">ssl_context</span><span class="hl-operator">=</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'cert.pem'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'key.pem'</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
 </code></pre>
 <p>Run in your terminal</p>
 <pre><code class="language-console">python flask_app.py
@@ -260,10 +260,10 @@ of extra functionality, which I don&#39;t need, so I&#39;ve skipped it.</p>
 <pre><code class="language-console">pip install uwsgi
 </code></pre>
 <p>Create a file called <code>wsgi.py</code></p>
-<pre><code class="language-python"><span class="hl-comment">## wsgi.py
-<span class="hl-keyword-function">def <span class="hl-function">application<span class="hl-punctuation-bracket">(<span class="hl-variable-parameter">env<span class="hl-punctuation-delimiter">, <span class="hl-variable-parameter">start_response<span class="hl-punctuation-bracket">)<span class="hl-punctuation-delimiter">:
-    <span class="hl-variable-parameter">start_response<span class="hl-punctuation-bracket">(<span class="hl-string">'200 OK'<span class="hl-punctuation-delimiter">, <span class="hl-punctuation-bracket">[<span class="hl-punctuation-bracket">(<span class="hl-string">'Content-Type'<span class="hl-punctuation-delimiter">, <span class="hl-string">'text/html'<span class="hl-punctuation-bracket">)<span class="hl-punctuation-bracket">]<span class="hl-punctuation-bracket">)
-    <span class="hl-keyword-control-return">return <span class="hl-punctuation-bracket">[<span class="hl-string">b"Hello World"<span class="hl-punctuation-bracket">]
+<pre><code class="language-python"><span class="hl-comment">## wsgi.py</span>
+<span class="hl-keyword-function">def</span> <span class="hl-function">application</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">env</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">start_response</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable-parameter">start_response</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'200 OK'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-punctuation-bracket">[</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'Content-Type'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'text/html'</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">b"Hello World"</span><span class="hl-punctuation-bracket">]</span>
 </code></pre>
 <p>Run in your terminal</p>
 <pre><code class="language-console">uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem
