@@ -10,10 +10,6 @@
             name="description"
             content="{% if page.description %}{{ page.description }}{% elif config.description %}{{ config.description }}{% else %}Santiago Fraire Willemoes website{% endif %}"
         />
-        {% if fediverse %}
-        <meta name="fediverse:creator" content="{{ fediverse }}" />
-        <link rel="me" href="https://hachyderm.io/" />
-        {% endif %}
 
         <link
             rel="preload"
@@ -39,6 +35,9 @@
         <meta property="og:description" content="{{ page.description }}" />
         {% elif config.description %}
         <meta property="og:description" content="{{ config.description }}" />
+        {% endif %} {% if fediverse %}
+        <meta name="fediverse:creator" content="{{ fediverse }}" />
+        <link rel="me" href="https://hachyderm.io/" />
         {% endif %}
 
         <!-- Preview image -->

@@ -26,13 +26,13 @@ body {
     h4,
     h5,
     h6 {
-        @apply font-serif text-text-primary mt-10 mb-6 break-words;
+        @apply text-text-primary mt-10 mb-6 wrap-break-word;
     }
     h1 {
         @apply text-6xl font-bold;
     }
     h2 {
-        @apply text-4xl font-semibold;
+        @apply text-4xl font-bold leading-8;
     }
     h3 {
         @apply text-2xl font-semibold;
@@ -111,16 +111,6 @@ a {
 .heading-anchor:hover::before {
     content: "#";
     @apply text-accent;
-}
-
-@keyframes blink-step {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
 }
 
 @keyframes blink {
