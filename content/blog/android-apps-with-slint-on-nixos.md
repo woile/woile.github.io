@@ -8,7 +8,7 @@ aliases = ["/posts/android-apps-with-slint-nixos"]
 
 Before moving to the south of Holland, and later starting traveling with my girlfriend,
 we were using a blackboard to keep track of the days we hadn't eaten added sugars.
-I was inspired by [Simon Willision's blog](https://simonwillison.net/2024/Jan/2/escalating-streaks/) about the power of streaks. Thus I created some mechanics for this streaks game, and we started "playing" it at home.
+I was inspired by [Simon Willision's blog](https://simonwillison.net/2024/Jan/2/escalating-streaks/) about the power of streaks. Thus, I created some mechanics for this streaks game, and we started "playing" it at home.
 It was a success, one of our streaks even lasted 45 days without added sugar (with some caveats).
 I've always wanted to transform the experience into an app, so we wouldn't depend on the location we were in.
 
@@ -595,7 +595,7 @@ terminal, otherwise you'll have to run `nix develop`.
 
 And our `justfile` would stay the same:
 
-```make
+```just
 # Run the android app
 run-android:
     cargo apk run --target x86_64-linux-android --lib
@@ -619,5 +619,3 @@ cause for sure it's going to be different than what Android docs say.
 On the plus side, once you get things right, they just work, which is mind blowing, **and reproducible**!
 
 I hope you enjoyed this article and let me know your thoughts in mastodon:
-
-[@woile](https://hachyderm.io/@woile)
