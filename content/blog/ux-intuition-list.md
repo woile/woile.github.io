@@ -11,7 +11,7 @@ We all have felt that friction, the moments where a system stops serving us and 
 As engineers, we often spend our time discussing what to build (the requirements) and our nights arguing about how to build it (the tech stack).
 But we rarely talk about the intuition that connects them: how the system actually feels to a human being.
 
-## Data Architecture is User Experience
+## Data Architecture Is User Experience
 
 At the root of most "bad UX" isn't just a misplaced button; it's often a **failure in data architecture**.
 
@@ -36,12 +36,12 @@ or re-entering your name on a support ticket when you're already logged in.
 > Recently, at the doctor, my girlfriend was asked the same information at the reception, then by the nurse, and finally by the doctor.
 > Which inspired me to write this post
 
-### 2. Reset on back
+### 2. Reset on Back
 
 You spend several minutes carefully filling out a multi-step form, reach the final "Review" page, and notice a small typo.
 When you click "Back" to fix it, you find that the application has wiped the entire previous step, forcing you to re-enter everything from scratch.
 
-### 3. Wild hunt
+### 3. Wild Hunt
 
 Primary actions (like "Export," "Download," or "Delete") that are buried three levels deep.
 If it's a core part of the workflow, it should be visible.
@@ -50,7 +50,7 @@ Learn your user's workflows!
 
 > Thought: maybe as the industry, we could come up with some type of benchmark to measure core workflows
 
-### 4. JS bloat
+### 4. User Disregard
 
 You open a table, expand sections, then you navigate to a different page, and when you hit the "Back" button, you have to do the whole exploration again.
 If you cannot guarantee good behavior, just show everything, this way, when the user goes back, they just end up in the position they were.
