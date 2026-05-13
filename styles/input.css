@@ -26,7 +26,7 @@ body {
     h4,
     h5,
     h6 {
-        @apply text-text-primary mt-10 mb-6 wrap-break-word;
+        @apply text-text-primary mt-10 mb-6 wrap-break-word scroll-m-8;
     }
     h1 {
         @apply text-6xl font-bold;
@@ -102,7 +102,14 @@ a {
 .heading-anchor {
     font-size: 0; /* Hides the "ugly" text */
     text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.05s ease-in-out;
 }
+/* Reveal when any parent containing the anchor is hovered */
+:has(> .heading-anchor):hover .heading-anchor {
+    opacity: 1;
+}
+
 .heading-anchor::before {
     content: "#";
     @apply ml-2 text-text-muted text-3xl;
