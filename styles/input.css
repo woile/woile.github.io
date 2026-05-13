@@ -32,7 +32,7 @@ body {
         @apply text-6xl font-bold;
     }
     h2 {
-        @apply text-4xl font-bold leading-8;
+        @apply text-4xl font-bold leading-10;
     }
     h3 {
         @apply text-2xl font-semibold;
@@ -42,7 +42,7 @@ body {
     }
 
     code {
-        @apply font-mono text-accent bg-bg-secondary px-1.5 py-0.5 rounded-sm text-lg;
+        @apply font-mono text-accent bg-bg-secondary px-1.5 py-0.5 rounded-sm text-sm md:text-base;
     }
     pre {
         @apply bg-bg-secondary border border-border p-4 rounded-lg my-6 overflow-x-auto leading-1;
