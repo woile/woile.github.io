@@ -11,7 +11,7 @@
         {% for section in page.extra.data %}
         <section class="flex flex-col gap-8 md:gap-10">
             <h2
-                class="text-4xl md:text-4xl font-bold text-white leading-none font-serif"
+                class="text-4xl md:text-4xl font-bold text-white leading-none font-sans"
             >
                 {{ section.title}}
             </h2>
@@ -43,7 +43,7 @@
                         </a>
                     </div>
                     <p
-                        class="text-base md:text-[18px] text-text-secondary leading-relaxed"
+                        class="text-base md:text-lg text-text-secondary leading-relaxed"
                     >
                         {{ item.description }}
                     </p>
