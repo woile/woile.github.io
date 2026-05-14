@@ -2,13 +2,13 @@
 
 @theme {
     --color-bg-primary: #1a1614;
-    --color-bg-secondary: #2d241f;
+    --color-bg-secondary: #282524;
     --color-text-primary: #ffffff;
     --color-text-secondary: #d1d5db;
     --color-text-muted: #94a3b8;
     --color-accent: #e29e6d;
     --color-logo: #fdf8f5;
-    --color-border: #3e342f;
+    --color-border: #443f3c;
 
     --font-serif: "Playfair Display", serif;
     --font-sans: "Inter", sans-serif;
