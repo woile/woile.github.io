@@ -53,7 +53,7 @@ data = [
                 link = "https://youtu.be/fk0EBn43NuU"
             },
             {
-                title = "2020 Py.amsterdam meetup",
+                title = "2020 py.amsterdam meetup",
                 description = "Pytest, let's go",
                 link = "https://py.amsterdam/2020/02/17/__add__self-brookz-python-meetup.html"
             },
