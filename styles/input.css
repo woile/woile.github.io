@@ -42,13 +42,13 @@ body {
     }
 
     code {
-        @apply font-mono text-accent bg-bg-secondary px-1.5 py-0.5 rounded-sm text-sm md:text-base;
+        @apply font-mono text-accent bg-bg-secondary px-1.5 py-0.5 rounded-sm;
     }
     pre {
         @apply bg-bg-secondary border border-border p-4 rounded-lg my-6 overflow-x-auto leading-1;
     }
     pre code {
-        @apply p-0;
+        @apply p-0 text-sm md:text-base;
     }
 
     blockquote {
