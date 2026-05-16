@@ -2,7 +2,7 @@
 title = "Sharing passwords using gopass, git and gpg"
 description = "Share secrets between team members, manage your personal password, multi device, gpg, happiness."
 date = 2019-03-18
-tags = ["security", "password manager", "encryption", "gpg"]
+tags = ["security", "secret management", "encryption", "gpg"]
 aliases = ["/posts/sharing-team-secrets"]
 +++
 
