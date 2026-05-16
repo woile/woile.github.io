@@ -1,6 +1,6 @@
 +++
 title = "A primer on age encryption"
-description = "Studying `age`: encryption made easy?"
+description = "Poking at age encryption. Exploring its simplicity, usage, and plugins, including TPM, SSH and FIDO2 support. Is encryption finally for everyone?"
 date = 2026-05-12
 tags = ["security", "secret management", "age"]
 +++
