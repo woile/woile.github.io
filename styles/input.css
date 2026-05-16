@@ -136,6 +136,41 @@ a {
     animation: blink 1s step-end infinite;
 }
 
-svg rect:first-of-type {
-    fill: rgb(255 255 255 / 0);
+/* D2 diagram */
+.d2-diagram {
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.d2-diagram svg {
+    display: block;
+    max-width: 100%;
+    max-height: 768px;
+    height: auto;
+}
+
+.d2-diagram svg .text {
+    fill: var(--color-text-primary);
+}
+
+.d2-diagram svg > rect:first-child {
+    fill: transparent !important;
+}
+
+/* Mermaid */
+.mermaid-diagram {
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.mermaid-diagram svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.mermaid-diagram svg > rect:first-child {
+    fill: transparent !important;
 }
