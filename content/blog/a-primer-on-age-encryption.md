@@ -13,7 +13,7 @@ It does too many things which keep me confused, combined with poor docs and a cl
 
 And thus, [age] presented a good opportunity to adapt and make my setup simpler.
 
-[age] **is an encryption format**, specified in [age-encryption.org/v1](https://age-encryption.org/v1) which focuses mainly on encryption and decryption.
+[age] **is an encryption format**, specified in [age-encryption.org/v1](https://age-encryption.org/v1) which focuses mainly on encryption and decryption. Check the author's word in [age-authentication](https://words.filippo.io/age-authentication/) for a deeper explanation.
 
 I dipped my toes into `age` a while ago;
 I published a blog post on how I structure the [secrets in a repository](./secret-management-for-the-layman) and,
