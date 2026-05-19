@@ -72,10 +72,13 @@ Now let's see **encryption and decryption** of an `.env` file.
 echo "API_KEY=unsafe" > .env
 
 # Encryption
-tar cvz .env | age -R recipients.txt > secrets.tar.gz.age
+tar cvz .env | age -R recipients.txt > env.tar.gz.age
+
+# Let's remove the env file and show what's in the dir
+rm .env && ls
 
 # Decryption
-age --decrypt -i priv.key secrets.tar.gz.age | tar xvz
+age --decrypt -i priv.key env.tar.gz.age | tar xvz
 
 # Verify file
 cat .env
