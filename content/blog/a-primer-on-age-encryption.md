@@ -74,8 +74,11 @@ echo "API_KEY=unsafe" > .env
 # Encryption
 tar cvz .env | age -R recipients.txt > env.tar.gz.age
 
-# Let's remove the env file and show what's in the dir
+# Let's remove the env file and show what's in the current dir
 rm .env && ls
+
+# OBSERVE the shape of the age encrypted file (starts with age-encryption.org/v1)
+cat env.tar.gz.age
 
 # Decryption
 age --decrypt -i priv.key env.tar.gz.age | tar xvz
