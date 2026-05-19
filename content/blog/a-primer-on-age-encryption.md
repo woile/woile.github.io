@@ -178,14 +178,17 @@ The `tpm-identity.key` created by the plugin contains the private key, but it's 
 This means if an attacker steals the `tpm-identity.key` file, it is completely useless to them without physical access to your machine's hardware.
 
 And because of the format used in the `tpm-identity.key`, `age` knows it needs to use the plugin to decrypt.
-It's a simple format really, the key starts with the name of the plugin.
+It's a simple format really, the text of the key starts with the name of the plugin.
 
 ```sh
 cat tpm-identity.key
+```
+
+```sh
 # Created: 2026-05-19 14:19:29.890241884 +0100 WEST m=+0.279063475
 # Recipient: age1tag1qtf848pl66qhk7...
 
-# AGE-PLUGIN-TPM-1QGQQQKQQYVQQK...
+AGE-PLUGIN-TPM-1QGQQQKQQYVQQK...
 ```
 
 If we were to run the same commands as in the [usage](#usage) section.
