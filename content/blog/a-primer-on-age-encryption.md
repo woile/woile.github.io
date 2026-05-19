@@ -77,8 +77,11 @@ tar cvz .env | age -R recipients.txt > env.tar.gz.age
 # Let's remove the env file and show what's in the current dir
 rm .env && ls
 
-# OBSERVE the shape of the age encrypted file (starts with age-encryption.org/v1)
+# OBSERVE the shape of the age encrypted file
 cat env.tar.gz.age
+# age-encryption.org/v1
+# -> X25519 VTfterDUb7cvb7nELDePn4ynbTi3+e6XumZsdL6PU3A
+# ....
 
 # Decryption
 age --decrypt -i priv.key env.tar.gz.age | tar xvz
@@ -173,7 +176,17 @@ age-plugin-tpm -y tpm-identity.key >> recipients.txt
 
 The `tpm-identity.key` created by the plugin contains the private key, but it's actually wrapped by the TPM module in the machine.
 This means if an attacker steals the `tpm-identity.key` file, it is completely useless to them without physical access to your machine's hardware.
+
 And because of the format used in the `tpm-identity.key`, `age` knows it needs to use the plugin to decrypt.
+It's a simple format really, the key starts with the name of the plugin.
+
+```sh
+cat tpm-identity.key
+# Created: 2026-05-19 14:19:29.890241884 +0100 WEST m=+0.279063475
+# Recipient: age1tag1qtf848pl66qhk7...
+
+# AGE-PLUGIN-TPM-1QGQQQKQQYVQQK...
+```
 
 If we were to run the same commands as in the [usage](#usage) section.
 The only difference would be that we would use the `tpm-identity.key` to decrypt.
