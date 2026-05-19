@@ -197,7 +197,7 @@ If we were to run the same commands as in the [usage](#usage) section.
 The only difference would be that we would use the `tpm-identity.key` to decrypt.
 
 ```sh
-age --decrypt -i tpm-identity.key secrets.tar.gz.age | tar xvz
+age --decrypt -i tpm-identity.key env.tar.gz.age | tar xvz
 ```
 
 ### SSH
@@ -219,7 +219,7 @@ If we were to execute the commands from the [usage](#usage) section,
 we would only change the key used, and instead we would directly use the private SSH key `ssh_ed25519`.
 
 ```sh
-age --decrypt -i ssh_ed25519 secrets.tar.gz.age | tar xvz
+age --decrypt -i ssh_ed25519 env.tar.gz.age | tar xvz
 ```
 
 ### FIDO2 Security Key
@@ -245,7 +245,7 @@ cat fido2.key | grep 'public key' | grep -oP 'age1.*' >> recipients.txt
 And like before, we would decrypt just by pointing to the `fido2.key`
 
 ```sh
-age --decrypt -i fido2.key secrets.tar.gz.age | tar xvz
+age --decrypt -i fido2.key env.tar.gz.age | tar xvz
 ```
 
 Using the FIDO2 key is not strictly necessary, however, it brings me value as a **backup option**, stored in a secured location.
