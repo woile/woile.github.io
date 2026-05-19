@@ -5,13 +5,15 @@ date = 2026-05-12
 tags = ["security", "secret management", "age"]
 +++
 
-I've been interested in `age` since it first appeared a few years ago (ca. 2020? Well, closer to a decade ago, how old am I?),
+I've been interested in [age] since it first appeared a few years ago (ca. 2020? Well, closer to a decade ago, how old am I?),
 mainly, because of its promise of simplicity.
 
 I'm a long time `gpg` user, but I'm one of those users that has no confidence in what I'm doing.
 It does too many things which keep me confused, combined with poor docs and a cli that just doesn't feel intuitive.
 
-And thus, `age` presented a good opportunity to adapt and make my setup simpler, by focusing solely on encryption and decryption.
+And thus, [age] presented a good opportunity to adapt and make my setup simpler.
+
+[age] is an encryption format, specified in [age-encryption.org/v1](https://age-encryption.org/v1) which focusing mainly on encryption and decryption.
 
 I dipped my toes into `age` a while ago;
 I published a blog post on how I structure the [secrets in a repository](./secret-management-for-the-layman) and,
@@ -269,3 +271,4 @@ In my next post, I'll cover [agenix] and how I integrate with my NixOS setup.
 Let me know your thoughts. Thanks for reading!
 
 [agenix]: https://github.com/ryantm/agenix
+[age]: https://github.com/filosottile/age
