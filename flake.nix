@@ -51,6 +51,7 @@
               just
               sukr
               miniserve
+              live-server
               tailwindcss_4
               tailwindcss-language-server
               gemini-cli
