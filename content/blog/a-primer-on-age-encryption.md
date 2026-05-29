@@ -77,7 +77,7 @@ echo "API_KEY=unsafe" > .env
 tar cvz .env | age -R recipients.txt > env.tar.gz.age
 
 # Let's remove the env file and show what's in the current dir
-rm .env && ls
+rm .env && ls -a
 
 # OBSERVE the shape of the age encrypted file
 cat env.tar.gz.age
@@ -93,6 +93,14 @@ cat .env
 ```
 
 Done! And with that, we covered `age`'s cli surface.
+
+Why is `tar` used?
+
+`tar` is used, because `age` reads from the buffer, and we want to stream the binary content, so later we can
+preserve the file. If `cat .env | age -R recipients.txt > env.age` was used, we would be storing the content of `.env`,
+and when decrypting, we would have to know where to "store" the content. E.g: `age --decrypt -i priv.key env.age > .env`.
+By using `tar` this way, we can easily store multiple files and directories, and we don't have to think about the structure.
+It's quite clever, as `tar` is widely available in UNIX systems.
 
 But that's not the end of the story, having a flying private key around just doesn't feel entirely right.
 Especially if we are talking about the main key, which can decrypt all secrets passed around.
@@ -182,13 +190,10 @@ This means if an attacker steals the `tpm-identity.key` file, it is completely u
 And because of the format used in the `tpm-identity.key`, `age` knows it needs to use the plugin to decrypt.
 It's a simple format really, the text of the key starts with the name of the plugin.
 
-```sh
-cat tpm-identity.key
-```
-
-```sh
-# Created: 2026-05-19 14:19:29.890241884 +0100 WEST m=+0.279063475
-# Recipient: age1tag1qtf848pl66qhk7...
+```shell-console
+$ cat tpm-identity.key
+Created: 2026-05-19 14:19:29.890241884 +0100 WEST m=+0.279063475
+Recipient: age1tag1qtf848pl66qhk7...
 
 AGE-PLUGIN-TPM-1QGQQQKQQYVQQK...
 ```
