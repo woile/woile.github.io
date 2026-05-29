@@ -9,7 +9,8 @@ build:
 
 # Serve site
 serve:
-    miniserve --index index.html -q public
+    # miniserve --index index.html -q public --pretty-urls
+    live-server public
 
 # Watch styles
 twatch:
