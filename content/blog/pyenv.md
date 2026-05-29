@@ -13,6 +13,11 @@ Works in the user space, avoiding the system's python, therefore is less error p
 You can also control a per directory version (this creates a `.python-version`).
 Doesn't require python.
 
+> 💡TIP
+>
+> If you are checking this from 2026 onwards, consider [uv](https://github.com/astral-sh/uv) instead,
+> which automatically downloads python versions.
+
 ## Installation
 
 Use [pyenv-installer][pyenv-installer]
