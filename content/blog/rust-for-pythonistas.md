@@ -10,11 +10,14 @@ draft = true
 
 ## Data structures with typing
 
-| Python                  | Rust                                           | Docs       |
-| ----------------------- | ---------------------------------------------- | ---------- |
-| `num: int = 1`          | `let num: i32 = 1; // used as default integer` | [integers] |
-| `word: str = "avocado"` | `let word: String = String::from("avocado");`  | [strings]  |
-| `point: Tuple = (1, 2)` | `let point: (i32, i32) = (1, 2)`               | [tuples]   |
+| Data structure | Python             | Rust                    |
+| -------------- | ------------------ | ----------------------- |
+| number         | `num = 1`          | `let num = 1; `         |
+| string         | `word = "avocado"` | `let word = "avocado";` |
+| tuple          | `point = (1, 2)`   | `let point = (1, 2);`    |
+| list | `my_list = [1,2,3]` | `let my_list = vec![1,2,3];
+| dict | `` | `let info = HashMap::from([("name", 0.4), ("foo", 0.7)]);`
+
 
 ## builins
 
@@ -59,7 +62,6 @@ let name = String::from(name)
 ```
 
 Now that our string has been cast to the type `String` we can start doing some operations on it.
-
 
 ### Immutability
 
