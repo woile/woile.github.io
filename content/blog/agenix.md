@@ -11,19 +11,19 @@ tags = ["security", "secret management", "nixos", "age"]
 [vaultix]: https://milieuim.github.io/vaultix
 [NixOS]: https://nixos.org/
 
-I've been avoiding managing secrets in [NixOS] for a long time, when I started with `nix`,
+I've been avoiding managing secrets in [NixOS] for a long time. When I started with `nix`,
 I didn't fully comprehend how the solutions for secret management worked, so I left it as a future problem.
 
 I started using `nix` in a MacBook a couple of years ago, then I ditched it for an OEM laptop, with… you guessed it… [NixOS]!
 Toss a media center and a VM into the mix, all managed via NixOS; and secrets were bound to happen.
 
 ```d2
-nixos -> vm
 nixos -> laptop
 nixos -> media-center
+nixos -> vm
 ```
 
-The time has finally arrived.
+And since introducing the VM, **the time has finally arrived**.
 
 I chose [agenix], one of the most popular solutions for secret management.
 Another popular option was `sops-nix`, but you have to use YAML, and I'm YAML fatigued, so pass.
@@ -32,7 +32,7 @@ To be fair, `sops-nix` is usually recommended for more complex scenarios, and mi
 In this post, I'm gonna cover my mental model of how it works and finally, my expectations.
 I'm not covering how to install `agenix`, which is already well covered in their [installation docs](https://github.com/ryantm/agenix#installation).
 
-My setup is using nix flakes, so this write assumes so.
+My setup is using nix flakes, so this write-up assumes so.
 
 Conceptually, we can split [agenix] in these scenarios:
 
@@ -43,16 +43,16 @@ Conceptually, we can split [agenix] in these scenarios:
 ## Key Management
 
 This is the simplest part. Internally, [agenix] uses [age] to encrypt and decrypt secrets. I've written [a primer on age](./a-primer-on-age-encryption).
-Not only you can set multiple recipients, but you can use SSH keys for encryption/decryption.
+Not only you can set multiple recipients, but you can also use SSH keys for encryption/decryption.
 
 When the `openssh` module is enabled in NixOS, it **automatically creates some SSH key pairs on the host machine** under `/etc/ssh/`.
 We can leverage the SSH keys to encrypt/decrypt secrets for a given host.
-The recommended one being `/etc/ssh/ssh_host_ed25519_key`.
+The recommended key is `/etc/ssh/ssh_host_ed25519_key`.
 
 And for redundancy, you can create a main key, used on all secrets.
 
-So the idea is, to **let each host, decrypt the secrets they need, using the SSH key, that they already hold.
-And use the "main keys", for redundancy**, in case any of the host changes.
+So the idea is, to **let each host decrypt the secrets they need using the SSH key that they already hold.
+And use the "main keys" for redundancy**, in case any of the host changes.
 For example, if you recreate a VM, the SSH key will change, and you wouldn't have access to the encrypted secrets without a main key.
 
 ```d2
@@ -87,7 +87,7 @@ age1mca4i2n7...
 
 ## Secret Creation
 
-Once we gather the public keys, we consolidate them in a `secretx.nix`,
+Once we gather the public keys, we consolidate them in a `secrets.nix`,
 which is **only used to generate secrets**, it's not imported into your NixOS configuration.
 
 ```nix
@@ -204,7 +204,9 @@ After a rebuild, **it should just work**.
 And in this case, to rebuild the remote VM running NixOS, from our laptop, we use:
 
 ```sh
-sudo nixos-rebuild switch --target-host root@[i:p:v:6] --flake ".#my-vm"
+sudo nixos-rebuild switch \
+    --target-host root@[i:p:v:6] \
+    --flake ".#my-vm"
 ```
 
 ## Attack Vectors
@@ -225,8 +227,8 @@ I would rather define them once instead of having a `secrets.nix` plus the `age.
 I recently found [vaultix], which seems like a more promising alternative.
 Apparently, it natively adopts the strategy I described above.
 And by natively, I mean that you only need to set a main key,
-and it automatically picks the SSH keys from the hosts, in a single place.
-Which means, that the SSH public keys remain hidden, which is a tiny plus.
+and it automatically picks up the SSH keys from the hosts, in a single place.
+This means that the SSH public keys aren't explicitly listed in the repo, which is a nice little plus.
 I would love to hear a confirmation of my understanding.
 
 I hope you enjoyed the read!
