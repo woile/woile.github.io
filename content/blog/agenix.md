@@ -192,6 +192,11 @@ And finally, to use the secret, and assuming the nix option expects a path to th
 }
 ```
 
+> ⚠️ WARNING
+>
+> Never use `builtins.readFile config.age.secrets.api_token.path`
+> which can cause the cleartext to be placed into the world-readable Nix store
+
 And that's all.
 
 After a rebuild, **it should just work**.
@@ -220,7 +225,8 @@ I would rather define them once instead of having a `secrets.nix` plus the `age.
 I recently found [vaultix], which seems like a more promising alternative.
 Apparently, it natively adopts the strategy I described above.
 And by natively, I mean that you only need to set a main key,
-and it automatically picks the SSH keys from the hosts, in a signle place.
+and it automatically picks the SSH keys from the hosts, in a single place.
+Which means, that the SSH public keys remain hidden, which is a tiny plus.
 I would love to hear a confirmation of my understanding.
 
 I hope you enjoyed the read!
