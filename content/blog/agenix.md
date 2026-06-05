@@ -231,4 +231,6 @@ and it automatically picks up the SSH keys from the hosts, in a single place.
 This means that the SSH public keys aren't explicitly listed in the repo, which is a nice little plus.
 I would love to hear a confirmation of my understanding.
 
-I hope you enjoyed the read!
+I hope you enjoyed the read! This entry took me a bit longer than I wanted to finish.
+
+[![Written by a Human, Not by AI](/badge-human-written.svg)](https://notbyai.fyi)

@@ -277,3 +277,5 @@ Let me know your thoughts. Thanks for reading!
 
 [agenix]: https://github.com/ryantm/agenix
 [age]: https://github.com/filosottile/age
+
+[![Written by a Human, Not by AI](/badge-human-written.svg)](https://notbyai.fyi)
