@@ -5,8 +5,8 @@ date = 2026-06-04
 tags = ["security", "secret management", "nixos", "age"]
 +++
 
-[agenix]: github.com/ryantm/agenix
-[age]: github.com/filosottile/age
+[agenix]: https://github.com/ryantm/agenix
+[age]: https://github.com/filosottile/age
 [nix-config]: https://github.com/woile/nix-config/
 [vaultix]: https://milieuim.github.io/vaultix
 [NixOS]: https://nixos.org/
