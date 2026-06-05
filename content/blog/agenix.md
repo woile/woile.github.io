@@ -94,7 +94,7 @@ which is **only used to generate secrets**, it's not imported into your NixOS co
 # secrets.nix
 let
   laptop-host = "ssh-ed25519 AlAaApAtCop";
-  vm-host = "ssh-ed25519 AvAmAAC3N"
+  vm-host = "ssh-ed25519 AvAmAAC3N";
   main-user = "age1mca4i2n7";
 in {
 
@@ -107,7 +107,7 @@ And then we specify, for each secret, which keys to use.
 # secrets.nix
 let
   laptop-host = "ssh-ed25519 AlAaApAtCop";
-  vm-host = "ssh-ed25519 AvAmAAC3N"
+  vm-host = "ssh-ed25519 AvAmAAC3N";
   main-user = "age1mca4i2n7";
 in {
 +  "api_token.age".publicKeys = [ main-user laptop-host ];
@@ -130,7 +130,7 @@ agenix -e 'server_password.age'
 Each time we run the command, `agenix` opens your default editor (via `$EDITOR`), you fill the password.
 And after you save and exit, `agenix` will read the `secrets.nix`, read the recipients of the secrets, and encrypt accordingly.
 
-This is a **keypoint: secrets are created via `agenix`**.
+This is a **keypoint: secrets are created via the `agenix` cli**.
 
 You don't create a file with the raw secret, and tell `agenix` to encrypt it.
 
@@ -154,6 +154,17 @@ Example using the `security` directory:
 
 ```sh
 export RULES=security/secrets.nix
+```
+
+### Rekey
+
+If you destroy and recreate a VM for example. You'll have to encrypt the secrets again with the new public key.
+This is call "to rekey". And there are some projects that make this easier, like [agenix-rekey](https://github.com/oddlama/agenix-rekey).
+
+Otherwise, just update the `secrets.nix` and run:
+
+```sh
+agenix --rekey
 ```
 
 ## Secret Usage
@@ -227,9 +238,12 @@ I would rather define them once instead of having a `secrets.nix` plus the `age.
 I recently found [vaultix], which seems like a more promising alternative.
 Apparently, it natively adopts the strategy I described above.
 And by natively, I mean that you only need to set a main key,
-and it automatically picks up the SSH keys from the hosts, in a single place.
+and it automatically picks up the SSH keys from the hosts.
 This means that the SSH public keys aren't explicitly listed in the repo, which is a nice little plus.
 I would love to hear a confirmation of my understanding.
+
+Another project that makes things nicer, is [agenix-rekey](https://github.com/oddlama/agenix-rekey), which extends `agenix`,
+removing the need for `secrets.nix`.
 
 I hope you enjoyed the read! This entry took me a bit longer than I wanted to finish.
 
