@@ -42,7 +42,7 @@ body {
     }
 
     code {
-        @apply font-mono text-accent bg-bg-secondary px-1.5 py-0.5 rounded-sm;
+        @apply font-mono text-accent bg-bg-secondary px-1.5 py-0.5 rounded-sm wrap-break-word;
     }
     pre {
         @apply bg-bg-secondary border border-border p-4 rounded-lg my-6 overflow-x-auto leading-1;
@@ -52,7 +52,7 @@ body {
     }
 
     blockquote {
-        @apply border-l-4 border-accent pl-6 py-4 pr-1 my-4 text-text-primary bg-accent/10 rounded-sm;
+        @apply border-l-4 border-accent pl-6 py-4 pr-1 my-4 text-text-primary bg-accent/10 rounded-sm overflow-x-scroll;
     }
 
     blockquote p {
