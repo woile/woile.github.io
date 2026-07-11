@@ -1,0 +1,428 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Nix journey part 3: learning nix-lang | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;nix-journey-part-3-learning-nix-lang.html" />
+        <meta
+            name="description"
+            content="Santiago Fraire Willemoes website"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Nix journey part 3: learning nix-lang" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;nix-journey-part-3-learning-nix-lang.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            Nix journey part 3: learning nix-lang
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/nix.html">#nix</a>
+                
+                <a href="../tags/flake.html">#flake</a>
+                
+                <a href="../tags/nix-lang.html">#nix-lang</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>I started reading the <a href="https://nix.dev/tutorials/nix-language">nix-language</a> tutorial that helps you understand the <a href="https://nixos.org/manual/nix/stable/language/index.html">nix-lang</a>.</p>
+<p>The explanation that has made more sense so far is:</p>
+<blockquote>
+<p>If you are familiar with JSON, imagine the Nix language as <em>JSON with functions</em>.</p>
+<p>Nix language data types <em>without functions</em> work just like their counterparts in JSON and look very similar.</p>
+</blockquote>
+<p>And here&#39;s a comparison:</p>
+<p>nix:</p>
+<pre><code class="language-nix"><span class="hl-punctuation-bracket">{</span>
+  <span class="hl-variable-other-member">string</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"hello"</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">integer</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">float</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-float">3.141</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">bool</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-builtin-boolean">true</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">null</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-builtin">null</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">list</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">[</span> <span class="hl-constant-numeric-integer">1</span> <span class="hl-string">"two"</span> <span class="hl-constant-builtin-boolean">false</span> <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">attribute-set</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">a</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"hello"</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">b</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">c</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-float">2.718</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">d</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-builtin-boolean">false</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-comment"># comments are supported</span>
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>json:</p>
+<pre><code class="language-json"><span class="hl-punctuation-bracket">{</span>
+  <span class="hl-variable-other-member">"string"</span>: <span class="hl-string">"hello"</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-variable-other-member">"integer"</span>: <span class="hl-constant-numeric">1</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-variable-other-member">"float"</span>: <span class="hl-constant-numeric">3.141</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-variable-other-member">"bool"</span>: <span class="hl-constant-builtin-boolean">true</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-variable-other-member">"null"</span>: <span class="hl-constant-builtin">null</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-variable-other-member">"list"</span>: <span class="hl-punctuation-bracket">[</span><span class="hl-constant-numeric">1</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">"two"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-constant-builtin-boolean">false</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-variable-other-member">"object"</span>: <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">"a"</span>: <span class="hl-string">"hello"</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-variable-other-member">"b"</span>: <span class="hl-constant-numeric">1</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-variable-other-member">"c"</span>: <span class="hl-constant-numeric">2.718</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-variable-other-member">"d"</span>: <span class="hl-constant-builtin-boolean">false</span>
+  <span class="hl-punctuation-bracket">}</span>
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>I like what I see. Why not making it more similar to json though?</p>
+<p>Here I&#39;m listing my thoughts while reading. I hope this feedback can help improve the docs (I can&#39;t yet as I literally know nothing, taking it as a brain dump):</p>
+<ol start="1">
+<li>Why no comma separated arrays? My hand automatically tries to add commas when making a list. Maybe an explanation would help to avoid people&#39;s complaints like me.</li>
+<li>JSON with comments + functions? Sounds like a plan</li>
+<li>Pure language, meaning no interaction with the outside world, except when reading files. I like this<ol start="1">
+<li>Does it mean there&#39;s no <code>print</code>? is the output of executing nix a <code>print</code>?</li>
+</ol>
+</li>
+<li>I bet I&#39;ll have to learn some builtin functions to understand it better</li>
+<li>String concatenation is straightforward, nothing weird here <code>&quot;a&quot; + &quot; &quot; + &quot;b&quot;</code> works as expected. Good.</li>
+<li><code>let .. in ...</code> is weird, are they like function declarations? Strange way to create a local scope.</li>
+<li>semicolons <code>;</code> only  after initializing variables.</li>
+<li>Could this language be used to replace <code>yaml</code> and other configuration formats? What about <code>toml</code> with functions? Okay, I&#39;m derailing, back to reading.</li>
+<li>It&#39;s not very intuitive, let&#39;s see some valid samples</li>
+</ol>
+<pre><code class="language-nix"><span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">a</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">x</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">y</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">z</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">3</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span>
+<span class="hl-variable">a</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">x</span> <span class="hl-operator">+</span> <span class="hl-variable">a</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">y</span>
+</code></pre>
+<p>it doesn&#39;t end with semicolon, outputs: 3. Ok
+Now the <code>with</code> + assignment</p>
+<pre><code class="language-nix"><span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">a</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">x</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">y</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">z</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">3</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span>
+b <span class="hl-punctuation-delimiter">=</span> <span class="hl-keyword">with</span> <span class="hl-variable">a</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-punctuation-bracket">{</span><span class="hl-variable-other-member">t</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">x</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-variable-other-member">u</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">y</span><span class="hl-punctuation-delimiter">;</span><span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>error. Solution? wrap with <code>{}</code> and introduce semicolon</p>
+<pre><code class="language-nix"><span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">a</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">x</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">y</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">z</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">3</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span> <span class="hl-punctuation-bracket">{</span>
+  <span class="hl-variable-other-member">b</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-keyword">with</span> <span class="hl-variable">a</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-punctuation-bracket">{</span><span class="hl-variable-other-member">t</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">x</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-variable-other-member">u</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">y</span><span class="hl-punctuation-delimiter">;</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>Works. Whatever. How do I add <code>b.x</code> + <code>b.y</code>?</p>
+<pre><code class="language-nix"><span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">a</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">x</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">y</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">z</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">3</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span> <span class="hl-punctuation-bracket">{</span>
+  <span class="hl-variable-other-member">b</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-keyword">with</span> <span class="hl-variable">a</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-punctuation-bracket">{</span><span class="hl-variable-other-member">t</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">x</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-variable-other-member">u</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">y</span><span class="hl-punctuation-delimiter">;</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+  b<span class="hl-punctuation-delimiter">.</span>t + b<span class="hl-punctuation-delimiter">.</span>u
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>Nope, maybe the <code>let.. in...</code> I just learned?</p>
+<pre><code class="language-nix"><span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">a</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">x</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">y</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">z</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-numeric-integer">3</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span> <span class="hl-punctuation-bracket">{</span>
+  let <span class="hl-variable-other-member">b</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-keyword">with</span> <span class="hl-variable">a</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-punctuation-bracket">{</span><span class="hl-variable-other-member">t</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">x</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-variable-other-member">u</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">y</span><span class="hl-punctuation-delimiter">;</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+  in
+  b<span class="hl-punctuation-delimiter">.</span>t + b<span class="hl-punctuation-delimiter">.</span>u
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>Nope. Couldn&#39;t find an explanation, maybe it&#39;s not allowed.</p>
+<blockquote>
+<p><strong>Update</strong>: user <a href="https://www.reddit.com/user/benide/">benide</a> on <a href="https://www.reddit.com/r/Nix/comments/10bp1vw/nix_journey_part_3_learning_nixlang/">/r/nix</a> pointed out that my scoped curly braces <code>{}</code> are actually attrsets (json object), that&#39;s why the semi-colons <code>;</code> are required, makes much more sense.</p>
+</blockquote>
+<ol start="10">
+<li>Why cannot coerce an int into a string? I don&#39;t see an explanation. Types could implement like a <code>Into&lt;string&gt;</code> trait, right? Maybe there&#39;s a good reason, but I think this can be useful for naming things <code>[ home-1 home-2 ]</code></li>
+<li>Integration with fs is dope.</li>
+<li>How are search path populated? <code>&lt;nixpkgs&gt;</code> works, but <code>&lt;path&gt;</code> does not. Are there other variables? Good thing it&#39;s not recommended to use them.</li>
+<li><code>Indented strings</code> are fantastic. The equal amount of space trimmed is perfect for writing scripts that look good, without compromising style.</li>
+</ol>
+<pre><code class="language-nix"><span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">uglyyaml</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">''
+  holis:
+    machines:
+      - m1
+      - m2
+  ''</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span>
+  <span class="hl-variable">uglyyaml</span>
+</code></pre>
+<p>Well I&#39;m done, it was worthy. After reading the quick overview I understand much more. So much I was able to create my own shell from a flake. This is the sample <code>flake.nix</code>:</p>
+<pre><code class="language-nix"><span class="hl-comment">/**
+  This flake provides a shell where you can add flakes
+
+  Adding dependencies:
+    1. Add your flake repository as an input url
+    2. Add the repository name to the function signature
+    3. Add your repo's package to buildInputs
+
+  Opening shell with your deps:
+    ```sh
+    nix develop
+    ```
+
+  For compatibility with nix-shell add the template compat:
+    ```sh
+    nix flake new . -t templates#compat
+    ```
+**/</span>
+<span class="hl-punctuation-bracket">{</span>
+  <span class="hl-variable-other-member">description</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"Build your own shell"</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">inputs</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">utils</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span> <span class="hl-variable-other-member">url</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"github:numtide/flake-utils"</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">wpa_passphrase_rs</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span> <span class="hl-variable-other-member">url</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"github:woile/wpa_passphrase_rs/main"</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-comment"># point 1: add repo url</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-comment"># point 2: add to function</span>
+  <span class="hl-variable-other-member">outputs</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span> <span class="hl-variable-parameter">self</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">nixpkgs</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">utils</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">wpa_passphrase_rs</span> <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">utils</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">lib</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member"><span class="hl-function">eachDefaultSystem</span></span> <span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">system</span><span class="hl-punctuation-delimiter">:</span>
+      <span class="hl-keyword">let</span>
+        <span class="hl-variable-other-member">pkgs</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-function-builtin">import</span> <span class="hl-variable">nixpkgs</span> <span class="hl-punctuation-bracket">{</span> <span class="hl-keyword">inherit</span> <span class="hl-variable">system</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+      <span class="hl-keyword">in</span>
+      <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-variable-other-member">devShell</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-keyword">with</span> <span class="hl-variable">pkgs</span><span class="hl-punctuation-delimiter">;</span> <span class="hl-function">mkShell</span> <span class="hl-punctuation-bracket">{</span>
+          <span class="hl-comment"># point 3: add package</span>
+          <span class="hl-variable-other-member">buildInputs</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">[</span>
+            <span class="hl-variable">gnugrep</span>
+            <span class="hl-variable">gnused</span>
+            <span class="hl-variable">wpa_passphrase_rs</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">defaultPackage</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member"><span class="hl-punctuation-special">${</span></span><span class="hl-variable-other-member"><span class="hl-variable">system</span></span><span class="hl-variable-other-member"><span class="hl-punctuation-special">}</span></span>
+          <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">;</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+      <span class="hl-punctuation-bracket">}</span>
+    <span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>Run <code>nix-develop</code> and you&#39;ll have a shell with your dependencies.
+Question: How do I keep using my own shell?</p>
+<p>You can copy-paste and extend that sample into your projects. I asked on github if it could be merged <a href="https://github.com/NixOS/templates/issues/59">#59</a>. Again, as a newbie in nix I don&#39;t know if it makes sense from nix perspective. Am I supposed to be doing things this way in nix?</p>
+<p>What I&#39;ve been thinking is that I would like a <code>cli</code> that adds the code for me to the <code>flake.nix</code>:</p>
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">flakectl</span> <span class="hl-variable-parameter">add</span> <span class="hl-variable-parameter">dep</span> <span class="hl-variable-parameter">github:woile/wpa_passphrase_rs</span>
+<span class="hl-function">Searching</span> <span class="hl-variable-parameter">packages...</span>
+<span class="hl-function">1.</span> <span class="hl-variable-parameter">packages.x86_64-darwin.wpa_passphrase</span> <span class="hl-punctuation-bracket">(</span><span class="hl-function">0.1.0</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-function">Choose</span> <span class="hl-variable-parameter">package</span> <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">add</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">int</span><span class="hl-variable-parameter">]</span><span class="hl-variable-parameter">:</span>
+<span class="hl-constant-numeric">1</span>
+
+<span class="hl-function">Does</span> <span class="hl-variable-parameter">the</span> <span class="hl-variable-parameter">package</span> <span class="hl-variable-parameter">provide</span> <span class="hl-variable-parameter">a</span> <span class="hl-variable-parameter">service?</span> <span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">y/N</span><span class="hl-variable-parameter">]</span>
+<span class="hl-function">n</span>
+</code></pre>
+<p>And to add more things:</p>
+<p>Environmental variables (maybe even encrypted using <a href="https://github.com/ryantm/agenix">agenix</a>):</p>
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">flakectl</span> <span class="hl-variable-parameter">add</span> <span class="hl-variable-parameter">env</span> <span class="hl-variable-parameter">SRC_FOLDER=foobar</span>
+<span class="hl-function">Adding</span> <span class="hl-variable-parameter">variables</span> <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">your</span> <span class="hl-variable-parameter">flake.nix...</span>
+
+<span class="hl-function">After</span> <span class="hl-variable-parameter">running</span> `<span class="hl-function">nix</span> <span class="hl-variable-parameter">develop</span>` <span class="hl-variable-parameter">or</span> `<span class="hl-function">nix-shell</span>` <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">see</span> <span class="hl-variable-parameter">your</span> <span class="hl-variable-parameter">variable</span> <span class="hl-variable-parameter">run:</span>
+`<span class="hl-function-builtin">echo</span> <span class="hl-punctuation-special">$</span><span class="hl-constant">SRC_FOLDER</span>`
+</code></pre>
+<p>Language support</p>
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">flakectl</span> <span class="hl-variable-parameter">add</span> <span class="hl-variable-parameter">lang</span> <span class="hl-variable-parameter">python</span> <span class="hl-variable-parameter">rust</span>
+<span class="hl-function">Adding</span> <span class="hl-variable-parameter">support</span> <span class="hl-variable-parameter">for</span> <span class="hl-variable-parameter">python</span> <span class="hl-variable-parameter">and</span> <span class="hl-variable-parameter">rust</span> <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">your</span> <span class="hl-variable-parameter">flake.nix...</span>
+
+<span class="hl-function">Use</span> `<span class="hl-function">nix</span> <span class="hl-variable-parameter">build</span> <span class="hl-variable-parameter">py</span>` <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">create</span> <span class="hl-variable-parameter">a</span> <span class="hl-variable-parameter">python</span> <span class="hl-variable-parameter">wheel</span>
+<span class="hl-function">Use</span> `<span class="hl-function">nix</span> <span class="hl-variable-parameter">build</span> <span class="hl-variable-parameter">rs</span>` <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">compile</span> <span class="hl-variable-parameter">the</span> <span class="hl-variable-parameter">rust</span> <span class="hl-variable-parameter">code.</span>
+</code></pre>
+<p>Commands</p>
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">flakectl</span> <span class="hl-variable-parameter">add</span> <span class="hl-variable-parameter">script</span> <span class="hl-variable-parameter">deploy</span> <span class="hl-variable-parameter">--bang</span> <span class="hl-variable-parameter">py</span>
+<span class="hl-function">Adding</span> `<span class="hl-function">deploy</span>` <span class="hl-variable-parameter">script</span> <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">your</span> <span class="hl-variable-parameter">flake.nix...</span>
+
+<span class="hl-function">Use</span> `<span class="hl-function">nix</span> <span class="hl-variable-parameter">run</span> <span class="hl-variable-parameter">deploy</span>` <span class="hl-variable-parameter">to</span> <span class="hl-variable-parameter">execute</span> <span class="hl-variable-parameter">the</span> <span class="hl-variable-parameter">script.</span>
+</code></pre>
+<p>Would something like this make sense as output?</p>
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">tree</span> <span class="hl-variable-parameter">scripts</span>
+<span class="hl-function">scripts/</span>
+<span class="hl-function">└──</span> <span class="hl-variable-parameter">deploy.nix</span>
+</code></pre>
+<p>And maybe some other ways to manipulate the flake itself. This way I can &quot;ask&quot; for the things I want, and later take a look at the result of the flake itself, without having to know much of nix-lang, and learning on the way.</p>
+<p>The question is: What are common things people need?</p>
+<p>It could be done with rust implementation of the AST parser <a href="https://github.com/nix-community/rnix-parser">rnix-parser</a>. Unfortunately I don&#39;t have much time to dig into this idea. Let me know if you do!</p>
+<p>Thanks for reading again.</p>
+<p>Find me on <a href="https://hachyderm.io/@woile">@woile@hachyderm</a></p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

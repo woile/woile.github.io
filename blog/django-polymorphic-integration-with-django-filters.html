@@ -1,0 +1,329 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>How to filter Polymorphic Models with Django Filters | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;django-polymorphic-integration-with-django-filters.html" />
+        <meta
+            name="description"
+            content="Integration of two python&#x2F;django libraries"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="How to filter Polymorphic Models with Django Filters" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;django-polymorphic-integration-with-django-filters.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="Integration of two python&#x2F;django libraries" />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            How to filter Polymorphic Models with Django Filters
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/python.html">#python</a>
+                
+                <a href="../tags/django.html">#django</a>
+                
+                <a href="../tags/drf.html">#drf</a>
+                
+                <a href="../tags/django-rest-framework.html">#django-rest-framework</a>
+                
+                <a href="../tags/api.html">#api</a>
+                
+                <a href="../tags/polymorphic.html">#polymorphic</a>
+                
+                <a href="../tags/filters.html">#filters</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>As the title says, I needed a way to filter my polymorphic models using
+my already defined <code>rest_framework.FilterSet</code>, and as I didn&#39;t find
+much resources about it I&#39;m sharing my experience here.</p>
+<p>First, let&#39;s talk about <code>django-polymorphic</code> and <code>django-filters</code>, what
+are these libraries for.</p>
+<h2 id="django-polymorphic">Django-polymorphic<a class="heading-anchor" href="#django-polymorphic">¶</a></h2>
+<sup class="footnote-ref" id="fn-ref-1"><a href="#fn-1" data-footnote="1" aria-label="Footnote 1"></a></sup><blockquote>
+<p>Simplifies using inherited models in Django projects. When a query is made at the base
+model, the inherited model classes are returned.</p>
+</blockquote>
+<p>One of the most important things to understand of polymorphic is, that
+when you ask for the queryset of the parent, every element is
+represented with its children classes. Let&#39;s see this.</p>
+<p>I&#39;ll use the models examples provided by the
+<a href="https://django-polymorphic.readthedocs.io/en/stable/">docs</a>.</p>
+<pre><code class="language-python"><span class="hl-keyword-control">from</span> <span class="hl-namespace">polymorphic</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">models</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">PolymorphicModel</span>
+
+<span class="hl-keyword">class</span> <span class="hl-type">Project</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">PolymorphicModel</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">topic</span> <span class="hl-operator">=</span> <span class="hl-variable">models</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">CharField</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">max_length</span><span class="hl-operator">=</span><span class="hl-constant-numeric-integer">30</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">start_date</span> <span class="hl-operator">=</span> <span class="hl-variable">models</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">DateField</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">null</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">True</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">blank</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">True</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">finish_date</span> <span class="hl-operator">=</span> <span class="hl-variable">models</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">DateField</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">null</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">True</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">blank</span><span class="hl-operator">=</span><span class="hl-constant-builtin-boolean">True</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-keyword">class</span> <span class="hl-type">ArtProject</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">Project</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">artist</span> <span class="hl-operator">=</span> <span class="hl-variable">models</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">CharField</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">max_length</span><span class="hl-operator">=</span><span class="hl-constant-numeric-integer">30</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-keyword">class</span> <span class="hl-type">ResearchProject</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">Project</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">supervisor</span> <span class="hl-operator">=</span> <span class="hl-variable">models</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">CharField</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">max_length</span><span class="hl-operator">=</span><span class="hl-constant-numeric-integer">30</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<pre><code class="language-python"><span class="hl-operator">&gt;</span><span class="hl-operator">&gt;&gt;</span> <span class="hl-type">Project</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">objects</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">create</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">topic</span><span class="hl-operator">=</span><span class="hl-string">"Department Party"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-operator">&gt;</span><span class="hl-operator">&gt;&gt;</span> <span class="hl-type">ArtProject</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">objects</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">create</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">topic</span><span class="hl-operator">=</span><span class="hl-string">"Painting with Tim"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">artist</span><span class="hl-operator">=</span><span class="hl-string">"T. Turner"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-operator">&gt;</span><span class="hl-operator">&gt;&gt;</span> <span class="hl-type">ResearchProject</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">objects</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">create</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">topic</span><span class="hl-operator">=</span><span class="hl-string">"Swallow Aerodynamics"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">supervisor</span><span class="hl-operator">=</span><span class="hl-string">"Dr. Winter"</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<pre><code class="language-python"><span class="hl-operator">&gt;</span><span class="hl-operator">&gt;&gt;</span> <span class="hl-type">Project</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">objects</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">all</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-punctuation-bracket">[</span> <span class="hl-operator">&lt;</span><span class="hl-type">Project</span><span class="hl-punctuation-delimiter">:</span>         <span class="hl-variable">id</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">topic</span> <span class="hl-string">"Department Party"</span><span class="hl-operator">&gt;</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-operator">&lt;</span><span class="hl-type">ArtProject</span><span class="hl-punctuation-delimiter">:</span>      <span class="hl-variable">id</span> <span class="hl-constant-numeric-integer">2</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">topic</span> <span class="hl-string">"Painting with Tim"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">artist</span> <span class="hl-string">"T. Turner"</span><span class="hl-operator">&gt;</span><span class="hl-punctuation-delimiter">,</span>
+  <span class="hl-operator">&lt;</span><span class="hl-type">ResearchProject</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-variable">id</span> <span class="hl-constant-numeric-integer">3</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">topic</span> <span class="hl-string">"Swallow Aerodynamics"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">supervisor</span> <span class="hl-string">"Dr. Winter"</span><span class="hl-operator">&gt;</span> <span class="hl-punctuation-bracket">]</span>
+</code></pre>
+<p>As you can see, this can be really helpful when using Django Rest
+Framework (DRF) and model inheritance. It allows to use just one model,
+in this case <code>Project</code>, in a <code>ModelViewSet</code> and you will receive all the
+instances for <code>Project</code>, <code>ArtProject</code> and <code>ResearchProject</code>. Take into
+account that your serializer will have to handle the representation of
+each of the models.</p>
+<h2 id="django-filter">Django-filter<a class="heading-anchor" href="#django-filter">¶</a></h2>
+<sup class="footnote-ref" id="fn-ref-2"><a href="#fn-2" data-footnote="2" aria-label="Footnote 2"></a></sup><blockquote>
+<p>Is a generic, reusable application to alleviate writing some of the more mundane bits of view code. Specifically, it allows users to filter down a queryset based on a model’s fields.</p>
+</blockquote>
+<p>Fundamentally, when using django filters you&#39;ll want to create a class
+specifying the model&#39;s fields by which a queryset can be filtered.</p>
+<p>Let&#39;s modified a bit the example of the
+<a href="https://django-filter.readthedocs.io/en/latest/guide/usage.html">docs</a>:</p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">django_filters</span>
+
+<span class="hl-keyword">class</span> <span class="hl-type">ProjectFilter</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">django_filters</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">FilterSet</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">topic</span> <span class="hl-operator">=</span> <span class="hl-namespace">django_filters</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">CharFilter</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">lookup_expr</span><span class="hl-operator">=</span><span class="hl-string">'iexact'</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-keyword">class</span> <span class="hl-type">Meta</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable">model</span> <span class="hl-operator">=</span> <span class="hl-type">Project</span>
+        <span class="hl-variable">fields</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">'start_date'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'finish_date'</span><span class="hl-punctuation-bracket">]</span>
+</code></pre>
+<p>And the view should look something like:</p>
+<pre><code class="language-python"><span class="hl-keyword-function">def</span> <span class="hl-function">project_list</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">request</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">f</span> <span class="hl-operator">=</span> <span class="hl-constructor">ProjectFilter</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">request</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">GET</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">queryset</span><span class="hl-operator">=</span><span class="hl-type">Project</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">objects</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">all</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-function">render</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">request</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'my_app/template.html'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-punctuation-bracket">{</span><span class="hl-string">'filter'</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-variable">f</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>Obviously, this will help reduce the amount of code written, and will be
+way easier to maintain. The good thing about this library, and what
+matters to me the most, is that it has a great <a href="https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html">integration with
+DRF</a>
+by providing a DRF-specific FilterSet and a filter backend.</p>
+<h2 id="filtering-by-a-polymorphic-model">Filtering by a polymorphic model<a class="heading-anchor" href="#filtering-by-a-polymorphic-model">¶</a></h2>
+<p>As we stated at the beginning what I wanted to do is filter by a
+<strong>polymorphic model</strong>, because we have different types of projects. This
+can be easily achieved by reading the docs, no seriously, by essentially
+using the <code>rest_framework.FilterSet</code> and using a customized filter with
+<a href="https://django-filter.readthedocs.io/en/latest/guide/usage.html#customize-filtering-with-filter-method">Filter.method</a>
+in our FilterSet.</p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">django_filters</span>
+
+
+<span class="hl-keyword-function">def</span> <span class="hl-function">get_subclasses_as_choice</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">klass</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">choices</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">{</span><span class="hl-variable">subclass</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">__name__</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">lower</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-variable">subclass</span>
+               <span class="hl-keyword-control-repeat">for</span> <span class="hl-variable">subclass</span> <span class="hl-keyword-control-repeat">in</span> <span class="hl-variable-parameter">klass</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">__subclasses__</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">}</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-variable">choices</span>
+
+
+<span class="hl-keyword">class</span> <span class="hl-type">ProjectFilter</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">django_filters</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">rest_framework</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">FilterSet</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">project_type</span> <span class="hl-operator">=</span> <span class="hl-namespace">django_filters</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">MultipleChoiceFilter</span><span class="hl-punctuation-bracket">(</span>
+        <span class="hl-variable-parameter">method</span><span class="hl-operator">=</span><span class="hl-string">'project_type_filter'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">choices</span><span class="hl-operator">=</span><span class="hl-function">get_subclasses_as_choice</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">Project</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-keyword">class</span> <span class="hl-type">Meta</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable">model</span> <span class="hl-operator">=</span> <span class="hl-type">Project</span>
+        <span class="hl-variable">fields</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">'topic'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'start_date'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'end_date'</span><span class="hl-punctuation-bracket">]</span>
+
+    <span class="hl-keyword-function">def</span> <span class="hl-function">project_type_filter</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">queryset</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">name</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">value</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable">project_choices</span> <span class="hl-operator">=</span> <span class="hl-function">get_subclasses_as_choice</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">Project</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-variable">selected_projects</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">[</span><span class="hl-variable-parameter">value</span> <span class="hl-keyword-control-repeat">for</span> <span class="hl-variable">key</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">value</span> <span class="hl-keyword-control-repeat">in</span> <span class="hl-variable">project_choices</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">items</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+                             <span class="hl-keyword-control-conditional">if</span> <span class="hl-variable">key</span> <span class="hl-keyword-operator">in</span> <span class="hl-variable-parameter">value</span><span class="hl-punctuation-bracket">]</span>
+        <span class="hl-keyword-control-return">return</span> <span class="hl-variable-parameter">queryset</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">instance_of</span><span class="hl-punctuation-bracket">(</span><span class="hl-operator">*</span><span class="hl-variable">selected_projects</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>Now, if our querystring includes a key <code>project_type</code>, it will check if
+the values match any of the choices and it will return the queryset
+filtered by the specified choices. And that&#39;s it, we have successfully
+filtered polymorphic models. Now we just need to add <code>ProjectFilter</code> to
+the <code>filter_class</code> in the <code>viewsets.ModelViewSet</code>.</p>
+<p>Cheers!</p>
+<aside class="footnotes">
+<div class="footnote" id="fn-1"><span class="footnote-num">[1]</span> <p><a href="https://github.com/django-polymorphic/django-polymorphic">https://github.com/django-polymorphic/django-polymorphic</a></p>
+ <a href="#fn-ref-1" class="footnote-backref" title="Back to text">↩</a></div>
+<div class="footnote" id="fn-2"><span class="footnote-num">[2]</span> <p><a href="https://github.com/carltongibson/django-filter">https://github.com/carltongibson/django-filter</a></p>
+ <a href="#fn-ref-2" class="footnote-backref" title="Back to text">↩</a></div>
+</aside>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

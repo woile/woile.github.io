@@ -1,0 +1,670 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>NixOS with agenix | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;agenix.html" />
+        <meta
+            name="description"
+            content="Onboarding agenix on my NixOS config"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="NixOS with agenix" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;agenix.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="Onboarding agenix on my NixOS config" />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            NixOS with agenix
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/security.html">#security</a>
+                
+                <a href="../tags/secret management.html">#secret management</a>
+                
+                <a href="../tags/nixos.html">#nixos</a>
+                
+                <a href="../tags/age.html">#age</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>I&#39;ve been avoiding managing secrets in <a href="https://nixos.org/">NixOS</a> for a long time. When I started with <code>nix</code>,
+I didn&#39;t fully comprehend how the solutions for secret management worked, so I left it as a future problem.</p>
+<p>I started using <code>nix</code> in a MacBook a couple of years ago, then I ditched it for an OEM laptop, with… you guessed it… <a href="https://nixos.org/">NixOS</a>!
+Toss a media center and a VM into the mix, all managed via NixOS; and secrets were bound to happen.</p>
+<div class="d2-diagram">
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.7.1-HEAD" preserveAspectRatio="xMinYMin meet" viewBox="0 0 420 234"><svg class="d2-3859935837 d2-svg" width="420" height="234" viewBox="-1 -1 420 234"><rect x="-1.000000" y="-1.000000" width="420.000000" height="234.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+.d2-3859935837 .text-bold {
+	font-family: "d2-3859935837-font-bold";
+}
+@font-face {
+	font-family: d2-3859935837-font-bold;
+	src: url("data:application/font-woff;base64,d09GRgABAAAAAApYAAoAAAAAEFwAAguFAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAAA9AAAAGAAAABgXxHXrmNtYXAAAAFUAAAAbAAAAIYChgIxZ2x5ZgAAAcAAAARdAAAFjKwsXcdoZWFkAAAGIAAAADYAAAA2G38e1GhoZWEAAAZYAAAAJAAAACQKfwXSaG10eAAABnwAAABMAAAATCI8AuJsb2NhAAAGyAAAACgAAAAoDpwQEG1heHAAAAbwAAAAIAAAACAAKwD3bmFtZQAABxAAAAMoAAAIKgjwVkFwb3N0AAAKOAAAAB0AAAAg/9EAMgADAioCvAAFAAACigJYAAAASwKKAlgAAAFeADIBKQAAAgsHAwMEAwICBGAAAvcAAAADAAAAAAAAAABBREJPACAAIP//Au7/BgAAA9gBESAAAZ8AAAAAAfAClAAAACAAA3icXMzLCcJAFEDRM5n4jxrsw6JEXARciIiIjfhB0N4s5AnjLnd5FhdJltCoXbHSyiprGzudg5OzSwTFtjp7x7/FNz7xjlc84xH3uJVTv1ZSyWoDQyNjE1MzjbmFJT8AAAD//wEAAP//DIYYqHicZFRNbNNWHP+/l8SmxrQ4/orT5tO1X9MQt4lre6EUNzRtYSRQimjZ+MjGYetWaCUoo+OyC5q0TYhN4cB2YNK0adthB8RlQ2LXDbEbSJwmbdJOHKZsijiFeHLS0qId7CdZ+v++/r9nCMEcAD6Hb0IAeqAPwiACmFyK00xCVNoxHUeVAw5BHD2Hw+1vviaZYCYTHE7eSlyt1VD1LL75/Pyp6rlzz2rj4+3bP91rX0eX7gFgGPaa6DFqgQIqgJzWrTHb0XU1TdHEts2CJHIqUSnKKdiORVGiIP1cnrtWx2omMTlojSzvrb21zgQTszsUjT+yL8EuukdO9qVIRHwzNrhysf2XOaBelPlFJhuLyACAYNBrovuoBVGAUFr36XwWmfYpRUEyC7YjUxRSpldLB98rG7MD02rSct3RiMHv1RbYicvzx9cm4nItVilNVsW+N5L9AL4P4jVRC98HHpKbPjrAxDK3OdA3aP49vTpeG8u8olD1dSYYncEREuazgmqPsJ+8f+zy/oFI5fvnU/moui4oD8O9U7OHpgF3tP+JWhCBxEvqJVGg6JQkmQVfe8Ac81lQYvbiganz47NnRoK4/YSZyVt2Xj/7xV2yJ22z+9fmj6257nKZ13psM/VaNI72ZqwRAPA8cADgd/wI68ABAA1h+LiTXclrojC+D31dh5zJvQjs18p4nesJ0VSY1dhTh7H6/IkcRuhCiPbnAAIx1IKU3xlTNrvJbK6X8+XSL86Sv8+ZvFXiU6/m5w7XY0lt1H+NoMZkIpcdSueXz7R/Qyl7aLR9Z+PocmBALRC2c2yiU13YZLVw7FA9lhwYiqCGG89tAily+w5088U0akEf9P8vX4oUbGtsY31IclfL5VXXXSmXV9ycYeSMXG6jGxNrx+cvT1ypTpYqfkV83JJ3EEuoBTzEAeQtdQJFqWmdyCLvY6tpWpQkX2fsEHl9aV/NTu6Lho7q9kJ2WBj6EX+Xj6ofXTqx7vYrRz9DgzOVD3MPw73Q9Y5uoBaEX8qX1rec91d0cYCJ7FJ2D0wIqLFYyIdCHwSDmUL7D0Agek30JWoB6eyVOH6TfLM6MbA1tgUmCpIcx6JAPcq/rR9Iu4lUPGZE4+ND75woLiYORMeixaKenMgssXritNIv85zEM+xgMTO9QCInBYlElN6datGYOgOdPnFeE63gNZA7aVuWajmOKZqiuu0iwumj5Qp39coVNcYqjMw77LsLDy5Q165d+mVYo4LLFNvFYgGQhxqwC8AMmLIk+TE4jhm4++3NSYZngj08U7r+FWo81aqEVLWn7d2dOT/AJmqAAmDyZNsgLatE1/2bS9O9t27c3sNITHBHeEf61qef3x5lZTbYI/QQhP+eE7OimBXnvH/mxT2imJXmfdwsPEAplIcAgGOZYvbZg6WljV3BY9Twv5ucyZXqqNHeDcj7ARfhOH4EOwG4zt+jWxDNMDTNMHBxWFWH/Qf+AwAA//8BAAD//6L+HzMAAAAAAQAAAAILhcqKzu1fDzz1AAED6AAAAADYXaCEAAAAAN1mLzb+N/7ECG0D8QABAAMAAgAAAAAAAAABAAAD2P7vAAAImP43/jcIbQABAAAAAAAAAAAAAAAAAAAAEwKyAFACDwAqAdMAJAI9ACcCBgAkARQANwEeAEEDWQBBAjwAQQIrACQCPQBBAY4AQQG7ABUBfwARAgsADAICAA4BTAArARQAQQAA/60AAAAsAGQAkADCAPYBAgEeAVABcgGeAc4B7gIqAlACbAKYAqQCsALGAAEAAAATAJAADABjAAcAAQAAAAAAAAAAAAAAAAAEAAN4nJyUz24bVRTGf05s0wrBAkVVuonugkWR6NhUSdU2K4fUikUUB48LQkJIE8/4jzKeGXkmDuEJWPMWvEVXPATPgVij+Xzs2AXRJoqSfHfu+fOdc75zgR3+ZptK9SHwRz0xXGGvfm54iwf1E8PbtOtbhqs8qf1puEZYmxuu83mtZ/gj3lZ/M/yA/epPhh+yW20b/phn1R3Dn2w7/jL8Kfu8XeAKvOBXwxV2yQxvscOPhrd5hMWsVHlE03CNz9gzXGcP6DOhIGZCwgjHkAkjrpgRkeMTMWPCkIgQR4cWMYW+JgRCjtF/fg3wKZgRKOKYAkeMT0xAztgi/iKvlHNlHOo0s7sWBWMCLuRxSUCCI2VESkLEpeIUFGS8okGDnIH4ZhTkeORMiPFImTGiQZc2p/QZMyHH0VakkplPypCCawLld2ZRdmZAREJurK5ICMXTiV8k7w6nOLpksl2PfLoR4Usc38m75JbK9is8/bo1Zpt5l2wC5upnrK7EurnWBMe6LfO2+Fa44BXuXv3ZZPL+HoX6XyjyBVeaf6hJJWKS4NwuLXwpyHePcRzp3MFXR76nQ58Turyhr3OLHj1anNGnw2v5dunh+JouZxzLoyO8uGtLMWf8gOMbOrIpY0fWn8XEIn4mM3Xn4jhTHVMy9bxk7qnWSBXefcLlDqUb6sjlM9AelZZO80u0ZwEjU0UmhlP1cqmN3PoXmiKmqqWc7e19uQ1z273lFt+QaodLtS44lZNbMHrfVL13NHOtH4+AkJQLWQxImdKg4Ea8zwm4IsZxrO6daEsKWiufMs+NVBIxFYMOieLMyPQ3MN34xn2woXtnb0ko/5Lp5aqq+2Rx6tXtjN6oe8s737ocrU2gYVNN19Q0ENfEtB9pp9b5+/LN9bqlPOWIlJjwXy/AMzya7HPAIWNlGOhmbq9DUy9Ek5ccqvpLIlkNpefIIhzg8ZwDDnjJ83f6uGTijItbcVnP3eKYI7ocflAVC/suR7xeffv/rL+LaVO1OJ6uTi/uPcUnd1DrF9qz2/eyp4mVk5hbtNutOCNgWnJxu+s1ucd4/wAAAP//AQAA///0t09ReJxiYGYAg//nGIwYsAAAAAAA//8BAAD//y8BAgMAAAA=");
+}]]></style><style type="text/css"><![CDATA[.shape {
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+}
+.connection {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blend {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+		.d2-3859935837 .fill-N1{fill:#0A0F25;}
+		.d2-3859935837 .fill-N2{fill:#676C7E;}
+		.d2-3859935837 .fill-N3{fill:#9499AB;}
+		.d2-3859935837 .fill-N4{fill:#CFD2DD;}
+		.d2-3859935837 .fill-N5{fill:#DEE1EB;}
+		.d2-3859935837 .fill-N6{fill:#EEF1F8;}
+		.d2-3859935837 .fill-N7{fill:#FFFFFF;}
+		.d2-3859935837 .fill-B1{fill:#0D32B2;}
+		.d2-3859935837 .fill-B2{fill:#0D32B2;}
+		.d2-3859935837 .fill-B3{fill:#E3E9FD;}
+		.d2-3859935837 .fill-B4{fill:#E3E9FD;}
+		.d2-3859935837 .fill-B5{fill:#EDF0FD;}
+		.d2-3859935837 .fill-B6{fill:#F7F8FE;}
+		.d2-3859935837 .fill-AA2{fill:#4A6FF3;}
+		.d2-3859935837 .fill-AA4{fill:#EDF0FD;}
+		.d2-3859935837 .fill-AA5{fill:#F7F8FE;}
+		.d2-3859935837 .fill-AB4{fill:#EDF0FD;}
+		.d2-3859935837 .fill-AB5{fill:#F7F8FE;}
+		.d2-3859935837 .stroke-N1{stroke:#0A0F25;}
+		.d2-3859935837 .stroke-N2{stroke:#676C7E;}
+		.d2-3859935837 .stroke-N3{stroke:#9499AB;}
+		.d2-3859935837 .stroke-N4{stroke:#CFD2DD;}
+		.d2-3859935837 .stroke-N5{stroke:#DEE1EB;}
+		.d2-3859935837 .stroke-N6{stroke:#EEF1F8;}
+		.d2-3859935837 .stroke-N7{stroke:#FFFFFF;}
+		.d2-3859935837 .stroke-B1{stroke:#0D32B2;}
+		.d2-3859935837 .stroke-B2{stroke:#0D32B2;}
+		.d2-3859935837 .stroke-B3{stroke:#E3E9FD;}
+		.d2-3859935837 .stroke-B4{stroke:#E3E9FD;}
+		.d2-3859935837 .stroke-B5{stroke:#EDF0FD;}
+		.d2-3859935837 .stroke-B6{stroke:#F7F8FE;}
+		.d2-3859935837 .stroke-AA2{stroke:#4A6FF3;}
+		.d2-3859935837 .stroke-AA4{stroke:#EDF0FD;}
+		.d2-3859935837 .stroke-AA5{stroke:#F7F8FE;}
+		.d2-3859935837 .stroke-AB4{stroke:#EDF0FD;}
+		.d2-3859935837 .stroke-AB5{stroke:#F7F8FE;}
+		.d2-3859935837 .background-color-N1{background-color:#0A0F25;}
+		.d2-3859935837 .background-color-N2{background-color:#676C7E;}
+		.d2-3859935837 .background-color-N3{background-color:#9499AB;}
+		.d2-3859935837 .background-color-N4{background-color:#CFD2DD;}
+		.d2-3859935837 .background-color-N5{background-color:#DEE1EB;}
+		.d2-3859935837 .background-color-N6{background-color:#EEF1F8;}
+		.d2-3859935837 .background-color-N7{background-color:#FFFFFF;}
+		.d2-3859935837 .background-color-B1{background-color:#0D32B2;}
+		.d2-3859935837 .background-color-B2{background-color:#0D32B2;}
+		.d2-3859935837 .background-color-B3{background-color:#E3E9FD;}
+		.d2-3859935837 .background-color-B4{background-color:#E3E9FD;}
+		.d2-3859935837 .background-color-B5{background-color:#EDF0FD;}
+		.d2-3859935837 .background-color-B6{background-color:#F7F8FE;}
+		.d2-3859935837 .background-color-AA2{background-color:#4A6FF3;}
+		.d2-3859935837 .background-color-AA4{background-color:#EDF0FD;}
+		.d2-3859935837 .background-color-AA5{background-color:#F7F8FE;}
+		.d2-3859935837 .background-color-AB4{background-color:#EDF0FD;}
+		.d2-3859935837 .background-color-AB5{background-color:#F7F8FE;}
+		.d2-3859935837 .color-N1{color:#0A0F25;}
+		.d2-3859935837 .color-N2{color:#676C7E;}
+		.d2-3859935837 .color-N3{color:#9499AB;}
+		.d2-3859935837 .color-N4{color:#CFD2DD;}
+		.d2-3859935837 .color-N5{color:#DEE1EB;}
+		.d2-3859935837 .color-N6{color:#EEF1F8;}
+		.d2-3859935837 .color-N7{color:#FFFFFF;}
+		.d2-3859935837 .color-B1{color:#0D32B2;}
+		.d2-3859935837 .color-B2{color:#0D32B2;}
+		.d2-3859935837 .color-B3{color:#E3E9FD;}
+		.d2-3859935837 .color-B4{color:#E3E9FD;}
+		.d2-3859935837 .color-B5{color:#EDF0FD;}
+		.d2-3859935837 .color-B6{color:#F7F8FE;}
+		.d2-3859935837 .color-AA2{color:#4A6FF3;}
+		.d2-3859935837 .color-AA4{color:#EDF0FD;}
+		.d2-3859935837 .color-AA5{color:#F7F8FE;}
+		.d2-3859935837 .color-AB4{color:#EDF0FD;}
+		.d2-3859935837 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3859935837);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-3859935837);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3859935837);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3859935837);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3859935837);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3859935837);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3859935837);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3859935837);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="bml4b3M="><g class="shape" ><rect x="180.000000" y="0.000000" width="82.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="221.000000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">nixos</text></g><g class="bGFwdG9w"><g class="shape" ><rect x="0.000000" y="166.000000" width="91.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="45.500000" y="204.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">laptop</text></g><g class="bWVkaWEtY2VudGVy"><g class="shape" ><rect x="151.000000" y="166.000000" width="140.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="221.000000" y="204.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">media-center</text></g><g class="dm0="><g class="shape" ><rect x="351.000000" y="166.000000" width="67.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="384.500000" y="204.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">vm</text></g><g class="KG5peG9zIC0mZ3Q7IGxhcHRvcClbMF0="><marker id="mk-d2-3859935837-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 178.692797 52.856748 C 72.500000 103.199997 45.500000 126.000000 45.500000 162.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3859935837-3488378134)" mask="url(#d2-3859935837)" /></g><g class="KG5peG9zIC0mZ3Q7IG1lZGlhLWNlbnRlcilbMF0="><path d="M 221.000000 68.000000 C 221.000000 106.000000 221.000000 126.000000 221.000000 162.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3859935837-3488378134)" mask="url(#d2-3859935837)" /></g><g class="KG5peG9zIC0mZ3Q7IHZtKVswXQ=="><path d="M 263.285941 54.900230 C 359.899994 103.599998 384.500000 126.000000 384.500000 162.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3859935837-3488378134)" mask="url(#d2-3859935837)" /></g><mask id="d2-3859935837" maskUnits="userSpaceOnUse" x="-1" y="-1" width="420" height="234">
+<rect x="-1" y="-1" width="420" height="234" fill="white"></rect>
+
+</mask></svg></svg>
+</div>
+<p>And since introducing the VM, <strong>the time has finally arrived</strong>.</p>
+<p>I chose <a href="https://github.com/ryantm/agenix">agenix</a>, one of the most popular solutions for secret management.
+Another popular option was <code>sops-nix</code>, but you have to use YAML, and I&#39;m YAML fatigued, so pass.
+To be fair, <code>sops-nix</code> is usually recommended for more complex scenarios, and mine is quite straightforward.</p>
+<p>In this post, I&#39;m gonna cover my mental model of how it works and finally, my expectations.
+I&#39;m not covering how to install <code>agenix</code>, which is already well covered in their <a href="https://github.com/ryantm/agenix#installation">installation docs</a>.</p>
+<p>My setup is using nix flakes, so this write-up assumes so.</p>
+<p>Conceptually, we can split <a href="https://github.com/ryantm/agenix">agenix</a> in these scenarios:</p>
+<ul>
+<li>Key management</li>
+<li>Secret creation</li>
+<li>Secret usage</li>
+</ul>
+<h2 id="key-management">Key Management<a class="heading-anchor" href="#key-management">¶</a></h2>
+<p>This is the simplest part. Internally, <a href="https://github.com/ryantm/agenix">agenix</a> uses <a href="https://github.com/filosottile/age">age</a> to encrypt and decrypt secrets. I&#39;ve written <a href="./a-primer-on-age-encryption">a primer on age</a>.
+Not only you can set multiple recipients, but you can also use SSH keys for encryption/decryption.</p>
+<p>When the <code>openssh</code> module is enabled in NixOS, it <strong>automatically creates some SSH key pairs on the host machine</strong> under <code>/etc/ssh/</code>.
+We can leverage the SSH keys to encrypt/decrypt secrets for a given host.
+The recommended key is <code>/etc/ssh/ssh_host_ed25519_key</code>.</p>
+<p>And for redundancy, you can create a main key, used on all secrets.</p>
+<p>So the idea is, to <strong>let each host decrypt the secrets they need using the SSH key that they already hold.
+And use the &quot;main keys&quot; for redundancy</strong>, in case any of the host changes.
+For example, if you recreate a VM, the SSH key will change, and you wouldn&#39;t have access to the encrypted secrets without a main key.</p>
+<div class="d2-diagram">
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.7.1-HEAD" preserveAspectRatio="xMinYMin meet" viewBox="0 0 439 506"><svg class="d2-1568636142 d2-svg" width="439" height="506" viewBox="41 15 439 506"><rect x="41.000000" y="15.000000" width="439.000000" height="506.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+.d2-1568636142 .text {
+	font-family: "d2-1568636142-font-regular";
+}
+@font-face {
+	font-family: d2-1568636142-font-regular;
+	src: url("data:application/font-woff;base64,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");
+}
+.d2-1568636142 .text-bold {
+	font-family: "d2-1568636142-font-bold";
+}
+@font-face {
+	font-family: d2-1568636142-font-bold;
+	src: url("data:application/font-woff;base64,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");
+}]]></style><style type="text/css"><![CDATA[.shape {
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+}
+.connection {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blend {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+		.d2-1568636142 .fill-N1{fill:#0A0F25;}
+		.d2-1568636142 .fill-N2{fill:#676C7E;}
+		.d2-1568636142 .fill-N3{fill:#9499AB;}
+		.d2-1568636142 .fill-N4{fill:#CFD2DD;}
+		.d2-1568636142 .fill-N5{fill:#DEE1EB;}
+		.d2-1568636142 .fill-N6{fill:#EEF1F8;}
+		.d2-1568636142 .fill-N7{fill:#FFFFFF;}
+		.d2-1568636142 .fill-B1{fill:#0D32B2;}
+		.d2-1568636142 .fill-B2{fill:#0D32B2;}
+		.d2-1568636142 .fill-B3{fill:#E3E9FD;}
+		.d2-1568636142 .fill-B4{fill:#E3E9FD;}
+		.d2-1568636142 .fill-B5{fill:#EDF0FD;}
+		.d2-1568636142 .fill-B6{fill:#F7F8FE;}
+		.d2-1568636142 .fill-AA2{fill:#4A6FF3;}
+		.d2-1568636142 .fill-AA4{fill:#EDF0FD;}
+		.d2-1568636142 .fill-AA5{fill:#F7F8FE;}
+		.d2-1568636142 .fill-AB4{fill:#EDF0FD;}
+		.d2-1568636142 .fill-AB5{fill:#F7F8FE;}
+		.d2-1568636142 .stroke-N1{stroke:#0A0F25;}
+		.d2-1568636142 .stroke-N2{stroke:#676C7E;}
+		.d2-1568636142 .stroke-N3{stroke:#9499AB;}
+		.d2-1568636142 .stroke-N4{stroke:#CFD2DD;}
+		.d2-1568636142 .stroke-N5{stroke:#DEE1EB;}
+		.d2-1568636142 .stroke-N6{stroke:#EEF1F8;}
+		.d2-1568636142 .stroke-N7{stroke:#FFFFFF;}
+		.d2-1568636142 .stroke-B1{stroke:#0D32B2;}
+		.d2-1568636142 .stroke-B2{stroke:#0D32B2;}
+		.d2-1568636142 .stroke-B3{stroke:#E3E9FD;}
+		.d2-1568636142 .stroke-B4{stroke:#E3E9FD;}
+		.d2-1568636142 .stroke-B5{stroke:#EDF0FD;}
+		.d2-1568636142 .stroke-B6{stroke:#F7F8FE;}
+		.d2-1568636142 .stroke-AA2{stroke:#4A6FF3;}
+		.d2-1568636142 .stroke-AA4{stroke:#EDF0FD;}
+		.d2-1568636142 .stroke-AA5{stroke:#F7F8FE;}
+		.d2-1568636142 .stroke-AB4{stroke:#EDF0FD;}
+		.d2-1568636142 .stroke-AB5{stroke:#F7F8FE;}
+		.d2-1568636142 .background-color-N1{background-color:#0A0F25;}
+		.d2-1568636142 .background-color-N2{background-color:#676C7E;}
+		.d2-1568636142 .background-color-N3{background-color:#9499AB;}
+		.d2-1568636142 .background-color-N4{background-color:#CFD2DD;}
+		.d2-1568636142 .background-color-N5{background-color:#DEE1EB;}
+		.d2-1568636142 .background-color-N6{background-color:#EEF1F8;}
+		.d2-1568636142 .background-color-N7{background-color:#FFFFFF;}
+		.d2-1568636142 .background-color-B1{background-color:#0D32B2;}
+		.d2-1568636142 .background-color-B2{background-color:#0D32B2;}
+		.d2-1568636142 .background-color-B3{background-color:#E3E9FD;}
+		.d2-1568636142 .background-color-B4{background-color:#E3E9FD;}
+		.d2-1568636142 .background-color-B5{background-color:#EDF0FD;}
+		.d2-1568636142 .background-color-B6{background-color:#F7F8FE;}
+		.d2-1568636142 .background-color-AA2{background-color:#4A6FF3;}
+		.d2-1568636142 .background-color-AA4{background-color:#EDF0FD;}
+		.d2-1568636142 .background-color-AA5{background-color:#F7F8FE;}
+		.d2-1568636142 .background-color-AB4{background-color:#EDF0FD;}
+		.d2-1568636142 .background-color-AB5{background-color:#F7F8FE;}
+		.d2-1568636142 .color-N1{color:#0A0F25;}
+		.d2-1568636142 .color-N2{color:#676C7E;}
+		.d2-1568636142 .color-N3{color:#9499AB;}
+		.d2-1568636142 .color-N4{color:#CFD2DD;}
+		.d2-1568636142 .color-N5{color:#DEE1EB;}
+		.d2-1568636142 .color-N6{color:#EEF1F8;}
+		.d2-1568636142 .color-N7{color:#FFFFFF;}
+		.d2-1568636142 .color-B1{color:#0D32B2;}
+		.d2-1568636142 .color-B2{color:#0D32B2;}
+		.d2-1568636142 .color-B3{color:#E3E9FD;}
+		.d2-1568636142 .color-B4{color:#E3E9FD;}
+		.d2-1568636142 .color-B5{color:#EDF0FD;}
+		.d2-1568636142 .color-B6{color:#F7F8FE;}
+		.d2-1568636142 .color-AA2{color:#4A6FF3;}
+		.d2-1568636142 .color-AA4{color:#EDF0FD;}
+		.d2-1568636142 .color-AA5{color:#F7F8FE;}
+		.d2-1568636142 .color-AB4{color:#EDF0FD;}
+		.d2-1568636142 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-1568636142);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-1568636142);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-1568636142);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-1568636142);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-1568636142);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-1568636142);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-1568636142);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-1568636142);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="dm0="><g class="shape" ><rect x="42.000000" y="56.000000" width="129.000000" height="126.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="106.500000" y="43.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">vm</text></g><g class="YXBpX2tleQ=="><g class="shape" ><rect x="345.000000" y="133.000000" width="102.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="396.000000" y="171.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">api_key</text></g><g class="bGFwdG9w"><g class="shape" ><rect x="42.000000" y="394.000000" width="129.000000" height="126.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="106.500000" y="381.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">laptop</text></g><g class="YWRtaW5fcGFzc3dvcmQ="><g class="shape" ><rect x="312.000000" y="378.000000" width="167.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="395.500000" y="416.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">admin_password</text></g><g class="bWFpbi1rZXk="><g class="shape" ><rect x="50.000000" y="232.000000" width="112.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="106.000000" y="270.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">main-key</text></g><g class="dm0uc3No"><g class="shape" ><rect x="72.000000" y="86.000000" width="69.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="106.500000" y="124.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">ssh</text></g><g class="bGFwdG9wLnNzaA=="><g class="shape" ><rect x="72.000000" y="424.000000" width="69.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="106.500000" y="462.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">ssh</text></g><g class="KHZtLnNzaCAtJmd0OyBhcGlfa2V5KVswXQ=="><marker id="mk-d2-1568636142-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 143.500000 119.000000 C 197.899994 119.000000 278.500000 124.747002 340.722572 146.419311" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1568636142-3488378134)" mask="url(#d2-1568636142)" /></g><g class="KGxhcHRvcC5zc2ggLSZndDsgYWRtaW5fcGFzc3dvcmQpWzBd"><path d="M 143.500000 457.000000 C 197.899994 457.000000 272.000000 453.600006 308.212909 441.287611" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1568636142-3488378134)" mask="url(#d2-1568636142)" /></g><g class="KG1haW4ta2V5IC0mZ3Q7IGFkbWluX3Bhc3N3b3JkKVswXQ=="><path d="M 163.935645 279.003267 C 202.000000 288.899994 276.630005 308.700012 332.558372 374.453117" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1568636142-3488378134)" mask="url(#d2-1568636142)" /></g><g class="KG1haW4ta2V5IC0mZ3Q7IGFwaV9rZXkpWzBd"><path d="M 163.935645 250.996733 C 202.000000 241.100006 278.500000 229.477005 340.990432 195.306090" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1568636142-3488378134)" mask="url(#d2-1568636142)" /></g><mask id="d2-1568636142" maskUnits="userSpaceOnUse" x="41" y="15" width="439" height="506">
+<rect x="41" y="15" width="439" height="506" fill="white"></rect>
+
+</mask></svg></svg>
+</div>
+<p>So we start by gathering our public keys:</p>
+<pre><code class="language-shell-console"><span class="hl-operator">$ </span><span class="hl-comment"># laptop public key</span>
+<span class="hl-operator">$ </span><span class="hl-function">cat</span> <span class="hl-variable-parameter">/etc/ssh/ssh_host_ed25519_key.pub</span>
+<span class="hl-comment">ssh-ed25519 AlAaApAtCop...</span>
+<span class="hl-comment"></span>
+<span class="hl-operator">$ </span><span class="hl-comment"># vm public key</span>
+<span class="hl-operator">$ </span><span class="hl-function">cat</span> <span class="hl-variable-parameter">/etc/ssh/ssh_host_ed25519_key.pub</span>
+<span class="hl-comment">ssh-ed25519 AvAmAAC3N...</span>
+<span class="hl-comment"></span>
+<span class="hl-operator">$ </span><span class="hl-comment"># main key</span>
+<span class="hl-operator">$ </span><span class="hl-function">cat</span> <span class="hl-variable-parameter">~/.age/main.pub</span>
+<span class="hl-comment">age1mca4i2n7...</span>
+<span class="hl-comment"></span></code></pre>
+<blockquote>
+<p>💡TIP</p>
+<p>For the main key, you can use a FIDO2 key,
+or the <a href="https://en.wikipedia.org/wiki/Trusted_Platform_Module#TPM_2.0">TPM</a>
+module of your machine for extra security</p>
+</blockquote>
+<h2 id="secret-creation">Secret Creation<a class="heading-anchor" href="#secret-creation">¶</a></h2>
+<p>Once we gather the public keys, we consolidate them in a <code>secrets.nix</code>,
+which is <strong>only used to generate secrets</strong>, it&#39;s not imported into your NixOS configuration.</p>
+<pre><code class="language-nix"><span class="hl-comment"># secrets.nix</span>
+<span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">laptop-host</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"ssh-ed25519 AlAaApAtCop"</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">vm-host</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"ssh-ed25519 AvAmAAC3N"</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">main-user</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"age1mca4i2n7"</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span> <span class="hl-punctuation-bracket">{</span>
+
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>And then we specify, for each secret, which keys to use.</p>
+<pre><code class="language-diff"># secrets.nix
+let
+  laptop-host = "ssh-ed25519 AlAaApAtCop";
+  vm-host = "ssh-ed25519 AvAmAAC3N";
+  main-user = "age1mca4i2n7";
+in {
+<span class="hl-diff-plus">+  "api_token.age".publicKeys = [ main-user laptop-host ];</span>
+<span class="hl-diff-plus">+  "server_password.age".publicKeys = [main-user vm-host ];</span>
+}
+</code></pre>
+<p>Finally, we use the cli provided by <a href="https://github.com/ryantm/agenix">agenix</a> to generate the secrets files (ending in <code>.age</code>) based on the <code>secrets.nix</code> file.</p>
+<pre><code class="language-sh"><span class="hl-comment"># run only if you are missing the cli</span>
+<span class="hl-function">nix</span> <span class="hl-variable-parameter">shell</span> <span class="hl-variable-parameter">github:ryantm/agenix</span>
+</code></pre>
+<pre><code class="language-sh"><span class="hl-function">agenix</span> <span class="hl-variable-parameter">-e</span> <span class="hl-string">'api_token.age'</span>
+<span class="hl-function">agenix</span> <span class="hl-variable-parameter">-e</span> <span class="hl-string">'server_password.age'</span>
+</code></pre>
+<p>Each time we run the command, <code>agenix</code> opens your default editor (via <code>$EDITOR</code>), you fill the password.
+And after you save and exit, <code>agenix</code> will read the <code>secrets.nix</code>, read the recipients of the secrets, and encrypt accordingly.</p>
+<p>This is a <strong>keypoint: secrets are created via the <code>agenix</code> cli</strong>.</p>
+<p>You don&#39;t create a file with the raw secret, and tell <code>agenix</code> to encrypt it.</p>
+<div class="d2-diagram">
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.7.1-HEAD" preserveAspectRatio="xMinYMin meet" viewBox="0 0 946 168"><svg class="d2-3984476258 d2-svg" width="946" height="168" viewBox="19 15 946 168"><rect x="19.000000" y="15.000000" width="946.000000" height="168.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+.d2-3984476258 .text {
+	font-family: "d2-3984476258-font-regular";
+}
+@font-face {
+	font-family: d2-3984476258-font-regular;
+	src: url("data:application/font-woff;base64,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");
+}
+.d2-3984476258 .text-bold {
+	font-family: "d2-3984476258-font-bold";
+}
+@font-face {
+	font-family: d2-3984476258-font-bold;
+	src: url("data:application/font-woff;base64,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");
+}]]></style><style type="text/css"><![CDATA[.shape {
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+}
+.connection {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blend {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+		.d2-3984476258 .fill-N1{fill:#0A0F25;}
+		.d2-3984476258 .fill-N2{fill:#676C7E;}
+		.d2-3984476258 .fill-N3{fill:#9499AB;}
+		.d2-3984476258 .fill-N4{fill:#CFD2DD;}
+		.d2-3984476258 .fill-N5{fill:#DEE1EB;}
+		.d2-3984476258 .fill-N6{fill:#EEF1F8;}
+		.d2-3984476258 .fill-N7{fill:#FFFFFF;}
+		.d2-3984476258 .fill-B1{fill:#0D32B2;}
+		.d2-3984476258 .fill-B2{fill:#0D32B2;}
+		.d2-3984476258 .fill-B3{fill:#E3E9FD;}
+		.d2-3984476258 .fill-B4{fill:#E3E9FD;}
+		.d2-3984476258 .fill-B5{fill:#EDF0FD;}
+		.d2-3984476258 .fill-B6{fill:#F7F8FE;}
+		.d2-3984476258 .fill-AA2{fill:#4A6FF3;}
+		.d2-3984476258 .fill-AA4{fill:#EDF0FD;}
+		.d2-3984476258 .fill-AA5{fill:#F7F8FE;}
+		.d2-3984476258 .fill-AB4{fill:#EDF0FD;}
+		.d2-3984476258 .fill-AB5{fill:#F7F8FE;}
+		.d2-3984476258 .stroke-N1{stroke:#0A0F25;}
+		.d2-3984476258 .stroke-N2{stroke:#676C7E;}
+		.d2-3984476258 .stroke-N3{stroke:#9499AB;}
+		.d2-3984476258 .stroke-N4{stroke:#CFD2DD;}
+		.d2-3984476258 .stroke-N5{stroke:#DEE1EB;}
+		.d2-3984476258 .stroke-N6{stroke:#EEF1F8;}
+		.d2-3984476258 .stroke-N7{stroke:#FFFFFF;}
+		.d2-3984476258 .stroke-B1{stroke:#0D32B2;}
+		.d2-3984476258 .stroke-B2{stroke:#0D32B2;}
+		.d2-3984476258 .stroke-B3{stroke:#E3E9FD;}
+		.d2-3984476258 .stroke-B4{stroke:#E3E9FD;}
+		.d2-3984476258 .stroke-B5{stroke:#EDF0FD;}
+		.d2-3984476258 .stroke-B6{stroke:#F7F8FE;}
+		.d2-3984476258 .stroke-AA2{stroke:#4A6FF3;}
+		.d2-3984476258 .stroke-AA4{stroke:#EDF0FD;}
+		.d2-3984476258 .stroke-AA5{stroke:#F7F8FE;}
+		.d2-3984476258 .stroke-AB4{stroke:#EDF0FD;}
+		.d2-3984476258 .stroke-AB5{stroke:#F7F8FE;}
+		.d2-3984476258 .background-color-N1{background-color:#0A0F25;}
+		.d2-3984476258 .background-color-N2{background-color:#676C7E;}
+		.d2-3984476258 .background-color-N3{background-color:#9499AB;}
+		.d2-3984476258 .background-color-N4{background-color:#CFD2DD;}
+		.d2-3984476258 .background-color-N5{background-color:#DEE1EB;}
+		.d2-3984476258 .background-color-N6{background-color:#EEF1F8;}
+		.d2-3984476258 .background-color-N7{background-color:#FFFFFF;}
+		.d2-3984476258 .background-color-B1{background-color:#0D32B2;}
+		.d2-3984476258 .background-color-B2{background-color:#0D32B2;}
+		.d2-3984476258 .background-color-B3{background-color:#E3E9FD;}
+		.d2-3984476258 .background-color-B4{background-color:#E3E9FD;}
+		.d2-3984476258 .background-color-B5{background-color:#EDF0FD;}
+		.d2-3984476258 .background-color-B6{background-color:#F7F8FE;}
+		.d2-3984476258 .background-color-AA2{background-color:#4A6FF3;}
+		.d2-3984476258 .background-color-AA4{background-color:#EDF0FD;}
+		.d2-3984476258 .background-color-AA5{background-color:#F7F8FE;}
+		.d2-3984476258 .background-color-AB4{background-color:#EDF0FD;}
+		.d2-3984476258 .background-color-AB5{background-color:#F7F8FE;}
+		.d2-3984476258 .color-N1{color:#0A0F25;}
+		.d2-3984476258 .color-N2{color:#676C7E;}
+		.d2-3984476258 .color-N3{color:#9499AB;}
+		.d2-3984476258 .color-N4{color:#CFD2DD;}
+		.d2-3984476258 .color-N5{color:#DEE1EB;}
+		.d2-3984476258 .color-N6{color:#EEF1F8;}
+		.d2-3984476258 .color-N7{color:#FFFFFF;}
+		.d2-3984476258 .color-B1{color:#0D32B2;}
+		.d2-3984476258 .color-B2{color:#0D32B2;}
+		.d2-3984476258 .color-B3{color:#E3E9FD;}
+		.d2-3984476258 .color-B4{color:#E3E9FD;}
+		.d2-3984476258 .color-B5{color:#EDF0FD;}
+		.d2-3984476258 .color-B6{color:#F7F8FE;}
+		.d2-3984476258 .color-AA2{color:#4A6FF3;}
+		.d2-3984476258 .color-AA4{color:#EDF0FD;}
+		.d2-3984476258 .color-AA5{color:#F7F8FE;}
+		.d2-3984476258 .color-AB4{color:#EDF0FD;}
+		.d2-3984476258 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3984476258);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-3984476258);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3984476258);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3984476258);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3984476258);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3984476258);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3984476258);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3984476258);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="c2VjcmV0cyBjb25maWc="><g class="shape" ><rect x="20.000000" y="56.000000" width="183.000000" height="126.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="111.500000" y="43.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">secrets config</text></g><g class="Y3JlYXRlIHNlY3JldA=="><g class="shape" ><rect x="343.000000" y="56.000000" width="274.000000" height="126.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="480.000000" y="43.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">create secret</text></g><g class="c2VjcmV0ZmlsZQ=="><g class="shape" ><rect x="757.000000" y="56.000000" width="207.000000" height="126.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="860.500000" y="43.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">secretfile</text></g><g class="c2VjcmV0cyBjb25maWcuJiMzNDtzZWNyZXRzLm5peCYjMzQ7"><g class="shape" ><rect x="50.000000" y="86.000000" width="123.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="111.500000" y="124.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">secrets.nix</text></g><g class="Y3JlYXRlIHNlY3JldC4mIzM0O2FnZW5peCAtZSBhcGlfdG9rZW4uYWdlJiMzNDs="><g class="shape" ><rect x="373.000000" y="86.000000" width="214.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="480.000000" y="124.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">agenix -e api_token.age</text></g><g class="c2VjcmV0ZmlsZS4mIzM0O2FwaV90b2tlbi5hZ2UmIzM0Ow=="><g class="shape" ><rect x="787.000000" y="86.000000" width="147.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="860.500000" y="124.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">api_token.age</text></g><g class="KHNlY3JldHMgY29uZmlnLiYjMzQ7c2VjcmV0cy5uaXgmIzM0OyAtJmd0OyBjcmVhdGUgc2VjcmV0KVswXQ=="><marker id="mk-d2-3984476258-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 175.000000 119.000000 C 213.000000 119.000000 287.000000 119.000000 339.000000 119.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3984476258-3488378134)" mask="url(#d2-3984476258)" /></g><g class="KGNyZWF0ZSBzZWNyZXQuJiMzNDthZ2VuaXggLWUgYXBpX3Rva2VuLmFnZSYjMzQ7IC0mZ3Q7IHNlY3JldGZpbGUuJiMzNDthcGlfdG9rZW4uYWdlJiMzNDspWzBd"><path d="M 589.000000 119.000000 C 627.000000 119.000000 647.000000 119.000000 662.000000 119.000000 C 677.000000 119.000000 747.000000 119.000000 783.000000 119.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3984476258-3488378134)" mask="url(#d2-3984476258)" /></g><mask id="d2-3984476258" maskUnits="userSpaceOnUse" x="19" y="15" width="946" height="168">
+<rect x="19" y="15" width="946" height="168" fill="white"></rect>
+
+</mask></svg></svg>
+</div>
+<h3 id="changing-directories">Changing Directories<a class="heading-anchor" href="#changing-directories">¶</a></h3>
+<p>If you are like me, and want to choose where to place the <code>secrets.nix</code>,
+you&#39;ll need 2 things. Specify the path in the nix code, and set the <code>RULES</code> env before running the <code>agenix</code> cli.</p>
+<p>Example using the <code>security</code> directory:</p>
+<pre><code class="language-diff"><span class="hl-diff-minus">- "api_token.age".publicKeys = [ main-user laptop-host ];</span>
+<span class="hl-diff-plus">+ "security/api_token.age".publicKeys = [ main-user laptop-host ];</span>
+</code></pre>
+<pre><code class="language-sh"><span class="hl-keyword-control-import">export</span> <span class="hl-constant">RULES</span><span class="hl-operator">=</span><span class="hl-string">security/secrets.nix</span>
+</code></pre>
+<h3 id="rekey">Rekey<a class="heading-anchor" href="#rekey">¶</a></h3>
+<p>If you destroy and recreate a VM for example. You&#39;ll have to encrypt the secrets again with the new public key.
+This is call &quot;to rekey&quot;. And there are some projects that make this easier, like <a href="https://github.com/oddlama/agenix-rekey">agenix-rekey</a>.</p>
+<p>Otherwise, just update the <code>secrets.nix</code> and run:</p>
+<pre><code class="language-sh"><span class="hl-function">agenix</span> <span class="hl-variable-parameter">--rekey</span>
+</code></pre>
+<h2 id="secret-usage">Secret Usage<a class="heading-anchor" href="#secret-usage">¶</a></h2>
+<p>We are now ready to start using the secrets in our NixOS configuration.
+Assuming the <code>agenix</code> module is correctly set up, we can split again in 2 parts:</p>
+<ol start="1">
+<li>Define the secret in your config via <code>age.secrets</code> option.</li>
+<li>Use the secret via the <code>config.age.secrets</code> option.</li>
+</ol>
+<p>Let&#39;s see how to define and use <code>api_token</code> on a host.</p>
+<p>We start by telling the configuration where to find the <code>.age</code> file</p>
+<pre><code class="language-nix"><span class="hl-comment"># ./hosts/my-vm/configuration.nix</span>
+<span class="hl-punctuation-bracket">{</span> <span class="hl-punctuation-delimiter">...</span> <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">:</span>
+<span class="hl-punctuation-bracket">{</span>
+  <span class="hl-comment"># Register Secrets</span>
+  <span class="hl-variable-other-member">age</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">secrets</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">api_token</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">file</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string-special-path">../../api_token.age</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>You can also include <code>owner</code> and <code>group</code> which default to the user decrypting the files, and the <code>mode</code>.</p>
+<p>And finally, to use the secret, and assuming the nix option expects a path to the secret location:</p>
+<pre><code class="language-nix"><span class="hl-comment"># ./hosts/my-vm/configuration.nix</span>
+<span class="hl-punctuation-bracket">{</span> <span class="hl-variable-parameter">config</span> <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">:</span>
+<span class="hl-punctuation-bracket">{</span>
+  <span class="hl-comment"># ...</span>
+  <span class="hl-variable-other-member">example-reverse-proxy</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">api_token</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">config</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">age</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">secrets</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">api_token</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">path</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<blockquote>
+<p>⚠️ WARNING</p>
+<p>Never use <code>builtins.readFile config.age.secrets.api_token.path</code>
+which can cause the cleartext to be placed into the world-readable Nix store</p>
+</blockquote>
+<p>And that&#39;s all.</p>
+<p>After a rebuild, <strong>it should just work</strong>.</p>
+<p>And in this case, to rebuild the remote VM running NixOS, from our laptop, we use:</p>
+<pre><code class="language-sh"><span class="hl-function">sudo</span> <span class="hl-variable-parameter">nixos-rebuild</span> <span class="hl-variable-parameter">switch</span> \
+    <span class="hl-variable-parameter">--target-host</span> <span class="hl-variable-parameter">root@</span><span class="hl-variable-parameter">[</span><span class="hl-variable-parameter">i:p:v:6</span><span class="hl-variable-parameter">]</span> \
+    <span class="hl-variable-parameter">--flake</span> <span class="hl-string">".#my-vm"</span>
+</code></pre>
+<h2 id="attack-vectors">Attack Vectors<a class="heading-anchor" href="#attack-vectors">¶</a></h2>
+<p>I would say <a href="https://github.com/ryantm/agenix">agenix</a> is secure by design, because it relies on <code>age</code>, an established and well trusted library.
+And secrets <strong>do not end up in the nix store</strong>, which is the downside of plaintext secrets.</p>
+<p>The main concern would be the <a href="https://en.wikipedia.org/wiki/Harvest_now,_decrypt_later">Harvest now, decrypt later</a> strategy.
+Which can be mitigated by rotating secrets often and using Post-Quantum Cryptography (PQC), which is supported by <code>age</code> (with plugins as of today).</p>
+<h2 id="conclusion-and-expectations">Conclusion and Expectations<a class="heading-anchor" href="#conclusion-and-expectations">¶</a></h2>
+<p>I&#39;ve successfully onboarded <a href="https://github.com/ryantm/agenix">agenix</a> into my <a href="https://github.com/woile/nix-config/">nix-config</a>.
+It&#39;s okay, but to be honest, I&#39;m a bit disappointed with its interface.
+The secrets are repeated in the <code>secrets.nix</code> and then in the <code>age.secrets</code>.
+I would rather define them once instead of having a <code>secrets.nix</code> plus the <code>age.secrets</code> module.</p>
+<p>I recently found <a href="https://milieuim.github.io/vaultix">vaultix</a>, which seems like a more promising alternative.
+Apparently, it natively adopts the strategy I described above.
+And by natively, I mean that you only need to set a main key,
+and it automatically picks up the SSH keys from the hosts.
+This means that the SSH public keys aren&#39;t explicitly listed in the repo, which is a nice little plus.
+I would love to hear a confirmation of my understanding.</p>
+<p>Another project that makes things nicer, is <a href="https://github.com/oddlama/agenix-rekey">agenix-rekey</a>, which extends <code>agenix</code>,
+removing the need for <code>secrets.nix</code>.</p>
+<p>I hope you enjoyed the read! This entry took me a bit longer than I wanted to finish.</p>
+<p><a href="https://notbyai.fyi"><img src="/badge-human-written.svg" alt="Written by a Human, Not by AI" /></a></p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

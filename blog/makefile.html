@@ -1,0 +1,417 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Digesting Make and Makefiles | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;makefile.html" />
+        <meta
+            name="description"
+            content="Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Digesting Make and Makefiles" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;makefile.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="Makefiles are great, but sometimes they get a bit hard, this tutorial tries to reduce the complexity by teaching about it" />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            Digesting Make and Makefiles
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/make.html">#make</a>
+                
+                <a href="../tags/unix.html">#unix</a>
+                
+                <a href="../tags/gnu.html">#gnu</a>
+                
+                <a href="../tags/linux.html">#linux</a>
+                
+                <a href="../tags/documentation.html">#documentation</a>
+                
+                <a href="../tags/tutorial.html">#tutorial</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>Make and its Makefiles, are a fantastic tool to keep track of the commands needed to build or run an application.
+I have recently done a big refactor for a project, where we make heavy use of Make, and decided to write this small piece about Make.</p>
+<p>Just create a <code>Makefile</code> at the root of your project, start adding commands, and done… right? Not really.</p>
+<p>Let&#39;s explore a bit more what I mean, and then try to build a mental model that matches reality a bit better,
+closing with some magic you can do with Makefiles.</p>
+<p>Set up a practice field by running in the terminal:</p>
+<pre><code class="language-sh"><span class="hl-function">mkdir</span> <span class="hl-variable-parameter">/tmp/practice</span>
+<span class="hl-function-builtin">cd</span> <span class="hl-variable-parameter">/tmp/practice</span>
+<span class="hl-function">touch</span> <span class="hl-variable-parameter">index.html</span>
+</code></pre>
+<p>And write a minimal <code>Makefile</code> with your favorite editor (e.g: <code>vim Makefile</code>)</p>
+<pre><code class="language-Makefile"><span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
+</code></pre>
+<p>Then execute in your terminal:</p>
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
+</code></pre>
+<p>This will create a folder <code>dist</code>, and copy <code>index.html</code> into the folder <code>dist</code>.</p>
+<p>This is good. Particularly for me, it documents the commands used by the project, and helps future me.</p>
+<p>Let&#39;s refactor a bit, to show some extra functionality:</p>
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+
+<span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> dist
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
+</code></pre>
+<p>Notice the <code>build: dist</code>, it means: call <code>dist</code> command <em>before</em> running <code>build</code></p>
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
+</code></pre>
+<p>The functionality remains the same.</p>
+<h3 id="recap">Recap<a class="heading-anchor" href="#recap">¶</a></h3>
+<blockquote>
+<p>We created two commands: <code>build</code> and <code>dist</code>.</p>
+<p>And <code>dist</code> is executed by the <code>build</code> before running itself.</p>
+</blockquote>
+<p>This is ok, but it&#39;s not necessary a correct mental model.
+In the Makefile world, commands are not commands… but files.</p>
+<h2 id="new-mental-model">New Mental Model<a class="heading-anchor" href="#new-mental-model">¶</a></h2>
+<p>In a nutshell, make builds a <a href="https://en.wikipedia.org/wiki/Dependency_graph">dependency graph</a> of files and folders.</p>
+<ul>
+<li><code>build</code> and <code>dist</code> are actually <strong>target files</strong> (or folders).</li>
+<li>Doing <code>build: dist</code> means that <code>build</code> depends on <code>dist</code> existing first.</li>
+</ul>
+<p>If we had a file called <code>build</code> , doing <code>make build</code>, wouldn&#39;t execute anything.</p>
+<pre><code>touch build
+make build
+$ make: `build' is up to date.
+</code></pre>
+<p>If we want to actually treat <code>build</code> as a command, we have to add <code>.PHONY</code>.</p>
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+
+<span class="hl-constant">.PHONY</span><span class="hl-punctuation-delimiter">:</span> build
+<span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> dist
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
+</code></pre>
+<p>This way Make no longer sees <code>build</code> as a file, but instead as a recipe, and it will be
+executed every time.</p>
+<h2 id="back-to-targets">Back to Targets<a class="heading-anchor" href="#back-to-targets">¶</a></h2>
+<p>Remember what we said about targets and dependency graph? No? Me neither.
+Don&#39;t worry, I actually didn&#39;t say anything.</p>
+<p>If you treat your targets as <strong>files</strong>, Make can keep track of the files that have
+changed, and update only those.</p>
+<p>By knowing this our previous example could be refactored into:</p>
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+
+<span class="hl-constant">dist/index.html</span><span class="hl-punctuation-delimiter">:</span> dist
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
+</code></pre>
+<p>And now we tell Make to create our target file:</p>
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">dist/index.html</span>
+</code></pre>
+<p>If we run multiple times, we get:</p>
+<pre><code>make: `dist/index.html' is up to date.
+</code></pre>
+<p>We would expect that by modifying <code>index.html</code>, and running <code>make dist/index.html</code>, it would be rebuilt,
+but we are getting the same message.</p>
+<h2 id="dependencies">Dependencies<a class="heading-anchor" href="#dependencies">¶</a></h2>
+<p>We need to tell Make that it depends on another file: <code>index.html</code></p>
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+
+<span class="hl-constant">dist/index.html</span><span class="hl-punctuation-delimiter">:</span> dist index.html
+	<span class="hl-function">cp</span> <span class="hl-variable-parameter">index.html</span> <span class="hl-variable-parameter">dist/index.html</span>
+</code></pre>
+<p>This time, if <code>index.html</code> is modified, <code>make dist/index.html</code> will run again.
+Thus, when dependencies are updated, <strong>target files</strong> are recreated.</p>
+<p><img src="/images/makefile/make-targets-deps.png" alt="Makefile targets and dependencies" /></p>
+<h2 id="patterns">Patterns<a class="heading-anchor" href="#patterns">¶</a></h2>
+<p>Now let&#39;s say we have many HTML files</p>
+<pre><code class="language-sh"><span class="hl-function">touch</span> <span class="hl-variable-parameter">about.html</span> <span class="hl-variable-parameter">privacy.html</span> <span class="hl-variable-parameter">docs.html</span>
+</code></pre>
+<p>And we want to do the same for all the files, without creating many commands in Make.
+For this case we use a pattern (<code>%</code>), and some Make variables:</p>
+<ul>
+<li><code>$@</code>: the target file</li>
+<li><code>$&lt;</code>: the input file</li>
+</ul>
+<pre><code class="language-Makefile"><span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+
+<span class="hl-constant">dist/%.html</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string-regexp">%.html</span> dist
+	<span class="hl-function">cp</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-special">&lt;</span> <span class="hl-punctuation-special">$</span><span class="hl-operator">@</span>
+</code></pre>
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">dist/about.html</span>
+</code></pre>
+<p>And we would be explicitly telling Make which file to create.</p>
+<p>But what if we want to copy all the files at the same time?</p>
+<p>Our current implementation, doesn&#39;t know about the available files.
+And we are providing the <code>about</code> to the <code>make dist/about.html</code>.</p>
+<p>We have to find a way to &quot;know&quot; all the possible targets.</p>
+<h2 id="variables">Variables<a class="heading-anchor" href="#variables">¶</a></h2>
+<p>We are gonna find the source files (<code>*.html</code> files which are not in the <code>dist</code> folder), store in a variable,
+and then use that information to create the target HTML files.</p>
+<pre><code class="language-Makefile"><span class="hl-variable">SRC_HTMLS</span> <span class="hl-operator">::=</span> <span class="hl-string"><span class="hl-punctuation-special">$</span></span><span class="hl-string"><span class="hl-punctuation-bracket">(</span></span><span class="hl-string"><span class="hl-keyword-function">shell</span></span><span class="hl-string"> find . -name '*.html' -depth 1</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-variable">TARGET_HTMLS</span> <span class="hl-operator">::=</span> <span class="hl-string"><span class="hl-punctuation-special">$</span></span><span class="hl-string"><span class="hl-punctuation-bracket">(</span></span><span class="hl-string">SRC_HTMLS</span><span class="hl-punctuation-delimiter">:</span><span class="hl-string"><span class="hl-string-regexp">./%.html</span></span><span class="hl-string"><span class="hl-operator">=</span></span><span class="hl-string"><span class="hl-string-regexp">dist/%.html</span></span><span class="hl-string"><span class="hl-punctuation-bracket">)</span></span>
+
+<span class="hl-constant">.PHONY</span><span class="hl-punctuation-delimiter">:</span> build
+<span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">TARGET_HTMLS</span><span class="hl-punctuation-bracket">)</span>
+	<span class="hl-punctuation-special">$</span><span class="hl-punctuation-bracket">(</span><span class="hl-keyword-control-exception">info</span> Done<span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-constant">dist</span><span class="hl-punctuation-delimiter">:</span>
+	<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">dist</span>
+
+<span class="hl-constant">dist/%.html</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string-regexp">%.html</span> dist
+	<span class="hl-function">cp</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-special">&lt;</span> <span class="hl-punctuation-special">$</span><span class="hl-operator">@</span>
+</code></pre>
+<pre><code class="language-sh"><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
+</code></pre>
+<p>What happens is:</p>
+<ul>
+<li><code>build</code> has all the <code>TARGET_HTMLS</code> files as dependency</li>
+<li>Make also sees <code>dist/%.html</code> and the pattern will fit the criteria for each <code>TARGET_HTMLS</code></li>
+<li>In <code>dist/%.html</code> we have as dependency  the <code>%.html</code>, so Make takes the pattern and checks if a <code>%.html</code> file exist</li>
+<li>If the conditions are met, it runs the <code>cp</code> command for each file, unless they are already present and not updated</li>
+</ul>
+<p>You can think of</p>
+<pre><code class="language-Makefile"><span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-special">$</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">TARGET_HTMLS</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>As</p>
+<pre><code class="language-Makefile"><span class="hl-constant">build</span><span class="hl-punctuation-delimiter">:</span> dist/index.html dist/about.html dist/docs.html dist/privacy.html
+</code></pre>
+<p>Variables can be reference using <code>$()</code> or <code>${}</code>.</p>
+<p>We also use <code>$(info Done)</code> to send information messages to the user.
+Make also provides <code>$(warning text…)</code> for warnings, and
+<code>$(error text...)</code> to exit earlier with an error code different than 0.
+See <a href="https://www.gnu.org/software/make/manual/html_node/Make-Control-Functions.html">Make-Control-Functions</a></p>
+<h2 id="one-more-time">One More Time<a class="heading-anchor" href="#one-more-time">¶</a></h2>
+<p>Let&#39;s start over by removing the <code>dist</code> folder, and see what happens</p>
+<pre><code class="language-sh"><span class="hl-function">rm</span> <span class="hl-variable-parameter">-rf</span> <span class="hl-variable-parameter">dist</span>
+</code></pre>
+<pre><code class="language-shell-console"><span class="hl-operator">$ </span><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
+<span class="hl-comment">mkdir dist</span>
+<span class="hl-comment">cp index.html dist/index.html</span>
+<span class="hl-comment">cp about.html dist/about.html</span>
+<span class="hl-comment">cp docs.html dist/docs.html</span>
+<span class="hl-comment">cp privacy.html dist/privacy.html</span>
+<span class="hl-comment">Done</span>
+<span class="hl-comment"></span>
+<span class="hl-operator">$ </span><span class="hl-function">make</span> <span class="hl-variable-parameter">build</span>
+<span class="hl-comment">Done</span>
+<span class="hl-comment">make: Nothing to be done for `build'.</span>
+<span class="hl-comment"></span></code></pre>
+<p>As you can see, files that have not changed, won&#39;t be rebuilt by Make.</p>
+<p>Now, try using <code>touch</code> on the different <code>html</code> files and running <code>make build</code> to see what happens.</p>
+<h2 id="more-functionality">More Functionality<a class="heading-anchor" href="#more-functionality">¶</a></h2>
+<p>Make is a powerful tool, and provides much more functionality, so far with the web stack
+I haven&#39;t had the need for more complexity.</p>
+<p>I usually wrap docker commands, and make use of different variables, but if the need arises,
+make has extra functionality, life:</p>
+<ul>
+<li>functions</li>
+<li>if/conditions</li>
+<li>change the shell in which the commands are executed</li>
+<li><code>.delete_on_error</code></li>
+</ul>
+<h2 id="notes">Notes<a class="heading-anchor" href="#notes">¶</a></h2>
+<p>Make is usually a good way to keep track of a project&#39;s commands, as it&#39;s available in Unix systems,
+and you can be up and running fast.
+But by no means is perfect, it can sometimes be hard to read, or use.
+It&#39;s not available on Windows. And because it was designed for the C,C++ era, it plays well with files,
+but it doesn&#39;t mean it fits perfectly the web development paradigm, where you don&#39;t &quot;transform&quot; files much
+and where <code>docker</code> is used a lot.</p>
+<p>So depending on your situation, there are some popular alternatives:</p>
+<ul>
+<li><a href="https://github.com/casey/just">just</a>: modern approach to make written in rust</li>
+<li><a href="https://earthly.dev/">earthly.dev</a>: repeatable builds based on docker</li>
+<li><a href="https://bazel.build/">bazel</a>: build tool from Google</li>
+<li><a href="https://github.com/github/scripts-to-rule-them-all">scripts-to-rule-them-all</a>: just use scripts, like <a href="https://github.com/encode/starlette/tree/master/scripts">starlette</a></li>
+</ul>
+<h2 id="resources">Resources<a class="heading-anchor" href="#resources">¶</a></h2>
+<ul>
+<li><a href="https://www.gnu.org/software/make/manual/html_node/">GNU Make Manual</a></li>
+<li><a href="https://makefiletutorial.com/">Makefiletutorial</a></li>
+</ul>
+<blockquote>
+<p>Thanks for reading! 👋</p>
+<p>If you are interested in what I write, follow me! below</p>
+</blockquote>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

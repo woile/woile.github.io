@@ -1,0 +1,356 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>How to test Selenium scrapper with Python | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;how-to-test-selenium-scrapper.html" />
+        <meta
+            name="description"
+            content="Santiago Fraire Willemoes website"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="How to test Selenium scrapper with Python" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;how-to-test-selenium-scrapper.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            How to test Selenium scrapper with Python
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/selenium python testing.html">#selenium python testing</a>
+                
+                <a href="../tags/python.html">#python</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>This week I&#39;ve been writing tests for <a href="https://github.com/discov-r/pyinstamation">a
+project</a> which is using
+Selenium as a scrapper.</p>
+<p>As you may know, Selenium is a testing framework, it&#39;s intended to be
+used while writing tests, not as a web crawler/scrapper.</p>
+<p>But you can. Why? Because it runs a browser, so the Javascript gets executed, and we are happy.
+There are other solutions like <a href="https://github.com/makinacorpus/spynner">Spynner</a>
+or writing the scrapper in pure Javascript, but I felt comfortable using
+Selenium this way.</p>
+<h2 id="the-problem">The problem<a class="heading-anchor" href="#the-problem">¶</a></h2>
+<p>How do we <strong>test</strong> this scrapper? I want it to have tests mama!</p>
+<h2 id="solution">Solution<a class="heading-anchor" href="#solution">¶</a></h2>
+<p>Save the static content while running the scrapper, then, serve it with
+a very small http server while testing. Yes, it&#39;s a bit tedious, but it
+delivers.</p>
+<p>When should you save?</p>
+<p>Whenever you need to. This is a good example:</p>
+<pre><code class="language-python"><span class="hl-variable">url</span> <span class="hl-operator">=</span> <span class="hl-string">'https://betterexplained.com/articles/why-do-we-multiply-combinations/'</span>
+<span class="hl-variable">driver</span> <span class="hl-operator">=</span> <span class="hl-variable">webdriver</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">Chrome</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">driver</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">url</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-function">save_current_state</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">driver</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">current_url</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">driver</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">page_source</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>Can I see the code of <code>save_current_state</code>? Here you go:</p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">os</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">urllib</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">parse</span> <span class="hl-keyword-control-import">import</span> <span class="hl-namespace">quote</span>
+
+<span class="hl-constant">SAVE_SOURCE</span> <span class="hl-operator">=</span> <span class="hl-constant-builtin-boolean">True</span>  <span class="hl-comment">## disable in production</span>
+<span class="hl-constant">TEST_LOCATION</span> <span class="hl-operator">=</span> <span class="hl-string">'tests/static'</span>
+
+
+<span class="hl-keyword-function">def</span> <span class="hl-function">save_current_state</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">url</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">source</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">location</span><span class="hl-operator">=</span><span class="hl-constant-builtin">None</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-keyword-control-conditional">if</span> <span class="hl-keyword-operator">not</span> <span class="hl-constant">SAVE_SOURCE</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-keyword-control-return">return</span> <span class="hl-constant-builtin">None</span>
+    <span class="hl-keyword-control-conditional">if</span> <span class="hl-variable-parameter">location</span> <span class="hl-keyword-operator">is</span> <span class="hl-constant-builtin">None</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-parameter">location</span> <span class="hl-operator">=</span> <span class="hl-constant">TEST_LOCATION</span>
+    <span class="hl-keyword-control-conditional">if</span> <span class="hl-keyword-operator">not</span> <span class="hl-function-builtin">isinstance</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">source</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type-builtin">str</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-keyword-control-exception">raise</span> <span class="hl-type-builtin">TypeError</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'source must be a string'</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-variable">filename</span> <span class="hl-operator">=</span> <span class="hl-function">quote</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">url</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">strip</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'/'</span><span class="hl-punctuation-bracket">)</span> <span class="hl-keyword-operator">or</span> <span class="hl-string">'/'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">safe</span><span class="hl-operator">=</span><span class="hl-string">''</span><span class="hl-punctuation-bracket">)</span> <span class="hl-operator">+</span> <span class="hl-string">'.html'</span>
+    <span class="hl-variable">filepath</span> <span class="hl-operator">=</span> <span class="hl-namespace">os</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-parameter">url</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">join</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">location</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">filename</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-keyword-control">with</span> <span class="hl-function-builtin">open</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">filepath</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'w'</span><span class="hl-punctuation-bracket">)</span> <span class="hl-keyword-control">as</span> <span class="hl-variable">f</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable">f</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">write</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">source</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-keyword-control-return">return</span> <span class="hl-variable">filepath</span>
+</code></pre>
+<p>Notice how the url is used as the file name (safely parsed). This helps
+a lot to match urls. But of course, a case where something custom is
+required may happen, so you can tune the server to fit any case.</p>
+<p>And the python server? A minor modification from
+<a href="https://realpython.com/blog/python/testing-third-party-apis-with-mock-servers/">here</a></p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">os</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">socket</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">threading</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Thread</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">urllib</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">parse</span> <span class="hl-keyword-control-import">import</span> <span class="hl-namespace">quote</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">http</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">server</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">BaseHTTPRequestHandler</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">HTTPServer</span>
+
+
+<span class="hl-constant">TEST_LOCATION</span> <span class="hl-operator">=</span> <span class="hl-string">'tests/static'</span>
+
+
+<span class="hl-keyword">class</span> <span class="hl-type">MockServerRequestHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-type">BaseHTTPRequestHandler</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+
+    <span class="hl-keyword-function">def</span> <span class="hl-function">_set_headers</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">send_response</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant-numeric-integer">200</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">send_header</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'Set-Cookie'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'exampleid=c295IGVsIHVzdWFyaW8gZW5pdG8K'</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">send_header</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'Content-type'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'text/html'</span><span class="hl-punctuation-bracket">)</span>  <span class="hl-comment">## change at will</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">end_headers</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-function">@</span><span class="hl-function">property</span>
+    <span class="hl-keyword-function">def</span> <span class="hl-function">_filepath</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable">filename</span> <span class="hl-operator">=</span> <span class="hl-function">quote</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">path</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">strip</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'/'</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">safe</span><span class="hl-operator">=</span><span class="hl-string">''</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-keyword-control-return">return</span> <span class="hl-namespace">os</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">path</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">join</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">TEST_LOCATION</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'{0}.html'</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">format</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">filename</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-keyword-function">def</span> <span class="hl-function">_read_from_file_or_404</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-keyword-control-exception">try</span><span class="hl-punctuation-delimiter">:</span>
+            <span class="hl-variable">f</span> <span class="hl-operator">=</span> <span class="hl-function-builtin">open</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">_filepath</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'rb'</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-keyword-control-exception">except</span> <span class="hl-type-builtin">FileNotFoundError</span><span class="hl-punctuation-delimiter">:</span>
+            <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">send_response</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant-numeric-integer">404</span><span class="hl-punctuation-bracket">)</span>
+            <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">wfile</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">write</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">b'</span><span class="hl-constant-character-escape">\n</span><span class="hl-string">&lt;html&gt;&lt;body&gt;404 Not Found!&lt;/body&gt;&lt;/html&gt;'</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-keyword-control-conditional">else</span><span class="hl-punctuation-delimiter">:</span>
+            <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">send_response</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant-numeric-integer">200</span><span class="hl-punctuation-bracket">)</span>
+            <span class="hl-comment">## needs an extra new line</span>
+            <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">wfile</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">write</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">b'</span><span class="hl-constant-character-escape">\n</span><span class="hl-string">'</span> <span class="hl-operator">+</span> <span class="hl-variable">f</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">read</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+            <span class="hl-variable">f</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">close</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-keyword-function">def</span> <span class="hl-function">do_GET</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">_set_headers</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">_read_from_file_or_404</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-keyword-function">def</span> <span class="hl-function">do_POST</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">_set_headers</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">_read_from_file_or_404</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+
+    <span class="hl-keyword-function">def</span> <span class="hl-function">log_message</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">format</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-operator">*</span><span class="hl-variable-parameter">args</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-string">"""Do not write log messages to std. Disable to see the requests."""</span>
+        <span class="hl-keyword-control-return">return</span>
+
+
+<span class="hl-keyword-function">def</span> <span class="hl-function">get_free_port</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">hostname</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">s</span> <span class="hl-operator">=</span> <span class="hl-namespace">socket</span><span class="hl-punctuation-delimiter">.</span><span class="hl-namespace">socket</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">socket</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">AF_INET</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">type</span><span class="hl-operator">=</span><span class="hl-namespace">socket</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">SOCK_STREAM</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">s</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">bind</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">hostname</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-constant-numeric-integer">0</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">address</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable">port</span> <span class="hl-operator">=</span> <span class="hl-variable">s</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">getsockname</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">s</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">close</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-variable">port</span>
+
+
+<span class="hl-keyword-function">def</span> <span class="hl-function">start_mock_server</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">hostname</span><span class="hl-operator">=</span><span class="hl-string">'localhost'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">port</span><span class="hl-operator">=</span><span class="hl-constant-builtin">None</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-keyword-control-conditional">if</span> <span class="hl-variable-parameter">port</span> <span class="hl-keyword-operator">is</span> <span class="hl-constant-builtin">None</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable-parameter">port</span> <span class="hl-operator">=</span> <span class="hl-function">get_free_port</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">hostname</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">mock_server</span> <span class="hl-operator">=</span> <span class="hl-constructor">HTTPServer</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">hostname</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">port</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-type">MockServerRequestHandler</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">mock_server_thread</span> <span class="hl-operator">=</span> <span class="hl-constructor">Thread</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">target</span><span class="hl-operator">=</span><span class="hl-variable">mock_server</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">serve_forever</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">mock_server_thread</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setDaemon</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant-builtin-boolean">True</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-variable">mock_server_thread</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">start</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-string">'{hostname}:{port}'</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">format</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">hostname</span><span class="hl-operator">=</span><span class="hl-variable-parameter">hostname</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">port</span><span class="hl-operator">=</span><span class="hl-variable-parameter">port</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>And finally the base test from which you will inherit, whenever you need
+to test the scrapper.</p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">unittest</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">my_project</span> <span class="hl-keyword-control-import">import</span> <span class="hl-namespace">const</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">tests</span> <span class="hl-keyword-control-import">import</span> <span class="hl-namespace">start_mock_server</span>  <span class="hl-comment">## or where you saved it</span>
+
+
+<span class="hl-keyword">class</span> <span class="hl-type">BaseScrapperTest</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">unittest</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">TestCase</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+
+    <span class="hl-function">@</span><span class="hl-function">classmethod</span>
+    <span class="hl-keyword-function">def</span> <span class="hl-function">setUpClass</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-builtin">cls</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+        <span class="hl-variable">url</span> <span class="hl-operator">=</span> <span class="hl-function">start_mock_server</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+        <span class="hl-variable">const</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">HOSTNAME</span> <span class="hl-operator">=</span> <span class="hl-variable">url</span>
+</code></pre>
+<p>Take a look at that last line, your project must have a central point
+where the <strong>HOSTNAME</strong> is set. Before testing, you need to tell to your
+application to hit your localserver.</p>
+<h2 id="final-notes">Final notes<a class="heading-anchor" href="#final-notes">¶</a></h2>
+<p>If you find hard to test some scrapper function, try dividing it into
+smaller functions, and testing them individually.</p>
+<p>If a scrapper function does not include any condition, it&#39;s okay to
+<code>return True</code> at the end, and assert that boolean. If something goes
+wrong in the scrapper, we&#39;ll get noticed with an exception and the
+test will throw an error. Also, if you wanted to <a href="https://stackoverflow.com/a/4319870/2047185">receive a
+fail</a> instead of an error,
+which is more pythonic, you should do something like this in your test:</p>
+<pre><code class="language-python"><span class="hl-keyword-control-exception">try</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-function">users_from_github</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-keyword-control-exception">except</span> <span class="hl-type">ExceptionType</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable-builtin">self</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">fail</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"users_from_github() raised ExceptionType unexpectedly!"</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>Try isolating the scrapper as much as possible from the rest of your
+project, whenever you need to use selenium, avoid including business
+logic in it as well, this difficulties testing and makes the code quite
+confusing.</p>
+<p>Regards!</p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,254 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Flawed UX Intuition List | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;ux-intuition-list.html" />
+        <meta
+            name="description"
+            content="An irritating collection of common app frictions that signal a deeper disconnect between data architecture and user needs."
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Flawed UX Intuition List" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;ux-intuition-list.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="An irritating collection of common app frictions that signal a deeper disconnect between data architecture and user needs." />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            Flawed UX Intuition List
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/ux.html">#ux</a>
+                
+                <a href="../tags/engineering.html">#engineering</a>
+                
+                <a href="../tags/product.html">#product</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>Systems surround our daily life, from a checkout at a cafe, to a doctor&#39;s appointment.
+We all have felt that friction, the moments where a system stops serving us and starts demanding we serve it instead.</p>
+<p>As engineers, we often spend our time discussing what to build (the requirements) and our nights arguing about how to build it (the tech stack).
+But we rarely talk about the intuition that connects them: how the system actually feels to a human being.</p>
+<h2 id="data-architecture-is-user-experience">Data Architecture Is User Experience<a class="heading-anchor" href="#data-architecture-is-user-experience">¶</a></h2>
+<p>At the root of most &quot;bad UX&quot; isn&#39;t just a misplaced button; it&#39;s often a <strong>failure in data architecture</strong>.</p>
+<p>Data architecture is the blueprint for how information is structured, stored, and retrieved.
+When this blueprint is designed in a vacuum, without considering the human workflow, <strong>we get friction</strong>.</p>
+<p>If your database knows my address but your checkout form asks for it again, that&#39;s not just a UI redundancy;
+it&#39;s a failure of the system to utilize its own internal knowledge to help the user.</p>
+<p><strong>A great system respects the user&#39;s time</strong>. It treats data as a shared memory between the machine and the human.
+When that memory fails, friction occurs.</p>
+<h2 id="the-intuition-list">The &quot;Intuition List&quot;<a class="heading-anchor" href="#the-intuition-list">¶</a></h2>
+<p>Here is a collection of common digital frictions that signal a deeper disconnect in a product&#39;s design:</p>
+<h3 id="1-data-amnesia">1. Data Amnesia<a class="heading-anchor" href="#1-data-amnesia">¶</a></h3>
+<p>Being asked for your billing address during checkout when it&#39;s already in your shipping profile,
+or re-entering your name on a support ticket when you&#39;re already logged in.</p>
+<blockquote>
+<p>Recently, at the doctor, my girlfriend was asked the same information at the reception, then by the nurse, and finally by the doctor.
+Which inspired me to write this post</p>
+</blockquote>
+<h3 id="2-reset-on-back">2. Reset on Back<a class="heading-anchor" href="#2-reset-on-back">¶</a></h3>
+<p>You spend several minutes carefully filling out a multi-step form, reach the final &quot;Review&quot; page, and notice a small typo.
+When you click &quot;Back&quot; to fix it, you find that the application has wiped the entire previous step, forcing you to re-enter everything from scratch.</p>
+<h3 id="3-wild-hunt">3. Wild Hunt<a class="heading-anchor" href="#3-wild-hunt">¶</a></h3>
+<p>Primary actions (like &quot;Export,&quot; &quot;Download,&quot; or &quot;Delete&quot;) that are buried three levels deep.
+If it&#39;s a core part of the workflow, it should be visible.
+When building a User Interface, consider the usually ignored axis &quot;<strong>task frequency</strong>&quot;, not just &quot;logical&quot; grouping.
+Learn your user&#39;s workflows!</p>
+<blockquote>
+<p>Thought: maybe as the industry, we could come up with some type of benchmark to measure core workflows</p>
+</blockquote>
+<h3 id="4-user-disregard">4. User Disregard<a class="heading-anchor" href="#4-user-disregard">¶</a></h3>
+<p>You open a table, expand sections, then you navigate to a different page, and when you hit the &quot;Back&quot; button, you have to do the whole exploration again.
+If you cannot guarantee good behavior, just show everything, this way, when the user goes back, they just end up in the position they were.</p>
+<h3 id="5-action-in-progress-void">5. &quot;Action in Progress&quot; Void<a class="heading-anchor" href="#5-action-in-progress-void">¶</a></h3>
+<p>When a user triggers a long-running process, like uploading a file, generating a report, or deploying a stack; and the interface remains static.
+Without a progress bar or step-by-step feedback, the user is left wondering if the app has crashed or if they should try again (which often makes things worse).
+Which can be easily fixed with a meaningful progress indicator that communicates active state.</p>
+<h2 id="why-this-matters">Why This Matters<a class="heading-anchor" href="#why-this-matters">¶</a></h2>
+<p>Spotting these issues isn&#39;t about being &quot;picky&quot;, it&#39;s about <strong>empathy</strong>.
+Every extra click, every redundant field, and every lost scroll position is a tiny withdrawal from the user&#39;s &quot;trust bank.&quot;.</p>
+<p>This can be easily extrapolated, not only to backends or CLI&#39;s, but also to any aspect of life, that&#39;s my belief.
+A road with no signs, a street so wide it encourages speeding, or a kitchen without plugs.</p>
+<p>As engineers, our job isn&#39;t just to make the code run; it&#39;s to make the friction disappear.</p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,501 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>A primer on age encryption | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;a-primer-on-age-encryption.html" />
+        <meta
+            name="description"
+            content="Poking at age encryption. Exploring its simplicity, usage, and plugins, including TPM, SSH and FIDO2 support. Is encryption finally for everyone?"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="A primer on age encryption" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;a-primer-on-age-encryption.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="Poking at age encryption. Exploring its simplicity, usage, and plugins, including TPM, SSH and FIDO2 support. Is encryption finally for everyone?" />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            A primer on age encryption
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/security.html">#security</a>
+                
+                <a href="../tags/secret management.html">#secret management</a>
+                
+                <a href="../tags/age.html">#age</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>I&#39;ve been interested in <a href="https://github.com/filosottile/age">age</a> since it first appeared a few years ago (ca. 2020? Well, closer to a decade ago, how old am I?),
+mainly, because of its promise of simplicity.</p>
+<p>I&#39;m a long time <code>gpg</code> user, but I&#39;m one of those users that has no confidence in what I&#39;m doing.
+It does too many things which keep me confused, combined with poor docs and a cli that just doesn&#39;t feel intuitive.</p>
+<p>And thus, <a href="https://github.com/filosottile/age">age</a> presented a good opportunity to adapt and make my setup simpler.</p>
+<p><a href="https://github.com/filosottile/age">age</a> <strong>is an encryption format</strong>, specified in <a href="https://age-encryption.org/v1">age-encryption.org/v1</a> which focuses mainly on encryption and decryption. Check the author&#39;s word in <a href="https://words.filippo.io/age-authentication/">age-authentication</a> for a deeper explanation.</p>
+<p>I dipped my toes into <code>age</code> a while ago;
+I published a blog post on how I structure the <a href="./secret-management-for-the-layman">secrets in a repository</a> and,
+as a side-effect, used <code>age</code> for that.</p>
+<p>Now, I&#39;m onboarding <a href="https://github.com/ryantm/agenix">agenix</a> into my NixOS configuration (<a href="https://github.com/woile/nix-config/">nix-config</a>),
+and wanted to explore the ecosystem a bit more.</p>
+<p>This post is a side-effect of that exploration.</p>
+<h2 id="usage">Usage<a class="heading-anchor" href="#usage">¶</a></h2>
+<p>For this section, I assume you have <a href="https://nixos.org/guides/how-nix-works/">nix</a> installed, which works on Linux, Mac, WSL, even Steam Deck and containers.
+If not, check the <a href="https://github.com/NixOS/nix-installer#nix-installer">nix-installer</a>.</p>
+<p>Let&#39;s jump into a shell with <code>age</code> and its associated tooling.</p>
+<pre><code class="language-sh"><span class="hl-comment"># Just the age cli</span>
+<span class="hl-function">nix-shell</span> <span class="hl-variable-parameter">-p</span> <span class="hl-variable-parameter">age</span>
+
+<span class="hl-comment"># age plugins we are going to use</span>
+<span class="hl-function">nix-shell</span> <span class="hl-variable-parameter">-p</span> <span class="hl-variable-parameter">age-plugin-tpm</span> <span class="hl-variable-parameter">age-plugin-fido2-hmac</span>
+
+<span class="hl-comment"># Drop yourself into a tmp dir for practicing</span>
+<span class="hl-constant">DIR</span><span class="hl-operator">=</span><span class="hl-punctuation-special">$(</span><span class="hl-function">mktemp</span> <span class="hl-variable-parameter">-d</span> <span class="hl-variable-parameter">-t</span> <span class="hl-variable-parameter">age-practice.XXXXXX</span><span class="hl-punctuation-special">)</span> <span class="hl-operator">&amp;&amp;</span> <span class="hl-function-builtin">cd</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">DIR</span></span><span class="hl-string">"</span>
+</code></pre>
+<p>We are going to go through the main workflow, which is: creating a private key, encryption, and decryption.</p>
+<p>Start by <strong>creating a key</strong>, and store its public key in <code>recipients.txt</code></p>
+<pre><code class="language-sh"><span class="hl-comment"># Create keys</span>
+<span class="hl-function">age-keygen</span> <span class="hl-variable-parameter">-o</span> <span class="hl-string">"priv.key"</span>
+
+<span class="hl-comment"># Save public key to recipients</span>
+<span class="hl-function">age-keygen</span> <span class="hl-variable-parameter">-y</span> <span class="hl-variable-parameter">priv.key</span> <span class="hl-operator">&gt;&gt;</span> <span class="hl-string-special-path">recipients.txt</span>
+</code></pre>
+<p>Which results in 2 files.</p>
+<pre><code class="language-sh"><span class="hl-punctuation-special">$</span> <span class="hl-variable">ls</span>
+<span class="hl-function-builtin">.</span>
+<span class="hl-function">├──</span> <span class="hl-variable-parameter">priv.key</span>        <span class="hl-comment"># private key</span>
+<span class="hl-function">└──</span> <span class="hl-variable-parameter">recipients.txt</span>  <span class="hl-comment"># aggregated public keys</span>
+</code></pre>
+<p>By &quot;<strong>aggregated public keys</strong>&quot;, I mean the public keys that we are going to use to encrypt things.
+Imagine you have 2 devices, instead of moving the private key around, you have one private key per device.
+I&#39;ll go over this in the next section.</p>
+<p>Now let&#39;s see <strong>encryption and decryption</strong> of an <code>.env</code> file.</p>
+<pre><code class="language-sh"><span class="hl-comment"># Init file</span>
+<span class="hl-function-builtin">echo</span> <span class="hl-string">"API_KEY=unsafe"</span> <span class="hl-operator">&gt;</span> <span class="hl-string-special-path">.env</span>
+
+<span class="hl-comment"># Encryption</span>
+<span class="hl-function">tar</span> <span class="hl-variable-parameter">cvz</span> <span class="hl-variable-parameter">.env</span> <span class="hl-operator">|</span> <span class="hl-function">age</span> <span class="hl-variable-parameter">-R</span> <span class="hl-variable-parameter">recipients.txt</span> <span class="hl-operator">&gt;</span> <span class="hl-string-special-path">env.tar.gz.age</span>
+
+<span class="hl-comment"># Let's remove the env file and show what's in the current dir</span>
+<span class="hl-function">rm</span> <span class="hl-variable-parameter">.env</span> <span class="hl-operator">&amp;&amp;</span> <span class="hl-function">ls</span> <span class="hl-variable-parameter">-a</span>
+
+<span class="hl-comment"># OBSERVE the shape of the age encrypted file</span>
+<span class="hl-function">cat</span> <span class="hl-variable-parameter">env.tar.gz.age</span>
+<span class="hl-comment"># age-encryption.org/v1</span>
+<span class="hl-comment"># -&gt; X25519 VTfterDUb7cvb7nELDePn4ynbTi3+e6XumZsdL6PU3A</span>
+<span class="hl-comment"># ....</span>
+
+<span class="hl-comment"># Decryption</span>
+<span class="hl-function">age</span> <span class="hl-variable-parameter">--decrypt</span> <span class="hl-variable-parameter">-i</span> <span class="hl-variable-parameter">priv.key</span> <span class="hl-variable-parameter">env.tar.gz.age</span> <span class="hl-operator">|</span> <span class="hl-function">tar</span> <span class="hl-variable-parameter">xvz</span>
+
+<span class="hl-comment"># Verify file</span>
+<span class="hl-function">cat</span> <span class="hl-variable-parameter">.env</span>
+</code></pre>
+<p>Done! And with that, we covered <code>age</code>&#39;s cli surface.</p>
+<p>Why is <code>tar</code> used?</p>
+<p><code>tar</code> is used, because <code>age</code> reads from the buffer, and we want to stream the binary content, so later we can
+preserve the file. If <code>cat .env | age -R recipients.txt &gt; env.age</code> was used, we would be storing the content of <code>.env</code>,
+and when decrypting, we would have to know where to &quot;store&quot; the content. E.g: <code>age --decrypt -i priv.key env.age &gt; .env</code>.
+By using <code>tar</code> this way, we can easily store multiple files and directories, and we don&#39;t have to think about the structure.
+It&#39;s quite clever, as <code>tar</code> is widely available in UNIX systems.</p>
+<p>But that&#39;s not the end of the story, having a flying private key around just doesn&#39;t feel entirely right.
+Especially if we are talking about the main key, which can decrypt all secrets passed around.
+Is there another way? What about security keys? Let&#39;s take a look.</p>
+<h2 id="aggregating-public-keys">Aggregating Public Keys<a class="heading-anchor" href="#aggregating-public-keys">¶</a></h2>
+<p>Here is what caught my eye: <strong>the plugins</strong>.</p>
+<p><code>age</code> interface might be simple, but the ecosystem is rich! It changed how I think about secrets and recipients. It&#39;s no longer about having a key that represents my identity, but instead, about devices that I have, and can access these secrets.</p>
+<p>As I said before, we can encrypt something with multiple public keys, and whoever has one of the private keys can decrypt.</p>
+<p>But when would you want this? Let&#39;s see…</p>
+<ul>
+<li>When you have multiple devices</li>
+<li>But imagine this: sharing secrets across your team, or organization</li>
+<li>Or, the solution I&#39;m evaluating for <a href="https://github.com/ryantm/agenix">agenix</a></li>
+</ul>
+<p><a href="https://github.com/ryantm/agenix">agenix</a> is a tool for NixOS, that leverages <code>age</code>, to distribute secrets across your hosts. You can choose which host(s) can access which secrets, by selecting the public keys that will encrypt the secrets.</p>
+<p>This is a snippet of how it looks in practice:</p>
+<pre><code class="language-nix"><span class="hl-keyword">let</span>
+  <span class="hl-variable-other-member">user1</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"ssh-ed25519 AAAAC3N..."</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">user2</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"ssh-ed25519 AAAAC3N..."</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">users</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">[</span> <span class="hl-variable">user1</span> <span class="hl-variable">user2</span> <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">;</span>
+
+  <span class="hl-variable-other-member">system1</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"ssh-ed25519 AAAAC3..."</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">system2</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-string">"ssh-ed25519 AAAAC3..."</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member">systems</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">[</span> <span class="hl-variable">system1</span> <span class="hl-variable">system2</span> <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-keyword">in</span>
+<span class="hl-punctuation-bracket">{</span>
+  <span class="hl-variable-other-member"><span class="hl-string">"secret1.age"</span></span><span class="hl-variable-other-member"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-variable-other-member">publicKeys</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">[</span> <span class="hl-variable">user1</span> <span class="hl-variable">system1</span> <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-variable-other-member"><span class="hl-string">"secret2.age"</span></span><span class="hl-variable-other-member"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-variable-other-member">publicKeys</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-variable">users</span> <span class="hl-operator">++</span> <span class="hl-variable">systems</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-string">"armored-secret.age"</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-variable-other-member">publicKeys</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-punctuation-bracket">[</span> <span class="hl-variable">user1</span> <span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">;</span>
+    <span class="hl-variable-other-member">armor</span> <span class="hl-punctuation-delimiter">=</span> <span class="hl-constant-builtin-boolean">true</span><span class="hl-punctuation-delimiter">;</span>
+  <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">;</span>
+<span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>Don&#39;t worry if it doesn&#39;t make sense, what you need to know, is that we list public keys for users and systems, and we choose which ones can access what.</p>
+<p>In my case, I have 2 machines, and me (physically). An admin laptop and a VPS. And, the VPS is the consumer of the secrets.
+The laptop (and I) should have access to the secrets the VPS will use.</p>
+<p>To achieve this, I want to use the <a href="https://en.wikipedia.org/wiki/Trusted_Platform_Module#TPM_2.0">TPM</a> module in the laptop, the SSH key generated by nix in the remote VPS, and finally, my SoloKey (a FIDO2 key).</p>
+<div class="d2-diagram">
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.7.1-HEAD" preserveAspectRatio="xMinYMin meet" viewBox="0 0 479 354"><svg class="d2-1231516850 d2-svg" width="479" height="354" viewBox="9 -21 479 354"><rect x="9.000000" y="-21.000000" width="479.000000" height="354.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+.d2-1231516850 .text {
+	font-family: "d2-1231516850-font-regular";
+}
+@font-face {
+	font-family: d2-1231516850-font-regular;
+	src: url("data:application/font-woff;base64,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");
+}
+.d2-1231516850 .text-bold {
+	font-family: "d2-1231516850-font-bold";
+}
+@font-face {
+	font-family: d2-1231516850-font-bold;
+	src: url("data:application/font-woff;base64,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");
+}]]></style><style type="text/css"><![CDATA[.shape {
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+}
+.connection {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blend {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+		.d2-1231516850 .fill-N1{fill:#0A0F25;}
+		.d2-1231516850 .fill-N2{fill:#676C7E;}
+		.d2-1231516850 .fill-N3{fill:#9499AB;}
+		.d2-1231516850 .fill-N4{fill:#CFD2DD;}
+		.d2-1231516850 .fill-N5{fill:#DEE1EB;}
+		.d2-1231516850 .fill-N6{fill:#EEF1F8;}
+		.d2-1231516850 .fill-N7{fill:#FFFFFF;}
+		.d2-1231516850 .fill-B1{fill:#0D32B2;}
+		.d2-1231516850 .fill-B2{fill:#0D32B2;}
+		.d2-1231516850 .fill-B3{fill:#E3E9FD;}
+		.d2-1231516850 .fill-B4{fill:#E3E9FD;}
+		.d2-1231516850 .fill-B5{fill:#EDF0FD;}
+		.d2-1231516850 .fill-B6{fill:#F7F8FE;}
+		.d2-1231516850 .fill-AA2{fill:#4A6FF3;}
+		.d2-1231516850 .fill-AA4{fill:#EDF0FD;}
+		.d2-1231516850 .fill-AA5{fill:#F7F8FE;}
+		.d2-1231516850 .fill-AB4{fill:#EDF0FD;}
+		.d2-1231516850 .fill-AB5{fill:#F7F8FE;}
+		.d2-1231516850 .stroke-N1{stroke:#0A0F25;}
+		.d2-1231516850 .stroke-N2{stroke:#676C7E;}
+		.d2-1231516850 .stroke-N3{stroke:#9499AB;}
+		.d2-1231516850 .stroke-N4{stroke:#CFD2DD;}
+		.d2-1231516850 .stroke-N5{stroke:#DEE1EB;}
+		.d2-1231516850 .stroke-N6{stroke:#EEF1F8;}
+		.d2-1231516850 .stroke-N7{stroke:#FFFFFF;}
+		.d2-1231516850 .stroke-B1{stroke:#0D32B2;}
+		.d2-1231516850 .stroke-B2{stroke:#0D32B2;}
+		.d2-1231516850 .stroke-B3{stroke:#E3E9FD;}
+		.d2-1231516850 .stroke-B4{stroke:#E3E9FD;}
+		.d2-1231516850 .stroke-B5{stroke:#EDF0FD;}
+		.d2-1231516850 .stroke-B6{stroke:#F7F8FE;}
+		.d2-1231516850 .stroke-AA2{stroke:#4A6FF3;}
+		.d2-1231516850 .stroke-AA4{stroke:#EDF0FD;}
+		.d2-1231516850 .stroke-AA5{stroke:#F7F8FE;}
+		.d2-1231516850 .stroke-AB4{stroke:#EDF0FD;}
+		.d2-1231516850 .stroke-AB5{stroke:#F7F8FE;}
+		.d2-1231516850 .background-color-N1{background-color:#0A0F25;}
+		.d2-1231516850 .background-color-N2{background-color:#676C7E;}
+		.d2-1231516850 .background-color-N3{background-color:#9499AB;}
+		.d2-1231516850 .background-color-N4{background-color:#CFD2DD;}
+		.d2-1231516850 .background-color-N5{background-color:#DEE1EB;}
+		.d2-1231516850 .background-color-N6{background-color:#EEF1F8;}
+		.d2-1231516850 .background-color-N7{background-color:#FFFFFF;}
+		.d2-1231516850 .background-color-B1{background-color:#0D32B2;}
+		.d2-1231516850 .background-color-B2{background-color:#0D32B2;}
+		.d2-1231516850 .background-color-B3{background-color:#E3E9FD;}
+		.d2-1231516850 .background-color-B4{background-color:#E3E9FD;}
+		.d2-1231516850 .background-color-B5{background-color:#EDF0FD;}
+		.d2-1231516850 .background-color-B6{background-color:#F7F8FE;}
+		.d2-1231516850 .background-color-AA2{background-color:#4A6FF3;}
+		.d2-1231516850 .background-color-AA4{background-color:#EDF0FD;}
+		.d2-1231516850 .background-color-AA5{background-color:#F7F8FE;}
+		.d2-1231516850 .background-color-AB4{background-color:#EDF0FD;}
+		.d2-1231516850 .background-color-AB5{background-color:#F7F8FE;}
+		.d2-1231516850 .color-N1{color:#0A0F25;}
+		.d2-1231516850 .color-N2{color:#676C7E;}
+		.d2-1231516850 .color-N3{color:#9499AB;}
+		.d2-1231516850 .color-N4{color:#CFD2DD;}
+		.d2-1231516850 .color-N5{color:#DEE1EB;}
+		.d2-1231516850 .color-N6{color:#EEF1F8;}
+		.d2-1231516850 .color-N7{color:#FFFFFF;}
+		.d2-1231516850 .color-B1{color:#0D32B2;}
+		.d2-1231516850 .color-B2{color:#0D32B2;}
+		.d2-1231516850 .color-B3{color:#E3E9FD;}
+		.d2-1231516850 .color-B4{color:#E3E9FD;}
+		.d2-1231516850 .color-B5{color:#EDF0FD;}
+		.d2-1231516850 .color-B6{color:#F7F8FE;}
+		.d2-1231516850 .color-AA2{color:#4A6FF3;}
+		.d2-1231516850 .color-AA4{color:#EDF0FD;}
+		.d2-1231516850 .color-AA5{color:#F7F8FE;}
+		.d2-1231516850 .color-AB4{color:#EDF0FD;}
+		.d2-1231516850 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-1231516850);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-1231516850);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-1231516850);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-1231516850);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-1231516850);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-1231516850);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-1231516850);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-1231516850);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="bGFwdG9w"><g class="shape" ><rect x="10.000000" y="20.000000" width="135.000000" height="126.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="77.500000" y="7.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">laptop</text></g><g class="c2VjcmV0cw=="><g class="shape" ><rect x="204.000000" y="266.000000" width="96.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="252.000000" y="304.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">secrets</text></g><g class="ZmlkbzIta2V5"><g class="shape" ><rect x="195.000000" y="50.000000" width="113.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="251.500000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">fido2-key</text></g><g class="dm0="><g class="shape" ><rect x="358.000000" y="20.000000" width="129.000000" height="126.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="422.500000" y="7.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">vm</text></g><g class="bGFwdG9wLlRQTQ=="><g class="shape" ><rect x="40.000000" y="50.000000" width="75.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="77.500000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">TPM</text></g><g class="dm0uc3No"><g class="shape" ><rect x="388.000000" y="50.000000" width="69.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="422.500000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">ssh</text></g><g class="KGxhcHRvcC5UUE0gLSZndDsgc2VjcmV0cylbMF0="><marker id="mk-d2-1231516850-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 77.500000 118.000000 C 77.500000 156.000000 102.699997 228.020004 199.889713 274.380840" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1231516850-3488378134)" mask="url(#d2-1231516850)" /></g><g class="KGZpZG8yLWtleSAtJmd0OyBzZWNyZXRzKVswXQ=="><path d="M 251.500000 118.000000 C 251.500000 156.000000 251.500000 226.000000 251.500000 262.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1231516850-3488378134)" mask="url(#d2-1231516850)" /></g><g class="KHZtLnNzaCAtJmd0OyBzZWNyZXRzKVswXQ=="><path d="M 422.500000 118.000000 C 422.500000 156.000000 397.899994 227.800003 303.106550 273.270029" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1231516850-3488378134)" mask="url(#d2-1231516850)" /></g><mask id="d2-1231516850" maskUnits="userSpaceOnUse" x="9" y="-21" width="479" height="354">
+<rect x="9" y="-21" width="479" height="354" fill="white"></rect>
+
+</mask></svg></svg>
+</div>
+<p>Is this possible with <code>age</code>? Let&#39;s check one by one.</p>
+<h3 id="tpm-trusted-platform-module">TPM (Trusted Platform Module)<a class="heading-anchor" href="#tpm-trusted-platform-module">¶</a></h3>
+<p>It&#39;s a chip in the CPU (or motherboard), available in most modern OEM hardware, that protects sensitive data.
+It&#39;s similar to Apple&#39;s Secure Enclave.</p>
+<p>How does it integrate with <code>age</code>?</p>
+<p>Via the <code>age-plugin-tpm</code> (or <code>age-plugin-se</code> on Mac)</p>
+<p>We drop into a shell with the module.</p>
+<pre><code class="language-sh"><span class="hl-function">nix-shell</span> <span class="hl-variable-parameter">-p</span> <span class="hl-variable-parameter">age-plugin-tpm</span>
+</code></pre>
+<p>And create a private key.</p>
+<pre><code class="language-sh"><span class="hl-comment"># Create key</span>
+<span class="hl-function">age-plugin-tpm</span> <span class="hl-variable-parameter">--generate</span> <span class="hl-variable-parameter">-o</span> <span class="hl-variable-parameter">tpm-identity.key</span>
+
+<span class="hl-comment"># Save public key to recipients</span>
+<span class="hl-function">age-plugin-tpm</span> <span class="hl-variable-parameter">-y</span> <span class="hl-variable-parameter">tpm-identity.key</span> <span class="hl-operator">&gt;&gt;</span> <span class="hl-string-special-path">recipients.txt</span>
+</code></pre>
+<p>The <code>tpm-identity.key</code> created by the plugin contains the private key, but it&#39;s actually wrapped by the TPM module in the machine.
+This means if an attacker steals the <code>tpm-identity.key</code> file, it is completely useless to them without physical access to your machine&#39;s hardware.</p>
+<p>And because of the format used in the <code>tpm-identity.key</code>, <code>age</code> knows it needs to use the plugin to decrypt.
+It&#39;s a simple format really, the text of the key starts with the name of the plugin.</p>
+<pre><code class="language-shell-console"><span class="hl-operator">$ </span><span class="hl-function">cat</span> <span class="hl-variable-parameter">tpm-identity.key</span>
+<span class="hl-comment">Created: 2026-05-19 14:19:29.890241884 +0100 WEST m=+0.279063475</span>
+<span class="hl-comment">Recipient: age1tag1qtf848pl66qhk7...</span>
+<span class="hl-comment"></span>
+<span class="hl-comment">AGE-PLUGIN-TPM-1QGQQQKQQYVQQK...</span>
+<span class="hl-comment"></span></code></pre>
+<p>If we were to run the same commands as in the <a href="#usage">usage</a> section.
+The only difference would be that we would use the <code>tpm-identity.key</code> to decrypt.</p>
+<pre><code class="language-sh"><span class="hl-function">age</span> <span class="hl-variable-parameter">--decrypt</span> <span class="hl-variable-parameter">-i</span> <span class="hl-variable-parameter">tpm-identity.key</span> <span class="hl-variable-parameter">env.tar.gz.age</span> <span class="hl-operator">|</span> <span class="hl-function">tar</span> <span class="hl-variable-parameter">xvz</span>
+</code></pre>
+<h3 id="ssh">SSH<a class="heading-anchor" href="#ssh">¶</a></h3>
+<p>SSH keys are supported by <code>age</code> from the get-go; you can use them directly. The SSH public key to encrypt, and the SSH private key to decrypt.</p>
+<pre><code class="language-sh"><span class="hl-comment"># Create pub and private key. (You will be prompted for a secure passphrase)</span>
+<span class="hl-function">ssh-keygen</span> <span class="hl-variable-parameter">-t</span> <span class="hl-variable-parameter">ed25519</span> <span class="hl-variable-parameter">-C</span> <span class="hl-string">"mymail@example.com"</span> <span class="hl-variable-parameter">-f</span> <span class="hl-variable-parameter">./ssh_ed25519</span>
+
+<span class="hl-comment"># 2 SSH keys: `ssh_ed25519` and `ssh_ed25519.pub`</span>
+<span class="hl-function">ls</span> <span class="hl-operator">|</span> <span class="hl-function">grep</span> <span class="hl-variable-parameter">ssh_ed25519</span>
+
+<span class="hl-comment"># Add the pub key as a recipient</span>
+<span class="hl-function">cat</span> <span class="hl-variable-parameter">ssh_ed25519.pub</span> <span class="hl-operator">&gt;&gt;</span> <span class="hl-string-special-path">recipients.txt</span>
+</code></pre>
+<p>If we were to execute the commands from the <a href="#usage">usage</a> section,
+we would only change the key used, and instead we would directly use the private SSH key <code>ssh_ed25519</code>.</p>
+<pre><code class="language-sh"><span class="hl-function">age</span> <span class="hl-variable-parameter">--decrypt</span> <span class="hl-variable-parameter">-i</span> <span class="hl-variable-parameter">ssh_ed25519</span> <span class="hl-variable-parameter">env.tar.gz.age</span> <span class="hl-operator">|</span> <span class="hl-function">tar</span> <span class="hl-variable-parameter">xvz</span>
+</code></pre>
+<h3 id="fido2-security-key">FIDO2 Security Key<a class="heading-anchor" href="#fido2-security-key">¶</a></h3>
+<p>By now, you might&#39;ve noticed the pattern is the same:</p>
+<ol start="1">
+<li>Install plugin</li>
+<li>Generate keys (priv &amp; pub) using a plugin</li>
+<li>Add the public key to the recipients list</li>
+<li>Encrypt/Decrypt secrets</li>
+</ol>
+<p>The <code>age-plugin-fido2-hmac</code> plugin is no different. It allows using your FIDO2 device (YubiKey, SoloKey, Nitrokey, etc) to create age keys.
+Like the TPM plugin, it wraps the private key. And in order to decrypt, you&#39;ll need to touch the stick.</p>
+<pre><code class="language-sh"><span class="hl-comment"># Create the key, following the steps</span>
+<span class="hl-function">age-plugin-fido2-hmac</span> <span class="hl-variable-parameter">-g</span> <span class="hl-operator">&gt;</span> <span class="hl-string-special-path">fido2.key</span>
+
+<span class="hl-comment"># Add the pub key to the recipients</span>
+<span class="hl-function">cat</span> <span class="hl-variable-parameter">fido2.key</span> <span class="hl-operator">|</span> <span class="hl-function">grep</span> <span class="hl-string">'public key'</span> <span class="hl-operator">|</span> <span class="hl-function">grep</span> <span class="hl-variable-parameter">-oP</span> <span class="hl-string">'age1.*'</span> <span class="hl-operator">&gt;&gt;</span> <span class="hl-string-special-path">recipients.txt</span>
+</code></pre>
+<p>And like before, we would decrypt just by pointing to the <code>fido2.key</code></p>
+<pre><code class="language-sh"><span class="hl-function">age</span> <span class="hl-variable-parameter">--decrypt</span> <span class="hl-variable-parameter">-i</span> <span class="hl-variable-parameter">fido2.key</span> <span class="hl-variable-parameter">env.tar.gz.age</span> <span class="hl-operator">|</span> <span class="hl-function">tar</span> <span class="hl-variable-parameter">xvz</span>
+</code></pre>
+<p>Using the FIDO2 key is not strictly necessary, however, it brings me value as a <strong>backup option</strong>, stored in a secured location.
+The TPM module will take care of the day to day operations, but if something happens to the laptop, it&#39;s useful to have a backup.</p>
+<h3 id="other-plugins">Other Plugins<a class="heading-anchor" href="#other-plugins">¶</a></h3>
+<p>Besides the plugins I&#39;ve covered, there are more, and you can probably find one for your use case.
+These piqued my curiosity:</p>
+<ul>
+<li><code>age-plugin-sss</code>: split keys and wrap them with different recipients using <a href="https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing">Shamir&#39;s secret sharing</a></li>
+<li><code>age-plugin-1p</code>: Use SSH keys stored in 1Password</li>
+<li><code>age-plugin-yubikey</code>: YubiKey integration, although you can still use the <code>age-plugin-fido2-hmac</code> with a YubiKey</li>
+</ul>
+<h2 id="closing-thoughts">Closing Thoughts<a class="heading-anchor" href="#closing-thoughts">¶</a></h2>
+<p><code>age</code> has matured a lot since its conception, like fine wine.</p>
+<p>It allows me to move with confidence, by understanding what&#39;s happening under the hood by betting on usability, without compromising on security.</p>
+<p>In my next post, I&#39;ll cover <a href="https://github.com/ryantm/agenix">agenix</a> and how I integrate with my NixOS setup.</p>
+<p>Let me know your thoughts. Thanks for reading!</p>
+<p><a href="https://notbyai.fyi"><img src="/badge-human-written.svg" alt="Written by a Human, Not by AI" /></a></p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

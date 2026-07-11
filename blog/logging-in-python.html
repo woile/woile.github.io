@@ -1,0 +1,337 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Logging in python | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;logging-in-python.html" />
+        <meta
+            name="description"
+            content="Easy and simple logging setup for a new python project. Are you tired of searching how to do it and why it doesn&#x27;t work? this is your place"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Logging in python" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;logging-in-python.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="Easy and simple logging setup for a new python project. Are you tired of searching how to do it and why it doesn&#x27;t work? this is your place" />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            Logging in python
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/python.html">#python</a>
+                
+                <a href="../tags/logging.html">#logging</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>For future reference, this is my logging configuration for a new project.</p>
+<p>It is not intended for libraries which already have some kind of set up in place, like django.</p>
+<h2 id="simple-logging-configuration">Simple logging configuration<a class="heading-anchor" href="#simple-logging-configuration">¶</a></h2>
+<p>This is a good configuration to start logging right away.
+You can use it when you have a single file, or you can share the <code>logger</code> if stored in a separated file,
+which is not recommended when you start growing.</p>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logging</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">os</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">sys</span>
+
+<span class="hl-constant">LOGLEVEL</span> <span class="hl-operator">=</span> <span class="hl-namespace">os</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">environ</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">get</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'LOGLEVEL'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'INFO'</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">upper</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">getLogger</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"my_app"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">LOGLEVEL</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">StreamHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">stdout</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">formatter</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">Formatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setFormatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">formatter</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">LOGLEVEL</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">addHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">console_handler</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-comment"># Send messages</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">debug</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Set LOGLEVEL=DEBUG to see this"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">info</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"An info log"</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>You can also replace <code>name</code> with <code>pathname</code> to get the full path.</p>
+<h2 id="project-wide-logging-configuration">Project-wide logging configuration<a class="heading-anchor" href="#project-wide-logging-configuration">¶</a></h2>
+<p>In this case we want to configure the logs once, by using the popular dict logging conf:</p>
+<pre><code class="language-python"><span class="hl-comment"># ./my_app/logs.py</span>
+<span class="hl-constant">LOGGING_CONFIG</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">{</span>
+    <span class="hl-string">"version"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-numeric-integer">1</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"disable_existing_loggers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">True</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"formatters"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-string">"standard"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+            <span class="hl-string">"format"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"[%(asctime)s] %(name)s:%(lineno)d %(levelname)s :: %(message)s"</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-string">"default"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+            <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"INFO"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"formatter"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"standard"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"class"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"logging.StreamHandler"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"stream"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"ext://sys.stdout"</span><span class="hl-punctuation-delimiter">,</span>  <span class="hl-comment"># Default is stderr</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-string">"loggers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>
+        <span class="hl-string">""</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>  <span class="hl-comment"># root logger</span>
+            <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"default"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"WARNING"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"propagate"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-string">"__main__"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>  <span class="hl-comment"># if __name__ == '__main__'</span>
+            <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"default"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"DEBUG"</span><span class="hl-punctuation-delimiter">,</span>
+            <span class="hl-string">"propagate"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">False</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-string">"my_app"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">{</span>  <span class="hl-comment"># folder</span>
+	        <span class="hl-string">"handlers"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">"default"</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-delimiter">,</span>
+	        <span class="hl-string">"level"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"INFO"</span><span class="hl-punctuation-delimiter">,</span>
+	        <span class="hl-string">"propagate"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-constant-builtin-boolean">False</span>
+	    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-delimiter">,</span>
+<span class="hl-punctuation-bracket">}</span>
+
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">config</span>
+
+<span class="hl-keyword-function">def</span> <span class="hl-function">init</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-comment"># Run once at startup:</span>
+    <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-namespace">config</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">dictConfig</span><span class="hl-punctuation-bracket">(</span><span class="hl-constant">LOGGING_CONFIG</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<pre><code class="language-python"><span class="hl-comment"># ./my_app/foo.py</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logs</span>
+
+<span class="hl-namespace">logs</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">init</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span> <span class="hl-operator">=</span> <span class="hl-variable">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">getLogger</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">__name__</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-comment"># Send messages</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">debug</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Set LOGLEVEL=DEBUG to see this"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">info</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Hello world"</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>And your folder structure should look something like:</p>
+<pre><code class="language-sh"><span class="hl-function">my-app/</span>
+<span class="hl-function">└──</span> <span class="hl-variable-parameter">my_app/</span>
+    <span class="hl-function">├──</span> <span class="hl-variable-parameter">foo.py</span>
+    <span class="hl-function">└──</span> <span class="hl-variable-parameter">logs.py</span>
+</code></pre>
+<h2 id="structured-logging">Structured logging<a class="heading-anchor" href="#structured-logging">¶</a></h2>
+<p>Structured logs are usually in JSON format, making it easy for machines to parse and index them. See for example <a href="https://www.elastic.co/blog/structured-logging-filebeat">structured logging with filebeat</a>.
+A common format is bunyan, based on <a href="https://github.com/trentm/node-bunyan">bunyan-node</a>.</p>
+<pre><code>pip install bunyan
+</code></pre>
+<pre><code class="language-python"><span class="hl-keyword-control-import">import</span> <span class="hl-namespace">logging</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">bunyan</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">sys</span>
+
+<span class="hl-variable">logger</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">getLogger</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"my_app"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">INFO</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span> <span class="hl-operator">=</span> <span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">StreamHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">sys</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable-other-member">stdout</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">formatter</span> <span class="hl-operator">=</span> <span class="hl-namespace">bunyan</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constructor">BunyanFormatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setFormatter</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">formatter</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">console_handler</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">setLevel</span><span class="hl-punctuation-bracket">(</span><span class="hl-namespace">logging</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">INFO</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">addHandler</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">console_handler</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-comment"># Send messages</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">debug</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Set LOGLEVEL=DEBUG to see this"</span><span class="hl-punctuation-bracket">)</span>
+<span class="hl-variable">logger</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">info</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">"Hello world"</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>The output of this script would only show the <code>info</code> logger, and it would look like this:</p>
+<pre><code class="language-json"><span class="hl-punctuation-bracket">{</span><span class="hl-variable-other-member">"name"</span>: <span class="hl-string">"my_app"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"msg"</span>: <span class="hl-string">"Hello world"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"time"</span>: <span class="hl-string">"2022-06-21T07:41:06Z"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"hostname"</span>: <span class="hl-string">"&lt;REDACTED&gt;"</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"level"</span>: <span class="hl-constant-numeric">30</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"pid"</span>: <span class="hl-constant-numeric">40625</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-other-member">"v"</span>: <span class="hl-constant-numeric">0</span><span class="hl-punctuation-bracket">}</span>
+</code></pre>
+<p>For local development, pipe the logs to the buyan cli, so they become friendly for developers.</p>
+<pre><code class="language-sh"><span class="hl-function">wget</span> <span class="hl-variable-parameter">-c</span> <span class="hl-variable-parameter">https://github.com/LukeMathWalker/bunyan/releases/download/v0.1.7/bunyan-v0.1.7-x86_64-unknown-linux-gnu.tar.gz</span> <span class="hl-variable-parameter">-O</span> <span class="hl-variable-parameter">-</span> <span class="hl-operator">|</span> <span class="hl-function">tar</span> <span class="hl-variable-parameter">-xz</span>
+
+<span class="hl-function">python</span> <span class="hl-variable-parameter">my_app.py</span> <span class="hl-operator">|</span> <span class="hl-function">./bunyan</span>
+</code></pre>
+<h2 id="docker-issues">Docker issues<a class="heading-anchor" href="#docker-issues">¶</a></h2>
+<p>Sometimes the logs are not sent to the terminal right away, specially if something is blocking. To prevent this, send right away the output to the terminal by setting the env <code>PYTHONUNBUFFERED=1</code>.</p>
+<h3 id="dockerfile">Dockerfile<a class="heading-anchor" href="#dockerfile">¶</a></h3>
+<p>Include this line</p>
+<pre><code class="language-dockerfile">ENV PYTHONUNBUFFERED 1
+</code></pre>
+<h2 id="running-docker">Running docker<a class="heading-anchor" href="#running-docker">¶</a></h2>
+<pre><code class="language-sh"><span class="hl-function">docker</span> <span class="hl-variable-parameter">run</span> <span class="hl-variable-parameter">--env</span> <span class="hl-string">"PYTHONUNBUFFERED=1"</span> <span class="hl-variable-parameter">python:slim</span> <span class="hl-variable-parameter">bash</span>
+</code></pre>
+<h2 id="docker-compose">Docker-compose<a class="heading-anchor" href="#docker-compose">¶</a></h2>
+<pre><code class="language-yaml"><span class="hl-variable-other-member">version</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">'3'</span>
+<span class="hl-variable-other-member">services</span><span class="hl-punctuation-delimiter">:</span>
+  <span class="hl-variable-other-member">my_app</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-comment"># ...</span>
+    <span class="hl-variable-other-member">environment</span><span class="hl-punctuation-delimiter">:</span>
+      <span class="hl-punctuation-delimiter">-</span> <span class="hl-string">PYTHONUNBUFFERED=1</span>
+</code></pre>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

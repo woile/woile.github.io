@@ -1,0 +1,366 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Local HTTPS development in Python with Mkcert | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;local-https-development-in-python-with-mkcert.html" />
+        <meta
+            name="description"
+            content="setting https in our local development servers with python and mkcert"
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Local HTTPS development in Python with Mkcert" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;local-https-development-in-python-with-mkcert.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="setting https in our local development servers with python and mkcert" />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="eng">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            Local HTTPS development in Python with Mkcert
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/web frameworks development security https.html">#web frameworks development security https</a>
+                
+                <a href="../tags/python.html">#python</a>
+                
+                <a href="../tags/programming.html">#programming</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <h2 id="about-mkcert">About mkcert<a class="heading-anchor" href="#about-mkcert">¶</a></h2>
+<p><a href="https://github.com/FiloSottile/mkcert/">mkcert</a> allows you to have a
+local certificate authority (CA). This means that you can run your
+development web server using HTTPS. You&#39;ll see the green lock in your
+browser.</p>
+<img src="/images/local-https-development-in-python-with-mkcert/https.png">
+<p>You might not need it most of the time, but more and more features
+require HTTPS by default in the browser, like web bluetooth, service
+workers, web authentication and websockets in some cases where SSL is
+already enabled.</p>
+<h2 id="configuring-mkcert">Configuring mkcert<a class="heading-anchor" href="#configuring-mkcert">¶</a></h2>
+<p>Install the <a href="https://github.com/FiloSottile/mkcert/#installation">dependencies for your
+os</a>. In my case
+I&#39;m using a Linux Debian based os.</p>
+<pre><code class="language-console"><span class="hl-comment">sudo apt install libnss3-tools</span>
+<span class="hl-comment"></span></code></pre>
+<p>Download the binary for your distribution from <a href="https://github.com/FiloSottile/mkcert/releases">mkcert release
+page</a></p>
+<p>Rename the file to <code>mkcert</code> and give execution permissions</p>
+<pre><code class="language-console"><span class="hl-comment">chmod +x mkcert</span>
+<span class="hl-comment"></span></code></pre>
+<p>Install the certificate authorities (CA) using</p>
+<pre><code class="language-console"><span class="hl-comment">./mkcert -install</span>
+<span class="hl-comment"></span></code></pre>
+<p>Create certificates for the domains you&#39;d like to use</p>
+<pre><code class="language-console"><span class="hl-comment">./mkcert -cert-file cert.pem -key-file key.pem 0.0.0.0 localhost 127.0.0.1 ::1</span>
+<span class="hl-comment"></span></code></pre>
+<p>This will create a <code>cert.pem</code> and a <code>key.pem</code> files in your current
+directory. We are gonna use this 2 files along the post.</p>
+<h2 id="python-frameworks">Python frameworks<a class="heading-anchor" href="#python-frameworks">¶</a></h2>
+<p>Now that we have created the certificates for those domains, we just need
+to know how to tell our app to use them.</p>
+<p>I&#39;ll assume you have a virtualenv already created.</p>
+<p>Let&#39;s see how to do this in some different python frameworks and tools.</p>
+<h3 id="uvicorn-starlette">Uvicorn + Starlette<a class="heading-anchor" href="#uvicorn-starlette">¶</a></h3>
+<p><strong>Update</strong>: uvicorn now has <a href="https://github.com/encode/uvicorn/pull/294">SSL
+support</a>.</p>
+<p>I&#39;ve used <a href="https://github.com/encode/starlette">starlette</a> because
+it&#39;s simpler than writing a uvicorn App, but it&#39;s not required.</p>
+<p>I guess this should be fairly similar for
+<a href="https://github.com/tiangolo/fastapi">FastAPI</a>,
+<a href="https://github.com/bocadilloproject/bocadillo">Bocadillo</a> and
+<a href="https://github.com/kennethreitz/responder">Responder</a>.</p>
+<p>In your terminal run</p>
+<pre><code class="language-console"><span class="hl-comment">pip install uvicorn starlette</span>
+<span class="hl-comment"></span></code></pre>
+<p>Now create a file <code>star_app.py</code></p>
+<pre><code class="language-python"><span class="hl-comment">## star_app.py</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">starlette</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">applications</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Starlette</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">starlette</span><span class="hl-punctuation-delimiter">.</span><span class="hl-variable">responses</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">JSONResponse</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">uvicorn</span>
+<span class="hl-keyword-control-import">import</span> <span class="hl-namespace">ssl</span>
+
+<span class="hl-variable">app</span> <span class="hl-operator">=</span> <span class="hl-constructor">Starlette</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span>
+
+
+<span class="hl-function">@</span><span class="hl-variable">app</span><span class="hl-function"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-function"><span class="hl-function-method">route</span></span><span class="hl-function"><span class="hl-punctuation-bracket">(</span></span><span class="hl-function"><span class="hl-string">"/"</span></span><span class="hl-function"><span class="hl-punctuation-bracket">)</span></span>
+<span class="hl-keyword">async</span> <span class="hl-keyword-function">def</span> <span class="hl-function">homepage</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">request</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-constructor">JSONResponse</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">{</span><span class="hl-string">"hello"</span><span class="hl-punctuation-delimiter">:</span> <span class="hl-string">"world"</span><span class="hl-punctuation-bracket">}</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-keyword-control-conditional">if</span> <span class="hl-variable">__name__</span> <span class="hl-operator">==</span> <span class="hl-string">"__main__"</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-namespace">uvicorn</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">run</span><span class="hl-punctuation-bracket">(</span>
+        <span class="hl-variable">app</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">host</span><span class="hl-operator">=</span><span class="hl-string">"0.0.0.0"</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">port</span><span class="hl-operator">=</span><span class="hl-constant-numeric-integer">8433</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">ssl_version</span><span class="hl-operator">=</span><span class="hl-namespace">ssl</span><span class="hl-punctuation-delimiter">.</span><span class="hl-type">PROTOCOL_SSLv23</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">cert_reqs</span><span class="hl-operator">=</span><span class="hl-namespace">ssl</span><span class="hl-punctuation-delimiter">.</span><span class="hl-constant">CERT_OPTIONAL</span><span class="hl-punctuation-delimiter">,</span>
+        <span class="hl-variable-parameter">ssl_keyfile</span><span class="hl-operator">=</span><span class="hl-string">"./key.pem"</span><span class="hl-punctuation-delimiter">,</span>        <span class="hl-comment">## Note that the generated certificates</span>
+        <span class="hl-variable-parameter">ssl_certfile</span><span class="hl-operator">=</span><span class="hl-string">"./cert.pem"</span><span class="hl-punctuation-delimiter">,</span>      <span class="hl-comment">## are used here</span>
+    <span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>And then just run</p>
+<pre><code class="language-console"><span class="hl-comment">python star_app.py</span>
+<span class="hl-comment"></span></code></pre>
+<p>Go to <code>https://0.0.0.0:8443</code> in your browser</p>
+<h3 id="django-ssl-server">Django SSL Server<a class="heading-anchor" href="#django-ssl-server">¶</a></h3>
+<p><a href="https://github.com/teddziuba/django-sslserver">django-sslserver</a> is a
+small library which adds the ability to run a secure debug server with
+the certificates we just created.</p>
+<pre><code class="language-console"><span class="hl-comment">pip install django-sslserver</span>
+<span class="hl-comment"></span></code></pre>
+<p>Update your <code>settings.py</code></p>
+<pre><code class="language-python"><span class="hl-constant">INSTALLED_APPS</span> <span class="hl-operator">=</span> <span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-delimiter">...</span>
+    <span class="hl-string">'sslserver'</span><span class="hl-punctuation-delimiter">,</span>
+    <span class="hl-punctuation-delimiter">...</span>
+<span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>And in your terminal run</p>
+<pre><code class="language-console"><span class="hl-comment">python manage.py runsslserver --certificate cert.pem --key key.pem</span>
+<span class="hl-comment"></span></code></pre>
+<h4 id="django-extensions">Django extensions<a class="heading-anchor" href="#django-extensions">¶</a></h4>
+<p>There&#39;s another alternative which I haven&#39;t tested, but it has a lot
+of extra functionality, which I don&#39;t need, so I&#39;ve skipped it.</p>
+<p>Feel free to try
+<a href="https://django-extensions.readthedocs.io/en/latest/runserver_plus.html">django-extensions</a></p>
+<p>I guess it would be something like</p>
+<pre><code class="language-console"><span class="hl-comment">python manage.py runserver_plus --cert-file cert.pem --key-file cert.pem</span>
+<span class="hl-comment"></span></code></pre>
+<h3 id="flask">Flask<a class="heading-anchor" href="#flask">¶</a></h3>
+<p>Install <a href="http://flask.pocoo.org/">flask</a></p>
+<pre><code class="language-console"><span class="hl-comment">pip install flask</span>
+<span class="hl-comment"></span></code></pre>
+<p>Create a file <code>flask_app.py</code></p>
+<pre><code class="language-python"><span class="hl-comment">## flask_app.py</span>
+<span class="hl-keyword-control">from</span> <span class="hl-namespace">flask</span> <span class="hl-keyword-control-import">import</span> <span class="hl-type">Flask</span>
+
+<span class="hl-variable">application</span> <span class="hl-operator">=</span> <span class="hl-constructor">Flask</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable">__name__</span><span class="hl-punctuation-bracket">)</span>
+
+<span class="hl-function">@</span><span class="hl-variable">application</span><span class="hl-function"><span class="hl-punctuation-delimiter">.</span></span><span class="hl-function"><span class="hl-function-method">route</span></span><span class="hl-function"><span class="hl-punctuation-bracket">(</span></span><span class="hl-function"><span class="hl-string">"/"</span></span><span class="hl-function"><span class="hl-punctuation-bracket">)</span></span>
+<span class="hl-keyword-function">def</span> <span class="hl-function">hello</span><span class="hl-punctuation-bracket">(</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-string">"&lt;h1 style='color:blue'&gt;Hello There!&lt;/h1&gt;"</span>
+
+<span class="hl-keyword-control-conditional">if</span> <span class="hl-variable">__name__</span> <span class="hl-operator">==</span> <span class="hl-string">"__main__"</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable">application</span><span class="hl-punctuation-delimiter">.</span><span class="hl-function-method">run</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">ssl_context</span><span class="hl-operator">=</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'cert.pem'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'key.pem'</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">)</span>
+</code></pre>
+<p>Run in your terminal</p>
+<pre><code class="language-console"><span class="hl-comment">python flask_app.py</span>
+<span class="hl-comment"></span></code></pre>
+<h3 id="gunicorn">Gunicorn<a class="heading-anchor" href="#gunicorn">¶</a></h3>
+<p>Install <a href="https://gunicorn.org/">gunicorn</a>.</p>
+<pre><code class="language-console"><span class="hl-comment">pip install gunicorn</span>
+<span class="hl-comment"></span></code></pre>
+<p>Let&#39;s continue with the previous flask example</p>
+<pre><code class="language-console"><span class="hl-comment">gunicorn flask_app:application --keyfile=./key.pem --certfile=./cert.pem</span>
+<span class="hl-comment"></span></code></pre>
+<h3 id="uwsgi">UWSGI<a class="heading-anchor" href="#uwsgi">¶</a></h3>
+<p>Install <a href="https://uwsgi-docs.readthedocs.io">uwsgi</a>.</p>
+<pre><code class="language-console"><span class="hl-comment">pip install uwsgi</span>
+<span class="hl-comment"></span></code></pre>
+<p>Create a file called <code>wsgi.py</code></p>
+<pre><code class="language-python"><span class="hl-comment">## wsgi.py</span>
+<span class="hl-keyword-function">def</span> <span class="hl-function">application</span><span class="hl-punctuation-bracket">(</span><span class="hl-variable-parameter">env</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-variable-parameter">start_response</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-delimiter">:</span>
+    <span class="hl-variable-parameter">start_response</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'200 OK'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-punctuation-bracket">[</span><span class="hl-punctuation-bracket">(</span><span class="hl-string">'Content-Type'</span><span class="hl-punctuation-delimiter">,</span> <span class="hl-string">'text/html'</span><span class="hl-punctuation-bracket">)</span><span class="hl-punctuation-bracket">]</span><span class="hl-punctuation-bracket">)</span>
+    <span class="hl-keyword-control-return">return</span> <span class="hl-punctuation-bracket">[</span><span class="hl-string">b"Hello World"</span><span class="hl-punctuation-bracket">]</span>
+</code></pre>
+<p>Run in your terminal</p>
+<pre><code class="language-console"><span class="hl-comment">uwsgi -w wsgi --https=0.0.0.0:8443,cert.pem,key.pem</span>
+<span class="hl-comment"></span></code></pre>
+<p>Go to <code>https://0.0.0.0:8443</code></p>
+<h2 id="security-concerns">Security concerns<a class="heading-anchor" href="#security-concerns">¶</a></h2>
+<p><strong>DO NOT</strong> use this certificates in production. This is <strong>only</strong> for
+development. Use <a href="https://letsencrypt.org/">Let&#39;s Encrypt</a> instead.</p>
+<p>You don&#39;t need to commit the generated certificates. Looks like each
+machine will have to install mkcert, create and work with its own
+certificates.</p>
+<p>This will only work on your local machine, where the server is running,
+if you want to access from a mobile device read <a href="https://github.com/FiloSottile/mkcert#mobile-devices">the
+docs</a>.</p>
+<h2 id="conclusion">Conclusion<a class="heading-anchor" href="#conclusion">¶</a></h2>
+<p>Many times, I&#39;ve had the need to test something with HTTPS, but it took
+me a lot of time to do it. I think <code>mkcert</code> is a really easy to use tool
+which achieves this smoothly.</p>
+<p>Do you have any other (security) concerns? Feedback is appreciated.</p>
+<p>If you have drop-in examples for other frameworks or tools I&#39;ll update
+the post.</p>
+<p>Thanks for reading and happy coding!</p>
+<p>Edit: gunicorn example + uvicorn now supports ssl.</p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>

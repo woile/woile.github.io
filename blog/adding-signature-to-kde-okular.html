@@ -1,0 +1,250 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Adding signature to KDE Okular | Woile</title>
+        <link rel="canonical" href="https:&#x2F;&#x2F;woile.dev&#x2F;blog&#x2F;adding-signature-to-kde-okular.html" />
+        <meta
+            name="description"
+            content="A step-by-step guide to creating digital signatures and configuring Okular to sign PDF documents on Linux systems, particularly NixOS."
+        />
+
+        <link rel="stylesheet" href="../fonts.css" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+            href="../favicon-48x48.png"
+        />
+
+        <!-- Open Graph -->
+        <meta property="og:title" content="Adding signature to KDE Okular" />
+        <meta
+            property="og:url"
+            content="https://woile.dev&#x2F;blog&#x2F;adding-signature-to-kde-okular.html"
+        />
+        <meta property="og:site_name" content="Woile" />
+        <meta
+            property="og:type"
+            content="article"
+        />
+        
+        <meta property="og:description" content="A step-by-step guide to creating digital signatures and configuring Okular to sign PDF documents on Linux systems, particularly NixOS." />
+         
+        <meta name="fediverse:creator" content="@woile@hachyderm.io" />
+        <link rel="me" href="https://hachyderm.io/" />
+        
+
+        <!-- Preview image -->
+        <meta
+            property="og:image"
+            content="https://woile.dev/me-1024x1024.jpg"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="../theme.css" />
+        <script
+            src="https://cdn.counter.dev/script.js"
+            data-id="acc7e853-fadb-4b91-a2f2-801890951f1e"
+            data-utcoffset="1"
+        ></script>
+    </head>
+    <body class="bg-bg-primary text-text-secondary min-h-screen flex flex-col">
+        <header
+            class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 lg:px-24 py-6 md:py-10 w-full max-w-[1440px] mx-auto gap-6 md:gap-0"
+        >
+            <a
+                href="../"
+                class="text-logo font-serif text-2xl md:text-[32px] font-bold"
+            >
+                woile
+            </a>
+            <nav class="flex gap-6 md:gap-12">
+                <a
+                    href="../bio.html"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Bio
+                </a>
+                <a
+                    href="../blog/"
+                    class="group relative text-text-secondary hover:text-white transition-colors text-base md:text-[18px]"
+                >
+                    <!-- Caret on hover -->
+                    <span
+                        class="relative mr-1 inline-block translate-y-4 text-green-400 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100"
+                    >
+                        &gt;
+                    </span>
+                    Writing
+                </a>
+            </nav>
+            <a
+                href="mailto:santiwilly@gmail.com"
+                class="text-accent font-bold text-base md:text-[18px] hover:opacity-80 transition-opacity"
+            >
+                Let's Talk &rarr;
+            </a>
+        </header>
+        <main class="w-full max-w-[1440px] mx-auto grow">
+            
+<article class="max-w-3xl mx-auto px-10 py-[60px] flex flex-col gap-10" lang="en">
+    <a
+        href="../blog/"
+        class="text-accent font-mono text-xs tracking-[2px] hover:underline"
+        >&larr; BACK TO WRITING</a
+    >
+
+    <header class="flex flex-col gap-6">
+        <time class="text-text-muted font-mono text-sm"
+            >March 10, 2026</time
+        >
+        <h1 class="text-4xl md:text-6xl wrap-break-word font-bold text-white leading-[1.1]">
+            Adding signature to KDE Okular
+        </h1>
+        <div>
+            
+            <div class="flex flex-wrap gap-4">
+                
+                <a href="../tags/KDE.html">#KDE</a>
+                
+                <a href="../tags/linux.html">#linux</a>
+                
+                <a href="../tags/PDF.html">#PDF</a>
+                
+                <a href="../tags/signature.html">#signature</a>
+                
+                <a href="../tags/esignature.html">#esignature</a>
+                
+                <a href="../tags/nixos.html">#nixos</a>
+                
+                <a href="../tags/security.html">#security</a>
+                
+            </div>
+            
+        </div>
+    </header>
+
+    <div
+        class="prose prose-invert prose-lg max-w-none text-xl text-text-secondary leading-[1.8] font-sans space-y-6"
+        id="content-rendered"
+    >
+        <p>I&#39;ve been using <a href="https://okular.kde.org/">Okular</a> to open and annotate PDFs on NixOS.
+It&#39;s an excellent piece of software. But I had trouble adding signatures to PDFs.</p>
+<p>I was confused by the instructions. Turns out you have to do the following:</p>
+<ol start="1">
+<li>Create a digital signature certificate</li>
+<li>Import the certificate into <a href="https://firefox-source-docs.mozilla.org/security/nss/index.html">nss</a> (through Firefox)</li>
+<li>Configure Okular backend</li>
+<li>Sign documents</li>
+</ol>
+<p>In order to create a digital signature, we can use the following script:</p>
+<pre><code class="language-sh"><span class="hl-comment">#! /usr/bin/env nix-shell</span>
+<span class="hl-comment">#! nix-shell openssl</span>
+<span class="hl-keyword-control-import">export</span> <span class="hl-constant">USER_ID</span><span class="hl-operator">=</span><span class="hl-string">woile</span>
+<span class="hl-keyword-control-import">export</span> <span class="hl-constant">FULL_NAME</span><span class="hl-operator">=</span><span class="hl-string">"Your Full Name"</span>
+
+<span class="hl-function">mkdir</span> <span class="hl-variable-parameter">~/.signatures</span>
+<span class="hl-function-builtin">cd</span> <span class="hl-variable-parameter">~/.signatures</span>
+<span class="hl-function">openssl</span> <span class="hl-variable-parameter">genrsa</span> <span class="hl-variable-parameter">-out</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.priv.key"</span> <span class="hl-constant-numeric">2048</span>
+
+<span class="hl-comment"># Here you'll get a bunch of questions, remember to use '.' if you want an empty field</span>
+<span class="hl-function">openssl</span> <span class="hl-variable-parameter">req</span> <span class="hl-variable-parameter">-new</span> <span class="hl-variable-parameter">-key</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.priv.key"</span> <span class="hl-variable-parameter">-out</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.csr"</span>
+
+<span class="hl-function">openssl</span> <span class="hl-variable-parameter">x509</span> <span class="hl-variable-parameter">-req</span> <span class="hl-variable-parameter">-days</span> <span class="hl-constant-numeric">365</span> <span class="hl-variable-parameter">-in</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.csr"</span> <span class="hl-variable-parameter">-signkey</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.priv.key"</span> <span class="hl-variable-parameter">-out</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.certificate.crt"</span>
+<span class="hl-function">openssl</span> <span class="hl-variable-parameter">pkcs12</span> <span class="hl-variable-parameter">-export</span> <span class="hl-variable-parameter">-out</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.sign.p12"</span> <span class="hl-variable-parameter">-inkey</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.priv.key"</span> <span class="hl-variable-parameter">-in</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">USER_ID</span></span><span class="hl-string">.certificate.crt"</span> <span class="hl-variable-parameter">-name</span> <span class="hl-string">"</span><span class="hl-punctuation-special">$</span><span class="hl-string"><span class="hl-constant">FULL_NAME</span></span><span class="hl-string">"</span>
+</code></pre>
+<p>The end result will be a file named <code>woile.sign.p12</code> in the <code>~/.signatures</code> directory.</p>
+<p>Then we load the <code>p12</code> certificate file into Firefox:</p>
+<p>Firefox &gt;&gt; Settings &gt;&gt; Privacy and Security &gt;&gt; View Certificates &gt;&gt; Your Certificates (1st tab)</p>
+<p>And finally we go to Okular &gt;&gt; Settings &gt;&gt; Configure Backends</p>
+<p>You may have to change the &quot;Certificate Database&quot;, mine for example is created by NixOS as <code>~/.mozilla/firefox/9q8doo6z.Santiago</code></p>
+<p>It would be nice if provisioning certificates could be done through NixOS, but I&#39;m still not sure how to do it.</p>
+<p>I hope you enjoyed this article and let me know your thoughts in mastodon:</p>
+<p><a href="https://hachyderm.io/@woile">@woile</a></p>
+
+    </div>
+</article>
+
+
+        </main>
+        <footer
+            class="px-6 md:px-10 lg:px-24 py-10 md:py-[60px] text-text-muted text-sm text-center"
+        >
+            <div class="flex flex-wrap gap-4 w-full justify-center mb-3">
+                <a
+                    href="https://www.linkedin.com/in/santiago-fraire-willemoes/?locale=en"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-linkedin.svg"
+                        alt="LinkedIn"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300"
+                    />
+                </a>
+                <a
+                    rel="me"
+                    href="https://hachyderm.io/@woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-mastodon.svg"
+                        alt="Mastodon"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://github.com/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-github.svg"
+                        alt="GitHub"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://codeberg.org/woile"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-codeberg.svg"
+                        alt="Codeberg"
+                        class="w-6 h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+                <a
+                    href="https://mu.social/profile/woile.dev"
+                    class="inline-block"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        src="../logo-bsky.svg"
+                        alt="ATProtocol: BlueSky and mu.social"
+                        class="h-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:scale-120 transition-all duration-200"
+                    />
+                </a>
+            </div>
+            &copy; 2026 woile. Built with care.
+            <a href="../feed.xml" title="Atom Feed">⚛</a>
+        </footer>
+    </body>
+</html>
