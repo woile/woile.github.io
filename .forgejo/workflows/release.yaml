@@ -26,7 +26,7 @@ jobs:
         with:
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
       - run: |
-          nix build --fallback --system x86_64-linux --option sandbox relaxed .#site --json --out-link _site
+          nix build --accept-flake-config --fallback --system x86_64-linux --option sandbox relaxed .#site --json --out-link _site
       - uses: actions/git-pages@v2
         with:
           site: https://woile.eu
