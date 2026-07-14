@@ -66,4 +66,10 @@
           };
         };
     };
+  nixConfig = {
+    extra-substituters = [ "https://woile.cachix.org" ];
+    extra-trusted-public-keys = [
+      "woile.cachix.org-1:i67QD9uyZmig2S6qZ+r+ADyboWjbTyWn3DBmBYKJk+E="
+    ];
+  };
 }
