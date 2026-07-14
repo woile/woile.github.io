@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
     name: Build and Release
-    runs-on: codeberg-tiny
+    runs-on: codeberg-small
     steps:
       - uses: actions/checkout@v7
       - uses: https://github.com/cachix/install-nix-action@v31
