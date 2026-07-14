@@ -1,4 +1,4 @@
-# woile.dev
+# woile.eu
 
 > My personal website
 

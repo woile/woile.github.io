@@ -60,7 +60,7 @@
             ];
 
             shellHook = ''
-              echo "Welcome to the woile.dev source code!"
+              echo "Welcome to the woile.eu source code!"
               just --list
             '';
           };

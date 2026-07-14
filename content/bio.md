@@ -79,7 +79,7 @@ data = [
 
 # whoami
 
-I'm Santiago, known as [@woile](https://woile.dev), an engineer dedicated to the craft of building scalable, human-centric software.
+I'm Santiago, known as [@woile](https://woile.eu), an engineer dedicated to the craft of building scalable, human-centric software.
 I find joy in building high-performance backend systems and intuitive developer experiences, while keeping simplicity in mind.
 
 Throughout my career, I have had the opportunity to work across the entire stack.
