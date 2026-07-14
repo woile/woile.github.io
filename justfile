@@ -1,6 +1,7 @@
 # Update dependencies
 update:
     nix flake update
+    @echo "WARNING: Don't forget to also update sukr for the cache"
 
 # Build styles and site
 build:
