@@ -21,6 +21,9 @@ jobs:
       - uses: https://github.com/cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GH_PAT_TOKEN }}
+      - uses: https://github.com/cachix/cachix-action@v17
+        with:
+          name: woile
       - name: Restore and save Nix store
         uses: https://github.com/nix-community/cache-nix-action@v7
         with:
