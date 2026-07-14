@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.ref }}
+#   cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: codeberg-tiny
+    steps:
+      - uses: actions/checkout@v7
+      - uses: https://github.com/cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GH_PAT_TOKEN }}
+      - name: Restore and save Nix store
+        uses: https://github.com/nix-community/cache-nix-action@v7
+        with:
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+      - run: |
+          nix build --fallback --system x86_64-linux --option sandbox relaxed .#site --json --out-link _site
+      - uses: actions/git-pages@v2
+        with:
+          site: https://woile.eu
+          server: "grebedoc.dev"
+          token: ${{ secrets.GIT_PAGES_TOKEN }}
+          source: _site/
