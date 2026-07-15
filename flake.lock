@@ -149,11 +149,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1784128669,
-        "narHash": "sha256-qhfsjdaeNDAci4owfqqbulhPFYdr20HcV2U2Fzn+c44=",
+        "lastModified": 1784136655,
+        "narHash": "sha256-oSwYghu9ssXPW57SexkBr7l1qYh35k9FDirTxYbGRm4=",
         "owner": "woile",
         "repo": "sukr",
-        "rev": "8af12a6b678bb5a31e2e08422bc8ddaf5d0f7c1d",
+        "rev": "923ffa8856b13575f18bdc40810f581cc65e7971",
         "type": "github"
       },
       "original": {
