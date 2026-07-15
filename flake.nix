@@ -3,7 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     sukr.url = "github:woile/sukr";
-    sukr.inputs.nixpkgs.follows = "nixpkgs";
+    # sukr.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{
