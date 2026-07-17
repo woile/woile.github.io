@@ -32,7 +32,8 @@ tags = []
 '''
 
 # create a new blog post
-new_post title='' description='':
+new_post title description='':
     #!/usr/bin/env bash
+
     SLUG=$(echo "{{ title }}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/-\{2,\}/-/g' | sed 's/^-//;s/-$//')
     echo '{{ replace(replace(blog_template, "POST_TITLE", title), "POST_DESCRIPTION", description) }}' > "content/blog/${SLUG}.md"
