@@ -37,5 +37,5 @@ jobs:
         with:
           site: https://woile.eu
           server: "grebedoc.dev"
-          token: ${{ secrets.GIT_PAGES_TOKEN }}
+          token: ${{ forgejo.token }}
           source: _site/
