@@ -18,7 +18,12 @@
         "x86_64-darwin"
       ];
       perSystem =
-        { pkgs, inputs', ... }:
+        {
+          pkgs,
+          inputs',
+          lib,
+          ...
+        }:
         let
           sukr = inputs'.sukr.packages.sukr;
         in
@@ -26,8 +31,8 @@
           packages = {
             site = pkgs.stdenv.mkDerivation {
               name = "site";
-              src = pkgs.nix-gitignore.gitignoreSource [ ] ./.;
-              #
+              src = pkgs.nix-gitignore.gitignoreFilterPure [ ".forgejo" ".github" ".envrc" ] (lib.cleanSource ./.);
+              # during the build
               nativeBuildInputs = with pkgs; [
                 sukr
                 just
