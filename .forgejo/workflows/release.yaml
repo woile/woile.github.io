@@ -28,7 +28,11 @@ jobs:
       - name: Nix build
         run: |
           nix build --accept-flake-config --max-jobs 1 --cores 1 \
-            --system x86_64-linux --option sandbox relaxed .#site --json --out-link _site
+            --system x86_64-linux --option sandbox true .#site --json --out-link result
+      - name: Dereference symlink
+        run: |
+          cp -aL result/ _site
+          ls
       - uses: actions/git-pages@v2
         with:
           site: https://woile.eu
