@@ -31,7 +31,17 @@
           packages = {
             site = pkgs.stdenv.mkDerivation {
               name = "site";
-              src = pkgs.nix-gitignore.gitignoreFilterPure [ ".forgejo" ".github" ".envrc" ] (lib.cleanSource ./.);
+              src = lib.fileset.toSource {
+                root = ./.;
+                fileset = lib.fileset.unions [
+                  ./site.toml
+                  ./justfile
+                  ./content
+                  ./static
+                  ./templates
+                  ./styles
+                ];
+              };
               # during the build
               nativeBuildInputs = with pkgs; [
                 sukr
